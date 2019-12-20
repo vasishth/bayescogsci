@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.4 Evaluating the priors of our models | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
+  <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
+  <meta name="generator" content="bookdown 0.13.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.4 Evaluating the priors of our models | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bookdown.org/yihui/bookdown/" />
+  <meta property="og:image" content="https://bookdown.org/yihui/bookdown/images/cover.jpg" />
+  <meta property="og:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
+  <meta name="github-repo" content="rstudio/bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.4 Evaluating the priors of our models | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  
+  <meta name="twitter:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
+  <meta name="twitter:image" content="https://bookdown.org/yihui/bookdown/images/cover.jpg" />
+
+<meta name="author" content="Shravan Vasishth, Bruno Nicenboim, and Daniel Schad" />
+
+
+<meta name="date" content="2019-11-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="summarizing-and-evaluation-the-posterior-distribution.html"/>
+<link rel="next" href="important-distributions.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="0.2" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.2</b> How to read this book</a></li>
+<li class="chapter" data-level="0.3" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.3</b> Online materials</a></li>
+<li class="chapter" data-level="0.4" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.4</b> Software needed</a></li>
+<li class="chapter" data-level="0.5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introprob.html"><a href="introprob.html"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
+<li class="chapter" data-level="1.2" data-path="conditional-probability.html"><a href="conditional-probability.html"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
+<li class="chapter" data-level="1.3" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.3</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The mean and variance of the Binomial distribution</a></li>
+<li class="chapter" data-level="1.3.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.3.2</b> What information does a probability distribution provide?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.4</b> Continuous random variables: An example using the Normal distribution</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#an-important-distinction-probability-vs.density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.4.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="an-important-concept-the-marginal-likelihood-integrating-out-a-parameter.html"><a href="an-important-concept-the-marginal-likelihood-integrating-out-a-parameter.html"><i class="fa fa-check"></i><b>1.5</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
+<li class="chapter" data-level="1.6" data-path="summary-of-useful-r-functions-relating-to-distributions.html"><a href="summary-of-useful-r-functions-relating-to-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Summary of useful R functions relating to distributions</a></li>
+<li class="chapter" data-level="1.7" data-path="summary-of-concepts-introduced-in-this-chapter.html"><a href="summary-of-concepts-introduced-in-this-chapter.html"><i class="fa fa-check"></i><b>1.7</b> Summary of concepts introduced in this chapter</a></li>
+<li class="chapter" data-level="1.8" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.8</b> Further reading</a></li>
+<li class="chapter" data-level="1.9" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="exercises.html"><a href="exercises.html#practice-using-the-pnorm-function"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
+<li class="chapter" data-level="1.9.2" data-path="exercises.html"><a href="exercises.html#practice-using-the-qnorm-function"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
+<li class="chapter" data-level="1.9.3" data-path="exercises.html"><a href="exercises.html#practice-using-qt"><i class="fa fa-check"></i><b>1.9.3</b> Practice using <code>qt</code></a></li>
+<li class="chapter" data-level="1.9.4" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-1"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 1</a></li>
+<li class="chapter" data-level="1.9.5" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-2"><i class="fa fa-check"></i><b>1.9.5</b> Maximum likelihood estimation 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introBDA.html"><a href="introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
+<li class="chapter" data-level="2.1" data-path="sec-analytical.html"><a href="sec-analytical.html"><i class="fa fa-check"></i><b>2.1</b> Deriving the posterior using Bayes’ rule: An analytical example</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.1.1</b> Choosing a likelihood</a></li>
+<li class="chapter" data-level="2.1.2" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-prior-for-theta"><i class="fa fa-check"></i><b>2.1.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
+<li class="chapter" data-level="2.1.3" data-path="sec-analytical.html"><a href="sec-analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.1.3</b> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
+<li class="chapter" data-level="2.1.4" data-path="sec-analytical.html"><a href="sec-analytical.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.1.4</b> Summary of the procedure</a></li>
+<li class="chapter" data-level="2.1.5" data-path="sec-analytical.html"><a href="sec-analytical.html#visualizing-the-prior-likelihood-and-the-posterior"><i class="fa fa-check"></i><b>2.1.5</b> Visualizing the prior, likelihood, and the posterior</a></li>
+<li class="chapter" data-level="2.1.6" data-path="sec-analytical.html"><a href="sec-analytical.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.1.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
+<li class="chapter" data-level="2.1.7" data-path="sec-analytical.html"><a href="sec-analytical.html#incremental-knowledge-gain-using-prior-knowledge"><i class="fa fa-check"></i><b>2.1.7</b> Incremental knowledge gain using prior knowledge</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="summary-of-concepts-introduced-in-this-chapter-1.html"><a href="summary-of-concepts-introduced-in-this-chapter-1.html"><i class="fa fa-check"></i><b>2.2</b> Summary of concepts introduced in this chapter</a></li>
+<li class="chapter" data-level="2.3" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>2.3</b> Further reading</a></li>
+<li class="chapter" data-level="2.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>2.4</b> Exercises</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="exercises-1.html"><a href="exercises-1.html#deriving-bayes-rule"><i class="fa fa-check"></i><b>2.4.1</b> Deriving Bayes’ rule</a></li>
+<li class="chapter" data-level="2.4.2" data-path="exercises-1.html"><a href="exercises-1.html#conjugate-forms-1"><i class="fa fa-check"></i><b>2.4.2</b> Conjugate forms 1</a></li>
+<li class="chapter" data-level="2.4.3" data-path="exercises-1.html"><a href="exercises-1.html#conjugate-forms-2"><i class="fa fa-check"></i><b>2.4.3</b> Conjugate forms 2</a></li>
+<li class="chapter" data-level="2.4.4" data-path="exercises-1.html"><a href="exercises-1.html#conjugate-forms-3"><i class="fa fa-check"></i><b>2.4.4</b> Conjugate forms 3</a></li>
+<li class="chapter" data-level="2.4.5" data-path="exercises-1.html"><a href="exercises-1.html#conjugate-forms-4"><i class="fa fa-check"></i><b>2.4.5</b> Conjugate forms 4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bayes-factor-definition.html"><a href="bayes-factor-definition.html"><i class="fa fa-check"></i><b>3</b> Bayes factor: Definition</a></li>
+<li class="chapter" data-level="4" data-path="introduction-to-bayesian-data-analysis-computationally.html"><a href="introduction-to-bayesian-data-analysis-computationally.html"><i class="fa fa-check"></i><b>4</b> Introduction to Bayesian data analysis computationally</a><ul>
+<li class="chapter" data-level="4.1" data-path="deriving-the-posterior-through-sampling.html"><a href="deriving-the-posterior-through-sampling.html"><i class="fa fa-check"></i><b>4.1</b> Deriving the posterior through sampling</a></li>
+<li class="chapter" data-level="4.2" data-path="bayesian-regression-models-using-stan-brms.html"><a href="bayesian-regression-models-using-stan-brms.html"><i class="fa fa-check"></i><b>4.2</b> Bayesian Regression Models using ‘Stan’: brms</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="bayesian-regression-models-using-stan-brms.html"><a href="bayesian-regression-models-using-stan-brms.html#a-simple-linear-model-a-single-participant-pressing-a-button-repeatedly"><i class="fa fa-check"></i><b>4.2.1</b> A simple linear model: A single participant pressing a button repeatedly</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="summarizing-and-evaluation-the-posterior-distribution.html"><a href="summarizing-and-evaluation-the-posterior-distribution.html"><i class="fa fa-check"></i><b>4.3</b> Summarizing and evaluation the posterior distribution</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="summarizing-and-evaluation-the-posterior-distribution.html"><a href="summarizing-and-evaluation-the-posterior-distribution.html#output-of-brms"><i class="fa fa-check"></i><b>4.3.1</b> Output of brms</a></li>
+<li class="chapter" data-level="4.3.2" data-path="summarizing-and-evaluation-the-posterior-distribution.html"><a href="summarizing-and-evaluation-the-posterior-distribution.html#posterior-predictive-checks"><i class="fa fa-check"></i><b>4.3.2</b> Posterior predictive checks</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="evaluating-the-priors-of-our-models.html"><a href="evaluating-the-priors-of-our-models.html"><i class="fa fa-check"></i><b>4.4</b> Evaluating the priors of our models</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="evaluating-the-priors-of-our-models.html"><a href="evaluating-the-priors-of-our-models.html#prior-predictive-distribution"><i class="fa fa-check"></i><b>4.4.1</b> Prior predictive distribution</a></li>
+<li class="chapter" data-level="4.4.2" data-path="evaluating-the-priors-of-our-models.html"><a href="evaluating-the-priors-of-our-models.html#influence-of-priors-and-sensitivity-analysis"><i class="fa fa-check"></i><b>4.4.2</b> Influence of priors and sensitivity analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>5</b> Important distributions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Introduction to Bayesian Data Analysis for Cognitive Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="evaluating-the-priors-of-our-models" class="section level2">
+<h2><span class="header-section-number">4.4</span> Evaluating the priors of our models</h2>
+<p>There are many ways to choose priors:</p>
+<ol style="list-style-type: decimal">
+<li>If we don’t have much information, we have “enough” data, and we
+won’t use Bayes factors (which are highly sensitives to the priors),
+we might be fine using <em>regularizing priors</em>. These are priors that
+downweight extreme values, they are not very informative, and mostly
+let the likelihood to dominate. Our <code>Normal</code> priors centered in zero
+are an example of regularizing priors.</li>
+<li>If we have a lot of prior knowledge, and not so much data, we can
+use informative priors.</li>
+<li>An intermediate position is to have priors that encode the
+theory-neutral information that we certainly have: e.g., we know how
+RT data looks like, or at least how they don’t look like.</li>
+</ol>
+<div id="prior-predictive-distribution" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Prior predictive distribution</h3>
+<p>To understand the assumptions about the data that our priors encode, we
+are going to generate something called the <strong>prior predictive
+distribution</strong>. This helps us check whether the priors make sense.</p>
+<p>Formally, we want to know the density <span class="math inline">\(p(\cdot)\)</span> of data points <span class="math inline">\(y_1,\dots,n\)</span>, given a vector of priors <span class="math inline">\(\Theta\)</span>. In our example, <span class="math inline">\(\Theta=\langle\mu,\sigma \rangle\)</span>. The prior predictive density is:</p>
+<p><span class="math display">\[\begin{equation}
+p(y_1,\dots,y_n)= \int p(y|\Theta)\cdot p(y_2|\Theta)\cdots p(y_n|\Theta) p(\Theta) \, d\Theta 
+\end{equation}\]</span></p>
+<p>In essence, we integrate out the parameters. Here is one way to do:</p>
+<ol style="list-style-type: decimal">
+<li>Take one sample from each of the priors</li>
+<li>Generate data using those samples</li>
+<li>Repeat until you have distribution of distributions of observations</li>
+</ol>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="co">#code</span></a></code></pre></div>
+<p>By using <code>sample_prior = &quot;only&quot;</code>, <code>brms</code> will do this for us, by ignoring the data. This means that our posterior (in blue) is only based on the prior information we gave to the model. Then pp_check will generate simulated datasets (here 11) based on the estimates of the parameters of the model (which are ignoring the data). (We could have done this “by hand”, by sampling priors with <code>rnorm</code> and then generate fake data 11 times using as true values the values that we sampled).</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">fit_press_pred &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2">                      <span class="dt">family=</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb86-3" data-line-number="3">                      <span class="dt">prior =</span> <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">uniform</span>(<span class="dv">0</span>,<span class="dv">60000</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb86-4" data-line-number="4">                                    <span class="kw">prior</span>(<span class="kw">uniform</span>(<span class="dv">0</span>,<span class="dv">2000</span>), <span class="dt">class =</span> sigma)),</a>
+<a class="sourceLine" id="cb86-5" data-line-number="5">                      <span class="dt">sample_prior =</span> <span class="st">&quot;only&quot;</span>,</a>
+<a class="sourceLine" id="cb86-6" data-line-number="6">                      <span class="co">#not using the data at all:</span></a>
+<a class="sourceLine" id="cb86-7" data-line-number="7">                      <span class="dt">data=</span> df_noreading_data)</a></code></pre></div>
+<pre><code>## Warning: There were 3504 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help. See
+## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</code></pre>
+<pre><code>## Warning: Examine the pairs() plot to diagnose sampling problems</code></pre>
+<pre><code>## Warning: The largest R-hat is 2.41, indicating chains have not mixed.
+## Running the chains for more iterations may help. See
+## http://mc-stan.org/misc/warnings.html#r-hat</code></pre>
+<pre><code>## Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+## Running the chains for more iterations may help. See
+## http://mc-stan.org/misc/warnings.html#bulk-ess</code></pre>
+<pre><code>## Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+## Running the chains for more iterations may help. See
+## http://mc-stan.org/misc/warnings.html#tail-ess</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="kw">pp_check</span>(fit_press_pred, <span class="dt">nsamples =</span> <span class="dv">11</span>, <span class="dt">type =</span> <span class="st">&quot;hist&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:m1priorpred"></span>
+<img src="bookdown_files/figure-html/m1priorpred-1.svg" alt="First attempt at prior predictive distribution of the data." width="672" />
+<p class="caption">
+FIGURE 4.5: First attempt at prior predictive distribution of the data.
+</p>
+</div>
+<p>This prior predictive distribution in Figure <a href="evaluating-the-priors-of-our-models.html#fig:m1priorpred">4.5</a> shows distribution of observations that are not realistic: how can button press time have negative values? (Also notice that the priors allow for too much variability in the RT distributions).</p>
+<p>We are not entirely satisfied that the priors make sense, but we’ll see that this is because our likelihood doesn’t make sense! See <span class="citation">(<span class="citeproc-not-found" data-reference-id="gelmanPriorCanGenerally2017"><strong>???</strong></span>)</span>.</p>
+</div>
+<div id="influence-of-priors-and-sensitivity-analysis" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> Influence of priors and sensitivity analysis</h3>
+<!-- Everything was normally distributed in our example (or truncated normal), but the fact that we assumed that RTs were normally distributed is completely unrelated to our (truncated) normally distributed priors. Let’s try very wide uniform priors. Here, we assume that every value lies between the boundaries of  uniform priors, and that means that they are equally likely. In general, this is a bad idea for two reasons: (i) it is computationally expensive (the sampler has a larger parameter space to search), and (ii) it is providing information that we know is not sensible. But in our very simple example these priors will give the same posterior as with the normal priors. -->
+<p>They worked, but we’ll discuss that this in general a very bad idea.</p>
+<p>How about very informative priors? In general, unless we have <em>very</em> good reasons for having informative priors, we don’t want our priors to have too much influence on our posterior. An example would be if we have data from an impaired population, which makes it hard to increase our sample size.</p>
+<p>You should always do a <em>sensitivity analysis</em> to check how influential the prior is: try different priors and either verify that the posterior doesn’t change drastically or report how the posterior is affected by some specific priors <span class="citation">(for a published example in psycholinguistics, see <span class="citeproc-not-found" data-reference-id="VasishthetalPLoSOne2013"><strong>???</strong></span>)</span>.</p>
+
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="summarizing-and-evaluation-the-posterior-distribution.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="important-distributions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/03-brms.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
