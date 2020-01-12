@@ -19,3 +19,5 @@ The index.Rmd file is just needed in the 00*R file. The *.bib files are provided
     ├── public_noun_data.txt
     ├── pupil.csv
     └── pupil_pilot.csv
+
+For book see: https://vasishth.github.io/Bayes_CogSci/
