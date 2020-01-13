@@ -1,0 +1,453 @@
+---
+title: "01 Foundations"
+author: "Shravan Vasishth"
+date: "LOT Winter school 2020"
+output:
+  beamer_presentation:
+    theme: "Boadilla"
+    colortheme: "dove"
+    fonttheme: "structurebold"
+header-includes:
+   - \usepackage{esint}
+   - \usepackage{mathtools}
+   - \makeatletter
+   - \newcommand{\explain}[2]{\underset{\mathclap{\overset{\uparrow}{#2}}}{#1}}
+   - \newcommand{\explainup}[2]{\overset{\mathclap{\underset{\downarrow}{#2}}}{#1}}
+   - \makeatother
+citation_package: biblatex
+biblatexoptions: 
+  - "backend=biber, style=apa"
+bibliography:  bayes.bib
+link-citations: yes
+---
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Preview: Steps in Bayesian analysis
+
+The way we will conduct data analysis is as follows. 
+
+  - Given data, specify a *likelihood function*.
+  - Specify *prior distributions* for model parameters.
+  - Using software, derive *marginal posterior distributions* for parameters given likelihood function and prior density.
+  - Simulate parameters to get *samples from posterior distributions* of parameters using some *Markov Chain Monte Carlo (MCMC) sampling algorithm*.
+  - Evaluate whether model makes sense, using *model convergence* diagnostics, 
+  fake-data simulation, *prior predictive* and *posterior predictive* checks, and (if you want to claim a discovery) calibrating true and false discovery rates.
+  - Summarize *posterior distributions* of parameter samples and carry out your scientific conclusion.
+
+
+
+
+# Bayes' rule
+
+A and B are events. Conditional probability is defined as follows:
+
+\begin{equation}
+P(A|B)= \frac{P(A,B)}{P(B)} \hbox{ where } P(B)>0
+\end{equation}
+
+This means that $P(A,B)=P(A|B)P(B)$.
+
+Since $P(B,A)=P(A,B)$, we can write: 
+
+\begin{equation}
+P(B,A)=P(B|A)P(A)=P(A|B)P(B)=P(A,B).
+\end{equation}
+
+Rearranging terms:
+
+\begin{equation}
+P(B|A)=\frac{P(A|B)P(B)}{P(A)}
+\end{equation}
+
+This is Bayes' rule.
+
+
+
+
+# Random variable theory 
+
+Every discrete (continuous) random variable X has associated with it a \textbf{probability mass (distribution)  function (pmf, pdf)}. I.e., PMF is used for discrete distributions and PDF for continuous. (I will sometimes use lower case for pdf and sometimes upper case. Some books use pdf for both discrete and continuous distributions.)
+
+# Random variable theory
+ 
+ Probability density functions (continuous case) or probability mass functions (discrete case) are functions that assign probabilities or relative frequencies to all events in a sample space.
+
+The expression 
+
+\begin{equation}
+ X \sim f(\cdot)
+\end{equation}
+
+\noindent
+means that the random variable $X$ has pdf/pmf $f(\cdot)$.
+For example, if we say that $X\sim N(\mu,\sigma^2)$, we are assuming that the pdf is
+
+\begin{equation}
+f(x)= \frac{1}{\sqrt{2\pi \sigma^2}} \exp[-\frac{(x-\mu)^2}{2\sigma^2}]
+\end{equation}
+
+# Random variable theory
+
+We also need a \textbf{cumulative distribution function} or cdf because, in the continuous case, P(X=some point value) is zero and we therefore need a way to talk about P(X in a specific range). cdfs serve that purpose.
+
+In the continuous case, the cdf or distribution function is defined as: 
+
+\begin{equation}
+P(X<x) = F(X<x) =\int_{-\infty}^{X} f(x)\, dx
+\end{equation}
+
+# Random variable theory
+
+\begin{equation}
+f(x)=\exp[-\frac{(x-\mu)^2}{2 \sigma^2}]
+\end{equation}
+
+This is  the ``kernel'' of the normal pdf, and it doesn't sum to 1:
+
+```{r fig.height=5}
+normkernel<-function(x,mu=0,sigma=1){
+  exp((-(x-mu)^2/(2*(sigma^2))))
+}
+
+x<-seq(-10,10,by=0.01)
+
+plot(function(x) normkernel(x), -3, 3,
+      main = "Normal density",ylim=c(0,1),
+              ylab="density",xlab="X")
+```
+
+# Random variable theory
+
+Adding a normalizing constant makes the above kernel density a pdf.
+
+```{r fig.height=5}
+norm<-function(x,mu=0,sigma=1){
+  (1/sqrt(2*pi*(sigma^2))) * exp((-(x-mu)^2/(2*(sigma^2))))
+}
+
+x<-seq(-10,10,by=0.01)
+
+plot(function(x) norm(x), -3, 3,
+      main = "Normal density",ylim=c(0,1),
+              ylab="density",xlab="X")
+```
+
+
+# Visualizing distributions
+
+```{r eval=FALSE,echo=TRUE}
+if ( !('devtools' %in% 
+       installed.packages()) ) 
+  install.packages("devtools")
+
+devtools::install_github("bearloga/tinydensR")
+```
+
+Then, run
+
+```{r eval=FALSE,echo=TRUE}
+library(tinydensR)
+univariate_discrete_addin()
+```
+
+or 
+
+```{r eval=FALSE,echo=TRUE}
+univariate_continuous_addin()
+```
+
+# Example: Binomial distribution
+
+If we have $x$ successes in $n$ trials, given a success probability $p$ for each trial. If $x \sim Bin(n,p)$.
+
+\begin{equation}
+P(x\mid n, p) = {n \choose k} p^k (1-p)^{n-k} 
+\end{equation}
+
+The mean is $np$ and the variance $np(1-p)$.
+
+
+```
+###pmf:
+dbinom(x, size, prob, log = FALSE)
+### cdf:
+pbinom(q, size, prob, lower.tail = TRUE, log.p = FALSE)
+### quantiles:
+qbinom(p, size, prob, lower.tail = TRUE, log.p = FALSE)
+### pseudo-random generation of samples:
+rbinom(n, size, prob)
+```
+
+
+# The Poisson distribution
+
+This is a distribution associated with ``rare events'', for reasons which will become clear in a moment. The events might be:
+
+  - traffic accidents,
+  - typing errors, or
+  - customers arriving in a bank.		
+
+For psychology and linguistics, one application is in eye tracking: modeling number of fixations. 
+
+# The Poisson distribution
+
+Let $\lambda$ be the average number of events in the time interval $[0,1]$. Let the random variable $X$ count the number of events occurring in the interval. Then: 
+
+\begin{equation}
+	f_{X}(x)=\mathbb{P}(X=x)=\mathrm{e}^{-\lambda}\frac{\lambda^{x}}{x!},\quad x=0,1,2,\ldots
+\end{equation}
+
+# Uniform distribution
+
+A random variable $(X)$ with the continuous uniform distribution on the interval $(\alpha,\beta)$ has PDF
+
+\begin{equation}
+f_{X}(x)=
+\begin{cases}
+\frac{1}{\beta-\alpha}, & \alpha < x < \beta,\\
+0 , & \hbox{otherwise}
+\end{cases}
+\end{equation}
+
+The associated $\mathsf{R}$ function is $\mathsf{dunif}(\mathtt{min}=a,\,\mathtt{max}=b)$. We write $X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)$. Due to the particularly simple form of this PDF we can also write down explicitly a formula for the CDF $F_{X}$:
+
+# Uniform distribution
+
+\begin{equation}
+F_{X}(a)=
+\begin{cases}
+0, & a < 0,\\
+\frac{a-\alpha}{\beta-\alpha}, & \alpha \leq t < \beta,\\
+1, & a \geq \beta.
+\end{cases}
+\label{eq-unif-cdf}
+\end{equation}
+
+\begin{equation}
+E[X]= \frac{\beta+\alpha}{2} \hbox{ and } Var(X)= \frac{(\beta-\alpha)^2}{12}
+\end{equation}
+
+
+```
+dunif(x, min = 0, max = 1, log = FALSE)
+punif(q, min = 0, max = 1, lower.tail = TRUE, 
+    log.p = FALSE)
+qunif(p, min = 0, max = 1, lower.tail = TRUE, 
+    log.p = FALSE)
+runif(n, min = 0, max = 1)
+```
+
+# Normal distribution
+
+\begin{equation}
+f_{X}(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{ \frac{-(x-\mu)^{2}}{2\sigma^{2}}},\quad -\infty < x < \infty.
+\end{equation}
+
+We write $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, and the associated $\mathsf{R}$ function is \texttt{dnorm(x, mean = 0, sd = 1)}.
+
+```{r,fig.cap="\\label{fig:normaldistr}Normal distribution.",fig.height=4}
+plot(function(x) dnorm(x), -3, 3,
+      main = "Normal density",ylim=c(0,.4),
+              ylab="density",xlab="X")
+```
+
+# Normal distribution
+
+If $X$ is normally distributed with parameters $\mu$ and $\sigma^2$, then $Y=aX+b$ is normally distributed with parameters $a\mu + b$ and $a^2\sigma^2$.
+
+\textbf{Standard or unit normal random variable:} 
+
+If $X$ is normally distributed with parameters $\mu$ and $\sigma^2$, then $Z=(X-\mu)/\sigma$ is normally distributed with parameters $0,1$.
+
+We conventionally write $\Phi (x)$ for the CDF:
+
+\begin{equation}
+\Phi (x)=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x}  e^{\frac{-y^2}{2}} \, dy 
+\quad \textrm{where}~y=(x-\mu)/\sigma
+\end{equation}
+
+
+# Normal distribution
+
+The standardized version of a normal
+random variable X is used to compute specific probabilities relating to X .
+
+```
+dnorm(x, mean = 0, sd = 1, log = FALSE)
+pnorm(q, mean = 0, sd = 1, lower.tail = TRUE, 
+                          log.p = FALSE)
+qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, 
+                          log.p = FALSE)
+rnorm(n, mean = 0, sd = 1)
+```
+
+
+# Beta distribution
+
+This is a generalization of the continuous uniform distribution.
+
+\begin{equation*}
+f(x)=  \left\{ 	
+\begin{array}{l l}
+       \frac{1}{B(a,b)} x^{a - 1} (1-x)^{b-1}  & \quad \textrm{if } 0< x < 1\\
+       0 & \quad \textrm{otherwise}\\
+\end{array} \right.
+\end{equation*}
+
+\noindent
+where
+
+\begin{equation*}
+B(a,b) = \int_0^1 x^{a-1}(1-x)^{b-1}\, dx
+\end{equation*}
+
+# Beta distribution
+
+
+We write $X\sim\mathsf{beta}(\mathtt{shape1}=\alpha,\,\mathtt{shape2}=\beta)$. The associated $\mathsf{R}$ function is =dbeta(x, shape1, shape2)=. 
+
+The mean and variance are
+
+\begin{equation} 
+E[X]=\frac{a}{a+b}\mbox{ and }Var(X)=\frac{ab}{\left(a+b\right)^{2}\left(a+b+1\right)}.
+\end{equation}
+
+# $t$ distribution
+
+A random variable $X$ with PDF
+
+\begin{equation}
+f_{X}(x) = \frac{\Gamma\left[ (r+1)/2\right] }{\sqrt{r\pi}\,\Gamma(r/2)}\left( 1 + \frac{x^{2}}{r} \right)^{-(r+1)/2},\quad -\infty < x < \infty
+\end{equation}
+
+is said to have Student's $t$ distribution with $r$ degrees of freedom, and we write $X\sim\mathsf{t}(\mathtt{df}=r)$. 
+The associated $\mathsf{R}$ functions are dt, pt, qt, and rt, which give the PDF, CDF, quantile function, and simulate random variates, respectively. 
+
+We will just write:
+
+$X\sim t(\mu,\sigma,r)$, where $r$ is the degrees of freedom $(n-1)$, where $n$ is sample size.
+
+# Jointly distributed random variables
+
+\textbf{Visualizing bivariate distributions}
+
+First, a visual of two uncorrelated normal RVs:
+
+```{r,fig.cap="\\label{fig:bivaruncorr}Visualization of two uncorrelated random variables.", fig.height=3.5}
+library(MASS)
+
+bivn<-mvrnorm(1000,mu=c(0,0),Sigma=matrix(c(1,0,0,2),2))
+bivn.kde<-kde2d(bivn[,1],bivn[,2],n=50)
+persp(bivn.kde,phi=10,theta=0,shade=0.2,border=NA,
+      main="Simulated bivariate normal density")
+```
+
+
+#Biivariate normal distributions
+
+And here is an example of a positively correlated case: 
+
+```{r,bivarcorr,fig.cap="\\label{fig:bivarcorr}Visualization of two correlated random variables.",fig.height=3.5}
+bivn<-mvrnorm(1000,mu=c(0,0),Sigma=matrix(c(1,0.9,0.9,2),2))
+bivn.kde<-kde2d(bivn[,1],bivn[,2],n=50)
+persp(bivn.kde,phi=10,theta=0,shade=0.2,border=NA,
+      main="Simulated bivariate normal density")
+```
+
+
+# Bivariate normal distributions
+
+And here is an example with a negative correlation:
+
+```{r,bivarcorrneg,fig.cap="\\label{fig:bivarnegcorr}Visualization of two negatively correlated random variables.",fig.height=3.5}
+bivn<-mvrnorm(1000,mu=c(0,0),
+              Sigma=matrix(c(1,-0.9,-0.9,2),2))
+bivn.kde<-kde2d(bivn[,1],bivn[,2],n=50)
+persp(bivn.kde,phi=10,theta=0,shade=0.2,border=NA,
+      main="Simulated bivariate normal density")
+```
+
+# Bivariate normal distributions
+
+\textbf{Visualizing conditional distributions}
+
+You can run the following code to get a visualization of what a conditional distribution looks like when we take ``slices'' from the conditioning random variable:
+
+```{r,eval=FALSE,echo=TRUE}
+for(i in 1:50){
+  plot(bivn.kde$z[i,1:50],type="l",ylim=c(0,0.1))
+  Sys.sleep(.5)
+}
+```
+
+# Maximum likelihood estimation
+## Discrete case
+
+Suppose the observed independent sample values are $x_1, x_2,\dots, x_n$. The probability of observing these is
+
+\begin{equation}
+P(X_1=x_1,X_2=x_2,\dots,X_n=x_n) = f(X_1=x_1,X_2=x_2,\dots,X_n=x_n;\theta)  
+\end{equation} 
+
+\noindent
+i.e., the function $f$ is the value of the joint probability \textbf{distribution} of the random variables $X_1,\dots,X_n$ at $X_1=x_1,\dots,X_n=x_n$. Since the sample values have been observed and are fixed, $f(x_1,\dots,x_n;\theta)$ is a function of $\theta$. The function $f$ is called a \textbf{likelihood function}.
+
+# Maximum likelihood estimation
+## Continuous case
+
+Here, $f$ is the joint probability \textbf{density}, the rest is the same as above.
+
+\begin{definition}\label{def:lik}
+If $x_1, x_2,\dots, x_n$ are the values of an independent random sample from a population with parameter $\theta$, the \textbf{likelihood function} of the sample is given by 
+
+\begin{equation}
+L(\theta) = f(x_1, x_2,\dots, x_n; \theta)  
+\end{equation}
+
+\noindent
+for values of $\theta$ within a given domain. Here, $f(X_1=x_1,X_2=x_2,\dots,X_n=x_n;\theta)$ is the joint probability distribution or density of the random variables $X_1,\dots,X_n$ at $X_1=x_1,\dots,X_n=x_n$.
+
+\end{definition}
+
+So, the method of maximum likelihood consists of finding the maximum point in the likelihood function with respect to $\theta$. 
+
+The value of $\theta$ that maximizes the likelihood function is the \textbf{MLE} (maximum likelihood estimate) of $\theta$.
+
+# Finding maximum likelihood estimates 
+
+For simplicity consider the case where $X\sim N(\mu=0,\sigma=1)$.
+
+```{r,logliknormal,fig.cap="\\label{fig:maxlik}Maximum likelihood and log likelihood."}
+op<-par(mfrow=c(1,2),pty="s")
+plot(function(x) dnorm(x,log=F), -3, 3,
+      main = "Normal density",#ylim=c(0,.4),
+              ylab="density",xlab="X")
+abline(h=0.4)
+plot(function(x) dnorm(x,log=T), -3, 3,
+      main = "Normal density (log)",#ylim=c(0,.4),
+              ylab="density",xlab="X")
+abline(h=log(0.4))
+```
+
+# Finding maximum likelihood estimates 
+## Practical implication
+
+Suppose you sample 10 data points:
+
+```{r}
+x<-rnorm(10)
+```
+
+The sample mean gives you the MLE of $\mu$, and the sample variance gives you the MLE of $\sigma^2$:
+
+```{r echo=TRUE}
+mean(x)
+var(x)
+```
+
+Because the samples will randomly vary from one experiment to another, this does not mean the the above sample means and variances reflect the true $\mu$ and $\sigma^2$!
