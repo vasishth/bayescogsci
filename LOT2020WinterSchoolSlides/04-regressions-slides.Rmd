@@ -395,7 +395,7 @@ ggplot(df_pupil_pred_summary, aes(av_p_size)) +
 * If we look hard enough, we'll find failures of descriptive adequacy.^[all models are wrong]
 * Posterior predictive accuracy can be used to generate new hypotheses and to compare different models.
 
-# Log-normal model: Does trial affect pupil size? {#sec:trial}
+# Log-normal model: Does trial affect reaction times? {#sec:trial}
 
 
 ---
@@ -638,7 +638,7 @@ There is a slowdown in both cases.
 
 * present the posterior mean and the 95% credible interval;
 * assess if the observed estimates are consistent with the prediction from our theory;
-* assess the practical relevance of the effect for the research question; (only after 100 button presses do we see a slowdown of `r round(mean(effect_middle_ms),2) * 100` ms on average ($`r mean(effect_middle_ms)` \cdot 100$), with a 95% credible interval ranging from `r quantile(effect_middle_ms, .025)*100` to `r quantile(effect_middle_ms, .975)*100`);
+* assess the practical relevance of the effect for the research question; (only after 100 button presses we see a slowdown of `r round(mean(effect_middle_ms),2) * 100` ms on average ($`r mean(effect_middle_ms)` \cdot 100$), with a 95% credible interval ranging from `r quantile(effect_middle_ms, .025)*100` to `r quantile(effect_middle_ms, .975)*100`);
 * establish the presence or absence of an effect (Bayes factor)
 
 <!-- Sometimes, researchers are only interested in establishing that there is an effect; the magnitude and uncertainty of the estimate is of secondary interest. Here, the goal is to argue that there is  **evidence** of a slowdown. The word evidence has a special meaning in statistics [@Royall], and in null hypothesis significance testing, a likelihood ratio test is the standard way to argue that one has evidence for an effect. In the Bayesian data analysis context, a Bayes factor hypothesis test must be carried out. We’ll come back to this issue in the model comparison section \@ref(sec:?). -->
