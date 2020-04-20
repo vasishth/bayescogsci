@@ -1,4 +1,4 @@
-## ---- echo = FALSE, message=FALSE-------------------
+## ---- echo = FALSE, message=FALSE------------------------------------------
 lst_cloze_data <- list(k = 80, N = 100)
 # Fit the model with the default values of number of chains and iterations
 # chains = 4,    iter = 2000
@@ -9,7 +9,7 @@ fit_cloze <- stan(
 )
 
 
-## ---- echo = FALSE----------------------------------
+## ---- echo = FALSE---------------------------------------------------------
 samples_theta <- rstan::extract(fit_cloze)$theta
 some_samples <- toString(round(head(samples_theta, 20), 3))
 df_fit_cloze <- data.frame(theta = samples_theta)
@@ -17,7 +17,7 @@ diff_means <- format(mean(samples_theta) - 84 / (84 + 24), digits =1)
 diff_var <- format(sd(samples_theta)^2 - 84 * 24 / ((84 + 24)^2 * (84 + 24 + 1)), digits=1)
 
 
-## ----betapost, fig.cap="(ref:betapost)",echo = FALSE----
+## ----betapost, fig.cap="(ref:betapost)",echo = FALSE-----------------------
 ggplot(df_fit_cloze, aes(theta)) +
   geom_histogram(binwidth = .01, colour = "gray", alpha = .5, aes(y = ..density..)) +
   stat_function(fun = dbeta, color = "red", args = list(
@@ -26,18 +26,18 @@ ggplot(df_fit_cloze, aes(theta)) +
   ))
 
 
-## ---- reading_noreading, message = FALSE------------
+## ---- reading_noreading, message = FALSE-----------------------------------
 df_noreading_data <- read_csv("./data/button_press.csv")
 df_noreading_data
 
 
-## ----m1visualize, fig.cap="Visualizing the data"----
+## ----m1visualize, fig.cap="Visualizing the data"---------------------------
 ggplot(df_noreading_data, aes(rt)) +
   geom_density() +
   ggtitle("Button-press data")
 
 
-## ---- message = FALSE, cache = TRUE-----------------
+## ---- message = FALSE, cache = TRUE----------------------------------------
 fit_press <- brm(rt ~ 1,
   data = df_noreading_data,
   family = gaussian(),
@@ -51,42 +51,63 @@ fit_press <- brm(rt ~ 1,
 )
 
 
-## ----warmup, fig.cap = "(ref:warmup)", echo = FALSE----
-chains <- as.mcmc(fit_press, inc_warmup = TRUE) %>%
-  map_dfr(~ as.data.frame(.x) %>%
-    as_tibble() %>%
-    mutate(iter = 1:n()), .id = "chain") %>%
-  rename(mu = b_Intercept) %>%
-  dplyr::select(-`lp__`) %>%
-  tidyr::gather("parameter", "value", -iter, -chain)
+## ----warmup, fig.cap = "(ref:warmup)", echo = FALSE------------------------
+plot_all <- function(fit, xlab=500, ylab =100){
+  chains <- as.mcmc(fit, inc_warmup = TRUE) %>%
+    map_dfr(~ as.data.frame(.x) %>%
+              as_tibble() %>%
+              mutate(iter = 1:n()), .id = "chain") %>%
+    rename(mu = b_Intercept) %>%
+    dplyr::select(-`lp__`) %>%
+    tidyr::gather("parameter", "value", -iter, -chain)
 
-ggplot(chains, aes(x = iter, y = value, color = chain)) + geom_line() +
-  facet_wrap(~parameter, ncol = 1) +
-  geom_vline(xintercept = 1000, linetype = "dashed") +
-  xlab("Iteration number") +
+  ggplot(chains, aes(x = iter, y = value, color = chain)) + geom_line() +
+    facet_wrap(~parameter, ncol = 1) +
+    geom_vline(xintercept = 1000, linetype = "dashed") +
+    xlab("Iteration number") +
     ylab("Sample value")+
-annotate("text", x=500, y =100, color= "black", label="Warm-up", size =5.2)
+    annotate("text", x=xlab, y =ylab, color= "black", label="Warm-up", size =5.2)
+}
+
+plot_all(fit_press)
 
 
-## ---------------------------------------------------
+## ----warmup2, fig.cap = "(ref:warmup2)", echo = FALSE, message = FALSE, warning = FALSE----
+data_mm <- tibble(rt = rnorm(500, c(5,3000), c(5,5)))
+fit_press_bad <- brm(rt ~ 1,
+  data = data_mm,
+  family = gaussian(),
+  prior = c(
+    prior(uniform(0, 60000), class = Intercept),
+    prior(uniform(0, 2000), class = sigma)
+  ),
+  chains = 4,
+  iter = 2000,
+  warmup = 1000
+  )
+
+plot_all(fit_press_bad, ylab = 1000)
+
+
+## --------------------------------------------------------------------------
 posterior_samples(fit_press) %>% str() 
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 plot(fit_press)
 
 
-## ---- results = "hold"------------------------------
+## ---- results = "hold"-----------------------------------------------------
 fit_press
 # posterior_summary(fit_press) is also useful
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 posterior_samples(fit_press)$b_Intercept %>% mean()
 posterior_samples(fit_press)$b_Intercept %>% quantile(c(0.025, .975))
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 normal_predictive_distribution <- function(mu_samples, sigma_samples, N_obs) {
   # empty data frame with headers:
   df_pred <- tibble(trialn = numeric(0),
@@ -111,7 +132,7 @@ normal_predictive_distribution <- function(mu_samples, sigma_samples, N_obs) {
 }
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 tic()
 N_samples <- 1000
 N_obs <- nrow(df_noreading_data)
@@ -126,7 +147,7 @@ normal_predictive_distribution(
 toc()
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 normal_predictive_distribution_fast <- function(mu_samples,
                                                 sigma_samples,
                                                 N_obs) {
@@ -161,7 +182,7 @@ prior_pred %>%
   facet_wrap(~iter, ncol = 3)
 
 
-## ----priorpred-stats,fig.cap="(ref:priorpred-stats)", message = FALSE----
+## ----priorpred-stats,fig.cap="(ref:priorpred-stats)", message = FALSE------
 prior_pred %>%
   group_by(iter) %>%
   summarize(
@@ -188,7 +209,7 @@ prior_pred %>%
 ## to-do: SV: could we show the posteriors from the last and this model side by side using ridge plots?
 
 
-## ---- message = FALSE, cache = TRUE-----------------
+## ---- message = FALSE, cache = TRUE----------------------------------------
 # We fit the model with the default setting of the sampler:
 # 4 chains, 2000 iterations with half of them as warmup.
 fit_press_unif <- brm(rt ~ 1,
@@ -201,11 +222,11 @@ fit_press_unif <- brm(rt ~ 1,
 )
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 fit_press_unif
 
 
-## ---- message = FALSE, cache = TRUE-----------------
+## ---- message = FALSE, cache = TRUE----------------------------------------
 fit_press_inf <- brm(rt ~ 1,
   data = df_noreading_data,
   family = gaussian(),
@@ -217,11 +238,11 @@ fit_press_inf <- brm(rt ~ 1,
 )
 
 
-## ---------------------------------------------------
-fit_press_unif
+## --------------------------------------------------------------------------
+fit_press_inf
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 N_obs <- nrow(df_noreading_data)
 mu_samples <- posterior_samples(fit_press)$b_Intercept
 sigma_samples <- posterior_samples(fit_press)$sigma
@@ -232,11 +253,11 @@ normal_predictive_distribution_fast(
 )
 
 
-## ----normalppc, fig.cap = "(ref:normalppc)", message = FALSE----
+## ----normalppc, fig.cap = "(ref:normalppc)", message = FALSE---------------
 pp_check(fit_press, nsamples = 11, type = "hist")
 
 
-## ----normalppc2, fig.cap = "(ref:normalppc2)" , message = FALSE----
+## ----normalppc2, fig.cap = "(ref:normalppc2)" , message = FALSE------------
 pp_check(fit_press, nsamples = 100)
 
 
@@ -247,20 +268,20 @@ sigma <- 0.5
 N <- 500000
 # Generate N random samples from a log-normal distribution
 sl <- rlnorm(N, mu, sigma)
-ggplot(tibble(samples = sl), aes(sl)) +
+ggplot(tibble(samples = sl), aes(samples)) +
   geom_histogram(binwidth = 50) +
   ggtitle("Log-normal distribution\n") +
   coord_cartesian(ylim = c(0, 70000), xlim = c(0, 2000))
 # Generate N random samples from a normal distribution,
 # and then exponentiate them
 sn <- exp(rnorm(N, mu, sigma))
-ggplot(tibble(samples = sn), aes(sn)) +
+ggplot(tibble(samples = sn), aes(samples)) +
   geom_histogram(binwidth = 50) +
   ggtitle("Exponentiated samples of\na normal distribution") +
     coord_cartesian(ylim = c(0, 70000), xlim = c(0, 2000))
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 N_samples <- 1000
 N_obs <- nrow(df_noreading_data)
 mu_samples <- runif(N_samples, 0, 8)
@@ -284,17 +305,18 @@ prior_pred_ln %>%
   pivot_longer(cols = ends_with("rt"), names_to = "stat", values_to = "rt") %>%
   ggplot(aes(rt)) +
   scale_x_continuous("Reaction times in ms",
-    trans = "log", breaks = c(0.001, 1, 100, 1000, 10000, 100000)
-  ) +
+    trans = "log", breaks = c(0.001, 1, 10, 100, 1000, 10000, 100000)
+  )+
   geom_histogram() +
   facet_wrap(~stat, ncol = 1)
 
 
-## ---------------------------------------------------
-c(
-  lower = exp(6 - 2 * 1.5),
-  higher = exp(6 + 2 * 1.5)
-)
+## to-do: We should explain more the meaning of location of the prior of sigma being 0. Maybe using rtnorm(0,1,a=0)
+
+
+## --------------------------------------------------------------------------
+c(lower = exp(6 - 2 * 1.5),
+  higher = exp(6 + 2 * 1.5))
 
 
 ## ----priorpredlognorm,fig.cap="(ref:priorpredlognorm)", message = FALSE, tidy=FALSE----
@@ -325,7 +347,7 @@ prior_pred_ln_better %>%
   coord_cartesian(xlim = c(0.001, 300000))
 
 
-## ---- message = FALSE, cache = TRUE-----------------
+## ---- message = FALSE, cache = TRUE----------------------------------------
 fit_press_ln <- brm(rt ~ 1,
   data = df_noreading_data,
   family = lognormal(),
@@ -336,19 +358,19 @@ fit_press_ln <- brm(rt ~ 1,
 )
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 fit_press_ln
 
 
-## ---- message = FALSE-------------------------------
+## ---- message = FALSE------------------------------------------------------
 estimate_ms <- exp(posterior_samples(fit_press_ln)$b_Intercept)
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 c(mean = mean(estimate_ms), quantile(estimate_ms, probs = c(.025, .975)))
 
 
-## ----lognppc, message=FALSE, fig.cap="(ref:logppc)"----
+## ----lognppc, message=FALSE, fig.cap="(ref:logppc)"------------------------
 pp_check(fit_press_ln, nsamples = 100)
 
 
@@ -362,7 +384,7 @@ pp_check(fit_press, type = "stat", stat = "max") + ggtitle("Normal model")
 pp_check(fit_press_ln, type = "stat", stat = "max") + ggtitle("Log-normal model")
 
 
-## ---- eval = FALSE----------------------------------
+## ---- eval = FALSE---------------------------------------------------------
 ## fit_press_prior <- brm(rt ~ 1,
 ##   family = gaussian(),
 ##   prior = c(
