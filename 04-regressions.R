@@ -1,3 +1,8 @@
+## ----echo = FALSE----------------------------------------------------------
+## no idea why dplyr doesn't remember this
+select <- dplyr::select
+
+
 ## to-do: This could be expanded much more.
 
 
@@ -21,34 +26,55 @@
 knitr::include_graphics("cc_figure/MOT.png", dpi =1000)
 
 
-## ---- message = FALSE-------------------------------
+## ---- message = FALSE------------------------------------------------------
 df_pupil_pilot <- read_csv("./data/pupil_pilot.csv")
 df_pupil_pilot$p_size %>% summary()
 
 
-## ---------------------------------------------------
-c(qnorm(.025, 1000,500), qnorm(.975, 1000, 500))
+## --------------------------------------------------------------------------
+qnorm(c(.025, .975), 1000,500)
 
 
-## ---------------------------------------------------
-c(qtnorm(.025, 0, 1000, a = 0), qtnorm(.975, 70,1000, a = 0))
+## --------------------------------------------------------------------------
+c(qtnorm(.025, 0, 1000, a = 0), qtnorm(.975, 0, 1000, a = 0))
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
+samples <- rtnorm(20000, 0, 1000, a = 0)
+mean(samples)
+
+
+## --------------------------------------------------------------------------
 c(qnorm(.025, 0,100), qnorm(.975, 0,100))
 
 
-## to-do: maybe prior predictive distributions here??
+## **Truncated distributions**
 
 
-## ---- message = FALSE-------------------------------
+## --------------------------------------------------------------------------
+dnorm(1) * 2 == dtnorm(1, a = 0)
+
+
+## --------------------------------------------------------------------------
+mean_n_ab <- function(mu = 0, sigma = 1, a = -Inf, b = Inf) {
+  alpha <- (a - mu) / sigma
+  beta <- (b - mu) / sigma
+mu + sigma * (dnorm(alpha) - dnorm(beta))/(pnorm(beta) - pnorm(alpha))
+}
+
+
+## --------------------------------------------------------------------------
+mean_n_ab(0, 1000, 0)
+
+
+## ---- message = FALSE------------------------------------------------------
 df_pupil_data <- read_csv("data/pupil.csv")
 df_pupil_data <- df_pupil_data %>%
     mutate(c_load = load - mean(load))
 df_pupil_data
 
 
-## ----fitpupil, message = FALSE, results = "hide"----
+## ----fitpupil, message = FALSE, results = "hide"---------------------------
 fit_pupil <- brm(p_size ~ 1 + c_load,
                  data = df_pupil_data,
                  family = gaussian(),
@@ -59,7 +85,7 @@ fit_pupil <- brm(p_size ~ 1 + c_load,
                  )) 
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 plot(fit_pupil)
 fit_pupil
 
@@ -67,22 +93,22 @@ fit_pupil
 ## **Intercepts in `brms`**
 
 
-## ----fitpupil2, message = FALSE, results = "hide"----
-fit_pupil_non_centered <- brm(p_size ~ 0 + intercept + load,
+## ----fitpupil2, message = FALSE, results = "hide"--------------------------
+fit_pupil_non_centered <- brm(p_size ~ 0 + Intercept + load,
                  data = df_pupil_data,
                  family = gaussian(),
                  prior = c(
-                     prior(normal(800, 200), class = b, coef = intercept),
+                     prior(normal(800, 200), class = b, coef = Intercept),
                      prior(normal(0, 1000), class = sigma),
                      prior(normal(0, 100), class = b, coef = load)
                  ))
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 posterior_summary(fit_pupil_non_centered)
 
 
-## ---- eval = FALSE----------------------------------
+## ---- eval = FALSE---------------------------------------------------------
 ## fit_pupil_wrong <- brm(p_size ~ 1 + load,
 ##                  data = df_pupil_data,
 ##                  family = gaussian(),
@@ -94,7 +120,7 @@ posterior_summary(fit_pupil_non_centered)
 ## 
 
 
-## ---- echo = FALSE----------------------------------
+## ---- echo = FALSE---------------------------------------------------------
 mean_load <- posterior_summary(fit_pupil)["b_c_load","Estimate"] %>%
     round(2)
 load_l <- posterior_summary(fit_pupil)["b_c_load","Q2.5"]%>%
@@ -103,11 +129,11 @@ load_h <- posterior_summary(fit_pupil)["b_c_load","Q97.5"]%>%
     round(2)
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 mean(posterior_samples(fit_pupil)$b_c_load > 0)
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 # we start from an array of 1000 samples by 41 observations
 df_pupil_pred <- posterior_predict(fit_pupil, nsamples = 1000) %>%
     # we convert it to a list of length 1000, with 41 observations in each element:
@@ -135,7 +161,7 @@ df_pupil_pred %>% filter(iter < 100) %>%
     facet_grid(load ~ .) 
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 # predicted means:
 df_pupil_pred_summary <- df_pupil_pred %>%
     group_by(iter, load) %>%
@@ -146,14 +172,14 @@ df_pupil_summary <- df_pupil_data %>%
     summarize(av_p_size = mean(p_size))
 
 
-## ----postpredmean, fig.cap ="(ref:postpredmean)", message= FALSE----
+## ----postpredmean, fig.cap ="(ref:postpredmean)", message= FALSE-----------
 ggplot(df_pupil_pred_summary, aes(av_p_size)) +
     geom_histogram(alpha=.5)+
     geom_vline(aes(xintercept= av_p_size),data= df_pupil_summary)+
     facet_grid(load ~ .)
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 lognormal_model_pred <- function(alpha_samples,
                                  beta_samples,
                                  sigma_samples,
@@ -175,7 +201,7 @@ lognormal_model_pred <- function(alpha_samples,
 }
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 N_obs = 361
 alpha_samples <- rnorm(1000, 6, 1.5)
 sigma_samples <- rtnorm(1000, 0, 1, a =0)
@@ -188,7 +214,7 @@ prior_pred <- lognormal_model_pred(
     N_obs = N_obs)
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 median_effect <-
      prior_pred %>%
      group_by(iter) %>%
@@ -198,13 +224,13 @@ median_effect <-
  )
 
 
-## ----priorbeta,fig.cap="(ref:priorbeta)", message = FALSE----
+## ----priorbeta,fig.cap="(ref:priorbeta)", message = FALSE------------------
 median_effect %>%
     ggplot(aes(median_rt)) +
     geom_histogram()
 
 
-## ---- echo = FALSE----------------------------------
+## ---- echo = FALSE---------------------------------------------------------
 beta_samples2 <- rnorm(1000, 0, .01)
 
 prior_pred2 <- lognormal_model_pred(
@@ -276,7 +302,7 @@ ggplot(df_dg, aes(x = n, y = ms)) +
 
 
 
-## ----  message = FALSE------------------------------
+## ----  message = FALSE-----------------------------------------------------
 df_noreading_data <- read_csv("./data/button_press.csv")
 df_noreading_data <- df_noreading_data %>%
     mutate(c_trial = trialn - mean(trialn))
@@ -287,25 +313,25 @@ fit_press_trial <- brm(rt ~ 1 + c_trial,
   prior = c(
     prior(normal(6, 1.5), class = Intercept),
     prior(normal(0, 1), class = sigma),
-    prior(normal(0, 1), class = b, coef = c_trial)
+    prior(normal(0, .01), class = b, coef = c_trial)
   )
 )
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 ## print posterior means and 95% credible intervals to four decimal places:
-posterior_summary(fit_press_trial)[1:3,c(1,3,4)]
+posterior_summary(fit_press_trial)[,c("Estimate","Q2.5","Q97.5")]
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 posterior_summary(fit_press_trial, pars = "b_c_trial")
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 plot(fit_press_trial)
 
 
-## ---- echo=FALSE, results="hide"--------------------
+## ---- echo=FALSE, results="hide"-------------------------------------------
 alpha_samples<- posterior_samples(fit_press_trial)$b_Intercept
 beta_samples<- posterior_samples(fit_press_trial)$b_c_trial
 
@@ -320,15 +346,15 @@ beta_low <- round(quantile(beta_samples,prob=0.025),5) %>% format()
 beta_high <- round(quantile(beta_samples,prob=0.975),5) %>% format() 
 
 
-## ---------------------------------------------------
-alpha_samples<- posterior_samples(fit_press_trial)$b_Intercept
-beta_samples<- posterior_samples(fit_press_trial)$b_c_trial
+## --------------------------------------------------------------------------
+alpha_samples <- posterior_samples(fit_press_trial)$b_Intercept
+beta_samples <- posterior_samples(fit_press_trial)$b_c_trial
 effect_middle_ms <- exp(alpha_samples) - exp(alpha_samples - 1* beta_samples)
 ## ms effect in the middle of the expt (mean trial vs. mean trial - 1 ) 
 c(mean = mean(effect_middle_ms), quantile(effect_middle_ms, c(.025,.975)))
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 first_trial <- min(df_noreading_data$c_trial)
 second_trial <- min(df_noreading_data$c_trial) +1
 effect_beginning_ms <- exp(alpha_samples+  second_trial * beta_samples) -
@@ -337,18 +363,12 @@ effect_beginning_ms <- exp(alpha_samples+  second_trial * beta_samples) -
 c(mean = mean(effect_beginning_ms), quantile(effect_beginning_ms, c(.025,.975)))
 
 
-## ----oberauer, fig.cap = "(ref:oberauer)", fig.height =5, echo = FALSE----
+## ----oberauer, fig.cap = "(ref:oberauer)", fig.height =5, echo = FALSE-----
 knitr::include_graphics("cc_figure/fig1_oberauer_2019_modified.png")
 
 
-## ----  message = FALSE, warning = FALSE-------------
-df_recall_data <- read_table2("./data/PairsRSS1_all.dat",
-                              col_names = c("subject", "session", "block",
-                                            "trial", "set_size",
-                                            "response_size_list",
-                                            "response_size_new_words",
-                                            "tested", "response",
-                                            "response_category", "rt")) %>%
+## ----  message = FALSE, warning = FALSE------------------------------------
+df_recall_data <- read_csv("./data/PairsRSS1_all.csv") %>%
     # We ignore the type of incorrect responses (the focus of the paper)
     mutate(correct = if_else(response_category ==1, 1, 0)) %>%
     # and we only use the data from the free recall task:
@@ -356,7 +376,9 @@ df_recall_data <- read_table2("./data/PairsRSS1_all.dat",
     filter(response_size_list + response_size_new_words == 0) %>%
     # We select one subject
     filter(subject == 10) %>%
-    mutate(c_set_size = set_size - mean(set_size))
+    mutate(c_set_size = set_size - mean(set_size)) %>%
+    select(subject, set_size, c_set_size, correct, trial, session, block, tested)
+
 # we can ignore the warning from read_table
 
 # Set sizes in the dataset:
@@ -368,13 +390,13 @@ df_recall_data %>%
     count()
 
 
-## ---------------------------------------------------
-df_recall_data<-df_recall_data[,c(12,13)]
+## --------------------------------------------------------------------------
 df_recall_data
 
 
-## ---------------------------------------------------
-as.numeric(rbernoulli(n=10,p=0.5))
+## --------------------------------------------------------------------------
+# We use as.numeric to get zeros and ones rather than FALSE and TRUE
+rbernoulli(n = 10, p = 0.5) %>% as.numeric()
 
 
 ## ----logisticfun, fig.cap = "The logit and inverse logit (logistic) function." ,echo = FALSE,warning=FALSE----
@@ -400,13 +422,6 @@ gridExtra::grid.arrange(p1,p2,ncol=2)
 #    xlab("x (Log-odds)")
 
 
-## ----echo=FALSE-------------------------------------
-m_logit<-glm(correct~c_set_size,
-    df_recall_data,family=binomial("logit"))
-alpha_hat<-round(summary(m_logit)$coefficients[1,1],2)
-beta_hat<-round(summary(m_logit)$coefficients[2,1],2)
-
-
 ## ----logoddspriorsf, fig.cap= "(ref:logoddspriorsf)",fig.show='hold', out.width = "45%", fig.width =3, fig.height =3----
 samples_logodds <- tibble(alpha = rnorm(100000, 0, 4))
 samples_prob <- tibble(p = plogis(rnorm(100000, 0, 4)))
@@ -425,7 +440,7 @@ ggplot(samples_prob, aes(p)) +
     geom_density()
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 logistic_model_pred <- function(alpha_samples,
                                 beta_samples,
                                 set_size,
@@ -439,9 +454,7 @@ logistic_model_pred <- function(alpha_samples,
                      # change the likelihood: 
                      # Notice the use of a link function for alpha and beta
                      theta = plogis(alpha + c_set_size * beta),
-                     # There is no bernoulli in R, but we can just use
-                     # binomial when the total number of trials is 1
-                     correct_pred = rbinom(N_obs, size = 1, prob = theta)
+                     correct_pred = rbernoulli(N_obs,  p = theta)
                  )
              }, .id = "iter") %>%
     # .id is always a string and needs to be converted to a number
@@ -449,12 +462,12 @@ logistic_model_pred <- function(alpha_samples,
 }
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 N_obs <- 800
 set_size <- rep(c(2,4,6,8),200)
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 alpha_samples <- rnorm(1000, 0, 1.5)
 sds_beta <- c(1, 0.5, 0.1,0.01, 0.001) 
 prior_pred <- map_dfr(sds_beta, function(sd) {
@@ -468,7 +481,7 @@ prior_pred <- map_dfr(sds_beta, function(sd) {
 })
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 mean_accuracy <-
      prior_pred %>%
      group_by(prior_beta_sd, iter, set_size) %>%
@@ -477,14 +490,14 @@ mean_accuracy <-
 
 
 
-## ----priors4beta,fig.cap="(ref:priors4beta)", message = FALSE----
+## ----priors4beta,fig.cap="(ref:priors4beta)", message = FALSE--------------
 mean_accuracy %>%
     ggplot(aes(accuracy)) +
     geom_histogram() +
     facet_grid(set_size~prior)
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 diff_accuracy <- mean_accuracy %>%
     arrange(set_size) %>%
     group_by(iter, prior_beta_sd) %>%
@@ -494,58 +507,33 @@ diff_accuracy <- mean_accuracy %>%
 
 
 
-## ----priors4beta2,fig.cap="(ref:priors4beta2)", message = FALSE----
+## ----priors4beta2,fig.cap="(ref:priors4beta2)", message = FALSE------------
 diff_accuracy %>%
     ggplot(aes(diffaccuracy)) +
     geom_histogram() +
     facet_grid(diffsize~prior)
 
 
-## ----  message = FALSE, warning = FALSE-------------
-df_recall_data <- read_table2("./data/PairsRSS1_all.dat",
-                              col_names = c("subject", "session", "block",
-                                            "trial", "set_size",
-                                            "response_size_list",
-                                            "response_size_new_words",
-                                            "tested", "response",
-                                            "response_category", "rt")) %>%
-    # ignore the type of incorrect responses (the focus of the paper)
-    mutate(correct = if_else(response_category ==1, 1, 0)) %>%
-    # use only the data from the free recall task:
-    # (when there was no list of possible responses)
-    filter(response_size_list + response_size_new_words == 0) %>%
-    # select one subject
-    filter(subject == 10) %>%
-    mutate(c_set_size = set_size - mean(set_size))
-# ignore the warning from read_table
-
-# Set sizes in the dataset:
-df_recall_data$set_size %>%
-    unique
-# Trials by set size
-df_recall_data %>%
-    group_by(set_size) %>%
-    count()
-
+## ----  message = FALSE-----------------------------------------------------
 fit_recall <- brm(correct ~ 1 + c_set_size,
   data = df_recall_data,
   family = bernoulli(link = logit),
   prior = c(
     prior(normal(0, 1.5), class = Intercept),
-    prior(normal(0, .5), class = b, coef = c_set_size)
+    prior(normal(0, .1), class = b, coef = c_set_size)
   )
 )
 
 
-## ---------------------------------------------------
-posterior_summary(fit_recall)[1:2,c(1,3,4)]
+## --------------------------------------------------------------------------
+posterior_summary(fit_recall, pars = c("b_Intercept", "b_c_set_size"))
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 plot(fit_recall)
 
 
-## ---- echo=FALSE, results="hide"--------------------
+## ---- echo=FALSE, results="hide"-------------------------------------------
 alpha_samples<- posterior_samples(fit_recall)$b_Intercept
 beta_samples<- posterior_samples(fit_recall)$b_c_set_size
 beta_mean <- round(mean(beta_samples),5)
@@ -553,25 +541,25 @@ beta_low <- round(quantile(beta_samples,prob=0.025),5)
 beta_high <- round(quantile(beta_samples,prob=0.975),5)
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 alpha_samples<- posterior_samples(fit_recall)$b_Intercept
 av_accuracy <- plogis(alpha_samples)
 c(mean = mean(av_accuracy), quantile(av_accuracy, c(.025,.975)))
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 beta_samples<- posterior_samples(fit_recall)$b_c_set_size
 effect_middle <- plogis(alpha_samples) - plogis(alpha_samples - beta_samples)
 c(mean = mean(effect_middle), quantile(effect_middle, c(.025,.975)))
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 effect_4m2 <- plogis(alpha_samples+  (4 - mean(df_recall_data$set_size)) * beta_samples) -
     plogis(alpha_samples+  (2 - mean(df_recall_data$set_size)) * beta_samples)
 c(mean = mean(effect_4m2), quantile(effect_4m2, c(.025,.975)))
 
 
-## ---------------------------------------------------
+## --------------------------------------------------------------------------
 df_recall_data_ext <- df_recall_data %>%
     bind_rows(tibble(set_size = rep(c(3,5,7),23),
                      c_set_size = set_size - mean(df_recall_data$set_size)))
@@ -586,7 +574,7 @@ df_recall_pred_ext <- posterior_predict(fit_recall,
     mutate(iter = as.numeric(iter))
 
 
-## ----postpredsum2, fig.cap ="(ref:postpredsum2)", message = FALSE----
+## ----postpredsum2, fig.cap ="(ref:postpredsum2)", message = FALSE----------
 df_recall_pred_ext_summary <- df_recall_pred_ext %>%
     group_by(iter, set_size) %>%
     summarize(accuracy = mean(correct))
@@ -600,6 +588,6 @@ ggplot(df_recall_pred_ext_summary, aes(accuracy)) +
     facet_grid(set_size ~ .)
 
 
-## ----prepshow, ref.label="prepare-pupil", eval=FALSE----
+## ----prepshow, ref.label="prepare-pupil", eval=FALSE-----------------------
 ## NA
 
