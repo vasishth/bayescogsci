@@ -1,0 +1,457 @@
+---
+title: "03 Logistic Regression"
+author: "Shravan Vasishth/Bruno Nicenboim"
+date: "SMLP 2020"
+output:
+  beamer_presentation:
+    theme: "Boadilla"
+    colortheme: "dove"
+    fonttheme: "structurebold"
+header-includes:
+   - \usepackage{esint}
+   - \usepackage{mathtools}
+   - \makeatletter
+   - \newcommand{\explain}[2]{\underset{\mathclap{\overset{\uparrow}{#2}}}{#1}}
+   - \newcommand{\explainup}[2]{\overset{\mathclap{\underset{\downarrow}{#2}}}{#1}}
+   - \makeatother
+citation_package: biblatex
+biblatexoptions: 
+  - "backend=biber, style=apa"
+bibliography:  bayes.bib
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+library(brms)
+```
+
+# The experiment
+
+One subject was presented word lists of varying lengths (2, 4, 6, and 8 elements), and then was asked to recall a word given its position on the list.
+
+Source: Oberauer 2019
+
+# Load data
+
+```{r,  message = FALSE, warning = FALSE}
+library(tidyverse)
+df_recall_data <- readr::read_table2("data/PairsRSS1_all.dat",
+                              col_names = c("subject", "session", "block",
+                                            "trial", "set_size",
+                                            "response_size_list",
+                                            "response_size_new_words",
+                                            "tested", "response",
+                                            "response_category", "rt")) %>%
+    # We ignore the type of incorrect responses (the focus of the paper)
+    mutate(correct = if_else(response_category ==1, 1, 0)) %>%
+    # and we only use the data from the free recall task:
+    # (when there was no list of possible responses)
+    filter(response_size_list + response_size_new_words == 0) %>%
+    # We select one subject
+    filter(subject == 10) %>%
+    mutate(c_set_size = set_size - mean(set_size))
+# we can ignore the warning from read_table
+
+# Set sizes in the dataset:
+df_recall_data$set_size %>%
+    unique
+# Trials by set size
+df_recall_data %>%
+    group_by(set_size) %>%
+    count()
+```
+
+# The data
+
+The data look like this: 
+
+-the column ```correct``` records the 0 (incorrect) or 1 (correct) responses
+-  the column ```c\_set\_size``` records the centered memory set size; these latter scores have continuous values -3, -1, 1, and 3. These continuous values are centered versions of 2, 4, 6, and 8.
+
+```{r}
+df_recall_data<-df_recall_data[,c(12,13)]
+df_recall_data
+```
+
+# The likelihood for the logistic regression model
+
+The Bernoulli likelihood generates a 0 or 1 response with a particular probability $\theta$. For example, one can generate simulated data for 10 trials as follows:
+
+```{r}
+as.numeric(rbernoulli(n=10,p=0.5))
+```
+
+\begin{equation}
+correct_n \sim Bernoulli(\theta_n)
+(\#eq:bernoullilik)
+\end{equation}
+
+- $\theta_n$ is bounded to be between 0 and 1 (it is a probability). We cannot just fit a regression model using the normal or lognormal likelihood.
+- The generalized linear modeling framework solves this problem by defining a so-called **link function** $g(\cdot)$ that connects the linear model to the quantity to be estimated (here, the probabilities $\theta_n$). 
+
+# Link function: the logit link
+
+The link function used for 0,1 responses is called the **logit link**, and is defined as follows. 
+
+\begin{equation}
+\eta_n = g(\theta_n) = \log\left(\frac{\theta_n}{1-\theta_n}\right)
+\end{equation}
+
+# Logit link
+
+The figure below shows the logit link function, $\eta = g(\theta)$, and the inverse logit, $\theta = g^{-1}(\eta)$, which is called the **logistic function**.
+
+```{r logisticfun,fig.height=3,fig.width=5,echo=FALSE,warning=FALSE}
+x<-seq(0.001,0.999,by=0.001)
+y<-log(x/(1-x))
+logistic_dat<-data.frame(theta=x,eta=y)
+
+p1<-qplot(logistic_dat$theta,logistic_dat$eta,geom="line")+xlab(expression(theta))+ylab(expression(eta))+ggtitle("The logit link")+
+  annotate('text', 
+           x = 0.3, y = 4, 
+        label = expression(paste(eta,"=",g(theta))),parse = TRUE,size=8)
+  
+
+p2<-qplot(logistic_dat$eta,logistic_dat$theta,geom="line")+xlab(expression(eta))+ylab(expression(theta))+ggtitle("The inverse logit link (logistic)")+annotate('text', 
+           x = -3.5, y = 0.80, 
+        label = expression(paste(theta,"=",g^-1, eta)),parse = TRUE,size=8)
+
+gridExtra::grid.arrange(p1,p2,ncol=2)
+
+#ggplot(tibble(x=c(-5, 5)), aes(x)) +
+#    stat_function(fun = plogis) +
+#    ylab("Probability")+
+#    xlab("x (Log-odds)")
+```
+
+# The logit link 
+
+The linear model is now fit **not** to the 0,1 responses as the dependent variable, but to $\eta_n$, i.e., log-odds, as the dependent variable:
+
+\begin{equation}
+\eta_n = \log\left(\frac{\theta_n}{1-\theta_n}\right) = \alpha + \beta \cdot c\_set\_size
+\end{equation}
+
+Once $\eta_n$ is estimated, one can easily compute the parameters of interest, the estimated probabilities, by solving the above equation for $\theta_n$:
+
+\begin{equation}
+\theta_n = g^{-1}(\eta_n) =  \log\left(\frac{\exp(\eta_n)}{1+\exp(\eta_n)}\right)
+\end{equation}
+
+# Logistic regression: Summary
+
+The generalized linear model with the logit link fits the following Bernoulli likelihood:
+
+\begin{equation}
+correct_n \sim Bernoulli(\theta_n)
+(\#eq:bernoullilogislik)
+\end{equation}
+
+- The model is fit on the log-odds scale, $\eta_n = \alpha + c\_set\_size_n \cdot \beta$. 
+- Once $\eta_n$ has been estimated, the inverse logit or the logistic function is used to compute the probability estimates 
+$\theta_n =  \log(\frac{\exp(\eta_n)}{1+\exp(\eta_n)})$. 
+
+# Priors for logistic regression
+
+In order to decide on priors for $\alpha$ and $\beta$ we need to take into account that these parameter do not represent probabilities or proportions, but *log-odds*, the x-axis in the Figure  (right-hand side figure).  
+
+# Priors for logistic regression
+
+As shown in  the figure, the relationship between log-odds and probabilities is not linear. 
+
+There are two functions in R that implement the logit and inverse logit functions: `qlogis(p)` for the logit function and `plogis(x)` for the inverse logit or logistic function.
+
+
+# Priors for logistic regression
+
+- The prior for $\alpha$ will depend on how difficult the recall task is. 
+- If we are not sure, we could assume that the probability of recalling a word for an average set size, $\alpha$, is centered in .5 (a 50/50 chance) with a great deal of uncertainty. The `R` command `plogis(.5)` tells us that .5 corresponds to zero in log-odds. 
+
+# Priors for logistic regression
+
+How do we include a great deal of uncertainty? We could look at next figure, and decide on  a standard deviation of 4 in a normal distribution centered in zero:
+
+
+# Priors for logistic regression
+
+\begin{equation}
+\alpha \sim Normal(0, 4) 
+\end{equation}
+
+
+# Priors for logistic regression
+
+The figure shows that our prior assigns more probability mass to extreme probabilities of recall than to intermediate values. Clearly, this is not what we intended.
+
+We could try several values for standard deviation of the prior, until we find a prior that make sense for us. Reducing the standard deviation to 1.5 seems to make sense as shown in the figure.
+
+\begin{equation}
+\alpha \sim Normal(0, 1.5) 
+\end{equation}
+
+
+```{r logoddspriorsf,echo=FALSE,fig.width=3,fig.height =3}
+samples_logodds <- tibble(alpha = rnorm(100000, 0, 4))
+samples_prob <- tibble(p = plogis(rnorm(100000, 0, 4)))
+ggplot(samples_logodds, aes(alpha)) +
+    geom_density()
+ggplot(samples_prob, aes(p)) +
+    geom_density()
+```
+
+# Priors for logistic regression
+
+```{r logoddspriorsf2,echo=FALSE,fig.width =3, fig.height =3}
+samples_logodds <- tibble(alpha = rnorm(100000, 0, 1.5))
+samples_prob <- tibble(p = plogis(rnorm(100000, 0, 1.5)))
+ggplot(samples_logodds, aes(alpha)) +
+    geom_density()
+ggplot(samples_prob, aes(p)) +
+    geom_density()
+```
+
+
+# Priors for logistic regression
+
+
+We need to decide now on the prior for the effect in log-odds of increasing the set size, $\beta$. 
+
+Some options:
+
+(a) $\beta \sim Normal(0, 1)$
+(b) $\beta \sim Normal(0, .5)$
+(c) $\beta \sim Normal(0, .1)$
+(d) $\beta \sim Normal(0, .01)$
+(e) $\beta \sim Normal(0, .001)$
+
+
+```{r echo=FALSE}
+logistic_model_pred <- function(alpha_samples,
+                                beta_samples,
+                                set_size,
+                                 N_obs) {
+    map2_dfr(alpha_samples, beta_samples,
+             function(alpha, beta) {
+                 tibble(
+                     set_size = set_size,
+                     # we center size:
+                     c_set_size = set_size - mean(set_size),
+                     # change the likelihood: 
+                     # Notice the use of a link function for alpha and beta
+                     theta = plogis(alpha + c_set_size * beta),
+                     # There is no bernoulli in R, but we can just use
+                     # binomial when the total number of trials is 1
+                     correct_pred = rbinom(N_obs, size = 1, prob = theta)
+                 )
+             }, .id = "iter") %>%
+    # .id is always a string and needs to be converted to a number
+        mutate(iter = as.numeric(iter))
+}
+```
+
+
+# Prior predictive distribution
+
+Let's assume 800 observations with 200 observation of each set size:
+```{r}
+N_obs <- 800
+set_size <- rep(c(2,4,6,8),200)
+```
+
+# Prior predictive distribution
+
+We iterate over the four possible standard deviations of $\beta$:
+
+```{r}
+alpha_samples <- rnorm(1000, 0, 1.5)
+sds_beta <- c(1, 0.5, 0.1,0.01, 0.001) 
+prior_pred <- map_dfr(sds_beta, function(sd) {
+    beta_samples <- rnorm(1000, 0, sd)
+    logistic_model_pred(alpha_samples = alpha_samples,
+                        beta_samples = beta_samples,
+                        set_size = set_size,
+                        N_obs = N_obs
+                        ) %>%
+        mutate(prior_beta_sd = sd)
+})
+```
+
+# Prior predictive distribution
+
+Calculate the accuracy  for each one of the priors we want to examine, for each iteration, and for each set size.
+
+```{r}
+mean_accuracy <-
+     prior_pred %>%
+     group_by(prior_beta_sd, iter, set_size) %>%
+     summarize(accuracy = mean(correct_pred)) %>%
+     mutate(prior = paste0("Normal(0, ",prior_beta_sd,")"))
+
+```
+
+
+# Prior predictive distribution
+
+
+```{r priors4beta,echo=FALSE,fig.height=3,fig.width=3,message = FALSE}
+mean_accuracy %>%
+    ggplot(aes(accuracy)) +
+    geom_histogram() +
+    facet_grid(set_size~prior)
+```
+
+# Prior predictive distribution
+
+Look at the predicted differences in accuracy between set sizes. We calculate them as follows:
+
+```{r}
+diff_accuracy <- mean_accuracy %>%
+    arrange(set_size) %>%
+    group_by(iter, prior_beta_sd) %>%
+    mutate(diffaccuracy = accuracy - lag(accuracy) ) %>%
+    mutate(diffsize = paste(set_size,"-",  lag(set_size))) %>%
+    filter(set_size >2)
+
+```
+
+# Prior predictive distribution
+
+If we are not sure whether the increase of set size could produce something between a null effect and a  relatively large effect, we can choose the prior with a standard deviation of $0.5$.
+
+# Prior predictive distribution
+
+
+```{r priors4beta2,echo=FALSE,message = FALSE}
+diff_accuracy %>%
+    ggplot(aes(diffaccuracy)) +
+    geom_histogram() +
+    facet_grid(diffsize~prior)
+```
+
+# Priors
+
+
+We settle one the following priors:
+
+\begin{equation}
+\begin{aligned}
+\alpha &\sim Normal(0, 1.5) \\
+\beta &\sim Normal(0, 0.5) 
+\end{aligned}
+\end{equation}
+
+# The `brms` model
+
+Having decided on the likelihood, the link function, and the priors, the model can now be fit using `brms`. Notice that we need to specify that the family is `bernoulli()`, and the link is `logit`. 
+
+```{r,  message = FALSE, warning = FALSE}
+df_recall_data <- read_table2("./data/PairsRSS1_all.dat",
+                              col_names = c("subject", "session", "block",
+                                            "trial", "set_size",
+                                            "response_size_list",
+                                            "response_size_new_words",
+                                            "tested", "response",
+                                            "response_category", "rt")) %>%
+    # ignore the type of incorrect responses (the focus of the paper)
+    mutate(correct = if_else(response_category ==1, 1, 0)) %>%
+    # use only the data from the free recall task:
+    # (when there was no list of possible responses)
+    filter(response_size_list + response_size_new_words == 0) %>%
+    # select one subject
+    filter(subject == 10) %>%
+    mutate(c_set_size = set_size - mean(set_size))
+# ignore the warning from read_table
+
+# Set sizes in the dataset:
+df_recall_data$set_size %>%
+    unique
+# Trials by set size
+df_recall_data %>%
+    group_by(set_size) %>%
+    count()
+```
+
+```{r cache-TRUE}
+fit_recall <- brm(correct ~ 1 + c_set_size,
+  data = df_recall_data,
+  family = bernoulli(link = logit),
+  prior = c(
+    prior(normal(0, 1.5), class = Intercept),
+    prior(normal(0, .5), class = b, coef = c_set_size)
+  )
+)
+```
+
+# The posteriors
+
+Next, look at the summary of the posteriors of each of the parameters. Keep in mind that the parameters are in log-odds space:
+
+```{r}
+posterior_summary(fit_recall)[1:2,c(1,3,4)]
+```
+
+# The posteriors
+
+Plot the posteriors as well:
+
+```{r}
+plot(fit_recall)
+```
+
+#  How to communicate the results?
+
+```{r,results="hide"}
+alpha_samples<- posterior_samples(fit_recall)$b_Intercept
+beta_samples<- posterior_samples(fit_recall)$b_c_set_size
+beta_mean <- round(mean(beta_samples),5)
+beta_low <- round(quantile(beta_samples,prob=0.025),5)
+beta_high <- round(quantile(beta_samples,prob=0.975),5)
+```
+
+#  How to communicate the results?
+
+Here, we are in situation analogous as before with the log-normal model. If we want to talk about the effect estimated by the model in log-odds space, we summarize the posterior of $\beta$ in the following way: $\hat\beta = `r mean(beta_samples)`$, 95% CrI = $[ `r beta_low` , `r beta_high` ]$.
+
+#  How to communicate the results?
+
+However, the effect might be easier to understand in proportions rather than in log-odds.  Let's look at the average accuracy for the task first:
+
+```{r}
+alpha_samples<- posterior_samples(fit_recall)$b_Intercept
+av_accuracy <- plogis(alpha_samples)
+c(mean = mean(av_accuracy), quantile(av_accuracy, c(.025,.975)))
+```
+
+#  How to communicate the results?
+
+As before, to transform the effect of our manipulation to an easier to interpret scale (i.e., proportion), we need to take  into account that the scale is not linear, and that the effect of increasing the set size depends on the average accuracy, and the set size that we start from.
+
+#  How to communicate the results?
+
+We can do the following calculation, similar to what we did for the trial effects experiment, to find out the decrease in accuracy in proportions or probability scale:
+
+```{r}
+beta_samples<- posterior_samples(fit_recall)$b_c_set_size
+effect_middle <- plogis(alpha_samples) - plogis(alpha_samples - beta_samples)
+c(mean = mean(effect_middle), quantile(effect_middle, c(.025,.975)))
+```
+
+#  How to communicate the results?
+
+Notice the interpretation here, if we increase the set size from the average set size minus one to the average set size, we get a reduction in the accuracy of recall of $`r mean(effect_middle)`$, 95% CrI = $[ `r quantile(effect_middle, .025)` , `r quantile(effect_middle, .975)` ]$. 
+
+#  How to communicate the results?
+
+Recall that the average set size, 5, was not presented to the subject! We could also look at the decrease in accuracy from a set size of 2 to 4:
+
+
+```{r}
+effect_4m2 <- plogis(alpha_samples+  (4 - mean(df_recall_data$set_size)) * beta_samples) -
+    plogis(alpha_samples+  (2 - mean(df_recall_data$set_size)) * beta_samples)
+c(mean = mean(effect_4m2), quantile(effect_4m2, c(.025,.975)))
+```
+
+We see that increasing the set size does have a detrimental effect in recall, as we suspected.
+
