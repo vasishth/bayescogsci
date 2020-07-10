@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-07-09" />
+<meta name="date" content="2020-07-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -409,42 +409,39 @@ We have mean <em>voice onset time</em> (VOT) data from male and female native sp
 <div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" data-line-number="1">priors_cauchy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">set_prior</span>(<span class="st">&quot;normal(0, 200)&quot;</span>, <span class="dt">class =</span> <span class="st">&quot;Intercept&quot;</span>),</a>
 <a class="sourceLine" id="cb264-2" data-line-number="2">            <span class="kw">set_prior</span>(<span class="st">&quot;cauchy(0,5)&quot;</span>, <span class="dt">class =</span> <span class="st">&quot;b&quot;</span>, </a>
 <a class="sourceLine" id="cb264-3" data-line-number="3">                      <span class="dt">coef =</span> <span class="st">&quot;memeanvdursevdur&quot;</span>),</a>
-<a class="sourceLine" id="cb264-4" data-line-number="4">            <span class="kw">set_prior</span>(<span class="st">&quot;normal(0, 20)&quot;</span>, <span class="dt">class =</span> <span class="st">&quot;sdme&quot;</span>),</a>
-<a class="sourceLine" id="cb264-5" data-line-number="5">            <span class="kw">set_prior</span>(<span class="st">&quot;normal(0, 20)&quot;</span>, <span class="dt">class =</span> <span class="st">&quot;sd&quot;</span>)</a>
-<a class="sourceLine" id="cb264-6" data-line-number="6">            )</a></code></pre></div>
-<p>An important detail in brms syntax when fitting a measurement-error model on the dependent variable is that residual error (what had class sigma in hierarchical models) is estimated by adding the term (1 | subject) and has class sd.</p>
+<a class="sourceLine" id="cb264-4" data-line-number="4">            <span class="kw">set_prior</span>(<span class="st">&quot;normal(0, 20)&quot;</span>, <span class="dt">class =</span> <span class="st">&quot;sdme&quot;</span>)</a>
+<a class="sourceLine" id="cb264-5" data-line-number="5">            )</a></code></pre></div>
 <p>The parameter with class sdme refers to the unknown standard deviation ($$ standard error) of the latent unknown means that generate the underlying vowel duration means. I.e., we assume that each of the observed vowel durations has some true underlying mean with some variability around some single true mean. This is very similar to
 the meta-analysis situation we saw earlier: <span class="math inline">\(\theta_i \sim Normal(\theta,\tau)\)</span>, where <span class="math inline">\(\theta_i\)</span> was the true latent mean of each study, and <span class="math inline">\(\theta\)</span> was the (unknown) true value of the parameter, and <span class="math inline">\(\tau\)</span> was the between-study variability.</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1">m2M_me &lt;-<span class="st"> </span><span class="kw">brm</span>(<span class="dt">formula =</span> meanVOT <span class="op">|</span><span class="st"> </span><span class="kw">se</span>(seVOT)  <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st">  </span><span class="kw">me</span>(meanvdur, sevdur) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb265-2" data-line-number="2"><span class="st">            </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>subject),</a>
-<a class="sourceLine" id="cb265-3" data-line-number="3">            <span class="dt">data =</span> mandarin, </a>
-<a class="sourceLine" id="cb265-4" data-line-number="4">            <span class="dt">family =</span> <span class="kw">gaussian</span>(), </a>
-<a class="sourceLine" id="cb265-5" data-line-number="5">            <span class="dt">prior =</span> priors_cauchy,</a>
-<a class="sourceLine" id="cb265-6" data-line-number="6">            <span class="dt">iter =</span> <span class="dv">2000</span>, <span class="dt">chains =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb265-7" data-line-number="7">            <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.999</span>,</a>
-<a class="sourceLine" id="cb265-8" data-line-number="8">                          <span class="dt">max_treedepth=</span><span class="dv">15</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1">m2M_me &lt;-<span class="st"> </span><span class="kw">brm</span>(<span class="dt">formula =</span> meanVOT <span class="op">|</span><span class="st"> </span><span class="kw">se</span>(seVOT,<span class="dt">sigma=</span><span class="ot">TRUE</span>)  <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st">  </span><span class="kw">me</span>(meanvdur, sevdur),</a>
+<a class="sourceLine" id="cb265-2" data-line-number="2">            <span class="dt">data =</span> mandarin, </a>
+<a class="sourceLine" id="cb265-3" data-line-number="3">            <span class="dt">family =</span> <span class="kw">gaussian</span>(), </a>
+<a class="sourceLine" id="cb265-4" data-line-number="4">            <span class="dt">prior =</span> priors_cauchy,</a>
+<a class="sourceLine" id="cb265-5" data-line-number="5">            <span class="dt">iter =</span> <span class="dv">2000</span>, <span class="dt">chains =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb265-6" data-line-number="6">            <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.999</span>,</a>
+<a class="sourceLine" id="cb265-7" data-line-number="7">                          <span class="dt">max_treedepth=</span><span class="dv">15</span>))</a></code></pre></div>
+<p>In the code above, sigma=TRUE ensures that a residual error term is present in the model.</p>
 <div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" data-line-number="1"><span class="kw">summary</span>(m2M_me)</a></code></pre></div>
 <pre><code>##  Family: gaussian 
 ##   Links: mu = identity; sigma = identity 
-## Formula: meanVOT | se(seVOT) ~ 1 + me(meanvdur, sevdur) + (1 | subject) 
+## Formula: meanVOT | se(seVOT, sigma = TRUE) ~ 1 + me(meanvdur, sevdur) 
 ##    Data: mandarin (Number of observations: 20) 
 ## Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
 ##          total post-warmup samples = 4000
 ## 
-## Group-Level Effects: 
-## ~subject (Number of levels: 20) 
-##               Estimate Est.Error l-95% CI u-95% CI
-## sd(Intercept)     9.09      3.07     2.34    14.89
-##               Rhat Bulk_ESS Tail_ESS
-## sd(Intercept) 1.01      763      908
-## 
 ## Population-Level Effects: 
 ##                  Estimate Est.Error l-95% CI u-95% CI
-## Intercept           85.69      4.67    78.56    93.73
-## memeanvdursevdur     0.63      1.02    -0.35     2.91
+## Intercept           85.38      4.87    76.32    93.78
+## memeanvdursevdur     0.50      1.25    -2.56     2.37
 ##                  Rhat Bulk_ESS Tail_ESS
-## Intercept        1.00     1939     1476
-## memeanvdursevdur 1.00      590      689
+## Intercept        1.02      214       71
+## memeanvdursevdur 1.05       62       23
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat
+## sigma     8.26      3.15     1.37    14.06 1.01
+##       Bulk_ESS Tail_ESS
+## sigma      474      388
 ## 
 ## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
