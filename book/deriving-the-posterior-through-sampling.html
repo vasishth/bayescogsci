@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-07-10" />
+<meta name="date" content="2020-07-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -352,7 +352,7 @@ FIGURE 3.1: Histogram of the samples of <span class="math inline">\(\theta\)</sp
 <div id="bayesian-regression-models-using-stan-brms" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Bayesian Regression Models using ‘Stan’: brms</h3>
 <p>The surge in popularity of Bayesian statistics is closely tied to the increase in computing power and the appearance of probabilistic programming languages, such as WinBUGS <span class="citation">(Lunn et al. <a href="#ref-lunn2000winbugs">2000</a>)</span>, JAGS <span class="citation">(Plummer <a href="#ref-plummer2016jags">2016</a>)</span>, and more recently pymc3 <span class="citation">(Salvatier, Wiecki, and Fonnesbeck <a href="#ref-Salvatier2016">2016</a>)</span> and Stan <span class="citation">(Carpenter et al. <a href="#ref-carpenter2017stan">2017</a>)</span>. These statistical languages allow the user to define models without having to deal (for the most part) with the complexities of the sampling process. However, they require learning a new language since they the user has to fully specify the statistical model using a particular syntax.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> Furthermore, some knowledge of the sampling process is needed to correctly parameterize the models and to avoid convergences issues (these topics will be covered in detail later in this book).</p>
-<p>There are some alternatives that allow Bayesian inference in <code>R</code> without having to fully specify the model “by hand”. The packages <code>rstanarm</code> <span class="citation">(Goodrich et al. <a href="#ref-rstanarm">2018</a>)</span> and <code>brms</code> <span class="citation">(Bürkner <a href="#ref-R-brms">2019</a>)</span> provide Bayesian equivalents of many popular R model-fitting functions, such as (g)lmer <span class="citation">(Bates, Maechler, et al. <a href="#ref-lme4new">2015</a>)</span>; both these packages use Stan for the back-end estimation and sampling.<br />
+<p>There are some alternatives that allow Bayesian inference in <code>R</code> without having to fully specify the model “by hand”. The packages <code>rstanarm</code> <span class="citation">(Goodrich et al. <a href="#ref-rstanarm">2018</a>)</span> and <code>brms</code> <span class="citation">(Bürkner <a href="#ref-R-brms">2019</a>)</span> provide Bayesian equivalents of many popular R model-fitting functions, such as (g)lmer <span class="citation">(D. Bates, Maechler, et al. <a href="#ref-lme4new">2015</a>)</span>; both these packages use Stan for the back-end estimation and sampling.<br />
 <!-- SV wants to remove this, it comes too early:
 In addition, the `BayesFactor` [@richard_morey_2015_31202] package emulates other standard frequentist tests (t-test, ANOVA, linear models, etc.), and provides the Bayes factor given some pre-specified priors.
 -->
