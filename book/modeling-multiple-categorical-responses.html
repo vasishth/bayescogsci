@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9.1 Modeling multiple categorical responses | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
+  <title>12.1 Modeling multiple categorical responses | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9.1 Modeling multiple categorical responses | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta property="og:title" content="12.1 Modeling multiple categorical responses | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://vasishth.github.io/Bayes_CogSci/" />
   <meta property="og:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/vasishth/Bayes_CogSci" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9.1 Modeling multiple categorical responses | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta name="twitter:title" content="12.1 Modeling multiple categorical responses | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   
   <meta name="twitter:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
   <meta name="twitter:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-07-12" />
+<meta name="date" content="2020-07-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,6 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.6" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>0.6</b> Acknowledgments</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="part"><span><b>I Foundational ideas</b></span></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introprob.html"><a href="introprob.html"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
 <li class="chapter" data-level="1.2" data-path="conditional-probability.html"><a href="conditional-probability.html"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.5" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-4"><i class="fa fa-check"></i><b>2.4.5</b> Exercise: Conjugate forms 4</a></li>
 </ul></li>
 </ul></li>
+<li class="part"><span><b>II Regression models</b></span></li>
 <li class="chapter" data-level="3" data-path="ch-compbda.html"><a href="ch-compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a><ul>
 <li class="chapter" data-level="3.1" data-path="deriving-the-posterior-through-sampling.html"><a href="deriving-the-posterior-through-sampling.html"><i class="fa fa-check"></i><b>3.1</b> Deriving the posterior through sampling</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="deriving-the-posterior-through-sampling.html"><a href="deriving-the-posterior-through-sampling.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.1.1</b> Bayesian Regression Models using ‘Stan’: brms</a></li>
@@ -288,35 +290,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding, interactions, etc</a></li>
-<li class="chapter" data-level="7" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>7</b> Model comparison using Bayes factors</a><ul>
-<li class="chapter" data-level="7.1" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>7.1</b> Summary</a></li>
-<li class="chapter" data-level="7.2" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>7.2</b> Further reading</a></li>
-<li class="chapter" data-level="7.3" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>7.3</b> Exercises</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="exercises-4.html"><a href="exercises-4.html#ex:bf-logn"><i class="fa fa-check"></i><b>7.3.1</b> Bayes factor for a hierarchical model with a lognormal likelihood.</a></li>
+<li class="chapter" data-level="7" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>7</b> Meta-analysis and measurement error models</a><ul>
+<li class="chapter" data-level="7.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>7.2</b> Meta-analysis</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="meta-analysis.html"><a href="meta-analysis.html#using-brms"><i class="fa fa-check"></i><b>7.2.1</b> Using brms</a></li>
+<li class="chapter" data-level="7.2.2" data-path="meta-analysis.html"><a href="meta-analysis.html#using-stan"><i class="fa fa-check"></i><b>7.2.2</b> Using Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>7.3</b> Measurement-error models</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="measurement-error-models.html"><a href="measurement-error-models.html#using-brms-1"><i class="fa fa-check"></i><b>7.3.1</b> Using brms</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>7.4</b> Further reading</a></li>
+</ul></li>
+<li class="part"><span><b>III Model comparison</b></span></li>
+<li class="chapter" data-level="8" data-path="model-comparison.html"><a href="model-comparison.html"><i class="fa fa-check"></i><b>8</b> Model comparison</a></li>
+<li class="chapter" data-level="9" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>9</b> Bayes factors</a><ul>
+<li class="chapter" data-level="9.1" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>9.1</b> Summary</a></li>
+<li class="chapter" data-level="9.2" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>9.2</b> Further reading</a></li>
+<li class="chapter" data-level="9.3" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>9.3</b> Exercises</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="exercises-4.html"><a href="exercises-4.html#ex:bf-logn"><i class="fa fa-check"></i><b>9.3.1</b> Bayes factor for a hierarchical model with a lognormal likelihood.</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>8</b> Meta-analysis and measurement error models</a><ul>
-<li class="chapter" data-level="8.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
-<li class="chapter" data-level="8.2" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>8.2</b> Meta-analysis</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="meta-analysis.html"><a href="meta-analysis.html#using-brms"><i class="fa fa-check"></i><b>8.2.1</b> Using brms</a></li>
-<li class="chapter" data-level="8.2.2" data-path="meta-analysis.html"><a href="meta-analysis.html#using-stan"><i class="fa fa-check"></i><b>8.2.2</b> Using Stan</a></li>
+<li class="chapter" data-level="10" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>10</b> Cross validation</a><ul>
+<li class="chapter" data-level="10.1" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>10.1</b> Summary</a></li>
+<li class="chapter" data-level="10.2" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>10.2</b> Further reading</a></li>
+<li class="chapter" data-level="10.3" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>8.3</b> Measurement-error models</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="measurement-error-models.html"><a href="measurement-error-models.html#using-brms-1"><i class="fa fa-check"></i><b>8.3.1</b> Using brms</a></li>
+<li class="part"><span><b>IV Advanced models with Stan</b></span></li>
+<li class="chapter" data-level="11" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>11</b> Introduction to Stan probabilistic language</a></li>
+<li class="chapter" data-level="12" data-path="cognitive-modeling-using-multinomial-processing-trees.html"><a href="cognitive-modeling-using-multinomial-processing-trees.html"><i class="fa fa-check"></i><b>12</b> Cognitive Modeling using multinomial processing trees</a><ul>
+<li class="chapter" data-level="12.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>12.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>12.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
+<li class="chapter" data-level="12.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>12.1.2</b> A model for multiple responses using the categorical distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>8.4</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>12.2</b> Multinomial processing tree (MPT) models</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>12.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="cognitive-modeling-using-multinomial-processing-trees.html"><a href="cognitive-modeling-using-multinomial-processing-trees.html"><i class="fa fa-check"></i><b>9</b> Cognitive Modeling using multinomial processing trees</a><ul>
-<li class="chapter" data-level="9.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>9.1</b> Modeling multiple categorical responses</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>9.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
-<li class="chapter" data-level="9.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>9.1.2</b> A model for multiple responses using the categorical distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>12.3</b> Further readings:</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>9.2</b> Multinomial processing tree (MPT) models</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>9.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
-</ul></li>
-<li class="chapter" data-level="9.3" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>9.3</b> Further readings:</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>10</b> Important distributions</a></li>
+<li class="part"><span><b>V Appendix</b></span></li>
+<li class="chapter" data-level="13" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>13</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -339,58 +351,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="modeling-multiple-categorical-responses" class="section level2">
-<h2><span class="header-section-number">9.1</span> Modeling multiple categorical responses</h2>
+<h2><span class="header-section-number">12.1</span> Modeling multiple categorical responses</h2>
 <p>One way to model categorical responses is using multinomial or categorical distributions.
 The categorical responses could be “yes” or “no”; “blue”, “read” or “yellow”; “true”, “false”, or “I don’t know”; or more complicated categories, but crucially the response of each observation can be coded as only belonging to only one category. The multinomial and the categorical distribution represent two ways of characterizing the underlying generative process for such data.</p>
 <p>The <strong>multinomial distribution</strong> is the generalization of the binomial distribution for more than two possible outcomes. Recall that the binomial works like this: in order to randomly generate the number of successes in observation consisting of 10 trials, with the probability of success 0.5, one can type:</p>
 <div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dv">1</span>,<span class="dt">size=</span><span class="dv">10</span>,<span class="dt">prob=</span><span class="fl">0.5</span>)</a></code></pre></div>
-<pre><code>## [1] 5</code></pre>
+<pre><code>## [1] 4</code></pre>
 <p>It is possible to repeatedly generate multiple observations as follows. Suppose five simulated observtions are needed, each with 10 trials:</p>
 <div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dv">5</span>,<span class="dt">size=</span><span class="dv">10</span>,<span class="dt">prob=</span><span class="fl">0.5</span>)</a></code></pre></div>
-<pre><code>## [1] 5 9 5 5 2</code></pre>
+<pre><code>## [1] 6 6 4 2 9</code></pre>
 <p>Now, suppose that there are N=3 possible answers to a question (yes, no don’t know), and suppose that the probabilities of producing each answer are:</p>
 <ul>
 <li>P(yes)=0.1</li>
-<li>P(no)=0.2</li>
+<li>P(no)=0.1</li>
 <li>P(don’t know)=0.8</li>
 </ul>
 <p>Note that the probabilities must sum to 1. Given such a situation, it is possible to simulate a single experiment with 10 trials, where each of the three possibilities appears a certain number of times:</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" data-line-number="1">extraDistr<span class="op">::</span><span class="kw">rmnom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.8</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" data-line-number="1">extraDistr<span class="op">::</span><span class="kw">rmnom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.8</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
-## [1,]    1    2    7</code></pre>
+## [1,]    1    0    9</code></pre>
 <p>Analogously to the binomial function shown above, five observations can be simulated, each having 10 trials:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" data-line-number="1">extraDistr<span class="op">::</span><span class="kw">rmnom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.8</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" data-line-number="1">extraDistr<span class="op">::</span><span class="kw">rmnom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.8</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
-## [1,]    0    4    6
-## [2,]    2    2    6
-## [3,]    3    3    4
-## [4,]    2    1    7
-## [5,]    2    2    6</code></pre>
+## [1,]    1    1    8
+## [2,]    1    2    7
+## [3,]    0    1    9
+## [4,]    1    1    8
+## [5,]    1    1    8</code></pre>
 <p>The <strong>categorical distribution</strong> is the generalization of the Bernoulli distribution for more than two possible outcomes, and it is the special case of the multinomial distribution when we have only one trial. Recall that the Bernoulli distribution can be used as follows. If we carry out a coin toss (each coin toss counts as a single trial), we will either get a heads or a tails:</p>
 <div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" data-line-number="1">extraDistr<span class="op">::</span><span class="kw">rbern</span>(<span class="dv">5</span>,<span class="dt">prob=</span><span class="fl">0.5</span>)</a></code></pre></div>
-<pre><code>## [1] 1 0 1 0 0</code></pre>
+<pre><code>## [1] 0 0 1 0 0</code></pre>
 <div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" data-line-number="1"><span class="co">## equivalent rbinom command:</span></a>
 <a class="sourceLine" id="cb280-2" data-line-number="2"><span class="kw">rbinom</span>(<span class="dv">5</span>,<span class="dt">size=</span><span class="dv">1</span>,<span class="dt">prob=</span><span class="fl">0.5</span>)</a></code></pre></div>
-<pre><code>## [1] 1 0 0 1 1</code></pre>
+<pre><code>## [1] 1 0 1 0 1</code></pre>
 <p>Thus, what the Bernoulli is to the Binomial, the Categorical is to the Multinomial. For example, one can simulate five observations, each of which will give one of the three responses with the given probabilities:</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" data-line-number="1"><span class="kw">rcat</span>(<span class="dt">n=</span><span class="dv">5</span>,<span class="dt">prob=</span><span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.8</span>),<span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>,<span class="st">&quot;dontknow&quot;</span>))</a></code></pre></div>
-<pre><code>## [1] dontknow dontknow dontknow dontknow yes     
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" data-line-number="1"><span class="kw">rcat</span>(<span class="dt">n=</span><span class="dv">5</span>,<span class="dt">prob=</span><span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.8</span>),<span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>,<span class="st">&quot;dontknow&quot;</span>))</a></code></pre></div>
+<pre><code>## [1] dontknow no       dontknow dontknow dontknow
 ## Levels: yes no dontknow</code></pre>
 <p>The above is analogous to using the multinomial with size=1 (a single trial in each experiment). In the output below, the rmultinom function shows which of the three categories is produced.</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" data-line-number="1">extraDistr<span class="op">::</span><span class="kw">rmnom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.8</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" data-line-number="1">extraDistr<span class="op">::</span><span class="kw">rmnom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.8</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    0    0    1
 ## [2,]    0    0    1
 ## [3,]    0    0    1
 ## [4,]    0    0    1
-## [5,]    0    1    0</code></pre>
+## [5,]    0    0    1</code></pre>
 <p>With these likelihoods as background, consider now a simulated situation where multiple responses are possible.</p>
 <div id="sec:mult" class="section level3">
-<h3><span class="header-section-number">9.1.1</span> A model for multiple responses using the multinomial likelihood</h3>
+<h3><span class="header-section-number">12.1.1</span> A model for multiple responses using the multinomial likelihood</h3>
 <p>Impaired picture naming (anomia) is common in most cases of aphasia. It is assessed as part of most comprehensive aphasia test batteries, since picture naming accuracy is a relatively easily obtained and reliable test score and the types of errors that are committed can provide useful information for diagnosis.</p>
-<p>In this simulated experiment, the responses are categorized as shown in table <a href="modeling-multiple-categorical-responses.html#tab:responses">9.1</a>.</p>
+<p>In this simulated experiment, the responses are categorized as shown in table <a href="modeling-multiple-categorical-responses.html#tab:responses">12.1</a>.</p>
 <table>
-<caption><span id="tab:responses">TABLE 9.1: </span> Categorization of responses for the simulated experiment.</caption>
+<caption><span id="tab:responses">TABLE 12.1: </span> Categorization of responses for the simulated experiment.</caption>
 <colgroup>
 <col width="15%" />
 <col width="77%" />
@@ -453,11 +465,11 @@ The categorical responses could be “yes” or “no”; “blue”, “read”
 <div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1">N_trials &lt;-<span class="st"> </span><span class="dv">100</span></a>
 <a class="sourceLine" id="cb290-2" data-line-number="2">(ans_mn &lt;-<span class="st"> </span><span class="kw">rmultinom</span>(<span class="dv">1</span>, N_trials, true_theta))</a></code></pre></div>
 <pre><code>##                 [,1]
-## theta_NR          21
-## theta_Neologism   10
-## theta_Formal      20
-## theta_Mixed        9
-## theta_Correct     40</code></pre>
+## theta_NR          18
+## theta_Neologism   13
+## theta_Formal      27
+## theta_Mixed        3
+## theta_Correct     39</code></pre>
 <p>A Stan model assuming a multinomial distribution is shown below (this model is stored under <code>stan_models/mpt_1.stan</code>) :</p>
 <pre><code>data {
   int&lt;lower = 1&gt; N_trials;
@@ -482,17 +494,17 @@ generated quantities{
 <div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" data-line-number="1"><span class="kw">str</span>(data_mn)</a></code></pre></div>
 <pre><code>## List of 2
 ##  $ N_trials: num 100
-##  $ ans     : int [1:5] 21 10 20 9 40</code></pre>
+##  $ ans     : int [1:5] 18 13 27 3 39</code></pre>
 <div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" data-line-number="1">fit_mn &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/mpt_1.stan&#39;</span>, </a>
 <a class="sourceLine" id="cb296-2" data-line-number="2">               <span class="dt">data =</span> data_mn) </a></code></pre></div>
-<p>Next, confirm that the posteriors of the probabilities <span class="math inline">\(\boldsymbol{\theta}\)</span> are close to the true values that were set up when simulating the data. See Figure <a href="modeling-multiple-categorical-responses.html#fig:multin-posterior">9.1</a>.</p>
+<p>Next, confirm that the posteriors of the probabilities <span class="math inline">\(\boldsymbol{\theta}\)</span> are close to the true values that were set up when simulating the data. See Figure <a href="modeling-multiple-categorical-responses.html#fig:multin-posterior">12.1</a>.</p>
 <div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">summary</span>(fit_mn,<span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))<span class="op">$</span>summary[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">8</span>)],<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##          mean 2.5%  98%
-## theta[1] 0.21 0.14 0.30
-## theta[2] 0.11 0.06 0.17
-## theta[3] 0.20 0.13 0.28
-## theta[4] 0.10 0.05 0.16
-## theta[5] 0.38 0.29 0.47</code></pre>
+## theta[1] 0.18 0.12 0.26
+## theta[2] 0.14 0.08 0.20
+## theta[3] 0.26 0.19 0.35
+## theta[4] 0.05 0.02 0.09
+## theta[5] 0.37 0.29 0.47</code></pre>
 <div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" data-line-number="1"><span class="kw">mcmc_hist</span>(<span class="kw">as.array</span>(fit_mn), <span class="dt">regex_pars =</span> <span class="st">&quot;theta&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb299-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">data =</span> <span class="kw">tibble</span>(<span class="dt">Parameter =</span> <span class="kw">paste0</span>(<span class="st">&quot;theta[&quot;</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="st">&quot;]&quot;</span>),</a>
 <a class="sourceLine" id="cb299-3" data-line-number="3">                             <span class="dt">value =</span> <span class="kw">unlist</span>(true_theta)),</a>
@@ -501,12 +513,12 @@ generated quantities{
 <div class="figure"><span id="fig:multin-posterior"></span>
 <img src="bookdown_files/figure-html/multin-posterior-1.svg" alt="Posterior distributions and true means of theta for the multinomial model defined in mpt_1.stan." width="672" />
 <p class="caption">
-FIGURE 9.1: Posterior distributions and true means of theta for the multinomial model defined in mpt_1.stan.
+FIGURE 12.1: Posterior distributions and true means of theta for the multinomial model defined in mpt_1.stan.
 </p>
 </div>
 </div>
 <div id="sec:cat" class="section level3">
-<h3><span class="header-section-number">9.1.2</span> A model for multiple responses using the categorical distribution</h3>
+<h3><span class="header-section-number">12.1.2</span> A model for multiple responses using the categorical distribution</h3>
 <p>Using the same information as above, we can model each response one at a time, instead of aggregating them. Using the categorical distributions gives us more flexibility to define what happens at every trial (the model is stored under <code>stan_models/mpt_2.stan</code>).</p>
 <pre><code>data { 
   int&lt;lower = 1&gt; N_trials;
@@ -535,7 +547,7 @@ generated quantities{
 <pre><code>## List of 2
 ##  $ N_obs: num 100
 ##  $ w_ans: num [1:100] 5 3 5 5 3 4 5 3 4 5 ...</code></pre>
-<p>Fitting the Stan model should yield approximately the same <span class="math inline">\(\boldsymbol{\theta}\)</span> as with the multinomial likelihood defined in the model <code>mpt_1.stan</code>. See Figure <a href="modeling-multiple-categorical-responses.html#fig:cat-posterior">9.2</a>.</p>
+<p>Fitting the Stan model should yield approximately the same <span class="math inline">\(\boldsymbol{\theta}\)</span> as with the multinomial likelihood defined in the model <code>mpt_1.stan</code>. See Figure <a href="modeling-multiple-categorical-responses.html#fig:cat-posterior">12.2</a>.</p>
 <div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" data-line-number="1">fit_cat &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/mpt_2.stan&#39;</span>, </a>
 <a class="sourceLine" id="cb304-2" data-line-number="2">                <span class="dt">data =</span> data_cat,<span class="dt">iter=</span><span class="dv">2000</span>) </a></code></pre></div>
 <pre><code>## Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
@@ -556,7 +568,7 @@ generated quantities{
 ## theta[4] 0.09       0 0.03 0.05 0.09 0.15  4197    1
 ## theta[5] 0.42       0 0.05 0.34 0.42 0.52  4121    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Jul  7 13:43:57 2020.
+## Samples were drawn using NUTS(diag_e) at Sun Jul 19 14:57:12 2020.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -568,7 +580,7 @@ generated quantities{
 <div class="figure"><span id="fig:cat-posterior"></span>
 <img src="bookdown_files/figure-html/cat-posterior-1.svg" alt="Posterior distributions and true means of theta for the categorical model mpt_2.stan." width="672" />
 <p class="caption">
-FIGURE 9.2: Posterior distributions and true means of theta for the categorical model mpt_2.stan.
+FIGURE 12.2: Posterior distributions and true means of theta for the categorical model mpt_2.stan.
 </p>
 </div>
 <p>The above models estimate the posterior distribution for the probability for each possible response. If we had some experimental manipulation, we could even fit regressions to these parameters.</p>
