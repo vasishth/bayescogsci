@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6.2 The hypothesis matrix illustrated with a three-level factor | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
+  <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
+  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6.2 The hypothesis matrix illustrated with a three-level factor | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://vasishth.github.io/Bayes_CogSci/" />
+  <meta property="og:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
+  <meta property="og:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
+  <meta name="github-repo" content="https://github.com/vasishth/Bayes_CogSci" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6.2 The hypothesis matrix illustrated with a three-level factor | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  
+  <meta name="twitter:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
+  <meta name="twitter:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
+
+<meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
+
+
+<meta name="date" content="2020-09-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="basic-concepts-illustrated-using-a-two-level-factor.html"/>
+<link rel="next" href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+     $folds = $(".solution");
+     $folds.wrapInner("<div class=\"solution-blck\">"); // wrap a div container around content
+     $folds.prepend("<button class=\"solution-btn\">Show solution</button>");  // add a button
+     $(".solution-blck").toggle();  // fold all blocks
+     $(".solution-btn").on("click", function() {  // add onClick event
+         $(this).text($(this).text() === "Hide solution" ? "Show solution" : "Hide solution");  // if the text equals "Hide solution", change it to "Show solution"or else to "Hide solution" 
+         $(this).next(".solution-blck").toggle("linear");  // "swing" is the default easing function. This can be further customized in its speed or the overall animation itself.
+     })
+ });
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="0.2" data-path="developing-the-right-mindset-for-this-book.html"><a href="developing-the-right-mindset-for-this-book.html"><i class="fa fa-check"></i><b>0.2</b> Developing the right mindset for this book</a></li>
+<li class="chapter" data-level="0.3" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.3</b> How to read this book</a></li>
+<li class="chapter" data-level="0.4" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.4</b> Online materials</a></li>
+<li class="chapter" data-level="0.5" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.5</b> Software needed</a></li>
+<li class="chapter" data-level="0.6" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>0.6</b> Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="part"><span><b>I Foundational ideas</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introprob.html"><a href="introprob.html"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
+<li class="chapter" data-level="1.2" data-path="conditional-probability.html"><a href="conditional-probability.html"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
+<li class="chapter" data-level="1.3" data-path="the-law-of-total-probability.html"><a href="the-law-of-total-probability.html"><i class="fa fa-check"></i><b>1.3</b> The law of total probability</a></li>
+<li class="chapter" data-level="1.4" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html"><i class="fa fa-check"></i><b>1.4</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.4.1</b> The mean and variance of the Binomial distribution</a></li>
+<li class="chapter" data-level="1.4.2" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.4.2</b> What information does a probability distribution provide?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.5</b> Continuous random variables: An example using the Normal distribution</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#an-important-distinction-probability-vs.-density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1: Discrete bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="sec-marginal.html"><a href="sec-marginal.html"><i class="fa fa-check"></i><b>1.7</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
+<li class="chapter" data-level="1.8" data-path="summary-of-useful-r-functions-relating-to-distributions.html"><a href="summary-of-useful-r-functions-relating-to-distributions.html"><i class="fa fa-check"></i><b>1.8</b> Summary of useful R functions relating to distributions</a></li>
+<li class="chapter" data-level="1.9" data-path="summary-of-concepts-introduced-in-this-chapter.html"><a href="summary-of-concepts-introduced-in-this-chapter.html"><i class="fa fa-check"></i><b>1.9</b> Summary of concepts introduced in this chapter</a></li>
+<li class="chapter" data-level="1.10" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.10</b> Further reading</a></li>
+<li class="chapter" data-level="1.11" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>1.11</b> Exercises</a><ul>
+<li class="chapter" data-level="1.11.1" data-path="exercises.html"><a href="exercises.html#practice-using-the-pnorm-function"><i class="fa fa-check"></i><b>1.11.1</b> Practice using the <code>pnorm</code> function</a></li>
+<li class="chapter" data-level="1.11.2" data-path="exercises.html"><a href="exercises.html#practice-using-the-qnorm-function"><i class="fa fa-check"></i><b>1.11.2</b> Practice using the <code>qnorm</code> function</a></li>
+<li class="chapter" data-level="1.11.3" data-path="exercises.html"><a href="exercises.html#practice-using-qt"><i class="fa fa-check"></i><b>1.11.3</b> Practice using <code>qt</code></a></li>
+<li class="chapter" data-level="1.11.4" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-1"><i class="fa fa-check"></i><b>1.11.4</b> Maximum likelihood estimation 1</a></li>
+<li class="chapter" data-level="1.11.5" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-2"><i class="fa fa-check"></i><b>1.11.5</b> Maximum likelihood estimation 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introBDA.html"><a href="introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
+<li class="chapter" data-level="2.1" data-path="sec-analytical.html"><a href="sec-analytical.html"><i class="fa fa-check"></i><b>2.1</b> Deriving the posterior using Bayes' rule: An analytical example</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.1.1</b> Choosing a likelihood</a></li>
+<li class="chapter" data-level="2.1.2" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-prior-for-theta"><i class="fa fa-check"></i><b>2.1.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
+<li class="chapter" data-level="2.1.3" data-path="sec-analytical.html"><a href="sec-analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.1.3</b> Using Bayes' rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
+<li class="chapter" data-level="2.1.4" data-path="sec-analytical.html"><a href="sec-analytical.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.1.4</b> Summary of the procedure</a></li>
+<li class="chapter" data-level="2.1.5" data-path="sec-analytical.html"><a href="sec-analytical.html#visualizing-the-prior-likelihood-and-the-posterior"><i class="fa fa-check"></i><b>2.1.5</b> Visualizing the prior, likelihood, and the posterior</a></li>
+<li class="chapter" data-level="2.1.6" data-path="sec-analytical.html"><a href="sec-analytical.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.1.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
+<li class="chapter" data-level="2.1.7" data-path="sec-analytical.html"><a href="sec-analytical.html#incremental-knowledge-gain-using-prior-knowledge"><i class="fa fa-check"></i><b>2.1.7</b> Incremental knowledge gain using prior knowledge</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="summary-of-concepts-introduced-in-this-chapter-1.html"><a href="summary-of-concepts-introduced-in-this-chapter-1.html"><i class="fa fa-check"></i><b>2.2</b> Summary of concepts introduced in this chapter</a></li>
+<li class="chapter" data-level="2.3" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>2.3</b> Further reading</a></li>
+<li class="chapter" data-level="2.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>2.4</b> Exercises</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="exercises-1.html"><a href="exercises-1.html#exercise-deriving-bayes-rule"><i class="fa fa-check"></i><b>2.4.1</b> Exercise: Deriving Bayes' rule</a></li>
+<li class="chapter" data-level="2.4.2" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-1"><i class="fa fa-check"></i><b>2.4.2</b> Exercise: Conjugate forms 1</a></li>
+<li class="chapter" data-level="2.4.3" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-2"><i class="fa fa-check"></i><b>2.4.3</b> Exercise: Conjugate forms 2</a></li>
+<li class="chapter" data-level="2.4.4" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-3"><i class="fa fa-check"></i><b>2.4.4</b> Exercise: Conjugate forms 3</a></li>
+<li class="chapter" data-level="2.4.5" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-4"><i class="fa fa-check"></i><b>2.4.5</b> Exercise: Conjugate forms 4</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Regression models</b></span></li>
+<li class="chapter" data-level="3" data-path="ch-compbda.html"><a href="ch-compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a><ul>
+<li class="chapter" data-level="3.1" data-path="sec-sampling.html"><a href="sec-sampling.html"><i class="fa fa-check"></i><b>3.1</b> Deriving the posterior through sampling</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="sec-sampling.html"><a href="sec-sampling.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.1.1</b> Bayesian Regression Models using 'Stan': brms</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="sec-priorpred.html"><a href="sec-priorpred.html"><i class="fa fa-check"></i><b>3.2</b> Prior predictive distribution</a></li>
+<li class="chapter" data-level="3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html"><i class="fa fa-check"></i><b>3.3</b> The influence of priors: sensitivity analysis</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.3.1</b> Flat uninformative priors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#regularizing-priors"><i class="fa fa-check"></i><b>3.3.2</b> Regularizing priors</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#principled-priors"><i class="fa fa-check"></i><b>3.3.3</b> Principled priors</a></li>
+<li class="chapter" data-level="3.3.4" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#informative-priors"><i class="fa fa-check"></i><b>3.3.4</b> Informative priors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="sec-revisit.html"><a href="sec-revisit.html"><i class="fa fa-check"></i><b>3.4</b> Revisiting the button-pressing example with different priors</a></li>
+<li class="chapter" data-level="3.5" data-path="sec-ppd.html"><a href="sec-ppd.html"><i class="fa fa-check"></i><b>3.5</b> Posterior predictive distribution</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="sec-ppd.html"><a href="sec-ppd.html#comparing-different-likelihoods"><i class="fa fa-check"></i><b>3.5.1</b> Comparing different likelihoods</a></li>
+<li class="chapter" data-level="3.5.2" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lnfirst"><i class="fa fa-check"></i><b>3.5.2</b> The log-normal likelihood</a></li>
+<li class="chapter" data-level="3.5.3" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lognormal"><i class="fa fa-check"></i><b>3.5.3</b> Re-fitting a single participant pressing a button repeatedly with a log-normal likelihood</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
+<li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
+<li class="chapter" data-level="3.9" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>3.9</b> Appendix</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="appendix.html"><a href="appendix.html#app:pp"><i class="fa fa-check"></i><b>3.9.1</b> Generating prior predictive distributions with <code>brms</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
+<li class="chapter" data-level="4.1" data-path="sec-pupil.html"><a href="sec-pupil.html"><i class="fa fa-check"></i><b>4.1</b> A first linear regression: Does attentional load affect pupil size?</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="sec-pupil.html"><a href="sec-pupil.html#likelihood-and-priors"><i class="fa fa-check"></i><b>4.1.1</b> Likelihood and priors</a></li>
+<li class="chapter" data-level="4.1.2" data-path="sec-pupil.html"><a href="sec-pupil.html#the-brms-model"><i class="fa fa-check"></i><b>4.1.2</b> The <code>brms</code> model</a></li>
+<li class="chapter" data-level="4.1.3" data-path="sec-pupil.html"><a href="sec-pupil.html#how-to-communicate-the-results"><i class="fa fa-check"></i><b>4.1.3</b> How to communicate the results?</a></li>
+<li class="chapter" data-level="4.1.4" data-path="sec-pupil.html"><a href="sec-pupil.html#sec:pupiladq"><i class="fa fa-check"></i><b>4.1.4</b> Descriptive adequacy</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="sec-trial.html"><a href="sec-trial.html"><i class="fa fa-check"></i><b>4.2</b> Log-normal model: Does trial affect reaction times?</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="sec-trial.html"><a href="sec-trial.html#likelihood-and-priors-for-the-log-normal-model"><i class="fa fa-check"></i><b>4.2.1</b> Likelihood and priors for the log-normal model</a></li>
+<li class="chapter" data-level="4.2.2" data-path="sec-trial.html"><a href="sec-trial.html#the-brms-model-1"><i class="fa fa-check"></i><b>4.2.2</b> The <code>brms</code> model</a></li>
+<li class="chapter" data-level="4.2.3" data-path="sec-trial.html"><a href="sec-trial.html#how-to-communicate-the-results-1"><i class="fa fa-check"></i><b>4.2.3</b> How to communicate the results?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="sec-logistic.html"><a href="sec-logistic.html"><i class="fa fa-check"></i><b>4.3</b> Logistic regression: Does set size affect free recall?</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="sec-logistic.html"><a href="sec-logistic.html#the-likelihood-for-the-logistic-regression-model"><i class="fa fa-check"></i><b>4.3.1</b> The likelihood for the logistic regression model</a></li>
+<li class="chapter" data-level="4.3.2" data-path="sec-logistic.html"><a href="sec-logistic.html#priors-for-the-logistic-regression"><i class="fa fa-check"></i><b>4.3.2</b> Priors for the logistic regression</a></li>
+<li class="chapter" data-level="4.3.3" data-path="sec-logistic.html"><a href="sec-logistic.html#the-brms-model-2"><i class="fa fa-check"></i><b>4.3.3</b> The <code>brms</code> model</a></li>
+<li class="chapter" data-level="4.3.4" data-path="sec-logistic.html"><a href="sec-logistic.html#sec:comlogis"><i class="fa fa-check"></i><b>4.3.4</b> How to communicate the results?</a></li>
+<li class="chapter" data-level="4.3.5" data-path="sec-logistic.html"><a href="sec-logistic.html#descriptive-adequacy"><i class="fa fa-check"></i><b>4.3.5</b> Descriptive adequacy</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
+<li class="chapter" data-level="4.6" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
+<li class="chapter" data-level="4.7" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="appendix-1.html"><a href="appendix-1.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
+<li class="chapter" data-level="5.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical normal model: The N400 effect</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#complete-pooling-model-m_cp"><i class="fa fa-check"></i><b>5.1.1</b> Complete-pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.2" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.1.2</b> No-pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.3" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercept and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.4" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:mcvivs"><i class="fa fa-check"></i><b>5.1.4</b> Correlated varying intercept varying slopes model (<span class="math inline">\(M_{h}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.5" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:sih"><i class="fa fa-check"></i><b>5.1.5</b> By-subjects and by-items correlated varying intercept varying slopes model (<span class="math inline">\(M_{sih}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.6" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the so-called maximal models--Distributional regression models</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="sec-stroop.html"><a href="sec-stroop.html"><i class="fa fa-check"></i><b>5.2</b> A hierarchical log-normal model: The Stroop effect</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="sec-stroop.html"><a href="sec-stroop.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.2.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>5.3</b> Summary</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="summary-2.html"><a href="summary-2.html#why-should-we-take-the-trouble-of-fitting-a-bayesian-hierarchical-model"><i class="fa fa-check"></i><b>5.3.1</b> Why should we take the trouble of fitting a Bayesian hierarchical model?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>5.4</b> Further reading</a></li>
+<li class="chapter" data-level="5.5" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
+<li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cell-means-parameterization-and-posterior-comparisons"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
+<li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
+<li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html"><i class="fa fa-check"></i><b>6.5</b> Examples of contrast coding in a factorial design with two factors</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>6.5.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="6.5.2" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>6.5.2</b> Nested effects</a></li>
+<li class="chapter" data-level="6.5.3" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>6.5.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>7</b> Meta-analysis and measurement error models</a><ul>
+<li class="chapter" data-level="7.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>7.1</b> Meta-analysis</a></li>
+<li class="chapter" data-level="7.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>7.2</b> Measurement-error models</a></li>
+<li class="chapter" data-level="7.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>7.3</b> Further reading</a></li>
+<li class="chapter" data-level="7.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>III Model comparison</b></span></li>
+<li class="chapter" data-level="8" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>8</b> Introduction to model comparison</a></li>
+<li class="chapter" data-level="9" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>9</b> Bayes factors</a><ul>
+<li class="chapter" data-level="9.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>9.1</b> Hypothesis testing using the Bayes factor</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>9.1.1</b> Marginal likelihood</a></li>
+<li class="chapter" data-level="9.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>9.1.2</b> Bayes factor</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>9.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>9.2.1</b> Non-nested models</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html"><i class="fa fa-check"></i><b>9.3</b> Understanding the (in-)stability of Bayes factors</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-the-number-of-iterations-of-the-posterior-sampler"><i class="fa fa-check"></i><b>9.3.1</b> Instability due to the number of iterations of the posterior sampler</a></li>
+<li class="chapter" data-level="9.3.2" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-posterior-uncertainty-and-noise-associated-with-subjects-items-and-residual-variability"><i class="fa fa-check"></i><b>9.3.2</b> Instability due to posterior uncertainty and noise associated with subjects, items, and residual variability</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
+<li class="chapter" data-level="9.6" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>10</b> Cross validation</a><ul>
+<li class="chapter" data-level="10.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>10.1</b> Expected log predictive density of a model</a></li>
+<li class="chapter" data-level="10.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>10.2</b> K-fold and leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="10.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>10.3</b> Testing the N400 effect using cross-validation</a></li>
+<li class="chapter" data-level="10.4" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
+<li class="chapter" data-level="10.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>10.5</b> Further reading</a></li>
+<li class="chapter" data-level="10.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>IV Advanced models with Stan</b></span></li>
+<li class="chapter" data-level="11" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>11</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="11.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>11.1</b> Stan syntax</a></li>
+<li class="chapter" data-level="11.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>11.2</b> A first simple example with Stan: Normal likelihood</a></li>
+<li class="chapter" data-level="11.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>11.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
+<li class="chapter" data-level="11.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>11.4</b> Regression models in Stan</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>11.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
+<li class="chapter" data-level="11.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>11.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
+<li class="chapter" data-level="11.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>11.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>11.5</b> Model comparison in Stan</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>11.5.1</b> Bayes factor in Stan</a></li>
+<li class="chapter" data-level="11.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>11.5.2</b> Cross validation in Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.6</b> Summary</a></li>
+<li class="chapter" data-level="11.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>11.7</b> Further reading</a></li>
+<li class="chapter" data-level="11.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>11.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>12</b> Complex models and reparametrization</a><ul>
+<li class="chapter" data-level="12.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>12.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>12.1.1</b> Varying intercept model with Stan</a></li>
+<li class="chapter" data-level="12.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>12.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="12.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>12.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="12.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>12.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.2</b> Summary</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
+<li class="chapter" data-level="12.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>12.4</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>V Computational cognitive modeling</b></span></li>
+<li class="chapter" data-level="13" data-path="introduction-to-computational-cognitive-modeling.html"><a href="introduction-to-computational-cognitive-modeling.html"><i class="fa fa-check"></i><b>13</b> Introduction to computational cognitive modeling</a><ul>
+<li class="chapter" data-level="13.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.1</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>14</b> Multinomial processing trees</a><ul>
+<li class="chapter" data-level="14.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>14.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>14.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
+<li class="chapter" data-level="14.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>14.1.2</b> A model for multiple responses using the categorical distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>14.2</b> Multinomial processing tree (MPT) models</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>14.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>14.3</b> Further reading</a></li>
+<li class="chapter" data-level="14.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>14.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>15</b> Mixture models</a><ul>
+<li class="chapter" data-level="15.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>15.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>15.1.1</b> A fast guess model account of the global motion detection task</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>15.2</b> Summary</a></li>
+<li class="chapter" data-level="15.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
+<li class="chapter" data-level="15.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>VI Appendix</b></span></li>
+<li class="chapter" data-level="16" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>16</b> Important distributions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Introduction to Bayesian Data Analysis for Cognitive Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-hypothesis-matrix-illustrated-with-a-three-level-factor" class="section level2">
+<h2><span class="header-section-number">6.2</span> The hypothesis matrix illustrated with a three-level factor</h2>
+<p>Consider an example with the three low, medium, and high word frequency conditions. We simulate data from a lexical decision task with response times as dependent variable. The research question is: do response times differ as a function of the between-subject factor word frequency with three levels: low, medium, and high? We assume that lower word frequency results in longer response times. Here, we specify word frequency as a between-subject factor. In cognitive science experiments, frequency will usually vary within subjects and between items. However, the within- or between-subjects status of an effect is independent of its contrast coding; we assume the manipulation to be between subjects for ease of exposition. The concepts presented here extend to repeated measures designs that are often analyzed using hierarchical Bayesian (linear mixed) models.</p>
+<p>The following R code simulates the data and computes the table of means and standard deviations for the three frequency categories:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d2 &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">4</span>, <span class="dt">mu=</span><span class="kw">c</span>(<span class="dv">500</span>, <span class="dv">450</span>, <span class="dv">400</span>), 
+              <span class="dt">Sigma=</span><span class="kw">diag</span>(<span class="dv">3</span>)<span class="op">*</span><span class="dv">20</span><span class="op">^</span><span class="dv">2</span>, <span class="dt">empirical=</span><span class="ot">TRUE</span>)
+df_simdat2 &lt;-<span class="st"> </span>d2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key=</span><span class="st">&quot;F&quot;</span>, <span class="dt">value=</span><span class="st">&quot;DV&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">id=</span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(.), <span class="dt">F=</span><span class="kw">factor</span>(F))
+<span class="kw">levels</span>(df_simdat2<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>)
+df_simdat2<span class="op">$</span>DV &lt;-<span class="st"> </span><span class="kw">round</span>(df_simdat2<span class="op">$</span>DV)
+<span class="kw">head</span>(df_simdat2)</code></pre></div>
+<pre><code>##        F  DV id
+## 1    low 492  1
+## 2    low 500  2
+## 3    low 481  3
+## 4    low 528  4
+## 5 medium 430  5
+## 6 medium 477  6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table.word &lt;-<span class="st"> </span>df_simdat2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(F) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N=</span><span class="kw">length</span>(DV), <span class="dt">M=</span><span class="kw">mean</span>(DV), 
+            <span class="dt">SD=</span><span class="kw">sd</span>(DV), <span class="dt">SE=</span><span class="kw">sd</span>(DV)<span class="op">/</span><span class="kw">sqrt</span>(N))</code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table.word1 &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(table.word)
+<span class="kw">names</span>(table.word1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Factor&quot;</span>,<span class="st">&quot;N data&quot;</span>,
+                        <span class="st">&quot;Est. means&quot;</span>,<span class="st">&quot;Std. dev.&quot;</span>,<span class="st">&quot;Std. errors&quot;</span>)
+table.word1</code></pre></div>
+<pre><code>##   Factor N data Est. means Std. dev. Std. errors
+## 1    low      4        500      20.1       10.04
+## 2 medium      4        450      19.8        9.91
+## 3   high      4        400      20.1       10.06</code></pre>
+<p>As shown in the object <code>table.word1</code>, the estimated means reflect our assumptions about the true means in the data simulation: Response times decrease with increasing word frequency. In the following sections, we use this and an additional data-set to illustrate <a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts">sum</a>, <a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#repeatedcontrasts">repeated</a>, <a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#polynomialContrasts">polynomial</a>, and <a href="#customContrasts">custom</a> contrasts. In practice, usually only one set of contrasts is selected when the expected pattern of means is formulated during the design of the experiment.</p>
+<div id="sumcontrasts" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Sum contrasts</h3>
+<p>For didactic purposes, the next sections describe sum contrasts. Suppose that the expectation is that low-frequency words are responded to slower and medium-frequency words are responded to faster than the GM response time. Then, the research question could be: Do low-frequency words differ from the GM and do medium-frequency words differ from the GM? And if so, are they above or below the GM? We want to estimate the following two quantities:</p>
+<span class="math display">\[\begin{equation}
+\beta_1 = \mu_1 - \frac{\mu_1+\mu_2+\mu_3}{3} = \mu_1 - GM
+\end{equation}\]</span>
+<p>and</p>
+<span class="math display">\[\begin{equation}
+\beta_2 = \mu_2 - \frac{\mu_1+\mu_2+\mu_3}{3} = \mu_2 - GM
+\end{equation}\]</span>
+<p>This translates into the following two hypotheses:</p>
+<span class="math display">\[\begin{equation}
+H_{0_1}: \mu_1 = \frac{\mu_1+\mu_2+\mu_3}{3} = GM
+\end{equation}\]</span>
+<p>and</p>
+<span class="math display">\[\begin{equation}
+H_{0_2}: \mu_2 = \frac{\mu_1+\mu_2+\mu_3}{3} = GM
+\end{equation}\]</span>
+<p><span class="math inline">\(H_{0_1}\)</span> can also be written as:</p>
+<span class="math display">\[\begin{align} \label{h01}
+&amp; \mu_1 =\frac{\mu_1+\mu_2+\mu_3}{3}\\
+\Leftrightarrow &amp; \mu_1 - \frac{\mu_1+\mu_2+\mu_3}{3} = 0\\
+\Leftrightarrow &amp; \frac{2}{3} \mu_1 - \frac{1}{3}\mu_2 - \frac{1}{3}\mu_3 = 0
+\end{align}\]</span>
+<p>This corresponds to estimating the quantity <span class="math inline">\(\beta_1 = \frac{2}{3} \mu_1 - \frac{1}{3}\mu_2 - \frac{1}{3}\mu_3\)</span>. Here, the weights <span class="math inline">\(2/3, -1/3, -1/3\)</span> are informative about how to combine the condition means to estimate the linear model coefficient and to define the null hypothesis.</p>
+<p><span class="math inline">\(H_{0_2}\)</span> is also rewritten as:</p>
+<span class="math display">\[\begin{align}\label{h02}
+&amp;  \mu_2 = \frac{\mu_1+\mu_2+\mu_3}{3}\\
+\Leftrightarrow &amp; \mu_2 - \frac{\mu_1+\mu_2+\mu_3}{3} = 0 \\
+\Leftrightarrow &amp; -\frac{1}{3}\mu_1 + \frac{2}{3} \mu_2 - \frac{1}{3} \mu_3 = 0
+\end{align}\]</span>
+<p>This corresponds to estimating the quantity <span class="math inline">\(\beta_2 = -\frac{1}{3}\mu_1 + \frac{2}{3} \mu_2 - \frac{1}{3} \mu_3\)</span>. Here, the weights are <span class="math inline">\(-1/3, 2/3, -1/3\)</span>, and they again indicate how to combine the condition means for estimating the regression coefficient and for defining the null hypothesis.</p>
+</div>
+<div id="the-hypothesis-matrix" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> The hypothesis matrix</h3>
+<p>The weights of the condition means are not only useful to define parameter estimates and hypotheses. They also provide the starting step in a very powerful method which allows the researcher to generate the contrasts that are needed to test these hypotheses in a linear model. That is, what we did so far is to explain some kinds of different contrast codings that exist and what the hypotheses are that they test. That is, if a certain data-set is given and the goal is to estimate certain comparisons (and test certain hypotheses), then the procedure would be to check whether any of the contrasts that we encountered above happen to estimate these comparisons and test exactly the hypotheses of interest. Sometimes it suffices to use one of these existing contrasts. However, at other times, our research questions may not correspond exactly to any of the contrasts in the default set of standard contrasts provided in R. For these cases, or simply for more complex designs, it is very useful to know how contrast matrices are created. Indeed, a relatively simple procedure exists in which we write our comparisons or hypotheses formally, extract the weights of the condition means from the comparisons/hypotheses, and then automatically generate the correct contrast matrix that we need in order to estimate these comparisons or test these hypotheses in a linear model. Using this powerful method, it is not necessary to find a match to a contrast matrix provided by the family of functions in R starting with the prefix contr. Instead, it is possible to simply define the comparisons that one wants to estimate or the hypotheses that one wants to test, and to obtain the correct contrast matrix for these in an automatic procedure. Here, for pedagogical reasons, we show some examples of how to apply this procedure in cases where the comparisons/hypotheses <em>do</em> correspond to some of the existing contrasts.</p>
+<p>Defining a custom contrast matrix involves four steps:</p>
+<ol style="list-style-type: decimal">
+<li>Write down the estimated comparisons or hypotheses</li>
+<li>Extract the weights and write them into what we will call a <em>hypothesis matrix</em><a href="#fn17" class="footnoteRef" id="fnref17"><sup>17</sup></a></li>
+<li>Apply the <em>generalized matrix inverse</em> to the hypothesis matrix to create the contrast matrix</li>
+<li>Assign the contrast matrix to the factor and run the (Bayesian) linear (mixed) model</li>
+</ol>
+<p>Let us apply this four-step procedure to our example of the sum contrast. The first step, writing down the estimated parameters and hypotheses, is shown above. The second step involves writing down the weights that each comparison / hypothesis gives to condition means. The weights for the first comparison or null hypothesis are <code>wH01=c(+2/3, -1/3, -1/3)</code>, and the weights for the second comparison or null hypothesis are <code>wH02=c(-1/3, +2/3, -1/3)</code>.</p>
+<p>Before writing these into a hypothesis matrix, we also define the estimated quantity and the null hypothesis for the intercept term. The intercept parameter estimates the mean across all conditions:</p>
+<span class="math display">\[\begin{align}
+\beta_0 = \frac{\mu_1 + \mu_2 + \mu_3}{3} \\
+\beta_0 = \frac{1}{3} \mu_1 + \frac{1}{3}\mu_2 + \frac{1}{3}\mu_3
+\end{align}\]</span>
+<p>This corresponds to the null hypothesis that the mean across all conditions is zero:</p>
+<span class="math display">\[\begin{align}
+H_{0_0}: &amp;\frac{\mu_1 + \mu_2 + \mu_3}{3} = 0 \\
+H_{0_0}: &amp;\frac{1}{3} \mu_1 + \frac{1}{3}\mu_2 + \frac{1}{3}\mu_3 = 0
+\end{align}\]</span>
+<p>This estimate and null hypothesis has weights of <span class="math inline">\(1/3\)</span> for all condition means. The weights from all three model parameters / hypotheses that were defined are now combined and written into a matrix that we refer to as the <em>hypothesis matrix</em> (<code>Hc</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HcSum &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="dt">cH00=</span><span class="kw">c</span>(<span class="dt">low=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dt">med=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dt">hi=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>), 
+               <span class="dt">cH01=</span><span class="kw">c</span>(<span class="dt">low=</span><span class="op">+</span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>, <span class="dt">med=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dt">hi=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>), 
+               <span class="dt">cH02=</span><span class="kw">c</span>(<span class="dt">low=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dt">med=</span><span class="op">+</span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>, <span class="dt">hi=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>))
+<span class="kw">fractions</span>(<span class="kw">t</span>(HcSum))</code></pre></div>
+<pre><code>##     cH00 cH01 cH02
+## low  1/3  2/3 -1/3
+## med  1/3 -1/3  2/3
+## hi   1/3 -1/3 -1/3</code></pre>
+<p>Each set of weights is first entered as a row into the matrix (command <code>rbind()</code>). This has mathematical reasons <span class="citation">(see D. J. Schad et al. <a href="#ref-schad2020capitalize">2020</a><a href="#ref-schad2020capitalize">a</a>)</span>. However, we then switch rows and columns of the matrix for easier readability using the command <code>t()</code> (this transposes the matrix, i.e., switches rows and columns). The command <code>fractions()</code> turns the decimals into fractions to improve readability.</p>
+<p>Now that the condition weights have been written into the hypothesis matrix, the third step of the procedure is implemented: a matrix operation called the 'generalized matrix inverse'<a href="#fn18" class="footnoteRef" id="fnref18"><sup>18</sup></a> is used to obtain the contrast matrix that is needed to test these hypotheses in a linear model. In R this next step is done using the function <code>ginv()</code> from the <code>MASS</code> package. We here define a function <code>ginv2()</code> for nicer formatting of the output.<a href="#fn19" class="footnoteRef" id="fnref19"><sup>19</sup></a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ginv2 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="co"># define a function to make the output nicer</span>
+  <span class="kw">fractions</span>(<span class="kw">provideDimnames</span>(<span class="kw">ginv</span>(x),<span class="dt">base=</span><span class="kw">dimnames</span>(x)[<span class="dv">2</span><span class="op">:</span><span class="dv">1</span>]))</code></pre></div>
+<p>Applying the generalized inverse to the hypothesis matrix results in the new matrix <code>XcSum</code>. This is the contrast matrix <span class="math inline">\(X_c\)</span> that estimates exactly those comparisons and tests exactly those hypotheses that were specified earlier:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(XcSum &lt;-<span class="st"> </span><span class="kw">ginv2</span>(HcSum))</code></pre></div>
+<pre><code>##     cH00 cH01 cH02
+## low  1    1    0  
+## med  1    0    1  
+## hi   1   -1   -1</code></pre>
+<p>This contrast matrix corresponds exactly to the sum contrasts described above. In the case of the sum contrast, the contrast matrix looks very different from the hypothesis matrix. The contrast matrix in sum contrasts codes with <span class="math inline">\(+1\)</span> the condition that is to be compared to the GM. The condition that is never compared to the GM is coded as <span class="math inline">\(-1\)</span>. Without knowing the relationship between the hypothesis matrix and the contrast matrix, the meaning of the coefficients is completely opaque.</p>
+<p>To verify this custom-made contrast matrix, it is compared to the sum contrast matrix as generated by the R function <code>contr.sum()</code> in the  package. The resulting contrast matrix is identical to the result when adding the intercept term, a column of ones, to the contrast matrix:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fractions</span>(<span class="kw">cbind</span>(<span class="dv">1</span>,<span class="kw">contr.sum</span>(<span class="dv">3</span>)))</code></pre></div>
+<pre><code>##   [,1] [,2] [,3]
+## 1  1    1    0  
+## 2  1    0    1  
+## 3  1   -1   -1</code></pre>
+<p>In order to estimate model parameters, step four in our procedure involves assigning sum contrasts to the factor <code>F</code> in our example data, and running a (Bayesian) linear model. This allows estimating the regression coefficients associated with each contrast. We compare these to the data shown above (<code>table.word1</code>) to test whether the regression coefficients actually correspond to the differences of condition means, as intended. To define the contrast, it is necessary to remove the intercept term, as this is automatically added by the modeling function <code>brm()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(df_simdat2<span class="op">$</span>F) &lt;-<span class="st"> </span>XcSum[,<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]
+fit_Sum &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,
+                 <span class="dt">data =</span> df_simdat2,
+                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),
+                 <span class="dt">prior =</span> <span class="kw">c</span>(
+                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">500</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),
+                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> sigma),
+                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> b)
+                 )) </code></pre></div>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Start sampling</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fixef</span>(fit_Sum)</code></pre></div>
+<pre><code>##           Estimate Est.Error  Q2.5 Q97.5
+## Intercept   450.22      6.92 436.4 464.4
+## FcH01        50.06      9.64  31.1  68.8
+## FcH02        -0.34      9.89 -20.2  19.3</code></pre>
+<p>The (Bayesian) linear model regression coefficients show the GM response time of <span class="math inline">\(450\)</span> ms in the intercept. Remember that the first regression coefficient <code>FcH01</code> was designed to estimate in how far low frequency words are responded to slower than the GM. The regression coefficient <code>FcH01</code> ('Estimate') of <span class="math inline">\(50\)</span> reflects the difference between low frequency words (<span class="math inline">\(500\)</span> ms) and the GM of <span class="math inline">\(450\)</span> ms. The estimate of interest was in how response times for medium frequency words differ from the GM. The fact that the second regression coefficient <code>FcH02</code> is close to <span class="math inline">\(0\)</span> indicates that response times for medium frequency words (<span class="math inline">\(450\)</span> ms) are the same as the GM of <span class="math inline">\(450\)</span> ms. While the low-frequency words are estimated to have <span class="math inline">\(50\)</span> ms longer reading times than the GM, the difference in reading times between medium frequency words and GM is estimated to be <span class="math inline">\(0\)</span>.</p>
+<p>We have now not only derived contrasts, parameter estimates, and hypotheses for the sum contrast, we have also used a powerful and highly general procedure that is used to generate contrasts for many kinds of different hypotheses and experimental designs.</p>
+</div>
+<div id="generating-contrasts-the-hypr-package" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> Generating contrasts: The <code>hypr</code> package</h3>
+<p>To work with the 4-step procedure, i.e., to flexibly design contrasts to estimate specific comparisons, we have developed the R package <code>hypr</code> <span class="citation">(Maximilian M Rabe et al. <a href="#ref-rabe2020hypr">2020</a>)</span>. This package allows us to specify some comparisons or null hypotheses, and based on these comparisons or null hypotheses, it automatically generates contrast matrices that allow us to estimate these comparisons and test these hypotheses in linear models. It thus considerably simplifies the implementation of the 4-step procedure outlined above.</p>
+<p>To illustrate the functionality of the <code>hypr</code> package, we will use the two comparisons and associated null hypotheses that we had defined and analyzed in the previous section:</p>
+<span class="math display">\[\begin{equation}
+\beta_1 = \mu_1 - \frac{\mu_1+\mu_2+\mu_3}{3} = \mu_1 - GM
+\end{equation}\]</span>
+<span class="math display">\[\begin{equation}
+H_{0_1}: \mu_1 = \frac{\mu_1+\mu_2+\mu_3}{3} = GM
+\end{equation}\]</span>
+<p>and</p>
+<span class="math display">\[\begin{equation}
+\beta_2 = \mu_2 - \frac{\mu_1+\mu_2+\mu_3}{3} = \mu_2 - GM
+\end{equation}\]</span>
+<span class="math display">\[\begin{equation}
+H_{0_2}: \mu_2 = \frac{\mu_1+\mu_2+\mu_3}{3} = GM
+\end{equation}\]</span>
+<p>These null hypotheses are effectively comparisons between condition means or between bundles of condition means. That is, <span class="math inline">\(\mu_1\)</span> is compared to the GM and <span class="math inline">\(\mu_2\)</span> is compared to the grand mean. These two comparisons/hypotheses can be directly entered into R using the <code>hypr()</code> function from the <code>hypr</code> package. To do so, we use some labels to indicate factor levels. E.g., <code>m1</code>, <code>m2</code>, and <code>m3</code> can represent factor levels <span class="math inline">\(\mu_1\)</span>, <span class="math inline">\(\mu_2\)</span>, and <span class="math inline">\(\mu_3\)</span>. The first comparison/hypothesis specifies that <span class="math inline">\(\mu_1 = \frac{\mu_1+\mu_2+\mu_3}{3}\)</span>. This can be written as a formula in R: <code>m1 ~ (m1+m2+m3)/3</code>. The second comparison/hypothesis is that <span class="math inline">\(\mu_2 = \frac{\mu_1+\mu_2+\mu_3}{3}\)</span>, which can be written in R as <code>m2 ~ (m1+m2+m3)/3</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HcSum &lt;-<span class="st"> </span><span class="kw">hypr</span>(<span class="dt">b1 =</span> m1 <span class="op">~</span><span class="st"> </span>(m1<span class="op">+</span>m2<span class="op">+</span>m3)<span class="op">/</span><span class="dv">3</span>, <span class="dt">b2 =</span> m2 <span class="op">~</span><span class="st"> </span>(m1<span class="op">+</span>m2<span class="op">+</span>m3)<span class="op">/</span><span class="dv">3</span>)
+HcSum</code></pre></div>
+<pre><code>## hypr object containing 2 null hypotheses:
+## H0.b1: 0 = 2/3*m1 - 1/3*m2 - 1/3*m3
+## H0.b2: 0 = 2/3*m2 - 1/3*m1 - 1/3*m3
+## 
+## Hypothesis matrix (transposed):
+##    b1   b2  
+## m1  2/3 -1/3
+## m2 -1/3  2/3
+## m3 -1/3 -1/3
+## 
+## Contrast matrix:
+##    b1 b2
+## m1  1  0
+## m2  0  1
+## m3 -1 -1</code></pre>
+<p>The results show that the null hypotheses or comparisons between condition means have been re-written into a form, where <span class="math inline">\(0\)</span> is coded on the left side of the equation, and the condition means together with associated weights are written on the right side of the equation. This presentation makes it easy to see the weights of the condition means to code a certain null hypothesis or comparison. The next part of the results shows the hypothesis matrix, which contains the weights from the condition means. Thus, <code>hypr</code> takes comparisons between condition means, which also define null hypotheses, as input, and automatically extracts the corresponding weights and encodes them into the hypothesis matrix. <code>hypr</code> moreover applies the generalized matrix inverse to obtain the contrast matrix from the hypothesis matrix. Note that the different steps correspond exactly to the steps we had carried out manually in the preceeding section. <code>hypr</code> automatically performs these steps for us. We can now extract the contrast matrix by a simple function call:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contr.hypothesis</span>(HcSum)</code></pre></div>
+<pre><code>##    b1 b2
+## m1  1  0
+## m2  0  1
+## m3 -1 -1
+## attr(,&quot;class&quot;)
+## [1] &quot;matrix&quot;    &quot;hypr_cmat&quot;</code></pre>
+<p>We can assign this contrast to our factor as we did before, and again run a Bayesian linear model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(df_simdat2<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(HcSum)
+fit_Sum2 &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,
+                 <span class="dt">data =</span> df_simdat2,
+                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),
+                 <span class="dt">prior =</span> <span class="kw">c</span>(
+                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">500</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),
+                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> sigma),
+                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> b)
+                 )) 
+<span class="kw">fixef</span>(fit_Sum2)</code></pre></div>
+<pre><code>##           Estimate Est.Error  Q2.5 Q97.5
+## Intercept   450.33      7.14 436.1 464.6
+## Fb1          49.37      9.76  29.2  68.1
+## Fb2           0.38      9.98 -18.5  21.7</code></pre>
+<p>The <code>hypr</code> package was first developed in the context of frequentist linear models, where null hypothesis testing and parameter estimation are closely related. However, <code>hypr</code> can equally be used to create contrasts for Bayesian models. Here, the focus lies on estimation of contrasts that code comparisons between condition means or bundles of condition means. Thus, the null hypotheses that one specifies implicitly imply the estimation of a difference between condition means or bundles of condition means. This is visible the output of the <code>hypr()</code> function (see the first section of the results) - these formulate the null hypotheses in a way that also illustrates the estimation of model parameters. I.e., the null hypothesis <code>H0.b1: 0 = 2/3*m1 - 1/3*m2 - 1/3*m3</code> corresponds to a parameter estimate of <code>b1 = 2/3*m1 - 1/3*m2 - 1/3*m3</code>. The resulting contrasts will then allow us to estimate the specified differences between condition means or bundles of condition means.</p>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-rabe2020hypr">
+<p>Rabe, Maximilian M, Shravan Vasishth, Sven Hohenstein, Reinhold Kliegl, and Daniel J. Schad. 2020. “Hypr: An R Package for Hypothesis-Driven Contrast Coding.” <em>Journal of Open Source Software</em> 5 (48): 2134.</p>
+</div>
+<div id="ref-schad2020capitalize">
+<p>Schad, Daniel J., Shravan Vasishth, Sven Hohenstein, and Reinhold Kliegl. 2019. “How to Capitalize on a Priori Contrasts in Linear (Mixed) Models: A Tutorial.” <em>Journal of Memory and Language</em> 110. doi:<a href="https://doi.org/10.1016/j.jml.2019.104038">10.1016/j.jml.2019.104038</a>.</p> 2020a. “How to Capitalize on a Priori Contrasts in Linear (Mixed) Models: A Tutorial.” <em>Journal of Memory and Language</em> 110. Elsevier: 104038.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="17">
+<li id="fn17"><p>This is inspired from frequentist statistics, where hypothesis tests and parameter estimation are closely linked; in the Bayesian context, we may also speak of a <em>comparison matrix</em> or <em>estimation matrix</em>.<a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#fnref17">↩</a></p></li>
+<li id="fn18"><p>At this point, there is no need to understand in detail what this means. We refer the interested reader to <span class="citation">D. J. Schad et al. (<a href="#ref-schad2020capitalize">2020</a><a href="#ref-schad2020capitalize">a</a>)</span>. For a quick overview, we recommend a vignette explaining the generalized inverse in the <a href="https://cran.r-project.org/web/packages/matlib/vignettes/ginv.html">matlib package</a> <span class="citation">(Friendly, Fox, and Chalmers <a href="#ref-friendly_matlib">2020</a>)</span>.<a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#fnref18">↩</a></p></li>
+<li id="fn19"><p>The function  from the  package is used to make the output more easily readable, and the function  is used to keep row and column names.<a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#fnref19">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="basic-concepts-illustrated-using-a-two-level-factor.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/07-coding.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

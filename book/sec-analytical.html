@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.1 Deriving the posterior using Bayes’ rule: An analytical example | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
+  <title>2.1 Deriving the posterior using Bayes' rule: An analytical example | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.1 Deriving the posterior using Bayes’ rule: An analytical example | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta property="og:title" content="2.1 Deriving the posterior using Bayes' rule: An analytical example | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://vasishth.github.io/Bayes_CogSci/" />
   <meta property="og:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/vasishth/Bayes_CogSci" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.1 Deriving the posterior using Bayes’ rule: An analytical example | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta name="twitter:title" content="2.1 Deriving the posterior using Bayes' rule: An analytical example | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   
   <meta name="twitter:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
   <meta name="twitter:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-07-19" />
+<meta name="date" content="2020-09-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,95 +51,55 @@
 
 
 <script type="text/javascript">
-
- /* Uncomment this and comment the next one to show the solutions */
-
- /* $(document).ready(function() {
-  *     $folds = $(".solution");
-  *     $folds.wrapInner("<div class=\"solution-blck\">"); // wrap a div container around content
-  *     $folds.prepend("<button class=\"solution-btn\">Show solution</button>");  // add a button
-  *     $(".solution-blck").toggle();  // fold all blocks
-  *     $(".solution-btn").on("click", function() {  // add onClick event
-  *         $(this).text($(this).text() === "Hide solution" ? "Show solution" : "Hide solution");  // if the text equals "Hide solution", change it to "Show solution"or else to "Hide solution" 
-  *         $(this).next(".solution-blck").toggle("linear");  // "swing" is the default easing function. This can be further customized in its speed or the overall animation itself.
-  *     })
-  * }); */
-
  $(document).ready(function() {
      $folds = $(".solution");
      $folds.wrapInner("<div class=\"solution-blck\">"); // wrap a div container around content
-     $folds.prepend("<button class=\"solution-btn\"></button>");  // add a button
+     $folds.prepend("<button class=\"solution-btn\">Show solution</button>");  // add a button
      $(".solution-blck").toggle();  // fold all blocks
      $(".solution-btn").on("click", function() {  // add onClick event
-         /* $(this).text($(this).text() === "Hide solution" ? "Show solution" : "Hide solution");  // if the text equals "Hide solution", change it to "Show solution"or else to "Hide solution"  */
-         /* $(this).next(".solution-blck").toggle("linear");  // "swing" is the default easing function. This can be further customized in its speed or the overall animation itself. */
+         $(this).text($(this).text() === "Hide solution" ? "Show solution" : "Hide solution");  // if the text equals "Hide solution", change it to "Show solution"or else to "Hide solution" 
+         $(this).next(".solution-blck").toggle("linear");  // "swing" is the default easing function. This can be further customized in its speed or the overall animation itself.
      })
  });
-
 </script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -171,30 +131,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introprob.html"><a href="introprob.html"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
 <li class="chapter" data-level="1.2" data-path="conditional-probability.html"><a href="conditional-probability.html"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
-<li class="chapter" data-level="1.3" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html"><i class="fa fa-check"></i><b>1.3</b> Discrete random variables: An example using the Binomial distribution</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The mean and variance of the Binomial distribution</a></li>
-<li class="chapter" data-level="1.3.2" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.3.2</b> What information does a probability distribution provide?</a></li>
+<li class="chapter" data-level="1.3" data-path="the-law-of-total-probability.html"><a href="the-law-of-total-probability.html"><i class="fa fa-check"></i><b>1.3</b> The law of total probability</a></li>
+<li class="chapter" data-level="1.4" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html"><i class="fa fa-check"></i><b>1.4</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.4.1</b> The mean and variance of the Binomial distribution</a></li>
+<li class="chapter" data-level="1.4.2" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.4.2</b> What information does a probability distribution provide?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.4</b> Continuous random variables: An example using the Normal distribution</a><ul>
-<li class="chapter" data-level="1.4.1" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#an-important-distinction-probability-vs.density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.4.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
+<li class="chapter" data-level="1.5" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.5</b> Continuous random variables: An example using the Normal distribution</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#an-important-distinction-probability-vs.-density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="an-important-concept-the-marginal-likelihood-integrating-out-a-parameter.html"><a href="an-important-concept-the-marginal-likelihood-integrating-out-a-parameter.html"><i class="fa fa-check"></i><b>1.5</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
-<li class="chapter" data-level="1.6" data-path="summary-of-useful-r-functions-relating-to-distributions.html"><a href="summary-of-useful-r-functions-relating-to-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Summary of useful R functions relating to distributions</a></li>
-<li class="chapter" data-level="1.7" data-path="summary-of-concepts-introduced-in-this-chapter.html"><a href="summary-of-concepts-introduced-in-this-chapter.html"><i class="fa fa-check"></i><b>1.7</b> Summary of concepts introduced in this chapter</a></li>
-<li class="chapter" data-level="1.8" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.8</b> Further reading</a></li>
-<li class="chapter" data-level="1.9" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a><ul>
-<li class="chapter" data-level="1.9.1" data-path="exercises.html"><a href="exercises.html#practice-using-the-pnorm-function"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.2" data-path="exercises.html"><a href="exercises.html#practice-using-the-qnorm-function"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.3" data-path="exercises.html"><a href="exercises.html#practice-using-qt"><i class="fa fa-check"></i><b>1.9.3</b> Practice using <code>qt</code></a></li>
-<li class="chapter" data-level="1.9.4" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-1"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 1</a></li>
-<li class="chapter" data-level="1.9.5" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-2"><i class="fa fa-check"></i><b>1.9.5</b> Maximum likelihood estimation 2</a></li>
+<li class="chapter" data-level="1.6" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1: Discrete bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="sec-marginal.html"><a href="sec-marginal.html"><i class="fa fa-check"></i><b>1.7</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
+<li class="chapter" data-level="1.8" data-path="summary-of-useful-r-functions-relating-to-distributions.html"><a href="summary-of-useful-r-functions-relating-to-distributions.html"><i class="fa fa-check"></i><b>1.8</b> Summary of useful R functions relating to distributions</a></li>
+<li class="chapter" data-level="1.9" data-path="summary-of-concepts-introduced-in-this-chapter.html"><a href="summary-of-concepts-introduced-in-this-chapter.html"><i class="fa fa-check"></i><b>1.9</b> Summary of concepts introduced in this chapter</a></li>
+<li class="chapter" data-level="1.10" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.10</b> Further reading</a></li>
+<li class="chapter" data-level="1.11" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>1.11</b> Exercises</a><ul>
+<li class="chapter" data-level="1.11.1" data-path="exercises.html"><a href="exercises.html#practice-using-the-pnorm-function"><i class="fa fa-check"></i><b>1.11.1</b> Practice using the <code>pnorm</code> function</a></li>
+<li class="chapter" data-level="1.11.2" data-path="exercises.html"><a href="exercises.html#practice-using-the-qnorm-function"><i class="fa fa-check"></i><b>1.11.2</b> Practice using the <code>qnorm</code> function</a></li>
+<li class="chapter" data-level="1.11.3" data-path="exercises.html"><a href="exercises.html#practice-using-qt"><i class="fa fa-check"></i><b>1.11.3</b> Practice using <code>qt</code></a></li>
+<li class="chapter" data-level="1.11.4" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-1"><i class="fa fa-check"></i><b>1.11.4</b> Maximum likelihood estimation 1</a></li>
+<li class="chapter" data-level="1.11.5" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-2"><i class="fa fa-check"></i><b>1.11.5</b> Maximum likelihood estimation 2</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introBDA.html"><a href="introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
-<li class="chapter" data-level="2.1" data-path="sec-analytical.html"><a href="sec-analytical.html"><i class="fa fa-check"></i><b>2.1</b> Deriving the posterior using Bayes’ rule: An analytical example</a><ul>
+<li class="chapter" data-level="2.1" data-path="sec-analytical.html"><a href="sec-analytical.html"><i class="fa fa-check"></i><b>2.1</b> Deriving the posterior using Bayes' rule: An analytical example</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.1.1</b> Choosing a likelihood</a></li>
 <li class="chapter" data-level="2.1.2" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-prior-for-theta"><i class="fa fa-check"></i><b>2.1.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
-<li class="chapter" data-level="2.1.3" data-path="sec-analytical.html"><a href="sec-analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.1.3</b> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
+<li class="chapter" data-level="2.1.3" data-path="sec-analytical.html"><a href="sec-analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.1.3</b> Using Bayes' rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
 <li class="chapter" data-level="2.1.4" data-path="sec-analytical.html"><a href="sec-analytical.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.1.4</b> Summary of the procedure</a></li>
 <li class="chapter" data-level="2.1.5" data-path="sec-analytical.html"><a href="sec-analytical.html#visualizing-the-prior-likelihood-and-the-posterior"><i class="fa fa-check"></i><b>2.1.5</b> Visualizing the prior, likelihood, and the posterior</a></li>
 <li class="chapter" data-level="2.1.6" data-path="sec-analytical.html"><a href="sec-analytical.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.1.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
@@ -203,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="summary-of-concepts-introduced-in-this-chapter-1.html"><a href="summary-of-concepts-introduced-in-this-chapter-1.html"><i class="fa fa-check"></i><b>2.2</b> Summary of concepts introduced in this chapter</a></li>
 <li class="chapter" data-level="2.3" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>2.3</b> Further reading</a></li>
 <li class="chapter" data-level="2.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>2.4</b> Exercises</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="exercises-1.html"><a href="exercises-1.html#exercise-deriving-bayes-rule"><i class="fa fa-check"></i><b>2.4.1</b> Exercise: Deriving Bayes’ rule</a></li>
+<li class="chapter" data-level="2.4.1" data-path="exercises-1.html"><a href="exercises-1.html#exercise-deriving-bayes-rule"><i class="fa fa-check"></i><b>2.4.1</b> Exercise: Deriving Bayes' rule</a></li>
 <li class="chapter" data-level="2.4.2" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-1"><i class="fa fa-check"></i><b>2.4.2</b> Exercise: Conjugate forms 1</a></li>
 <li class="chapter" data-level="2.4.3" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-2"><i class="fa fa-check"></i><b>2.4.3</b> Exercise: Conjugate forms 2</a></li>
 <li class="chapter" data-level="2.4.4" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-3"><i class="fa fa-check"></i><b>2.4.4</b> Exercise: Conjugate forms 3</a></li>
@@ -212,8 +178,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression models</b></span></li>
 <li class="chapter" data-level="3" data-path="ch-compbda.html"><a href="ch-compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a><ul>
-<li class="chapter" data-level="3.1" data-path="deriving-the-posterior-through-sampling.html"><a href="deriving-the-posterior-through-sampling.html"><i class="fa fa-check"></i><b>3.1</b> Deriving the posterior through sampling</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="deriving-the-posterior-through-sampling.html"><a href="deriving-the-posterior-through-sampling.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.1.1</b> Bayesian Regression Models using ‘Stan’: brms</a></li>
+<li class="chapter" data-level="3.1" data-path="sec-sampling.html"><a href="sec-sampling.html"><i class="fa fa-check"></i><b>3.1</b> Deriving the posterior through sampling</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="sec-sampling.html"><a href="sec-sampling.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.1.1</b> Bayesian Regression Models using 'Stan': brms</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="sec-priorpred.html"><a href="sec-priorpred.html"><i class="fa fa-check"></i><b>3.2</b> Prior predictive distribution</a></li>
 <li class="chapter" data-level="3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html"><i class="fa fa-check"></i><b>3.3</b> The influence of priors: sensitivity analysis</a><ul>
@@ -230,11 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
 <li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
-<li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="ex-compbda.html"><a href="ex-compbda.html#a-simple-linear-model-exercises-section-refsecsimplenormal"><i class="fa fa-check"></i><b>3.8.1</b> A simple linear model exercises (Section @ref(sec:simplenormal))</a></li>
-<li class="chapter" data-level="3.8.2" data-path="ex-compbda.html"><a href="ex-compbda.html#revisiting-the-button-pressing-example-with-different-priors-exercises-section-refsecrevisit"><i class="fa fa-check"></i><b>3.8.2</b> Revisiting the button-pressing example with different priors exercises (Section @ref(sec:revisit))</a></li>
-<li class="chapter" data-level="3.8.3" data-path="ex-compbda.html"><a href="ex-compbda.html#posterior-predictive-distribution-and-log-normal-model-exercises-section-refsecppd"><i class="fa fa-check"></i><b>3.8.3</b> Posterior predictive distribution and log-normal model exercises (Section @ref(sec:ppd))</a></li>
-</ul></li>
+<li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
 <li class="chapter" data-level="3.9" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>3.9</b> Appendix</a><ul>
 <li class="chapter" data-level="3.9.1" data-path="appendix.html"><a href="appendix.html#app:pp"><i class="fa fa-check"></i><b>3.9.1</b> Generating prior predictive distributions with <code>brms</code></a></li>
 </ul></li>
@@ -255,28 +217,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.1" data-path="sec-logistic.html"><a href="sec-logistic.html#the-likelihood-for-the-logistic-regression-model"><i class="fa fa-check"></i><b>4.3.1</b> The likelihood for the logistic regression model</a></li>
 <li class="chapter" data-level="4.3.2" data-path="sec-logistic.html"><a href="sec-logistic.html#priors-for-the-logistic-regression"><i class="fa fa-check"></i><b>4.3.2</b> Priors for the logistic regression</a></li>
 <li class="chapter" data-level="4.3.3" data-path="sec-logistic.html"><a href="sec-logistic.html#the-brms-model-2"><i class="fa fa-check"></i><b>4.3.3</b> The <code>brms</code> model</a></li>
-<li class="chapter" data-level="4.3.4" data-path="sec-logistic.html"><a href="sec-logistic.html#how-to-communicate-the-results-2"><i class="fa fa-check"></i><b>4.3.4</b> How to communicate the results?</a></li>
+<li class="chapter" data-level="4.3.4" data-path="sec-logistic.html"><a href="sec-logistic.html#sec:comlogis"><i class="fa fa-check"></i><b>4.3.4</b> How to communicate the results?</a></li>
 <li class="chapter" data-level="4.3.5" data-path="sec-logistic.html"><a href="sec-logistic.html#descriptive-adequacy"><i class="fa fa-check"></i><b>4.3.5</b> Descriptive adequacy</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
 <li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
-<li class="chapter" data-level="4.6" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="exercises-2.html"><a href="exercises-2.html#a-first-linear-regression-exercises-section-refsecpupil"><i class="fa fa-check"></i><b>4.6.1</b> A first linear regression exercises (Section @ref(sec:pupil))</a></li>
-<li class="chapter" data-level="4.6.2" data-path="exercises-2.html"><a href="exercises-2.html#log-normal-model-exercises-section-refsectrial"><i class="fa fa-check"></i><b>4.6.2</b> Log-normal model exercises (Section @ref(sec:trial))</a></li>
-<li class="chapter" data-level="4.6.3" data-path="exercises-2.html"><a href="exercises-2.html#logistic-regression-exercises-section-refseclogistic"><i class="fa fa-check"></i><b>4.6.3</b> Logistic regression exercises (section @ref(sec:logistic))</a></li>
-</ul></li>
+<li class="chapter" data-level="4.6" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 <li class="chapter" data-level="4.7" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
 <li class="chapter" data-level="4.7.1" data-path="appendix-1.html"><a href="appendix-1.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
-<li class="chapter" data-level="5.1" data-path="a-hierarchical-normal-model-the-n400-effect.html"><a href="a-hierarchical-normal-model-the-n400-effect.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical normal model: The N400 effect</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="a-hierarchical-normal-model-the-n400-effect.html"><a href="a-hierarchical-normal-model-the-n400-effect.html#complete-pooling-model-m_cp"><i class="fa fa-check"></i><b>5.1.1</b> Complete-pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.2" data-path="a-hierarchical-normal-model-the-n400-effect.html"><a href="a-hierarchical-normal-model-the-n400-effect.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.1.2</b> No-pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.3" data-path="a-hierarchical-normal-model-the-n400-effect.html"><a href="a-hierarchical-normal-model-the-n400-effect.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercept and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.4" data-path="a-hierarchical-normal-model-the-n400-effect.html"><a href="a-hierarchical-normal-model-the-n400-effect.html#sec:mcvivs"><i class="fa fa-check"></i><b>5.1.4</b> Correlated varying intercept varying slopes model (<span class="math inline">\(M_{h}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.5" data-path="a-hierarchical-normal-model-the-n400-effect.html"><a href="a-hierarchical-normal-model-the-n400-effect.html#sec:sih"><i class="fa fa-check"></i><b>5.1.5</b> By-subjects and by-items correlated varying intercept varying slopes model (<span class="math inline">\(M_{sih}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.6" data-path="a-hierarchical-normal-model-the-n400-effect.html"><a href="a-hierarchical-normal-model-the-n400-effect.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the so-called maximal models–Distributional regression models</a></li>
+<li class="chapter" data-level="5.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical normal model: The N400 effect</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#complete-pooling-model-m_cp"><i class="fa fa-check"></i><b>5.1.1</b> Complete-pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.2" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.1.2</b> No-pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.3" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercept and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.4" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:mcvivs"><i class="fa fa-check"></i><b>5.1.4</b> Correlated varying intercept varying slopes model (<span class="math inline">\(M_{h}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.5" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:sih"><i class="fa fa-check"></i><b>5.1.5</b> By-subjects and by-items correlated varying intercept varying slopes model (<span class="math inline">\(M_{sih}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.6" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the so-called maximal models--Distributional regression models</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="sec-stroop.html"><a href="sec-stroop.html"><i class="fa fa-check"></i><b>5.2</b> A hierarchical log-normal model: The Stroop effect</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="sec-stroop.html"><a href="sec-stroop.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.2.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
@@ -285,50 +243,123 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.1" data-path="summary-2.html"><a href="summary-2.html#why-should-we-take-the-trouble-of-fitting-a-bayesian-hierarchical-model"><i class="fa fa-check"></i><b>5.3.1</b> Why should we take the trouble of fitting a Bayesian hierarchical model?</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>5.4</b> Further reading</a></li>
-<li class="chapter" data-level="5.5" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>5.5</b> Exercises</a><ul>
-<li class="chapter" data-level="5.5.1" data-path="exercises-3.html"><a href="exercises-3.html#ex:hierarchical-logn"><i class="fa fa-check"></i><b>5.5.1</b> Hierarchical model with a lognormal likelihood.</a></li>
+<li class="chapter" data-level="5.5" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
+<li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cell-means-parameterization-and-posterior-comparisons"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding, interactions, etc</a></li>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
+<li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
+<li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html"><i class="fa fa-check"></i><b>6.5</b> Examples of contrast coding in a factorial design with two factors</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>6.5.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="6.5.2" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>6.5.2</b> Nested effects</a></li>
+<li class="chapter" data-level="6.5.3" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>6.5.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
+</ul></li>
 <li class="chapter" data-level="7" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>7</b> Meta-analysis and measurement error models</a><ul>
-<li class="chapter" data-level="7.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
-<li class="chapter" data-level="7.2" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>7.2</b> Meta-analysis</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="meta-analysis.html"><a href="meta-analysis.html#using-brms"><i class="fa fa-check"></i><b>7.2.1</b> Using brms</a></li>
-<li class="chapter" data-level="7.2.2" data-path="meta-analysis.html"><a href="meta-analysis.html#using-stan"><i class="fa fa-check"></i><b>7.2.2</b> Using Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>7.3</b> Measurement-error models</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="measurement-error-models.html"><a href="measurement-error-models.html#using-brms-1"><i class="fa fa-check"></i><b>7.3.1</b> Using brms</a></li>
-</ul></li>
-<li class="chapter" data-level="7.4" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>7.4</b> Further reading</a></li>
+<li class="chapter" data-level="7.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>7.1</b> Meta-analysis</a></li>
+<li class="chapter" data-level="7.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>7.2</b> Measurement-error models</a></li>
+<li class="chapter" data-level="7.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>7.3</b> Further reading</a></li>
+<li class="chapter" data-level="7.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>III Model comparison</b></span></li>
-<li class="chapter" data-level="8" data-path="model-comparison.html"><a href="model-comparison.html"><i class="fa fa-check"></i><b>8</b> Model comparison</a></li>
+<li class="chapter" data-level="8" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>8</b> Introduction to model comparison</a></li>
 <li class="chapter" data-level="9" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>9</b> Bayes factors</a><ul>
-<li class="chapter" data-level="9.1" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>9.1</b> Summary</a></li>
-<li class="chapter" data-level="9.2" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>9.2</b> Further reading</a></li>
-<li class="chapter" data-level="9.3" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>9.3</b> Exercises</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="exercises-4.html"><a href="exercises-4.html#ex:bf-logn"><i class="fa fa-check"></i><b>9.3.1</b> Bayes factor for a hierarchical model with a lognormal likelihood.</a></li>
+<li class="chapter" data-level="9.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>9.1</b> Hypothesis testing using the Bayes factor</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>9.1.1</b> Marginal likelihood</a></li>
+<li class="chapter" data-level="9.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>9.1.2</b> Bayes factor</a></li>
 </ul></li>
+<li class="chapter" data-level="9.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>9.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>9.2.1</b> Non-nested models</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html"><i class="fa fa-check"></i><b>9.3</b> Understanding the (in-)stability of Bayes factors</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-the-number-of-iterations-of-the-posterior-sampler"><i class="fa fa-check"></i><b>9.3.1</b> Instability due to the number of iterations of the posterior sampler</a></li>
+<li class="chapter" data-level="9.3.2" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-posterior-uncertainty-and-noise-associated-with-subjects-items-and-residual-variability"><i class="fa fa-check"></i><b>9.3.2</b> Instability due to posterior uncertainty and noise associated with subjects, items, and residual variability</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
+<li class="chapter" data-level="9.6" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>10</b> Cross validation</a><ul>
-<li class="chapter" data-level="10.1" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>10.1</b> Summary</a></li>
-<li class="chapter" data-level="10.2" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>10.2</b> Further reading</a></li>
-<li class="chapter" data-level="10.3" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
+<li class="chapter" data-level="10.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>10.1</b> Expected log predictive density of a model</a></li>
+<li class="chapter" data-level="10.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>10.2</b> K-fold and leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="10.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>10.3</b> Testing the N400 effect using cross-validation</a></li>
+<li class="chapter" data-level="10.4" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
+<li class="chapter" data-level="10.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>10.5</b> Further reading</a></li>
+<li class="chapter" data-level="10.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced models with Stan</b></span></li>
-<li class="chapter" data-level="11" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>11</b> Introduction to Stan probabilistic language</a></li>
-<li class="chapter" data-level="12" data-path="cognitive-modeling-using-multinomial-processing-trees.html"><a href="cognitive-modeling-using-multinomial-processing-trees.html"><i class="fa fa-check"></i><b>12</b> Cognitive Modeling using multinomial processing trees</a><ul>
-<li class="chapter" data-level="12.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>12.1</b> Modeling multiple categorical responses</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>12.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
-<li class="chapter" data-level="12.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>12.1.2</b> A model for multiple responses using the categorical distribution</a></li>
+<li class="chapter" data-level="11" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>11</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="11.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>11.1</b> Stan syntax</a></li>
+<li class="chapter" data-level="11.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>11.2</b> A first simple example with Stan: Normal likelihood</a></li>
+<li class="chapter" data-level="11.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>11.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
+<li class="chapter" data-level="11.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>11.4</b> Regression models in Stan</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>11.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
+<li class="chapter" data-level="11.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>11.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
+<li class="chapter" data-level="11.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>11.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>12.2</b> Multinomial processing tree (MPT) models</a><ul>
-<li class="chapter" data-level="12.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>12.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
+<li class="chapter" data-level="11.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>11.5</b> Model comparison in Stan</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>11.5.1</b> Bayes factor in Stan</a></li>
+<li class="chapter" data-level="11.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>11.5.2</b> Cross validation in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>12.3</b> Further readings:</a></li>
+<li class="chapter" data-level="11.6" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.6</b> Summary</a></li>
+<li class="chapter" data-level="11.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>11.7</b> Further reading</a></li>
+<li class="chapter" data-level="11.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>11.8</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>V Appendix</b></span></li>
-<li class="chapter" data-level="13" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>13</b> Important distributions</a></li>
+<li class="chapter" data-level="12" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>12</b> Complex models and reparametrization</a><ul>
+<li class="chapter" data-level="12.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>12.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>12.1.1</b> Varying intercept model with Stan</a></li>
+<li class="chapter" data-level="12.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>12.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="12.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>12.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="12.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>12.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.2</b> Summary</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
+<li class="chapter" data-level="12.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>12.4</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>V Computational cognitive modeling</b></span></li>
+<li class="chapter" data-level="13" data-path="introduction-to-computational-cognitive-modeling.html"><a href="introduction-to-computational-cognitive-modeling.html"><i class="fa fa-check"></i><b>13</b> Introduction to computational cognitive modeling</a><ul>
+<li class="chapter" data-level="13.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.1</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>14</b> Multinomial processing trees</a><ul>
+<li class="chapter" data-level="14.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>14.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>14.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
+<li class="chapter" data-level="14.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>14.1.2</b> A model for multiple responses using the categorical distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>14.2</b> Multinomial processing tree (MPT) models</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>14.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>14.3</b> Further reading</a></li>
+<li class="chapter" data-level="14.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>14.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>15</b> Mixture models</a><ul>
+<li class="chapter" data-level="15.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>15.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>15.1.1</b> A fast guess model account of the global motion detection task</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>15.2</b> Summary</a></li>
+<li class="chapter" data-level="15.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
+<li class="chapter" data-level="15.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>VI Appendix</b></span></li>
+<li class="chapter" data-level="16" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>16</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -351,28 +382,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="sec:analytical" class="section level2">
-<h2><span class="header-section-number">2.1</span> Deriving the posterior using Bayes’ rule: An analytical example</h2>
+<h2><span class="header-section-number">2.1</span> Deriving the posterior using Bayes' rule: An analytical example</h2>
 <p>Recall our cloze probability example earlier. Participants are shown sentences like</p>
-<p>“It’s raining. I’m going to take the …”</p>
-<p>Ten participants are asked to complete the sentence.
-If <span class="math inline">\(8\)</span> out of <span class="math inline">\(10\)</span> participants complete the sentence with “umbrella,” the estimated cloze probability or predictability (given the preceding context) would be <span class="math inline">\(\frac{8}{10}=0.8\)</span>. This is the maximum likelihood estimate of the probability of producing this word; we will designate the estimate with a “hat” on the parameter name: <span class="math inline">\(\hat \theta=0.8\)</span>.</p>
+<p>&quot;It's raining. I'm going to take the ...&quot;</p>
+<p>Ten participants are asked to complete the sentence. If <span class="math inline">\(8\)</span> out of <span class="math inline">\(10\)</span> participants complete the sentence with &quot;umbrella,&quot; the estimated cloze probability or predictability (given the preceding context) would be <span class="math inline">\(\frac{8}{10}=0.8\)</span>. This is the maximum likelihood estimate of the probability of producing this word; we will designate the estimate with a &quot;hat&quot; on the parameter name: <span class="math inline">\(\hat \theta=0.8\)</span>.</p>
 <p>Notice an important point here: one shortcoming of simply writing down the proportion in this way is that it ignores the uncertainty of our measurement: <span class="math inline">\(0.8\)</span> could come from <span class="math inline">\(10\)</span> participants (<span class="math inline">\(\frac{8}{10}\)</span>), <span class="math inline">\(100\)</span> participants (<span class="math inline">\(\frac{80}{100}\)</span>), or <span class="math inline">\(100,000\)</span> participants (<span class="math inline">\(\frac{80000}{100000}\)</span>). The uncertainty of the estimate <span class="math inline">\(0.8\)</span> is different in each of these cases, and that is very relevant when drawing conclusions from data.</p>
-<p>In the frequentist framework, the only thing we can characterize our uncertainty about is the <strong>sampling distribution</strong> of this parameter under imaginary repeated sampling; we can never talk about our uncertainty about the parameter’s true value itself.
-Thus, for a sample size of <span class="math inline">\(10\)</span>, our uncertainty of the sampling distribution would be computed by calculating the sample variance <span class="math inline">\(\sigma^2\)</span> (here, <span class="math inline">\(n\times \hat\theta(1-\hat\theta)= 10\times 0.8 \times (1-0.8)=1.6\)</span>), and then calculating the standard error: <span class="math inline">\(\sigma/\sqrt{n}=0.4\)</span>. Increasing the sample size will make this standard error smaller and smaller for the same estimated proportion of successes of <span class="math inline">\(0.8\)</span>. This increased precision is a statement about the uncertainty of the sampling distribution of <span class="math inline">\(\theta\)</span> under imaginary repeated sampling; it is not an estimate of the uncertainty of <span class="math inline">\(\theta\)</span> itself.</p>
-<p>The Bayesian framework gives us the opportunity to talk directly about our uncertainty of the parameter itself, given the data. This is achieved by obtaining the posterior distribution of the parameter using Bayes’ rule, as we show below.</p>
+<p>In the frequentist framework, the only thing we can characterize our uncertainty about is the <strong>sampling distribution</strong> of this parameter under imaginary repeated sampling; we can never talk about our uncertainty about the parameter's true value itself. Thus, for a sample size of <span class="math inline">\(10\)</span>, our uncertainty of the sampling distribution would be computed by calculating the sample variance <span class="math inline">\(\sigma^2\)</span> (here, <span class="math inline">\(n\times \hat\theta(1-\hat\theta)= 10\times 0.8 \times (1-0.8)=1.6\)</span>), and then calculating the standard error: <span class="math inline">\(\sigma/\sqrt{n}=0.4\)</span>. Increasing the sample size will make this standard error smaller and smaller for the same estimated proportion of successes of <span class="math inline">\(0.8\)</span>. This increased precision is a statement about the uncertainty of the sampling distribution of <span class="math inline">\(\theta\)</span> under imaginary repeated sampling; it is not an estimate of the uncertainty of <span class="math inline">\(\theta\)</span> itself.</p>
+<p>The Bayesian framework gives us the opportunity to talk directly about our uncertainty of the parameter itself, given the data. This is achieved by obtaining the posterior distribution of the parameter using Bayes' rule, as we show below.</p>
 <div id="choosing-a-likelihood" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Choosing a likelihood</h3>
 <p>Under the assumptions we have set up above, the responses follow a Binomial distribution, and so the PMF can be written as follows.</p>
-<p><span class="math display" id="eq:binom">\[\begin{equation}
+<span class="math display" id="eq:binom">\[\begin{equation}
 p(k|n,\theta) = \binom{n}
 {k} \theta^k (1-\theta)^{n-k}
 \tag{2.3}
-\end{equation}\]</span></p>
-<p>where <span class="math inline">\(k\)</span> indicates the number of times “umbrella” is given as an answer, and <span class="math inline">\(n\)</span> the total number of answers given.</p>
+\end{equation}\]</span>
+<p>where <span class="math inline">\(k\)</span> indicates the number of times &quot;umbrella&quot; is given as an answer, and <span class="math inline">\(n\)</span> the total number of answers given.</p>
 <p>In a particular experiment that we carry out, if <span class="math inline">\(n=10\)</span> and <span class="math inline">\(k = 8\)</span>, these data are now a fixed quantity. The PMF above now becomes a function of <span class="math inline">\(\theta\)</span>, the likelihood function:</p>
-<p><span class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}
 p(k=8 | n= 10, \theta) = \binom{n}{k} \theta^8 (1-\theta)^{2}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>The above function is a now a continuous function of the value <span class="math inline">\(\theta\)</span>, which has possible values ranging from 0 to 1. Compare this to the PMF of the Binomial, which treats <span class="math inline">\(\theta\)</span> as a fixed value and defines a discrete distribution over the n+1 possible discrete values <span class="math inline">\(k\)</span> that we can observe (the possible number of successes).</p>
 <p>Recall that the PMF and the likelihood are the same function seen from different points of view. The only difference between the two is what is considered to be fixed and what is varying. The PMF treats data as varying from experiment to experiment and <span class="math inline">\(\theta\)</span> as fixed, whereas the likelihood function treats the data as fixed and the parameter <span class="math inline">\(\theta\)</span> as varying.</p>
 <!--
@@ -389,7 +418,7 @@ integrate(LikFun,lower=0,upper=1)$value
 ```
 
 ```
-## [1] 0.091
+## [1] 0.0909
 ```
 -->
 <!--
@@ -407,18 +436,18 @@ c \int_{0}^1 \mathcal{L}(\theta)\, d\theta = 1 \Rightarrow c\times 0.09091 = 1 \
 
 This $c$ is called a normalization constant because it ensures that the function sums to 1. This little exercise illustrates that, at least in the example above, it is  possible to make a function become a proper probability distribution by adding a normalization constant.
 -->
-<p>We now turn our attention back to our main goal, which is to find out, using Bayes’ rule, the posterior distribution of <span class="math inline">\(\theta\)</span> given our data: <span class="math inline">\(p(\theta|n,k)\)</span>. In order to use Bayes’ rule to calculate this posterior distribution, we need to define a prior distribution over the parameter <span class="math inline">\(\theta\)</span>. In doing so, we are explicitly expressing our prior uncertainty about plausible values of <span class="math inline">\(\theta\)</span>.</p>
+<p>We now turn our attention back to our main goal, which is to find out, using Bayes' rule, the posterior distribution of <span class="math inline">\(\theta\)</span> given our data: <span class="math inline">\(p(\theta|n,k)\)</span>. In order to use Bayes' rule to calculate this posterior distribution, we need to define a prior distribution over the parameter <span class="math inline">\(\theta\)</span>. In doing so, we are explicitly expressing our prior uncertainty about plausible values of <span class="math inline">\(\theta\)</span>.</p>
 </div>
 <div id="choosing-a-prior-for-theta" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> Choosing a prior for <span class="math inline">\(\theta\)</span></h3>
-<p>For the choice of prior for <span class="math inline">\(\theta\)</span> in the Binomial distribution, we need to assume that the parameter <span class="math inline">\(\theta\)</span> is a random variable that has a PDF whose range lies within [0,1], the range over which <span class="math inline">\(\theta\)</span> can vary (this is because <span class="math inline">\(\theta\)</span> represents a probability). The Beta distribution, which is a PDF for a continuous random variable, is commonly used as prior for parameters representing probabilities. One reason for this choice is that its PDF ranges over the interval <span class="math inline">\([0,1]\)</span>. The other reason for this choice is that it makes the Bayes’ rule calculation remarkably easy.</p>
+<p>For the choice of prior for <span class="math inline">\(\theta\)</span> in the Binomial distribution, we need to assume that the parameter <span class="math inline">\(\theta\)</span> is a random variable that has a PDF whose range lies within [0,1], the range over which <span class="math inline">\(\theta\)</span> can vary (this is because <span class="math inline">\(\theta\)</span> represents a probability). The Beta distribution, which is a PDF for a continuous random variable, is commonly used as prior for parameters representing probabilities. One reason for this choice is that its PDF ranges over the interval <span class="math inline">\([0,1]\)</span>. The other reason for this choice is that it makes the Bayes' rule calculation remarkably easy.</p>
 <p>The Beta distribution has the following PDF.</p>
-<p><span class="math display" id="eq:beta">\[\begin{equation}
+<span class="math display" id="eq:beta">\[\begin{equation}
 p(\theta|a,b)=  \frac{1}{B(a,b)} \theta^{a - 1} (1-\theta)^{b-1}   
 \tag{2.4}
-\end{equation}\]</span></p>
-<p>The term <span class="math inline">\(B(a,b)\)</span> expands to <span class="math inline">\(\int_0^1 \theta^{a-1}(1-\theta)^{b-1}\, d\theta\)</span>, and is a normalizing constant that ensures that the area under the curve sums to one.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
-<p>The Beta distribution’s parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> can be interpreted as expressing our prior beliefs about the probability of success; <span class="math inline">\(a\)</span> represents the number of “successes”, in our case, answers that are “umbrella” and <span class="math inline">\(b\)</span> the number of failures, the answers that are not “umbrella”. Figure <a href="sec-analytical.html#fig:betas2">2.1</a> shows the different Beta distribution shapes given different values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
+\end{equation}\]</span>
+<p>The term <span class="math inline">\(B(a,b)\)</span> expands to <span class="math inline">\(\int_0^1 \theta^{a-1}(1-\theta)^{b-1}\, d\theta\)</span>, and is a normalizing constant that ensures that the area under the curve sums to one.<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a></p>
+<p>The Beta distribution's parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> can be interpreted as expressing our prior beliefs about the probability of success; <span class="math inline">\(a\)</span> represents the number of &quot;successes&quot;, in our case, answers that are &quot;umbrella&quot; and <span class="math inline">\(b\)</span> the number of failures, the answers that are not &quot;umbrella&quot;. Figure <a href="sec-analytical.html#fig:betas2">2.1</a> shows the different Beta distribution shapes given different values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
 <div class="figure"><span id="fig:betas2"></span>
 <img src="bookdown_files/figure-html/betas2-1.svg" alt="Examples of Beta distributions with different parameters." width="48%" /><img src="bookdown_files/figure-html/betas2-2.svg" alt="Examples of Beta distributions with different parameters." width="48%" /><img src="bookdown_files/figure-html/betas2-3.svg" alt="Examples of Beta distributions with different parameters." width="48%" /><img src="bookdown_files/figure-html/betas2-4.svg" alt="Examples of Beta distributions with different parameters." width="48%" /><img src="bookdown_files/figure-html/betas2-5.svg" alt="Examples of Beta distributions with different parameters." width="48%" /><img src="bookdown_files/figure-html/betas2-6.svg" alt="Examples of Beta distributions with different parameters." width="48%" /><img src="bookdown_files/figure-html/betas2-7.svg" alt="Examples of Beta distributions with different parameters." width="48%" /><img src="bookdown_files/figure-html/betas2-8.svg" alt="Examples of Beta distributions with different parameters." width="48%" />
 <p class="caption">
@@ -426,79 +455,79 @@ FIGURE 2.1: Examples of Beta distributions with different parameters.
 </p>
 </div>
 <p>As in the Binomial and Normal distributions that we saw in chapter 1, one can analytically derive the formulas for the expectation and variance of the Beta distribution. These are:</p>
-<p><span class="math display" id="eq:meanvar">\[\begin{equation}
+<span class="math display" id="eq:meanvar">\[\begin{equation}
 \operatorname{E}[X] = \frac{a}{a+b} \quad \operatorname{var}(X)=\frac {a \cdot b }{(a + b )^{2}(a + b +1)}
 \tag{2.5}
-\end{equation}\]</span></p>
-<p>As an example, choosing <span class="math inline">\(a=4\)</span> and <span class="math inline">\(b=4\)</span> would mean that the answer “umbrella” is as likely as a different answer, but we are relatively unsure about this. We could express our uncertainty by computing the region over which we are 95% certain that the value of the parameter lies; this is the <strong>95% credible interval</strong>. For this, we would use the <code>qbeta</code> function in R; the parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are called <code>shape1</code> and <code>shape2</code> in <code>R</code>.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">qbeta</span>(<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>),<span class="dt">shape1=</span><span class="dv">4</span>,<span class="dt">shape2=</span><span class="dv">4</span>)</a></code></pre></div>
-<pre><code>## [1] 0.18 0.82</code></pre>
-<p>If we were to choose <span class="math inline">\(a=10\)</span> and <span class="math inline">\(b=10\)</span>, we would still be assuming that a priori the answer “umbrella” is just as likely as some other answer, but now our prior uncertainty about this mean is lower, as the 95% credible interval computed below shows.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">qbeta</span>(<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>),<span class="dt">shape1=</span><span class="dv">10</span>,<span class="dt">shape2=</span><span class="dv">10</span>)</a></code></pre></div>
-<pre><code>## [1] 0.29 0.71</code></pre>
+\end{equation}\]</span>
+<p>As an example, choosing <span class="math inline">\(a=4\)</span> and <span class="math inline">\(b=4\)</span> would mean that the answer &quot;umbrella&quot; is as likely as a different answer, but we are relatively unsure about this. We could express our uncertainty by computing the region over which we are 95% certain that the value of the parameter lies; this is the <strong>95% credible interval</strong>. For this, we would use the <code>qbeta</code> function in R; the parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are called <code>shape1</code> and <code>shape2</code> in <code>R</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qbeta</span>(<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>),<span class="dt">shape1=</span><span class="dv">4</span>,<span class="dt">shape2=</span><span class="dv">4</span>)</code></pre></div>
+<pre><code>## [1] 0.184 0.816</code></pre>
+<p>If we were to choose <span class="math inline">\(a=10\)</span> and <span class="math inline">\(b=10\)</span>, we would still be assuming that a priori the answer &quot;umbrella&quot; is just as likely as some other answer, but now our prior uncertainty about this mean is lower, as the 95% credible interval computed below shows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qbeta</span>(<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>),<span class="dt">shape1=</span><span class="dv">10</span>,<span class="dt">shape2=</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 0.289 0.711</code></pre>
 <p>In Figure <a href="sec-analytical.html#fig:betas2">2.1</a>, we can see also the difference in uncertainty in these two examples graphically.</p>
-<p>Which prior should we choose? In a real data analysis problem, the choice of prior would depend on what prior knowledge we want to bring into the analysis. If we don’t have much prior information, we could use <span class="math inline">\(a=b=1\)</span>; this gives us a uniform prior. This kind of prior goes by various names: <strong>non-informative prior</strong>, or <strong>uninformative prior</strong>. By contrast, if we have a lot of prior knowledge and/or a strong belief (e.g., based on a particular theory’s predictions, or prior data) that <span class="math inline">\(\theta\)</span> has a particular range of plausible values, we can use a different set of a,b values to reflect our belief about the parameter. Notice in the above example that the larger our parameters a and b, the narrower the spread of the distribution; i.e., the lower our uncertainty about the mean value of the parameter.</p>
+<p>Which prior should we choose? In a real data analysis problem, the choice of prior would depend on what prior knowledge we want to bring into the analysis. If we don't have much prior information, we could use <span class="math inline">\(a=b=1\)</span>; this gives us a uniform prior. This kind of prior goes by various names: <strong>non-informative prior</strong>, or <strong>uninformative prior</strong>. By contrast, if we have a lot of prior knowledge and/or a strong belief (e.g., based on a particular theory's predictions, or prior data) that <span class="math inline">\(\theta\)</span> has a particular range of plausible values, we can use a different set of a,b values to reflect our belief about the parameter. Notice in the above example that the larger our parameters a and b, the narrower the spread of the distribution; i.e., the lower our uncertainty about the mean value of the parameter.</p>
 <p>For the moment, just for illustration, we choose the values <span class="math inline">\(a=4\)</span> and <span class="math inline">\(b=4\)</span> for the Beta prior. Then, our prior for <span class="math inline">\(\theta\)</span> is the following Beta PDF:</p>
-<p><span class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}
 p(\theta) = \frac{1}{B(4,4)} \theta^{3} (1-\theta)^{3}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>Having chosen a likelihood, and having defined a prior on <span class="math inline">\(\theta\)</span>, we are ready to carry out our first Bayesian analysis to derive a posterior distribution for <span class="math inline">\(\theta\)</span>.</p>
 </div>
 <div id="using-bayes-rule-to-compute-the-posterior-pthetank" class="section level3">
-<h3><span class="header-section-number">2.1.3</span> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></h3>
-<p>Having specified the likelihood and the prior, we will now use Bayes’ rule to calculate <span class="math inline">\(p(\theta|n,k)\)</span>. Using Bayes’ rule simply involves replacing the Likelihood and the Prior we defined above into the equation we saw earlier:</p>
-<p><span class="math display">\[\begin{equation}
+<h3><span class="header-section-number">2.1.3</span> Using Bayes' rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></h3>
+<p>Having specified the likelihood and the prior, we will now use Bayes' rule to calculate <span class="math inline">\(p(\theta|n,k)\)</span>. Using Bayes' rule simply involves replacing the Likelihood and the Prior we defined above into the equation we saw earlier:</p>
+<span class="math display">\[\begin{equation}
 \hbox{Posterior} = \frac{\hbox{Likelihood} \cdot \hbox{Prior}}{\hbox{Marginal Likelihood}}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>Replace the terms for likelihood and prior into this equation:</p>
-<p><span class="math display" id="eq:betaunpost">\[\begin{equation}
+<span class="math display" id="eq:betaunpost">\[\begin{equation}
 p(\theta|n=10,k=8) = \frac{\left[\binom{10}{8} \theta^8 \cdot (1-\theta)^{2}\right]  \times \left[\frac{1}{B(4,4)} \times \theta^{3} (1-\theta)^{3}\right]}{p(k=8)}
 \tag{2.6}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>where <span class="math inline">\(p(k=8)\)</span> is <span class="math inline">\(\int_{0}^1 p(k=8|n,\theta) p(\theta)\, d\theta\)</span>. This term will be a constant once the number of successes <span class="math inline">\(k\)</span> is known; this is the marginal likelihood we encountered in chapter 1. In fact, once <span class="math inline">\(k\)</span> is known, there are several constant values in the above equation; they are constants because none of them depend on the parameter of interest, <span class="math inline">\(\theta\)</span>. We can collect all of these together:</p>
-<p><span class="math display" id="eq:betaunpost2">\[\begin{equation}
+<span class="math display" id="eq:betaunpost2">\[\begin{equation}
 p(\theta|n=10,k=8) =   \left[ \frac{\binom{10}{8}}{B(4,4)\times p(k=8)} \right]   [\theta^8 (1-\theta)^{2} \times  \theta^{3} (1-\theta)^{3}]
 \tag{2.7}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>The first term that is in square brackets, <span class="math inline">\(\frac{\binom{10}{8}}{B(4,4)\times p(k=8)}\)</span>, is all the constants collected together, and is the normalizing constant we have seen before; it makes the posterior distribution <span class="math inline">\(p(\theta|n=10,k=8)\)</span> sum to one. Since it is a constant, we can ignore it for now and focus on the two other terms in the equation. Because we are ignoring the constant, we will now say that the posterior is proportional to the right-hand side.</p>
 
 <div class="rmdnote">
 to-do: introduce the idea of an unnormalized posterior here? see other suggestion elsewhere.
 </div>
 
-<p><span class="math display" id="eq:betaunpost3">\[\begin{equation}
+<span class="math display" id="eq:betaunpost3">\[\begin{equation}
 p(\theta|n=10,k=8) \propto   [\theta^8 (1-\theta)^{2} \times \theta^{3} (1-\theta)^{3} ]
 \tag{2.8}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>A common way of writing the above equation is:</p>
-<p><span class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}
 \hbox{Posterior} \propto \hbox{Likelihood} \times \hbox{Prior}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>Resolving the right-hand side now simply involves adding up the exponents! In this example, computing the posterior really does boil down to this simple addition operation on the exponents.</p>
-<p><span class="math display" id="eq:betaunpost4">\[\begin{equation}
+<span class="math display" id="eq:betaunpost4">\[\begin{equation}
 p(\theta|n=10,k=8) \propto   [\theta^{8+3} (1-\theta)^{2+3}] = \theta^{11} (1-\theta)^{5}
 \tag{2.9}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>The expression on the right-hand side corresponds to a Beta distribution with parameters <span class="math inline">\(a=12\)</span>, and <span class="math inline">\(b=6\)</span>. This becomes evidence if we rewrite the right-hand side such that it represents the core part of a Beta PDF (see equation <a href="sec-analytical.html#eq:beta">(2.4)</a>). All that is missing is a normalizing constant which would make the area under the curve sum to one.</p>
-<p><span class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}
 \theta^{11} (1-\theta)^{5} = \theta^{12-1} (1-\theta)^{6-1} 
-\end{equation}\]</span></p>
-<p>This core part of any PDF or PMF is called the kernel of that distribution. Without a normalizing constant, the area under the curve will not sum to one. Let’s check this:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">PostFun&lt;-<span class="cf">function</span>(theta){</a>
-<a class="sourceLine" id="cb59-2" data-line-number="2">  theta<span class="op">^</span><span class="dv">11</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>theta)<span class="op">^</span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb59-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb59-4" data-line-number="4">(AUC&lt;-<span class="kw">integrate</span>(PostFun,<span class="dt">lower=</span><span class="dv">0</span>,<span class="dt">upper=</span><span class="dv">1</span>)<span class="op">$</span>value)</a></code></pre></div>
-<pre><code>## [1] 0.000013</code></pre>
-<p>So the area under the curve (AUC) is not 1—the posterior that we computed above is not a proper probability distribution.</p>
+\end{equation}\]</span>
+<p>This core part of any PDF or PMF is called the kernel of that distribution. Without a normalizing constant, the area under the curve will not sum to one. Let's check this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">PostFun&lt;-<span class="cf">function</span>(theta){
+  theta<span class="op">^</span><span class="dv">11</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>theta)<span class="op">^</span><span class="dv">5</span>
+}
+(AUC&lt;-<span class="kw">integrate</span>(PostFun,<span class="dt">lower=</span><span class="dv">0</span>,<span class="dt">upper=</span><span class="dv">1</span>)<span class="op">$</span>value)</code></pre></div>
+<pre><code>## [1] 0.0000135</code></pre>
+<p>So the area under the curve (AUC) is not 1---the posterior that we computed above is not a proper probability distribution.</p>
 <p>All that is needed to make this into a proper probability distribution is to include a normalizing constant, which, according to the definition of the Beta distribution, would be <span class="math inline">\(B(12,6)\)</span>. This term is in fact the integral we computed above.</p>
-<p><span class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}
 p(\theta|n=10,k=8) = \frac{1}{B(12,6)} \theta^{12-1} (1-\theta)^{6-1} 
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>Now, this function will sum to one:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">PostFun&lt;-<span class="cf">function</span>(theta){</a>
-<a class="sourceLine" id="cb61-2" data-line-number="2">  theta<span class="op">^</span><span class="dv">11</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>theta)<span class="op">^</span><span class="dv">5</span><span class="op">/</span>AUC</a>
-<a class="sourceLine" id="cb61-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb61-4" data-line-number="4"><span class="kw">round</span>(<span class="kw">integrate</span>(PostFun,<span class="dt">lower=</span><span class="dv">0</span>,<span class="dt">upper=</span><span class="dv">1</span>)<span class="op">$</span>value,<span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">PostFun&lt;-<span class="cf">function</span>(theta){
+  theta<span class="op">^</span><span class="dv">11</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>theta)<span class="op">^</span><span class="dv">5</span><span class="op">/</span>AUC
+}
+<span class="kw">round</span>(<span class="kw">integrate</span>(PostFun,<span class="dt">lower=</span><span class="dv">0</span>,<span class="dt">upper=</span><span class="dv">1</span>)<span class="op">$</span>value,<span class="dv">2</span>)</code></pre></div>
 <pre><code>## [1] 1</code></pre>
 </div>
 <div id="summary-of-the-procedure" class="section level3">
@@ -507,46 +536,40 @@ p(\theta|n=10,k=8) = \frac{1}{B(12,6)} \theta^{12-1} (1-\theta)^{6-1}
 <p>The above example is a case of a <strong>conjugate</strong> analysis: the posterior on the parameter has the same form as the prior. The above combination of likelihood and prior is called the Beta-Binomial conjugate case. There are several other such combinations of Likelihoods and Priors that yield a posterior that has the same PDF as the prior on the parameter; some examples will appear in the exercises.</p>
 <p>Formally, conjugacy is defined as follows:</p>
 <blockquote>
-<p>DEFINITION
-Given the likelihood <span class="math inline">\(p(y| \theta)\)</span>, if the prior <span class="math inline">\(p(\theta)\)</span> results in a posterior <span class="math inline">\(y(\theta|y)\)</span> that has the same form as <span class="math inline">\(p(\theta)\)</span>, then we call <span class="math inline">\(p(\theta)\)</span> a conjugate prior.</p>
+<p>DEFINITION Given the likelihood <span class="math inline">\(p(y| \theta)\)</span>, if the prior <span class="math inline">\(p(\theta)\)</span> results in a posterior <span class="math inline">\(y(\theta|y)\)</span> that has the same form as <span class="math inline">\(p(\theta)\)</span>, then we call <span class="math inline">\(p(\theta)\)</span> a conjugate prior.</p>
 </blockquote>
 <p>For the Beta-Binomial case, we can derive a very general relationship between the likelihood, prior, and posterior. Given the Binomial likelihood up to proportionality (ignoring the constant) <span class="math inline">\(\theta^k (1-\theta)^{n-k}\)</span>, and given the prior, also up to proportionality, <span class="math inline">\(\theta^{a-1} (1-\theta)^{b-1}\)</span>, their product will be:</p>
-<p><span class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}
 \theta^k (1-\theta)^{n-k} \theta^{a-1} (1-\theta)^{b-1} = \theta^{a+k-1} (1-\theta)^{b+n-k-1} 
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>Thus, given a <span class="math inline">\(Binomial(n,k|\theta)\)</span> likelihood, and a <span class="math inline">\(Beta(a,b)\)</span> prior on <span class="math inline">\(\theta\)</span>, the posterior will be <span class="math inline">\(Beta(a+k,b+n-k)\)</span>.</p>
 </div>
 <div id="visualizing-the-prior-likelihood-and-the-posterior" class="section level3">
 <h3><span class="header-section-number">2.1.5</span> Visualizing the prior, likelihood, and the posterior</h3>
 <p>We established in the example above that the posterior is a Beta distribution with parameters <span class="math inline">\(a=12\)</span>, and <span class="math inline">\(b = 6\)</span>. We visualize the likelihood, prior, and the posterior alongside each other in <a href="sec-analytical.html#fig:postbeta-viz">2.2</a>.</p>
-<pre><code>## Warning: `mapping` is not used by stat_function()
-
-## Warning: `mapping` is not used by stat_function()
-
-## Warning: `mapping` is not used by stat_function()</code></pre>
 <div class="figure"><span id="fig:postbeta-viz"></span>
 <img src="bookdown_files/figure-html/postbeta-viz-1.svg" alt="The likelihood, prior, and posterior in the Beta-Binomial example." width="672" />
 <p class="caption">
 FIGURE 2.2: The likelihood, prior, and posterior in the Beta-Binomial example.
 </p>
 </div>
-<p>We can summarize the posterior distribution either graphically as we did above, or summarize it by computing the mean and the variance. The mean gives us an estimate of the Cloze probability of producing “umbrella” in that sentence (given the model, i.e., given the likelihood and prior):</p>
-<p><span class="math display" id="eq:meanPb">\[\begin{equation}
+<p>We can summarize the posterior distribution either graphically as we did above, or summarize it by computing the mean and the variance. The mean gives us an estimate of the Cloze probability of producing &quot;umbrella&quot; in that sentence (given the model, i.e., given the likelihood and prior):</p>
+<span class="math display" id="eq:meanPb">\[\begin{equation}
 \operatorname{E}[\hat\theta] = \frac{12}{12+6}=0.67
 \tag{2.10}
-\end{equation}\]</span></p>
-<p><span class="math display" id="eq:varPb">\[\begin{equation}
+\end{equation}\]</span>
+<span class="math display" id="eq:varPb">\[\begin{equation}
 \operatorname{var}[\hat\theta]=\frac {12 \cdot 6 }{(12 + 6 )^{2}(12 + 6 +1)}= .01
 \tag{2.11}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>We could also display the 95% credible interval, the range over which we are 95% certain the true value of <span class="math inline">\(\theta\)</span> lies, given the data and model.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">qbeta</span>(<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>),<span class="dt">shape1=</span><span class="dv">12</span>,<span class="dt">shape2=</span><span class="dv">6</span>)</a></code></pre></div>
-<pre><code>## [1] 0.44 0.86</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qbeta</span>(<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>),<span class="dt">shape1=</span><span class="dv">12</span>,<span class="dt">shape2=</span><span class="dv">6</span>)</code></pre></div>
+<pre><code>## [1] 0.440 0.858</code></pre>
 <p>Typically, we would summarize the results of a Bayesian analysis by displaying the posterior distribution of the parameter (or parameters) graphically, along with the above summary statistics: the mean, the standard deviation or variance, and the 95% credible interval. You will see many examples of such summaries later.</p>
 </div>
 <div id="the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood" class="section level3">
 <h3><span class="header-section-number">2.1.6</span> The posterior distribution is a compromise between the prior and the likelihood</h3>
-<p>Just for the sake of illustration, let’s take four different Beta priors, each reflecting increasing certainty.</p>
+<p>Just for the sake of illustration, let's take four different Beta priors, each reflecting increasing certainty.</p>
 <ul>
 <li>Beta(a=2,b=2)</li>
 <li>Beta(a=3,b=3)</li>
@@ -554,31 +577,31 @@ FIGURE 2.2: The likelihood, prior, and posterior in the Beta-Binomial example.
 <li>Beta(a=21,b=21)</li>
 </ul>
 <p>Each prior reflects a belief that <span class="math inline">\(\theta=0.5\)</span>, with varying degrees of (un)certainty. Given the general formula we developed above for the Beta-Binomial case, we just need to plug in the likelihood and the prior to get the posterior:</p>
-<p><span class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}
 p(\theta | n,k) \propto p(k |n,\theta) p(\theta)
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>The four corresponding posterior distributios would be:</p>
-<p><span class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}
 p(\theta\mid k,n) \propto [\theta^{8} (1-\theta)^{2}] [\theta^{2-1}(1-\theta)^{2-1}] = \theta^{10-1} (1-\theta)^{4-1}
-\end{equation}\]</span></p>
-<p><span class="math display">\[\begin{equation}
+\end{equation}\]</span>
+<span class="math display">\[\begin{equation}
 p(\theta\mid k,n) \propto [\theta^{8} (1-\theta)^{2}] [\theta^{3-1}(1-\theta)^{3-1}] = \theta^{11-1} (1-\theta)^{5-1}
-\end{equation}\]</span></p>
-<p><span class="math display">\[\begin{equation}
+\end{equation}\]</span>
+<span class="math display">\[\begin{equation}
 p(\theta\mid k,n) \propto [\theta^{8} (1-\theta)^{2}] [\theta^{6-1}(1-\theta)^{6-1}] = \theta^{14-1} (1-\theta)^{8-1}
-\end{equation}\]</span></p>
-<p><span class="math display">\[\begin{equation}
+\end{equation}\]</span>
+<span class="math display">\[\begin{equation}
 p(\theta\mid k,n) \propto [\theta^{8} (1-\theta)^{2}] [\theta^{21-1}(1-\theta)^{21-1}] = \theta^{29-1} (1-\theta)^{23-1}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>We can easily visualize each of these triplets of priors, likelihoods and posteriors. Use the Shiny app embedded below to visualize these different prior-likelihood combinations and look at the posterior in each case.</p>
 
 <div class="rmdnote">
 to-do: put in a shiny app that varies the a,b parameters and the amount of data, to show how the posterior is influenced by the data and the prior under different scenarios.
 </div>
 
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="co">## this is just  a placeholder for the relevant shinyapp:</span></a>
-<a class="sourceLine" id="cb66-2" data-line-number="2">knitr<span class="op">::</span><span class="kw">include_app</span>(<span class="st">&quot;https://vasishth.shinyapps.io/AppTypeIPower&quot;</span>, </a>
-<a class="sourceLine" id="cb66-3" data-line-number="3">  <span class="dt">height =</span> <span class="st">&quot;500px&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## this is just  a placeholder for the relevant shinyapp:
+knitr<span class="op">::</span><span class="kw">include_app</span>(<span class="st">&quot;https://vasishth.shinyapps.io/AppTypeIPower&quot;</span>, 
+  <span class="dt">height =</span> <span class="st">&quot;500px&quot;</span>)</code></pre></div>
 <iframe src="https://vasishth.shinyapps.io/AppTypeIPower?showcase=0" width="672" height="500px">
 </iframe>
 <p>If you hold the likelihood function constant (held constant at <span class="math inline">\(n=10, k=8\)</span> in the above example), the tighter the prior, the greater the extent to owhichh the posterior orients itself towards the prior. In general, we can say the following about the likelihood-prior-posterior relationship:</p>
@@ -592,9 +615,8 @@ to-do: put in a shiny app that varies the a,b parameters and the amount of data,
 </div>
 <div id="incremental-knowledge-gain-using-prior-knowledge" class="section level3">
 <h3><span class="header-section-number">2.1.7</span> Incremental knowledge gain using prior knowledge</h3>
-<p>In the above example, we used an artificial example where we asked <span class="math inline">\(10\)</span> participants to complete the sentence shown at the beginning of the chapter, and then we counted the number of times that they produced “umbrella” vs. some other word as a continuation. Given 8 instances of “umbrella”, and using a <span class="math inline">\(Beta(4,4)\)</span> prior, we derived the posterior to be <span class="math inline">\(Beta(12,6)\)</span>. We could now use this posterior as our prior for the next study. Suppose that we were to carry out a second experiment, again with 10 participants, and this time <span class="math inline">\(6\)</span> produced “umbrella”. We could now use our new prior (Beta(12,6)) to obtain an updated posterior. We have <span class="math inline">\(a=12, b=6, n=10, k=6\)</span>. This gives us as posterior:
-<span class="math inline">\(Beta(a+k,b+n-k) = Beta(12+6,6+10-6)=Beta(18,10)\)</span>.</p>
-<p>Now, if we were to pool all our data that we have from the two experiments, then we would have as data <span class="math inline">\(n=20, k=14\)</span>. Suppose that we keep our initial prior of <span class="math inline">\(a=4,b=4\)</span>. Then, our posterior would be <span class="math inline">\(Beta(4+14,4+20-14)=Beta(18,10)\)</span>. This is exactly the same posterior that we got when first analyzed the first <span class="math inline">\(10\)</span> participants’ data, derived the posterior, and then used that posterior as a prior for the next <span class="math inline">\(10\)</span> participants’ data.</p>
+<p>In the above example, we used an artificial example where we asked <span class="math inline">\(10\)</span> participants to complete the sentence shown at the beginning of the chapter, and then we counted the number of times that they produced &quot;umbrella&quot; vs. some other word as a continuation. Given 8 instances of &quot;umbrella&quot;, and using a <span class="math inline">\(Beta(4,4)\)</span> prior, we derived the posterior to be <span class="math inline">\(Beta(12,6)\)</span>. We could now use this posterior as our prior for the next study. Suppose that we were to carry out a second experiment, again with 10 participants, and this time <span class="math inline">\(6\)</span> produced &quot;umbrella&quot;. We could now use our new prior (Beta(12,6)) to obtain an updated posterior. We have <span class="math inline">\(a=12, b=6, n=10, k=6\)</span>. This gives us as posterior: <span class="math inline">\(Beta(a+k,b+n-k) = Beta(12+6,6+10-6)=Beta(18,10)\)</span>.</p>
+<p>Now, if we were to pool all our data that we have from the two experiments, then we would have as data <span class="math inline">\(n=20, k=14\)</span>. Suppose that we keep our initial prior of <span class="math inline">\(a=4,b=4\)</span>. Then, our posterior would be <span class="math inline">\(Beta(4+14,4+20-14)=Beta(18,10)\)</span>. This is exactly the same posterior that we got when first analyzed the first <span class="math inline">\(10\)</span> participants' data, derived the posterior, and then used that posterior as a prior for the next <span class="math inline">\(10\)</span> participants' data.</p>
 <p>This toy example illustrates an important point that has great practical importance for cognitive science. One can incrementally gain information about a research question by using information from previous studies and deriving a posterior, and then use that posterior as a prior. For practical examples from psycholinguistics showing how information can be pooled from previous studies, see <span class="citation">Jäger, Engelmann, and Vasishth (<a href="#ref-JaegerEngelmannVasishth2017">2017</a>)</span> and <span class="citation">Nicenboim, Roettger, and Vasishth (<a href="#ref-NicenboimRoettgeretal">2018</a>)</span>. <span class="citation">Vasishth and Engelmann (<a href="#ref-VasishthEngelmann2020">2020</a>)</span> illustrates an example of how the posterior from a previous study or collection of studies can be used to compute the posterior derived from new data. We return to this point in later chapters.</p>
 
 <div class="rmdnote">
@@ -606,19 +628,19 @@ to-do: check that we do.
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-JaegerEngelmannVasishth2017">
-<p>Jäger, Lena A., Felix Engelmann, and Shravan Vasishth. 2017. “Similarity-Based Interference in Sentence Comprehension: Literature review and Bayesian meta-analysis.” <em>Journal of Memory and Language</em> 94: 316–39. <a href="https://doi.org/https://doi.org/10.1016/j.jml.2017.01.004">https://doi.org/https://doi.org/10.1016/j.jml.2017.01.004</a>.</p>
+<p>Jäger, Lena A., Felix Engelmann, and Shravan Vasishth. 2017. “Similarity-Based Interference in Sentence Comprehension: Literature review and Bayesian meta-analysis.” <em>Journal of Memory and Language</em> 94: 316–39. doi:<a href="https://doi.org/https://doi.org/10.1016/j.jml.2017.01.004">https://doi.org/10.1016/j.jml.2017.01.004</a>.</p>
 </div>
 <div id="ref-NicenboimRoettgeretal">
-<p>Nicenboim, Bruno, Timo B. Roettger, and Shravan Vasishth. 2018. “Using Meta-Analysis for Evidence Synthesis: The case of incomplete neutralization in German.” <em>Journal of Phonetics</em> 70: 39–55. <a href="https://doi.org/https://doi.org/10.1016/j.wocn.2018.06.001">https://doi.org/https://doi.org/10.1016/j.wocn.2018.06.001</a>.</p>
+<p>Nicenboim, Bruno, Timo B. Roettger, and Shravan Vasishth. 2018. “Using Meta-Analysis for Evidence Synthesis: The case of incomplete neutralization in German.” <em>Journal of Phonetics</em> 70: 39–55. doi:<a href="https://doi.org/https://doi.org/10.1016/j.wocn.2018.06.001">https://doi.org/10.1016/j.wocn.2018.06.001</a>.</p>
 </div>
 <div id="ref-VasishthEngelmann2020">
-<p>Vasishth, Shravan, and Felix Engelmann. 2020. “Sentence Comprehension as a Cognitive Process: A Computational Approach.” <a href="https://vasishth.github.io/sccp/">https://vasishth.github.io/sccp/</a>.</p>
+<p>Vasishth, Shravan, and Felix Engelmann. 2020. “Sentence Comprehension as a Cognitive Process: A Computational Approach.” <a href="https://vasishth.github.io/sccp/" class="uri">https://vasishth.github.io/sccp/</a>.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="5">
-<li id="fn5"><p>In some textbooks, you may see the PDF of the Beta distribution with the normalizing constant <span class="math inline">\(\frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}\)</span> (the expression <span class="math inline">\(\Gamma(n)\)</span> is defined as (n-1)!): <span class="math display">\[p(\theta|a,b)=  \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \theta^{a - 1} (1-\theta)^{b-1}\]</span> These two statements for the Beta distribution are identical because <span class="math inline">\(B(a,b)\)</span> can be shown to be equal to <span class="math inline">\(\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}\)</span>.<a href="sec-analytical.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>In some textbooks, you may see the PDF of the Beta distribution with the normalizing constant <span class="math inline">\(\frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}\)</span> (the expression <span class="math inline">\(\Gamma(n)\)</span> is defined as (n-1)!): <span class="math display">\[p(\theta|a,b)=  \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \theta^{a - 1} (1-\theta)^{b-1}\]</span> These two statements for the Beta distribution are identical because <span class="math inline">\(B(a,b)\)</span> can be shown to be equal to <span class="math inline">\(\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}\)</span>.<a href="sec-analytical.html#fnref5">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -682,7 +704,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
