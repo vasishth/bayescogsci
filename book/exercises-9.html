@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-01" />
+<meta name="date" content="2020-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -411,24 +411,114 @@ https://link.springer.com/article/10.3758/s13428-017-0937-z
 <span id="exr:mpt-adv" class="exercise"><strong>Exercise 14.3  </strong></span><strong>Advanced</strong>: Multinomial processing trees
 </div>
 
-<p>The dataset <code>data/source_monitoring.csv</code> contains data from the package psychotools coming from a source-monitoring experiment <span class="citation">(Batchelder and Riefer <a href="#ref-batchelder1990multinomial">1990</a>)</span> performed by <span class="citation">Wickelmaier and Zeileis (<a href="#ref-wickelmaier2018using">2018</a>)</span>.</p>
+<p>The dataset <code>data/d_source_monitoring.csv</code> contains data from the package psychotools coming from a source-monitoring experiment <span class="citation">(Batchelder and Riefer <a href="#ref-batchelder1990multinomial">1990</a>)</span> performed by <span class="citation">Wickelmaier and Zeileis (<a href="#ref-wickelmaier2018using">2018</a>)</span>.</p>
 <p>In this type of experiment, subjects study items from (at least) two different sources, A and B. After the presentation of the study items, subjects are required to classify each item as coming from source A, B, or as new: N (that is, a distractor). In Wickelmaier &amp; Zeileis' version of the experiment, participants had to read items either quietly (think) or aloud (say). In the recall task, they wrote them down (write) or read them aloud (say).</p>
 <ul>
 <li>experiment: write-say or think-say</li>
-<li>age: Age of the respondents in years.</li>
-<li>gender: coding gender.</li>
-<li>response frequencies:</li>
-<li>a.a: Number of source A items judged to be of source A.</li>
-<li>a.b: Number of source A items judged to be of source B.</li>
-<li>a.n: Number of source A items judged to be new.</li>
-<li>b.a: Number of source B items judged to be of source A.</li>
-<li>b.b: Number of source B items judged to be of source B.</li>
-<li>b.n: Number of source B items judged to be new.</li>
-<li>n.a: Number of new items judged to be of source A.</li>
-<li>n.b: Number of new items judged to be of source B.</li>
-<li>n.n: Number of new items judged to be new.</li>
+<li>age: Age of the respondent in years.</li>
+<li>gender: Gender of the respondent.</li>
+<li>subj: Subject id.</li>
+<li>source: Item source, a, b or b (new)</li>
+<li>a, b, N: Number of responses for each type of stimuli</li>
 </ul>
-<p>Fit a multinomial processing tree following the Figure 8 of <span class="citation">Wickelmaier and Zeileis (<a href="#ref-wickelmaier2018using">2018</a>)</span> (<a href="https://link.springer.com/article/10.3758/s13428-017-0937-z" class="uri">https://link.springer.com/article/10.3758/s13428-017-0937-z</a>) to investigate whether experiment type and/or gender affects the different processes assumed in the model.</p>
+<p>Fit a multinomial processing tree following Figure <a href="exercises-9.html#fig:sm-tikz">14.10</a> to investigate whether experiment type, age and/or gender affects the different processes assumed in the model. As in <span class="citation">Batchelder and Riefer (<a href="#ref-batchelder1990multinomial">1990</a>)</span>, assume that <span class="math inline">\(a = g\)</span> (for identifiability) and that discriminability is equal for both sources (<span class="math inline">\(d_1 = d_2\)</span>).</p>
+
+<div class="figure"><span id="fig:sm-tikz"></span>
+<img src="bookdown_files/figure-html/sm-tikz-1.svg" alt="Multinomial processing tree for the source monitoring paradigm (Batchelder and Riefer, 1990). \(D_1\) and \(D_2\) stand the detectability of Source A and Source B items respectively, \(d_1\) and \(d_2\) stand for the source discriminabilities for Source A and Source B items, \(b\) stands for the bias for responding &quot;old&quot; to a nondetected item, \(a\) stands for guessing that a detected but nondiscriminated item belongs to Source A, and \(g\) stands for guessing that the item is a Source A item." width="672" />
+<p class="caption">
+FIGURE 14.10: Multinomial processing tree for the source monitoring paradigm (Batchelder and Riefer, 1990). <span class="math inline">\(D_1\)</span> and <span class="math inline">\(D_2\)</span> stand the detectability of Source A and Source B items respectively, <span class="math inline">\(d_1\)</span> and <span class="math inline">\(d_2\)</span> stand for the source discriminabilities for Source A and Source B items, <span class="math inline">\(b\)</span> stands for the bias for responding &quot;old&quot; to a nondetected item, <span class="math inline">\(a\)</span> stands for guessing that a detected but nondiscriminated item belongs to Source A, and <span class="math inline">\(g\)</span> stands for guessing that the item is a Source A item.
+</p>
+</div>
+<p>Notice the following:</p>
+<ul>
+<li>The data are aggregated at the level of source, so you should use <code>multinomial_lpmf</code> for every row of the dataset rather than <code>categorical_lpmf()</code>.</li>
+<li>In contrast to the previous example, <code>source</code> determines three different trees, this means that the parameter <code>theta</code> has to be defined in relationship to the item source.</li>
+<li>All the predictors are between subject, this means that only a by-intercept adjustment (for every latent process) is possible.</li>
+</ul>
+<p>If you want some base to start with, see the incomplete code in the next page.</p>
+
+<pre><code>data {
+  int&lt;lower = 1&gt; N;
+  int&lt;lower = 1, upper = 3&gt; source[N];
+  int response[N, 3];
+  int&lt;lower = 0&gt; K; // number of predictors
+  matrix[N, K] X; // model matrix
+  int&lt;lower = 1&gt; N_subj;
+  int&lt;lower = 1, upper = N_subj&gt; subj[N];
+}
+transformed data {
+  int N_p = 5; //Number of latent parameters
+}
+parameters {
+  real D1_alpha;
+  real D2_alpha;
+  real d_alpha;
+  real b_alpha;
+  real g_alpha;
+  vector[K] D1_beta;
+  vector[K] D2_beta;
+  vector[K] d_beta;
+  vector[K] b_beta;
+  vector[K] g_beta;
+  vector&lt;lower = 0&gt;[N_p] tau_u; // 5 parameters
+  matrix[N_p, N_subj] z_u;
+  cholesky_factor_corr[N_p] L_u;
+}
+transformed parameters {
+  simplex[3] theta[N]; // 3 possible responses
+  matrix[N_subj, 5] u = (diag_pre_multiply(tau_u, L_u) * z_u)&#39;;
+  vector[N_subj] D1_u = u[, 1];
+  vector[N_subj] D2_u = u[, 2];
+  vector[N_subj] d_u = u[, 3];
+  vector[N_subj] b_u = u[, 4];
+  vector[N_subj] g_u = u[, 5];
+  for (n in 1:N){
+    real D1 = ....;
+    real D2 = ....;
+    real d = = ....;
+    real b = = ....;
+    real g = = ....;
+    // assumed for identifiability:
+    real a = g;
+    // same discriminability for both sources:
+    real d1 = d;
+    real d2 = d;
+    if(source[n] == 1){
+    //Probability of a certain answer given that the stimuli is of source A:
+    theta[n, 1] = D1 * d1 + D1 * (1 - d1) * a + (1 - D1) * b * g; //Pr A | A
+    theta[n, 2] = ... ; //Pr B | A
+    theta[n, 3] = ... ;  //Pr N | A
+    } else if (source[n] == 2){
+    //Probability of a certain answer given that the stimuli is of source B:
+    theta[n, 1] = D2 * (1 - d2) * a + (1 - D2) * b * g; //Pr A | B
+    theta[n, 2] = = ... ; //Pr B | B
+    theta[n, 3] = ... ;  //Pr N | B
+    } else {
+    //Probability of a certain answer given that the stimuli is new:
+    theta[n, 1] = ...; //Pr A | N
+    theta[n, 2] = ...; //Pr B | N
+    theta[n, 3] = ...;  //Pr N | N
+    }
+  }
+}
+model {
+  target += normal_lpdf(D1_alpha | 0, 3);
+  (...)
+
+  // for the intercept adjustment:
+  target += lkj_corr_cholesky_lpdf(L_u | 2);
+  target += std_normal_lpdf(to_vector(z_u));
+  target += normal_lpdf(tau_u | 0, 2)  -
+    N_p * normal_lccdf(0 | 0, 2);
+
+  for(n in 1:N){
+    target +=  multinomial_lpmf(response[n, ] | theta[n]);
+  }
+}
+generated quantities {
+  corr_matrix[N_p] rho_u = L_u * L_u&#39;;
+}
+</code></pre>
 
 </div>
 <!-- </div> -->

@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-01" />
+<meta name="date" content="2020-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -603,7 +603,7 @@ to-do: Interaction as a matrix multiplication might be introduced before in an i
 <p>The translation into Stan code is the following:</p>
 <pre class="stan"><code>data {
   int&lt;lower = 1&gt; N;
-  int&lt;lower=0&gt; K;   // number of predictors
+  int&lt;lower = 0&gt; K;   // number of predictors
   matrix[N, K] X;   // model matrix
   vector[N] p_size;
 }
@@ -628,7 +628,7 @@ model {
 ```stan
 data {
   int<lower = 1> N;
-  int<lower=0> K;   // number of predictors
+  int<lower = 0> K;   // number of predictors
   matrix[N, K] X;   // model matrix
   vector[N] p_size;
 }

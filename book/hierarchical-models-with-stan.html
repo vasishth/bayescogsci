@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-01" />
+<meta name="date" content="2020-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1192,8 +1192,8 @@ model {
                         c_cloze .* (beta + u[subj, 2] + w[item, 2]), sigma);
 }
 generated quantities {
-  corr_matrix[2] rho_u= L_u * L_u&#39;;
-  corr_matrix[2] rho_w= L_w * L_w&#39;;
+  corr_matrix[2] rho_u = L_u * L_u&#39;;
+  corr_matrix[2] rho_w = L_w * L_w&#39;;
 }</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_eeg_data &lt;-<span class="st"> </span>df_eeg_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">item =</span> <span class="kw">as.numeric</span>(<span class="kw">as.factor</span>(item)))
