@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-06" />
+<meta name="date" content="2020-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -420,7 +420,7 @@ FIGURE 15.1: Three levels of difficulty of the global motion detection task. The
 <p>We could imagine that if the fast guesses model would be true, we would see a bimodal distribution, when we plot a histogram of the data. Unfortunately, when two similar distributions are mixed, we won't see any apparent bimodality:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df_dots_data, <span class="kw">aes</span>(rt)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>()</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-400-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-403-1.svg" width="672" /></p>
 <p>However, another plot reveals that incorrect responses are generally faster, and this is especially true when the instructions emphasized accuracy:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df_dots_data, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(acc), <span class="dt">y =</span> rt)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_jitter</span>(<span class="dt">width =</span> <span class="fl">.4</span>, <span class="dt">height =</span> <span class="dv">0</span>),
@@ -428,7 +428,7 @@ FIGURE 15.1: Three levels of difficulty of the global motion detection task. The
 <span class="st">  </span><span class="kw">facet_wrap</span>(diff <span class="op">~</span><span class="st"> </span>emphasis) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Accuracy&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Response time&quot;</span>)</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-401-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-404-1.svg" width="672" /></p>
 <!-- using a plotting style -->
 <!-- that has become important in RT research, -->
 <!-- called a “latency-probability” plot (LP plot: -->
@@ -513,7 +513,7 @@ df_dots_simdata1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<s
 <p>We verify that our simulated data is realistic, that is, it's on the same range as the original data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df_dots_simdata1, <span class="kw">aes</span>(rt)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>()</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-405-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-408-1.svg" width="672" /></p>
 <p>To implement the mixture model defined in Eq. <a href="sec-ppd.html#eq:logpriorsunif">(3.8)</a> in Stan, the discrete parameter <span class="math inline">\(z\)</span> needs to be marginalized:</p>
 <span class="math display">\[\begin{equation}
 \begin{aligned}
@@ -587,7 +587,7 @@ model {
 ## lp__   -6349.94 -6354.70 -6346.88    10 1.14</code></pre>
 <p>A traceplot shows clearly that the chains aren't mixing.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">traceplot</span>(fit_mix_<span class="dv">1</span>) </code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-409-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-412-1.svg" width="672" /></p>
 <p>The problem with this model is that the mixture components are underlyingly exchangeable and thus not identifiable. Each chain doesn't know how each component was identified by the rest of the chains. A major problem is that even though the theoretical model assumes that guesses are faster than engaged responses, this is not explicit in our computational model. That is, our model lacks some of the theoretical information that we have, namely that the distribution of guesses times is faster than the distribution of engaged reaction times. This can be encoded with a strong prior for <span class="math inline">\(\gamma\)</span>, where we assume that its prior distribution is truncated on a lower bound by the value of <span class="math inline">\(\alpha\)</span>:</p>
 <span class="math display">\[\begin{equation}
 \gamma \sim Normal(6, 1), \text{for } \gamma &gt; \alpha
@@ -597,7 +597,7 @@ model {
 p_{task} \sim Beta(8, 2)
 \end{equation}\]</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="cf">function</span>(x) <span class="kw">dbeta</span>(x, <span class="dv">8</span>, <span class="dv">2</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-410-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-413-1.svg" width="672" /></p>
 <pre class="stan"><code>data {
   int&lt;lower = 1&gt; N;
   vector[N] x;
@@ -644,7 +644,7 @@ model {
 ## p_task     0.78     0.58     0.94  1262    1
 ## lp__   -6348.87 -6353.12 -6346.51  1201    1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">traceplot</span>(fit_mix_<span class="dv">2</span>) </code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-412-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-415-1.svg" width="672" /></p>
 </div>
 <div id="sec:multmix" class="section level4">
 <h4><span class="header-section-number">15.1.1.3</span> A multivariate implementation of the model</h4>
@@ -691,7 +691,7 @@ df_dots_simdata3 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<s
 <span class="st">  </span><span class="kw">facet_wrap</span>(diff <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Accuracy&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Response time&quot;</span>)</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-414-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-417-1.svg" width="672" /></p>
 <p>We need now to marginalize the discrete parameters from both pairs of distributions.</p>
 <span class="math display">\[\begin{equation}
 \begin{aligned}
@@ -812,7 +812,7 @@ diff_p_pred &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diff_p_pred <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(diff)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>()</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-418-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-421-1.svg" width="672" /></p>
 <p>The previous plot shows that we are predicting a priori that the difference in <span class="math inline">\(p_{task}\)</span> will be mostly smaller than <span class="math inline">\(.3\)</span>, which seems to make sense.</p>
 <p>We are ready to generate a new dataset, by deciding on true values for <span class="math inline">\(\beta_{task}\)</span> and <span class="math inline">\(p_{btask}\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># New predictor</span>
@@ -857,7 +857,7 @@ df_dots_simdata4 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<s
 <span class="st">  </span><span class="kw">facet_wrap</span>(diff <span class="op">~</span><span class="st"> </span>emphasis) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Accuracy&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Response time&quot;</span>)</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-420-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-423-1.svg" width="672" /></p>
 <p>For the Stan implementation, we added a generated quantities plots that can be used for further (prior or posterior) predictive checks. We use the dummy variable <code>onlyprior</code> to indicate whether we use the data or we only sample from the priors. Notice that one can always do the predictive checks in R, transforming the code that we wrote for the simulation into a function, and writing the priors in R. However, it can be simpler to take advantage of Stan output format and rewrite the code in Stan. One downside of this, is that the <code>stanfit</code> object that stores the model output can become too large for the memory of the computer.</p>
 <pre class="stan"><code>data {
   int&lt;lower = 1&gt; N;
@@ -939,13 +939,13 @@ fit_mix_<span class="dv">4</span>_priors &lt;-<span class="st"> </span><span cla
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rt_pred &lt;-<span class="st"> </span><span class="kw">extract</span>(fit_mix_<span class="dv">4</span>_priors)<span class="op">$</span>rt_pred
 <span class="kw">ppc_dens_overlay</span>(<span class="dt">y =</span> rt, <span class="dt">yrep =</span> rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,]) <span class="op">+</span>
 <span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-422-1.svg" width="672" /> We see that we tend to generate some responses that are too large, but the general shape of the predictive distribution of the response times is fine.</p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-425-1.svg" width="672" /> We see that we tend to generate some responses that are too large, but the general shape of the predictive distribution of the response times is fine.</p>
 <p>If we want to plot the prior predicted distribution of differences in response time conditioning on task difficulty, we need to define a new function. Then we use the <code>bayesplot</code> function <code>ppc_stat()</code> that takes as an argument of <code>stat</code> any summary function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">meanrt_diff &lt;-<span class="st"> </span><span class="cf">function</span>(rt){
   <span class="kw">mean</span>(rt[x <span class="op">==</span><span class="st"> </span><span class="fl">.5</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(rt[x <span class="op">==</span><span class="st"> </span><span class="fl">-.5</span>])
 }
 <span class="kw">ppc_stat</span>(<span class="dt">y =</span> rt, <span class="dt">yrep =</span> rt_pred, <span class="dt">stat =</span> meanrt_diff) </code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-423-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-426-1.svg" width="672" /></p>
 <!-- We can inspect the prior predictive distribution of accuracy by grouping accuracy by emphasis: -->
 <p>We find that the range of response times look reasonable. There are, however, always more checks that can be done, for example, plotting other summary statistics, or predictions conditioned on other aspects of the data.</p>
 </div>
@@ -1071,7 +1071,7 @@ df_dots_simdata &lt;-<span class="st"> </span>stimuli <span class="op">%&gt;%</s
 <span class="st">  </span><span class="kw">facet_wrap</span>(diff <span class="op">~</span><span class="st"> </span>emphasis) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Accuracy&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Response time&quot;</span>)</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-427-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-430-1.svg" width="672" /></p>
 <p>We implement the model in Stan as follows. The hierarchical extension uses the Cholesky factorization for the group-level effects (as we did in <a href="hierarchical-models-with-stan.html#sec:corrstan">12.1.3</a>).</p>
 <pre class="stan"><code>data {
   int&lt;lower = 1&gt; N;
@@ -1174,7 +1174,7 @@ true_values &lt;-<span class="st"> </span><span class="kw">c</span>(alpha, beta,
                 p_correct, p_btask, beta_task, tau_u[<span class="dv">1</span>],
                 tau_u[<span class="dv">2</span>], tau_u[<span class="dv">3</span>], <span class="kw">rep</span>(rho,<span class="dv">3</span>))
 <span class="kw">mcmc_recover_hist</span>(df_fit_mix_h, true_values)</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-431-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-434-1.svg" width="672" /></p>
 <p>The model seems to be underestimating the probability of being correct of the participants (<code>p_correct</code>) and overestimating the probability of being engaged in the task (<code>p_btask</code>). Notice, however that the numerical differences are very small. We can be relatively certain that the model is not seriously mis-specified, but A more principled approach using simulation based calibration is presented in <span class="citation">Talts et al. (<a href="#ref-talts2018validating">2018</a>)</span> and <span class="citation">Schad, Betancourt, and Vasishth (<a href="#ref-schad2020toward">2020</a>)</span>.</p>
 <!-- We can verify that with enough data... -->
 <div id="fitting-the-model-to-real-data" class="section level5">

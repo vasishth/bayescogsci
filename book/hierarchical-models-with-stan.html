@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-06" />
+<meta name="date" content="2020-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -673,18 +673,18 @@ model {
 ## tau_u[1]  2.22  1.58  3.03  2193 1.00
 ## tau_u[2]  1.67  0.14  3.52    93 1.04</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">traceplot</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-329-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-332-1.svg" width="672" /></p>
 <p>We see that <code>tau_u[2]</code> has a low number of effective samples (<code>n_eff</code>) and its chains are not mixing properly. This parameter is specially problematic because there is not too much information about it (every subject is providing only one data point), it's quite small (in comparison with <code>sigma</code>), it's bounded by zero, and there is a dependency between this parameter and <code>u[, 2]</code>. This makes the exploration of the sampler quite hard.</p>
 <p>Pairs plots can be useful to uncover pathologies in the sampling, since we can visualize correlations between samples, which are in general problematic. Here we see the samples of <code>tau_u[2]</code> against some of the adjustments to the slope <code>u</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>, <span class="st">&quot;u[2,2]&quot;</span>, <span class="st">&quot;u[3,2]&quot;</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-330-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-333-1.svg" width="672" /></p>
 <p>Compare with <code>tau_u[1]</code> plotted against the by-participant adjustments to the intercept. Here, instead of funnels we see blobs, indicating no strong correlation between the parameters:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;tau_u[1]&quot;</span>, <span class="st">&quot;u[1,1]&quot;</span>, <span class="st">&quot;u[2,1]&quot;</span>,<span class="st">&quot;u[3,1]&quot;</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-331-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-334-1.svg" width="672" /></p>
 <p>In fact, the problem that the sampler faces is more serious than what our initial plots show. Stan samples in an <em>unconstrained</em> space where all the parameters can range from minus infinity to infinity, and then transforms back the parameters to the constrained space that we specified, where, for example, a variance parameter is restricted to be positive. This means that Stan is actually sampling from an auxiliary parameter equivalent to <code>log(tau_u[2])</code> rather than from <code>tau_u[2]</code>. We can use <code>mcmc_scatter</code> to see the actual funnel:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg2), <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),
            <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-332-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-335-1.svg" width="672" /></p>
 <p>At the neck of the funnel, <code>tau_u[2]</code> is close to zero (and <code>log(tau_u[2])</code> is a negative number) and thus the adjustment <code>u</code> is constrained to be near 0. This a problem because a step size that's optimized to work well in the broad part of the funnel will fail to work appropriately in the neck of the funnel and vice versa; see also Neal's funnel <span class="citation">(Neal <a href="#ref-neal2003">2003</a>)</span> and the optimization chapter of Stan's manual (<a href="https://mc-stan.org/docs/2_24/stan-users-guide/reparameterization-section.html#ref-Neal:2003" class="uri">https://mc-stan.org/docs/2_24/stan-users-guide/reparameterization-section.html#ref-Neal:2003</a>). There are two options, we might just remove the by-participant varying slope since it's not giving us much information anyway, or we can alleviate this problem by re-parameterizing the model. In general, this is the trickiest and probably most annoying part of modeling. A model can be theoretically and mathematically sound, but still fail to converge. The best advice to solve this type of problems is to start small with simulated data where we know the true values of the parameters, and increase the complexity of the models gradually. Although in this example, the problem was clearly in the parametrization of <code>tau_u[2]</code>, in many cases the biggest hurdle is to identify where the problem lies. Fortunately, the issue with <code>tau_u[2]</code> is a common problem which is easy to solve by using a non-centered parametrization <span class="citation">(Papaspiliopoulos, Roberts, and Sköld <a href="#ref-papaspiliopoulos2007">2007</a>)</span>. The following Box explains the specific re-parametrization we use for the improved version of our Stan code.</p>
 
 <div class="extra">
@@ -758,14 +758,14 @@ model {
 ## tau_u[1]  2.20  1.54  3.03  1476    1
 ## tau_u[2]  1.60  0.12  3.38  1313    1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">traceplot</span>(fit_eeg3, <span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-335-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-338-1.svg" width="672" /></p>
 <p>Although the samples of <code>tau_u[2]</code> are still correlated with the adjustments for the slope, <code>u[,2]</code>, these latter parameters are not the ones explored by the model, the auxiliary parameters, <code>z_u</code>, are the relevant ones for the sampler:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3), <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),
            <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-336-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-339-1.svg" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3), <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;z_u[1,2]&quot;</span>),
            <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-336-2.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-339-2.svg" width="672" /></p>
 <!-- Before examine how each subject is being affected by the manipulation as we did with `brms`, we'll fit a correlated intercepts and slopes model. -->
 </div>
 <div id="sec:corrstan" class="section level3">
@@ -872,7 +872,7 @@ model {
 ## tau_u[1]  2.21  1.57  3.03  2278 1.00
 ## tau_u[2]  1.46  0.21  3.20   118 1.01</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">traceplot</span>(fit_eeg_corr, <span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-339-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-342-1.svg" width="672" /></p>
 <p>Again, we need to reparametrize this model. The non-centered parametrization for this type of model is the so-called Cholesky factorization; the math and the intuition behind this parametrization is explained in Box <a href="hierarchical-models-with-stan.html#thm:cholesky">12.2</a>.</p>
 
 <div class="extra">
@@ -1087,12 +1087,12 @@ generated quantities {
 ## L_u[2,2]    0.91  0.59  1.00  1914 1.00</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">traceplot</span>(fit_eeg_corr2, <span class="dt">pars =</span>
                            <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;L_u&quot;</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-348-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-351-1.svg" width="672" /></p>
 <p>Is there a correlation between the by-participant intercept and slope?</p>
 <p>Let's visualize some of the posteriors:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mcmc_hist</span>(<span class="kw">as.data.frame</span>(fit_eeg_corr2),
           <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;rho_u[1,2]&quot;</span>))</code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-349-1.svg" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-352-1.svg" width="672" /></p>
 <p>We can't really know if they are correlated, it's clear that we don't have enough data, the correlation might well be between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>.</p>
 </div>
 <div id="sec:crosscorrstan" class="section level3">

@@ -262,7 +262,7 @@
 
 \title{An Introduction to Bayesian Data Analysis for Cognitive Science}
 \author{Bruno Nicenboim, Daniel Schad, and Shravan Vasishth}
-\date{2020-09-06}
+\date{2020-09-07}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Box}[chapter]
@@ -15616,6 +15616,102 @@ TO-DO: to complete
 \section{Exercises}\label{exercises-7}
 
 \begin{exercise}
+\protect\hypertarget{exr:badstan}{}{\label{exr:badstan} }Incorrect Stan
+model. \end{exercise}
+
+We want to fit both reaction times and accuracy with the same model. We
+simulate the data as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{N <-}\StringTok{ }\DecValTok{500}
+\NormalTok{df_sim <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{rt =} \KeywordTok{rlnorm}\NormalTok{(N, }\DataTypeTok{mean =} \DecValTok{6}\NormalTok{, }\DataTypeTok{sd =} \FloatTok{.5}\NormalTok{),}
+                 \DataTypeTok{correct =}\NormalTok{ extraDistr}\OperatorTok{::}\KeywordTok{rbern}\NormalTok{(N, }\DataTypeTok{prob =} \FloatTok{.85}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+We build the following model:
+
+\begin{verbatim}
+data {
+  int<lower = 1> N;
+  vector[N] rt;
+  int correct[N];
+}
+parameters {
+  real<lower = 0> sigma;
+  real theta;
+}
+model {
+  target += normal_lpdf(mu | 0, 20);
+  target += lognormal_lpdf(sigma | 3, 1)
+  for(n in 1:N)
+    target += lognormal_lpdf(rt[n] | mu, sigma);
+    target += bernoulli_lpdf(correct[n] | theta);
+}
+\end{verbatim}
+
+Why is this model not working?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ls_sim <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{rt =}\NormalTok{ df_sim}\OperatorTok{$}\NormalTok{rt,}
+               \DataTypeTok{correct =}\NormalTok{ df_sim}\OperatorTok{$}\NormalTok{correct)}
+\NormalTok{fit_sim <-}\StringTok{ }\KeywordTok{stan}\NormalTok{(}\StringTok{"./stan_models/incorrect.stan"}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ ls_sim)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## SYNTAX ERROR, MESSAGE(S) FROM PARSER:
+\end{verbatim}
+
+\begin{verbatim}
+## Variable "mu" does not exist.
+\end{verbatim}
+
+\begin{verbatim}
+##  error in 'model15c24c9480d5_incorrect' at line 11, column 26
+\end{verbatim}
+
+\begin{verbatim}
+##   -------------------------------------------------
+\end{verbatim}
+
+\begin{verbatim}
+##      9: }
+\end{verbatim}
+
+\begin{verbatim}
+##     10: model {
+\end{verbatim}
+
+\begin{verbatim}
+##     11:   target += normal_lpdf(mu | 0, 20);
+\end{verbatim}
+
+\begin{verbatim}
+##                                  ^
+\end{verbatim}
+
+\begin{verbatim}
+##     12:   target += lognormal_lpdf(sigma | 3, 1)
+\end{verbatim}
+
+\begin{verbatim}
+##   -------------------------------------------------
+\end{verbatim}
+
+\begin{verbatim}
+## 
+\end{verbatim}
+
+\begin{verbatim}
+## Error in stanc(file = file, model_code = model_code, model_name = model_name, : failed to parse Stan model 'incorrect' due to the above error.
+\end{verbatim}
+
+Try to make it run. (Hint: There are several problems.)
+
+\begin{exercise}
 \protect\hypertarget{exr:skewstan}{}{\label{exr:skewstan} }Using Stan
 documentation. \end{exercise}
 
@@ -15628,7 +15724,7 @@ Fit the following data:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Y <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{3}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{10}\NormalTok{)}
+\NormalTok{Y <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{3}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -16195,7 +16291,7 @@ parameter space:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-329-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-332-1.pdf}
 
 We see that \texttt{tau\_u{[}2{]}} has a low number of effective samples
 (\texttt{n\_eff}) and its chains are not mixing properly. This parameter
@@ -16216,7 +16312,7 @@ some of the adjustments to the slope \texttt{u}:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-330-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-333-1.pdf}
 
 Compare with \texttt{tau\_u{[}1{]}} plotted against the by-participant
 adjustments to the intercept. Here, instead of funnels we see blobs,
@@ -16228,7 +16324,7 @@ indicating no strong correlation between the parameters:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-331-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-334-1.pdf}
 
 In fact, the problem that the sampler faces is more serious than what
 our initial plots show. Stan samples in an \emph{unconstrained} space
@@ -16247,7 +16343,7 @@ actual funnel:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-332-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-335-1.pdf}
 
 At the neck of the funnel, \texttt{tau\_u{[}2{]}} is close to zero (and
 \texttt{log(tau\_u{[}2{]})} is a negative number) and thus the
@@ -16403,7 +16499,7 @@ distribution with location 0 and scale 1. The function
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-335-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-338-1.pdf}
 
 Although the samples of \texttt{tau\_u{[}2{]}} are still correlated with
 the adjustments for the slope, \texttt{u{[},2{]}}, these latter
@@ -16417,7 +16513,7 @@ parameters, \texttt{z\_u}, are the relevant ones for the sampler:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-336-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-339-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -16426,7 +16522,7 @@ parameters, \texttt{z\_u}, are the relevant ones for the sampler:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-336-2.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-339-2.pdf}
 
 \subsection{Correlated varying intercept varying slopes
 model}\label{sec:corrstan}
@@ -16596,7 +16692,7 @@ As we expected, there are warnings and bad mixing of the chains for
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-339-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-342-1.pdf}
 
 Again, we need to reparametrize this model. The non-centered
 parametrization for this type of model is the so-called Cholesky
@@ -17020,7 +17116,7 @@ chains are mixing well.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-348-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-351-1.pdf}
 
 Is there a correlation between the by-participant intercept and slope?
 
@@ -17033,7 +17129,7 @@ Let's visualize some of the posteriors:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-349-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-352-1.pdf}
 
 We can't really know if they are correlated, it's clear that we don't
 have enough data, the correlation might well be between \(-1\) and
@@ -17187,21 +17283,21 @@ generated quantities {
 
 \begin{verbatim}
 ##             mean  2.5% 97.5% n_eff Rhat
-## alpha       3.65  2.72  4.62  1901    1
-## beta        2.29  0.94  3.55  4014    1
-## sigma      11.50 11.20 11.83  6816    1
-## tau_u[1]    2.25  1.61  3.08  1774    1
-## tau_u[2]    1.35  0.06  3.21  1223    1
-## tau_w[1]    1.52  0.79  2.20  1262    1
-## tau_w[2]    2.30  0.31  4.28   833    1
+## alpha       3.67  2.76  4.55  1976 1.00
+## beta        2.32  0.97  3.63  3997 1.00
+## sigma      11.51 11.20 11.82  5016 1.00
+## tau_u[1]    2.25  1.58  3.10  1462 1.00
+## tau_u[2]    1.34  0.07  3.15  1159 1.00
+## tau_w[1]    1.51  0.73  2.19   645 1.01
+## tau_w[2]    2.24  0.17  4.23   562 1.01
 ## rho_u[1,1]  1.00  1.00  1.00   NaN  NaN
-## rho_u[1,2]  0.13 -0.63  0.77  4156    1
-## rho_u[2,1]  0.13 -0.63  0.77  4156    1
-## rho_u[2,2]  1.00  1.00  1.00   710    1
+## rho_u[1,2]  0.13 -0.66  0.79  4127 1.00
+## rho_u[2,1]  0.13 -0.66  0.79  4127 1.00
+## rho_u[2,2]  1.00  1.00  1.00   237 1.00
 ## rho_w[1,1]  1.00  1.00  1.00   NaN  NaN
-## rho_w[1,2] -0.41 -0.89  0.31  2592    1
-## rho_w[2,1] -0.41 -0.89  0.31  2592    1
-## rho_w[2,2]  1.00  1.00  1.00   189    1
+## rho_w[1,2] -0.40 -0.89  0.39  2312 1.00
+## rho_w[2,1] -0.40 -0.89  0.39  2312 1.00
+## rho_w[2,2]  1.00  1.00  1.00   240 1.00
 \end{verbatim}
 
 \section{Summary}\label{summary-7}
@@ -19082,7 +19178,7 @@ any apparent bimodality:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-400-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-403-1.pdf}
 
 However, another plot reveals that incorrect responses are generally
 faster, and this is especially true when the instructions emphasized
@@ -19099,7 +19195,7 @@ accuracy:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-401-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-404-1.pdf}
 
 \subsubsection{A very simple implementation of the fast guess
 model}\label{a-very-simple-implementation-of-the-fast-guess-model}
@@ -19245,7 +19341,7 @@ same range as the original data:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-405-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-408-1.pdf}
 
 To implement the mixture model defined in Eq. \eqref{eq:logpriorsunif} in
 Stan, the discrete parameter \(z\) needs to be marginalized:
@@ -19371,7 +19467,7 @@ A traceplot shows clearly that the chains aren't mixing.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-409-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-412-1.pdf}
 
 The problem with this model is that the mixture components are
 underlyingly exchangeable and thus not identifiable. Each chain doesn't
@@ -19404,7 +19500,7 @@ p_{task} \sim Beta(8, 2)
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-410-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-413-1.pdf}
 
 \begin{verbatim}
 data {
@@ -19482,7 +19578,7 @@ Now summaries and plots look fine.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-412-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-415-1.pdf}
 
 \subsubsection{A multivariate implementation of the
 model}\label{sec:multmix}
@@ -19563,7 +19659,7 @@ task difficulty on the simulated response times and accuracy:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-414-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-417-1.pdf}
 
 We need now to marginalize the discrete parameters from both pairs of
 distributions.
@@ -19767,7 +19863,7 @@ emphasis conditions:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-418-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-421-1.pdf}
 
 The previous plot shows that we are predicting a priori that the
 difference in \(p_{task}\) will be mostly smaller than \(.3\), which
@@ -19846,7 +19942,7 @@ instructions are manipulated:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-420-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-423-1.pdf}
 
 For the Stan implementation, we added a generated quantities plots that
 can be used for further (prior or posterior) predictive checks. We use
@@ -19970,7 +20066,7 @@ distribution.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-422-1.pdf} We
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-425-1.pdf} We
 see that we tend to generate some responses that are too large, but the
 general shape of the predictive distribution of the response times is
 fine.
@@ -19990,7 +20086,7 @@ summary function.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-423-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-426-1.pdf}
 
 We find that the range of response times look reasonable. There are,
 however, always more checks that can be done, for example, plotting
@@ -20209,7 +20305,7 @@ make sense with the following plot:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-427-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-430-1.pdf}
 
 We implement the model in Stan as follows. The hierarchical extension
 uses the Cholesky factorization for the group-level effects (as we did
@@ -20348,7 +20444,7 @@ values.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-431-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-434-1.pdf}
 
 The model seems to be underestimating the probability of being correct
 of the participants (\texttt{p\_correct}) and overestimating the

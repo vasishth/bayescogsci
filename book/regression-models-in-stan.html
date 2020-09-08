@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-06" />
+<meta name="date" content="2020-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -707,7 +707,7 @@ model {
 <pre><code>target += bernoulli_logit_lpmf(correct| alpha + exp(X * beta));</code></pre>
 <p>Another more flexible possibility when we want to indicate a Bernoulli likelihood is to use <code>bernoulli_lpmf</code> and add the link manually. The last statement of <code>stan_models/recall.stan</code> would become the following:</p>
 <pre><code>target += bernoulli_lpmf(correct| inv_logit(alpha + X * beta));</code></pre>
-<p>The function <code>bernoulli_lpmf</code> can be useful if one wants to try other link functions; see exercise <a href="exercises-7.html#exr:linkfunction">11.3</a>.</p>
+<p>The function <code>bernoulli_lpmf</code> can be useful if one wants to try other link functions; see exercise <a href="exercises-7.html#exr:linkfunction">11.4</a>.</p>
 <p>Finally, the most transparent form (but less efficient) would be the following for-loop:</p>
 <pre><code>for (n in 1:N)
   target += bernoulli_lpmf(correct[n] | inv_logit(alpha + X[n] * beta));</code></pre>

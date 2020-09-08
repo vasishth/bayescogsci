@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-06" />
+<meta name="date" content="2020-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -400,6 +400,95 @@ FIGURE 8.1: Comparing prior prediction using Bayes factors with posterior predic
 <li><p>Model comparison can provide a quantitative way to evaluate models, but this cannot replace understanding the qualitative patterns in the data <span class="citation">(see, e.g., Navarro <a href="#ref-navarroDevilDeepBlue2018">2019</a>)</span>. A model can provide a good fit by behaving in a way that contradicts our substantive knowledge. For example, <span class="citation">Lissón et al. (<a href="#ref-lisson_2020">2020</a>)</span> examine two computational models of sentence comprehension. One of the models yielded higher predictive accuracy when the parameter that is related to the probability of correctly comprehending a sentence was higher for impaired participants than for the control population. This contradicts the domain knowledge---impaired participants are generally observed to show worse performance than unimpaired control participants---and led to a re-evaluation of the model.</p></li>
 <li><p>Model comparison is based on finding the most ``useful model'' for characterizing our data, but neither the Bayes factor or cross validation (nor any other method that we are aware of) guarantees selecting the model closest to the truth (even with enough data). This is related to our previous point: A model that's closest to the true generating data process is not guaranteed to produce the best (prior or posterior) predictions, and a model with a clearly wrong generating data process is not guaranteed to produce poor (prior or posterior) predictions <span class="citation">(see Wang and Gelman <a href="#ref-WangGelman2014difficulty">2014</a>, for an example with cross-validation; and Navarro <a href="#ref-navarroDevilDeepBlue2018">2019</a> for a toy example with Bayes factor)</span>.</p></li>
 </ol>
+<!-- 
+Rouder et al, 2018 
+ The salient difference is that common Bayes factor approaches provide for privileged consideration of theoretically useful parameter values, such as the value corresponding to the null hypothesis, while estimation approaches do not 
+
+Estimation:
+two approaches: 1. Lindley (1965), in his early
+career, notes that one could examine the 95% highest-density
+credible intervals (HDCIs).
+2. Kruschke (2012) and
+Kruschke and Liddell (2017) take a modified version of
+this approach, in which the credible interval is compared
+to a pre-established region called a region of practical
+equivalence (ROPE). ROPEs are small intervals around zero
+containing only values that are considered to be practically
+the same as zero.
+
+posterior-estimation is not recommended for drawing conclu-
+sions about the presence or absence of effect by a number
+of Bayesian psychologists (Dienes, 2014; Gallistel, 2009;
+Rouder et al., 2009; Wagenmakers, 2007).
+
+Bayes factor approach remains con-
+troversial too, and it has been critiqued as well for being too
+sensitive to the prior density on parameter values (see Liu
+& Aitkin 2008; Gelman & Carlin 2017; Kruschke, 2011)
+
+
+From a pragmatic view, Bayes factor and posterior
+estimation often lead to the same conclusion when observed
+effects are large. This is not too surprising as large effects
+should be detected by all approaches. Conclusions may
+differ, however, when observed effects are small.
+
+
+Bayes factor may
+be represented as part of estimation under a certain model
+specification known currently in the statistics literature as a
+spike-and-slab model (George & McCulloch, 1993)
+
+Before we do so, we should note that from a
+mathematical viewpoint, the Bayes factor approach cannot
+be assailed. The Bayes factors are the natural, direct, and
+unavoidable consequence of Bayes’ rule. They are often
+critiqued because of the above robustness issue, but the
+logical consequences of these critiques are that either that
+one should not place beliefs on models or not use Bayes’
+rule for updating these beliefs. The estimation of posteriors
+is also mathematically unassailable as it too is the natural,
+direct, and unavoidable consequence of Bayes’ rule. The
+critical issue is the step between estimation and using
+estimates to draw conclusions about the presence or absence
+of effects. These rules do not come from Bayes rule, and in
+this sense they may be considered heuristics.
+
+
+The Bayes factor
+approaches we have developed in Guan and Vandeker-
+ckhove (2016), Rouder et al. (2009), Rouder and Morey
+(2012), and Rouder et al. (2012), place point-mass on pre-
+specified, theoretically important values. It is this difference
+in model specification—rather than the difference in infer-
+ential statistic—that leads to some of the most salient prac-
+tical differences between the Bayes factor and estimation
+approaches.
+
+### SHOW HOW CHANGING THE PRIOR DOESN'T MATTER FOR > comparisons
+
+
+In some cases—perhaps ones where measurement is
+a main goal and where the zero value has no special
+meaning—a slab-only approach may be best. Researchers in
+these measurement contexts, however, should avoid drawing
+inferences about whether or not there are effects in the data
+as the model specification does not capture such categorical
+difference and Bayes’ rule does not provide a reallocated
+probability for either proposition.
+
+
+Posterior estimation always remains useful in reporting
+the results of analyses. Posterior means give an overall
+indication of where we think values are best localized,
+and posterior intervals describe the precision of this
+localization. Posterior means and CIs may provide valuable
+graphical displays, especially for researchers who are
+used to confidence intervals. Moreover, these analyses are
+not exclusive; one may graph a posterior and report a
+Bayes factor as evidence, combine it with prior odds and
+a loss function to reach a decision.
+-->
 
 </div>
 <h3>References</h3>

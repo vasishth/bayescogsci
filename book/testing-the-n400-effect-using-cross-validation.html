@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-06" />
+<meta name="date" content="2020-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -443,6 +443,45 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Curiously, cross validation methods are sometimes criticized because with too much data they will give undue preference to the complex model in comparison to a true simpler model <span class="citation">(Gronau and Wagenmakers <a href="#ref-gronauLimitationsBayesianLeaveOneOut2018">2018</a>)</span>. Although this can be true for toy examples where we can have unlimited observations, the problems that we face with realistic examples are many times very different: The true model is unknown and very likely not under consideration in our comparison <span class="citation">(see also Navarro <a href="#ref-navarroDevilDeepBlue2018">2019</a>)</span>. In our experience, we are very far from the asymptotic behavior of cross validation, and, in contrast, cross validation main weakness lies in its lack of assumptions that prevents it from selecting more complex models when the gain in predictions is modest.</p>
 <!-- ## Generalization level -->
 <!-- The generalization ability from one entity (a person, state, etc) to other similar entity tells us that model has learned something useful. It is very important to think what is the level where the generalization is most interesting. For example, in cognitive science and psychology it would more interesting to generalize from one person to another than within person data from one trial to another trial for the same person. In cognitive science and psychology studies it is common that the study population is young university students, and in such thus there are limitations what we can say about the generalization to whole human population. In polling data from all US states, the whole population of US states has been observed, but there is limitation how we can generalize to other countries or future years. -->
+<!-- 
+Siluva et al 2020
+Based on this analysis, we identify when
+the discussed uncertainty estimates can perform badly, namely when:
+1. the models make very similar predictions,
+2. the models are misspecified with outliers in the data, and
+3. the number of observations is small.
+We study the underlying reasons for these behaviour. Consequences of these problematic
+cases in the context of comparing two models using LOO-CV are:
+1. When the models make similar predictions there is not much difference in the predictive
+performance, but the bad calibration makes LOO-CV less useful for separating very
+small effect sizes from zero effect sizes.
+2. The model misspecification in model comparison should be avoided by proper model
+checking and expansion before using LOO-CV.
+3. Small differences in the predictive performance can not reliably be detected by LOO-CV
+if the number of observations is small.
+
+the variance of elpd LOO M k | y can be greatly underestimated when n is small
+or if the model is misspecified and there are outliers in the data (Bengio and Grandvalet,
+2004; Varoquaux et al., 2017; Varoquaux, 2018). We show that under-estimation of the
+d
+variance holds also for the difference sv elpd
+LOO M a , M b | y , and even more so for nested
+models which are close in predictive performance.
+
+
+
+Fourth, Shao (1993) shows that in the non-Bayesian context of model selection with nested
+linear models and if the true model is included, the model selection based on LOO-CV with
+squared prediction error as the cost function is asymptotically inconsistent; the probability of
+choosing the true model does not converge to one when the number of observations n → ∞.
+Asymptotically all the models that include the true model will have the same predictive
+performance and due to the variance in LOO-CV estimator, there is a non-zero probability
+that a bigger model than the true model will be selected. Shao’s result is asymptotic analysis
+for a non-Bayesian problem but reflects the fact that also in Bayesian analysis in a finite
+case, the variance in LOO-CV could make it difficult to compare models which have very
+similar predictive performance.
+
+-->
 </div>
 <h3>References</h3>
 <div id="refs" class="references">

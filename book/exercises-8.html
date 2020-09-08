@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-06" />
+<meta name="date" content="2020-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -456,8 +456,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   \tau_{\sigma_u} &amp;\sim Normal_+(0, 5)
 \end{aligned}
 \end{equation}\]</span>
-<p>To fit this model, take into account that <code>sigma</code> is now a vector, and it's transformed parameter which depends on two parameters: <code>sigma_alpha</code> and the vector with <code>N_subj</code> elements <code>sigma_u</code>. In addition, <code>sigma_u</code> depends on the hyperparameter <code>tau_sigma_u</code> (<span class="math inline">\(\tau_{\sigma_u}\)</span>).</p>
-<p>Fit this model and use Bayes factor and cross validation to compare it with the variant that assumes a single variance component <span class="math inline">\(\sigma\)</span> for all the participants.</p>
+<p>To fit this model, take into account that <code>sigma</code> is now a vector, and it's transformed parameter which depends on two parameters: <code>sigma_alpha</code> and the vector with <code>N_subj</code> elements <code>sigma_u</code>. In addition, <code>sigma_u</code> depends on the hyperparameter <code>tau_sigma_u</code> (<span class="math inline">\(\tau_{\sigma_u}\)</span>). (Using non-centered parametrization for <code>sigma_u</code> speeds up the model considerably).</p>
 
 </div>
 <!-- </div> -->

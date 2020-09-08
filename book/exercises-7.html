@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-06" />
+<meta name="date" content="2020-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -385,16 +385,59 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">11.8</span> Exercises</h2>
 
 <div class="exercise">
-<span id="exr:skewstan" class="exercise"><strong>Exercise 11.1  </strong></span>Using Stan documentation.
+<span id="exr:badstan" class="exercise"><strong>Exercise 11.1  </strong></span>Incorrect Stan model.
+</div>
+
+<p>We want to fit both reaction times and accuracy with the same model. We simulate the data as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">N &lt;-<span class="st"> </span><span class="dv">500</span>
+df_sim &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">rt =</span> <span class="kw">rlnorm</span>(N, <span class="dt">mean =</span> <span class="dv">6</span>, <span class="dt">sd =</span> <span class="fl">.5</span>),
+                 <span class="dt">correct =</span> extraDistr<span class="op">::</span><span class="kw">rbern</span>(N, <span class="dt">prob =</span> <span class="fl">.85</span>))</code></pre></div>
+<p>We build the following model:</p>
+<pre class="stan"><code>data {
+  int&lt;lower = 1&gt; N;
+  vector[N] rt;
+  int correct[N];
+}
+parameters {
+  real&lt;lower = 0&gt; sigma;
+  real theta;
+}
+model {
+  target += normal_lpdf(mu | 0, 20);
+  target += lognormal_lpdf(sigma | 3, 1)
+  for(n in 1:N)
+    target += lognormal_lpdf(rt[n] | mu, sigma);
+    target += bernoulli_lpdf(correct[n] | theta);
+}</code></pre>
+<p>Why is this model not working?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ls_sim &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rt =</span> df_sim<span class="op">$</span>rt,
+               <span class="dt">correct =</span> df_sim<span class="op">$</span>correct)
+fit_sim &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="st">&quot;./stan_models/incorrect.stan&quot;</span>, <span class="dt">data =</span> ls_sim)</code></pre></div>
+<pre><code>## SYNTAX ERROR, MESSAGE(S) FROM PARSER:</code></pre>
+<pre><code>## Variable &quot;mu&quot; does not exist.</code></pre>
+<pre><code>##  error in &#39;model1e2b222e8dd2_incorrect&#39; at line 11, column 26</code></pre>
+<pre><code>##   -------------------------------------------------</code></pre>
+<pre><code>##      9: }</code></pre>
+<pre><code>##     10: model {</code></pre>
+<pre><code>##     11:   target += normal_lpdf(mu | 0, 20);</code></pre>
+<pre><code>##                                  ^</code></pre>
+<pre><code>##     12:   target += lognormal_lpdf(sigma | 3, 1)</code></pre>
+<pre><code>##   -------------------------------------------------</code></pre>
+<pre><code>## </code></pre>
+<pre><code>## Error in stanc(file = file, model_code = model_code, model_name = model_name, : failed to parse Stan model &#39;incorrect&#39; due to the above error.</code></pre>
+<p>Try to make it run. (Hint: There are several problems.)</p>
+
+<div class="exercise">
+<span id="exr:skewstan" class="exercise"><strong>Exercise 11.2  </strong></span>Using Stan documentation.
 </div>
 
 <p>Edit the simple example with Stan from section <a href="sec-firststan.html#sec:firststan">11.2</a>, and replace the normal distribution with a skew normal distribution. (Don't forget to add a prior to the new parameter, and check Wikipedia and Stan documentation for more information about the distribution).</p>
 <p>Fit the following data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</code></pre></div>
 <p>Does the estimate of the new parameter make sense?</p>
 
 <div class="exercise">
-<span id="exr:lognstan" class="exercise"><strong>Exercise 11.2  </strong></span>Bayes factor and bounded parameters.
+<span id="exr:lognstan" class="exercise"><strong>Exercise 11.3  </strong></span>Bayes factor and bounded parameters.
 </div>
 
 <p>Re fit the data of a single participant pressing a button repeatedly from <a href="sec-ppd.html#sec:lognormal">3.5.3</a> from <code>button_press.csv</code> coding it in Stan.</p>
@@ -418,7 +461,7 @@ rt_n \sim LogNormal(\alpha + c\_trial_n \cdot \beta,\sigma)
 </ol>
 
 <div class="exercise">
-<span id="exr:linkfunction" class="exercise"><strong>Exercise 11.3  </strong></span>The probit link function as an alternative to the logit function.
+<span id="exr:linkfunction" class="exercise"><strong>Exercise 11.4  </strong></span>The probit link function as an alternative to the logit function.
 </div>
 
 <p>The probit link function is the inverse of the CDF of the standard normal distribution (<span class="math inline">\(Normal(0,1)\)</span>). Since the CDF of the standard normal is usually denoted with the Greek letter <span class="math inline">\(\Phi\)</span> (Phi), the probit is denoted as <span class="math inline">\(\Phi^{-1}\)</span>. Refit the model presented in <a href="regression-models-in-stan.html#sec:logisticstan">11.4.3</a> changing the logit link function for the probit link (that is transforming the regression to a constrained space using <code>Phi()</code> in Stan).</p>
@@ -432,7 +475,7 @@ rt_n \sim LogNormal(\alpha + c\_trial_n \cdot \beta,\sigma)
 </ol>
 
 <div class="exercise">
-<span id="exr:logisticstan" class="exercise"><strong>Exercise 11.4  </strong></span>Examining the position of the queued word on recall.
+<span id="exr:logisticstan" class="exercise"><strong>Exercise 11.5  </strong></span>Examining the position of the queued word on recall.
 </div>
 
 <p>Refit the model presented in <a href="regression-models-in-stan.html#sec:logisticstan">11.4.3</a> and examine whether, set size, trial effects, the position of the queued word (<code>tested</code> in the dataset), and their interaction affect free recall. (Tip: You can do this exercise without changing the Stan code.).</p>
@@ -447,7 +490,7 @@ rt_n \sim LogNormal(\alpha + c\_trial_n \cdot \beta,\sigma)
 <!-- In Study 4, Alter et al. (2007) investigated whether a deliberate, analytic processing style can be activated by incidental disfluency cues that suggest task difficulty. Forty-one participants attempted to solve syllogisms presented in either a hard-to-read or an easy-to-read font. The hard-to-read font served as an incidental induction of disfluency. Participants in the hard-to-read-font condition answered more moderately difficult syllogisms correctly (64%) than did participants in the easy-to-read-font condition (42%), t(39) = 2.01, p = .051, d = 0.63, 95% CI = [−0.004, 1.25]. -->
 
 <div class="exercise">
-<span id="exr:fallacy" class="exercise"><strong>Exercise 11.5  </strong></span>Data from a real experiment: The conjunction fallacy.
+<span id="exr:fallacy" class="exercise"><strong>Exercise 11.6  </strong></span>Data from a real experiment: The conjunction fallacy.
 </div>
 
 <p><span class="citation">Paolacci, Chandler, and Ipeirotis (<a href="#ref-Paolaccietal">2010</a>)</span> examined whether the results of some classic experiments differ between a university pool population and participants recruited from Mechanical Turk. We'll examine whether the results of the conjunction fallacy experiment (or Linda problem; <span class="citation">Tversky and Kahneman (<a href="#ref-TverskyKahneman1983">1983</a>)</span>) are replicated for both groups.</p>
