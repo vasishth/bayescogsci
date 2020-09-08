@@ -262,7 +262,7 @@
 
 \title{An Introduction to Bayesian Data Analysis for Cognitive Science}
 \author{Bruno Nicenboim, Daniel Schad, and Shravan Vasishth}
-\date{2020-09-07}
+\date{2020-09-08}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Box}[chapter]
@@ -13288,8 +13288,8 @@ To-DO: to complete
 probability among the participants? Use Bayes factor to compare the
 ``full'' log Cloze probability model that we examined in section
 \ref{sec:BFnonnested} with a similar model but that incorporates the
-strong assumption of no difference between participants
-(\(\tau_{u_2}=0\)).
+strong assumption of no difference between participants for the effect
+of Cloze (\(\tau_{u_2}=0\)).
 
 \begin{exercise}
 \protect\hypertarget{exr:bf-logn}{}{\label{exr:bf-logn} }Is there evidence
@@ -15450,53 +15450,30 @@ generated quantities{
 
   }
 }
-
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
 \end{verbatim}
 
-For the null model, we just omit the term with \(\beta_1\):
+For the null model, we just omit the term with \(\beta_1\) in both the
+model block and the generated quantities block:
 
 \begin{verbatim}
+model {
+  // priors including all constants
+  target += normal_lpdf(alpha | 1000, 500);
+  target += normal_lpdf(beta2 | 0, 100);
+  target += normal_lpdf(beta3 | 0, 100);
+  target += normal_lpdf(sigma | 0, 1000)
+    - normal_lccdf(0 | 0, 1000);
+  target += normal_lpdf(p_size | alpha + c_trial * beta2 +
+                        c_load .* c_trial * beta3, sigma);
+}
+generated quantities{
+  real log_lik[N];
+  for (n in 1:N){
     log_lik[n] = normal_lpdf(p_size[n] | alpha + c_trial[n] * beta2 +
                              c_load[n] * c_trial[n] * beta3, sigma);
 
   }
 }
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
 \end{verbatim}
 
 Fit the models with the default number of iterations:
@@ -15504,9 +15481,11 @@ Fit the models with the default number of iterations:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{fit_pupil_int_pos_ll <-}\StringTok{ }\KeywordTok{stan}\NormalTok{(}\DataTypeTok{file =} \StringTok{'stan_models/pupil_pos.stan'}\NormalTok{,}
-                          \DataTypeTok{data =}\NormalTok{ ls_pupil_data)}
+                             \DataTypeTok{iter =} \DecValTok{3000}\NormalTok{,}
+                             \DataTypeTok{data =}\NormalTok{ ls_pupil_data)}
 \NormalTok{fit_pupil_int_null_ll <-}\StringTok{ }\KeywordTok{stan}\NormalTok{(}\DataTypeTok{file =} \StringTok{'stan_models/pupil_null.stan'}\NormalTok{,}
-                          \DataTypeTok{data =}\NormalTok{ ls_pupil_data)}
+                              \DataTypeTok{iter =} \DecValTok{3000}\NormalTok{,}
+                              \DataTypeTok{data =}\NormalTok{ ls_pupil_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -15519,28 +15498,17 @@ We compare the models in the following way:
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Some Pareto k diagnostic values are slightly high. See help('pareto-k-diagnostic') for details.
-\end{verbatim}
-
-\begin{verbatim}
 ## 
-## Computed from 4000 by 41 log-likelihood matrix
+## Computed from 6000 by 41 log-likelihood matrix
 ## 
 ##          Estimate   SE
-## elpd_loo   -251.0  5.2
-## p_loo         5.2  1.4
-## looic       502.1 10.4
+## elpd_loo   -250.9  5.2
+## p_loo         5.1  1.4
+## looic       501.9 10.5
 ## ------
-## Monte Carlo SE of elpd_loo is 0.1.
+## Monte Carlo SE of elpd_loo is 0.0.
 ## 
-## Pareto k diagnostic values:
-##                          Count Pct.    Min. n_eff
-## (-Inf, 0.5]   (good)     40    97.6%   835       
-##  (0.5, 0.7]   (ok)        1     2.4%   1068      
-##    (0.7, 1]   (bad)       0     0.0%   <NA>      
-##    (1, Inf)   (very bad)  0     0.0%   <NA>      
-## 
-## All Pareto k estimates are ok (k < 0.7).
+## All Pareto k estimates are good (k < 0.5).
 ## See help('pareto-k-diagnostic') for details.
 \end{verbatim}
 
@@ -15556,19 +15524,19 @@ We compare the models in the following way:
 
 \begin{verbatim}
 ## 
-## Computed from 4000 by 41 log-likelihood matrix
+## Computed from 6000 by 41 log-likelihood matrix
 ## 
 ##          Estimate  SE
 ## elpd_loo   -255.4 4.6
 ## p_loo         4.4 1.1
-## looic       510.8 9.2
+## looic       510.9 9.3
 ## ------
-## Monte Carlo SE of elpd_loo is 0.1.
+## Monte Carlo SE of elpd_loo is 0.0.
 ## 
 ## Pareto k diagnostic values:
 ##                          Count Pct.    Min. n_eff
-## (-Inf, 0.5]   (good)     40    97.6%   883       
-##  (0.5, 0.7]   (ok)        1     2.4%   1169      
+## (-Inf, 0.5]   (good)     40    97.6%   2274      
+##  (0.5, 0.7]   (ok)        1     2.4%   900       
 ##    (0.7, 1]   (bad)       0     0.0%   <NA>      
 ##    (1, Inf)   (very bad)  0     0.0%   <NA>      
 ## 
@@ -15585,7 +15553,7 @@ We compare the models in the following way:
 \begin{verbatim}
 ##        elpd_diff se_diff
 ## model1  0.0       0.0   
-## model2 -4.4       3.3
+## model2 -4.5       3.4
 \end{verbatim}
 
 As it happened in the cross validation chapter (\ref{ch:cv}), we cannot
@@ -17415,11 +17383,9 @@ To fit this model, take into account that \texttt{sigma} is now a
 vector, and it's transformed parameter which depends on two parameters:
 \texttt{sigma\_alpha} and the vector with \texttt{N\_subj} elements
 \texttt{sigma\_u}. In addition, \texttt{sigma\_u} depends on the
-hyperparameter \texttt{tau\_sigma\_u} (\(\tau_{\sigma_u}\)).
-
-Fit this model and use Bayes factor and cross validation to compare it
-with the variant that assumes a single variance component \(\sigma\) for
-all the participants.
+hyperparameter \texttt{tau\_sigma\_u} (\(\tau_{\sigma_u}\)). (Using
+non-centered parametrization for \texttt{sigma\_u} speeds up the model
+considerably).
 
 \part{Computational cognitive
 modeling}\label{part-computational-cognitive-modeling}

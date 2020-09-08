@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-07" />
+<meta name="date" content="2020-09-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -486,93 +486,63 @@ lml_pupil_null &lt;-<span class="st"> </span><span class="kw">bridge_sampler</sp
                              c_load[n] * c_trial[n] * beta3, sigma);
 
   }
+}</code></pre>
+<p>For the null model, we just omit the term with <span class="math inline">\(\beta_1\)</span> in both the model block and the generated quantities block:</p>
+<pre class="stan"><code>model {
+  // priors including all constants
+  target += normal_lpdf(alpha | 1000, 500);
+  target += normal_lpdf(beta2 | 0, 100);
+  target += normal_lpdf(beta3 | 0, 100);
+  target += normal_lpdf(sigma | 0, 1000)
+    - normal_lccdf(0 | 0, 1000);
+  target += normal_lpdf(p_size | alpha + c_trial * beta2 +
+                        c_load .* c_trial * beta3, sigma);
 }
-
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA</code></pre>
-<p>For the null model, we just omit the term with <span class="math inline">\(\beta_1\)</span>:</p>
-<pre class="stan"><code>    log_lik[n] = normal_lpdf(p_size[n] | alpha + c_trial[n] * beta2 +
+generated quantities{
+  real log_lik[N];
+  for (n in 1:N){
+    log_lik[n] = normal_lpdf(p_size[n] | alpha + c_trial[n] * beta2 +
                              c_load[n] * c_trial[n] * beta3, sigma);
 
   }
-}
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA
-NA</code></pre>
+}</code></pre>
 <p>Fit the models with the default number of iterations:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_pupil_int_pos_ll &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/pupil_pos.stan&#39;</span>,
-                          <span class="dt">data =</span> ls_pupil_data)
+                             <span class="dt">iter =</span> <span class="dv">3000</span>,
+                             <span class="dt">data =</span> ls_pupil_data)
 fit_pupil_int_null_ll &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/pupil_null.stan&#39;</span>,
-                          <span class="dt">data =</span> ls_pupil_data)</code></pre></div>
+                              <span class="dt">iter =</span> <span class="dv">3000</span>,
+                              <span class="dt">data =</span> ls_pupil_data)</code></pre></div>
 <p>We compare the models in the following way:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(loo_pos &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_pupil_int_pos_ll))</code></pre></div>
-<pre><code>## Warning: Some Pareto k diagnostic values are slightly high. See help(&#39;pareto-k-diagnostic&#39;) for details.</code></pre>
 <pre><code>## 
-## Computed from 4000 by 41 log-likelihood matrix
+## Computed from 6000 by 41 log-likelihood matrix
 ## 
 ##          Estimate   SE
-## elpd_loo   -251.0  5.2
-## p_loo         5.2  1.4
-## looic       502.1 10.4
+## elpd_loo   -250.9  5.2
+## p_loo         5.1  1.4
+## looic       501.9 10.5
 ## ------
-## Monte Carlo SE of elpd_loo is 0.1.
+## Monte Carlo SE of elpd_loo is 0.0.
 ## 
-## Pareto k diagnostic values:
-##                          Count Pct.    Min. n_eff
-## (-Inf, 0.5]   (good)     40    97.6%   835       
-##  (0.5, 0.7]   (ok)        1     2.4%   1068      
-##    (0.7, 1]   (bad)       0     0.0%   &lt;NA&gt;      
-##    (1, Inf)   (very bad)  0     0.0%   &lt;NA&gt;      
-## 
-## All Pareto k estimates are ok (k &lt; 0.7).
+## All Pareto k estimates are good (k &lt; 0.5).
 ## See help(&#39;pareto-k-diagnostic&#39;) for details.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(loo_null &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_pupil_int_null_ll))</code></pre></div>
 <pre><code>## Warning: Some Pareto k diagnostic values are slightly high. See help(&#39;pareto-k-diagnostic&#39;) for details.</code></pre>
 <pre><code>## 
-## Computed from 4000 by 41 log-likelihood matrix
+## Computed from 6000 by 41 log-likelihood matrix
 ## 
 ##          Estimate  SE
 ## elpd_loo   -255.4 4.6
 ## p_loo         4.4 1.1
-## looic       510.8 9.2
+## looic       510.9 9.3
 ## ------
-## Monte Carlo SE of elpd_loo is 0.1.
+## Monte Carlo SE of elpd_loo is 0.0.
 ## 
 ## Pareto k diagnostic values:
 ##                          Count Pct.    Min. n_eff
-## (-Inf, 0.5]   (good)     40    97.6%   883       
-##  (0.5, 0.7]   (ok)        1     2.4%   1169      
+## (-Inf, 0.5]   (good)     40    97.6%   2274      
+##  (0.5, 0.7]   (ok)        1     2.4%   900       
 ##    (0.7, 1]   (bad)       0     0.0%   &lt;NA&gt;      
 ##    (1, Inf)   (very bad)  0     0.0%   &lt;NA&gt;      
 ## 
@@ -581,7 +551,7 @@ fit_pupil_int_null_ll &lt;-<span class="st"> </span><span class="kw">stan</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">loo_compare</span>(loo_pos, loo_null)</code></pre></div>
 <pre><code>##        elpd_diff se_diff
 ## model1  0.0       0.0   
-## model2 -4.4       3.3</code></pre>
+## model2 -4.5       3.4</code></pre>
 <p>As it happened in the cross validation chapter (<a href="ch-cv.html#ch:cv">10</a>), we cannot decide which model has better predictive accuracy according to PSIS-LOO.</p>
 </div>
 <div id="exact-cross-validation" class="section level4">
