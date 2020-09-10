@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-08" />
+<meta name="date" content="2020-09-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,41 +65,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -137,7 +162,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.4.2" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.4.2</b> What information does a probability distribution provide?</a></li>
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.5</b> Continuous random variables: An example using the Normal distribution</a><ul>
-<li class="chapter" data-level="1.5.1" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#an-important-distinction-probability-vs.-density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
+<li class="chapter" data-level="1.5.1" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#an-important-distinction-probability-vs.density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1: Discrete bivariate distributions</a></li>
@@ -157,10 +182,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introBDA.html"><a href="introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
-<li class="chapter" data-level="2.1" data-path="sec-analytical.html"><a href="sec-analytical.html"><i class="fa fa-check"></i><b>2.1</b> Deriving the posterior using Bayes' rule: An analytical example</a><ul>
+<li class="chapter" data-level="2.1" data-path="sec-analytical.html"><a href="sec-analytical.html"><i class="fa fa-check"></i><b>2.1</b> Deriving the posterior using Bayes’ rule: An analytical example</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.1.1</b> Choosing a likelihood</a></li>
-<li class="chapter" data-level="2.1.2" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-prior-for-theta"><i class="fa fa-check"></i><b>2.1.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
-<li class="chapter" data-level="2.1.3" data-path="sec-analytical.html"><a href="sec-analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.1.3</b> Using Bayes' rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
+<li class="chapter" data-level="2.1.2" data-path="sec-analytical.html"><a href="sec-analytical.html#sec:choosepriortheta"><i class="fa fa-check"></i><b>2.1.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
+<li class="chapter" data-level="2.1.3" data-path="sec-analytical.html"><a href="sec-analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.1.3</b> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
 <li class="chapter" data-level="2.1.4" data-path="sec-analytical.html"><a href="sec-analytical.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.1.4</b> Summary of the procedure</a></li>
 <li class="chapter" data-level="2.1.5" data-path="sec-analytical.html"><a href="sec-analytical.html#visualizing-the-prior-likelihood-and-the-posterior"><i class="fa fa-check"></i><b>2.1.5</b> Visualizing the prior, likelihood, and the posterior</a></li>
 <li class="chapter" data-level="2.1.6" data-path="sec-analytical.html"><a href="sec-analytical.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.1.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
@@ -169,7 +194,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.2" data-path="summary-of-concepts-introduced-in-this-chapter-1.html"><a href="summary-of-concepts-introduced-in-this-chapter-1.html"><i class="fa fa-check"></i><b>2.2</b> Summary of concepts introduced in this chapter</a></li>
 <li class="chapter" data-level="2.3" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>2.3</b> Further reading</a></li>
 <li class="chapter" data-level="2.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>2.4</b> Exercises</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="exercises-1.html"><a href="exercises-1.html#exercise-deriving-bayes-rule"><i class="fa fa-check"></i><b>2.4.1</b> Exercise: Deriving Bayes' rule</a></li>
+<li class="chapter" data-level="2.4.1" data-path="exercises-1.html"><a href="exercises-1.html#exercise-deriving-bayes-rule"><i class="fa fa-check"></i><b>2.4.1</b> Exercise: Deriving Bayes’ rule</a></li>
 <li class="chapter" data-level="2.4.2" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-1"><i class="fa fa-check"></i><b>2.4.2</b> Exercise: Conjugate forms 1</a></li>
 <li class="chapter" data-level="2.4.3" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-2"><i class="fa fa-check"></i><b>2.4.3</b> Exercise: Conjugate forms 2</a></li>
 <li class="chapter" data-level="2.4.4" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-3"><i class="fa fa-check"></i><b>2.4.4</b> Exercise: Conjugate forms 3</a></li>
@@ -179,7 +204,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="part"><span><b>II Regression models</b></span></li>
 <li class="chapter" data-level="3" data-path="ch-compbda.html"><a href="ch-compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a><ul>
 <li class="chapter" data-level="3.1" data-path="sec-sampling.html"><a href="sec-sampling.html"><i class="fa fa-check"></i><b>3.1</b> Deriving the posterior through sampling</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="sec-sampling.html"><a href="sec-sampling.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.1.1</b> Bayesian Regression Models using 'Stan': brms</a></li>
+<li class="chapter" data-level="3.1.1" data-path="sec-sampling.html"><a href="sec-sampling.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.1.1</b> Bayesian Regression Models using ‘Stan’: brms</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="sec-priorpred.html"><a href="sec-priorpred.html"><i class="fa fa-check"></i><b>3.2</b> Prior predictive distribution</a></li>
 <li class="chapter" data-level="3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html"><i class="fa fa-check"></i><b>3.3</b> The influence of priors: sensitivity analysis</a><ul>
@@ -234,7 +259,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.1.3" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercept and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
 <li class="chapter" data-level="5.1.4" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:mcvivs"><i class="fa fa-check"></i><b>5.1.4</b> Correlated varying intercept varying slopes model (<span class="math inline">\(M_{h}\)</span>)</a></li>
 <li class="chapter" data-level="5.1.5" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:sih"><i class="fa fa-check"></i><b>5.1.5</b> By-subjects and by-items correlated varying intercept varying slopes model (<span class="math inline">\(M_{sih}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.6" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the so-called maximal models--Distributional regression models</a></li>
+<li class="chapter" data-level="5.1.6" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the so-called maximal models–Distributional regression models</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="sec-stroop.html"><a href="sec-stroop.html"><i class="fa fa-check"></i><b>5.2</b> A hierarchical log-normal model: The Stroop effect</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="sec-stroop.html"><a href="sec-stroop.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.2.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
@@ -394,34 +419,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ol style="list-style-type: lower-alpha">
 <li>Refit Stroop example from section <a href="sec-stroop.html#sec:stroop">5.2</a> in Stan. Recall that we want to fit the response times of the correct answers of 30 participants (to speed up computation):</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_stroop_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/StroopCleanSet.csv&quot;</span>)  <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># rename unintuitive column names:</span>
-<span class="st">  </span><span class="kw">rename</span>(<span class="dt">correct=</span> trial_error, 
-         <span class="dt">RT =</span> trial_latency,
-         <span class="dt">condition =</span> congruent) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subject =</span> session_id <span class="op">%&gt;%</span>
-<span class="st">           </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span>
-<span class="st">           </span><span class="kw">as.numeric</span>(),
-         <span class="dt">c_cond =</span> <span class="kw">if_else</span>(condition <span class="op">==</span><span class="st"> &quot;Incongruent&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(correct <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, subject <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span>)</code></pre></div>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb657-1" data-line-number="1">df_stroop_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/StroopCleanSet.csv&quot;</span>)  <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb657-2" data-line-number="2"><span class="st">  </span><span class="co"># rename unintuitive column names:</span></a>
+<a class="sourceLine" id="cb657-3" data-line-number="3"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">correct=</span> trial_error, </a>
+<a class="sourceLine" id="cb657-4" data-line-number="4">         <span class="dt">RT =</span> trial_latency,</a>
+<a class="sourceLine" id="cb657-5" data-line-number="5">         <span class="dt">condition =</span> congruent) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb657-6" data-line-number="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subject =</span> session_id <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb657-7" data-line-number="7"><span class="st">           </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb657-8" data-line-number="8"><span class="st">           </span><span class="kw">as.numeric</span>(),</a>
+<a class="sourceLine" id="cb657-9" data-line-number="9">         <span class="dt">c_cond =</span> <span class="kw">if_else</span>(condition <span class="op">==</span><span class="st"> &quot;Incongruent&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb657-10" data-line-number="10"><span class="st">  </span><span class="kw">filter</span>(correct <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, subject <span class="op">&lt;=</span><span class="st"> </span><span class="dv">50</span>)</a></code></pre></div>
 <p>Assume the following likelihood and priors:</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
   rt_n \sim LogNormal(\alpha + u_{subj[n],1}  + c\_cond_n \cdot  (\beta + u_{subj[n],2}), \sigma)
-\end{equation}\]</span>
-<span class="math display">\[\begin{equation}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
  \begin{aligned}
    \alpha &amp; \sim Normal(6, 1.5) \\
    \beta  &amp; \sim Normal(0, .01) \\
     \sigma  &amp;\sim Normal_+(0, 1)
  \end{aligned}
- \end{equation}\]</span>
-<span class="math display">\[\begin{equation}
+ \end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
 \begin{aligned}
 \tau_{u_1} &amp;\sim Normal_+(0,1)\\
 \tau_{u_2} &amp;\sim Normal_+(0,1)\\
 \rho_u &amp;\sim LKJcorr(2) 
 \end{aligned}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Use PSIS-LOO to compare the previous model with a model that assumes no population-level effect.</li>
 </ol>
@@ -430,33 +455,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span id="exr:hierarchical-logn-stan" class="exercise"><strong>Exercise 12.2  </strong></span>By subject and by items hierarchical model with a log-normal likelihood.
 </div>
 
-<p>We'll revisit the question &quot;Are subject relatives easier to process than object relatives?&quot; Refit in Stan the exercise <a href="exercises-3.html#exr:hierarchical-logn">5.1</a>.</p>
+<p>We’ll revisit the question “Are subject relatives easier to process than object relatives?” Refit in Stan the exercise <a href="exercises-3.html#exr:hierarchical-logn">5.1</a>.</p>
 
 <div class="exercise">
 <span id="exr:strooplogis" class="exercise"><strong>Exercise 12.3  </strong></span>Comprehension accuracy with a hierarchical logistic regression.
 </div>
 
-<p>Instead of the reaction times of the correct answers, we want to find out whether accuracy also changes by condition in the Stroop task. Fit the Stroop data (but don't filter out the incorrect answers) with a hierarchical logistic regression (i.e., a Bernoulli likelihood with a logit link).</p>
+<p>Instead of the reaction times of the correct answers, we want to find out whether accuracy also changes by condition in the Stroop task. Fit the Stroop data (but don’t filter out the incorrect answers) with a hierarchical logistic regression (i.e., a Bernoulli likelihood with a logit link).</p>
 
 <div class="exercise">
-<span id="exr:distr-stan" class="exercise"><strong>Exercise 12.4  </strong></span>Distributional regression model of Cloze probability in Stan
+<span id="exr:distr-stan" class="exercise"><strong>Exercise 12.4  </strong></span>Distributional regression model of the effect of Cloze probability on the N400
 </div>
 
 <p>In <a href="sec-N400hierarchical.html#sec:distrmodel">5.1.6</a>, we saw how to fit a distributional regression model. We might want to extend this approach to Stan. Fit the EEG data to a hierarchical model with by-participant and by-items varying intercept and slopes, and in addition assume that the variance component of the model can vary by participant.</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
 \begin{aligned}
   signal_n &amp;\sim Normal(\alpha + u_{subj[n],1} + w_{item[n],1} + c\_cloze_n \cdot  (\beta + u_{subj[n],2}+ w_{item[n],2}), \sigma_n)\\
   \sigma_n &amp;= \exp(\sigma_\alpha + \sigma_{u_{subj[n]}})
 \end{aligned}
-\end{equation}\]</span>
-<span class="math display">\[\begin{equation}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
 \begin{aligned}
   \sigma_\alpha &amp;\sim Normal(0,log(50))\\
   \sigma_u &amp;\sim Normal(0, \tau_{\sigma_u}) \\
   \tau_{\sigma_u} &amp;\sim Normal_+(0, 5)
 \end{aligned}
-\end{equation}\]</span>
-<p>To fit this model, take into account that <code>sigma</code> is now a vector, and it's transformed parameter which depends on two parameters: <code>sigma_alpha</code> and the vector with <code>N_subj</code> elements <code>sigma_u</code>. In addition, <code>sigma_u</code> depends on the hyperparameter <code>tau_sigma_u</code> (<span class="math inline">\(\tau_{\sigma_u}\)</span>). (Using non-centered parametrization for <code>sigma_u</code> speeds up the model considerably).</p>
+\end{equation}\]</span></p>
+<p>To fit this model, take into account that <code>sigma</code> is now a vector, and it’s transformed parameter which depends on two parameters: <code>sigma_alpha</code> and the vector with <code>N_subj</code> elements <code>sigma_u</code>. In addition, <code>sigma_u</code> depends on the hyperparameter <code>tau_sigma_u</code> (<span class="math inline">\(\tau_{\sigma_u}\)</span>). (Using non-centered parametrization for <code>sigma_u</code> speeds up the model fit considerably).</p>
 
 </div>
 <!-- </div> -->
@@ -524,7 +549,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
