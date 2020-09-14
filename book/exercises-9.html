@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-10" />
+<meta name="date" content="2020-09-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -414,7 +414,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <ol style="list-style-type: lower-alpha">
-<li>Refit the model presented in <a href="modeling-multiple-categorical-responses.html#sec:cat">14.1.2</a>, adding the assumption that you have more information about the probability of giving a correct response in the task. Assume that participants’ answers are around 60% of time correct. Encode this information with two different degrees of certainty. (Tip: You’ll need to use a column vector for the Dirichlet concentration parameters. Notice that <code>[.., .., ]</code> is a <code>row_vector</code> that can be transposed and converted into a column vector by adding <code>'</code> after the right bracket.)</li>
+<li>Refit the model presented in <a href="modeling-multiple-categorical-responses.html#sec:cat">14.1.2</a>, adding the assumption that you have more information about the probability of giving a correct response in the task. Assume that you know that participants’ answers should be around 60% of time correct. Encode this information in the priors with two different degrees of certainty. (Tip: 1. Like with the Beta distribution, you can increase the so-called pseudo-counts to increase the amount of information and reduce the “width” of the distribution, compare <span class="math inline">\(Beta(9,1)\)</span> with <span class="math inline">\(Beta(900,100)\)</span>. 2. You’ll need to use a column vector for the Dirichlet concentration parameters. Notice that <code>[.., .., ]</code> is a <code>row_vector</code> that can be transposed and converted into a column vector by adding <code>'</code> after the right bracket.)</li>
 <li>What is the difference between the multinomial and categorical parametrizations?</li>
 <li>What can we learn about impaired picture naming from the models in <a href="modeling-multiple-categorical-responses.html#sec:mult">14.1.1</a> and <a href="modeling-multiple-categorical-responses.html#sec:cat">14.1.2</a>.</li>
 </ol>
@@ -439,12 +439,12 @@ https://link.springer.com/article/10.3758/s13428-017-0937-z
 <p>The dataset <code>data/d_source_monitoring.csv</code> contains data from the package psychotools coming from a source-monitoring experiment <span class="citation">(Batchelder and Riefer <a href="#ref-batchelder1990multinomial">1990</a>)</span> performed by <span class="citation">Wickelmaier and Zeileis (<a href="#ref-wickelmaier2018using">2018</a>)</span>.</p>
 <p>In this type of experiment, subjects study items from (at least) two different sources, A and B. After the presentation of the study items, subjects are required to classify each item as coming from source A, B, or as new: N (that is, a distractor). In Wickelmaier &amp; Zeileis’ version of the experiment, participants had to read items either quietly (think) or aloud (say). In the recall task, they wrote them down (write) or read them aloud (say).</p>
 <ul>
-<li>experiment: write-say or think-say</li>
-<li>age: Age of the respondent in years.</li>
-<li>gender: Gender of the respondent.</li>
-<li>subj: Subject id.</li>
-<li>source: Item source, a, b or b (new)</li>
-<li>a, b, N: Number of responses for each type of stimuli</li>
+<li><code>experiment</code>: write-say or think-say</li>
+<li><code>age</code>: Age of the respondent in years.</li>
+<li><code>gender</code>: Gender of the respondent.</li>
+<li><code>subj</code>: Subject id.</li>
+<li><code>source</code>: Item source, a, b or b (new)</li>
+<li><code>a</code>, <code>b</code>, <code>N</code>: Number of responses for each type of stimuli</li>
 </ul>
 <p>Fit a multinomial processing tree following Figure <a href="exercises-9.html#fig:sm-tikz">14.10</a>
 to investigate whether experiment type, age and/or gender affects the different processes assumed in the model.
@@ -517,7 +517,7 @@ transformed parameters {
     theta[n, 3] = ... ;  //Pr N | A
     } else if (source[n] == 2){
     //Probability of a certain answer given that the stimuli is of source B:
-    theta[n, 1] = D2 * (1 - d2) * a + (1 - D2) * b * g; //Pr A | B
+    theta[n, 1] = D2 *d2 + D2 * (1 - d2) * a + (1 - D2) * b * g; //Pr A | B
     theta[n, 2] = = ... ; //Pr B | B
     theta[n, 3] = ... ;  //Pr N | B
     } else {

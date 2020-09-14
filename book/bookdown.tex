@@ -243,12 +243,26 @@
 \makeatother
 
 \frontmatter
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
 \title{An Introduction to Bayesian Data Analysis for Cognitive Science}
 \author{Bruno Nicenboim, Daniel Schad, and Shravan Vasishth}
-\date{2020-09-10}
+\date{2020-09-13}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Box}[chapter]
@@ -11546,7 +11560,7 @@ The likelihood remains identical to the model without a correlation between grou
   signal_n \sim Normal(\alpha + u_{subj[n],0} + c\_cloze_n \cdot  (\beta + u_{subj[n],1}),\sigma)
 \end{equation}
 
-The correlation is indicated in the priors on the adjustments for intercept \(u_{,0}\) and slopes \(u_{,1}\).
+The correlation is indicated in the priors on the adjustments for intercept \(u_{,1}\) and slope \(u_{,2}\).
 
 \begin{itemize}
 \tightlist
@@ -13388,7 +13402,7 @@ model {
   target += normal_lpdf(f_alpha | 0, 2);
   target += normal_lpdf(f_beta | 0, 2);
   target += normal_lpdf(u | 0, tau_u);
-  target += normal_lpdf(tau_u | 0, 1);
+  target += normal_lpdf(tau_u | 0, 1) - normal_lccdf(0, 0, 1); 
   for(n in 1:N_obs)
     target +=  categorical_lpmf(w_ans[n] | theta[n]);
 }
@@ -13547,7 +13561,7 @@ The hierachical does a better job of modeling individual-level variability.
 \def\labelenumi{\alph{enumi}.}
 \tightlist
 \item
-  Refit the model presented in \ref{sec:cat}, adding the assumption that you have more information about the probability of giving a correct response in the task. Assume that participants' answers are around 60\% of time correct. Encode this information with two different degrees of certainty. (Tip: You'll need to use a column vector for the Dirichlet concentration parameters. Notice that \texttt{{[}..,\ ..,\ {]}} is a \texttt{row\_vector} that can be transposed and converted into a column vector by adding \texttt{\textquotesingle{}} after the right bracket.)
+  Refit the model presented in \ref{sec:cat}, adding the assumption that you have more information about the probability of giving a correct response in the task. Assume that you know that participants' answers should be around 60\% of time correct. Encode this information in the priors with two different degrees of certainty. (Tip: 1. Like with the Beta distribution, you can increase the so-called pseudo-counts to increase the amount of information and reduce the ``width'' of the distribution, compare \(Beta(9,1)\) with \(Beta(900,100)\). 2. You'll need to use a column vector for the Dirichlet concentration parameters. Notice that \texttt{{[}..,\ ..,\ {]}} is a \texttt{row\_vector} that can be transposed and converted into a column vector by adding \texttt{\textquotesingle{}} after the right bracket.)
 \item
   What is the difference between the multinomial and categorical parametrizations?
 \item
@@ -13571,17 +13585,17 @@ In this type of experiment, subjects study items from (at least) two different s
 \begin{itemize}
 \tightlist
 \item
-  experiment: write-say or think-say
+  \texttt{experiment}: write-say or think-say
 \item
-  age: Age of the respondent in years.
+  \texttt{age}: Age of the respondent in years.
 \item
-  gender: Gender of the respondent.
+  \texttt{gender}: Gender of the respondent.
 \item
-  subj: Subject id.
+  \texttt{subj}: Subject id.
 \item
-  source: Item source, a, b or b (new)
+  \texttt{source}: Item source, a, b or b (new)
 \item
-  a, b, N: Number of responses for each type of stimuli
+  \texttt{a}, \texttt{b}, \texttt{N}: Number of responses for each type of stimuli
 \end{itemize}
 
 Fit a multinomial processing tree following Figure \ref{fig:sm-tikz}
@@ -13666,7 +13680,7 @@ transformed parameters {
     theta[n, 3] = ... ;  //Pr N | A
     } else if (source[n] == 2){
     //Probability of a certain answer given that the stimuli is of source B:
-    theta[n, 1] = D2 * (1 - d2) * a + (1 - D2) * b * g; //Pr A | B
+    theta[n, 1] = D2 *d2 + D2 * (1 - d2) * a + (1 - D2) * b * g; //Pr A | B
     theta[n, 2] = = ... ; //Pr B | B
     theta[n, 3] = ... ;  //Pr N | B
     } else {
@@ -14036,10 +14050,10 @@ A traceplot shows clearly that the chains aren't mixing.
 
 \includegraphics{bookdown_files/figure-latex/unnamed-chunk-410-1.pdf}
 
-The problem with this model is that the mixture components are underlyingly exchangeable and thus not identifiable. Each chain doesn't know how each component was identified by the rest of the chains. A major problem is that even though the theoretical model assumes that guesses are faster than engaged responses, this is not explicit in our computational model. That is, our model lacks some of the theoretical information that we have, namely that the distribution of guesses times is faster than the distribution of engaged reaction times. This can be encoded with a strong prior for \(\gamma\), where we assume that its prior distribution is truncated on a lower bound by the value of \(\alpha\):
+The problem with this model is that the mixture components are underlyingly exchangeable and thus not identifiable. Each chain doesn't know how each component was identified by the rest of the chains. A major problem is that even though the theoretical model assumes that guesses are faster than engaged responses, this is not explicit in our computational model. That is, our model lacks some of the theoretical information that we have, namely that the distribution of guesses times is faster than the distribution of engaged reaction times. This can be encoded with a strong prior for \(\gamma\), where we assume that its prior distribution is truncated on an upper bound by the value of \(\alpha\):
 
 \begin{equation}
-\gamma \sim Normal(6, 1), \text{for } \gamma > \alpha
+\gamma \sim Normal(6, 1), \text{for } \gamma < \alpha
 \end{equation}
 
 Another softer constraint that we could add to our implementation is the assumption that participants are generally trying to do the task more likely than just guessing. The following prior has more probability mass closer to 1 than to 0:
@@ -14205,7 +14219,7 @@ We need now to marginalize the discrete parameters from both pairs of distributi
 
 \begin{equation}
 \begin{aligned}
-p(rt | \Theta) = & p_{task} \cdot \\
+p(rt, acc | \Theta) = & p_{task} \cdot \\
 & LogNormal(rt_n | \alpha + \beta \cdot x_n, \sigma) \cdot \\
 & Bernoulli(acc_n | p_{correct}) \\
 & +\\ 
@@ -14219,7 +14233,7 @@ In log-space:
 
 \begin{equation}
 \begin{aligned}
-\log(p(rt | \Theta)) =  \log(\exp(&\\
+\log(p(rt, acc | \Theta)) =  \log(\exp(&\\
 & \log(p_{task}) +\\
   &\log(LogNormal(rt_n | \alpha + \beta * x_n, \sigma)) + \\
   &\log(Bernoulli(acc_n | p_{correct})))\\
@@ -14257,7 +14271,8 @@ model {
   target += normal_lpdf(sigma | .5, .2)
     - normal_lccdf(0 | .5, .2);
   // priors for the guessing component
-  target += normal_lpdf(gamma | 6, 1);
+  target += normal_lpdf(gamma | 6, 1) -
+    normal_lcdf(alpha | 6, 1);
   target += normal_lpdf(sigma2 | .5, .2)
     - normal_lccdf(0 | .5, .2);
   target += beta_lpdf(p_correct | 995, 5);
@@ -14281,28 +14296,32 @@ Save it as \texttt{stan\_models/mixture3.stan} and fit it to also accuracy:
                         \DataTypeTok{x =}\NormalTok{ x,}
                         \DataTypeTok{acc =}\NormalTok{ acc)}
 \NormalTok{fit_mix_}\DecValTok{3}\NormalTok{ <-}\StringTok{ }\KeywordTok{stan}\NormalTok{(}\DataTypeTok{file =} \StringTok{'stan_models/mixture3.stan'}\NormalTok{,}
-               \DataTypeTok{data =}\NormalTok{ ls_dots_simdata) }
+               \DataTypeTok{data =}\NormalTok{ ls_dots_simdata)  }
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## hash mismatch so recompiling; make sure Stan code ends with a blank line
+\end{verbatim}
 
 We see that our model can be fit to both response times and accuracy now, and its parameters estimates have sensible values (given our simulated data).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{print}\NormalTok{(fit_mix_}\DecValTok{3}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(fit_mix_}\DecValTok{3}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ##               mean     2.5%    97.5% n_eff Rhat
-## alpha         5.78     5.74     5.81  4159    1
-## beta          0.02    -0.03     0.08  5326    1
-## sigma         0.38     0.35     0.40  5519    1
-## gamma         5.16     5.07     5.26  4077    1
-## sigma2        0.48     0.41     0.55  3626    1
-## p_correct     0.99     0.99     1.00  4727    1
-## p_task        0.81     0.77     0.84  4875    1
-## lp__      -6567.35 -6572.03 -6564.71  1675    1
+## alpha         5.78     5.74     5.81  4609    1
+## beta          0.02    -0.04     0.08  6625    1
+## sigma         0.38     0.35     0.40  5859    1
+## gamma         5.16     5.07     5.26  4462    1
+## sigma2        0.48     0.42     0.55  5303    1
+## p_correct     0.99     0.99     1.00  5119    1
+## p_task        0.81     0.77     0.84  5361    1
+## lp__      -6566.49 -6571.07 -6563.80  1858    1
 \end{verbatim}
 
 Before we extend this model hierarchically we will account for the instructions given to the participant in the next section.
@@ -14415,7 +14434,7 @@ We are ready to generate a new dataset, by deciding on true values for \(\beta_{
 \NormalTok{beta_task <-}\StringTok{ }\FloatTok{0.5}
 \NormalTok{p_btask <-}\StringTok{ }\FloatTok{.85}
 \CommentTok{# Generate data:}
-\NormalTok{alpha_task <-}\StringTok{ }\KeywordTok{qlogis}\NormalTok{(p_task)}
+\NormalTok{alpha_task <-}\StringTok{ }\KeywordTok{qlogis}\NormalTok{(p_btask)}
 \NormalTok{p_task <-}\StringTok{ }\KeywordTok{plogis}\NormalTok{(alpha_task }\OperatorTok{+}\StringTok{ }\NormalTok{x2 }\OperatorTok{*}\StringTok{ }\NormalTok{beta_task)}
 \NormalTok{z <-}\StringTok{ }\KeywordTok{rbern}\NormalTok{(}\DataTypeTok{n =}\NormalTok{ N, }\DataTypeTok{prob =}\NormalTok{ p_task)}
 \NormalTok{rt <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(z, }\KeywordTok{rlnorm}\NormalTok{(}\DataTypeTok{n =}\NormalTok{ N, }\DataTypeTok{meanlog =}\NormalTok{ alpha }\OperatorTok{+}\StringTok{ }\NormalTok{beta }\OperatorTok{*}\StringTok{ }\NormalTok{x, }\DataTypeTok{sdlog =}\NormalTok{ sigma),}
@@ -14472,7 +14491,8 @@ model {
   target += normal_lpdf(sigma | .5, .2)
     - normal_lccdf(0 | .5, .2);
   // priors for the guessing component
-  target += normal_lpdf(gamma | 6, 1);
+  target += normal_lpdf(gamma | 6, 1)-
+  normal_lcdf(alpha | 6, 1);
   target += normal_lpdf(sigma2 | .5, .2)
     - normal_lccdf(0 | .5, .2);
   target += normal_lpdf(beta_task | 0, 1);
@@ -14526,15 +14546,9 @@ We generate prior predictive distributions, by setting only prior to \texttt{1}.
                         \DataTypeTok{onlyprior =} \DecValTok{1}\NormalTok{) }
 \NormalTok{fit_mix_}\DecValTok{4}\NormalTok{_priors <-}\StringTok{ }\KeywordTok{stan}\NormalTok{(}\DataTypeTok{file =} \StringTok{'stan_models/mixture4.stan'}\NormalTok{,}
                          \DataTypeTok{data =}\NormalTok{ ls_dots_simdata,}
-                         \DataTypeTok{chains =} \DecValTok{1}\NormalTok{, }\DataTypeTok{iter =} \DecValTok{1000}\NormalTok{)  }
+                         \DataTypeTok{chains =} \DecValTok{1}\NormalTok{, }\DataTypeTok{iter =} \DecValTok{1000}\NormalTok{)   }
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-## Running the chains for more iterations may help. See
-## http://mc-stan.org/misc/warnings.html#tail-ess
-\end{verbatim}
 
 We plot prior predictive distributions of response times as follows. Notice that we are plotting them again our simulated data, by setting \texttt{y\ =\ rt} in \texttt{ppc\_dens\_overlay}, this distribution can be thought as a hand-picked instance of the prior predictive distribution.
 
@@ -14542,7 +14556,7 @@ We plot prior predictive distributions of response times as follows. Notice that
 \begin{Highlighting}[]
 \NormalTok{rt_pred <-}\StringTok{ }\KeywordTok{extract}\NormalTok{(fit_mix_}\DecValTok{4}\NormalTok{_priors)}\OperatorTok{$}\NormalTok{rt_pred}
 \KeywordTok{ppc_dens_overlay}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ rt, }\DataTypeTok{yrep =}\NormalTok{ rt_pred[}\DecValTok{1}\OperatorTok{:}\DecValTok{100}\NormalTok{,]) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{coord_cartesian}\NormalTok{(}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10000}\NormalTok{))}
+\StringTok{  }\KeywordTok{coord_cartesian}\NormalTok{(}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10000}\NormalTok{)) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -14555,7 +14569,7 @@ If we want to plot the prior predicted distribution of differences in response t
 \begin{Highlighting}[]
 \NormalTok{meanrt_diff <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(rt)\{}
   \KeywordTok{mean}\NormalTok{(rt[x }\OperatorTok{==}\StringTok{ }\FloatTok{.5}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(rt[x }\OperatorTok{==}\StringTok{ }\FloatTok{-.5}\NormalTok{])}
-\NormalTok{\}}
+\NormalTok{\} }
 \KeywordTok{ppc_stat}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ rt, }\DataTypeTok{yrep =}\NormalTok{ rt_pred, }\DataTypeTok{stat =}\NormalTok{ meanrt_diff) }
 \end{Highlighting}
 \end{Shaded}
@@ -14578,7 +14592,7 @@ Fit it to data, by setting \texttt{onlyprior\ =\ 0}:
                         \DataTypeTok{acc =}\NormalTok{ acc,}
                         \DataTypeTok{onlyprior =} \DecValTok{0}\NormalTok{) }
 \NormalTok{fit_mix_}\DecValTok{4}\NormalTok{ <-}\StringTok{ }\KeywordTok{stan}\NormalTok{(}\DataTypeTok{file =} \StringTok{'stan_models/mixture4.stan'}\NormalTok{,}
-                  \DataTypeTok{data =}\NormalTok{ ls_dots_simdata) }
+                  \DataTypeTok{data =}\NormalTok{ ls_dots_simdata)  }
 \end{Highlighting}
 \end{Shaded}
 
@@ -14586,20 +14600,20 @@ Fit it to data, by setting \texttt{onlyprior\ =\ 0}:
 \begin{Highlighting}[]
 \KeywordTok{print}\NormalTok{(fit_mix_}\DecValTok{4}\NormalTok{,}
       \DataTypeTok{pars =} \KeywordTok{c}\NormalTok{(}\StringTok{"alpha"}\NormalTok{, }\StringTok{"beta"}\NormalTok{, }\StringTok{"sigma"}\NormalTok{, }\StringTok{"gamma"}\NormalTok{, }\StringTok{"sigma2"}\NormalTok{,}
-               \StringTok{"p_correct"}\NormalTok{, }\StringTok{"p_btask"}\NormalTok{, }\StringTok{"beta_task"}\NormalTok{))}
+               \StringTok{"p_correct"}\NormalTok{, }\StringTok{"p_btask"}\NormalTok{, }\StringTok{"beta_task"}\NormalTok{)) }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ##           mean  2.5% 97.5% n_eff Rhat
-## alpha     5.80  5.77  5.83  4546    1
-## beta      0.03 -0.02  0.09  5846    1
-## sigma     0.40  0.37  0.42  4263    1
-## gamma     5.31  5.22  5.40  4910    1
-## sigma2    0.46  0.40  0.52  6246    1
-## p_correct 0.99  0.99  1.00  6616    1
-## p_btask   0.81  0.77  0.85  5996    1
-## beta_task 0.75  0.31  1.18  5968    1
+## alpha     5.80  5.77  5.83  4228    1
+## beta      0.03 -0.03  0.08  8050    1
+## sigma     0.39  0.37  0.42  5538    1
+## gamma     5.30  5.18  5.41  3909    1
+## sigma2    0.46  0.39  0.54  4620    1
+## p_correct 0.99  0.99  1.00  5036    1
+## p_btask   0.87  0.83  0.90  4156    1
+## beta_task 0.98  0.45  1.55  4985    1
 \end{verbatim}
 
 We see that we fit the model without problems. Before we evaluate the recovery of the parameters more carefully, we implement a hierarchical version of the fast guesses model.
@@ -14794,7 +14808,8 @@ model {
   target += normal_lpdf(sigma | .5, .2)
     - normal_lccdf(0 | .5, .2);
   // priors for the guessing component
-  target += normal_lpdf(gamma | 6, 1);
+  target += normal_lpdf(gamma | 6, 1) - 
+    normal_lcdf(alpha | 6, 1);
   target += normal_lpdf(sigma2 | .5, .2)
     - normal_lccdf(0 | .5, .2);
   target += normal_lpdf(tau_u | 0, .5)
@@ -14833,7 +14848,9 @@ Save it as \texttt{stan\_models/mixtureh.stan} and fit it to the simulated data:
                           \DataTypeTok{subj =}\NormalTok{ df_dots_simdata}\OperatorTok{$}\NormalTok{subj,}
                           \DataTypeTok{N_subj =}\NormalTok{ N_subj)}
 \NormalTok{fit_mix_h <-}\StringTok{ }\KeywordTok{stan}\NormalTok{(}\DataTypeTok{file =} \StringTok{'stan_models/mixtureh.stan'}\NormalTok{,}
-                  \DataTypeTok{data =}\NormalTok{ ls_dots_simdata)}
+                  \DataTypeTok{data =}\NormalTok{ ls_dots_simdata,}
+                  \DataTypeTok{iter =} \DecValTok{3000}\NormalTok{,}
+                  \DataTypeTok{control =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{adapt_delta =} \FloatTok{.9}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -14847,20 +14864,20 @@ Save it as \texttt{stan\_models/mixtureh.stan} and fit it to the simulated data:
 
 \begin{verbatim}
 ##             mean  2.5% 97.5% n_eff Rhat
-## alpha       5.81  5.70  5.92   710 1.01
-## beta        0.03 -0.02  0.08  5325 1.00
-## sigma       0.41  0.40  0.43  6593 1.00
-## gamma       5.18  5.00  5.35  2390 1.00
-## sigma2      0.51  0.13  0.88  3483 1.00
-## p_correct   0.99  0.99  1.00  5489 1.00
-## p_btask     0.87  0.84  0.89  6514 1.00
-## beta_task   0.21 -0.13  0.55  8539 1.00
-## tau_u[1]    0.23  0.17  0.33  1028 1.00
-## tau_u[2]    0.04  0.00  0.09  2222 1.00
-## tau_u[3]    0.35  0.24  0.52  2163 1.00
-## rho_u[1,2] -0.25 -0.85  0.58  4492 1.00
-## rho_u[1,3]  0.19 -0.25  0.58  2571 1.00
-## rho_u[2,3]  0.00 -0.70  0.70   501 1.01
+## alpha       5.74  5.63  5.85   907 1.00
+## beta        0.05  0.01  0.09  7737 1.00
+## sigma       0.41  0.39  0.42  8443 1.00
+## gamma       5.03  4.86  5.22  2920 1.00
+## sigma2      0.50  0.11  0.89  3888 1.00
+## p_correct   1.00  0.99  1.00  7171 1.00
+## p_btask     0.86  0.83  0.88  6315 1.00
+## beta_task  -0.13 -0.44  0.19  8905 1.00
+## tau_u[1]    0.24  0.17  0.34  1364 1.00
+## tau_u[2]    0.02  0.00  0.07  4298 1.00
+## tau_u[3]    0.37  0.25  0.54  2531 1.00
+## rho_u[1,2] -0.09 -0.77  0.70  8677 1.00
+## rho_u[1,3]  0.14 -0.28  0.54  2706 1.00
+## rho_u[2,3] -0.04 -0.77  0.72   396 1.01
 \end{verbatim}
 
 We see that we can fit the hierarchical extension of our model to simulated data. Next we'll evaluate whether we can recover the true values of the parameters.
@@ -15037,9 +15054,9 @@ We first take a look at the general distribution of response times generated by 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rt_pred <-}\StringTok{ }\KeywordTok{extract}\NormalTok{(gen_mix_data)}\OperatorTok{$}\NormalTok{rt_pred}
+\NormalTok{rt_pred <-}\StringTok{ }\KeywordTok{extract}\NormalTok{(gen_mix_data)}\OperatorTok{$}\NormalTok{rt_pred }
 \KeywordTok{ppc_dens_overlay}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ ls_dots_data}\OperatorTok{$}\NormalTok{rt, }\DataTypeTok{yrep =}\NormalTok{ rt_pred[}\DecValTok{1}\OperatorTok{:}\DecValTok{100}\NormalTok{,]) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{coord_cartesian}\NormalTok{(}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10000}\NormalTok{))}
+\StringTok{  }\KeywordTok{coord_cartesian}\NormalTok{(}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10000}\NormalTok{)) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -15059,7 +15076,7 @@ Next we examine the effect of the experimental manipulation in Figure \ref{fig:p
 \begin{Highlighting}[]
 \NormalTok{meanrt_diff <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(rt)\{}
   \KeywordTok{mean}\NormalTok{(rt[ls_dots_data}\OperatorTok{$}\NormalTok{x }\OperatorTok{==}\StringTok{ }\FloatTok{.5}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(rt[ls_dots_data}\OperatorTok{$}\NormalTok{x }\OperatorTok{==}\StringTok{ }\FloatTok{-.5}\NormalTok{])}
-\NormalTok{\}}
+\NormalTok{\}  }
 \KeywordTok{ppc_stat}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ ls_dots_data}\OperatorTok{$}\NormalTok{rt, }\DataTypeTok{yrep =}\NormalTok{ rt_pred, }\DataTypeTok{stat =}\NormalTok{ meanrt_diff) }
 \end{Highlighting}
 \end{Shaded}
@@ -15076,7 +15093,7 @@ We also look at some instances of the predictive distribution. Figure \ref{fig:p
 \begin{Highlighting}[]
 \NormalTok{acc_pred <-}\StringTok{ }\KeywordTok{extract}\NormalTok{(gen_mix_data)}\OperatorTok{$}\NormalTok{acc_pred}
 \NormalTok{df_dots_data <-}
-\StringTok{  }\NormalTok{df_dots_data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{acc_pred1 =}\NormalTok{ acc_pred[}\DecValTok{1}\NormalTok{,], }\DataTypeTok{rt_pred1 =}\NormalTok{ rt_pred[}\DecValTok{1}\NormalTok{,],}
+\StringTok{  }\NormalTok{df_dots_data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{acc_pred1 =}\NormalTok{ acc_pred[}\DecValTok{1}\NormalTok{,], }\DataTypeTok{rt_pred1 =}\NormalTok{ rt_pred[}\DecValTok{1}\NormalTok{,], }
                           \DataTypeTok{acc_pred2 =}\NormalTok{ acc_pred[}\DecValTok{2}\NormalTok{,], }\DataTypeTok{rt_pred2 =}\NormalTok{ rt_pred[}\DecValTok{2}\NormalTok{,])}
 \end{Highlighting}
 \end{Shaded}
@@ -15090,7 +15107,7 @@ We also look at some instances of the predictive distribution. Figure \ref{fig:p
 \StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{factor}\NormalTok{(acc_pred1), }\DataTypeTok{y =}\NormalTok{ rt_pred1), }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{,}
              \DataTypeTok{position =} \KeywordTok{position_jitter}\NormalTok{(}\DataTypeTok{width =} \FloatTok{.4}\NormalTok{, }\DataTypeTok{height =} \DecValTok{0}\NormalTok{),}
              \DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(diff }\OperatorTok{~}\StringTok{ }\NormalTok{emphasis) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(diff }\OperatorTok{~}\StringTok{ }\NormalTok{emphasis) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Accuracy"}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Response time"}\NormalTok{)}
 \end{Highlighting}
@@ -15119,13 +15136,13 @@ We also look at some instances of the predictive distribution. Figure \ref{fig:p
 \protect\hypertarget{exr:pcorrect}{}{\label{exr:pcorrect} }Changes in the true values.
 \end{exercise}
 
-Change the true value of \texttt{p\_correct} to .5 and .1, and generate data for the non-hierarchical model. Can you recover the value of this parameter. Does the model still converges?
+Change the true value of \texttt{p\_correct} to .5 and .1, and generate data for the non-hierarchical model. Can you recover the value of this parameter. Does the model still converge?
 
 \begin{exercise}
 \protect\hypertarget{exr:mixhier}{}{\label{exr:mixhier} }More hierarchical parameters.
 \end{exercise}
 
-Change the hierarchical mixture model and assume that the probability of being engaged in the task, and the probability of a correct answer (\texttt{p\_correct}) also vary by subject. Fit the new model to (a subset) of the data.
+Change the hierarchical mixture model and assume that the probability of being engaged in the task, and the probability of a correct answer (\texttt{p\_correct}) also vary by subject. Fit the new model to (a subset of) the data.
 
 \begin{exercise}
 \protect\hypertarget{exr:simp}{}{\label{exr:simp} }Advanced: A simplification in the model.

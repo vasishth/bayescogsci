@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-10" />
+<meta name="date" content="2020-09-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -799,7 +799,7 @@ model {
   target += normal_lpdf(f_alpha | 0, 2);
   target += normal_lpdf(f_beta | 0, 2);
   target += normal_lpdf(u | 0, tau_u);
-  target += normal_lpdf(tau_u | 0, 1);
+  target += normal_lpdf(tau_u | 0, 1) - normal_lccdf(0, 0, 1); 
   for(n in 1:N_obs)
     target +=  categorical_lpmf(w_ans[n] | theta[n]);
 }

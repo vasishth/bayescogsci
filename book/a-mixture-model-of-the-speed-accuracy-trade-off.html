@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-10" />
+<meta name="date" content="2020-09-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -613,9 +613,9 @@ model {
 <p>A traceplot shows clearly that the chains aren’t mixing.</p>
 <div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb754-1" data-line-number="1"><span class="kw">traceplot</span>(fit_mix_<span class="dv">1</span>) </a></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-410-1.svg" width="672" /></p>
-<p>The problem with this model is that the mixture components are underlyingly exchangeable and thus not identifiable. Each chain doesn’t know how each component was identified by the rest of the chains. A major problem is that even though the theoretical model assumes that guesses are faster than engaged responses, this is not explicit in our computational model. That is, our model lacks some of the theoretical information that we have, namely that the distribution of guesses times is faster than the distribution of engaged reaction times. This can be encoded with a strong prior for <span class="math inline">\(\gamma\)</span>, where we assume that its prior distribution is truncated on a lower bound by the value of <span class="math inline">\(\alpha\)</span>:</p>
+<p>The problem with this model is that the mixture components are underlyingly exchangeable and thus not identifiable. Each chain doesn’t know how each component was identified by the rest of the chains. A major problem is that even though the theoretical model assumes that guesses are faster than engaged responses, this is not explicit in our computational model. That is, our model lacks some of the theoretical information that we have, namely that the distribution of guesses times is faster than the distribution of engaged reaction times. This can be encoded with a strong prior for <span class="math inline">\(\gamma\)</span>, where we assume that its prior distribution is truncated on an upper bound by the value of <span class="math inline">\(\alpha\)</span>:</p>
 <p><span class="math display">\[\begin{equation}
-\gamma \sim Normal(6, 1), \text{for } \gamma &gt; \alpha
+\gamma \sim Normal(6, 1), \text{for } \gamma &lt; \alpha
 \end{equation}\]</span></p>
 <p>Another softer constraint that we could add to our implementation is the assumption that participants are generally trying to do the task more likely than just guessing. The following prior has more probability mass closer to 1 than to 0:</p>
 <p><span class="math display">\[\begin{equation}
@@ -721,7 +721,7 @@ p_{correct} \sim Beta(995, 5)
 <p>We need now to marginalize the discrete parameters from both pairs of distributions.</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
-p(rt | \Theta) = &amp; p_{task} \cdot \\
+p(rt, acc | \Theta) = &amp; p_{task} \cdot \\
 &amp; LogNormal(rt_n | \alpha + \beta \cdot x_n, \sigma) \cdot \\
 &amp; Bernoulli(acc_n | p_{correct}) \\
 &amp; +\\ 
@@ -733,7 +733,7 @@ p(rt | \Theta) = &amp; p_{task} \cdot \\
 <p>In log-space:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
-\log(p(rt | \Theta)) =  \log(\exp(&amp;\\
+\log(p(rt, acc | \Theta)) =  \log(\exp(&amp;\\
 &amp; \log(p_{task}) +\\
   &amp;\log(LogNormal(rt_n | \alpha + \beta * x_n, \sigma)) + \\
   &amp;\log(Bernoulli(acc_n | p_{correct})))\\
@@ -768,7 +768,8 @@ model {
   target += normal_lpdf(sigma | .5, .2)
     - normal_lccdf(0 | .5, .2);
   // priors for the guessing component
-  target += normal_lpdf(gamma | 6, 1);
+  target += normal_lpdf(gamma | 6, 1) -
+    normal_lcdf(alpha | 6, 1);
   target += normal_lpdf(sigma2 | .5, .2)
     - normal_lccdf(0 | .5, .2);
   target += beta_lpdf(p_correct | 995, 5);
@@ -787,18 +788,18 @@ model {
 <a class="sourceLine" id="cb765-3" data-line-number="3">                        <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb765-4" data-line-number="4">                        <span class="dt">acc =</span> acc)</a>
 <a class="sourceLine" id="cb765-5" data-line-number="5">fit_mix_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/mixture3.stan&#39;</span>,</a>
-<a class="sourceLine" id="cb765-6" data-line-number="6">               <span class="dt">data =</span> ls_dots_simdata) </a></code></pre></div>
+<a class="sourceLine" id="cb765-6" data-line-number="6">               <span class="dt">data =</span> ls_dots_simdata)  </a></code></pre></div>
 <p>We see that our model can be fit to both response times and accuracy now, and its parameters estimates have sensible values (given our simulated data).</p>
-<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb766-1" data-line-number="1"><span class="kw">print</span>(fit_mix_<span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb766-1" data-line-number="1"><span class="kw">print</span>(fit_mix_<span class="dv">3</span>) </a></code></pre></div>
 <pre><code>##               mean     2.5%    97.5% n_eff Rhat
-## alpha         5.78     5.74     5.81  4159    1
-## beta          0.02    -0.03     0.08  5326    1
-## sigma         0.38     0.35     0.40  5519    1
-## gamma         5.16     5.07     5.26  4077    1
-## sigma2        0.48     0.41     0.55  3626    1
-## p_correct     0.99     0.99     1.00  4727    1
-## p_task        0.81     0.77     0.84  4875    1
-## lp__      -6567.35 -6572.03 -6564.71  1675    1</code></pre>
+## alpha         5.78     5.74     5.81  4234    1
+## beta          0.02    -0.03     0.08  6111    1
+## sigma         0.38     0.35     0.40  4603    1
+## gamma         5.16     5.07     5.26  4713    1
+## sigma2        0.48     0.42     0.55  4220    1
+## p_correct     0.99     0.99     1.00  4925    1
+## p_task        0.81     0.77     0.84  5183    1
+## lp__      -6566.46 -6571.15 -6563.79  1684    1</code></pre>
 <p>Before we extend this model hierarchically we will account for the instructions given to the participant in the next section.</p>
 </div>
 <div id="an-implementation-of-the-model-that-accounts-for-instructions" class="section level4">
@@ -865,7 +866,7 @@ p_{task} = logit^{-1}(\alpha_{task} + x_2 \cdot \beta_{task})
 <a class="sourceLine" id="cb774-2" data-line-number="2">beta_task &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
 <a class="sourceLine" id="cb774-3" data-line-number="3">p_btask &lt;-<span class="st"> </span><span class="fl">.85</span></a>
 <a class="sourceLine" id="cb774-4" data-line-number="4"><span class="co"># Generate data:</span></a>
-<a class="sourceLine" id="cb774-5" data-line-number="5">alpha_task &lt;-<span class="st"> </span><span class="kw">qlogis</span>(p_task)</a>
+<a class="sourceLine" id="cb774-5" data-line-number="5">alpha_task &lt;-<span class="st"> </span><span class="kw">qlogis</span>(p_btask)</a>
 <a class="sourceLine" id="cb774-6" data-line-number="6">p_task &lt;-<span class="st"> </span><span class="kw">plogis</span>(alpha_task <span class="op">+</span><span class="st"> </span>x2 <span class="op">*</span><span class="st"> </span>beta_task)</a>
 <a class="sourceLine" id="cb774-7" data-line-number="7">z &lt;-<span class="st"> </span><span class="kw">rbern</span>(<span class="dt">n =</span> N, <span class="dt">prob =</span> p_task)</a>
 <a class="sourceLine" id="cb774-8" data-line-number="8">rt &lt;-<span class="st"> </span><span class="kw">ifelse</span>(z, <span class="kw">rlnorm</span>(<span class="dt">n =</span> N, <span class="dt">meanlog =</span> alpha <span class="op">+</span><span class="st"> </span>beta <span class="op">*</span><span class="st"> </span>x, <span class="dt">sdlog =</span> sigma),</a>
@@ -910,7 +911,8 @@ model {
   target += normal_lpdf(sigma | .5, .2)
     - normal_lccdf(0 | .5, .2);
   // priors for the guessing component
-  target += normal_lpdf(gamma | 6, 1);
+  target += normal_lpdf(gamma | 6, 1)-
+  normal_lcdf(alpha | 6, 1);
   target += normal_lpdf(sigma2 | .5, .2)
     - normal_lccdf(0 | .5, .2);
   target += normal_lpdf(beta_task | 0, 1);
@@ -957,21 +959,18 @@ generated quantities {
 <a class="sourceLine" id="cb777-6" data-line-number="6">                        <span class="dt">onlyprior =</span> <span class="dv">1</span>) </a>
 <a class="sourceLine" id="cb777-7" data-line-number="7">fit_mix_<span class="dv">4</span>_priors &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/mixture4.stan&#39;</span>,</a>
 <a class="sourceLine" id="cb777-8" data-line-number="8">                         <span class="dt">data =</span> ls_dots_simdata,</a>
-<a class="sourceLine" id="cb777-9" data-line-number="9">                         <span class="dt">chains =</span> <span class="dv">1</span>, <span class="dt">iter =</span> <span class="dv">1000</span>)  </a></code></pre></div>
-<pre><code>## Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-## Running the chains for more iterations may help. See
-## http://mc-stan.org/misc/warnings.html#tail-ess</code></pre>
+<a class="sourceLine" id="cb777-9" data-line-number="9">                         <span class="dt">chains =</span> <span class="dv">1</span>, <span class="dt">iter =</span> <span class="dv">1000</span>)   </a></code></pre></div>
 <p>We plot prior predictive distributions of response times as follows. Notice that we are plotting them again our simulated data, by setting <code>y = rt</code> in <code>ppc_dens_overlay</code>, this distribution can be thought as a hand-picked instance of the prior predictive distribution.</p>
-<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb779-1" data-line-number="1">rt_pred &lt;-<span class="st"> </span><span class="kw">extract</span>(fit_mix_<span class="dv">4</span>_priors)<span class="op">$</span>rt_pred</a>
-<a class="sourceLine" id="cb779-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(<span class="dt">y =</span> rt, <span class="dt">yrep =</span> rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb779-3" data-line-number="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb778-1" data-line-number="1">rt_pred &lt;-<span class="st"> </span><span class="kw">extract</span>(fit_mix_<span class="dv">4</span>_priors)<span class="op">$</span>rt_pred</a>
+<a class="sourceLine" id="cb778-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(<span class="dt">y =</span> rt, <span class="dt">yrep =</span> rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb778-3" data-line-number="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>)) </a></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-423-1.svg" width="672" />
 We see that we tend to generate some responses that are too large, but the general shape of the predictive distribution of the response times is fine.</p>
 <p>If we want to plot the prior predicted distribution of differences in response time conditioning on task difficulty, we need to define a new function. Then we use the <code>bayesplot</code> function <code>ppc_stat()</code> that takes as an argument of <code>stat</code> any summary function.</p>
-<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb780-1" data-line-number="1">meanrt_diff &lt;-<span class="st"> </span><span class="cf">function</span>(rt){</a>
-<a class="sourceLine" id="cb780-2" data-line-number="2">  <span class="kw">mean</span>(rt[x <span class="op">==</span><span class="st"> </span><span class="fl">.5</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(rt[x <span class="op">==</span><span class="st"> </span><span class="fl">-.5</span>])</a>
-<a class="sourceLine" id="cb780-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb780-4" data-line-number="4"><span class="kw">ppc_stat</span>(<span class="dt">y =</span> rt, <span class="dt">yrep =</span> rt_pred, <span class="dt">stat =</span> meanrt_diff) </a></code></pre></div>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb779-1" data-line-number="1">meanrt_diff &lt;-<span class="st"> </span><span class="cf">function</span>(rt){</a>
+<a class="sourceLine" id="cb779-2" data-line-number="2">  <span class="kw">mean</span>(rt[x <span class="op">==</span><span class="st"> </span><span class="fl">.5</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(rt[x <span class="op">==</span><span class="st"> </span><span class="fl">-.5</span>])</a>
+<a class="sourceLine" id="cb779-3" data-line-number="3">} </a>
+<a class="sourceLine" id="cb779-4" data-line-number="4"><span class="kw">ppc_stat</span>(<span class="dt">y =</span> rt, <span class="dt">yrep =</span> rt_pred, <span class="dt">stat =</span> meanrt_diff) </a></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-424-1.svg" width="672" /></p>
 <!-- We can inspect the prior predictive distribution of accuracy by grouping accuracy by emphasis: -->
 <p>We find that the range of response times look reasonable. There are, however, always more checks that can be done, for example, plotting other summary statistics, or predictions conditioned on other aspects of the data.</p>
@@ -979,26 +978,26 @@ We see that we tend to generate some responses that are too large, but the gener
 <div id="fit-to-simulated-data" class="section level5">
 <h5><span class="header-section-number">15.1.1.4.2</span> Fit to simulated data</h5>
 <p>Fit it to data, by setting <code>onlyprior = 0</code>:</p>
-<div class="sourceCode" id="cb781"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb781-1" data-line-number="1">ls_dots_simdata &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> N,</a>
-<a class="sourceLine" id="cb781-2" data-line-number="2">                        <span class="dt">rt =</span> rt,</a>
-<a class="sourceLine" id="cb781-3" data-line-number="3">                        <span class="dt">x =</span> x,</a>
-<a class="sourceLine" id="cb781-4" data-line-number="4">                        <span class="dt">x2 =</span> x2,</a>
-<a class="sourceLine" id="cb781-5" data-line-number="5">                        <span class="dt">acc =</span> acc,</a>
-<a class="sourceLine" id="cb781-6" data-line-number="6">                        <span class="dt">onlyprior =</span> <span class="dv">0</span>) </a>
-<a class="sourceLine" id="cb781-7" data-line-number="7">fit_mix_<span class="dv">4</span> &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/mixture4.stan&#39;</span>,</a>
-<a class="sourceLine" id="cb781-8" data-line-number="8">                  <span class="dt">data =</span> ls_dots_simdata) </a></code></pre></div>
-<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb782-1" data-line-number="1"><span class="kw">print</span>(fit_mix_<span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb782-2" data-line-number="2">      <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;sigma2&quot;</span>,</a>
-<a class="sourceLine" id="cb782-3" data-line-number="3">               <span class="st">&quot;p_correct&quot;</span>, <span class="st">&quot;p_btask&quot;</span>, <span class="st">&quot;beta_task&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb780-1" data-line-number="1">ls_dots_simdata &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> N,</a>
+<a class="sourceLine" id="cb780-2" data-line-number="2">                        <span class="dt">rt =</span> rt,</a>
+<a class="sourceLine" id="cb780-3" data-line-number="3">                        <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb780-4" data-line-number="4">                        <span class="dt">x2 =</span> x2,</a>
+<a class="sourceLine" id="cb780-5" data-line-number="5">                        <span class="dt">acc =</span> acc,</a>
+<a class="sourceLine" id="cb780-6" data-line-number="6">                        <span class="dt">onlyprior =</span> <span class="dv">0</span>) </a>
+<a class="sourceLine" id="cb780-7" data-line-number="7">fit_mix_<span class="dv">4</span> &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/mixture4.stan&#39;</span>,</a>
+<a class="sourceLine" id="cb780-8" data-line-number="8">                  <span class="dt">data =</span> ls_dots_simdata)  </a></code></pre></div>
+<div class="sourceCode" id="cb781"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb781-1" data-line-number="1"><span class="kw">print</span>(fit_mix_<span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb781-2" data-line-number="2">      <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;sigma2&quot;</span>,</a>
+<a class="sourceLine" id="cb781-3" data-line-number="3">               <span class="st">&quot;p_correct&quot;</span>, <span class="st">&quot;p_btask&quot;</span>, <span class="st">&quot;beta_task&quot;</span>)) </a></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
-## alpha     5.80  5.77  5.83  4546    1
-## beta      0.03 -0.02  0.09  5846    1
-## sigma     0.40  0.37  0.42  4263    1
-## gamma     5.31  5.22  5.40  4910    1
-## sigma2    0.46  0.40  0.52  6246    1
-## p_correct 0.99  0.99  1.00  6616    1
-## p_btask   0.81  0.77  0.85  5996    1
-## beta_task 0.75  0.31  1.18  5968    1</code></pre>
+## alpha     5.80  5.77  5.83  4228    1
+## beta      0.03 -0.03  0.08  8050    1
+## sigma     0.39  0.37  0.42  5538    1
+## gamma     5.30  5.18  5.41  3909    1
+## sigma2    0.46  0.39  0.54  4620    1
+## p_correct 0.99  0.99  1.00  5036    1
+## p_btask   0.87  0.83  0.90  4156    1
+## beta_task 0.98  0.45  1.55  4985    1</code></pre>
 <p>We see that we fit the model without problems. Before we evaluate the recovery of the parameters more carefully, we implement a hierarchical version of the fast guesses model.</p>
 </div>
 </div>
@@ -1023,29 +1022,29 @@ tau_{u_{1..3}} &amp; \sim  Normal_+(0, .5)\\
 \end{aligned}
 \end{equation}\]</span></p>
 <p>Before we fit the model to the real dataset, we simulate data again; this time we simulate 100 trials of each of 20 subjects.</p>
-<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb784-1" data-line-number="1"><span class="co"># We build the fake stimuli</span></a>
-<a class="sourceLine" id="cb784-2" data-line-number="2">N_subj &lt;-<span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb784-3" data-line-number="3">N_trials &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb784-4" data-line-number="4"><span class="co"># Parameters true values</span></a>
-<a class="sourceLine" id="cb784-5" data-line-number="5">alpha &lt;-<span class="st"> </span><span class="fl">5.8</span></a>
-<a class="sourceLine" id="cb784-6" data-line-number="6">beta &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
-<a class="sourceLine" id="cb784-7" data-line-number="7">sigma &lt;-<span class="st"> </span><span class="fl">.4</span></a>
-<a class="sourceLine" id="cb784-8" data-line-number="8">sigma2 &lt;-<span class="st"> </span><span class="fl">.5</span></a>
-<a class="sourceLine" id="cb784-9" data-line-number="9">gamma &lt;-<span class="st"> </span><span class="fl">5.2</span></a>
-<a class="sourceLine" id="cb784-10" data-line-number="10">beta_task &lt;-<span class="st"> </span><span class="fl">0.1</span></a>
-<a class="sourceLine" id="cb784-11" data-line-number="11">p_btask &lt;-<span class="st"> </span><span class="fl">.85</span></a>
-<a class="sourceLine" id="cb784-12" data-line-number="12">alpha_task &lt;-<span class="st"> </span><span class="kw">qlogis</span>(p_btask)</a>
-<a class="sourceLine" id="cb784-13" data-line-number="13">p_correct &lt;-<span class="st"> </span><span class="fl">.999</span></a>
-<a class="sourceLine" id="cb784-14" data-line-number="14">tau_u &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">2</span>, <span class="fl">.005</span>, <span class="fl">.3</span>)</a>
-<a class="sourceLine" id="cb784-15" data-line-number="15">rho &lt;-<span class="st"> </span><span class="fl">.3</span></a></code></pre></div>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb785-1" data-line-number="1"><span class="co">## We build the stimuli here:</span></a>
-<a class="sourceLine" id="cb785-2" data-line-number="2">N &lt;-<span class="st"> </span>N_subj <span class="op">*</span><span class="st"> </span>N_trials</a>
-<a class="sourceLine" id="cb785-3" data-line-number="3">stimuli &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="op">-</span>.<span class="dv">5</span>,N_trials<span class="op">/</span><span class="dv">2</span>), <span class="kw">rep</span>(.<span class="dv">5</span>, N_trials<span class="op">/</span><span class="dv">2</span>)), N_subj),</a>
-<a class="sourceLine" id="cb785-4" data-line-number="4">                  <span class="dt">x2 =</span> <span class="kw">rep</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="op">-</span>.<span class="dv">5</span>,.<span class="dv">5</span>), N_trials<span class="op">/</span><span class="dv">2</span>), N_subj),</a>
-<a class="sourceLine" id="cb785-5" data-line-number="5">                  <span class="dt">subj =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_subj, <span class="dt">each =</span> N_trials),</a>
-<a class="sourceLine" id="cb785-6" data-line-number="6">                  <span class="dt">trial =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_trials, N_subj)</a>
-<a class="sourceLine" id="cb785-7" data-line-number="7">                  )</a>
-<a class="sourceLine" id="cb785-8" data-line-number="8">stimuli</a></code></pre></div>
+<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb783-1" data-line-number="1"><span class="co"># We build the fake stimuli</span></a>
+<a class="sourceLine" id="cb783-2" data-line-number="2">N_subj &lt;-<span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb783-3" data-line-number="3">N_trials &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb783-4" data-line-number="4"><span class="co"># Parameters true values</span></a>
+<a class="sourceLine" id="cb783-5" data-line-number="5">alpha &lt;-<span class="st"> </span><span class="fl">5.8</span></a>
+<a class="sourceLine" id="cb783-6" data-line-number="6">beta &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb783-7" data-line-number="7">sigma &lt;-<span class="st"> </span><span class="fl">.4</span></a>
+<a class="sourceLine" id="cb783-8" data-line-number="8">sigma2 &lt;-<span class="st"> </span><span class="fl">.5</span></a>
+<a class="sourceLine" id="cb783-9" data-line-number="9">gamma &lt;-<span class="st"> </span><span class="fl">5.2</span></a>
+<a class="sourceLine" id="cb783-10" data-line-number="10">beta_task &lt;-<span class="st"> </span><span class="fl">0.1</span></a>
+<a class="sourceLine" id="cb783-11" data-line-number="11">p_btask &lt;-<span class="st"> </span><span class="fl">.85</span></a>
+<a class="sourceLine" id="cb783-12" data-line-number="12">alpha_task &lt;-<span class="st"> </span><span class="kw">qlogis</span>(p_btask)</a>
+<a class="sourceLine" id="cb783-13" data-line-number="13">p_correct &lt;-<span class="st"> </span><span class="fl">.999</span></a>
+<a class="sourceLine" id="cb783-14" data-line-number="14">tau_u &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">2</span>, <span class="fl">.005</span>, <span class="fl">.3</span>)</a>
+<a class="sourceLine" id="cb783-15" data-line-number="15">rho &lt;-<span class="st"> </span><span class="fl">.3</span></a></code></pre></div>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb784-1" data-line-number="1"><span class="co">## We build the stimuli here:</span></a>
+<a class="sourceLine" id="cb784-2" data-line-number="2">N &lt;-<span class="st"> </span>N_subj <span class="op">*</span><span class="st"> </span>N_trials</a>
+<a class="sourceLine" id="cb784-3" data-line-number="3">stimuli &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="op">-</span>.<span class="dv">5</span>,N_trials<span class="op">/</span><span class="dv">2</span>), <span class="kw">rep</span>(.<span class="dv">5</span>, N_trials<span class="op">/</span><span class="dv">2</span>)), N_subj),</a>
+<a class="sourceLine" id="cb784-4" data-line-number="4">                  <span class="dt">x2 =</span> <span class="kw">rep</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="op">-</span>.<span class="dv">5</span>,.<span class="dv">5</span>), N_trials<span class="op">/</span><span class="dv">2</span>), N_subj),</a>
+<a class="sourceLine" id="cb784-5" data-line-number="5">                  <span class="dt">subj =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_subj, <span class="dt">each =</span> N_trials),</a>
+<a class="sourceLine" id="cb784-6" data-line-number="6">                  <span class="dt">trial =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_trials, N_subj)</a>
+<a class="sourceLine" id="cb784-7" data-line-number="7">                  )</a>
+<a class="sourceLine" id="cb784-8" data-line-number="8">stimuli</a></code></pre></div>
 <pre><code>## # A tibble: 2,000 x 4
 ##       x    x2  subj trial
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
@@ -1055,25 +1054,25 @@ tau_{u_{1..3}} &amp; \sim  Normal_+(0, .5)\\
 ## 4  -0.5   0.5     1     4
 ## 5  -0.5  -0.5     1     5
 ## # … with 1,995 more rows</code></pre>
-<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb787-1" data-line-number="1">Cor_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(rho, <span class="dv">9</span>), <span class="dt">nrow =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb787-2" data-line-number="2"><span class="kw">diag</span>(Cor_u) &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb787-3" data-line-number="3">Cor_u</a></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb786-1" data-line-number="1">Cor_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(rho, <span class="dv">9</span>), <span class="dt">nrow =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb786-2" data-line-number="2"><span class="kw">diag</span>(Cor_u) &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb786-3" data-line-number="3">Cor_u</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]  1.0  0.3  0.3
 ## [2,]  0.3  1.0  0.3
 ## [3,]  0.3  0.3  1.0</code></pre>
-<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb789-1" data-line-number="1"><span class="co"># Variance covariance matrix for &#39;subj&#39;:</span></a>
-<a class="sourceLine" id="cb789-2" data-line-number="2">Sigma_u &lt;-<span class="st"> </span><span class="kw">diag</span>(tau_u, <span class="dv">3</span>, <span class="dv">3</span>) <span class="op">%*%</span><span class="st"> </span>Cor_u <span class="op">%*%</span><span class="st"> </span><span class="kw">diag</span>(tau_u, <span class="dv">3</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb789-3" data-line-number="3"><span class="co"># Create the correlated adjustments </span></a>
-<a class="sourceLine" id="cb789-4" data-line-number="4">u &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt">n =</span> N_subj, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), Sigma_u)</a>
-<a class="sourceLine" id="cb789-5" data-line-number="5"><span class="co"># Check if they are correctly correlated</span></a>
-<a class="sourceLine" id="cb789-6" data-line-number="6"><span class="kw">cor</span>(u)</a></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb788-1" data-line-number="1"><span class="co"># Variance covariance matrix for &#39;subj&#39;:</span></a>
+<a class="sourceLine" id="cb788-2" data-line-number="2">Sigma_u &lt;-<span class="st"> </span><span class="kw">diag</span>(tau_u, <span class="dv">3</span>, <span class="dv">3</span>) <span class="op">%*%</span><span class="st"> </span>Cor_u <span class="op">%*%</span><span class="st"> </span><span class="kw">diag</span>(tau_u, <span class="dv">3</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb788-3" data-line-number="3"><span class="co"># Create the correlated adjustments </span></a>
+<a class="sourceLine" id="cb788-4" data-line-number="4">u &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt">n =</span> N_subj, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), Sigma_u)</a>
+<a class="sourceLine" id="cb788-5" data-line-number="5"><span class="co"># Check if they are correctly correlated</span></a>
+<a class="sourceLine" id="cb788-6" data-line-number="6"><span class="kw">cor</span>(u)</a></code></pre></div>
 <pre><code>##       [,1]  [,2]  [,3]
 ## [1,] 1.000 0.242 0.404
 ## [2,] 0.242 1.000 0.484
 ## [3,] 0.404 0.484 1.000</code></pre>
-<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb791-1" data-line-number="1"><span class="co">#(there is random variation), and the SD</span></a>
-<a class="sourceLine" id="cb791-2" data-line-number="2"><span class="kw">list</span>(<span class="kw">sd</span>(u[, <span class="dv">1</span>]), <span class="kw">sd</span>(u[, <span class="dv">2</span>]), <span class="kw">sd</span>(u[, <span class="dv">3</span>]))</a></code></pre></div>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb790-1" data-line-number="1"><span class="co">#(there is random variation), and the SD</span></a>
+<a class="sourceLine" id="cb790-2" data-line-number="2"><span class="kw">list</span>(<span class="kw">sd</span>(u[, <span class="dv">1</span>]), <span class="kw">sd</span>(u[, <span class="dv">2</span>]), <span class="kw">sd</span>(u[, <span class="dv">3</span>]))</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 0.23
 ## 
@@ -1082,23 +1081,23 @@ tau_{u_{1..3}} &amp; \sim  Normal_+(0, .5)\\
 ## 
 ## [[3]]
 ## [1] 0.244</code></pre>
-<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb793-1" data-line-number="1"><span class="co"># Create the data</span></a>
-<a class="sourceLine" id="cb793-2" data-line-number="2">df_dots_simdata &lt;-<span class="st"> </span>stimuli <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb793-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">z =</span> <span class="kw">rbern</span>(<span class="dt">n =</span> N, <span class="dt">prob =</span> <span class="kw">plogis</span>(alpha_task <span class="op">+</span><span class="st"> </span>x2 <span class="op">*</span><span class="st"> </span>beta_task)),</a>
-<a class="sourceLine" id="cb793-4" data-line-number="4">         <span class="dt">rt =</span> <span class="kw">ifelse</span>(z,</a>
-<a class="sourceLine" id="cb793-5" data-line-number="5">             <span class="kw">rlnorm</span>(<span class="dt">n =</span> N, <span class="dt">meanlog =</span> alpha <span class="op">+</span><span class="st"> </span>u[subj, <span class="dv">1</span>] <span class="op">+</span></a>
-<a class="sourceLine" id="cb793-6" data-line-number="6"><span class="st">                             </span>(beta <span class="op">+</span><span class="st"> </span>u[subj, <span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span>x, <span class="dt">sdlog =</span> sigma),</a>
-<a class="sourceLine" id="cb793-7" data-line-number="7">             <span class="kw">rlnorm</span>(<span class="dt">n =</span> N, <span class="dt">meanlog =</span> gamma <span class="op">+</span><span class="st"> </span>u[subj, <span class="dv">3</span>], <span class="dt">sdlog =</span> sigma2)),</a>
-<a class="sourceLine" id="cb793-8" data-line-number="8">         <span class="dt">acc =</span> <span class="kw">ifelse</span>(z, <span class="kw">rbern</span>(<span class="dt">n =</span> N, p_correct),</a>
-<a class="sourceLine" id="cb793-9" data-line-number="9">              <span class="kw">rbern</span>(<span class="dt">n =</span> N, <span class="fl">.5</span>)),</a>
-<a class="sourceLine" id="cb793-10" data-line-number="10">         <span class="dt">diff =</span> <span class="kw">if_else</span>(x <span class="op">==</span><span class="st"> </span><span class="fl">.5</span>, <span class="st">&quot;hard&quot;</span>, <span class="st">&quot;easy&quot;</span>),</a>
-<a class="sourceLine" id="cb793-11" data-line-number="11">         <span class="dt">emphasis =</span> <span class="kw">ifelse</span>(x2 <span class="op">==</span><span class="st"> </span><span class="fl">.5</span>, <span class="st">&quot;accuracy&quot;</span>, <span class="st">&quot;speed&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb792-1" data-line-number="1"><span class="co"># Create the data</span></a>
+<a class="sourceLine" id="cb792-2" data-line-number="2">df_dots_simdata &lt;-<span class="st"> </span>stimuli <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb792-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">z =</span> <span class="kw">rbern</span>(<span class="dt">n =</span> N, <span class="dt">prob =</span> <span class="kw">plogis</span>(alpha_task <span class="op">+</span><span class="st"> </span>x2 <span class="op">*</span><span class="st"> </span>beta_task)),</a>
+<a class="sourceLine" id="cb792-4" data-line-number="4">         <span class="dt">rt =</span> <span class="kw">ifelse</span>(z,</a>
+<a class="sourceLine" id="cb792-5" data-line-number="5">             <span class="kw">rlnorm</span>(<span class="dt">n =</span> N, <span class="dt">meanlog =</span> alpha <span class="op">+</span><span class="st"> </span>u[subj, <span class="dv">1</span>] <span class="op">+</span></a>
+<a class="sourceLine" id="cb792-6" data-line-number="6"><span class="st">                             </span>(beta <span class="op">+</span><span class="st"> </span>u[subj, <span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span>x, <span class="dt">sdlog =</span> sigma),</a>
+<a class="sourceLine" id="cb792-7" data-line-number="7">             <span class="kw">rlnorm</span>(<span class="dt">n =</span> N, <span class="dt">meanlog =</span> gamma <span class="op">+</span><span class="st"> </span>u[subj, <span class="dv">3</span>], <span class="dt">sdlog =</span> sigma2)),</a>
+<a class="sourceLine" id="cb792-8" data-line-number="8">         <span class="dt">acc =</span> <span class="kw">ifelse</span>(z, <span class="kw">rbern</span>(<span class="dt">n =</span> N, p_correct),</a>
+<a class="sourceLine" id="cb792-9" data-line-number="9">              <span class="kw">rbern</span>(<span class="dt">n =</span> N, <span class="fl">.5</span>)),</a>
+<a class="sourceLine" id="cb792-10" data-line-number="10">         <span class="dt">diff =</span> <span class="kw">if_else</span>(x <span class="op">==</span><span class="st"> </span><span class="fl">.5</span>, <span class="st">&quot;hard&quot;</span>, <span class="st">&quot;easy&quot;</span>),</a>
+<a class="sourceLine" id="cb792-11" data-line-number="11">         <span class="dt">emphasis =</span> <span class="kw">ifelse</span>(x2 <span class="op">==</span><span class="st"> </span><span class="fl">.5</span>, <span class="st">&quot;accuracy&quot;</span>, <span class="st">&quot;speed&quot;</span>))</a></code></pre></div>
 <p>We verify that the distribution of the simulated response times conditional on the simulated accuracy and the experimental manipulations make sense with the following plot:</p>
-<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb794-1" data-line-number="1"><span class="kw">ggplot</span>(df_dots_simdata, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(acc), <span class="dt">y =</span> rt)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb794-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_jitter</span>(<span class="dt">width =</span> <span class="fl">.4</span>, <span class="dt">height =</span> <span class="dv">0</span>), <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb794-3" data-line-number="3"><span class="st">  </span><span class="kw">facet_wrap</span>(diff <span class="op">~</span><span class="st"> </span>emphasis) <span class="op">+</span></a>
-<a class="sourceLine" id="cb794-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Accuracy&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb794-5" data-line-number="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Response time&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb793-1" data-line-number="1"><span class="kw">ggplot</span>(df_dots_simdata, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(acc), <span class="dt">y =</span> rt)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb793-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_jitter</span>(<span class="dt">width =</span> <span class="fl">.4</span>, <span class="dt">height =</span> <span class="dv">0</span>), <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb793-3" data-line-number="3"><span class="st">  </span><span class="kw">facet_wrap</span>(diff <span class="op">~</span><span class="st"> </span>emphasis) <span class="op">+</span></a>
+<a class="sourceLine" id="cb793-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Accuracy&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb793-5" data-line-number="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Response time&quot;</span>)</a></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-428-1.svg" width="672" /></p>
 <p>We implement the model in Stan as follows. The hierarchical extension uses the Cholesky factorization for the group-level effects (as we did in <a href="hierarchical-models-with-stan.html#sec:corrstan">12.1.3</a>).</p>
 <pre class="stan"><code>data {
@@ -1134,7 +1133,8 @@ model {
   target += normal_lpdf(sigma | .5, .2)
     - normal_lccdf(0 | .5, .2);
   // priors for the guessing component
-  target += normal_lpdf(gamma | 6, 1);
+  target += normal_lpdf(gamma | 6, 1) - 
+    normal_lcdf(alpha | 6, 1);
   target += normal_lpdf(sigma2 | .5, .2)
     - normal_lccdf(0 | .5, .2);
   target += normal_lpdf(tau_u | 0, .5)
@@ -1160,72 +1160,74 @@ generated quantities {
   corr_matrix[3] rho_u = L_u * L_u&#39;;
 }</code></pre>
 <p>Save it as <code>stan_models/mixtureh.stan</code> and fit it to the simulated data:</p>
-<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb796-1" data-line-number="1">ls_dots_simdata &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> N,</a>
-<a class="sourceLine" id="cb796-2" data-line-number="2">                          <span class="dt">rt =</span> df_dots_simdata<span class="op">$</span>rt,</a>
-<a class="sourceLine" id="cb796-3" data-line-number="3">                          <span class="dt">x =</span> df_dots_simdata<span class="op">$</span>x,</a>
-<a class="sourceLine" id="cb796-4" data-line-number="4">                          <span class="dt">x2 =</span> df_dots_simdata<span class="op">$</span>x2,</a>
-<a class="sourceLine" id="cb796-5" data-line-number="5">                          <span class="dt">acc =</span> df_dots_simdata<span class="op">$</span>acc,</a>
-<a class="sourceLine" id="cb796-6" data-line-number="6">                          <span class="dt">subj =</span> df_dots_simdata<span class="op">$</span>subj,</a>
-<a class="sourceLine" id="cb796-7" data-line-number="7">                          <span class="dt">N_subj =</span> N_subj)</a>
-<a class="sourceLine" id="cb796-8" data-line-number="8">fit_mix_h &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/mixtureh.stan&#39;</span>,</a>
-<a class="sourceLine" id="cb796-9" data-line-number="9">                  <span class="dt">data =</span> ls_dots_simdata)</a></code></pre></div>
-<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb797-1" data-line-number="1"><span class="kw">print</span>(fit_mix_h, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;sigma2&quot;</span>,</a>
-<a class="sourceLine" id="cb797-2" data-line-number="2">                          <span class="st">&quot;p_correct&quot;</span>,<span class="st">&quot;p_btask&quot;</span>, <span class="st">&quot;beta_task&quot;</span>, <span class="st">&quot;tau_u&quot;</span>,</a>
-<a class="sourceLine" id="cb797-3" data-line-number="3">                          <span class="st">&quot;rho_u[1,2]&quot;</span>, <span class="st">&quot;rho_u[1,3]&quot;</span>, <span class="st">&quot;rho_u[2,3]&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb795-1" data-line-number="1">ls_dots_simdata &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> N,</a>
+<a class="sourceLine" id="cb795-2" data-line-number="2">                          <span class="dt">rt =</span> df_dots_simdata<span class="op">$</span>rt,</a>
+<a class="sourceLine" id="cb795-3" data-line-number="3">                          <span class="dt">x =</span> df_dots_simdata<span class="op">$</span>x,</a>
+<a class="sourceLine" id="cb795-4" data-line-number="4">                          <span class="dt">x2 =</span> df_dots_simdata<span class="op">$</span>x2,</a>
+<a class="sourceLine" id="cb795-5" data-line-number="5">                          <span class="dt">acc =</span> df_dots_simdata<span class="op">$</span>acc,</a>
+<a class="sourceLine" id="cb795-6" data-line-number="6">                          <span class="dt">subj =</span> df_dots_simdata<span class="op">$</span>subj,</a>
+<a class="sourceLine" id="cb795-7" data-line-number="7">                          <span class="dt">N_subj =</span> N_subj)</a>
+<a class="sourceLine" id="cb795-8" data-line-number="8">fit_mix_h &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/mixtureh.stan&#39;</span>,</a>
+<a class="sourceLine" id="cb795-9" data-line-number="9">                  <span class="dt">data =</span> ls_dots_simdata,</a>
+<a class="sourceLine" id="cb795-10" data-line-number="10">                  <span class="dt">iter =</span> <span class="dv">3000</span>,</a>
+<a class="sourceLine" id="cb795-11" data-line-number="11">                  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb796-1" data-line-number="1"><span class="kw">print</span>(fit_mix_h, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;sigma2&quot;</span>,</a>
+<a class="sourceLine" id="cb796-2" data-line-number="2">                          <span class="st">&quot;p_correct&quot;</span>,<span class="st">&quot;p_btask&quot;</span>, <span class="st">&quot;beta_task&quot;</span>, <span class="st">&quot;tau_u&quot;</span>,</a>
+<a class="sourceLine" id="cb796-3" data-line-number="3">                          <span class="st">&quot;rho_u[1,2]&quot;</span>, <span class="st">&quot;rho_u[1,3]&quot;</span>, <span class="st">&quot;rho_u[2,3]&quot;</span>))</a></code></pre></div>
 <pre><code>##             mean  2.5% 97.5% n_eff Rhat
-## alpha       5.81  5.70  5.92   710 1.01
-## beta        0.03 -0.02  0.08  5325 1.00
-## sigma       0.41  0.40  0.43  6593 1.00
-## gamma       5.18  5.00  5.35  2390 1.00
-## sigma2      0.51  0.13  0.88  3483 1.00
-## p_correct   0.99  0.99  1.00  5489 1.00
-## p_btask     0.87  0.84  0.89  6514 1.00
-## beta_task   0.21 -0.13  0.55  8539 1.00
-## tau_u[1]    0.23  0.17  0.33  1028 1.00
-## tau_u[2]    0.04  0.00  0.09  2222 1.00
-## tau_u[3]    0.35  0.24  0.52  2163 1.00
-## rho_u[1,2] -0.25 -0.85  0.58  4492 1.00
-## rho_u[1,3]  0.19 -0.25  0.58  2571 1.00
-## rho_u[2,3]  0.00 -0.70  0.70   501 1.01</code></pre>
+## alpha       5.74  5.63  5.85   907 1.00
+## beta        0.05  0.01  0.09  7737 1.00
+## sigma       0.41  0.39  0.42  8443 1.00
+## gamma       5.03  4.86  5.22  2920 1.00
+## sigma2      0.50  0.11  0.89  3888 1.00
+## p_correct   1.00  0.99  1.00  7171 1.00
+## p_btask     0.86  0.83  0.88  6315 1.00
+## beta_task  -0.13 -0.44  0.19  8905 1.00
+## tau_u[1]    0.24  0.17  0.34  1364 1.00
+## tau_u[2]    0.02  0.00  0.07  4298 1.00
+## tau_u[3]    0.37  0.25  0.54  2531 1.00
+## rho_u[1,2] -0.09 -0.77  0.70  8677 1.00
+## rho_u[1,3]  0.14 -0.28  0.54  2706 1.00
+## rho_u[2,3] -0.04 -0.77  0.72   396 1.01</code></pre>
 <p>We see that we can fit the hierarchical extension of our model to simulated data. Next we’ll evaluate whether we can recover the true values of the parameters.</p>
 </div>
 <div id="recovery-of-the-parameters" class="section level4">
 <h4><span class="header-section-number">15.1.1.6</span> Recovery of the parameters</h4>
 <p>By “recovering” the true values of the parameters, we mean that the true values are somewhere inside the bulk of the posterior distribution of the model.</p>
 <p>We use <code>mcmc_recover_hist</code> to compare the posterior distributions of the relevant parameters of the model with their true values.</p>
-<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb799-1" data-line-number="1">df_fit_mix_h &lt;-<span class="st"> </span>fit_mix_h <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb799-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;sigma2&quot;</span>,</a>
-<a class="sourceLine" id="cb799-3" data-line-number="3">           <span class="st">&quot;p_correct&quot;</span>,<span class="st">&quot;p_btask&quot;</span>, <span class="st">&quot;beta_task&quot;</span>, <span class="st">&quot;tau_u[1]&quot;</span>,</a>
-<a class="sourceLine" id="cb799-4" data-line-number="4">           <span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;tau_u[3]&quot;</span>, <span class="st">&quot;rho_u[1,2]&quot;</span>, <span class="st">&quot;rho_u[1,3]&quot;</span>,</a>
-<a class="sourceLine" id="cb799-5" data-line-number="5">           <span class="st">&quot;rho_u[2,3]&quot;</span>))</a>
-<a class="sourceLine" id="cb799-6" data-line-number="6">true_values &lt;-<span class="st"> </span><span class="kw">c</span>(alpha, beta, sigma, gamma, sigma2,</a>
-<a class="sourceLine" id="cb799-7" data-line-number="7">                p_correct, p_btask, beta_task, tau_u[<span class="dv">1</span>],</a>
-<a class="sourceLine" id="cb799-8" data-line-number="8">                tau_u[<span class="dv">2</span>], tau_u[<span class="dv">3</span>], <span class="kw">rep</span>(rho,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb799-9" data-line-number="9"><span class="kw">mcmc_recover_hist</span>(df_fit_mix_h, true_values)</a></code></pre></div>
+<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb798-1" data-line-number="1">df_fit_mix_h &lt;-<span class="st"> </span>fit_mix_h <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb798-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;sigma2&quot;</span>,</a>
+<a class="sourceLine" id="cb798-3" data-line-number="3">           <span class="st">&quot;p_correct&quot;</span>,<span class="st">&quot;p_btask&quot;</span>, <span class="st">&quot;beta_task&quot;</span>, <span class="st">&quot;tau_u[1]&quot;</span>,</a>
+<a class="sourceLine" id="cb798-4" data-line-number="4">           <span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;tau_u[3]&quot;</span>, <span class="st">&quot;rho_u[1,2]&quot;</span>, <span class="st">&quot;rho_u[1,3]&quot;</span>,</a>
+<a class="sourceLine" id="cb798-5" data-line-number="5">           <span class="st">&quot;rho_u[2,3]&quot;</span>))</a>
+<a class="sourceLine" id="cb798-6" data-line-number="6">true_values &lt;-<span class="st"> </span><span class="kw">c</span>(alpha, beta, sigma, gamma, sigma2,</a>
+<a class="sourceLine" id="cb798-7" data-line-number="7">                p_correct, p_btask, beta_task, tau_u[<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb798-8" data-line-number="8">                tau_u[<span class="dv">2</span>], tau_u[<span class="dv">3</span>], <span class="kw">rep</span>(rho,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb798-9" data-line-number="9"><span class="kw">mcmc_recover_hist</span>(df_fit_mix_h, true_values)</a></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-432-1.svg" width="672" /></p>
 <p>The model seems to be underestimating the probability of being correct of the participants (<code>p_correct</code>) and overestimating the probability of being engaged in the task (<code>p_btask</code>). Notice, however that the numerical differences are very small. We can be relatively certain that the model is not seriously mis-specified, but A more principled approach using simulation based calibration is presented in <span class="citation">Talts et al. (<a href="#ref-talts2018validating">2018</a>)</span> and <span class="citation">D. J. Schad, Betancourt, and Vasishth (<a href="#ref-schad2020toward">2020</a>)</span>.</p>
 <!-- We can verify that with enough data... -->
 <div id="fitting-the-model-to-real-data" class="section level5">
 <h5><span class="header-section-number">15.1.1.6.1</span> Fitting the model to real data</h5>
 <p>After verifying that our model works as expected, we are ready to fit it to real data. We code the predictors <span class="math inline">\(x\)</span> and <span class="math inline">\(x_2\)</span> as we did for the simulated data:</p>
-<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb800-1" data-line-number="1">df_dots_data &lt;-<span class="st"> </span>df_dots_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb800-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">x =</span> <span class="kw">if_else</span>(diff <span class="op">==</span><span class="st"> &quot;easy&quot;</span>, <span class="fl">-.5</span>, <span class="fl">.5</span>),</a>
-<a class="sourceLine" id="cb800-3" data-line-number="3">         <span class="dt">x2 =</span> <span class="kw">if_else</span>(emphasis <span class="op">==</span><span class="st"> &quot;accuracy&quot;</span>, <span class="fl">.5</span>, <span class="fl">-.5</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb799-1" data-line-number="1">df_dots_data &lt;-<span class="st"> </span>df_dots_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb799-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">x =</span> <span class="kw">if_else</span>(diff <span class="op">==</span><span class="st"> &quot;easy&quot;</span>, <span class="fl">-.5</span>, <span class="fl">.5</span>),</a>
+<a class="sourceLine" id="cb799-3" data-line-number="3">         <span class="dt">x2 =</span> <span class="kw">if_else</span>(emphasis <span class="op">==</span><span class="st"> &quot;accuracy&quot;</span>, <span class="fl">.5</span>, <span class="fl">-.5</span>))</a></code></pre></div>
 <p>The main obstacle now is that fitting the entire dataset takes around 12 hours! If you want to get a taste of the fit of the model, you can sample 150 observations (from the ~2800) of each subject as follows:</p>
-<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb801-1" data-line-number="1">df_dots_data_short &lt;-<span class="st"> </span>df_dots_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb801-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(subject) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb801-3" data-line-number="3"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">150</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb800-1" data-line-number="1">df_dots_data_short &lt;-<span class="st"> </span>df_dots_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb800-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(subject) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb800-3" data-line-number="3"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">150</span>)</a></code></pre></div>
 <p>The complete model is fit as follows.</p>
-<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb802-1" data-line-number="1">ls_dots_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_dots_data),</a>
-<a class="sourceLine" id="cb802-2" data-line-number="2">                     <span class="dt">rt =</span> df_dots_data<span class="op">$</span>rt,</a>
-<a class="sourceLine" id="cb802-3" data-line-number="3">                     <span class="dt">x =</span> df_dots_data<span class="op">$</span>x,</a>
-<a class="sourceLine" id="cb802-4" data-line-number="4">                     <span class="dt">x2 =</span> df_dots_data<span class="op">$</span>x2,</a>
-<a class="sourceLine" id="cb802-5" data-line-number="5">                     <span class="dt">acc =</span> df_dots_data<span class="op">$</span>acc,</a>
-<a class="sourceLine" id="cb802-6" data-line-number="6">                     <span class="dt">subj =</span> <span class="kw">as.numeric</span>(df_dots_data<span class="op">$</span>subject),</a>
-<a class="sourceLine" id="cb802-7" data-line-number="7">                     <span class="dt">N_subj =</span> <span class="kw">length</span>(<span class="kw">unique</span>(df_dots_data<span class="op">$</span>subject)))</a></code></pre></div>
-<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb803-1" data-line-number="1"><span class="kw">print</span>(fit_mix_data, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;sigma2&quot;</span>,</a>
-<a class="sourceLine" id="cb803-2" data-line-number="2">                              <span class="st">&quot;p_correct&quot;</span>,<span class="st">&quot;p_btask&quot;</span>, <span class="st">&quot;beta_task&quot;</span>, <span class="st">&quot;tau_u&quot;</span>,</a>
-<a class="sourceLine" id="cb803-3" data-line-number="3">                              <span class="st">&quot;rho_u[1,2]&quot;</span>, <span class="st">&quot;rho_u[1,3]&quot;</span>, <span class="st">&quot;rho_u[2,3]&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb801-1" data-line-number="1">ls_dots_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_dots_data),</a>
+<a class="sourceLine" id="cb801-2" data-line-number="2">                     <span class="dt">rt =</span> df_dots_data<span class="op">$</span>rt,</a>
+<a class="sourceLine" id="cb801-3" data-line-number="3">                     <span class="dt">x =</span> df_dots_data<span class="op">$</span>x,</a>
+<a class="sourceLine" id="cb801-4" data-line-number="4">                     <span class="dt">x2 =</span> df_dots_data<span class="op">$</span>x2,</a>
+<a class="sourceLine" id="cb801-5" data-line-number="5">                     <span class="dt">acc =</span> df_dots_data<span class="op">$</span>acc,</a>
+<a class="sourceLine" id="cb801-6" data-line-number="6">                     <span class="dt">subj =</span> <span class="kw">as.numeric</span>(df_dots_data<span class="op">$</span>subject),</a>
+<a class="sourceLine" id="cb801-7" data-line-number="7">                     <span class="dt">N_subj =</span> <span class="kw">length</span>(<span class="kw">unique</span>(df_dots_data<span class="op">$</span>subject)))</a></code></pre></div>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb802-1" data-line-number="1"><span class="kw">print</span>(fit_mix_data, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;sigma2&quot;</span>,</a>
+<a class="sourceLine" id="cb802-2" data-line-number="2">                              <span class="st">&quot;p_correct&quot;</span>,<span class="st">&quot;p_btask&quot;</span>, <span class="st">&quot;beta_task&quot;</span>, <span class="st">&quot;tau_u&quot;</span>,</a>
+<a class="sourceLine" id="cb802-3" data-line-number="3">                              <span class="st">&quot;rho_u[1,2]&quot;</span>, <span class="st">&quot;rho_u[1,3]&quot;</span>, <span class="st">&quot;rho_u[2,3]&quot;</span>))</a></code></pre></div>
 <pre><code>##            mean  2.5% 97.5% n_eff Rhat
 ## alpha      6.42  6.35  6.50   780 1.01
 ## beta       0.14  0.12  0.17  1242 1.00
@@ -1294,16 +1296,16 @@ generated quantities {
   }
 }</code></pre>
 <p>Save the file as <code>stan_models/mixtureh_gen.stan</code>, and generate 500 simulated datasets as follows:</p>
-<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb806-1" data-line-number="1">gen_model &lt;-<span class="st"> </span><span class="kw">stan_model</span>(<span class="st">&quot;stan_models/mixtureh_gen.stan&quot;</span>)</a>
-<a class="sourceLine" id="cb806-2" data-line-number="2">draws_par &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(fit_mix_data)[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>, ,drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
-<a class="sourceLine" id="cb806-3" data-line-number="3">gen_mix_data &lt;-<span class="st"> </span><span class="kw">gqs</span>(gen_model,</a>
-<a class="sourceLine" id="cb806-4" data-line-number="4">                    <span class="dt">data =</span> ls_dots_data,</a>
-<a class="sourceLine" id="cb806-5" data-line-number="5">                    <span class="dt">draws =</span> draws_par)</a></code></pre></div>
+<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb805-1" data-line-number="1">gen_model &lt;-<span class="st"> </span><span class="kw">stan_model</span>(<span class="st">&quot;stan_models/mixtureh_gen.stan&quot;</span>)</a>
+<a class="sourceLine" id="cb805-2" data-line-number="2">draws_par &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(fit_mix_data)[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>, ,drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
+<a class="sourceLine" id="cb805-3" data-line-number="3">gen_mix_data &lt;-<span class="st"> </span><span class="kw">gqs</span>(gen_model,</a>
+<a class="sourceLine" id="cb805-4" data-line-number="4">                    <span class="dt">data =</span> ls_dots_data,</a>
+<a class="sourceLine" id="cb805-5" data-line-number="5">                    <span class="dt">draws =</span> draws_par)</a></code></pre></div>
 <p>We first take a look at the general distribution of response times generated by the posterior predictive model and by our real data in Figure <a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#fig:postpmix">15.2</a>.</p>
 
-<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb807-1" data-line-number="1">rt_pred &lt;-<span class="st"> </span><span class="kw">extract</span>(gen_mix_data)<span class="op">$</span>rt_pred</a>
-<a class="sourceLine" id="cb807-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(<span class="dt">y =</span> ls_dots_data<span class="op">$</span>rt, <span class="dt">yrep =</span> rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb807-3" data-line-number="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb806-1" data-line-number="1">rt_pred &lt;-<span class="st"> </span><span class="kw">extract</span>(gen_mix_data)<span class="op">$</span>rt_pred </a>
+<a class="sourceLine" id="cb806-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(<span class="dt">y =</span> ls_dots_data<span class="op">$</span>rt, <span class="dt">yrep =</span> rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb806-3" data-line-number="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>)) </a></code></pre></div>
 <div class="figure"><span id="fig:postpmix"></span>
 <img src="bookdown_files/figure-html/postpmix-1.svg" alt="Posterior predictive distribution of the hierarchical fast guess model in comparision with the observed response times." width="672" />
 <p class="caption">
@@ -1315,10 +1317,10 @@ FIGURE 15.2: Posterior predictive distribution of the hierarchical fast guess mo
 <!-- If we want to plot the prior predicted distribution of differences in response time conditioning on task difficulty, we need to define a new function. Then we use the `bayesplot` function `ppc_stat()` that takes as an argument of `stat` any summary function. -->
 <p>Next we examine the effect of the experimental manipulation in Figure <a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#fig:postpmanip">15.3</a>: The model is underestimating the effect of the experimental manipulation and the observed difference between response times is well outside the bulk of the predictive distribution.</p>
 
-<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb808-1" data-line-number="1">meanrt_diff &lt;-<span class="st"> </span><span class="cf">function</span>(rt){</a>
-<a class="sourceLine" id="cb808-2" data-line-number="2">  <span class="kw">mean</span>(rt[ls_dots_data<span class="op">$</span>x <span class="op">==</span><span class="st"> </span><span class="fl">.5</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(rt[ls_dots_data<span class="op">$</span>x <span class="op">==</span><span class="st"> </span><span class="fl">-.5</span>])</a>
-<a class="sourceLine" id="cb808-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb808-4" data-line-number="4"><span class="kw">ppc_stat</span>(<span class="dt">y =</span> ls_dots_data<span class="op">$</span>rt, <span class="dt">yrep =</span> rt_pred, <span class="dt">stat =</span> meanrt_diff) </a></code></pre></div>
+<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb807-1" data-line-number="1">meanrt_diff &lt;-<span class="st"> </span><span class="cf">function</span>(rt){</a>
+<a class="sourceLine" id="cb807-2" data-line-number="2">  <span class="kw">mean</span>(rt[ls_dots_data<span class="op">$</span>x <span class="op">==</span><span class="st"> </span><span class="fl">.5</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(rt[ls_dots_data<span class="op">$</span>x <span class="op">==</span><span class="st"> </span><span class="fl">-.5</span>])</a>
+<a class="sourceLine" id="cb807-3" data-line-number="3">}  </a>
+<a class="sourceLine" id="cb807-4" data-line-number="4"><span class="kw">ppc_stat</span>(<span class="dt">y =</span> ls_dots_data<span class="op">$</span>rt, <span class="dt">yrep =</span> rt_pred, <span class="dt">stat =</span> meanrt_diff) </a></code></pre></div>
 <div class="figure"><span id="fig:postpmanip"></span>
 <img src="bookdown_files/figure-html/postpmanip-1.svg" alt="Posterior predictive distribution of the difference in response time due to the experimental manipulation." width="672" />
 <p class="caption">
@@ -1326,20 +1328,20 @@ FIGURE 15.3: Posterior predictive distribution of the difference in response tim
 </p>
 </div>
 <p>We also look at some instances of the predictive distribution. Figure <a href="#fig:postppdobs"><strong>??</strong></a> shows to simulated datasets in red overlaid to the real observations in black. As we noticed in Figure <a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#fig:postpmix">15.2</a>, the model is predicting less variability than what we find in the data.</p>
-<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb809-1" data-line-number="1">acc_pred &lt;-<span class="st"> </span><span class="kw">extract</span>(gen_mix_data)<span class="op">$</span>acc_pred</a>
-<a class="sourceLine" id="cb809-2" data-line-number="2">df_dots_data &lt;-</a>
-<a class="sourceLine" id="cb809-3" data-line-number="3"><span class="st">  </span>df_dots_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">acc_pred1 =</span> acc_pred[<span class="dv">1</span>,], <span class="dt">rt_pred1 =</span> rt_pred[<span class="dv">1</span>,],</a>
-<a class="sourceLine" id="cb809-4" data-line-number="4">                          <span class="dt">acc_pred2 =</span> acc_pred[<span class="dv">2</span>,], <span class="dt">rt_pred2 =</span> rt_pred[<span class="dv">2</span>,])</a></code></pre></div>
-<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb810-1" data-line-number="1"><span class="kw">ggplot</span>(df_dots_data, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(acc), <span class="dt">y =</span> rt)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb810-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb810-3" data-line-number="3">             <span class="dt">position =</span> <span class="kw">position_jitter</span>(<span class="dt">width =</span> <span class="fl">.4</span>, <span class="dt">height =</span> <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb810-4" data-line-number="4">             <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb810-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(acc_pred1), <span class="dt">y =</span> rt_pred1), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>,</a>
-<a class="sourceLine" id="cb810-6" data-line-number="6">             <span class="dt">position =</span> <span class="kw">position_jitter</span>(<span class="dt">width =</span> <span class="fl">.4</span>, <span class="dt">height =</span> <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb810-7" data-line-number="7">             <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb810-8" data-line-number="8"><span class="st">  </span><span class="kw">facet_wrap</span>(diff <span class="op">~</span><span class="st"> </span>emphasis) <span class="op">+</span></a>
-<a class="sourceLine" id="cb810-9" data-line-number="9"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Accuracy&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb810-10" data-line-number="10"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Response time&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb808-1" data-line-number="1">acc_pred &lt;-<span class="st"> </span><span class="kw">extract</span>(gen_mix_data)<span class="op">$</span>acc_pred</a>
+<a class="sourceLine" id="cb808-2" data-line-number="2">df_dots_data &lt;-</a>
+<a class="sourceLine" id="cb808-3" data-line-number="3"><span class="st">  </span>df_dots_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">acc_pred1 =</span> acc_pred[<span class="dv">1</span>,], <span class="dt">rt_pred1 =</span> rt_pred[<span class="dv">1</span>,], </a>
+<a class="sourceLine" id="cb808-4" data-line-number="4">                          <span class="dt">acc_pred2 =</span> acc_pred[<span class="dv">2</span>,], <span class="dt">rt_pred2 =</span> rt_pred[<span class="dv">2</span>,])</a></code></pre></div>
+<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb809-1" data-line-number="1"><span class="kw">ggplot</span>(df_dots_data, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(acc), <span class="dt">y =</span> rt)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb809-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb809-3" data-line-number="3">             <span class="dt">position =</span> <span class="kw">position_jitter</span>(<span class="dt">width =</span> <span class="fl">.4</span>, <span class="dt">height =</span> <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb809-4" data-line-number="4">             <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb809-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(acc_pred1), <span class="dt">y =</span> rt_pred1), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>,</a>
+<a class="sourceLine" id="cb809-6" data-line-number="6">             <span class="dt">position =</span> <span class="kw">position_jitter</span>(<span class="dt">width =</span> <span class="fl">.4</span>, <span class="dt">height =</span> <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb809-7" data-line-number="7">             <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb809-8" data-line-number="8"><span class="st">  </span><span class="kw">facet_wrap</span>(diff <span class="op">~</span><span class="st"> </span>emphasis) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb809-9" data-line-number="9"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Accuracy&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb809-10" data-line-number="10"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Response time&quot;</span>)</a></code></pre></div>
 
 <div class="figure"><span id="fig:postppdobs-1"></span>
 <img src="bookdown_files/figure-html/postppdobs-1.svg" alt="Two simulated datasets in red overlaid to the observations in black." width="672" />
