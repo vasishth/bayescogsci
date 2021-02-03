@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.1 Basic concepts illustrated using a two-level factor | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.1 Basic concepts illustrated using a two-level factor | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-13" />
+<meta name="date" content="2021-02-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,18 +50,7 @@
 
 
 
-<script type="text/javascript">
- $(document).ready(function() {
-     $folds = $(".solution");
-     $folds.wrapInner("<div class=\"solution-blck\">"); // wrap a div container around content
-     $folds.prepend("<button class=\"solution-btn\">Show solution</button>");  // add a button
-     $(".solution-blck").toggle();  // fold all blocks
-     $(".solution-btn").on("click", function() {  // add onClick event
-         $(this).text($(this).text() === "Hide solution" ? "Show solution" : "Hide solution");  // if the text equals "Hide solution", change it to "Show solution"or else to "Hide solution" 
-         $(this).next(".solution-blck").toggle("linear");  // "swing" is the default easing function. This can be further customized in its speed or the overall animation itself.
-     })
- });
-</script>
+
 
 
 <style type="text/css">
@@ -153,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="ch-intro.html"><a href="ch-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introprob.html"><a href="introprob.html"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
 <li class="chapter" data-level="1.2" data-path="conditional-probability.html"><a href="conditional-probability.html"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
 <li class="chapter" data-level="1.3" data-path="the-law-of-total-probability.html"><a href="the-law-of-total-probability.html"><i class="fa fa-check"></i><b>1.3</b> The law of total probability</a></li>
@@ -222,9 +211,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
 <li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
 <li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
-<li class="chapter" data-level="3.9" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>3.9</b> Appendix</a><ul>
-<li class="chapter" data-level="3.9.1" data-path="appendix.html"><a href="appendix.html#app:pp"><i class="fa fa-check"></i><b>3.9.1</b> Generating prior predictive distributions with <code>brms</code></a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
 <li class="chapter" data-level="4.1" data-path="sec-pupil.html"><a href="sec-pupil.html"><i class="fa fa-check"></i><b>4.1</b> A first linear regression: Does attentional load affect pupil size?</a><ul>
@@ -248,8 +234,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
 <li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
 <li class="chapter" data-level="4.6" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
-<li class="chapter" data-level="4.7" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="appendix-1.html"><a href="appendix-1.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
+<li class="chapter" data-level="4.7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="appendix.html"><a href="appendix.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
@@ -275,116 +261,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
 <li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
 <li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
-<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cell-means-parameterization-and-posterior-comparisons"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
 <li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="6.3.2" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="6.3.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
 <li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
 <li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html"><i class="fa fa-check"></i><b>6.5</b> Examples of contrast coding in a factorial design with two factors</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>6.5.1</b> The difference between an ANOVA and a multiple regression</a></li>
-<li class="chapter" data-level="6.5.2" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>6.5.2</b> Nested effects</a></li>
-<li class="chapter" data-level="6.5.3" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>6.5.3</b> Interactions between contrasts</a></li>
-</ul></li>
+<li class="chapter" data-level="6.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>6.5</b> Computing condition means from estimated contrasts</a></li>
 <li class="chapter" data-level="6.6" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>7</b> Meta-analysis and measurement error models</a><ul>
-<li class="chapter" data-level="7.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>7.1</b> Meta-analysis</a></li>
-<li class="chapter" data-level="7.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>7.2</b> Measurement-error models</a></li>
-<li class="chapter" data-level="7.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>7.3</b> Further reading</a></li>
-<li class="chapter" data-level="7.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>8</b> Meta-analysis and measurement error models</a><ul>
+<li class="chapter" data-level="8.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>8.1</b> Meta-analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>8.2</b> Measurement-error models</a></li>
+<li class="chapter" data-level="8.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.3</b> Further reading</a></li>
+<li class="chapter" data-level="8.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>8.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>III Model comparison</b></span></li>
-<li class="chapter" data-level="8" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>8</b> Introduction to model comparison</a></li>
-<li class="chapter" data-level="9" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>9</b> Bayes factors</a><ul>
-<li class="chapter" data-level="9.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>9.1</b> Hypothesis testing using the Bayes factor</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>9.1.1</b> Marginal likelihood</a></li>
-<li class="chapter" data-level="9.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>9.1.2</b> Bayes factor</a></li>
+<li class="chapter" data-level="9" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>9</b> Introduction to model comparison</a></li>
+<li class="chapter" data-level="10" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>10</b> Bayes factors</a><ul>
+<li class="chapter" data-level="10.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>10.1</b> Hypothesis testing using the Bayes factor</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>10.1.1</b> Marginal likelihood</a></li>
+<li class="chapter" data-level="10.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>10.1.2</b> Bayes factor</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>9.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>9.2.1</b> Non-nested models</a></li>
+<li class="chapter" data-level="10.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>10.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sensitivity-analysis"><i class="fa fa-check"></i><b>10.2.1</b> Sensitivity analysis</a></li>
+<li class="chapter" data-level="10.2.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>10.2.2</b> Non-nested models</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html"><i class="fa fa-check"></i><b>9.3</b> Understanding the (in-)stability of Bayes factors</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-the-number-of-iterations-of-the-posterior-sampler"><i class="fa fa-check"></i><b>9.3.1</b> Instability due to the number of iterations of the posterior sampler</a></li>
-<li class="chapter" data-level="9.3.2" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-posterior-uncertainty-and-noise-associated-with-subjects-items-and-residual-variability"><i class="fa fa-check"></i><b>9.3.2</b> Instability due to posterior uncertainty and noise associated with subjects, items, and residual variability</a></li>
+<li class="chapter" data-level="10.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>10.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a></li>
+<li class="chapter" data-level="10.4" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html"><i class="fa fa-check"></i><b>10.4</b> Bayes factors in theory: Stability and accuracy</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#instability-due-to-the-effective-number-of-posterior-samples"><i class="fa fa-check"></i><b>10.4.1</b> Instability due to the effective number of posterior samples</a></li>
+<li class="chapter" data-level="10.4.2" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#inaccuracy-of-bayes-factors-does-the-estimate-approximate-the-true-bayes-factor-well"><i class="fa fa-check"></i><b>10.4.2</b> Inaccuracy of Bayes factors: Does the estimate approximate the true Bayes factor well?</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
-<li class="chapter" data-level="9.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
-<li class="chapter" data-level="9.6" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
+<li class="chapter" data-level="10.5" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html"><i class="fa fa-check"></i><b>10.5</b> Bayes factors in practice: Variability with the data</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variation-associated-with-the-data-subjects-items-and-residual-noise"><i class="fa fa-check"></i><b>10.5.1</b> Variation associated with the data (subjects, items, and residual noise)</a></li>
+<li class="chapter" data-level="10.5.2" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#example-2-inhibitory-and-facilitatory-interference-effects"><i class="fa fa-check"></i><b>10.5.2</b> Example 2: Inhibitory and facilitatory interference effects</a></li>
+<li class="chapter" data-level="10.5.3" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variability-of-the-bayes-factor-posterior-simulations"><i class="fa fa-check"></i><b>10.5.3</b> Variability of the Bayes factor: Posterior simulations</a></li>
+<li class="chapter" data-level="10.5.4" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#visualize-distribution-of-bayes-factors"><i class="fa fa-check"></i><b>10.5.4</b> Visualize distribution of Bayes factors</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>10</b> Cross validation</a><ul>
-<li class="chapter" data-level="10.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>10.1</b> Expected log predictive density of a model</a></li>
-<li class="chapter" data-level="10.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>10.2</b> K-fold and leave-one-out cross-validation</a></li>
-<li class="chapter" data-level="10.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>10.3</b> Testing the N400 effect using cross-validation</a></li>
-<li class="chapter" data-level="10.4" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
-<li class="chapter" data-level="10.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>10.5</b> Further reading</a></li>
-<li class="chapter" data-level="10.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
+<li class="chapter" data-level="10.6" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.6</b> Summary</a></li>
+<li class="chapter" data-level="10.7" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.7</b> Further reading</a></li>
+<li class="chapter" data-level="10.8" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>10.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>11</b> Cross validation</a><ul>
+<li class="chapter" data-level="11.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>11.1</b> Expected log predictive density of a model</a></li>
+<li class="chapter" data-level="11.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>11.2</b> K-fold and leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="11.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>11.3</b> Testing the N400 effect using cross-validation</a></li>
+<li class="chapter" data-level="11.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.4</b> Summary</a></li>
+<li class="chapter" data-level="11.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.5</b> Further reading</a></li>
+<li class="chapter" data-level="11.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>11.6</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced models with Stan</b></span></li>
-<li class="chapter" data-level="11" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>11</b> Introduction to the probabilistic programming language Stan</a><ul>
-<li class="chapter" data-level="11.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>11.1</b> Stan syntax</a></li>
-<li class="chapter" data-level="11.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>11.2</b> A first simple example with Stan: Normal likelihood</a></li>
-<li class="chapter" data-level="11.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>11.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
-<li class="chapter" data-level="11.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>11.4</b> Regression models in Stan</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>11.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
-<li class="chapter" data-level="11.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>11.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
-<li class="chapter" data-level="11.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>11.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
+<li class="chapter" data-level="12" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>12</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="12.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>12.1</b> Stan syntax</a></li>
+<li class="chapter" data-level="12.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>12.2</b> A first simple example with Stan: Normal likelihood</a></li>
+<li class="chapter" data-level="12.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>12.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
+<li class="chapter" data-level="12.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>12.4</b> Regression models in Stan</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>12.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
+<li class="chapter" data-level="12.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>12.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
+<li class="chapter" data-level="12.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>12.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>11.5</b> Model comparison in Stan</a><ul>
-<li class="chapter" data-level="11.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>11.5.1</b> Bayes factor in Stan</a></li>
-<li class="chapter" data-level="11.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>11.5.2</b> Cross validation in Stan</a></li>
+<li class="chapter" data-level="12.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>12.5</b> Model comparison in Stan</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>12.5.1</b> Bayes factor in Stan</a></li>
+<li class="chapter" data-level="12.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>12.5.2</b> Cross validation in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="11.6" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.6</b> Summary</a></li>
-<li class="chapter" data-level="11.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>11.7</b> Further reading</a></li>
-<li class="chapter" data-level="11.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>11.8</b> Exercises</a></li>
+<li class="chapter" data-level="12.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.6</b> Summary</a></li>
+<li class="chapter" data-level="12.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.7</b> Further reading</a></li>
+<li class="chapter" data-level="12.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>12.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>12</b> Complex models and reparametrization</a><ul>
-<li class="chapter" data-level="12.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>12.1</b> Hierarchical models with Stan</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>12.1.1</b> Varying intercept model with Stan</a></li>
-<li class="chapter" data-level="12.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>12.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
-<li class="chapter" data-level="12.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>12.1.3</b> Correlated varying intercept varying slopes model</a></li>
-<li class="chapter" data-level="12.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>12.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="13" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>13</b> Complex models and reparametrization</a><ul>
+<li class="chapter" data-level="13.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>13.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>13.1.1</b> Varying intercept model with Stan</a></li>
+<li class="chapter" data-level="13.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>13.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="13.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>13.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="13.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>13.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.2</b> Summary</a></li>
-<li class="chapter" data-level="12.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
-<li class="chapter" data-level="12.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>12.4</b> Exercises</a></li>
+<li class="chapter" data-level="13.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>13.2</b> Summary</a></li>
+<li class="chapter" data-level="13.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>13.3</b> Further reading</a></li>
+<li class="chapter" data-level="13.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>13.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>V Computational cognitive modeling</b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-to-computational-cognitive-modeling.html"><a href="introduction-to-computational-cognitive-modeling.html"><i class="fa fa-check"></i><b>13</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="13.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.1</b> Further reading</a></li>
+<li class="chapter" data-level="14" data-path="introduction-to-computational-cognitive-modeling-chcogmod.html"><a href="introduction-to-computational-cognitive-modeling-chcogmod.html"><i class="fa fa-check"></i><b>14</b> Introduction to computational cognitive modeling {ch:cogmod}</a><ul>
+<li class="chapter" data-level="14.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>14.1</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>14</b> Multinomial processing trees</a><ul>
-<li class="chapter" data-level="14.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>14.1</b> Modeling multiple categorical responses</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>14.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
-<li class="chapter" data-level="14.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>14.1.2</b> A model for multiple responses using the categorical distribution</a></li>
+<li class="chapter" data-level="15" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>15</b> Multinomial processing trees</a><ul>
+<li class="chapter" data-level="15.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>15.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>15.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
+<li class="chapter" data-level="15.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>15.1.2</b> A model for multiple responses using the categorical distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>14.2</b> Multinomial processing tree (MPT) models</a><ul>
-<li class="chapter" data-level="14.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>14.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
+<li class="chapter" data-level="15.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>15.2</b> Multinomial processing tree (MPT) models</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>15.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="14.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>14.3</b> Further reading</a></li>
-<li class="chapter" data-level="14.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>14.4</b> Exercises</a></li>
+<li class="chapter" data-level="15.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
+<li class="chapter" data-level="15.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>15</b> Mixture models</a><ul>
-<li class="chapter" data-level="15.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>15.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>15.1.1</b> A fast guess model account of the global motion detection task</a></li>
+<li class="chapter" data-level="16" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>16</b> Mixture models</a><ul>
+<li class="chapter" data-level="16.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>16.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>16.1.1</b> A fast guess model account of the global motion detection task</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>15.2</b> Summary</a></li>
-<li class="chapter" data-level="15.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
-<li class="chapter" data-level="15.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.2" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>16.2</b> Summary</a></li>
+<li class="chapter" data-level="16.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.3</b> Further reading</a></li>
+<li class="chapter" data-level="16.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>16.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Appendix</b></span></li>
-<li class="chapter" data-level="16" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>16</b> Important distributions</a></li>
+<li class="chapter" data-level="17" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>17</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -408,72 +411,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="basic-concepts-illustrated-using-a-two-level-factor" class="section level2">
 <h2><span class="header-section-number">6.1</span> Basic concepts illustrated using a two-level factor</h2>
-<p>We first consider the simplest case: suppose we want to compare the means of a dependent variable (DV) such as response times between two groups of subjects. R can be used to simulate data for such an example. The simulations assume longer response times in condition F1 (<span class="math inline">\(\mu_1 = 0.8\)</span> sec) than F2 (<span class="math inline">\(\mu_2 = 0.4\)</span> sec). The data from the <span class="math inline">\(10\)</span> simulated subjects are aggregated and summary statistics are computed for the two groups.</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">5</span>, <span class="dt">mu=</span><span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.4</span>), <span class="dt">Sigma=</span><span class="kw">diag</span>(<span class="dv">2</span>)<span class="op">*</span><span class="fl">0.2</span><span class="op">^</span><span class="dv">2</span>, <span class="dt">empirical=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb266-2" data-line-number="2">df_simdat &lt;-<span class="st"> </span>d <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="dt">key=</span><span class="st">&quot;F&quot;</span>, <span class="dt">value=</span><span class="st">&quot;DV&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb266-3" data-line-number="3"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">id=</span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(.), <span class="dt">F=</span><span class="kw">factor</span>(F))</a>
-<a class="sourceLine" id="cb266-4" data-line-number="4"><span class="kw">levels</span>(df_simdat<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F2&quot;</span>)</a>
-<a class="sourceLine" id="cb266-5" data-line-number="5">df_simdat</a></code></pre></div>
-<pre><code>##     F    DV id
-## 1  F1 0.717  1
-## 2  F1 0.796  2
-## 3  F1 0.528  3
-## 4  F1 0.894  4
-## 5  F1 1.065  5
-## 6  F2 0.198  6
-## 7  F2 0.313  7
-## 8  F2 0.476  8
-## 9  F2 0.711  9
-## 10 F2 0.302 10</code></pre>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" data-line-number="1"><span class="kw">str</span>(df_simdat)</a></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    10 obs. of  3 variables:
+<p>We first consider the simplest case: suppose we want to compare the means of a dependent variable (DV) such as response times between two groups of subjects. R can be used to simulate data for such an example. Such simulated data is available in the R-package <code>bcogsci</code> as the data set <code>df_contrasts1</code>. The simulations assumed longer response times in condition F1 (<span class="math inline">\(\mu_1 = 0.8\)</span> sec) than F2 (<span class="math inline">\(\mu_2 = 0.4\)</span> sec). The data from the <span class="math inline">\(10\)</span> simulated subjects are aggregated and summary statistics are computed for the two groups.</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_contrasts1&quot;</span>) </a>
+<a class="sourceLine" id="cb258-2" data-line-number="2">df_contrasts1</a></code></pre></div>
+<pre><code>## # A tibble: 10 x 3
+##   F        DV    id
+##   &lt;fct&gt; &lt;dbl&gt; &lt;int&gt;
+## 1 F1    0.636     1
+## 2 F1    0.841     2
+## 3 F1    0.555     3
+## 4 F1    1.03      4
+## 5 F1    0.938     5
+## # … with 5 more rows</code></pre>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" data-line-number="1"><span class="kw">str</span>(df_contrasts1)</a></code></pre></div>
+<pre><code>## tibble [10 × 3] (S3: tbl_df/tbl/data.frame)
 ##  $ F : Factor w/ 2 levels &quot;F1&quot;,&quot;F2&quot;: 1 1 1 1 1 2 2 2 2 2
-##  $ DV: num  0.717 0.796 0.528 0.894 1.065 ...
-##  $ id: int  1 2 3 4 5 6 7 8 9 10</code></pre>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" data-line-number="1">table1 &lt;-<span class="st"> </span>df_simdat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(F) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Table for main effect F</span></a>
-<a class="sourceLine" id="cb270-2" data-line-number="2"><span class="st">   </span><span class="kw">summarize</span>(<span class="dt">N=</span><span class="kw">n</span>(), <span class="dt">M=</span><span class="kw">mean</span>(DV), <span class="dt">SD=</span><span class="kw">sd</span>(DV), <span class="dt">SE=</span><span class="kw">round</span>(SD<span class="op">/</span><span class="kw">sqrt</span>(N),<span class="dv">1</span>) )</a></code></pre></div>
+##  $ DV: num [1:10] 0.636 0.841 0.555 1.029 0.938 ...
+##  $ id: int [1:10] 1 2 3 4 5 6 7 8 9 10</code></pre>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" data-line-number="1">table1a &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(table1)</a>
-<a class="sourceLine" id="cb272-2" data-line-number="2"><span class="kw">names</span>(table1a) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Factor&quot;</span>,<span class="st">&quot;N data&quot;</span>,<span class="st">&quot;Est. means&quot;</span>,<span class="st">&quot;Std. dev.&quot;</span>,<span class="st">&quot;Std. errors&quot;</span>)</a>
-<a class="sourceLine" id="cb272-3" data-line-number="3">table1a</a></code></pre></div>
-<pre><code>##   Factor N data Est. means Std. dev. Std. errors
-## 1     F1      5        0.8       0.2         0.1
-## 2     F2      5        0.4       0.2         0.1</code></pre>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" data-line-number="1">(GM &lt;-<span class="st">  </span><span class="kw">mean</span>(table1<span class="op">$</span>M)) <span class="co"># Grand Mean</span></a></code></pre></div>
 <pre><code>## [1] 0.6</code></pre>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" data-line-number="1"><span class="kw">apa_table</span>(table1a, <span class="dt">placement=</span><span class="st">&quot;b&quot;</span>, <span class="dt">digits=</span><span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb264-2" data-line-number="2">    <span class="dt">caption=</span><span class="st">&quot;Summary statistics per condition for the simulated data.&quot;</span>)</a></code></pre></div>
+<caption>
+<span id="tab:cTab1Means">TABLE 6.1: </span>
+</caption>
+<div custom-style="Table Caption">
+<em>Summary statistics per condition for the simulated data.</em>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Factor</th>
+<th align="left">N data</th>
+<th align="left">Est. means</th>
+<th align="left">Std. dev.</th>
+<th align="left">Std. errors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">F1</td>
+<td align="left">5</td>
+<td align="left">0.8</td>
+<td align="left">0.2</td>
+<td align="left">0.1</td>
+</tr>
+<tr class="even">
+<td align="left">F2</td>
+<td align="left">5</td>
+<td align="left">0.4</td>
+<td align="left">0.2</td>
+<td align="left">0.1</td>
+</tr>
+</tbody>
+</table>
 <div class="figure"><span id="fig:cFig1Means"></span>
 <img src="bookdown_files/figure-html/cFig1Means-1.svg" alt="Means and standard errors of the simulated dependent variable (e.g., response times in seconds) in two conditions F1 and F2." width="384" />
 <p class="caption">
 FIGURE 6.1: Means and standard errors of the simulated dependent variable (e.g., response times in seconds) in two conditions F1 and F2.
 </p>
 </div>
-<p>The results, displayed in Figure <a href="basic-concepts-illustrated-using-a-two-level-factor.html#fig:cFig1Means">6.1</a>, show that the assumed true condition means are exactly realized with the simulated data. The numbers are exact because the <code>mvrnorm()</code> function ensures that the data are generated so that the sample mean yields the true means for each level. In real data-sets, of course, the sample means will vary from experiment to experiment.</p>
+<p>The results, displayed in Figure <a href="basic-concepts-illustrated-using-a-two-level-factor.html#fig:cFig1Means">6.1</a> and shown in Table <a href="basic-concepts-illustrated-using-a-two-level-factor.html#tab:cTab1Means">6.1</a>, show that the assumed true condition means are exactly realized with the simulated data. The numbers are exact because the used <code>mvrnorm()</code> function (see <code>df_contrasts1</code>) ensures that the data are generated so that the sample mean yields the true means for each level. In real data-sets, of course, the sample means will vary from experiment to experiment.</p>
 <p>A simple Bayesian linear model of <code>DV</code> on <code>F</code> using the function <code>brm</code> yields a straightforward estimate of the difference between the group means. We use rather vague priors. The estimates for the fixed effects are presented below:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" data-line-number="1">fit_F &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb276-2" data-line-number="2">                 <span class="dt">data =</span> df_simdat,</a>
-<a class="sourceLine" id="cb276-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb276-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb276-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb276-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb276-7" data-line-number="7">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb276-8" data-line-number="8">                 )) </a>
-<a class="sourceLine" id="cb276-9" data-line-number="9"><span class="kw">fixef</span>(fit_F)</a></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1">fit_F &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb265-2" data-line-number="2">                 <span class="dt">data =</span> df_contrasts1,</a>
+<a class="sourceLine" id="cb265-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb265-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb265-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb265-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb265-7" data-line-number="7">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb265-8" data-line-number="8">                 )) </a></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">fixef</span>(fit_F),<span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error  Q2.5 Q97.5
-## Intercept     0.79      0.11  0.56  1.02
-## FF2          -0.39      0.16 -0.71 -0.07</code></pre>
+## Intercept     0.79      0.11  0.58  1.01
+## FF2          -0.39      0.16 -0.70 -0.06</code></pre>
 <p>Comparing the means for each condition with the coefficients (<em>Estimates</em>) reveals that (i) the intercept (<span class="math inline">\(0.8\)</span>) is the mean for condition F1, <span class="math inline">\(\hat\mu_1\)</span>; and (ii) the slope (<code>FF2</code>: <span class="math inline">\(-0.4\)</span>) is the difference between the true means for the two groups, <span class="math inline">\(\hat\mu_2 - \hat\mu_1\)</span> <span class="citation">(Bolker <a href="#ref-Bolker2018">2018</a>)</span>:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{array}{lcl}
-\text{Intercept} = &amp; \hat{\mu}_1 &amp; = \text{estimated mean for \texttt{F1}} \\
-\text{Slope (\texttt{FF2})} = &amp; \hat{\mu}_2 - \hat{\mu}_1 &amp; = \text{estim. mean for \texttt{F2}} - \text{estim. mean for \texttt{F1}} 
+\text{Intercept} = &amp; \hat{\mu}_1 &amp; = \text{estimated mean for F1} \\
+\text{Slope (FF2)} = &amp; \hat{\mu}_2 - \hat{\mu}_1 &amp; = \text{estim. mean for F2} - \text{estim. mean for F1} 
 \end{array}
 \label{def:beta}
 \end{equation}\]</span></p>
 <p>The new information are the credible intervals for the difference between the two groups.</p>
 <div id="treatmentcontrasts" class="section level3">
 <h3><span class="header-section-number">6.1.1</span> Default contrast coding: Treatment contrasts</h3>
-<p>How does the function <code>brm</code> arrive at these particular values for the intercept and slope? That is, why does the intercept assess the mean of condition <code>F1</code> and how do we know the slope measures the difference in means between <code>F2</code><span class="math inline">\(-\)</span><code>F1</code>? This result is a consequence of the default contrast coding of the factor . R assigns treatment contrasts to factors and orders their levels alphabetically. The first factor level (here: ) is coded as <span class="math inline">\(0\)</span> and the second level (here: ) is coded as <span class="math inline">\(1\)</span>. This becomes clear when we inspect the current contrast attribute of the factor using the <code>contrasts</code> command:</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" data-line-number="1"><span class="kw">contrasts</span>(df_simdat<span class="op">$</span>F)</a></code></pre></div>
+<p>How does the function <code>brm</code> arrive at these particular values for the intercept and slope? That is, why does the intercept assess the mean of condition <code>F1</code> and how do we know the slope measures the difference in means between <code>F2</code><span class="math inline">\(-\)</span><code>F1</code>? This result is a consequence of the default contrast coding of the factor <code>F</code>. R assigns treatment contrasts to factors and orders their levels alphabetically. The first factor level (here: <code>F1</code>) is coded as <span class="math inline">\(0\)</span> and the second level (here: <code>F2</code>) is coded as <span class="math inline">\(1\)</span>. This becomes clear when we inspect the current contrast attribute of the factor using the <code>contrasts</code> command:</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts1<span class="op">$</span>F)</a></code></pre></div>
 <pre><code>##    F2
 ## F1  0
 ## F2  1</code></pre>
@@ -488,12 +512,12 @@ So, if <span class="math inline">\(x = 0\)</span> (condition <code>F1</code>), <
 <p>Expressing the above in terms of the estimated coefficients:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{array}{lccll}
-\text{estim. value for \texttt{F1}} = &amp; \hat{\mu}_1 = &amp; \hat{\beta}_0 = &amp; \text{Intercept} \\
-\text{estim. value for \texttt{F2}} = &amp; \hat{\mu}_2 = &amp; \hat{\beta}_0 + \hat{\beta}_1 = &amp; \text{Intercept} + \text{Slope (\texttt{FF2})}
+\text{estim. value for F1} = &amp; \hat{\mu}_1 = &amp; \hat{\beta}_0 = &amp; \text{Intercept} \\
+\text{estim. value for F2} = &amp; \hat{\mu}_2 = &amp; \hat{\beta}_0 + \hat{\beta}_1 = &amp; \text{Intercept} + \text{Slope (FF2)}
 \end{array}
 \label{eq:predVal}
 \end{equation}\]</span></p>
-<p>It is useful to think of such unstandardized regression coefficients as difference scores; they express the increase in the dependent variable <span class="math inline">\(y\)</span> associated with a change in the independent variable <span class="math inline">\(x\)</span> of <span class="math inline">\(1\)</span> unit, such as going from <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span> in this example. The difference between condition means is <span class="math inline">\(0.4 - 0.8 = -0.4\)</span>, which is the estimated regression coefficient <span class="math inline">\(\hat{\beta}_1\)</span>. The sign of the slope is negative because we have chosen to subtract the larger mean  score from the smaller mean  score.</p>
+<p>It is useful to think of such unstandardized regression coefficients as difference scores; they express the increase in the dependent variable <span class="math inline">\(y\)</span> associated with a change in the independent variable <span class="math inline">\(x\)</span> of <span class="math inline">\(1\)</span> unit, such as going from <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span> in this example. The difference between condition means is <span class="math inline">\(0.4 - 0.8 = -0.4\)</span>, which is the estimated regression coefficient <span class="math inline">\(\hat{\beta}_1\)</span>. The sign of the slope is negative because we have chosen to subtract the larger mean <code>F1</code> score from the smaller mean <code>F2</code> score.</p>
 </div>
 <div id="inverseMatrix" class="section level3">
 <h3><span class="header-section-number">6.1.2</span> Defining hypotheses</h3>
@@ -537,58 +561,55 @@ H_0: \beta_0 = 1 \cdot \mu_{F1} + 0 \cdot \mu_{F2} = 0 .
 <p>
 The fact that the intercept term formally tests the null hypothesis that the mean of condition <code>F1</code> is zero is in line with our previous derivation (see equation <a href="#def:beta"><strong>??</strong></a>).</p>
 <p>In R, factor levels are ordered alphabetically and by default the first level is used as the baseline in treatment contrasts. Obviously, this default mapping will only be correct for a given data-set if the levels’ alphabetical ordering matches the desired contrast coding. When it does not, it is possible to re-order the levels. Here is one way of re-ordering the levels in R:</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" data-line-number="1">df_simdat<span class="op">$</span>Fb &lt;-<span class="st"> </span><span class="kw">factor</span>(df_simdat<span class="op">$</span>F,  <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;F2&quot;</span>,<span class="st">&quot;F1&quot;</span>))</a>
-<a class="sourceLine" id="cb280-2" data-line-number="2"><span class="kw">contrasts</span>(df_simdat<span class="op">$</span>Fb)</a></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" data-line-number="1">df_contrasts1<span class="op">$</span>Fb &lt;-<span class="st"> </span><span class="kw">factor</span>(df_contrasts1<span class="op">$</span>F,  <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;F2&quot;</span>,<span class="st">&quot;F1&quot;</span>))</a>
+<a class="sourceLine" id="cb270-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts1<span class="op">$</span>Fb)</a></code></pre></div>
 <pre><code>##    F1
 ## F2  0
 ## F1  1</code></pre>
 <p>
 This re-ordering did not change any data associated with the factor, only one of its attributes. With this new contrast attribute a simple Bayesian model yields the following result.</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" data-line-number="1">fit_Fb &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Fb,</a>
-<a class="sourceLine" id="cb282-2" data-line-number="2">                 <span class="dt">data =</span> df_simdat,</a>
-<a class="sourceLine" id="cb282-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb282-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb282-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb282-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb282-7" data-line-number="7">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb282-8" data-line-number="8">                 )) </a>
-<a class="sourceLine" id="cb282-9" data-line-number="9"><span class="kw">fixef</span>(fit_Fb)</a></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" data-line-number="1">fit_Fb &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Fb,</a>
+<a class="sourceLine" id="cb272-2" data-line-number="2">                 <span class="dt">data =</span> df_contrasts1,</a>
+<a class="sourceLine" id="cb272-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb272-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb272-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb272-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb272-7" data-line-number="7">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb272-8" data-line-number="8">                 )) </a></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">fixef</span>(fit_Fb),<span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error Q2.5 Q97.5
 ## Intercept     0.40      0.11 0.19  0.63
-## FbF1          0.39      0.16 0.05  0.71</code></pre>
+## FbF1          0.39      0.16 0.08  0.70</code></pre>
 <p>The model now estimates different quantities. The intercept now codes the mean of condition <code>F2</code>, and the slope measures the difference in means between <code>F1</code> minus <code>F2</code>. This represents an alternative coding of the treatment contrast.</p>
 </div>
 <div id="effectcoding" class="section level3">
 <h3><span class="header-section-number">6.1.3</span> Sum contrasts</h3>
 <p>Treatment contrasts are only one of many options. It is also possible to use sum contrasts, which code one of the conditions as <span class="math inline">\(-1\)</span> and the other as <span class="math inline">\(+1\)</span>, effectively `centering’ the effects at the grand mean (GM, i.e., the mean of the two group means). Here, we rescale the contrast to values of <span class="math inline">\(-0.5\)</span> and <span class="math inline">\(+0.5\)</span>, which makes the estimated treatment effect the same as for treatment coding and easier to interpret.</p>
-<p>To use this contrast in a linear regression, use the  function:</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" data-line-number="1">(<span class="kw">contrasts</span>(df_simdat<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>,<span class="op">+</span><span class="fl">0.5</span>))</a></code></pre></div>
-<pre><code>## [1] -0.5  0.5</code></pre>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" data-line-number="1">fit_mSum &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb286-2" data-line-number="2">                 <span class="dt">data =</span> df_simdat,</a>
-<a class="sourceLine" id="cb286-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb286-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb286-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb286-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb286-7" data-line-number="7">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb286-8" data-line-number="8">                 )) </a></code></pre></div>
-<pre><code>## Compiling Stan program...</code></pre>
-<pre><code>## Start sampling</code></pre>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" data-line-number="1"><span class="kw">fixef</span>(fit_mSum)</a></code></pre></div>
+<p>To use this contrast in a linear regression, use the <code>contrasts</code> function:</p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" data-line-number="1">(<span class="kw">contrasts</span>(df_contrasts1<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>,<span class="op">+</span><span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb275-2" data-line-number="2">fit_mSum &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb275-3" data-line-number="3">                 <span class="dt">data =</span> df_contrasts1,</a>
+<a class="sourceLine" id="cb275-4" data-line-number="4">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb275-5" data-line-number="5">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb275-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb275-7" data-line-number="7">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb275-8" data-line-number="8">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb275-9" data-line-number="9">                 )) </a></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">fixef</span>(fit_mSum),<span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error  Q2.5 Q97.5
 ## Intercept     0.60      0.08  0.44  0.77
-## F1           -0.39      0.15 -0.69 -0.07</code></pre>
+## F1           -0.39      0.16 -0.70 -0.09</code></pre>
 <p>Here, the slope (<code>F1</code>) again codes the difference of the groups associated with the first and second factor levels. It has the same value as in the treatment contrast.
 However, the intercept now represents the estimate of the average of condition means for F1 and F2, that is, the GM. This differs from the treatment contrast. For the scaled sum contrast:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{array}{lcl}
-\text{Intercept} = &amp; (\hat{\mu}_1 + \hat{\mu}_2)/2 &amp; = \text{estimated mean of \texttt{F1} and \texttt{F2}} \\
-\text{Slope (\texttt{F1})} = &amp; \hat{\mu}_2 - \hat{\mu}_1 &amp; = \text{estim. mean for \texttt{F2}} - \text{estim. mean for \texttt{F1}} 
+\text{Intercept} = &amp; (\hat{\mu}_1 + \hat{\mu}_2)/2 &amp; = \text{estimated mean of F1 and F2} \\
+\text{Slope (F1)} = &amp; \hat{\mu}_2 - \hat{\mu}_1 &amp; = \text{estim. mean for F2} - \text{estim. mean for F1} 
 \end{array}
 \label{def:beta2}
 \end{equation}\]</span></p>
 <p>Why does the intercept assess the GM and why does the slope test the group-difference? This is the result of rescaling the sum contrast. The first factor level (<code>F1</code>) was coded as <span class="math inline">\(-0.5\)</span>, and the second factor level (<code>F1</code>) as <span class="math inline">\(+0.5\)</span>:</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" data-line-number="1"><span class="kw">contrasts</span>(df_simdat<span class="op">$</span>F)</a></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts1<span class="op">$</span>F)</a></code></pre></div>
 <pre><code>##    [,1]
 ## F1 -0.5
 ## F2  0.5</code></pre>
@@ -597,16 +618,16 @@ However, the intercept now represents the estimate of the average of condition m
 y = \beta_0 + \beta_1x
 \label{eq:lm2}
 \end{equation}\]</span></p>
-<p>The group of  subjects is then coded as <span class="math inline">\(-0.5\)</span>, and the response time for the group of  subjects is <span class="math inline">\(\beta_0 + \beta_1 \cdot x_1 = 0.6 + (-0.4) \cdot (-0.5) = 0.8\)</span>. The  group, to the contrary, is coded as <span class="math inline">\(+0.5\)</span>. By implication, the mean of the  group must be <span class="math inline">\(\beta_0 + \beta_1 \cdot x_1 = 0.6 + (-0.4) \cdot 0.5 = 0.4\)</span>.
+<p>The group of <code>F1</code> subjects is then coded as <span class="math inline">\(-0.5\)</span>, and the response time for the group of <code>F1</code> subjects is <span class="math inline">\(\beta_0 + \beta_1 \cdot x_1 = 0.6 + (-0.4) \cdot (-0.5) = 0.8\)</span>. The <code>F2</code> group, to the contrary, is coded as <span class="math inline">\(+0.5\)</span>. By implication, the mean of the <code>F2</code> group must be <span class="math inline">\(\beta_0 + \beta_1 \cdot x_1 = 0.6 + (-0.4) \cdot 0.5 = 0.4\)</span>.
 Expressed in terms of the estimated coefficients:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{array}{lccll}
-\text{estim. value for \texttt{F1}} = &amp; \hat{\mu}_1 = &amp; \hat{\beta}_0 - 0.5 \cdot \hat{\beta}_1 = &amp; \text{Intercept} - 0.5 \cdot \text{Slope (\texttt{F1})}\\
-\text{estim. value for \texttt{F2}} = &amp; \hat{\mu}_2 = &amp; \hat{\beta}_0 + 0.5 \cdot \hat{\beta}_1 = &amp; \text{Intercept} + 0.5 \cdot \text{Slope (\texttt{F1})}
+\text{estim. value for F1} = &amp; \hat{\mu}_1 = &amp; \hat{\beta}_0 - 0.5 \cdot \hat{\beta}_1 = &amp; \text{Intercept} - 0.5 \cdot \text{Slope (F1)}\\
+\text{estim. value for F2} = &amp; \hat{\mu}_2 = &amp; \hat{\beta}_0 + 0.5 \cdot \hat{\beta}_1 = &amp; \text{Intercept} + 0.5 \cdot \text{Slope (F1)}
 \end{array}
 \label{eq:predVal2}
 \end{equation}\]</span></p>
-<p>The unstandardized regression coefficient is a difference score: Taking a step of one unit on the predictor variable <span class="math inline">\(x\)</span>, e.g., from <span class="math inline">\(-0.5\)</span> to <span class="math inline">\(+0.5\)</span>, reflecting a step from condition  to , changes the dependent variable from <span class="math inline">\(0.8\)</span> (for condition ) to <span class="math inline">\(0.4\)</span> (condition ), reflecting a difference of <span class="math inline">\(0.4 - 0.8 = -0.4\)</span>; and this is again the estimated regression coefficient <span class="math inline">\(\hat{\beta}_1\)</span>.
+<p>The unstandardized regression coefficient is a difference score: Taking a step of one unit on the predictor variable <span class="math inline">\(x\)</span>, e.g., from <span class="math inline">\(-0.5\)</span> to <span class="math inline">\(+0.5\)</span>, reflecting a step from condition F1 to F2, changes the dependent variable from <span class="math inline">\(0.8\)</span> (for condition F1) to <span class="math inline">\(0.4\)</span> (condition F2), reflecting a difference of <span class="math inline">\(0.4 - 0.8 = -0.4\)</span>; and this is again the estimated regression coefficient <span class="math inline">\(\hat{\beta}_1\)</span>.
 Moreover, as mentioned above, the intercept now assesses the GM of conditions F1 and F2: it is in the middle between condition means for F1 and F2.</p>
 <p>So far we gave verbal statements about what is tested by the intercept and the slope in the case of the scaled sum contrast. It is possible to write these statements as formal parameter estimates and formal null hypotheses that are tested by each regression coefficient.
 In sum contrasts, the slope parameter <span class="math inline">\(\beta_1\)</span> assesses the following quantity:</p>
@@ -630,141 +651,41 @@ H_0: \beta_0 = 1/2 \cdot \mu_{F1} + 1/2 \cdot \mu_{F2} = \frac{\mu_{F1} + \mu_{F
 \end{equation}\]</span></p>
 <p>
 In balanced data, i.e., in data-sets where there are no missing data points, the average of the two conditions F1 and F2 is the GM. In unbalanced data-sets, where there are missing values, this average is the weighted GM.
-To illustrate this point, consider an example with fully balanced data and two equal group sizes of <span class="math inline">\(5\)</span> subjects for each group F1 and F2. Here, the GM is also the mean across all subjects. Next, consider a highly simplified unbalanced data-set, where in condition  two observations of the dependent variable are available with values of <span class="math inline">\(2\)</span> and <span class="math inline">\(3\)</span>, and where in condition  only one observation of the dependent variables is available with a value of <span class="math inline">\(4\)</span>. In this data-set, the mean across all subjects is <span class="math inline">\(\frac{2 + 3 + 4}{3} = \frac{9}{3} = 3\)</span>. However, the (weighted) GM as assessed in the intercept in a model using sum contrasts for factor  would first compute the mean for each group separately (i.e., <span class="math inline">\(\frac{2 + 3}{2} = 2.5\)</span>, and <span class="math inline">\(4\)</span>), and then compute the mean across conditions <span class="math inline">\(\frac{2.5 + 4}{2} = \frac{6.5}{2} = 3.25\)</span>. The GM of <span class="math inline">\(3.25\)</span> is different from the mean across subjects of <span class="math inline">\(3\)</span>.</p>
-<p>To summarize, treatment contrasts and sum contrasts are two possible ways to parameterize the difference between two groups; they estimate different quantities and test different hypotheses (there are cases, however, where the estimates / hypotheses are equivalent). treatment contrasts compare one or more means against a baseline condition, whereas sum contrasts allow us to determine whether we can reject the null hypothesis that a condition’s mean is the same as the GM (which in the two-group case also implies a hypothesis test that the two group means are the same). One question that comes up here, is how one knows or formally derives what quantities are estimated by a given set of contrasts, and what hypotheses it can be used to test. This question will be discussed in detail below for the general case of any arbitrary contrasts.</p>
+To illustrate this point, consider an example with fully balanced data and two equal group sizes of <span class="math inline">\(5\)</span> subjects for each group F1 and F2. Here, the GM is also the mean across all subjects. Next, consider a highly simplified unbalanced data-set, where in condition F1 two observations of the dependent variable are available with values of <span class="math inline">\(2\)</span> and <span class="math inline">\(3\)</span>, and where in condition F2 only one observation of the dependent variables is available with a value of <span class="math inline">\(4\)</span>. In this data-set, the mean across all subjects is <span class="math inline">\(\frac{2 + 3 + 4}{3} = \frac{9}{3} = 3\)</span>. However, the (weighted) GM as assessed in the intercept in a model using sum contrasts for factor F would first compute the mean for each group separately (i.e., <span class="math inline">\(\frac{2 + 3}{2} = 2.5\)</span>, and <span class="math inline">\(4\)</span>), and then compute the mean across conditions <span class="math inline">\(\frac{2.5 + 4}{2} = \frac{6.5}{2} = 3.25\)</span>. The GM of <span class="math inline">\(3.25\)</span> is different from the mean across subjects of <span class="math inline">\(3\)</span>.</p>
+<p>To summarize, treatment contrasts and sum contrasts are two possible ways to parameterize the difference between two groups; they estimate different quantities and test different hypotheses (there are cases, however, where the estimates / hypotheses are equivalent). Treatment contrasts compare one or more means against a baseline condition, whereas sum contrasts allow us to determine whether we can reject the null hypothesis that a condition’s mean is the same as the GM (which in the two-group case also implies a hypothesis test that the two group means are the same). One question that comes up here, is how one knows or formally derives what quantities are estimated by a given set of contrasts, and what hypotheses it can be used to test. This question will be discussed in detail below for the general case of any arbitrary contrasts.</p>
 </div>
-<div id="cell-means-parameterization-and-posterior-comparisons" class="section level3">
+<div id="sec:cellMeans" class="section level3">
 <h3><span class="header-section-number">6.1.4</span> Cell means parameterization and posterior comparisons</h3>
 <p>One alternative option is to use the so-called cell means parameterization. In this approach, one does not estimate an intercept term, and then differences between factor levels. Instead, each degree of freedom in a design is used to simply estimate the mean of one of the factor levels. As a consequence, no comparisons between condition means are estimated, but simply the mean of each experimental condition is estimated. Cell means parameterization is specified by explicitly removing the intercept term (which is added automatically) by adding a <span class="math inline">\(-1\)</span> in the regression formula:</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" data-line-number="1">fit_mCM &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">-1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb293-2" data-line-number="2">                 <span class="dt">data =</span> df_simdat,</a>
-<a class="sourceLine" id="cb293-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb293-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb293-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb293-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb293-7" data-line-number="7">                 )) </a>
-<a class="sourceLine" id="cb293-8" data-line-number="8"><span class="kw">fixef</span>(fit_mCM)</a></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" data-line-number="1">fit_mCM &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">-1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb280-2" data-line-number="2">                 <span class="dt">data =</span> df_contrasts1,</a>
+<a class="sourceLine" id="cb280-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb280-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb280-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb280-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb280-7" data-line-number="7">                 )) </a></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">fixef</span>(fit_mCM),<span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##     Estimate Est.Error Q2.5 Q97.5
-## FF1      0.8      0.11 0.57  1.03
-## FF2      0.4      0.12 0.17  0.65</code></pre>
-<p>Now, the regression coefficients (see the columns labeled ‘Estimate’) estimate the mean of the first factor level (<span class="math inline">\(0.8\)</span>) and the mean of the second factor level (<span class="math inline">\(0.4\)</span>). This cell means parameterization usually does not allow a test of the hypotheses of interest, as these hypotheses usually relate to differences between conditions rather than to whether each condition differs from zero.
+## FF1     0.80      0.11 0.58  1.01
+## FF2     0.39      0.11 0.17  0.61</code></pre>
+<p>Now, the regression coefficients (see the column labeled ‘Estimate’) estimate the mean of the first factor level (<span class="math inline">\(0.8\)</span>) and the mean of the second factor level (<span class="math inline">\(0.4\)</span>). This cell means parameterization usually does not allow a test of the hypotheses of interest, as these hypotheses usually relate to differences between conditions rather than to whether each condition differs from zero.
 However, the cell means parameterization provides a good example to demonstrate an advantage of Bayesian data analysis. In Bayesian models, it is possible to use the posterior samples to compute new estimates that were not directly contained in the fitted model. To implement this, we first extract the posterior samples from the <code>brm</code> model object:</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" data-line-number="1">df_postSamp &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_mCM)</a>
-<a class="sourceLine" id="cb295-2" data-line-number="2"><span class="kw">str</span>(df_postSamp)</a></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" data-line-number="1">df_postSamp &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_mCM)</a>
+<a class="sourceLine" id="cb283-2" data-line-number="2"><span class="kw">str</span>(df_postSamp)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    4000 obs. of  4 variables:
-##  $ b_FF1: num  0.671 0.902 0.743 0.716 0.809 ...
-##  $ b_FF2: num  0.404 0.501 0.493 0.299 0.321 ...
-##  $ sigma: num  0.227 0.188 0.19 0.18 0.221 ...
-##  $ lp__ : num  -3.98 -4.41 -3.74 -4.24 -3.45 ...</code></pre>
+##  $ b_FF1: num  0.764 0.739 0.887 0.78 0.799 ...
+##  $ b_FF2: num  0.358 0.398 0.177 0.565 0.401 ...
+##  $ sigma: num  0.158 0.259 0.187 0.409 0.201 ...
+##  $ lp__ : num  -3.55 -3.79 -7.04 -6.79 -2.96 ...</code></pre>
 <p>In a second step, we can then compute comparisons from these posterior samples. For example, we can compute the difference between conditions <code>F2</code> and <code>F1</code>. To do so, we simply take the posterior samples for each condition, and compute their difference.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" data-line-number="1">df_postSamp<span class="op">$</span>b_dif &lt;-<span class="st"> </span>df_postSamp<span class="op">$</span>b_FF2 <span class="op">-</span><span class="st"> </span>df_postSamp<span class="op">$</span>b_FF1</a></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" data-line-number="1">df_postSamp<span class="op">$</span>b_dif &lt;-<span class="st"> </span>df_postSamp<span class="op">$</span>b_FF2 <span class="op">-</span><span class="st"> </span>df_postSamp<span class="op">$</span>b_FF1</a></code></pre></div>
 <p>This provides a posterior sample of the difference between conditions. It is possible to investigate this posterior sample by looking at its mean and 95% credibility intervals:</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" data-line-number="1"><span class="kw">c</span>(<span class="dt">Estimate =</span> <span class="kw">mean</span>(df_postSamp<span class="op">$</span>b_dif),</a>
-<a class="sourceLine" id="cb298-2" data-line-number="2">  <span class="kw">quantile</span>(df_postSamp<span class="op">$</span>b_dif, <span class="dt">p =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" data-line-number="1"><span class="kw">c</span>(<span class="dt">Estimate =</span> <span class="kw">mean</span>(df_postSamp<span class="op">$</span>b_dif),</a>
+<a class="sourceLine" id="cb286-2" data-line-number="2">  <span class="kw">quantile</span>(df_postSamp<span class="op">$</span>b_dif, <span class="dt">p =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)))</a></code></pre></div>
 <pre><code>## Estimate     2.5%    97.5% 
-##  -0.3950  -0.7110  -0.0505</code></pre>
-<p>Interestingly, this provides the same estimate of roughly <span class="math inline">\(-0.4\)</span> as we obtained previously when using the treatment contrast or the scaled sum contrasts in our Bayesian (brm) models.
+##  -0.4068  -0.7262  -0.0923</code></pre>
+<p>Interestingly, this provides the same estimate of roughly <span class="math inline">\(-0.4\)</span> as we obtained previously when using the treatment contrast or the scaled sum contrasts in our Bayesian (brms) models.
 Thus, Bayesian models provide a lot of flexibility in computing new comparisons post-hoc from the posterior samples and in obtaining their posterior distributions. However, what these posterior computations do not provide directly are null hypothesis tests, i.e., a test of whether a given contrast is best explained by a null model assuming no difference, or by an alternative hypothesis assuming a difference between conditions. Such Bayesian null hypothesis tests can be conducted using Bayes factors via model comparison, where an alternative model that contains a certain contrast is compared with a null model that lacks this contrast.</p>
-<!--
-## Examples of different default contrast types
-
-In the previous sections, we saw that contrasts consist of numberical values, i.e., contrast coefficients, which define a numberical value for each level of a factor. We saw that treatment contrasts are coded as $0$ for the baseline and as $1$ for the treatment condition. This can also be written as a $1 \times 2$ matrix: $\left[\begin{array}{cc} 0 \\ 1 \end{array} \right]$. Note that each row in this matrix represents one factor level (baseline/treatment), and that the one column indicates the one comparison between the two. Similarly, the scaled sum contrast can be written as $\left[\begin{array}{cc} -0.5 \\ +0.5 \end{array} \right]$. Each of the default contrasts is implemented using a different contrast matrix. For the default contrast types, these default contrast matrices are available in the R System for Statistical Computing in the basic distribution of R in the stats package.
-Here, we provide a quick overview of the different contrast matrices specifically for the example applications discussed above.
-
-For the treatment contrasts, we discussed an example where a psychotherapy group and a pharmacotherapy group are each compared to the same control or baseline group; the latter could be a group that receives no treatment. The corresponding contrast matrix is obtained using the following function call:
-
-
-```r
-contr.treatment(3)
-```
-
-```
-##   2 3
-## 1 0 0
-## 2 1 0
-## 3 0 1
-```
-
-The number of rows specifies the number of factor levels. The three rows indicate the three levels of the factor. The first row codes the baseline or control condition (the baseline always only contains $0$s as contrast coefficients), the second row codes the psychotherapy group, and the third row codes the pharmacotherapy group. The two columns reflect the two comparisons that are being estimated by the contrasts: the first column estimates the mean of the second group (i.e., psychotherapy) against the baseline / control group, and the second column estimates the third group (i.e., pharmacotherapy) against the baseline / control group.
-
-For the sum contrast, our example involved conditions for orthographic priming, phonological priming, and semantic priming. The orthographic and phonological priming conditions were compared to the average priming effect across all three groups. In R, there is again a standard function call for the sum contrast:
-
-
-```r
-contr.sum(3)
-```
-
-```
-##   [,1] [,2]
-## 1    1    0
-## 2    0    1
-## 3   -1   -1
-```
-
-Again, the three rows indicate three groups, and the two columns reflect the two comparisons. The first row codes orthographic priming, the second row phonological priming, and the last row semantic priming. Now, the first column codes a contrast that compares the response in orthographic priming against the average response, and the second column codes a contrast comparing phonological priming against the average response. Why these contrasts estimate these differences is not transparent here. We will return to this issue below.
-
-For repeated contrasts, our example compared response times in low frequency words vs.  medium frequency words, and medium frequency words vs.  high frequency words. In R, the corresponding contrast matrix is available in the MASS package [@R-MASS]:
-
-
-```r
-library(MASS)
-contr.sdif(3)
-```
-
-```
-##      2-1    3-2
-## 1 -0.667 -0.333
-## 2  0.333 -0.333
-## 3  0.333  0.667
-```
-
-The first row represents low frequency words, the second row medium frequency words, and the last row high frequency words. Now the first contrast (column) tests the difference between the second minus the first row, i.e., the response to medium frequency words minus response to low frequency words. The second contrast (column) tests the difference between the third minus the second row, i.e., the difference in the response to high frequency words minus the response to medium frequency words. Why the repeated contrast tests exactly these differences is not transparent either.}
-
-Below, we will explain how these and other contrasts are generated from a careful definition of the hypotheses that one wishes to test for a given data-set. We will introduce a basic workflow for how to create one's own custom contrasts.
-
-We discussed that for the example with three different word frequency levels, it is possible to test the hypothesis of a linear (or quadratic) trend across all levels of word frequency. Such polynomial contrasts are specified in R using the following command:
-
-
-```r
-contr.poly(3)
-```
-
-```
-##             .L     .Q
-## [1,] -7.07e-01  0.408
-## [2,] -7.85e-17 -0.816
-## [3,]  7.07e-01  0.408
-```
-
-As in the other contrasts mentioned above, it is not clear from this contrast matrix what hypotheses are being tested. As before, the three rows represent three levels of word frequency. The first column codes a linear increase with word frequency levels. The second column codes a quadratic trend. The `contr.poly()` function tests orthogonalized trends, that is, the linear and quadratic contrast coefficients are uncorrelated.
-
-We had also discussed Helmert contrasts above, and had given the example that one might want to compare two "invalid" priming conditions to each other, and then compare both "invalid" priming conditions to one "valid" prime condition. Helmert contrasts are specified in R using the following command:
-
-
-```r
-contr.helmert(3)
-```
-
-```
-##   [,1] [,2]
-## 1   -1   -1
-## 2    1   -1
-## 3    0    2
-```
-
-The first row represents "invalid prime 1", the second row "invalid prime 2", and the third row the "valid prime" condition. The first column tests the difference between the two "invalid" prime conditions. The coefficients in the second column test both "invalid prime" conditions against the "valid prime" condition.
-
-How can one make use of these contrast matrices for a specific linear model? As discussed above for the case of two factor levels, one needs to tell R to use one of these contrast coding schemes for a factor of interest in a linear model (LM). Let's assume a data-frame called `dat` with a dependent variable `dat$DV` and a three-level factor `dat$WordFrequency` with levels low, medium, and high frequency words. One chooses one of the above contrast matrices and `assigns' this contrast to the factor. Here, we choose the repeated contrast:
-
-
-```r
-contrasts(dat$WordFrequency) <- contr.sdif(3)
-```
-
-This way, when running a (Bayesian) linear model using this factor, R will automatically use the contrast matrix assigned to the factor. 
-Assuming that there are three levels to the WordFrequency factor, 
-the lm or brm function will estimate three regression coefficients: one intercept and two slopes. What these regression coefficients test will depend on which contrast coding is specified. Given that we have used repeated contrasts, the resulting regression coefficients will now test the difference between medium and low frequency words (first slope) and will test the difference between high and medium frequency words (second slope). Examples of output from regression models for concrete sitations will be shown below. Moreover, it will be shown how contrast matrices are generated for whatever hypotheses one wants to test in a given data-set.
--->
 </div>
 </div>
 <h3>References</h3>

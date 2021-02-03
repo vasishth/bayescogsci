@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.1 A hierarchical normal model: The N400 effect | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.1 A hierarchical normal model: The N400 effect | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-13" />
+<meta name="date" content="2021-02-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,18 +50,7 @@
 
 
 
-<script type="text/javascript">
- $(document).ready(function() {
-     $folds = $(".solution");
-     $folds.wrapInner("<div class=\"solution-blck\">"); // wrap a div container around content
-     $folds.prepend("<button class=\"solution-btn\">Show solution</button>");  // add a button
-     $(".solution-blck").toggle();  // fold all blocks
-     $(".solution-btn").on("click", function() {  // add onClick event
-         $(this).text($(this).text() === "Hide solution" ? "Show solution" : "Hide solution");  // if the text equals "Hide solution", change it to "Show solution"or else to "Hide solution" 
-         $(this).next(".solution-blck").toggle("linear");  // "swing" is the default easing function. This can be further customized in its speed or the overall animation itself.
-     })
- });
-</script>
+
 
 
 <style type="text/css">
@@ -153,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="ch-intro.html"><a href="ch-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introprob.html"><a href="introprob.html"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
 <li class="chapter" data-level="1.2" data-path="conditional-probability.html"><a href="conditional-probability.html"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
 <li class="chapter" data-level="1.3" data-path="the-law-of-total-probability.html"><a href="the-law-of-total-probability.html"><i class="fa fa-check"></i><b>1.3</b> The law of total probability</a></li>
@@ -222,9 +211,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
 <li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
 <li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
-<li class="chapter" data-level="3.9" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>3.9</b> Appendix</a><ul>
-<li class="chapter" data-level="3.9.1" data-path="appendix.html"><a href="appendix.html#app:pp"><i class="fa fa-check"></i><b>3.9.1</b> Generating prior predictive distributions with <code>brms</code></a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
 <li class="chapter" data-level="4.1" data-path="sec-pupil.html"><a href="sec-pupil.html"><i class="fa fa-check"></i><b>4.1</b> A first linear regression: Does attentional load affect pupil size?</a><ul>
@@ -248,8 +234,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
 <li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
 <li class="chapter" data-level="4.6" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
-<li class="chapter" data-level="4.7" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="appendix-1.html"><a href="appendix-1.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
+<li class="chapter" data-level="4.7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="appendix.html"><a href="appendix.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
@@ -275,116 +261,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
 <li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
 <li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
-<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cell-means-parameterization-and-posterior-comparisons"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
 <li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="6.3.2" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="6.3.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
 <li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
 <li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html"><i class="fa fa-check"></i><b>6.5</b> Examples of contrast coding in a factorial design with two factors</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>6.5.1</b> The difference between an ANOVA and a multiple regression</a></li>
-<li class="chapter" data-level="6.5.2" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>6.5.2</b> Nested effects</a></li>
-<li class="chapter" data-level="6.5.3" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>6.5.3</b> Interactions between contrasts</a></li>
-</ul></li>
+<li class="chapter" data-level="6.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>6.5</b> Computing condition means from estimated contrasts</a></li>
 <li class="chapter" data-level="6.6" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>7</b> Meta-analysis and measurement error models</a><ul>
-<li class="chapter" data-level="7.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>7.1</b> Meta-analysis</a></li>
-<li class="chapter" data-level="7.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>7.2</b> Measurement-error models</a></li>
-<li class="chapter" data-level="7.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>7.3</b> Further reading</a></li>
-<li class="chapter" data-level="7.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>8</b> Meta-analysis and measurement error models</a><ul>
+<li class="chapter" data-level="8.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>8.1</b> Meta-analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>8.2</b> Measurement-error models</a></li>
+<li class="chapter" data-level="8.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.3</b> Further reading</a></li>
+<li class="chapter" data-level="8.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>8.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>III Model comparison</b></span></li>
-<li class="chapter" data-level="8" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>8</b> Introduction to model comparison</a></li>
-<li class="chapter" data-level="9" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>9</b> Bayes factors</a><ul>
-<li class="chapter" data-level="9.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>9.1</b> Hypothesis testing using the Bayes factor</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>9.1.1</b> Marginal likelihood</a></li>
-<li class="chapter" data-level="9.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>9.1.2</b> Bayes factor</a></li>
+<li class="chapter" data-level="9" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>9</b> Introduction to model comparison</a></li>
+<li class="chapter" data-level="10" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>10</b> Bayes factors</a><ul>
+<li class="chapter" data-level="10.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>10.1</b> Hypothesis testing using the Bayes factor</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>10.1.1</b> Marginal likelihood</a></li>
+<li class="chapter" data-level="10.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>10.1.2</b> Bayes factor</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>9.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>9.2.1</b> Non-nested models</a></li>
+<li class="chapter" data-level="10.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>10.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sensitivity-analysis"><i class="fa fa-check"></i><b>10.2.1</b> Sensitivity analysis</a></li>
+<li class="chapter" data-level="10.2.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>10.2.2</b> Non-nested models</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html"><i class="fa fa-check"></i><b>9.3</b> Understanding the (in-)stability of Bayes factors</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-the-number-of-iterations-of-the-posterior-sampler"><i class="fa fa-check"></i><b>9.3.1</b> Instability due to the number of iterations of the posterior sampler</a></li>
-<li class="chapter" data-level="9.3.2" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-posterior-uncertainty-and-noise-associated-with-subjects-items-and-residual-variability"><i class="fa fa-check"></i><b>9.3.2</b> Instability due to posterior uncertainty and noise associated with subjects, items, and residual variability</a></li>
+<li class="chapter" data-level="10.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>10.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a></li>
+<li class="chapter" data-level="10.4" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html"><i class="fa fa-check"></i><b>10.4</b> Bayes factors in theory: Stability and accuracy</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#instability-due-to-the-effective-number-of-posterior-samples"><i class="fa fa-check"></i><b>10.4.1</b> Instability due to the effective number of posterior samples</a></li>
+<li class="chapter" data-level="10.4.2" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#inaccuracy-of-bayes-factors-does-the-estimate-approximate-the-true-bayes-factor-well"><i class="fa fa-check"></i><b>10.4.2</b> Inaccuracy of Bayes factors: Does the estimate approximate the true Bayes factor well?</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
-<li class="chapter" data-level="9.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
-<li class="chapter" data-level="9.6" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
+<li class="chapter" data-level="10.5" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html"><i class="fa fa-check"></i><b>10.5</b> Bayes factors in practice: Variability with the data</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variation-associated-with-the-data-subjects-items-and-residual-noise"><i class="fa fa-check"></i><b>10.5.1</b> Variation associated with the data (subjects, items, and residual noise)</a></li>
+<li class="chapter" data-level="10.5.2" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#example-2-inhibitory-and-facilitatory-interference-effects"><i class="fa fa-check"></i><b>10.5.2</b> Example 2: Inhibitory and facilitatory interference effects</a></li>
+<li class="chapter" data-level="10.5.3" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variability-of-the-bayes-factor-posterior-simulations"><i class="fa fa-check"></i><b>10.5.3</b> Variability of the Bayes factor: Posterior simulations</a></li>
+<li class="chapter" data-level="10.5.4" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#visualize-distribution-of-bayes-factors"><i class="fa fa-check"></i><b>10.5.4</b> Visualize distribution of Bayes factors</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>10</b> Cross validation</a><ul>
-<li class="chapter" data-level="10.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>10.1</b> Expected log predictive density of a model</a></li>
-<li class="chapter" data-level="10.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>10.2</b> K-fold and leave-one-out cross-validation</a></li>
-<li class="chapter" data-level="10.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>10.3</b> Testing the N400 effect using cross-validation</a></li>
-<li class="chapter" data-level="10.4" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
-<li class="chapter" data-level="10.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>10.5</b> Further reading</a></li>
-<li class="chapter" data-level="10.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
+<li class="chapter" data-level="10.6" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.6</b> Summary</a></li>
+<li class="chapter" data-level="10.7" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.7</b> Further reading</a></li>
+<li class="chapter" data-level="10.8" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>10.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>11</b> Cross validation</a><ul>
+<li class="chapter" data-level="11.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>11.1</b> Expected log predictive density of a model</a></li>
+<li class="chapter" data-level="11.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>11.2</b> K-fold and leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="11.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>11.3</b> Testing the N400 effect using cross-validation</a></li>
+<li class="chapter" data-level="11.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.4</b> Summary</a></li>
+<li class="chapter" data-level="11.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.5</b> Further reading</a></li>
+<li class="chapter" data-level="11.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>11.6</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced models with Stan</b></span></li>
-<li class="chapter" data-level="11" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>11</b> Introduction to the probabilistic programming language Stan</a><ul>
-<li class="chapter" data-level="11.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>11.1</b> Stan syntax</a></li>
-<li class="chapter" data-level="11.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>11.2</b> A first simple example with Stan: Normal likelihood</a></li>
-<li class="chapter" data-level="11.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>11.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
-<li class="chapter" data-level="11.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>11.4</b> Regression models in Stan</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>11.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
-<li class="chapter" data-level="11.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>11.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
-<li class="chapter" data-level="11.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>11.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
+<li class="chapter" data-level="12" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>12</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="12.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>12.1</b> Stan syntax</a></li>
+<li class="chapter" data-level="12.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>12.2</b> A first simple example with Stan: Normal likelihood</a></li>
+<li class="chapter" data-level="12.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>12.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
+<li class="chapter" data-level="12.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>12.4</b> Regression models in Stan</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>12.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
+<li class="chapter" data-level="12.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>12.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
+<li class="chapter" data-level="12.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>12.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>11.5</b> Model comparison in Stan</a><ul>
-<li class="chapter" data-level="11.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>11.5.1</b> Bayes factor in Stan</a></li>
-<li class="chapter" data-level="11.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>11.5.2</b> Cross validation in Stan</a></li>
+<li class="chapter" data-level="12.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>12.5</b> Model comparison in Stan</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>12.5.1</b> Bayes factor in Stan</a></li>
+<li class="chapter" data-level="12.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>12.5.2</b> Cross validation in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="11.6" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.6</b> Summary</a></li>
-<li class="chapter" data-level="11.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>11.7</b> Further reading</a></li>
-<li class="chapter" data-level="11.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>11.8</b> Exercises</a></li>
+<li class="chapter" data-level="12.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.6</b> Summary</a></li>
+<li class="chapter" data-level="12.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.7</b> Further reading</a></li>
+<li class="chapter" data-level="12.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>12.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>12</b> Complex models and reparametrization</a><ul>
-<li class="chapter" data-level="12.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>12.1</b> Hierarchical models with Stan</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>12.1.1</b> Varying intercept model with Stan</a></li>
-<li class="chapter" data-level="12.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>12.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
-<li class="chapter" data-level="12.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>12.1.3</b> Correlated varying intercept varying slopes model</a></li>
-<li class="chapter" data-level="12.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>12.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="13" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>13</b> Complex models and reparametrization</a><ul>
+<li class="chapter" data-level="13.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>13.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>13.1.1</b> Varying intercept model with Stan</a></li>
+<li class="chapter" data-level="13.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>13.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="13.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>13.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="13.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>13.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.2</b> Summary</a></li>
-<li class="chapter" data-level="12.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
-<li class="chapter" data-level="12.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>12.4</b> Exercises</a></li>
+<li class="chapter" data-level="13.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>13.2</b> Summary</a></li>
+<li class="chapter" data-level="13.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>13.3</b> Further reading</a></li>
+<li class="chapter" data-level="13.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>13.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>V Computational cognitive modeling</b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-to-computational-cognitive-modeling.html"><a href="introduction-to-computational-cognitive-modeling.html"><i class="fa fa-check"></i><b>13</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="13.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.1</b> Further reading</a></li>
+<li class="chapter" data-level="14" data-path="introduction-to-computational-cognitive-modeling-chcogmod.html"><a href="introduction-to-computational-cognitive-modeling-chcogmod.html"><i class="fa fa-check"></i><b>14</b> Introduction to computational cognitive modeling {ch:cogmod}</a><ul>
+<li class="chapter" data-level="14.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>14.1</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>14</b> Multinomial processing trees</a><ul>
-<li class="chapter" data-level="14.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>14.1</b> Modeling multiple categorical responses</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>14.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
-<li class="chapter" data-level="14.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>14.1.2</b> A model for multiple responses using the categorical distribution</a></li>
+<li class="chapter" data-level="15" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>15</b> Multinomial processing trees</a><ul>
+<li class="chapter" data-level="15.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>15.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>15.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
+<li class="chapter" data-level="15.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>15.1.2</b> A model for multiple responses using the categorical distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>14.2</b> Multinomial processing tree (MPT) models</a><ul>
-<li class="chapter" data-level="14.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>14.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
+<li class="chapter" data-level="15.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>15.2</b> Multinomial processing tree (MPT) models</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>15.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="14.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>14.3</b> Further reading</a></li>
-<li class="chapter" data-level="14.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>14.4</b> Exercises</a></li>
+<li class="chapter" data-level="15.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
+<li class="chapter" data-level="15.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>15</b> Mixture models</a><ul>
-<li class="chapter" data-level="15.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>15.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>15.1.1</b> A fast guess model account of the global motion detection task</a></li>
+<li class="chapter" data-level="16" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>16</b> Mixture models</a><ul>
+<li class="chapter" data-level="16.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>16.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>16.1.1</b> A fast guess model account of the global motion detection task</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>15.2</b> Summary</a></li>
-<li class="chapter" data-level="15.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
-<li class="chapter" data-level="15.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.2" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>16.2</b> Summary</a></li>
+<li class="chapter" data-level="16.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.3</b> Further reading</a></li>
+<li class="chapter" data-level="16.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>16.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Appendix</b></span></li>
-<li class="chapter" data-level="16" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>16</b> Important distributions</a></li>
+<li class="chapter" data-level="17" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>17</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -434,45 +437,35 @@ FIGURE 5.1: Typical ERP for the grand average across the N400 spatial window (ce
 </ol></li>
 </ol>
 <p>We’ll ignore the goal of original experiment <span class="citation">(DeLong, Urbach, and Kutas <a href="#ref-delongProbabilisticWordPreactivation2005">2005</a>)</span>, and its replication <span class="citation">(Nieuwland et al. <a href="#ref-nieuwlandLargescaleReplicationStudy2018">2018</a>)</span>. We are going to focus on the N400 at the final nouns in the experimental stimuli. In example (2), for example, the final noun <em>‘kite’</em> has higher predictability than <em>‘airplane’</em>, and thus we would expect a more negative signal in <em>‘airplane’</em> in (b) in comparison with <em>‘kite’</em> in (a).</p>
-<p>To speed-up computation, we’ll restrict the dataset to the participants from the Edinburgh lab; the entire dataset can be found in <a href="https://osf.io/q7dsk/" class="uri">https://osf.io/q7dsk/</a>.</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1">df_eeg_data &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/public_noun_data.txt&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb219-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(lab<span class="op">==</span><span class="st">&quot;edin&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb219-3" data-line-number="3"><span class="st">  </span><span class="co"># choose only the relevant columns:</span></a>
-<a class="sourceLine" id="cb219-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(subject, cloze, item, n400) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb219-5" data-line-number="5"><span class="st">  </span><span class="co"># we simplify the subjects id </span></a>
-<a class="sourceLine" id="cb219-6" data-line-number="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subject =</span> <span class="kw">as.factor</span>(subject) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>())</a>
-<a class="sourceLine" id="cb219-7" data-line-number="7">df_eeg_data</a></code></pre></div>
-<pre><code>## # A tibble: 2,827 x 4
-##   subject cloze  item  n400
-##     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1       1     0   101  7.08
-## 2       1     3   102 -0.68
-## 3       1   100   103  1.39
-## 4       1    93   104 22.8 
-## 5       1     0   105  1.61
-## # … with 2,822 more rows</code></pre>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="co"># Number of subjects</span></a>
-<a class="sourceLine" id="cb221-2" data-line-number="2">df_eeg_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb221-3" data-line-number="3"><span class="st">    </span><span class="kw">distinct</span>(subject) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb221-4" data-line-number="4"><span class="st">    </span><span class="kw">count</span>()</a></code></pre></div>
+<p>To speed-up computation, we restrict the dataset to the participants from the Edinburgh lab using <code>df_eeg</code> from <code>bcogsci</code> package. We’ll center the Cloze probability before using it as a predictor.</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_eeg&quot;</span>)</a>
+<a class="sourceLine" id="cb213-2" data-line-number="2">(df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb213-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cloze =</span> cloze <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cloze)))</a></code></pre></div>
+<pre><code>## # A tibble: 2,863 x 7
+##    subj cloze  item  n400 cloze_ans     N c_cloze
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1     1  0        1  7.08         0    44  -0.476
+## 2     1  0.03     2 -0.68         1    44  -0.446
+## 3     1  1        3  1.39        44    44   0.524
+## 4     1  0.93     4 22.8         41    44   0.454
+## 5     1  0        5  1.61         0    44  -0.476
+## # … with 2,858 more rows</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="co"># Number of subjects</span></a>
+<a class="sourceLine" id="cb215-2" data-line-number="2">df_eeg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb215-3" data-line-number="3"><span class="st">    </span><span class="kw">distinct</span>(subj) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb215-4" data-line-number="4"><span class="st">    </span><span class="kw">count</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##       n
 ##   &lt;int&gt;
 ## 1    37</code></pre>
-<p>In the data, the Cloze is in percentages, we’ll transform it to proportions and center it before using it as a predictor in <code>c_cloze</code>.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1">df_eeg_data  &lt;-<span class="st"> </span>df_eeg_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb223-2" data-line-number="2"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">c_cloze=</span> cloze<span class="op">/</span><span class="dv">100</span> <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cloze<span class="op">/</span><span class="dv">100</span>) )</a>
-<a class="sourceLine" id="cb223-3" data-line-number="3">df_eeg_data<span class="op">$</span>c_cloze <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>() </a></code></pre></div>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  -0.471  -0.441   0.029   0.000   0.429   0.529</code></pre>
 <p>One nice aspect of using averages of EEG data is that they are roughly normally distributed. This allows us to use the Normal likelihood. Here is a histogram showing the distribution of the data:</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1">df_eeg_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n400)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb225-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">4</span>, <span class="dt">colour=</span><span class="st">&quot;gray&quot;</span>, <span class="dt">alpha =</span> <span class="fl">.5</span>, <span class="kw">aes</span>(<span class="dt">y =</span> ..density..)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb225-3" data-line-number="3"><span class="st">  </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, <span class="dt">args =</span> <span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(df_eeg_data<span class="op">$</span>n400),</a>
-<a class="sourceLine" id="cb225-4" data-line-number="4">                                         <span class="dt">sd =</span> <span class="kw">sd</span>(df_eeg_data<span class="op">$</span>n400))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb225-5" data-line-number="5"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Average voltage in microvolts for the N400 spatiotemporal window&quot;</span>)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-137"></span>
-<img src="bookdown_files/figure-html/unnamed-chunk-137-1.svg" alt="Histogram of the N400 averages for every trial in gray; density plot of a normal distribution in black." width="672" />
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1">df_eeg <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n400)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb217-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">4</span>, <span class="dt">colour=</span><span class="st">&quot;gray&quot;</span>, <span class="dt">alpha =</span> <span class="fl">.5</span>, <span class="kw">aes</span>(<span class="dt">y =</span> ..density..)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb217-3" data-line-number="3"><span class="st">  </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, <span class="dt">args =</span> <span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(df_eeg<span class="op">$</span>n400),</a>
+<a class="sourceLine" id="cb217-4" data-line-number="4">                                         <span class="dt">sd =</span> <span class="kw">sd</span>(df_eeg<span class="op">$</span>n400))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb217-5" data-line-number="5"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Average voltage in microvolts for the N400 spatiotemporal window&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-138"></span>
+<img src="bookdown_files/figure-html/unnamed-chunk-138-1.svg" alt="Histogram of the N400 averages for every trial in gray; density plot of a normal distribution in black." width="672" />
 <p class="caption">
 FIGURE 5.2: Histogram of the N400 averages for every trial in gray; density plot of a normal distribution in black.
 </p>
@@ -489,7 +482,7 @@ FIGURE 5.2: Histogram of the N400 averages for every trial in gray; density plot
 <li>There is a linear relationship between cloze and the EEG signal for the trial.</li>
 </ol>
 <p><strong>Note that this model is incorrect for these data due to assumption 2 being violated.</strong></p>
-<p>With the last assumption, we are saying that the difference in the average signal when we compare nouns with Cloze probability 0-.1, .1-.2, .2-.3, and so forth is the same. Notice that this <em>is</em> an assumption, and it may not necessarily be the case in the actual data. This means that we are going to get a posterior for <span class="math inline">\(\beta\)</span> <em>conditional</em> on the assumption that the linear relationship holds. Even if it <em>approximately</em> holds, we still don’t know how much we deviate from this assumption. We’ll come back to this issue in chapters <a href="ch-bf.html#ch:bf">9</a>-<a href="ch-cv.html#ch:cv">10</a> when we deal with model comparison.</p>
+<p>With the last assumption, we are saying that the difference in the average signal when we compare nouns with Cloze probability 0-.1, .1-.2, .2-.3, and so forth is the same. Notice that this <em>is</em> an assumption, and it may not necessarily be the case in the actual data. This means that we are going to get a posterior for <span class="math inline">\(\beta\)</span> <em>conditional</em> on the assumption that the linear relationship holds. Even if it <em>approximately</em> holds, we still don’t know how much we deviate from this assumption. We’ll come back to this issue in chapters <a href="ch-bf.html#ch:bf">10</a>-<a href="ch-cv.html#ch:cv">11</a> when we deal with model comparison.</p>
 <p>We can now decide on a likelihood and priors:</p>
 </div>
 <div id="likelihood-and-priors-1" class="section level4">
@@ -504,15 +497,15 @@ FIGURE 5.2: Histogram of the N400 averages for every trial in gray; density plot
 <p>If the signal for each ERP is <em>baselined</em>, that is, the mean signal of a time window before the time window of interest is subtracted from the time window of interest, then the mean signal would be relatively close to 0. Since we know that the ERPs were baselined in this study, we expect that the grand mean of our signal should be relatively close to zero. Our prior for <span class="math inline">\(\alpha\)</span> is then normally distributed centered in zero with a standard deviation of 10 <span class="math inline">\(\mu V\)</span>.</p>
 <p>The standard deviation of our signal distribution is harder to guess. We know that EEG signals are quite noisy, and that the standard deviation must be higher than zero. Our prior for <span class="math inline">\(\sigma\)</span> is a truncated normal distribution with location zero and scale as 50. Recall that since we truncate the distribution, the parameters location and scale do not correspond to the mean and standard deviation of the new distribution; see Box <a href="sec-pupil.html#thm:truncation">4.1</a>.</p>
 <p>We can draw random samples from this distribution and calculate their mean and standard deviation:</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1">samples &lt;-<span class="st"> </span><span class="kw">rtnorm</span>(<span class="dv">20000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb226-2" data-line-number="2"><span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(samples), <span class="kw">sd</span>(samples))</a></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1">samples &lt;-<span class="st"> </span><span class="kw">rtnorm</span>(<span class="dv">20000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb218-2" data-line-number="2"><span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(samples), <span class="kw">sd</span>(samples))</a></code></pre></div>
 <pre><code>## mean      
-## 39.7 30.1</code></pre>
+## 39.7 30.0</code></pre>
 <p>So we are essentially saying that we assume a prior that we will find the true standard deviation of the signal in the following interval with 95% probability:</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="kw">quantile</span>(samples, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">.975</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1"><span class="kw">quantile</span>(samples, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">.975</span>))</a></code></pre></div>
 <pre><code>##   2.5%  97.5% 
-##   1.53 112.06</code></pre>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1"><span class="co"># or c(qtnorm(.025, 0, 50, a = 0), qtnorm(.975, 0, 50, a = 0))</span></a></code></pre></div>
+##   1.64 111.20</code></pre>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1"><span class="co"># or c(qtnorm(.025, 0, 50, a = 0), qtnorm(.975, 0, 50, a = 0))</span></a></code></pre></div>
 <p>To sum up, we are going to use the following priors:</p>
 <p><span class="math display">\[\begin{equation}
  \begin{aligned}
@@ -521,29 +514,35 @@ FIGURE 5.2: Histogram of the N400 averages for every trial in gray; density plot
  \sigma  &amp;\sim Normal_{+}(0,50)
  \end{aligned}
  \end{equation}\]</span></p>
-<p>A model such as <span class="math inline">\(M_{cp}\)</span> is sometimes called a <em>fixed-effects</em> model: all the parameters are fixed and do not vary from subject to subject or from item to item. A similar frequentist model would correspond to fitting a simple linear model using the <code>lm</code> function: <code>lm(n400 ~ 1 + cloze, data = df_eeg_data)</code>.</p>
+<p>A model such as <span class="math inline">\(M_{cp}\)</span> is sometimes called a <em>fixed-effects</em> model: all the parameters are fixed and do not vary from subject to subject or from item to item. A similar frequentist model would correspond to fitting a simple linear model using the <code>lm</code> function: <code>lm(n400 ~ 1 + cloze, data = df_eeg)</code>.</p>
 <p>We fit this model in <code>brms</code> as follows (the default family is <code>gaussian()</code> so we can omit it). As with <code>lm</code>, by default an intercept is fitted and thus <code>n400 ~ c_cloze</code> is equivalent to <code>n400 ~ 1 + c_cloze</code>:</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1">fit_N400_cp &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze,</a>
-<a class="sourceLine" id="cb231-2" data-line-number="2">  <span class="dt">prior =</span> </a>
-<a class="sourceLine" id="cb231-3" data-line-number="3">    <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb231-4" data-line-number="4">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_cloze),</a>
-<a class="sourceLine" id="cb231-5" data-line-number="5">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma)),</a>
-<a class="sourceLine" id="cb231-6" data-line-number="6">  <span class="dt">data =</span> df_eeg_data</a>
-<a class="sourceLine" id="cb231-7" data-line-number="7">)</a></code></pre></div>
-<p>For now, we’ll check the summary and plot the posterior of the model. To save space we use the function <code>posterior_summary()</code>, but it’s a good idea to inspect the full summary.</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_N400_cp)</a></code></pre></div>
-<pre><code>##              Estimate Est.Error      Q2.5     Q97.5
-## b_Intercept      3.65     0.221      3.22      4.08
-## b_c_cloze        2.28     0.540      1.22      3.35
-## sigma           11.84     0.154     11.54     12.15
-## lp__        -11005.84     1.183 -11008.92 -11004.49</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1"><span class="kw">plot</span>(fit_N400_cp)</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-141-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1">fit_N400_cp &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze,</a>
+<a class="sourceLine" id="cb223-2" data-line-number="2">  <span class="dt">prior =</span> </a>
+<a class="sourceLine" id="cb223-3" data-line-number="3">    <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb223-4" data-line-number="4">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_cloze),</a>
+<a class="sourceLine" id="cb223-5" data-line-number="5">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma)),</a>
+<a class="sourceLine" id="cb223-6" data-line-number="6">  <span class="dt">data =</span> df_eeg</a>
+<a class="sourceLine" id="cb223-7" data-line-number="7">)</a></code></pre></div>
+<p>For now, we’ll check the summary and plot the posterior of the model.</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1">fit_N400_cp</a></code></pre></div>
+<pre><code>## ...
+## Population-Level Effects: 
+##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept     3.66      0.22     3.24     4.10 1.00     3972     3044
+## c_cloze       2.24      0.56     1.20     3.35 1.00     3824     2454
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma    11.82      0.15    11.53    12.12 1.00     4259     3066
+## 
+## ...</code></pre>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1"><span class="kw">plot</span>(fit_N400_cp)</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-144-1.svg" width="672" /></p>
 </div>
 </div>
 <div id="no-pooling-model-m_np" class="section level3">
 <h3><span class="header-section-number">5.1.2</span> No-pooling model (<span class="math inline">\(M_{np}\)</span>)</h3>
-<p>One of the assumptions of the previous model is clearly wrong: observations are not independent, they are clustered by participant (and also by the specific item, but we’ll ignore this until section <a href="sec-N400hierarchical.html#sec:mcvivs">5.1.4</a>). It is reasonable to assume that EEG signals are more similar within participants than between them. The following model assumes that each participant is completely independent from each other.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
+<p>One of the assumptions of the previous model is clearly wrong: observations are not independent, they are clustered by participant (and also by the specific item, but we’ll ignore this until section <a href="sec-N400hierarchical.html#sec:mcvivs">5.1.4</a>). It is reasonable to assume that EEG signals are more similar within participants than between them. The following model assumes that each participant is completely independent from each other.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
 <div id="model-assumptions-1" class="section level4">
 <h4><span class="header-section-number">5.1.2.1</span> Model assumptions</h4>
 <ol style="list-style-type: decimal">
@@ -559,15 +558,7 @@ FIGURE 5.2: Histogram of the N400 averages for every trial in gray; density plot
 <p><span class="math display">\[\begin{equation}
  signal_n \sim Normal( \alpha_{subj[n]} + c\_cloze_n \cdot \beta_{subj[n]},\sigma)
  \end{equation}\]</span></p>
-<p>But notice that this model is actually fitting one linear model for each participant, with a single standard deviation <span class="math inline">\(\sigma\)</span> across all participants.
-<!--
-^[Incidentally, the ```lmList``` function in the ```lme4``` package fits a frequentist variant of the above model with the code specification ```lmList(n400 ~ c_cloze|subject,data = df_eeg_data)```. 
- The only difference here from our model is that a separate standard deviation $\sigma$ is fit for each participant:
- \begin{equation}
- signal_n \sim Normal( \alpha_{subj[n]} + c\_cloze_n \cdot \beta_{subj[n]},\sigma_{subj[n]})
- \end{equation}
-]
---></p>
+<p>But notice that this model is actually fitting one linear model for each participant, with a single standard deviation <span class="math inline">\(\sigma\)</span> across all participants.</p>
 <p>As before, <span class="math inline">\(n\)</span> represents each observation, that is, the <span class="math inline">\(n\)</span>th row in the data frame, which has <span class="math inline">\(N\)</span> rows, and now <span class="math inline">\(i\)</span> identifies the participant. The notation <span class="math inline">\(subj[n]\)</span>, which roughly follows <span class="citation">Gelman and Hill (<a href="#ref-GelmanHill2007">2007</a>)</span>, identifies the participant index; for example, if <span class="math inline">\(subj[10]=3\)</span>, then the <span class="math inline">\(10\)</span>th row of the data-frame is from participant <span class="math inline">\(3\)</span>.</p>
 <p>We define the priors as follows:</p>
 <p><span class="math display">\[\begin{equation}
@@ -577,42 +568,43 @@ FIGURE 5.2: Histogram of the N400 averages for every trial in gray; density plot
  \sigma  &amp;\sim Normal_+(0,50)
  \end{aligned}
  \end{equation}\]</span></p>
-<p>In <code>brms</code>, such a model can be fit by removing the common intercept with <code>0 +</code>. Instead, we force the model to estimate one intercept and one slope for <em>each</em> level of <code>subject</code>. The by-subject intercepts are indicated with <code>factor(subject)</code> and the by-subject slopes with <code>c_cloze:factor(subject)</code>. It’s very important to specify that <code>subject</code> should be treated as a factor and not as a number; we don’t assume that subject number 3 will show 3 times more positive (or negative) average signal than subject number 1! The model fits 37 independent intercepts and 37 independent slopes. By setting a prior to <code>class = b</code> and omitting <code>coef</code>, we are essentially setting identical priors to all the intercepts and slopes of the model. Notice that the parameters are independent from each other, it’s only our previous knowledge about their possible values (encoded in the priors) that is identical. We can set different priors to each intercept and slope, but that will mean to set 74 priors!</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1">fit_N400_np &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(subject) <span class="op">+</span><span class="st"> </span>c_cloze<span class="op">:</span><span class="kw">factor</span>(subject),</a>
-<a class="sourceLine" id="cb235-2" data-line-number="2">                 <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb235-3" data-line-number="3">                     <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb235-4" data-line-number="4">                       <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma)),</a>
-<a class="sourceLine" id="cb235-5" data-line-number="5">                 <span class="dt">data =</span> df_eeg_data)</a></code></pre></div>
-<p>For this model, printing a summary means printing the 75 parameters (<span class="math inline">\(\alpha_{1,...,37}\)</span>, <span class="math inline">\(\beta_{1,...,37}\)</span>, and <span class="math inline">\(\sigma\)</span>). We could do this as always by printing out the model results: just type <code>fit_N400_np</code>. Instead, one can plot <span class="math inline">\(\beta_{1,..,37}\)</span> using <code>bayesplot</code>. (<code>brms</code> also a includes a wrapper to this function called <code>stanplot</code>). We can peek at the internal names that <code>brms</code> gives to the parameters with <code>parnames(fit_N400_np)</code>; they are <code>b_factorsubject</code>, then the subject index and then <code>:c_cloze</code>. The code below changes the subject labels back to their original numerical indices and plots them in Figure <a href="sec-N400hierarchical.html#fig:nopooling">5.3</a>. The subjects are ordered by the magnitude of their mean effects.</p>
+<p>In <code>brms</code>, such a model can be fit by removing the common intercept with <code>0 +</code>. Instead, we force the model to estimate one intercept and one slope for <em>each</em> level of <code>subj</code>. The by-subject intercepts are indicated with <code>factor(subj)</code> and the by-subject slopes with <code>c_cloze:factor(subj)</code>. It’s very important to specify that <code>subject</code> should be treated as a factor and not as a number; we don’t assume that subject number 3 will show 3 times more positive (or negative) average signal than subject number 1! The model fits 37 independent intercepts and 37 independent slopes. By setting a prior to <code>class = b</code> and omitting <code>coef</code>, we are essentially setting identical priors to all the intercepts and slopes of the model. Notice that the parameters are independent from each other, it’s only our previous knowledge about their possible values (encoded in the priors) that is identical. We can set different priors to each intercept and slope, but that will mean to set 74 priors!</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1">fit_N400_np &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(subj) <span class="op">+</span><span class="st"> </span>c_cloze<span class="op">:</span><span class="kw">factor</span>(subj),</a>
+<a class="sourceLine" id="cb227-2" data-line-number="2">                 <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb227-3" data-line-number="3">                     <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb227-4" data-line-number="4">                       <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma)),</a>
+<a class="sourceLine" id="cb227-5" data-line-number="5">                 <span class="dt">data =</span> df_eeg)</a></code></pre></div>
+<p>For this model, printing a summary means printing the 75 parameters (<span class="math inline">\(\alpha_{1,...,37}\)</span>, <span class="math inline">\(\beta_{1,...,37}\)</span>, and <span class="math inline">\(\sigma\)</span>). We could do this as always by printing out the model results: just type <code>fit_N400_np</code>. Instead, one can plot <span class="math inline">\(\beta_{1,..,37}\)</span> using <code>bayesplot</code>. (<code>brms</code> also a includes a wrapper to this function called <code>stanplot</code>). We can peek at the internal names that <code>brms</code> gives to the parameters with <code>parnames(fit_N400_np)</code>; they are <code>b_factorsubj</code>, then the subject index and then <code>:c_cloze</code>. The code below changes the subject labels back to their original numerical indices and plots them in Figure <a href="sec-N400hierarchical.html#fig:nopooling">5.3</a>. The subjects are ordered by the magnitude of their mean effects.</p>
 <p>The model <span class="math inline">\(M_{np}\)</span> does not estimate a unique population-level effect; instead, there is a different effect estimated for each subject. However, given the posterior means from each subject, it is still possible to calculate the average of these estimates <span class="math inline">\(\hat\beta_{1,...,n}\)</span>:</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" data-line-number="1"><span class="co"># parameter name of beta by subject: </span></a>
-<a class="sourceLine" id="cb236-2" data-line-number="2">ind_effects_np &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;b_factorsubject&quot;</span>,<span class="kw">unique</span>(df_eeg_data<span class="op">$</span>subject), <span class="st">&quot;:c_cloze&quot;</span>)</a>
-<a class="sourceLine" id="cb236-3" data-line-number="3">beta_across_subj &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_N400_np, <span class="dt">pars=</span>ind_effects_np)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rowMeans</span>() </a>
-<a class="sourceLine" id="cb236-4" data-line-number="4"><span class="co"># We calculate the average of these estimates</span></a>
-<a class="sourceLine" id="cb236-5" data-line-number="5">(grand_av_beta &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(beta_across_subj),</a>
-<a class="sourceLine" id="cb236-6" data-line-number="6">                    <span class="dt">lq =</span> <span class="kw">quantile</span>(beta_across_subj, <span class="kw">c</span>(.<span class="dv">025</span>)),</a>
-<a class="sourceLine" id="cb236-7" data-line-number="7">                    <span class="dt">hq =</span> <span class="kw">quantile</span>(beta_across_subj, <span class="kw">c</span>(.<span class="dv">975</span>))))</a></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="co"># parameter name of beta by subject: </span></a>
+<a class="sourceLine" id="cb228-2" data-line-number="2">ind_effects_np &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;b_factorsubj&quot;</span>,<span class="kw">unique</span>(df_eeg<span class="op">$</span>subj), <span class="st">&quot;:c_cloze&quot;</span>)</a>
+<a class="sourceLine" id="cb228-3" data-line-number="3">beta_across_subj &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_N400_np, <span class="dt">pars =</span> ind_effects_np) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb228-4" data-line-number="4"><span class="st">  </span><span class="kw">rowMeans</span>() </a>
+<a class="sourceLine" id="cb228-5" data-line-number="5"><span class="co"># We calculate the average of these estimates</span></a>
+<a class="sourceLine" id="cb228-6" data-line-number="6">(grand_av_beta &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(beta_across_subj),</a>
+<a class="sourceLine" id="cb228-7" data-line-number="7">                    <span class="dt">lq =</span> <span class="kw">quantile</span>(beta_across_subj, <span class="kw">c</span>(.<span class="dv">025</span>)),</a>
+<a class="sourceLine" id="cb228-8" data-line-number="8">                    <span class="dt">hq =</span> <span class="kw">quantile</span>(beta_across_subj, <span class="kw">c</span>(.<span class="dv">975</span>))))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 3
 ##    mean    lq    hq
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.19  1.17  3.21</code></pre>
-<p>The 95% credible interval of this overall mean effect is plotted in Figure <a href="sec-N400hierarchical.html#fig:nopooling">5.3</a> as two vertical lines together with the effect of Cloze probability for each subject (ordered by effect size).</p>
+## 1  2.17  1.19  3.13</code></pre>
+<p>The 95% credible interval of this overall mean effect is plotted in Figure <a href="sec-N400hierarchical.html#fig:nopooling">5.3</a> as two vertical lines together with the effect of Cloze probability for each subject (ordered by effect size). Rather than using a plotting function from <code>brms</code>, we extract the summary, we arrange it and we plot it with <code>ggplot2</code>.</p>
 
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1"><span class="co"># We make a table of beta by subject  </span></a>
-<a class="sourceLine" id="cb238-2" data-line-number="2">beta_by_subj &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_N400_np, <span class="dt">pars=</span>ind_effects_np) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb238-3" data-line-number="3"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb238-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subject =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb238-5" data-line-number="5"><span class="st">  </span><span class="co">## reorder plot by magnitude of mean:</span></a>
-<a class="sourceLine" id="cb238-6" data-line-number="6"><span class="st">  </span><span class="kw">arrange</span>(Estimate) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb238-7" data-line-number="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subject =</span> <span class="kw">factor</span>(subject, <span class="dt">levels =</span> subject))</a>
-<a class="sourceLine" id="cb238-8" data-line-number="8"><span class="co"># We plot: </span></a>
-<a class="sourceLine" id="cb238-9" data-line-number="9"><span class="kw">ggplot</span>(beta_by_subj, <span class="kw">aes</span>(<span class="dt">x =</span> Estimate, <span class="dt">xmin =</span> Q2<span class="fl">.5</span>, <span class="dt">xmax =</span> Q97<span class="fl">.5</span>, <span class="dt">y =</span> subject)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb238-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb238-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_errorbarh</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb238-12" data-line-number="12"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> grand_av_beta<span class="op">$</span>mean) <span class="op">+</span></a>
-<a class="sourceLine" id="cb238-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> grand_av_beta<span class="op">$</span>lq, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb238-14" data-line-number="14"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> grand_av_beta<span class="op">$</span>hq, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb238-15" data-line-number="15"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;By-subject effect of cloze probability in microvolts&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1"><span class="co"># We make a table of beta by subject  </span></a>
+<a class="sourceLine" id="cb230-2" data-line-number="2">beta_by_subj &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_N400_np, <span class="dt">pars=</span>ind_effects_np) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb230-3" data-line-number="3"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb230-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subject =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb230-5" data-line-number="5"><span class="st">  </span><span class="co">## reorder plot by magnitude of mean:</span></a>
+<a class="sourceLine" id="cb230-6" data-line-number="6"><span class="st">  </span><span class="kw">arrange</span>(Estimate) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb230-7" data-line-number="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subject =</span> <span class="kw">factor</span>(subject, <span class="dt">levels =</span> subject))</a>
+<a class="sourceLine" id="cb230-8" data-line-number="8"><span class="co"># We plot: </span></a>
+<a class="sourceLine" id="cb230-9" data-line-number="9"><span class="kw">ggplot</span>(beta_by_subj, <span class="kw">aes</span>(<span class="dt">x =</span> Estimate, <span class="dt">xmin =</span> Q2<span class="fl">.5</span>, <span class="dt">xmax =</span> Q97<span class="fl">.5</span>, <span class="dt">y =</span> subject)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb230-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb230-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_errorbarh</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb230-12" data-line-number="12"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> grand_av_beta<span class="op">$</span>mean) <span class="op">+</span></a>
+<a class="sourceLine" id="cb230-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> grand_av_beta<span class="op">$</span>lq, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb230-14" data-line-number="14"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> grand_av_beta<span class="op">$</span>hq, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb230-15" data-line-number="15"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;By-subject effect of cloze probability in microvolts&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:nopooling"></span>
 <img src="bookdown_files/figure-html/nopooling-1.svg" alt="95% credible intervals of the effect of Cloze probability for each subject according to the no pooling model." width="672" />
 <p class="caption">
@@ -623,10 +615,9 @@ FIGURE 5.3: 95% credible intervals of the effect of Cloze probability for each s
 </div>
 <div id="sec:uncorrelated" class="section level3">
 <h3><span class="header-section-number">5.1.3</span> Varying intercept and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</h3>
-<!-- One major problem with the no-pooling model is that it's not modeling the assumption that there is an overall effect and that participants have estimates that vary around that mean effect. To obtain an estimate of the effect, we just averaged the estimates of the mean subject-level effects.   -->
 <p>One major problem with the no-pooling model is that we ignore completely that the subjects were after all doing the same experiment. We fit each subject’s data ignoring the information available in the other subjects’ data.
 The no-pooling model is very likely to <em>overfit</em> the individual subjects’ data; we are likely to ignore the generalities of the data and we may end up overinterpreting the noise. The model can be modified to explicitly assume that the subjects have an overall effect common to all the subjects, with the individual subjects deviating from this common effect.</p>
-<p>Assuming that there is an overall effect that is common to the subjects will result in the estimation of posteriors for each participant being also influenced by what we know about all the subjects together. We’ll first fit a hierarchical model with uncorrelated varying intercept and slope.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
+<p>Assuming that there is an overall effect that is common to the subjects will result in the estimation of posteriors for each participant being also influenced by what we know about all the subjects together. We’ll first fit a hierarchical model with uncorrelated varying intercept and slope.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
 <div id="model-assumptions-2" class="section level4">
 <h4><span class="header-section-number">5.1.3.1</span> Model assumptions</h4>
 <ol style="list-style-type: decimal">
@@ -655,9 +646,9 @@ The no-pooling model is very likely to <em>overfit</em> the individual subjects�
  \sigma  &amp;\sim Normal_+(0,50)
  \end{aligned}
  \end{equation}\]</span></p>
-<p>In this model each subject has their own intercept adjustment, <span class="math inline">\(u_{1,subj}\)</span>, and slope adjustment, <span class="math inline">\(u_{2,subj}\)</span>.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> If <span class="math inline">\(u_{1,subj}\)</span> is positive, the subject will have a more positive EEG signal than the grand mean average. If <span class="math inline">\(u_{2,subj}\)</span> is positive, the subject will have a more positive EEG response to a change of one unit in <code>c_cloze</code> than the overall mean effect. The parameters <span class="math inline">\(u\)</span> are sometimes called random effects and thus a model with fixed effects (<span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>) and random effects is called a mixed model. However, random effects have different meanings in different contexts. To avoid ambiguity, <code>brms</code> calls these parameters <em>group-level</em> effects. Notice that since we are estimating <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(u\)</span> at the same time and we assume that the average of the <span class="math inline">\(u\)</span>’s is 0 (since it is assumed to be normally distributed with mean 0), what is common between the subjects, the grand mean, is estimated as the intercept <span class="math inline">\(\alpha\)</span>, and the deviations of individual subjects’ means from this grand mean are the adjustments <span class="math inline">\(u_1\)</span>. Similarly, the mean effect of cloze is estimated as <span class="math inline">\(\beta\)</span>, and the deviations of individual subjects’ mean effects of cloze from <span class="math inline">\(\beta\)</span> are the adjustment <span class="math inline">\(u_2\)</span>. The standard deviations of these two adjustment terms, <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span>, respectively, represent between participant variability; see also Box <a href="sec-N400hierarchical.html#thm:hierarchical">5.1</a>.</p>
+<p>In this model each subject has their own intercept adjustment, <span class="math inline">\(u_{1,subj}\)</span>, and slope adjustment, <span class="math inline">\(u_{2,subj}\)</span>.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> If <span class="math inline">\(u_{1,subj}\)</span> is positive, the subject will have a more positive EEG signal than the grand mean average. If <span class="math inline">\(u_{2,subj}\)</span> is positive, the subject will have a more positive EEG response to a change of one unit in <code>c_cloze</code> than the overall mean effect. The parameters <span class="math inline">\(u\)</span> are sometimes called random effects and thus a model with fixed effects (<span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>) and random effects is called a mixed model. However, random effects have different meanings in different contexts. To avoid ambiguity, <code>brms</code> calls these parameters <em>group-level</em> effects. Notice that since we are estimating <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(u\)</span> at the same time and we assume that the average of the <span class="math inline">\(u\)</span>’s is 0 (since it is assumed to be normally distributed with mean 0), what is common between the subjects, the grand mean, is estimated as the intercept <span class="math inline">\(\alpha\)</span>, and the deviations of individual subjects’ means from this grand mean are the adjustments <span class="math inline">\(u_1\)</span>. Similarly, the mean effect of cloze is estimated as <span class="math inline">\(\beta\)</span>, and the deviations of individual subjects’ mean effects of cloze from <span class="math inline">\(\beta\)</span> are the adjustment <span class="math inline">\(u_2\)</span>. The standard deviations of these two adjustment terms, <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span>, respectively, represent between participant variability; see also Box <a href="sec-N400hierarchical.html#thm:hierarchical">5.1</a>.</p>
 <p>Thus, the model <span class="math inline">\(M_{v}\)</span> has three <em>standard deviations</em>: <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span>. In statistics, it is conventional to talk about variances (the square of these standard deviations); for this reason, these standard deviations are also (confusingly) called <em>variance components</em>. The variance components <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span> characterize between-subject variability, and the variance component <span class="math inline">\(\sigma\)</span> characterizes within-subject variability.</p>
-<p>Notice that the by-subject adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span> are parameters in the model, and therefore have priors defined on them. Parameters that appear in the prior specifications for parameters, such as <span class="math inline">\(\tau_u\)</span>, are often called <em>hyperparameters</em>, and the priors on such hyperparameters are called <em>hyperpriors</em>. Thus, the parameter <span class="math inline">\(u_1\)</span> has <span class="math inline">\(Normal(0,\tau_{u_1})\)</span> as a prior; <span class="math inline">\(\tau_{u_1}\)</span> is a hyperparameter, and the hyperprior on <span class="math inline">\(\tau_{u_1}\)</span> is <span class="math inline">\(Normal(0,20)\)</span>.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
+<p>Notice that the by-subject adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span> are parameters in the model, and therefore have priors defined on them. Parameters that appear in the prior specifications for parameters, such as <span class="math inline">\(\tau_u\)</span>, are often called <em>hyperparameters</em>, and the priors on such hyperparameters are called <em>hyperpriors</em>. Thus, the parameter <span class="math inline">\(u_1\)</span> has <span class="math inline">\(Normal(0,\tau_{u_1})\)</span> as a prior; <span class="math inline">\(\tau_{u_1}\)</span> is a hyperparameter, and the hyperprior on <span class="math inline">\(\tau_{u_1}\)</span> is <span class="math inline">\(Normal(0,20)\)</span>.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></p>
 <p>In general, the standard deviations for the by-subject adjustments are smaller than the standard deviation of the observations (which is the within-subjects standard deviation). That is, usually the between-subject variability in the intercepts and slopes is smaller than the within-subjects variability in the data. For this reason, reducing the scale of the truncated normal distribution to <span class="math inline">\(20\)</span> (in comparison to <span class="math inline">\(50\)</span>) seems reasonable for the priors of the <span class="math inline">\(\tau\)</span> parameters. As always, we can do a sensitivity analysis to verify that our priors are reasonably uninformative (if we intended them to be uninformative).</p>
 
 <div class="extra">
@@ -681,84 +672,88 @@ The no-pooling model is very likely to <em>overfit</em> the individual subjects�
 <p>Mostly because of convention, that’s the way it’s implemented in most frequentist mixed models. But also because if we don’t know anything about the distribution besides its mean and variance, the normal distribution is the most conservative assumption <span class="citation">(see also chapter 9 of McElreath <a href="#ref-mcelreath2015statistical">2015</a>)</span>.</p>
 </div>
 
-<p>For now, we are assuming that there is no relationship (no correlation) between the by-subject intercept and slope adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span>; as in <code>lmer</code>, this lack of correlation is indicated using in <code>brms</code> using the double pipe <code>||</code>. In <code>brms</code>, we need to specify hyperpriors for <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span>; these are called <code>sd</code> in <code>brms</code>, to distinguish these standard deviations from <span class="math inline">\(\sigma\)</span>. As with the population-level effects, the by-subjects intercept adjustments are implicitly fit for the group-level effects and thus <code>(c_cloze || subject)</code> is equivalent to <code>(1 + c_cloze || subject)</code>. If we don’t want an intercept we need to explicitly indicate it with <code>(0 + c_cloze || subject)</code> or <code>(-1 + c_cloze || subject)</code>. Such a removal of the intercept is not normally done.</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1">fit_N400_v &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">||</span><span class="st"> </span>subject),</a>
-<a class="sourceLine" id="cb239-2" data-line-number="2">                  <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb239-3" data-line-number="3">                      <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb239-4" data-line-number="4">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_cloze),</a>
-<a class="sourceLine" id="cb239-5" data-line-number="5">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb239-6" data-line-number="6">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> Intercept, <span class="dt">group =</span> subject),</a>
-<a class="sourceLine" id="cb239-7" data-line-number="7">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> c_cloze, <span class="dt">group =</span> subject)</a>
-<a class="sourceLine" id="cb239-8" data-line-number="8">                        ),</a>
-<a class="sourceLine" id="cb239-9" data-line-number="9">              <span class="dt">data =</span> df_eeg_data)</a></code></pre></div>
+<p>For now, we are assuming that there is no relationship (no correlation) between the by-subject intercept and slope adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span>; as in <code>lmer</code>, this lack of correlation is indicated using in <code>brms</code> using the double pipe <code>||</code>. In <code>brms</code>, we need to specify hyperpriors for <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span>; these are called <code>sd</code> in <code>brms</code>, to distinguish these standard deviations from <span class="math inline">\(\sigma\)</span>. As with the population-level effects, the by-subjects intercept adjustments are implicitly fit for the group-level effects and thus <code>(c_cloze || subj)</code> is equivalent to <code>(1 + c_cloze || subj)</code>. If we don’t want an intercept we need to explicitly indicate it with <code>(0 + c_cloze || subj)</code> or <code>(-1 + c_cloze || subj)</code>. Such a removal of the intercept is not normally done.</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1">fit_N400_v &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">||</span><span class="st"> </span>subj),</a>
+<a class="sourceLine" id="cb231-2" data-line-number="2">                  <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb231-3" data-line-number="3">                      <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb231-4" data-line-number="4">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_cloze),</a>
+<a class="sourceLine" id="cb231-5" data-line-number="5">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb231-6" data-line-number="6">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> Intercept, <span class="dt">group =</span> subj),</a>
+<a class="sourceLine" id="cb231-7" data-line-number="7">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> c_cloze, <span class="dt">group =</span> subj)</a>
+<a class="sourceLine" id="cb231-8" data-line-number="8">                        ),</a>
+<a class="sourceLine" id="cb231-9" data-line-number="9">              <span class="dt">data =</span> df_eeg)</a></code></pre></div>
 <p>When we print a <code>brms</code> fit, we first see the summaries of the posteriors of the standard deviation of the by-group intercept and slopes, <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span> as <code>sd(Intercept)</code> and <code>sd(c_cloze)</code>, and then, as with previous models, the population-level effects, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> as <code>Intercept</code> and <code>c_cloze</code>, and the scale of the likelihood, <span class="math inline">\(\sigma\)</span>, as <code>sigma</code>.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" data-line-number="1">fit_N400_v</a></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1">fit_N400_v</a></code></pre></div>
 <p>Because the above command will result in pages of output, it is easier to understand the summary graphically:</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1"><span class="kw">plot</span>(fit_N400_v, <span class="dt">N=</span><span class="dv">6</span>)</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-146-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" data-line-number="1"><span class="kw">plot</span>(fit_N400_v, <span class="dt">N=</span><span class="dv">6</span>)</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-149-1.svg" width="672" /></p>
 <p>Because we estimated how the population-level effect of Cloze is adjusted for each subject, we could examine how each subject is being affected by the manipulation. For this we do the following, and we plot it in Figure <a href="sec-N400hierarchical.html#fig:partialpooling">5.4</a>. Notice that these are adjustments, <span class="math inline">\(u_{1,1},u_{1,...},u_{1,37}\)</span>, and not the effect of the manipulation by subject, <span class="math inline">\(\beta + [u_{1,1},u_{1,...},u_{1,37}]\)</span>.</p>
 
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" data-line-number="1"><span class="co"># We make a table of u_2s</span></a>
-<a class="sourceLine" id="cb242-2" data-line-number="2">ind_effects_v &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;r_subject[&quot;</span>,<span class="kw">unique</span>(df_eeg_data<span class="op">$</span>subject), <span class="st">&quot;,c_cloze]&quot;</span>)</a>
-<a class="sourceLine" id="cb242-3" data-line-number="3">u_<span class="dv">2</span>_v &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_N400_v)[ind_effects_v, ] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb242-4" data-line-number="4"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb242-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subject =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb242-6" data-line-number="6"><span class="st">  </span><span class="co">## reorder plot by magnitude of mean:</span></a>
-<a class="sourceLine" id="cb242-7" data-line-number="7"><span class="st">  </span><span class="kw">arrange</span>(Estimate) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb242-8" data-line-number="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subject =</span> <span class="kw">factor</span>(subject, <span class="dt">levels =</span> subject))</a>
-<a class="sourceLine" id="cb242-9" data-line-number="9"><span class="co"># We plot:</span></a>
-<a class="sourceLine" id="cb242-10" data-line-number="10"><span class="kw">ggplot</span>(u_<span class="dv">2</span>_v, <span class="kw">aes</span>(<span class="dt">x =</span> Estimate, <span class="dt">xmin =</span> Q2<span class="fl">.5</span>, <span class="dt">xmax =</span> Q97<span class="fl">.5</span>, <span class="dt">y =</span> subject)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb242-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb242-12" data-line-number="12"><span class="st">  </span><span class="kw">geom_errorbarh</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb242-13" data-line-number="13"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;By-subject adjustment to the slope in microvolts&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1"><span class="co"># We make a table of u_2s</span></a>
+<a class="sourceLine" id="cb234-2" data-line-number="2">ind_effects_v &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;r_subj[&quot;</span>,<span class="kw">unique</span>(df_eeg<span class="op">$</span>subj), <span class="st">&quot;,c_cloze]&quot;</span>)</a>
+<a class="sourceLine" id="cb234-3" data-line-number="3">u_<span class="dv">2</span>_v &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_N400_v)[ind_effects_v, ] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb234-4" data-line-number="4"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb234-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subj =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb234-6" data-line-number="6"><span class="st">  </span><span class="co">## reorder plot by magnitude of mean:</span></a>
+<a class="sourceLine" id="cb234-7" data-line-number="7"><span class="st">  </span><span class="kw">arrange</span>(Estimate) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb234-8" data-line-number="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subj=</span> <span class="kw">factor</span>(subj, <span class="dt">levels =</span> subj))</a>
+<a class="sourceLine" id="cb234-9" data-line-number="9"><span class="co"># We plot:</span></a>
+<a class="sourceLine" id="cb234-10" data-line-number="10"><span class="kw">ggplot</span>(u_<span class="dv">2</span>_v, <span class="kw">aes</span>(<span class="dt">x =</span> Estimate, <span class="dt">xmin =</span> Q2<span class="fl">.5</span>, <span class="dt">xmax =</span> Q97<span class="fl">.5</span>, <span class="dt">y =</span> subj)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb234-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb234-12" data-line-number="12"><span class="st">  </span><span class="kw">geom_errorbarh</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb234-13" data-line-number="13"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;By-subject adjustment to the slope in microvolts&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:partialpooling"></span>
 <img src="bookdown_files/figure-html/partialpooling-1.svg" alt="95% credible intervals of adjustments to the effect of Cloze probability for each subject (\(u_{1,1..37}\)) according to the varying intercept and varying slopes model." width="672" />
 <p class="caption">
 FIGURE 5.4: 95% credible intervals of adjustments to the effect of Cloze probability for each subject (<span class="math inline">\(u_{1,1..37}\)</span>) according to the varying intercept and varying slopes model.
 </p>
 </div>
-<p>There is an important difference between the no-pooling model and the varying intercepts and slopes model we just fit. The no-pooling model fits each individual subject’s intercept and slope independently for each subject. By contrast, the varying intercepts and slopes model takes <em>all</em> the subjects’ data into account in order to compute the fixed effects <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>; and the model shrinks the by-subject intercept and slope adjustments towards the fixed effects estimates. We can see the shrinkage of the estimates in the varying intercepts model when we compare them with the estimates of the no pooling model (<span class="math inline">\(M_{np}\)</span>) in Figure <a href="sec-N400hierarchical.html#fig:comparison">5.5</a>.</p>
+<p>There is an important difference between the no-pooling model and the varying intercepts and slopes model we just fit. The no-pooling model fits each individual subject’s intercept and slope independently for each subject. By contrast, the varying intercepts and slopes model takes <em>all</em> the subjects’ data into account in order to compute the fixed effects <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>; and the model shrinks the by-subject intercept and slope adjustments towards the fixed effects estimates. We can see the shrinkage of the estimates in the varying intercepts model when we compare them with the estimates of the no pooling model (<span class="math inline">\(M_{np}\)</span>) in Figure <a href="sec-N400hierarchical.html#fig:comparison">5.5</a>. The code is here more involved since it require us to build a data frame with the by-subject effects.</p>
 
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1"><span class="co"># No pooling model</span></a>
-<a class="sourceLine" id="cb243-2" data-line-number="2">ind_effects_v &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;r_subject[&quot;</span>,<span class="kw">unique</span>(df_eeg_data<span class="op">$</span>subject), <span class="st">&quot;,c_cloze]&quot;</span>)</a>
-<a class="sourceLine" id="cb243-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb243-4" data-line-number="4">par_np &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_N400_np)[ind_effects_np,] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-5" data-line-number="5"><span class="st">    </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-6" data-line-number="6"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;No pooling&quot;</span>,</a>
-<a class="sourceLine" id="cb243-7" data-line-number="7">           <span class="dt">subj =</span> <span class="kw">unique</span>(df_eeg_data<span class="op">$</span>subject))</a>
-<a class="sourceLine" id="cb243-8" data-line-number="8"><span class="co"># For the hierarchical model is more complicated,</span></a>
-<a class="sourceLine" id="cb243-9" data-line-number="9"><span class="co"># because we want the effect (beta) + adjustment:</span></a>
-<a class="sourceLine" id="cb243-10" data-line-number="10">par_h &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_N400_v) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-11" data-line-number="11"><span class="st">    </span><span class="kw">select</span>(<span class="kw">all_of</span>(ind_effects_v))  <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-12" data-line-number="12"><span class="st">    </span><span class="co"># We create a dataframe where each column is beta + u_{2,subj}</span></a>
-<a class="sourceLine" id="cb243-13" data-line-number="13"><span class="st">    </span><span class="kw">mutate_all</span>( <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span><span class="kw">posterior_samples</span>(fit_N400_v)<span class="op">$</span>b_c_cloze) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-14" data-line-number="14"><span class="st">    </span><span class="co"># We iterate over each column and create a dataframe with</span></a>
-<a class="sourceLine" id="cb243-15" data-line-number="15"><span class="st">    </span><span class="co"># estimate and the 95% CI of each iteration:</span></a>
-<a class="sourceLine" id="cb243-16" data-line-number="16"><span class="st">    </span><span class="kw">map_dfr</span>(<span class="op">~</span><span class="st"> </span><span class="kw">tibble</span>(<span class="dt">Estimate =</span> <span class="kw">mean</span>(.),</a>
-<a class="sourceLine" id="cb243-17" data-line-number="17">                <span class="dt">Q2.5 =</span> <span class="kw">quantile</span>(.,.<span class="dv">025</span>),</a>
-<a class="sourceLine" id="cb243-18" data-line-number="18">                <span class="dt">Q97.5 =</span> <span class="kw">quantile</span>(., <span class="fl">.975</span>))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-19" data-line-number="19"><span class="st">    </span><span class="co"># We add a column to identify that the model,</span></a>
-<a class="sourceLine" id="cb243-20" data-line-number="20"><span class="st">    </span><span class="co"># and one with the subject labels:</span></a>
-<a class="sourceLine" id="cb243-21" data-line-number="21"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Hierarchical&quot;</span>,</a>
-<a class="sourceLine" id="cb243-22" data-line-number="22">           <span class="dt">subj =</span> <span class="kw">unique</span>(df_eeg_data<span class="op">$</span>subject))</a>
-<a class="sourceLine" id="cb243-23" data-line-number="23"><span class="co"># The mean and 95% CI of both models in one dataframe:</span></a>
-<a class="sourceLine" id="cb243-24" data-line-number="24">by_subj_df &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(par_h, par_np) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-25" data-line-number="25"><span class="st">  </span><span class="kw">arrange</span>(Estimate) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb243-26" data-line-number="26"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subj =</span> <span class="kw">factor</span>(subj, <span class="dt">levels=</span> <span class="kw">unique</span>(.data<span class="op">$</span>subj)))</a>
-<a class="sourceLine" id="cb243-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb243-28" data-line-number="28"><span class="kw">ggplot</span>(by_subj_df,</a>
-<a class="sourceLine" id="cb243-29" data-line-number="29">       <span class="kw">aes</span>(<span class="dt">ymin =</span> Q2<span class="fl">.5</span>, <span class="dt">ymax =</span> Q97<span class="fl">.5</span>,<span class="dt">x=</span>subj, <span class="dt">y =</span> Estimate, <span class="dt">color=</span>model,</a>
-<a class="sourceLine" id="cb243-30" data-line-number="30">           <span class="dt">shape =</span> model)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb243-31" data-line-number="31"><span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dv">1</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb243-32" data-line-number="32"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dv">1</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb243-33" data-line-number="33"><span class="st">    </span><span class="co"># We&#39;ll also add the mean and 95% CrI of the overall difference to the plot:</span></a>
-<a class="sourceLine" id="cb243-34" data-line-number="34"><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">posterior_summary</span>(fit_N400_v)[<span class="st">&quot;b_c_cloze&quot;</span>,<span class="st">&quot;Estimate&quot;</span>]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb243-35" data-line-number="35"><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">posterior_summary</span>(fit_N400_v)[<span class="st">&quot;b_c_cloze&quot;</span>,<span class="st">&quot;Q2.5&quot;</span>],</a>
-<a class="sourceLine" id="cb243-36" data-line-number="36">               <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>,<span class="dt">size =</span> <span class="fl">.5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb243-37" data-line-number="37"><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">posterior_summary</span>(fit_N400_v)[<span class="st">&quot;b_c_cloze&quot;</span>,<span class="st">&quot;Q97.5&quot;</span>],</a>
-<a class="sourceLine" id="cb243-38" data-line-number="38">               <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>,<span class="dt">size =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb243-39" data-line-number="39"><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;N400 effect of predictability&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb243-40" data-line-number="40"><span class="st">    </span><span class="kw">coord_flip</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1"><span class="co"># No pooling model</span></a>
+<a class="sourceLine" id="cb235-2" data-line-number="2">par_np &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_N400_np)[ind_effects_np,] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb235-3" data-line-number="3"><span class="st">    </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb235-4" data-line-number="4"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;No pooling&quot;</span>,</a>
+<a class="sourceLine" id="cb235-5" data-line-number="5">           <span class="dt">subj =</span> <span class="kw">unique</span>(df_eeg<span class="op">$</span>subj))</a>
+<a class="sourceLine" id="cb235-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb235-7" data-line-number="7"><span class="co"># For the hierarchical model is more complicated,</span></a>
+<a class="sourceLine" id="cb235-8" data-line-number="8"><span class="co"># because we want the effect (beta) + adjustment:</span></a>
+<a class="sourceLine" id="cb235-9" data-line-number="9"><span class="co"># we extract the overall group level effect:</span></a>
+<a class="sourceLine" id="cb235-10" data-line-number="10">beta &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">posterior_samples</span>(fit_N400_v)<span class="op">$</span>b_c_cloze)</a>
+<a class="sourceLine" id="cb235-11" data-line-number="11"><span class="co"># We extract the individual adjustments</span></a>
+<a class="sourceLine" id="cb235-12" data-line-number="12">ind_effects_v &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;r_subj[&quot;</span>,<span class="kw">unique</span>(df_eeg<span class="op">$</span>subj), <span class="st">&quot;,c_cloze]&quot;</span>)</a>
+<a class="sourceLine" id="cb235-13" data-line-number="13">adjustment &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">posterior_samples</span>(fit_N400_v)[ind_effects_v])</a>
+<a class="sourceLine" id="cb235-14" data-line-number="14"><span class="co"># We get the by subject effects in a data frame where each adjustment is in each column</span></a>
+<a class="sourceLine" id="cb235-15" data-line-number="15">by_subj_effect &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(beta <span class="op">+</span><span class="st"> </span>adjustment)</a>
+<a class="sourceLine" id="cb235-16" data-line-number="16"><span class="co"># We summarize them by getting a table with the mean and the quantiles for each column and then binding them</span></a>
+<a class="sourceLine" id="cb235-17" data-line-number="17">par_h &lt;-<span class="st"> </span><span class="kw">lapply</span>(by_subj_effect, <span class="cf">function</span>(x) </a>
+<a class="sourceLine" id="cb235-18" data-line-number="18">  <span class="kw">tibble</span>(<span class="dt">Estimate =</span> <span class="kw">mean</span>(x),</a>
+<a class="sourceLine" id="cb235-19" data-line-number="19">                <span class="dt">Q2.5 =</span> <span class="kw">quantile</span>(x,.<span class="dv">025</span>),</a>
+<a class="sourceLine" id="cb235-20" data-line-number="20">                <span class="dt">Q97.5 =</span> <span class="kw">quantile</span>(x, <span class="fl">.975</span>))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb235-21" data-line-number="21"><span class="st">  </span><span class="kw">bind_rows</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb235-22" data-line-number="22"><span class="st">  </span><span class="co"># We add a column to identify that the model,</span></a>
+<a class="sourceLine" id="cb235-23" data-line-number="23"><span class="st">  </span><span class="co"># and one with the subject labels:</span></a>
+<a class="sourceLine" id="cb235-24" data-line-number="24"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Hierarchical&quot;</span>,</a>
+<a class="sourceLine" id="cb235-25" data-line-number="25">         <span class="dt">subj =</span> <span class="kw">unique</span>(df_eeg<span class="op">$</span>subj))</a>
+<a class="sourceLine" id="cb235-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb235-27" data-line-number="27"><span class="co"># The mean and 95% CI of both models in one dataframe:</span></a>
+<a class="sourceLine" id="cb235-28" data-line-number="28">by_subj_df &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(par_h, par_np) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb235-29" data-line-number="29"><span class="st">  </span><span class="kw">arrange</span>(Estimate) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb235-30" data-line-number="30"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subj =</span> <span class="kw">factor</span>(subj, <span class="dt">levels=</span> <span class="kw">unique</span>(.data<span class="op">$</span>subj)))</a>
+<a class="sourceLine" id="cb235-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb235-32" data-line-number="32"><span class="kw">ggplot</span>(by_subj_df,</a>
+<a class="sourceLine" id="cb235-33" data-line-number="33">       <span class="kw">aes</span>(<span class="dt">ymin =</span> Q2<span class="fl">.5</span>, <span class="dt">ymax =</span> Q97<span class="fl">.5</span>,<span class="dt">x=</span>subj, <span class="dt">y =</span> Estimate, <span class="dt">color=</span>model,</a>
+<a class="sourceLine" id="cb235-34" data-line-number="34">           <span class="dt">shape =</span> model)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb235-35" data-line-number="35"><span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dv">1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb235-36" data-line-number="36"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dv">1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb235-37" data-line-number="37"><span class="st">    </span><span class="co"># We&#39;ll also add the mean and 95% CrI of the overall difference to the plot:</span></a>
+<a class="sourceLine" id="cb235-38" data-line-number="38"><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">posterior_summary</span>(fit_N400_v)[<span class="st">&quot;b_c_cloze&quot;</span>,<span class="st">&quot;Estimate&quot;</span>]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb235-39" data-line-number="39"><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">posterior_summary</span>(fit_N400_v)[<span class="st">&quot;b_c_cloze&quot;</span>,<span class="st">&quot;Q2.5&quot;</span>],</a>
+<a class="sourceLine" id="cb235-40" data-line-number="40">               <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>,<span class="dt">size =</span> <span class="fl">.5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb235-41" data-line-number="41"><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">posterior_summary</span>(fit_N400_v)[<span class="st">&quot;b_c_cloze&quot;</span>,<span class="st">&quot;Q97.5&quot;</span>],</a>
+<a class="sourceLine" id="cb235-42" data-line-number="42">               <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>,<span class="dt">size =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb235-43" data-line-number="43"><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;N400 effect of predictability&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb235-44" data-line-number="44"><span class="st">    </span><span class="kw">coord_flip</span>()</a></code></pre></div>
 <div class="figure"><span id="fig:comparison"></span>
 <img src="bookdown_files/figure-html/comparison-1.svg" alt="Comparison of the estimates of effect of Cloze probability for each subject between the no pooling and the varying intercept and varying slopes, hierarchical, model." width="672" />
 <p class="caption">
@@ -880,18 +875,18 @@ FIGURE 5.6: Visualization of the LKJ correlation distribution prior with four di
 \end{aligned}
 \end{equation}\]</span></p>
 <p>We indicate in our <code>brms</code> model that we assume a possible correlation between the by-subject intercept and slope with the single pipe <code>|</code>. As before the intercept is implicitly fit. This means that we need to add a new prior for the correlation, <span class="math inline">\(\rho_{u}\)</span>, <code>cor</code> in <code>brms</code>.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" data-line-number="1">fit_N400_h &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>subject),</a>
-<a class="sourceLine" id="cb244-2" data-line-number="2">                  <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb244-3" data-line-number="3">                      <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb244-4" data-line-number="4">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_cloze),</a>
-<a class="sourceLine" id="cb244-5" data-line-number="5">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb244-6" data-line-number="6">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> Intercept, <span class="dt">group =</span> subject),</a>
-<a class="sourceLine" id="cb244-7" data-line-number="7">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> c_cloze, <span class="dt">group =</span> subject),</a>
-<a class="sourceLine" id="cb244-8" data-line-number="8">                        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor, <span class="dt">group=</span> subject)),</a>
-<a class="sourceLine" id="cb244-9" data-line-number="9">              <span class="dt">data =</span> df_eeg_data)</a></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" data-line-number="1">fit_N400_h &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj),</a>
+<a class="sourceLine" id="cb236-2" data-line-number="2">                  <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb236-3" data-line-number="3">                      <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb236-4" data-line-number="4">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_cloze),</a>
+<a class="sourceLine" id="cb236-5" data-line-number="5">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb236-6" data-line-number="6">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> Intercept, <span class="dt">group =</span> subj),</a>
+<a class="sourceLine" id="cb236-7" data-line-number="7">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> c_cloze, <span class="dt">group =</span> subj),</a>
+<a class="sourceLine" id="cb236-8" data-line-number="8">                        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor, <span class="dt">group=</span> subj)),</a>
+<a class="sourceLine" id="cb236-9" data-line-number="9">              <span class="dt">data =</span> df_eeg)</a></code></pre></div>
 <p>The estimates do not change much in comparison with the varying intercept/slope model, probably because the estimation of the correlation is quite poor (i.e., there is a lot of uncertainty). As before we show the estimates graphically, one can access the complete summary as always with <code>fit_N400_h</code>.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1"><span class="kw">plot</span>(fit_N400_h, <span class="dt">N=</span><span class="dv">6</span>)</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-148-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1"><span class="kw">plot</span>(fit_N400_h, <span class="dt">N =</span> <span class="dv">6</span>)</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-151-1.svg" width="672" /></p>
 <p>We are now half-way to the so-called maximal hierarchical model <span class="citation">(Barr et al. <a href="#ref-barr2013">2013</a>)</span>, because everything that we said about subjects is also relevant for items. The next section spells out this type of model.</p>
 </div>
 <div id="sec:sih" class="section level3">
@@ -973,125 +968,91 @@ we assume a possible correlation between varying intercepts and slopes by subjec
 \end{aligned}
 \end{equation}\]</span></p>
 <p>We set identical priors to by-items group-level effects as to the by-subject ones, because we don’t have different prior information about them. However, bear in mind that the estimation for items is completely independent from the estimation for subjects. Although we wrote many more equations than before, the <code>brms</code> model is quite straightforward to extend:</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" data-line-number="1">fit_N400_sih &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>subject) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb246-2" data-line-number="2">                  <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb246-3" data-line-number="3">                      <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb246-4" data-line-number="4">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_cloze),</a>
-<a class="sourceLine" id="cb246-5" data-line-number="5">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb246-6" data-line-number="6">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> Intercept, <span class="dt">group =</span> subject),</a>
-<a class="sourceLine" id="cb246-7" data-line-number="7">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> c_cloze, <span class="dt">group =</span> subject),</a>
-<a class="sourceLine" id="cb246-8" data-line-number="8">                        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor, <span class="dt">group =</span> subject),</a>
-<a class="sourceLine" id="cb246-9" data-line-number="9">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> Intercept, <span class="dt">group =</span> item),</a>
-<a class="sourceLine" id="cb246-10" data-line-number="10">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> c_cloze, <span class="dt">group =</span> item),</a>
-<a class="sourceLine" id="cb246-11" data-line-number="11">                        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor, <span class="dt">group =</span> item)),</a>
-<a class="sourceLine" id="cb246-12" data-line-number="12">                  <span class="dt">data =</span> df_eeg_data)</a></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1">fit_N400_sih &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb238-2" data-line-number="2">                  <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb238-3" data-line-number="3">                      <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb238-4" data-line-number="4">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_cloze),</a>
+<a class="sourceLine" id="cb238-5" data-line-number="5">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb238-6" data-line-number="6">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> Intercept, <span class="dt">group =</span> subj),</a>
+<a class="sourceLine" id="cb238-7" data-line-number="7">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> c_cloze, <span class="dt">group =</span> subj),</a>
+<a class="sourceLine" id="cb238-8" data-line-number="8">                        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor, <span class="dt">group =</span> subject),</a>
+<a class="sourceLine" id="cb238-9" data-line-number="9">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> Intercept, <span class="dt">group =</span> item),</a>
+<a class="sourceLine" id="cb238-10" data-line-number="10">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd, <span class="dt">coef =</span> c_cloze, <span class="dt">group =</span> item),</a>
+<a class="sourceLine" id="cb238-11" data-line-number="11">                        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor, <span class="dt">group =</span> item)),</a>
+<a class="sourceLine" id="cb238-12" data-line-number="12">                  <span class="dt">data =</span> df_eeg)</a></code></pre></div>
 <p>We can also simplify the call to <code>brms</code>, when we assign the same priors to the by-subject and by-item parameters:</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1">fit_N400_sih &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>subject) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb247-2" data-line-number="2">                  <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb247-3" data-line-number="3">                      <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb247-4" data-line-number="4">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb247-5" data-line-number="5">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb247-6" data-line-number="6">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb247-7" data-line-number="7">                        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)),</a>
-<a class="sourceLine" id="cb247-8" data-line-number="8">                  <span class="dt">data =</span> df_eeg_data)</a></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1">fit_N400_sih &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb239-2" data-line-number="2">                  <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb239-3" data-line-number="3">                      <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb239-4" data-line-number="4">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb239-5" data-line-number="5">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb239-6" data-line-number="6">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb239-7" data-line-number="7">                        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)),</a>
+<a class="sourceLine" id="cb239-8" data-line-number="8">                  <span class="dt">data =</span> df_eeg)</a></code></pre></div>
 <p>We have new group-level effects in the summary, but again the estimate of the effect of Cloze remains virtually unchanged.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1">fit_N400_sih</a></code></pre></div>
-<pre><code>##  Family: gaussian 
-##   Links: mu = identity; sigma = identity 
-## Formula: n400 ~ c_cloze + (c_cloze | subject) + (c_cloze | item) 
-##    Data: df_eeg_data (Number of observations: 2827) 
-## Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
-##          total post-warmup samples = 4000
-## 
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" data-line-number="1">fit_N400_sih</a></code></pre></div>
+<pre><code>## ...
 ## Group-Level Effects: 
 ## ~item (Number of levels: 80) 
 ##                        Estimate Est.Error l-95% CI u-95% CI Rhat
-## sd(Intercept)              1.53      0.34     0.86     2.19 1.00
-## sd(c_cloze)                2.28      1.04     0.22     4.25 1.00
-## cor(Intercept,c_cloze)    -0.42      0.32    -0.89     0.37 1.00
+## sd(Intercept)              1.50      0.35     0.78     2.17 1.00
+## sd(c_cloze)                2.28      1.04     0.26     4.25 1.00
+## cor(Intercept,c_cloze)    -0.42      0.32    -0.90     0.34 1.00
 ##                        Bulk_ESS Tail_ESS
-## sd(Intercept)              1457     2291
-## sd(c_cloze)                 871      482
-## cor(Intercept,c_cloze)     2027     2132
+## sd(Intercept)              1173     1146
+## sd(c_cloze)                1262     1555
+## cor(Intercept,c_cloze)     2845     2366
 ## 
-## ~subject (Number of levels: 37) 
+## ~subj (Number of levels: 37) 
 ##                        Estimate Est.Error l-95% CI u-95% CI Rhat
-## sd(Intercept)              2.24      0.38     1.59     3.05 1.00
-## sd(c_cloze)                1.39      0.84     0.07     3.12 1.00
-## cor(Intercept,c_cloze)     0.15      0.37    -0.63     0.81 1.00
+## sd(Intercept)              2.20      0.37     1.53     3.02 1.00
+## sd(c_cloze)                1.49      0.88     0.10     3.38 1.00
+## cor(Intercept,c_cloze)     0.13      0.35    -0.61     0.76 1.00
 ##                        Bulk_ESS Tail_ESS
-## sd(Intercept)              1176     2307
-## sd(c_cloze)                1147     1591
-## cor(Intercept,c_cloze)     4086     2590
+## sd(Intercept)              1699     2150
+## sd(c_cloze)                1394     2236
+## cor(Intercept,c_cloze)     5523     2574
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     3.63      0.47     2.70     4.52 1.00     1904     2585
-## c_cloze       2.33      0.67     0.99     3.59 1.00     3926     3244
+## Intercept     3.66      0.46     2.75     4.54 1.00     2835     2913
+## c_cloze       2.31      0.70     0.92     3.69 1.00     4302     3087
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma    11.50      0.16    11.20    11.82 1.00     4849     2872
+## sigma    11.49      0.16    11.18    11.82 1.00     6255     2918
 ## 
-## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
-## and Tail_ESS are effective sample size measures, and Rhat is the potential
-## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" data-line-number="1"><span class="kw">plot</span>(fit_N400_sih, <span class="dt">N=</span><span class="dv">9</span>)</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-151-1.svg" width="672" /></p>
+## ...</code></pre>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" data-line-number="1"><span class="kw">plot</span>(fit_N400_sih, <span class="dt">N=</span><span class="dv">9</span>)</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-156-1.svg" width="672" /></p>
 </div>
 <div id="sec:distrmodel" class="section level3">
 <h3><span class="header-section-number">5.1.6</span> Beyond the so-called maximal models–Distributional regression models</h3>
 <p>We can use posterior predictive checks to verify that our last model can capture the entire signal distribution.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="kw">pp_check</span>(fit_N400_sih, <span class="dt">nsamples =</span><span class="dv">50</span>, <span class="dt">type=</span><span class="st">&quot;dens_overlay&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-152-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1"><span class="kw">pp_check</span>(fit_N400_sih, <span class="dt">nsamples =</span><span class="dv">50</span>, <span class="dt">type=</span><span class="st">&quot;dens_overlay&quot;</span>)</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-157-1.svg" width="672" /></p>
 <p>However, we know that in ERP studies, large levels of impedance between the recording electrodes and the skin tissue increase the noise in the recordings <span class="citation">(Picton et al. <a href="#ref-picton_etal_2000">2000</a>)</span>. Given that skin tissue is different between subjects, it could be the case that the level of noise varies by participant.
-It might be a good idea to verify that our model is good enough for capturing the by-subject data pattern. We adapt the code from <a href="sec-pupil.html#sec:pupiladq">4.1.4</a> and we plot it in Figure <a href="sec-N400hierarchical.html#fig:postpreddensbysubj">5.7</a>.</p>
+It might be a good idea to verify that our model is good enough for capturing the by-subject data pattern. We plot it in Figure <a href="sec-N400hierarchical.html#fig:postpreddensbysubj">5.7</a>.</p>
 
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" data-line-number="1">df_eeg_pred &lt;-<span class="st"> </span><span class="kw">posterior_predict</span>(fit_N400_sih,</a>
-<a class="sourceLine" id="cb252-2" data-line-number="2">                                 <span class="dt">nsamples =</span> <span class="dv">1000</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb252-3" data-line-number="3"><span class="st">    </span><span class="kw">array_branch</span>(<span class="dt">margin =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb252-4" data-line-number="4"><span class="st">    </span><span class="kw">map_dfr</span>( <span class="cf">function</span>(yrep_iter) {</a>
-<a class="sourceLine" id="cb252-5" data-line-number="5">        df_eeg_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb252-6" data-line-number="6"><span class="st">            </span><span class="kw">mutate</span>(<span class="dt">n400 =</span> yrep_iter)</a>
-<a class="sourceLine" id="cb252-7" data-line-number="7">    }, <span class="dt">.id =</span> <span class="st">&quot;iter&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb252-8" data-line-number="8"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">iter =</span> <span class="kw">as.numeric</span>(iter))</a>
-<a class="sourceLine" id="cb252-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb252-10" data-line-number="10">df_eeg_pred <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(iter <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb252-11" data-line-number="11"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n400, <span class="dt">group=</span>iter)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb252-12" data-line-number="12"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">alpha =</span> <span class="fl">.05</span>, <span class="dt">stat=</span><span class="st">&quot;density&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb252-13" data-line-number="13"><span class="st">    </span><span class="kw">geom_density</span>(<span class="dt">data=</span>df_eeg_data, <span class="kw">aes</span>(n400),</a>
-<a class="sourceLine" id="cb252-14" data-line-number="14">                 <span class="dt">inherit.aes =</span> <span class="ot">FALSE</span>, <span class="dt">size =</span><span class="dv">1</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb252-15" data-line-number="15"><span class="st">    </span><span class="kw">facet_wrap</span>(subject <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span></a>
-<a class="sourceLine" id="cb252-16" data-line-number="16"><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;Signal in the N400 spatiotemporal window&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:postpreddensbysubj"></span>
 <img src="bookdown_files/figure-html/postpreddensbysubj-1.svg" alt="The plot shows 100 predicted distributions in blue density plots and the distribution of the average signal data in black density plots for the 37 subjects that participated in the experiment." width="672" />
 <p class="caption">
 FIGURE 5.7: The plot shows 100 predicted distributions in blue density plots and the distribution of the average signal data in black density plots for the 37 subjects that participated in the experiment.
 </p>
 </div>
-<p>Figure <a href="sec-N400hierarchical.html#fig:postpreddensbysubj">5.7</a> hints that we might be misfitting some subjects: Some of the by-participant observed distributions of the EEG signal averages look much tighter than their corresponding posterior predictive distributions (e.g., subjects 3, 5, 9, 10, 14), whereas some other by-participant observed distributions look wider (e.g., subjects 25, 26, 27). Another approach to examine whether we misfit the by-subject noise level is to plot posterior distributions of the standard deviations and compared them with the observed standard deviation. This is achieved in the following code, and the result is shown in Figure <a href="sec-N400hierarchical.html#fig:postpredsumbysubj">5.8</a>. It is clear now that, for some subjects, the observed standard deviation lies outside the distribution of predictive standard deviations.</p>
+<p>Figure <a href="sec-N400hierarchical.html#fig:postpreddensbysubj">5.7</a> hints that we might be misfitting some subjects: Some of the by-participant observed distributions of the EEG signal averages look much tighter than their corresponding posterior predictive distributions (e.g., subjects 3, 5, 9, 10, 14), whereas some other by-participant observed distributions look wider (e.g., subjects 25, 26, 27). Another approach to examine whether we misfit the by-subject noise level is to plot posterior distributions of the standard deviations and compared them with the observed standard deviation. This is achieved in the following code that groups by subject and shows the distribution of standard deviations; the result is shown in Figure <a href="sec-N400hierarchical.html#fig:postpredsumbysubj">5.8</a>. It is clear now that, for some subjects, the observed standard deviation lies outside the distribution of predictive standard deviations.</p>
 
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="co"># predicted subject:</span></a>
-<a class="sourceLine" id="cb253-2" data-line-number="2">df_eeg_pred_summary &lt;-<span class="st"> </span>df_eeg_pred <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb253-3" data-line-number="3"><span class="st">    </span><span class="kw">group_by</span>(iter, subject) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb253-4" data-line-number="4"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">sd =</span> <span class="kw">sd</span>(n400))</a>
-<a class="sourceLine" id="cb253-5" data-line-number="5"><span class="co"># observed means:</span></a>
-<a class="sourceLine" id="cb253-6" data-line-number="6">df_eeg_summary &lt;-<span class="st"> </span>df_eeg_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb253-7" data-line-number="7"><span class="st">    </span><span class="kw">group_by</span>(subject) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb253-8" data-line-number="8"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">sd =</span> <span class="kw">sd</span>(n400, <span class="dt">na.rm=</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb253-9" data-line-number="9"><span class="co"># plot</span></a>
-<a class="sourceLine" id="cb253-10" data-line-number="10"><span class="kw">ggplot</span>(df_eeg_pred_summary, <span class="kw">aes</span>(sd)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb253-11" data-line-number="11"><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb253-12" data-line-number="12"><span class="st">    </span><span class="kw">geom_vline</span>(<span class="kw">aes</span>(<span class="dt">xintercept=</span> sd),<span class="dt">data=</span> df_eeg_summary)<span class="op">+</span></a>
-<a class="sourceLine" id="cb253-13" data-line-number="13"><span class="st">    </span><span class="kw">facet_wrap</span>(subject <span class="op">~</span>.)<span class="op">+</span></a>
-<a class="sourceLine" id="cb253-14" data-line-number="14"><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;Standard deviation&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" data-line-number="1"><span class="kw">pp_check</span>(fit_N400_sih, <span class="dt">type =</span> <span class="st">&quot;stat_grouped&quot;</span>,</a>
+<a class="sourceLine" id="cb244-2" data-line-number="2">         <span class="dt">nsamples =</span> <span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb244-3" data-line-number="3">         <span class="dt">group =</span> <span class="st">&quot;subj&quot;</span>,</a>
+<a class="sourceLine" id="cb244-4" data-line-number="4">         <span class="dt">stat =</span> <span class="st">&quot;sd&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:postpredsumbysubj"></span>
 <img src="bookdown_files/figure-html/postpredsumbysubj-1.svg" alt="Distribution of posterior predicted standard deviations in gray and observed standard deviation in black lines by subject." width="672" />
 <p class="caption">
 FIGURE 5.8: Distribution of posterior predicted standard deviations in gray and observed standard deviation in black lines by subject.
 </p>
 </div>
-<p>Why is our “maximal” hierarchical model misfitting the by-subject distribution of data? This is because, the so-called maximal models are, in general and implicitly, models with the maximal group-level effect structure for the location parameter (e.g., the mean, <span class="math inline">\(\mu\)</span>, in a normal model). Other parameters (e.g., scale or shape parameters) are estimated as auxiliary parameters assuming them to be constant across observations and clusters. This assumption is so common that researchers may not be aware that it is just an assumption, which (in the Bayesian framework) can be changed. Changing this assumption leads to distributional regression models. These can be fit in <code>brms</code>.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
+<p>Why is our “maximal” hierarchical model misfitting the by-subject distribution of data? This is because, the so-called maximal models are, in general and implicitly, models with the maximal group-level effect structure for the location parameter (e.g., the mean, <span class="math inline">\(\mu\)</span>, in a normal model). Other parameters (e.g., scale or shape parameters) are estimated as auxiliary parameters assuming them to be constant across observations and clusters. This assumption is so common that researchers may not be aware that it is just an assumption, which (in the Bayesian framework) can be changed. Changing this assumption leads to distributional regression models. These can be fit in <code>brms</code>.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
 <p>We are going to change our previous likelihood, so that the scale, <span class="math inline">\(\sigma\)</span> has also a group-level effect structure. Notice that we exponentiate <span class="math inline">\(\sigma\)</span> to make sure that the negative adjustments do not cause <span class="math inline">\(\sigma\)</span> to become negative.</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
@@ -1108,23 +1069,23 @@ FIGURE 5.8: Distribution of posterior predicted standard deviations in gray and 
 \end{aligned}
 \end{equation}\]</span></p>
 <p>This model can be fit in <code>brms</code> using the internal function <code>bf()</code>. This will allow us to set a hierarchical structure (and any regression) to the parameter <span class="math inline">\(\sigma\)</span>. We also need to set new priors; these priors are idenfitied by <code>dpar = sigma</code>.</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1">fit_N400_s &lt;-<span class="st"> </span><span class="kw">brm</span>(<span class="kw">bf</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>subject) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item ),</a>
-<a class="sourceLine" id="cb254-2" data-line-number="2">                       sigma <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>subject)),</a>
-<a class="sourceLine" id="cb254-3" data-line-number="3">                  <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb254-4" data-line-number="4">                      <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb254-5" data-line-number="5">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb254-6" data-line-number="6">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb254-7" data-line-number="7">                        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor),</a>
-<a class="sourceLine" id="cb254-8" data-line-number="8">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="kw">log</span>(<span class="dv">50</span>)), <span class="dt">class =</span> Intercept, <span class="dt">dpar =</span> sigma),</a>
-<a class="sourceLine" id="cb254-9" data-line-number="9">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="dt">class =</span> sd, <span class="dt">group =</span> subject, </a>
-<a class="sourceLine" id="cb254-10" data-line-number="10">                              <span class="dt">dpar =</span> sigma)</a>
-<a class="sourceLine" id="cb254-11" data-line-number="11">                        ),</a>
-<a class="sourceLine" id="cb254-12" data-line-number="12">                  <span class="dt">data =</span> df_eeg_data)</a></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1">fit_N400_s &lt;-<span class="st"> </span><span class="kw">brm</span>(<span class="kw">bf</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item ),</a>
+<a class="sourceLine" id="cb245-2" data-line-number="2">                       sigma <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>subj)),</a>
+<a class="sourceLine" id="cb245-3" data-line-number="3">                  <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb245-4" data-line-number="4">                      <span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb245-5" data-line-number="5">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb245-6" data-line-number="6">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb245-7" data-line-number="7">                        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor),</a>
+<a class="sourceLine" id="cb245-8" data-line-number="8">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="kw">log</span>(<span class="dv">50</span>)), <span class="dt">class =</span> Intercept, <span class="dt">dpar =</span> sigma),</a>
+<a class="sourceLine" id="cb245-9" data-line-number="9">                        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="dt">class =</span> sd, <span class="dt">group =</span> subj, </a>
+<a class="sourceLine" id="cb245-10" data-line-number="10">                              <span class="dt">dpar =</span> sigma)</a>
+<a class="sourceLine" id="cb245-11" data-line-number="11">                        ),</a>
+<a class="sourceLine" id="cb245-12" data-line-number="12">                  <span class="dt">data =</span> df_eeg)</a></code></pre></div>
 <p>We inspect the output below, and we see that our estimate for the effect of Cloze
 remains very similar to our previous one.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_N400_s)[<span class="st">&quot;b_c_cloze&quot;</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_N400_s)[<span class="st">&quot;b_c_cloze&quot;</span>,]</a></code></pre></div>
 <pre><code>##  Estimate Est.Error      Q2.5     Q97.5 
-##     2.302     0.639     1.047     3.518</code></pre>
+##     2.293     0.656     1.006     3.585</code></pre>
 <p>Nonetheless, Figure <a href="sec-N400hierarchical.html#fig:postpreddensbysubj2">5.9</a> shows that the fit of the model with respect to the by-subject variability is much better than before. Furthermore, Figure <a href="sec-N400hierarchical.html#fig:postpredsumbysubj2">5.10</a> shows that the observed standard deviations for each subject are well inside the posterior predictive distributions.</p>
 
 <div class="figure"><span id="fig:postpreddensbysubj2"></span>
@@ -1147,16 +1108,16 @@ FIGURE 5.10: Distribution of posterior predicted standard deviations for the mod
 <!-- But is the fit with the effect of cloze good?  -->
 <!-- ```{r} -->
 <!-- yrep <- posterior_predict(fit_N400_sih, nsamples = 50) -->
-<!-- data_sims <- array_branch(yrep,1) %>% map_dfr(~ mutate(df_eeg_data, yrep = ., -->
+<!-- data_sims <- array_branch(yrep,1) %>% map_dfr(~ mutate(df_eeg, yrep = ., -->
 <!--                                           ints = cut(cloze ,breaks = 10)) %>% -->
 <!--                                      group_by(ints) %>% -->
 <!--                                 summarize(yrep = mean(yrep)),.id= "sim") -->
-<!-- df_eeg_data_sum <- df_eeg_data %>% -->
+<!-- df_eeg_sum <- df_eeg_data %>% -->
 <!--     mutate(ints = cut(cloze ,breaks = 10)) %>% -->
 <!--                group_by(ints) %>% -->
 <!--                summarize(n400 = mean(n400)) -->
 <!-- ggplot(data_sims, aes(x=ints, y =yrep)) + geom_violin() + -->
-<!--     geom_point(data=df_eeg_data_sum, aes(x=ints, y=n400), inherit.aes = FALSE) -->
+<!--     geom_point(data=df_eeg_sum, aes(x=ints, y=n400), inherit.aes = FALSE) -->
 <!-- ``` -->
 </div>
 </div>
@@ -1201,12 +1162,12 @@ FIGURE 5.10: Distribution of posterior predicted standard deviations for the mod
 </div>
 <div class="footnotes">
 <hr />
-<ol start="12">
-<li id="fn12"><p>For simplicity, we assume that they share the same standard deviation.<a href="sec-N400hierarchical.html#fnref12" class="footnote-back">↩</a></p></li>
-<li id="fn13"><p>An analogous frequentist model can be fit with <code>lmer</code> from the package <code>lme4</code>, using <code>(c_cloze||subj)</code> for the random effects.<a href="sec-N400hierarchical.html#fnref13" class="footnote-back">↩</a></p></li>
-<li id="fn14"><p>Notice that the intercept adjustment is many times called <span class="math inline">\(u_0\)</span> in statistics books, where the intercept might be called <span class="math inline">\(\alpha\)</span> or (sometimes also <span class="math inline">\(\beta_0\)</span>), and thus <span class="math inline">\(u_1\)</span> refers to the adjustment to the slope. However, in this book, we start the indexing with 1 to be consistent with the Stan language.<a href="sec-N400hierarchical.html#fnref14" class="footnote-back">↩</a></p></li>
-<li id="fn15"><p>One could in theory keep going deeper and deeper, definer hyper-hyperpriors etc., but the model would quickly become impossible to fit.<a href="sec-N400hierarchical.html#fnref15" class="footnote-back">↩</a></p></li>
-<li id="fn16"><p><a href="https://web.archive.org/web/20191206093021/https://paul-buerkner.github.io/brms/articles/brms_distreg.html" class="uri">https://web.archive.org/web/20191206093021/https://paul-buerkner.github.io/brms/articles/brms_distreg.html</a><a href="sec-N400hierarchical.html#fnref16" class="footnote-back">↩</a></p></li>
+<ol start="11">
+<li id="fn11"><p>For simplicity, we assume that they share the same standard deviation.<a href="sec-N400hierarchical.html#fnref11" class="footnote-back">↩</a></p></li>
+<li id="fn12"><p>An analogous frequentist model can be fit with <code>lmer</code> from the package <code>lme4</code>, using <code>(c_cloze||subj)</code> for the random effects.<a href="sec-N400hierarchical.html#fnref12" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p>Notice that the intercept adjustment is many times called <span class="math inline">\(u_0\)</span> in statistics books, where the intercept might be called <span class="math inline">\(\alpha\)</span> or (sometimes also <span class="math inline">\(\beta_0\)</span>), and thus <span class="math inline">\(u_1\)</span> refers to the adjustment to the slope. However, in this book, we start the indexing with 1 to be consistent with the Stan language.<a href="sec-N400hierarchical.html#fnref13" class="footnote-back">↩</a></p></li>
+<li id="fn14"><p>One could in theory keep going deeper and deeper, definer hyper-hyperpriors etc., but the model would quickly become impossible to fit.<a href="sec-N400hierarchical.html#fnref14" class="footnote-back">↩</a></p></li>
+<li id="fn15"><p><a href="https://web.archive.org/web/20191206093021/https://paul-buerkner.github.io/brms/articles/brms_distreg.html" class="uri">https://web.archive.org/web/20191206093021/https://paul-buerkner.github.io/brms/articles/brms_distreg.html</a><a href="sec-N400hierarchical.html#fnref15" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.1 A first linear regression: Does attentional load affect pupil size? | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.1 A first linear regression: Does attentional load affect pupil size? | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-13" />
+<meta name="date" content="2021-02-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,18 +50,7 @@
 
 
 
-<script type="text/javascript">
- $(document).ready(function() {
-     $folds = $(".solution");
-     $folds.wrapInner("<div class=\"solution-blck\">"); // wrap a div container around content
-     $folds.prepend("<button class=\"solution-btn\">Show solution</button>");  // add a button
-     $(".solution-blck").toggle();  // fold all blocks
-     $(".solution-btn").on("click", function() {  // add onClick event
-         $(this).text($(this).text() === "Hide solution" ? "Show solution" : "Hide solution");  // if the text equals "Hide solution", change it to "Show solution"or else to "Hide solution" 
-         $(this).next(".solution-blck").toggle("linear");  // "swing" is the default easing function. This can be further customized in its speed or the overall animation itself.
-     })
- });
-</script>
+
 
 
 <style type="text/css">
@@ -153,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="ch-intro.html"><a href="ch-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introprob.html"><a href="introprob.html"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
 <li class="chapter" data-level="1.2" data-path="conditional-probability.html"><a href="conditional-probability.html"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
 <li class="chapter" data-level="1.3" data-path="the-law-of-total-probability.html"><a href="the-law-of-total-probability.html"><i class="fa fa-check"></i><b>1.3</b> The law of total probability</a></li>
@@ -222,9 +211,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
 <li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
 <li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
-<li class="chapter" data-level="3.9" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>3.9</b> Appendix</a><ul>
-<li class="chapter" data-level="3.9.1" data-path="appendix.html"><a href="appendix.html#app:pp"><i class="fa fa-check"></i><b>3.9.1</b> Generating prior predictive distributions with <code>brms</code></a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
 <li class="chapter" data-level="4.1" data-path="sec-pupil.html"><a href="sec-pupil.html"><i class="fa fa-check"></i><b>4.1</b> A first linear regression: Does attentional load affect pupil size?</a><ul>
@@ -248,8 +234,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
 <li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
 <li class="chapter" data-level="4.6" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
-<li class="chapter" data-level="4.7" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="appendix-1.html"><a href="appendix-1.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
+<li class="chapter" data-level="4.7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="appendix.html"><a href="appendix.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
@@ -275,116 +261,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
 <li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
 <li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
-<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cell-means-parameterization-and-posterior-comparisons"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
 <li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="6.3.2" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="6.3.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
 <li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
 <li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html"><i class="fa fa-check"></i><b>6.5</b> Examples of contrast coding in a factorial design with two factors</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>6.5.1</b> The difference between an ANOVA and a multiple regression</a></li>
-<li class="chapter" data-level="6.5.2" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>6.5.2</b> Nested effects</a></li>
-<li class="chapter" data-level="6.5.3" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>6.5.3</b> Interactions between contrasts</a></li>
-</ul></li>
+<li class="chapter" data-level="6.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>6.5</b> Computing condition means from estimated contrasts</a></li>
 <li class="chapter" data-level="6.6" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>7</b> Meta-analysis and measurement error models</a><ul>
-<li class="chapter" data-level="7.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>7.1</b> Meta-analysis</a></li>
-<li class="chapter" data-level="7.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>7.2</b> Measurement-error models</a></li>
-<li class="chapter" data-level="7.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>7.3</b> Further reading</a></li>
-<li class="chapter" data-level="7.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>8</b> Meta-analysis and measurement error models</a><ul>
+<li class="chapter" data-level="8.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>8.1</b> Meta-analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>8.2</b> Measurement-error models</a></li>
+<li class="chapter" data-level="8.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.3</b> Further reading</a></li>
+<li class="chapter" data-level="8.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>8.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>III Model comparison</b></span></li>
-<li class="chapter" data-level="8" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>8</b> Introduction to model comparison</a></li>
-<li class="chapter" data-level="9" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>9</b> Bayes factors</a><ul>
-<li class="chapter" data-level="9.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>9.1</b> Hypothesis testing using the Bayes factor</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>9.1.1</b> Marginal likelihood</a></li>
-<li class="chapter" data-level="9.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>9.1.2</b> Bayes factor</a></li>
+<li class="chapter" data-level="9" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>9</b> Introduction to model comparison</a></li>
+<li class="chapter" data-level="10" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>10</b> Bayes factors</a><ul>
+<li class="chapter" data-level="10.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>10.1</b> Hypothesis testing using the Bayes factor</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>10.1.1</b> Marginal likelihood</a></li>
+<li class="chapter" data-level="10.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>10.1.2</b> Bayes factor</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>9.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>9.2.1</b> Non-nested models</a></li>
+<li class="chapter" data-level="10.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>10.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sensitivity-analysis"><i class="fa fa-check"></i><b>10.2.1</b> Sensitivity analysis</a></li>
+<li class="chapter" data-level="10.2.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>10.2.2</b> Non-nested models</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html"><i class="fa fa-check"></i><b>9.3</b> Understanding the (in-)stability of Bayes factors</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-the-number-of-iterations-of-the-posterior-sampler"><i class="fa fa-check"></i><b>9.3.1</b> Instability due to the number of iterations of the posterior sampler</a></li>
-<li class="chapter" data-level="9.3.2" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-posterior-uncertainty-and-noise-associated-with-subjects-items-and-residual-variability"><i class="fa fa-check"></i><b>9.3.2</b> Instability due to posterior uncertainty and noise associated with subjects, items, and residual variability</a></li>
+<li class="chapter" data-level="10.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>10.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a></li>
+<li class="chapter" data-level="10.4" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html"><i class="fa fa-check"></i><b>10.4</b> Bayes factors in theory: Stability and accuracy</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#instability-due-to-the-effective-number-of-posterior-samples"><i class="fa fa-check"></i><b>10.4.1</b> Instability due to the effective number of posterior samples</a></li>
+<li class="chapter" data-level="10.4.2" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#inaccuracy-of-bayes-factors-does-the-estimate-approximate-the-true-bayes-factor-well"><i class="fa fa-check"></i><b>10.4.2</b> Inaccuracy of Bayes factors: Does the estimate approximate the true Bayes factor well?</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
-<li class="chapter" data-level="9.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
-<li class="chapter" data-level="9.6" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
+<li class="chapter" data-level="10.5" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html"><i class="fa fa-check"></i><b>10.5</b> Bayes factors in practice: Variability with the data</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variation-associated-with-the-data-subjects-items-and-residual-noise"><i class="fa fa-check"></i><b>10.5.1</b> Variation associated with the data (subjects, items, and residual noise)</a></li>
+<li class="chapter" data-level="10.5.2" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#example-2-inhibitory-and-facilitatory-interference-effects"><i class="fa fa-check"></i><b>10.5.2</b> Example 2: Inhibitory and facilitatory interference effects</a></li>
+<li class="chapter" data-level="10.5.3" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variability-of-the-bayes-factor-posterior-simulations"><i class="fa fa-check"></i><b>10.5.3</b> Variability of the Bayes factor: Posterior simulations</a></li>
+<li class="chapter" data-level="10.5.4" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#visualize-distribution-of-bayes-factors"><i class="fa fa-check"></i><b>10.5.4</b> Visualize distribution of Bayes factors</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>10</b> Cross validation</a><ul>
-<li class="chapter" data-level="10.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>10.1</b> Expected log predictive density of a model</a></li>
-<li class="chapter" data-level="10.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>10.2</b> K-fold and leave-one-out cross-validation</a></li>
-<li class="chapter" data-level="10.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>10.3</b> Testing the N400 effect using cross-validation</a></li>
-<li class="chapter" data-level="10.4" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
-<li class="chapter" data-level="10.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>10.5</b> Further reading</a></li>
-<li class="chapter" data-level="10.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
+<li class="chapter" data-level="10.6" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.6</b> Summary</a></li>
+<li class="chapter" data-level="10.7" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.7</b> Further reading</a></li>
+<li class="chapter" data-level="10.8" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>10.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>11</b> Cross validation</a><ul>
+<li class="chapter" data-level="11.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>11.1</b> Expected log predictive density of a model</a></li>
+<li class="chapter" data-level="11.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>11.2</b> K-fold and leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="11.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>11.3</b> Testing the N400 effect using cross-validation</a></li>
+<li class="chapter" data-level="11.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.4</b> Summary</a></li>
+<li class="chapter" data-level="11.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.5</b> Further reading</a></li>
+<li class="chapter" data-level="11.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>11.6</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced models with Stan</b></span></li>
-<li class="chapter" data-level="11" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>11</b> Introduction to the probabilistic programming language Stan</a><ul>
-<li class="chapter" data-level="11.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>11.1</b> Stan syntax</a></li>
-<li class="chapter" data-level="11.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>11.2</b> A first simple example with Stan: Normal likelihood</a></li>
-<li class="chapter" data-level="11.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>11.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
-<li class="chapter" data-level="11.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>11.4</b> Regression models in Stan</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>11.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
-<li class="chapter" data-level="11.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>11.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
-<li class="chapter" data-level="11.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>11.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
+<li class="chapter" data-level="12" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>12</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="12.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>12.1</b> Stan syntax</a></li>
+<li class="chapter" data-level="12.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>12.2</b> A first simple example with Stan: Normal likelihood</a></li>
+<li class="chapter" data-level="12.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>12.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
+<li class="chapter" data-level="12.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>12.4</b> Regression models in Stan</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>12.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
+<li class="chapter" data-level="12.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>12.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
+<li class="chapter" data-level="12.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>12.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>11.5</b> Model comparison in Stan</a><ul>
-<li class="chapter" data-level="11.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>11.5.1</b> Bayes factor in Stan</a></li>
-<li class="chapter" data-level="11.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>11.5.2</b> Cross validation in Stan</a></li>
+<li class="chapter" data-level="12.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>12.5</b> Model comparison in Stan</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>12.5.1</b> Bayes factor in Stan</a></li>
+<li class="chapter" data-level="12.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>12.5.2</b> Cross validation in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="11.6" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.6</b> Summary</a></li>
-<li class="chapter" data-level="11.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>11.7</b> Further reading</a></li>
-<li class="chapter" data-level="11.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>11.8</b> Exercises</a></li>
+<li class="chapter" data-level="12.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.6</b> Summary</a></li>
+<li class="chapter" data-level="12.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.7</b> Further reading</a></li>
+<li class="chapter" data-level="12.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>12.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>12</b> Complex models and reparametrization</a><ul>
-<li class="chapter" data-level="12.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>12.1</b> Hierarchical models with Stan</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>12.1.1</b> Varying intercept model with Stan</a></li>
-<li class="chapter" data-level="12.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>12.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
-<li class="chapter" data-level="12.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>12.1.3</b> Correlated varying intercept varying slopes model</a></li>
-<li class="chapter" data-level="12.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>12.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="13" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>13</b> Complex models and reparametrization</a><ul>
+<li class="chapter" data-level="13.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>13.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>13.1.1</b> Varying intercept model with Stan</a></li>
+<li class="chapter" data-level="13.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>13.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="13.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>13.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="13.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>13.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.2</b> Summary</a></li>
-<li class="chapter" data-level="12.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
-<li class="chapter" data-level="12.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>12.4</b> Exercises</a></li>
+<li class="chapter" data-level="13.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>13.2</b> Summary</a></li>
+<li class="chapter" data-level="13.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>13.3</b> Further reading</a></li>
+<li class="chapter" data-level="13.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>13.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>V Computational cognitive modeling</b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-to-computational-cognitive-modeling.html"><a href="introduction-to-computational-cognitive-modeling.html"><i class="fa fa-check"></i><b>13</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="13.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.1</b> Further reading</a></li>
+<li class="chapter" data-level="14" data-path="introduction-to-computational-cognitive-modeling-chcogmod.html"><a href="introduction-to-computational-cognitive-modeling-chcogmod.html"><i class="fa fa-check"></i><b>14</b> Introduction to computational cognitive modeling {ch:cogmod}</a><ul>
+<li class="chapter" data-level="14.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>14.1</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>14</b> Multinomial processing trees</a><ul>
-<li class="chapter" data-level="14.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>14.1</b> Modeling multiple categorical responses</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>14.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
-<li class="chapter" data-level="14.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>14.1.2</b> A model for multiple responses using the categorical distribution</a></li>
+<li class="chapter" data-level="15" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>15</b> Multinomial processing trees</a><ul>
+<li class="chapter" data-level="15.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>15.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>15.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
+<li class="chapter" data-level="15.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>15.1.2</b> A model for multiple responses using the categorical distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>14.2</b> Multinomial processing tree (MPT) models</a><ul>
-<li class="chapter" data-level="14.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>14.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
+<li class="chapter" data-level="15.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>15.2</b> Multinomial processing tree (MPT) models</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>15.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="14.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>14.3</b> Further reading</a></li>
-<li class="chapter" data-level="14.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>14.4</b> Exercises</a></li>
+<li class="chapter" data-level="15.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
+<li class="chapter" data-level="15.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>15</b> Mixture models</a><ul>
-<li class="chapter" data-level="15.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>15.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>15.1.1</b> A fast guess model account of the global motion detection task</a></li>
+<li class="chapter" data-level="16" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>16</b> Mixture models</a><ul>
+<li class="chapter" data-level="16.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>16.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>16.1.1</b> A fast guess model account of the global motion detection task</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>15.2</b> Summary</a></li>
-<li class="chapter" data-level="15.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
-<li class="chapter" data-level="15.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.2" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>16.2</b> Summary</a></li>
+<li class="chapter" data-level="16.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.3</b> Further reading</a></li>
+<li class="chapter" data-level="16.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>16.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Appendix</b></span></li>
-<li class="chapter" data-level="16" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>16</b> Important distributions</a></li>
+<li class="chapter" data-level="17" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>17</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -409,7 +412,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sec:pupil" class="section level2">
 <h2><span class="header-section-number">4.1</span> A first linear regression: Does attentional load affect pupil size?</h2>
 <p>We’ll look at the effect of cognitive processing on human pupil size to illustrate the use of Bayesian linear regression models. Although pupil size is mostly related to the amount of light that reaches the retina or the distance to a perceived object, pupil sizes are also systematically influenced by cognitive processing: It has been found that increased cognitive load leads to an increase in the pupil size <span class="citation">(for a review, see Mathot <a href="#ref-mathotPupillometryPsychologyPhysiology2018">2018</a>)</span>.</p>
-<p>For this example, we’ll use the data of one participant’s pupil size of the control experiment of <span class="citation">Wahn et al. (<a href="#ref-wahnPupilSizesScale2016">2016</a>)</span> averaged by trial.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>
+<p>For this example, we’ll use the data of one participant’s pupil size of the control experiment of <span class="citation">Wahn et al. (<a href="#ref-wahnPupilSizesScale2016">2016</a>)</span> averaged by trial, <code>df_pupil</code> from the package <code>bcogsci</code>.
 In this experiment, a participant covertly tracked between zero and five objects among several randomly moving objects on a computer screen. This task is called multiple object tracking <span class="citation">(or MOT: Pylyshyn and Storm <a href="#ref-pylyshynTrackingMultipleIndependent1988">1988</a>)</span> task. First, several objects appear on the screen, and a subset of them are indicated as “targets” at the beginning. Then, the objects start moving randomly across the screen and become indistinguishable. After several seconds, the objects stop moving and the participant need to indicate which objects were the targets. See also Figure <a href="sec-pupil.html#fig:mot">4.1</a>. Our research goal is to examine how the number of moving objects being tracked, that is how the attentional load, affects pupil size.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:mot"></span>
@@ -434,9 +437,9 @@ p\_size_n \sim Normal(\alpha + c\_load_n \cdot \beta,\sigma)
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(n\)</span> indicates the observation number with <span class="math inline">\(n = 1 \ldots N\)</span></p>
 <p>This means that the formula that we’ll use in <code>brms</code> will be <code>p_size ~ 1 + c_load</code>, where <code>1</code> represents the intercept, <span class="math inline">\(\alpha\)</span>, which doesn’t depend on a covariate or predictor, and <code>c_load</code> is our covariate that is multiplied by <span class="math inline">\(\beta\)</span>. We will generally indicate with the prefix <code>c_</code>, that a covariate (in this case load) is centered (i.e., we subtract from each value the mean of all values). If load is centered, the intercept represents the pupil size at the average load in the experiment (because at the average load, the centered load is zero, and then <span class="math inline">\(\alpha + 0 \cdot \beta\)</span>). Alternatively, if the load would not have been centered (i.e., starts with no load, then one, two, etc), then the intercept would represent the pupil size when there is no load. Although this formula would be enough to fit a frequentist model with <code>lm(p_size ~ 1 + c_load, dataset)</code>, when we fit a Bayesian model, we have to specify priors for each of the parameters.</p>
-<p>For setting the priors, we need information about pupil sizes. While we might know that pupil diameters range between 2 to 4 mm in bright light to 4 to 8 mm in the dark <span class="citation">(Spector <a href="#ref-spectorPupils1990">1990</a>)</span>, this experiment was conducted with the Eyelink-II eyetracker which measures the pupils in arbitrary units <span class="citation">(Hayes and Petrov <a href="#ref-hayesMappingCorrectingInfluence2016">2016</a>)</span>. If this is our first analysis of pupil size, before setting up the priors, we’ll need to look at some measures of pupil size. (If we had analyzed this type of data before, we could also look at estimates from previous experiments). Fortunately, we have some measurements of the same participant with no attentional load for the first 100ms, each 10 ms, in <code>pupil_pilot.csv</code>: This will give us some idea about the order of magnitude of our dependent variable.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">df_pupil_pilot &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;./data/pupil_pilot.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb145-2" data-line-number="2">df_pupil_pilot<span class="op">$</span>p_size <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
+<p>For setting the priors, we need information about pupil sizes. While we might know that pupil diameters range between 2 to 4 mm in bright light to 4 to 8 mm in the dark <span class="citation">(Spector <a href="#ref-spectorPupils1990">1990</a>)</span>, this experiment was conducted with the Eyelink-II eyetracker which measures the pupils in arbitrary units <span class="citation">(Hayes and Petrov <a href="#ref-hayesMappingCorrectingInfluence2016">2016</a>)</span>. If this is our first analysis of pupil size, before setting up the priors, we’ll need to look at some measures of pupil size. (If we had analyzed this type of data before, we could also look at estimates from previous experiments). Fortunately, we have some measurements of the same participant with no attentional load for the first 100ms, each 10 ms, in <code>df_pupil_pilot</code> from <code>bcogsci</code>: This will give us some idea about the order of magnitude of our dependent variable.</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_pupil_pilot&quot;</span>)</a>
+<a class="sourceLine" id="cb142-2" data-line-number="2">df_pupil_pilot<span class="op">$</span>p_size <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##     852     856     862     861     866     868</code></pre>
 <p>With this information we can set a regularizing prior for <span class="math inline">\(\alpha\)</span>. We center the prior around 1000 to be in the right order of magnitude.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> Since we don’t know how much pupil sizes are going to vary by load yet, we include a rather wide prior by defining it as a normal distribution and setting its standard deviation as <span class="math inline">\(500\)</span>.</p>
@@ -444,26 +447,26 @@ p\_size_n \sim Normal(\alpha + c\_load_n \cdot \beta,\sigma)
 \alpha \sim Normal(1000, 500) 
 \end{equation}\]</span></p>
 <p>Given that our covariate load is centered, with the prior for <span class="math inline">\(\alpha\)</span>, we are saying that we suspect that the average pupil size for the average load in the experiment will be in a 95% central interval limited by approximately <span class="math inline">\(1000 \pm 2 \cdot 500 = [0, 2000]\)</span> units. We can caclulate this with more precision in <code>R</code> using the <code>qnorm</code> function:</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1"><span class="kw">qnorm</span>(<span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>), <span class="dt">mean =</span> <span class="dv">1000</span>, <span class="dt">sd =</span> <span class="dv">500</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="kw">qnorm</span>(<span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>), <span class="dt">mean =</span> <span class="dv">1000</span>, <span class="dt">sd =</span> <span class="dv">500</span>)</a></code></pre></div>
 <pre><code>## [1]   20 1980</code></pre>
 <p>We know that the measurements of the pilot data are strongly correlated because they were taken together just some milliseconds apart. For this reason, they won’t tell us how much the pupil size can vary. We set up a quite weak prior for <span class="math inline">\(\sigma\)</span> that encodes our lack of precise information: <span class="math inline">\(\sigma\)</span> is surely larger than zero and has to be in the order of magnitude of the pupil size with no load.</p>
 <p><span class="math display">\[\begin{equation}
 \sigma \sim Normal_+(0, 1000)
 \end{equation}\]</span></p>
 <p>With this prior for <span class="math inline">\(\sigma\)</span>, we are saying that we expect that the standard deviation of the pupil sizes should be in the following 95% central interval. (Notice that we use <code>qtnorm(..., a = 0)</code> and not <code>qnorm()</code>).</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="kw">c</span>(<span class="kw">qtnorm</span>(.<span class="dv">025</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb149-2" data-line-number="2">  <span class="kw">qtnorm</span>(.<span class="dv">975</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="kw">c</span>(<span class="kw">qtnorm</span>(.<span class="dv">025</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb146-2" data-line-number="2">  <span class="kw">qtnorm</span>(.<span class="dv">975</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>))</a></code></pre></div>
 <pre><code>## [1]   31.3 2241.4</code></pre>
 <p>Notice that the mean of <span class="math inline">\(Normal_+\)</span>, a normal distribution truncated in zero allowing for only positive values, does not coincide with its location indicated with the parameter <span class="math inline">\(\mu\)</span> (and neither the standard deviation coincides with the scale, <span class="math inline">\(\sigma\)</span>); see also Box <a href="sec-pupil.html#thm:truncation">4.1</a>.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1">samples &lt;-<span class="st"> </span><span class="kw">rtnorm</span>(<span class="dv">20000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb151-2" data-line-number="2"><span class="kw">mean</span>(samples)</a></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">samples &lt;-<span class="st"> </span><span class="kw">rtnorm</span>(<span class="dv">20000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb148-2" data-line-number="2"><span class="kw">mean</span>(samples)</a></code></pre></div>
 <pre><code>## [1] 803</code></pre>
 <p>We still need to set a prior for <span class="math inline">\(\beta\)</span>, the change in pupil size produced by the attentional load. Given that pupil size changes are not easily perceptible (we don’t see them in our day-to-day life), we expect them to be much smaller than the pupil size, so we use the following prior:</p>
 <p><span class="math display">\[\begin{equation}
 \beta \sim Normal(0, 100)
 \end{equation}\]</span></p>
 <p>With the prior of <span class="math inline">\(\beta\)</span>, we are saying that we don’t really know if the attentional load will increase or even decrease the pupil size (notice that is centered in zero), but we do know that one unit of load (that is one more object to track) will potentially change the pupil size in a way that is consistent with the following 95% central interval.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1"><span class="kw">c</span>(<span class="kw">qnorm</span>(.<span class="dv">025</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">100</span>), <span class="kw">qnorm</span>(.<span class="dv">975</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">100</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="kw">c</span>(<span class="kw">qnorm</span>(.<span class="dv">025</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">100</span>), <span class="kw">qnorm</span>(.<span class="dv">975</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">100</span>))</a></code></pre></div>
 <pre><code>## [1] -196  196</code></pre>
 <p>That is, we don’t expect changes in size that increase or decrease the pupil size in more than 200 units.</p>
 
@@ -497,7 +500,7 @@ Normal_+(x |0, \sigma) = \frac{Normal(x | 0, \sigma)}{1/2}
 \end{equation}\]</span></p>
 <p>Because <span class="math inline">\(F(X= b =\infty) = 1\)</span> and <span class="math inline">\(F(X = a = 0) = 1/2\)</span>.</p>
 <p>You can verify this in R (and this is valid for any value of <code>sd</code>).</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="kw">dnorm</span>(<span class="dv">1</span>,<span class="dt">mean =</span> <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="kw">dtnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">a =</span> <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">dnorm</span>(<span class="dv">1</span>,<span class="dt">mean =</span> <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="kw">dtnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">a =</span> <span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Notice that unless the truncation of the normal distribution is symmetrical, the location, <span class="math inline">\(\mu\)</span>, of the truncated normal does not coincide with the mean, and for any type of truncation, the scale, <span class="math inline">\(\sigma\)</span>, does not coincide with the standard deviation. Confusingly enough, the arguments of the family of functions <code>*tnorm</code> keep the names of the family of functions <code>*norm</code>, and the location is called <code>mean</code> and the scale <code>sd</code>.</p>
 <p>For example, the mean of the truncated normal with boundaries <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, given its location and scale is as follows:</p>
@@ -506,67 +509,61 @@ Normal_+(x |0, \sigma) = \frac{Normal(x | 0, \sigma)}{1/2}
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(\alpha =(a-\mu )/\sigma\)</span>, <span class="math inline">\(\beta =(b-\mu )/\sigma\)</span>, <span class="math inline">\(\phi(X)\)</span> is the PDF of the standard normal (<span class="math inline">\(\mu=0, \sigma=1\)</span>) evaluated at <span class="math inline">\(X\)</span>, and <span class="math inline">\(\Phi(X)\)</span> is the CDF of the standard normal evaluated at <span class="math inline">\(X\)</span>.</p>
 <p>We build a function in R that calculates the mean for any truncated normal as follows:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">mean_n_ab &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1</span>, <span class="dt">a =</span> <span class="op">-</span><span class="ot">Inf</span>, <span class="dt">b =</span> <span class="ot">Inf</span>) {</a>
-<a class="sourceLine" id="cb157-2" data-line-number="2">  alpha &lt;-<span class="st"> </span>(a <span class="op">-</span><span class="st"> </span>mu) <span class="op">/</span><span class="st"> </span>sigma</a>
-<a class="sourceLine" id="cb157-3" data-line-number="3">  beta &lt;-<span class="st"> </span>(b <span class="op">-</span><span class="st"> </span>mu) <span class="op">/</span><span class="st"> </span>sigma</a>
-<a class="sourceLine" id="cb157-4" data-line-number="4">  mu <span class="op">+</span><span class="st"> </span>sigma <span class="op">*</span><span class="st"> </span>(<span class="kw">dnorm</span>(alpha) <span class="op">-</span><span class="st"> </span><span class="kw">dnorm</span>(beta))<span class="op">/</span></a>
-<a class="sourceLine" id="cb157-5" data-line-number="5"><span class="st">    </span>(<span class="kw">pnorm</span>(beta) <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(alpha))</a>
-<a class="sourceLine" id="cb157-6" data-line-number="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">mean_n_ab &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1</span>, <span class="dt">a =</span> <span class="op">-</span><span class="ot">Inf</span>, <span class="dt">b =</span> <span class="ot">Inf</span>) {</a>
+<a class="sourceLine" id="cb154-2" data-line-number="2">  alpha &lt;-<span class="st"> </span>(a <span class="op">-</span><span class="st"> </span>mu) <span class="op">/</span><span class="st"> </span>sigma</a>
+<a class="sourceLine" id="cb154-3" data-line-number="3">  beta &lt;-<span class="st"> </span>(b <span class="op">-</span><span class="st"> </span>mu) <span class="op">/</span><span class="st"> </span>sigma</a>
+<a class="sourceLine" id="cb154-4" data-line-number="4">  mu <span class="op">+</span><span class="st"> </span>sigma <span class="op">*</span><span class="st"> </span>(<span class="kw">dnorm</span>(alpha) <span class="op">-</span><span class="st"> </span><span class="kw">dnorm</span>(beta))<span class="op">/</span></a>
+<a class="sourceLine" id="cb154-5" data-line-number="5"><span class="st">    </span>(<span class="kw">pnorm</span>(beta) <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(alpha))</a>
+<a class="sourceLine" id="cb154-6" data-line-number="6">}</a></code></pre></div>
 <p>We can try it in R for our <span class="math inline">\(Normal_+(0, 1000)\)</span>:</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1"><span class="kw">mean_n_ab</span>(<span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="kw">mean_n_ab</span>(<span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## [1] 798</code></pre>
 <p>We get similar results calculating the average of 20000 samples.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">rtnorm</span>(<span class="dv">20000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>))</a></code></pre></div>
-<pre><code>## [1] 803</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">rtnorm</span>(<span class="dv">20000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>))</a></code></pre></div>
+<pre><code>## [1] 799</code></pre>
 </div>
 </div>
 <div id="the-brms-model" class="section level3">
 <h3><span class="header-section-number">4.1.2</span> The <code>brms</code> model</h3>
 <p>Before fitting the <code>brms</code> model, we load the data and center the predictor <code>load</code>:</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1">(df_pupil_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/pupil.csv&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb162-2" data-line-number="2"><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load)))</a></code></pre></div>
-<pre><code>## # A tibble: 41 x 4
-##   trial  load p_size c_load
-##   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1     1     2  1021. -0.439
-## 2     2     1   951. -1.44 
-## 3     3     5  1064.  2.56 
-## 4     4     4   913.  1.56 
-## 5     5     0   603. -2.44 
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_pupil&quot;</span>)</a>
+<a class="sourceLine" id="cb159-2" data-line-number="2">(df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb159-3" data-line-number="3"><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load)))</a></code></pre></div>
+<pre><code>## # A tibble: 41 x 5
+## # Groups:   subj, trial [41]
+##    subj trial  load p_size c_load
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1   701     1     2  1021.      0
+## 2   701     2     1   951.      0
+## 3   701     3     5  1064.      0
+## 4   701     4     4   913.      0
+## 5   701     5     0   603.      0
 ## # … with 36 more rows</code></pre>
 <p>Now we can fit the <code>brms</code> model:</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1">fit_pupil &lt;-<span class="st"> </span><span class="kw">brm</span>(p_size <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_load,</a>
-<a class="sourceLine" id="cb164-2" data-line-number="2">                 <span class="dt">data =</span> df_pupil_data,</a>
-<a class="sourceLine" id="cb164-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb164-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb164-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">1000</span>, <span class="dv">500</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb164-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1000</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb164-7" data-line-number="7">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_load)</a>
-<a class="sourceLine" id="cb164-8" data-line-number="8">                 )) </a></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1">fit_pupil &lt;-<span class="st"> </span><span class="kw">brm</span>(p_size <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_load,</a>
+<a class="sourceLine" id="cb161-2" data-line-number="2">                 <span class="dt">data =</span> df_pupil,</a>
+<a class="sourceLine" id="cb161-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb161-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb161-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">1000</span>, <span class="dv">500</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb161-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1000</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb161-7" data-line-number="7">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_load)</a>
+<a class="sourceLine" id="cb161-8" data-line-number="8">                 )) </a></code></pre></div>
 <p>The only difference from our previous models is that we now have a predictor in the formula and in the priors. Priors for predictors are indicated with <code>class = b</code>, and the specific predictor with <code>coef = c_load</code>. If we want to set the same priors to different predictors we can omit the argument <code>coef</code>. We can remove the <code>1</code> of the formula, and <code>brm()</code> will fit the exact same model as when we specify <code>1</code> explicitly. If we really want to remove the intercept we indicate this with <code>0 +...</code> or <code>-1 +...</code>. See also the Box <a href="sec-pupil.html#thm:intercept">4.2</a> for more details about the treatment of the intercepts by <code>brms</code>.</p>
 <p>We can inspect the output of our model now:</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="kw">plot</span>(fit_pupil)</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-98-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">fit_pupil</a></code></pre></div>
-<pre><code>##  Family: gaussian 
-##   Links: mu = identity; sigma = identity 
-## Formula: p_size ~ 1 + c_load 
-##    Data: df_pupil_data (Number of observations: 41) 
-## Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
-##          total post-warmup samples = 4000
-## 
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="kw">plot</span>(fit_pupil)</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-103-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1">fit_pupil</a></code></pre></div>
+<pre><code>## ...
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept   701.52     19.82   661.69   739.89 1.00     3674     2945
-## c_load       33.38     11.86    10.59    56.56 1.00     3597     2332
+## Intercept   701.35     22.53   657.27   745.91 1.00     3698     2707
+## c_load        0.48    103.50  -202.44   196.80 1.00     3982     2682
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma   128.50     15.38   102.67   163.37 1.00     3629     2847
+## sigma   140.45     16.06   112.48   175.48 1.00     3795     2793
 ## 
-## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
-## and Tail_ESS are effective sample size measures, and Rhat is the potential
-## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+## ...</code></pre>
 <p>We discuss how we could communicate the relevant information in the next section.</p>
 
 <div class="extra">
@@ -576,31 +573,37 @@ Normal_+(x |0, \sigma) = \frac{Normal(x | 0, \sigma)}{1/2}
 </div>
 <p>When we set up a prior for the intercept in <code>brms</code>, we actually set a prior for an intercept given that all the predictors are centered. The reason for this is that <code>brms</code> increases sampling efficiency by <em>automatically</em> centering all the predictors (that is the population-level design matrix X is internally centered around its column means when <code>brms</code> fits a model). This did not matter in our previous examples because we centered our predictor (or we had none), but it might matter if we want to have uncentered predictors. In the design we are discussing, a non-centered predictor of load will mean that the intercept, <span class="math inline">\(\alpha\)</span>, has a straightforward interpretation (in many cases, however, an intercept with a non-centered predictor won’t have a straightforward interpretation): the pupil size when there is no attention load.</p>
 <p>We might be more sure about prior values for the no load condition, and we want to set the following prior to our new <span class="math inline">\(\alpha\)</span>: <span class="math inline">\(Normal(800,200)\)</span>. In this case, we should fit the following model:</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1">fit_pupil_non_centered &lt;-<span class="st"> </span><span class="kw">brm</span>(p_size <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>Intercept <span class="op">+</span><span class="st"> </span>load,</a>
-<a class="sourceLine" id="cb168-2" data-line-number="2">                 <span class="dt">data =</span> df_pupil_data,</a>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1">fit_pupil_non_centered &lt;-<span class="st"> </span><span class="kw">brm</span>(p_size <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>Intercept <span class="op">+</span><span class="st"> </span>load,</a>
+<a class="sourceLine" id="cb165-2" data-line-number="2">                 <span class="dt">data =</span> df_pupil,</a>
+<a class="sourceLine" id="cb165-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb165-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb165-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">800</span>, <span class="dv">200</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> Intercept),</a>
+<a class="sourceLine" id="cb165-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1000</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb165-7" data-line-number="7">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> load)</a>
+<a class="sourceLine" id="cb165-8" data-line-number="8">                 ))</a></code></pre></div>
+<p>Notice that we remove the regular centered intercept by adding <code>0</code> to the formula, and we replace it with the “actual” intercept we want to set priors to with <code>Intercept</code>—this is a reserved word, and thus we cannot name any predictor with this name. This new parameter is also of the class <code>b</code>, so its prior needs to be defined accordingly.</p>
+<p>The output below shows that, as expected, while the posterior for the intercept has changed noticeably, the posterior for the effect of load remains virtually unchanged.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">fit_pupil_non_centered</a></code></pre></div>
+<pre><code>## ...
+## Population-Level Effects: 
+##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept   624.16     35.08   553.85   690.86 1.00     1356     1709
+## load         32.19     11.88     8.27    56.36 1.00     1256     1600
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma   128.19     14.80   102.66   159.78 1.00     2718     2227
+## 
+## ...</code></pre>
+<p>Notice the following potential pitfall. A model like the one below will fit a non-centered load predictor, but will assign a prior of <span class="math inline">\(Normal(800,200)\)</span> to the intercept of a <em>centered</em> model, <span class="math inline">\(\alpha_{centered}\)</span>, and not the current intercept, <span class="math inline">\(\alpha\)</span>.</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1">fit_pupil_wrong &lt;-<span class="st"> </span><span class="kw">brm</span>(p_size <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>load,</a>
+<a class="sourceLine" id="cb168-2" data-line-number="2">                 <span class="dt">data =</span> df_pupil,</a>
 <a class="sourceLine" id="cb168-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
 <a class="sourceLine" id="cb168-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb168-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">800</span>, <span class="dv">200</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> Intercept),</a>
+<a class="sourceLine" id="cb168-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">800</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),</a>
 <a class="sourceLine" id="cb168-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1000</span>), <span class="dt">class =</span> sigma),</a>
 <a class="sourceLine" id="cb168-7" data-line-number="7">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> load)</a>
 <a class="sourceLine" id="cb168-8" data-line-number="8">                 ))</a></code></pre></div>
-<p>Notice that we remove the regular centered intercept by adding <code>0</code> to the formula, and we replace it with the “actual” intercept we want to set priors to with <code>Intercept</code>—this is a reserved word, and thus we cannot name any predictor with this name. This new parameter is also of the class <code>b</code>, so its prior needs to be defined accordingly.</p>
-<p>The output below shows that, as expected, while the posterior for the intercept has changed noticeably, the posterior for the effect of load remains virtually unchanged.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_pupil_non_centered)</a></code></pre></div>
-<pre><code>##             Estimate Est.Error    Q2.5  Q97.5
-## b_Intercept    623.9     34.49  555.65  693.2
-## b_load          32.2     11.59    8.96   54.5
-## sigma          127.9     14.60  103.03  159.5
-## lp__          -271.0      1.22 -274.22 -269.6</code></pre>
-<p>Notice the following potential pitfall. A model like the one below will fit a non-centered load predictor, but will assign a prior of <span class="math inline">\(Normal(800,200)\)</span> to the intercept of a <em>centered</em> model, <span class="math inline">\(\alpha_{centered}\)</span>, and not the current intercept, <span class="math inline">\(\alpha\)</span>.</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1">fit_pupil_wrong &lt;-<span class="st"> </span><span class="kw">brm</span>(p_size <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>load,</a>
-<a class="sourceLine" id="cb171-2" data-line-number="2">                 <span class="dt">data =</span> df_pupil_data,</a>
-<a class="sourceLine" id="cb171-3" data-line-number="3">                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb171-4" data-line-number="4">                 <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb171-5" data-line-number="5">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">800</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb171-6" data-line-number="6">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1000</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb171-7" data-line-number="7">                     <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> load)</a>
-<a class="sourceLine" id="cb171-8" data-line-number="8">                 ))</a></code></pre></div>
 <p>What does it mean to set a prior to <span class="math inline">\(\alpha_{centered}\)</span> in a model that <em>doesn’t</em> include <span class="math inline">\(\alpha_{centered}\)</span>?</p>
 <p>Notice that the fitted values of the non-centered model and the centered one are identical, that is, the expected values of the response distribution without the residual error (when <span class="math inline">\(\sigma =0\)</span>) are identical for both models:</p>
 <p><span class="math display" id="eq:fitted">\[\begin{equation}
@@ -622,67 +625,75 @@ When <span class="math inline">\(\beta\)</span> is very small, and the prior for
 </div>
 <div id="how-to-communicate-the-results" class="section level3">
 <h3><span class="header-section-number">4.1.3</span> How to communicate the results?</h3>
-<p>We want to answer our research question “What is the effect of attentional load on the participant’s pupil size?” For that we’ll need to examine what happens with <span class="math inline">\(\beta\)</span>, which is <code>c_load</code> in the summary of <code>brms</code>. The summary of the posterior tells us that the most likely values of <span class="math inline">\(\beta\)</span> will be around the mean of the posterior, 33.38, and we can be 95% certain that the true value of <span class="math inline">\(\beta\)</span> <em>given the model and the data</em> lies between 10.59 and 56.56.</p>
+<p>We want to answer our research question “What is the effect of attentional load on the participant’s pupil size?” For that we’ll need to examine what happens with <span class="math inline">\(\beta\)</span>, which is <code>c_load</code> in the summary of <code>brms</code>. The summary of the posterior tells us that the most likely values of <span class="math inline">\(\beta\)</span> will be around the mean of the posterior, 0.48, and we can be 95% certain that the true value of <span class="math inline">\(\beta\)</span> <em>given the model and the data</em> lies between -202.44 and 196.8.</p>
 <p>We see that as the attentional load increases, the pupil size of the participant becomes larger. If we want to determine how likely it is that the pupil size increased rather than decreased, we can examine the proportion of samples above zero. (Notice that the intercept and the slopes, are always preceded by <code>b_</code> in <code>brms</code>. One can see all the names of parameters being estimated with <code>parnames()</code>.)</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">posterior_samples</span>(fit_pupil)<span class="op">$</span>b_c_load <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
-<pre><code>## [1] 0.996</code></pre>
-<p><strong>Take into account that this probability ignores the possibility of the participant not being affected at all by the manipulation, this is because <span class="math inline">\(P(\beta=0)=0\)</span>, we’ll come back to this issue in the model comparison chapter <a href="ch-comparison.html#ch:comparison">8</a>.</strong></p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">posterior_samples</span>(fit_pupil)<span class="op">$</span>b_c_load <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## [1] 0.506</code></pre>
+<p><strong>Take into account that this probability ignores the possibility of the participant not being affected at all by the manipulation, this is because <span class="math inline">\(P(\beta=0)=0\)</span>, we’ll come back to this issue in the model comparison chapter <a href="ch-comparison.html#ch:comparison">9</a>.</strong></p>
 </div>
 <div id="sec:pupiladq" class="section level3">
 <h3><span class="header-section-number">4.1.4</span> Descriptive adequacy</h3>
 <p>Our model converged and we obtained a posterior distribution. There is, however, no guarantee that our model was adequate to represent our data. We can use posterior predictive checks to verify this.</p>
-<p>Sometimes it’s useful to build our own posterior predictive check to visualize the fit of our model, as opposed to use the <code>pp_check</code> functions as we did before in section <a href="sec-ppd.html#sec:ppd">3.5</a>. For example, here we use <code>posterior_predict()</code> to generate 1000 posterior predictive distributions, and we convert them from an array to a long data frame.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="co"># we start from an array of 1000 samples by 41 observations</span></a>
-<a class="sourceLine" id="cb174-2" data-line-number="2">df_pupil_pred &lt;-<span class="st"> </span><span class="kw">posterior_predict</span>(fit_pupil, <span class="dt">nsamples =</span> <span class="dv">1000</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb174-3" data-line-number="3"><span class="st">    </span><span class="co"># we convert it to a list of length 1000, with 41 observations in each element:</span></a>
-<a class="sourceLine" id="cb174-4" data-line-number="4"><span class="st">    </span><span class="kw">array_branch</span>(<span class="dt">margin =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb174-5" data-line-number="5"><span class="st">    </span><span class="co"># We iterate over the elements (the predicted distributions)</span></a>
-<a class="sourceLine" id="cb174-6" data-line-number="6"><span class="st">    </span><span class="co"># and we convert them into a long data frame similar to the data,</span></a>
-<a class="sourceLine" id="cb174-7" data-line-number="7"><span class="st">    </span><span class="co"># but with an extra column `iter` indicating from which iteration</span></a>
-<a class="sourceLine" id="cb174-8" data-line-number="8"><span class="st">    </span><span class="co"># the sample is coming from.</span></a>
-<a class="sourceLine" id="cb174-9" data-line-number="9"><span class="st">    </span><span class="kw">map_dfr</span>( <span class="cf">function</span>(yrep_iter) {</a>
-<a class="sourceLine" id="cb174-10" data-line-number="10">        df_pupil_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb174-11" data-line-number="11"><span class="st">            </span><span class="kw">mutate</span>(<span class="dt">p_size =</span> yrep_iter)</a>
-<a class="sourceLine" id="cb174-12" data-line-number="12">    }, <span class="dt">.id =</span> <span class="st">&quot;iter&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb174-13" data-line-number="13"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">iter =</span> <span class="kw">as.numeric</span>(iter))</a></code></pre></div>
-<p>Then we plot 100 of the densities of the predicted distributions in blue, and the distribution of our data in black for the five levels of load in Figure <a href="sec-pupil.html#fig:postpreddens">4.2</a>. We don’t have enough data to derive a strong conclusion: Notice that both the predictive distributions and our data look very wide, and it hard to tell if the distribution of the observations could have been generated by our model. For now we can say that it doesn’t look too bad.</p>
+<p>Sometimes it’s useful to customize the posterior predictive check to visualize the fit of our model. We iterate over the different loads (e.g, 0 to 4), and we show the prior predictive distributions based on 1000 simulations for each load together with the observed pupil sizes in Figure <a href="sec-pupil.html#fig:postpreddens">4.2</a>. We don’t have enough data to derive a strong conclusion: Notice that both the predictive distributions and our data look very wide, and it hard to tell if the distribution of the observations could have been generated by our model. For now we can say that it doesn’t look too bad.</p>
 
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1">df_pupil_pred <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(iter <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb175-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(p_size, <span class="dt">group=</span>iter)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb175-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">alpha =</span> <span class="fl">.05</span>, <span class="dt">stat=</span><span class="st">&quot;density&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb175-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_density</span>(<span class="dt">data=</span>df_pupil_data, <span class="kw">aes</span>(p_size),</a>
-<a class="sourceLine" id="cb175-5" data-line-number="5">                 <span class="dt">inherit.aes =</span> <span class="ot">FALSE</span>, <span class="dt">size =</span><span class="dv">1</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb175-6" data-line-number="6"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">data=</span>df_pupil_data, <span class="kw">aes</span>(<span class="dt">x=</span>p_size, <span class="dt">y =</span> <span class="fl">-0.001</span>), <span class="dt">alpha =</span>.<span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb175-7" data-line-number="7">               <span class="dt">inherit.aes =</span> <span class="ot">FALSE</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb175-8" data-line-number="8"><span class="st">    </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.002</span>, <span class="fl">.01</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb175-9" data-line-number="9"><span class="st">    </span><span class="kw">facet_grid</span>(load <span class="op">~</span><span class="st"> </span>.) </a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">0</span><span class="op">:</span><span class="dv">4</span>){</a>
+<a class="sourceLine" id="cb171-2" data-line-number="2">  df_sub_pupil &lt;-<span class="st"> </span><span class="kw">filter</span>(df_pupil, load <span class="op">==</span><span class="st"> </span>l)</a>
+<a class="sourceLine" id="cb171-3" data-line-number="3">  p &lt;-<span class="st"> </span><span class="kw">pp_check</span>(fit_pupil, <span class="dt">type =</span> <span class="st">&quot;dens_overlay&quot;</span>,</a>
+<a class="sourceLine" id="cb171-4" data-line-number="4">                <span class="dt">nsamples =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb171-5" data-line-number="5">                <span class="dt">newdata =</span> df_sub_pupil) <span class="op">+</span></a>
+<a class="sourceLine" id="cb171-6" data-line-number="6"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">data =</span>df_sub_pupil, <span class="kw">aes</span>(<span class="dt">x =</span> p_size, <span class="dt">y =</span> <span class="fl">0.0001</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb171-7" data-line-number="7"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;load: &quot;</span>,l))</a>
+<a class="sourceLine" id="cb171-8" data-line-number="8">  <span class="kw">print</span>(p)</a>
+<a class="sourceLine" id="cb171-9" data-line-number="9">}</a></code></pre></div>
 <div class="figure"><span id="fig:postpreddens"></span>
-<img src="bookdown_files/figure-html/postpreddens-1.svg" alt="The plot shows 100 predicted distributions in blue density plots, the distribution of pupil size data in black density plots, and the observed pupil sizes in black dots for the five levels of attentional load." width="672" />
+<img src="bookdown_files/figure-html/postpreddens-1.svg" alt="The plot shows 100 predicted distributions with the label \(y_{rep}\), the distribution of pupil size data in black with the label \(y\), and the observed pupil sizes in black dots for the five levels of attentional load." width="672" /><img src="bookdown_files/figure-html/postpreddens-2.svg" alt="The plot shows 100 predicted distributions with the label \(y_{rep}\), the distribution of pupil size data in black with the label \(y\), and the observed pupil sizes in black dots for the five levels of attentional load." width="672" /><img src="bookdown_files/figure-html/postpreddens-3.svg" alt="The plot shows 100 predicted distributions with the label \(y_{rep}\), the distribution of pupil size data in black with the label \(y\), and the observed pupil sizes in black dots for the five levels of attentional load." width="672" /><img src="bookdown_files/figure-html/postpreddens-4.svg" alt="The plot shows 100 predicted distributions with the label \(y_{rep}\), the distribution of pupil size data in black with the label \(y\), and the observed pupil sizes in black dots for the five levels of attentional load." width="672" /><img src="bookdown_files/figure-html/postpreddens-5.svg" alt="The plot shows 100 predicted distributions with the label \(y_{rep}\), the distribution of pupil size data in black with the label \(y\), and the observed pupil sizes in black dots for the five levels of attentional load." width="672" />
 <p class="caption">
-FIGURE 4.2: The plot shows 100 predicted distributions in blue density plots, the distribution of pupil size data in black density plots, and the observed pupil sizes in black dots for the five levels of attentional load.
+FIGURE 4.2: The plot shows 100 predicted distributions with the label <span class="math inline">\(y_{rep}\)</span>, the distribution of pupil size data in black with the label <span class="math inline">\(y\)</span>, and the observed pupil sizes in black dots for the five levels of attentional load.
 </p>
 </div>
 <p>We can instead look at the distribution of a statistic, such as mean pupil size by load:</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1"><span class="co"># predicted means:</span></a>
-<a class="sourceLine" id="cb176-2" data-line-number="2">df_pupil_pred_summary &lt;-<span class="st"> </span>df_pupil_pred <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb176-3" data-line-number="3"><span class="st">    </span><span class="kw">group_by</span>(iter, load) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb176-4" data-line-number="4"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">av_p_size =</span> <span class="kw">mean</span>(p_size))</a>
-<a class="sourceLine" id="cb176-5" data-line-number="5"><span class="co"># observed means:</span></a>
-<a class="sourceLine" id="cb176-6" data-line-number="6">df_pupil_summary &lt;-<span class="st"> </span>df_pupil_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb176-7" data-line-number="7"><span class="st">    </span><span class="kw">group_by</span>(load) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb176-8" data-line-number="8"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">av_p_size =</span> <span class="kw">mean</span>(p_size))</a></code></pre></div>
 
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">ggplot</span>(df_pupil_pred_summary, <span class="kw">aes</span>(av_p_size)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb177-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb177-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_vline</span>(<span class="kw">aes</span>(<span class="dt">xintercept=</span> av_p_size),<span class="dt">data=</span> df_pupil_summary)<span class="op">+</span></a>
-<a class="sourceLine" id="cb177-4" data-line-number="4"><span class="st">    </span><span class="kw">facet_grid</span>(load <span class="op">~</span><span class="st"> </span>.)</a></code></pre></div>
-<div class="figure"><span id="fig:postpredmean"></span>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">0</span><span class="op">:</span><span class="dv">4</span>){</a>
+<a class="sourceLine" id="cb172-2" data-line-number="2">  df_sub_pupil &lt;-<span class="st"> </span><span class="kw">filter</span>(df_pupil, load <span class="op">==</span><span class="st"> </span>l)</a>
+<a class="sourceLine" id="cb172-3" data-line-number="3">  p &lt;-<span class="st"> </span><span class="kw">pp_check</span>(fit_pupil, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>,</a>
+<a class="sourceLine" id="cb172-4" data-line-number="4">                <span class="dt">nsamples =</span> <span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb172-5" data-line-number="5">                <span class="dt">newdata =</span> df_sub_pupil,</a>
+<a class="sourceLine" id="cb172-6" data-line-number="6">                <span class="dt">stat =</span> <span class="st">&quot;mean&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb172-7" data-line-number="7"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">data =</span>df_sub_pupil, <span class="kw">aes</span>(<span class="dt">x =</span> p_size, <span class="dt">y =</span> <span class="fl">0.0001</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb172-8" data-line-number="8"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;load: &quot;</span>,l))</a>
+<a class="sourceLine" id="cb172-9" data-line-number="9">  <span class="kw">print</span>(p)</a>
+<a class="sourceLine" id="cb172-10" data-line-number="10">}</a></code></pre></div>
+<div class="figure"><span id="fig:postpredmean-1"></span>
 <img src="bookdown_files/figure-html/postpredmean-1.svg" alt="Distribution of posterior predicted means in gray and observed pupil size means in black lines by load." width="672" />
 <p class="caption">
 FIGURE 4.3: Distribution of posterior predicted means in gray and observed pupil size means in black lines by load.
 </p>
 </div>
-<p>Figure <a href="sec-pupil.html#fig:postpredmean">4.3</a> shows that the observed means for no load and for a load of one are falling in the tails of the distributions. While our model predicts a monotonic increase of pupil size, the data might be indicating that the relevant difference is between (i) no load, (ii) a load between two and three, and then (iii) a load of four, and (iv) of five. However, given the uncertainty in the posterior predictive distributions and that the observed means are contained somewhere in the predicted distributions, it could be the case that with this we are overinterpreting noise.</p>
+<div class="figure"><span id="fig:postpredmean-2"></span>
+<img src="bookdown_files/figure-html/postpredmean-2.svg" alt="Distribution of posterior predicted means in gray and observed pupil size means in black lines by load." width="672" />
+<p class="caption">
+FIGURE 4.4: Distribution of posterior predicted means in gray and observed pupil size means in black lines by load.
+</p>
+</div>
+<div class="figure"><span id="fig:postpredmean-3"></span>
+<img src="bookdown_files/figure-html/postpredmean-3.svg" alt="Distribution of posterior predicted means in gray and observed pupil size means in black lines by load." width="672" />
+<p class="caption">
+FIGURE 4.5: Distribution of posterior predicted means in gray and observed pupil size means in black lines by load.
+</p>
+</div>
+<div class="figure"><span id="fig:postpredmean-4"></span>
+<img src="bookdown_files/figure-html/postpredmean-4.svg" alt="Distribution of posterior predicted means in gray and observed pupil size means in black lines by load." width="672" />
+<p class="caption">
+FIGURE 4.6: Distribution of posterior predicted means in gray and observed pupil size means in black lines by load.
+</p>
+</div>
+<div class="figure"><span id="fig:postpredmean-5"></span>
+<img src="bookdown_files/figure-html/postpredmean-5.svg" alt="Distribution of posterior predicted means in gray and observed pupil size means in black lines by load." width="672" />
+<p class="caption">
+FIGURE 4.7: Distribution of posterior predicted means in gray and observed pupil size means in black lines by load.
+</p>
+</div>
+<p>Figure <a href="#fig:postpredmean"><strong>??</strong></a> shows that the observed means for no load and for a load of one are falling in the tails of the distributions. While our model predicts a monotonic increase of pupil size, the data might be indicating that the relevant difference is between (i) no load, (ii) a load between two and three, and then (iii) a load of four, and (iv) of five. However, given the uncertainty in the posterior predictive distributions and that the observed means are contained somewhere in the predicted distributions, it could be the case that with this we are overinterpreting noise.</p>
 </div>
 </div>
 <h3>References</h3>
@@ -708,8 +719,7 @@ FIGURE 4.3: Distribution of posterior predicted means in gray and observed pupil
 </div>
 <div class="footnotes">
 <hr />
-<ol start="8">
-<li id="fn8"><p>The full dataset can be found in <a href="https://osf.io/z43dz/" class="uri">https://osf.io/z43dz/</a>. We show our preprocessing in the appendix of this chapter, section <a href="appendix-1.html#sec:preprocessingpupil">4.7.1</a>.<a href="sec-pupil.html#fnref8" class="footnote-back">↩</a></p></li>
+<ol start="9">
 <li id="fn9"><p>The average pupil size will probably be higher than 800, since this measurement was with no load, but, in any case, the exact number won’t matter, any mean between 500-1500 would be fine if the standard deviation is large.<a href="sec-pupil.html#fnref9" class="footnote-back">↩</a></p></li>
 </ol>
 </div>

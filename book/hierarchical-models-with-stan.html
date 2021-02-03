@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>12.1 Hierarchical models with Stan | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
+  <title>13.1 Hierarchical models with Stan | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="12.1 Hierarchical models with Stan | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta property="og:title" content="13.1 Hierarchical models with Stan | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://vasishth.github.io/Bayes_CogSci/" />
   <meta property="og:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/vasishth/Bayes_CogSci" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="12.1 Hierarchical models with Stan | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta name="twitter:title" content="13.1 Hierarchical models with Stan | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   
   <meta name="twitter:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
   <meta name="twitter:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-13" />
+<meta name="date" content="2021-02-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="ch-complexstan.html"/>
-<link rel="next" href="summary-7.html"/>
+<link rel="next" href="summary-8.html"/>
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
@@ -50,18 +50,7 @@
 
 
 
-<script type="text/javascript">
- $(document).ready(function() {
-     $folds = $(".solution");
-     $folds.wrapInner("<div class=\"solution-blck\">"); // wrap a div container around content
-     $folds.prepend("<button class=\"solution-btn\">Show solution</button>");  // add a button
-     $(".solution-blck").toggle();  // fold all blocks
-     $(".solution-btn").on("click", function() {  // add onClick event
-         $(this).text($(this).text() === "Hide solution" ? "Show solution" : "Hide solution");  // if the text equals "Hide solution", change it to "Show solution"or else to "Hide solution" 
-         $(this).next(".solution-blck").toggle("linear");  // "swing" is the default easing function. This can be further customized in its speed or the overall animation itself.
-     })
- });
-</script>
+
 
 
 <style type="text/css">
@@ -153,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="ch-intro.html"><a href="ch-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introprob.html"><a href="introprob.html"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
 <li class="chapter" data-level="1.2" data-path="conditional-probability.html"><a href="conditional-probability.html"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
 <li class="chapter" data-level="1.3" data-path="the-law-of-total-probability.html"><a href="the-law-of-total-probability.html"><i class="fa fa-check"></i><b>1.3</b> The law of total probability</a></li>
@@ -222,9 +211,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
 <li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
 <li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
-<li class="chapter" data-level="3.9" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>3.9</b> Appendix</a><ul>
-<li class="chapter" data-level="3.9.1" data-path="appendix.html"><a href="appendix.html#app:pp"><i class="fa fa-check"></i><b>3.9.1</b> Generating prior predictive distributions with <code>brms</code></a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
 <li class="chapter" data-level="4.1" data-path="sec-pupil.html"><a href="sec-pupil.html"><i class="fa fa-check"></i><b>4.1</b> A first linear regression: Does attentional load affect pupil size?</a><ul>
@@ -248,8 +234,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
 <li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
 <li class="chapter" data-level="4.6" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
-<li class="chapter" data-level="4.7" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="appendix-1.html"><a href="appendix-1.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
+<li class="chapter" data-level="4.7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="appendix.html"><a href="appendix.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
@@ -275,116 +261,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
 <li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
 <li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
-<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cell-means-parameterization-and-posterior-comparisons"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
 <li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="6.3.2" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="6.3.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
 <li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
 <li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html"><i class="fa fa-check"></i><b>6.5</b> Examples of contrast coding in a factorial design with two factors</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>6.5.1</b> The difference between an ANOVA and a multiple regression</a></li>
-<li class="chapter" data-level="6.5.2" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>6.5.2</b> Nested effects</a></li>
-<li class="chapter" data-level="6.5.3" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>6.5.3</b> Interactions between contrasts</a></li>
-</ul></li>
+<li class="chapter" data-level="6.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>6.5</b> Computing condition means from estimated contrasts</a></li>
 <li class="chapter" data-level="6.6" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>7</b> Meta-analysis and measurement error models</a><ul>
-<li class="chapter" data-level="7.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>7.1</b> Meta-analysis</a></li>
-<li class="chapter" data-level="7.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>7.2</b> Measurement-error models</a></li>
-<li class="chapter" data-level="7.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>7.3</b> Further reading</a></li>
-<li class="chapter" data-level="7.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>8</b> Meta-analysis and measurement error models</a><ul>
+<li class="chapter" data-level="8.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>8.1</b> Meta-analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>8.2</b> Measurement-error models</a></li>
+<li class="chapter" data-level="8.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.3</b> Further reading</a></li>
+<li class="chapter" data-level="8.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>8.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>III Model comparison</b></span></li>
-<li class="chapter" data-level="8" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>8</b> Introduction to model comparison</a></li>
-<li class="chapter" data-level="9" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>9</b> Bayes factors</a><ul>
-<li class="chapter" data-level="9.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>9.1</b> Hypothesis testing using the Bayes factor</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>9.1.1</b> Marginal likelihood</a></li>
-<li class="chapter" data-level="9.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>9.1.2</b> Bayes factor</a></li>
+<li class="chapter" data-level="9" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>9</b> Introduction to model comparison</a></li>
+<li class="chapter" data-level="10" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>10</b> Bayes factors</a><ul>
+<li class="chapter" data-level="10.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>10.1</b> Hypothesis testing using the Bayes factor</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>10.1.1</b> Marginal likelihood</a></li>
+<li class="chapter" data-level="10.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>10.1.2</b> Bayes factor</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>9.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>9.2.1</b> Non-nested models</a></li>
+<li class="chapter" data-level="10.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>10.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sensitivity-analysis"><i class="fa fa-check"></i><b>10.2.1</b> Sensitivity analysis</a></li>
+<li class="chapter" data-level="10.2.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>10.2.2</b> Non-nested models</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html"><i class="fa fa-check"></i><b>9.3</b> Understanding the (in-)stability of Bayes factors</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-the-number-of-iterations-of-the-posterior-sampler"><i class="fa fa-check"></i><b>9.3.1</b> Instability due to the number of iterations of the posterior sampler</a></li>
-<li class="chapter" data-level="9.3.2" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-posterior-uncertainty-and-noise-associated-with-subjects-items-and-residual-variability"><i class="fa fa-check"></i><b>9.3.2</b> Instability due to posterior uncertainty and noise associated with subjects, items, and residual variability</a></li>
+<li class="chapter" data-level="10.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>10.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a></li>
+<li class="chapter" data-level="10.4" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html"><i class="fa fa-check"></i><b>10.4</b> Bayes factors in theory: Stability and accuracy</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#instability-due-to-the-effective-number-of-posterior-samples"><i class="fa fa-check"></i><b>10.4.1</b> Instability due to the effective number of posterior samples</a></li>
+<li class="chapter" data-level="10.4.2" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#inaccuracy-of-bayes-factors-does-the-estimate-approximate-the-true-bayes-factor-well"><i class="fa fa-check"></i><b>10.4.2</b> Inaccuracy of Bayes factors: Does the estimate approximate the true Bayes factor well?</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
-<li class="chapter" data-level="9.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
-<li class="chapter" data-level="9.6" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
+<li class="chapter" data-level="10.5" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html"><i class="fa fa-check"></i><b>10.5</b> Bayes factors in practice: Variability with the data</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variation-associated-with-the-data-subjects-items-and-residual-noise"><i class="fa fa-check"></i><b>10.5.1</b> Variation associated with the data (subjects, items, and residual noise)</a></li>
+<li class="chapter" data-level="10.5.2" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#example-2-inhibitory-and-facilitatory-interference-effects"><i class="fa fa-check"></i><b>10.5.2</b> Example 2: Inhibitory and facilitatory interference effects</a></li>
+<li class="chapter" data-level="10.5.3" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variability-of-the-bayes-factor-posterior-simulations"><i class="fa fa-check"></i><b>10.5.3</b> Variability of the Bayes factor: Posterior simulations</a></li>
+<li class="chapter" data-level="10.5.4" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#visualize-distribution-of-bayes-factors"><i class="fa fa-check"></i><b>10.5.4</b> Visualize distribution of Bayes factors</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>10</b> Cross validation</a><ul>
-<li class="chapter" data-level="10.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>10.1</b> Expected log predictive density of a model</a></li>
-<li class="chapter" data-level="10.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>10.2</b> K-fold and leave-one-out cross-validation</a></li>
-<li class="chapter" data-level="10.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>10.3</b> Testing the N400 effect using cross-validation</a></li>
-<li class="chapter" data-level="10.4" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
-<li class="chapter" data-level="10.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>10.5</b> Further reading</a></li>
-<li class="chapter" data-level="10.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
+<li class="chapter" data-level="10.6" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.6</b> Summary</a></li>
+<li class="chapter" data-level="10.7" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.7</b> Further reading</a></li>
+<li class="chapter" data-level="10.8" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>10.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>11</b> Cross validation</a><ul>
+<li class="chapter" data-level="11.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>11.1</b> Expected log predictive density of a model</a></li>
+<li class="chapter" data-level="11.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>11.2</b> K-fold and leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="11.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>11.3</b> Testing the N400 effect using cross-validation</a></li>
+<li class="chapter" data-level="11.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.4</b> Summary</a></li>
+<li class="chapter" data-level="11.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.5</b> Further reading</a></li>
+<li class="chapter" data-level="11.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>11.6</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced models with Stan</b></span></li>
-<li class="chapter" data-level="11" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>11</b> Introduction to the probabilistic programming language Stan</a><ul>
-<li class="chapter" data-level="11.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>11.1</b> Stan syntax</a></li>
-<li class="chapter" data-level="11.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>11.2</b> A first simple example with Stan: Normal likelihood</a></li>
-<li class="chapter" data-level="11.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>11.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
-<li class="chapter" data-level="11.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>11.4</b> Regression models in Stan</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>11.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
-<li class="chapter" data-level="11.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>11.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
-<li class="chapter" data-level="11.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>11.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
+<li class="chapter" data-level="12" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>12</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="12.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>12.1</b> Stan syntax</a></li>
+<li class="chapter" data-level="12.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>12.2</b> A first simple example with Stan: Normal likelihood</a></li>
+<li class="chapter" data-level="12.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>12.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
+<li class="chapter" data-level="12.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>12.4</b> Regression models in Stan</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>12.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
+<li class="chapter" data-level="12.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>12.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
+<li class="chapter" data-level="12.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>12.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>11.5</b> Model comparison in Stan</a><ul>
-<li class="chapter" data-level="11.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>11.5.1</b> Bayes factor in Stan</a></li>
-<li class="chapter" data-level="11.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>11.5.2</b> Cross validation in Stan</a></li>
+<li class="chapter" data-level="12.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>12.5</b> Model comparison in Stan</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>12.5.1</b> Bayes factor in Stan</a></li>
+<li class="chapter" data-level="12.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>12.5.2</b> Cross validation in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="11.6" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.6</b> Summary</a></li>
-<li class="chapter" data-level="11.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>11.7</b> Further reading</a></li>
-<li class="chapter" data-level="11.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>11.8</b> Exercises</a></li>
+<li class="chapter" data-level="12.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.6</b> Summary</a></li>
+<li class="chapter" data-level="12.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.7</b> Further reading</a></li>
+<li class="chapter" data-level="12.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>12.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>12</b> Complex models and reparametrization</a><ul>
-<li class="chapter" data-level="12.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>12.1</b> Hierarchical models with Stan</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>12.1.1</b> Varying intercept model with Stan</a></li>
-<li class="chapter" data-level="12.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>12.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
-<li class="chapter" data-level="12.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>12.1.3</b> Correlated varying intercept varying slopes model</a></li>
-<li class="chapter" data-level="12.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>12.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="13" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>13</b> Complex models and reparametrization</a><ul>
+<li class="chapter" data-level="13.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>13.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>13.1.1</b> Varying intercept model with Stan</a></li>
+<li class="chapter" data-level="13.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>13.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="13.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>13.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="13.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>13.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.2</b> Summary</a></li>
-<li class="chapter" data-level="12.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
-<li class="chapter" data-level="12.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>12.4</b> Exercises</a></li>
+<li class="chapter" data-level="13.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>13.2</b> Summary</a></li>
+<li class="chapter" data-level="13.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>13.3</b> Further reading</a></li>
+<li class="chapter" data-level="13.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>13.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>V Computational cognitive modeling</b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-to-computational-cognitive-modeling.html"><a href="introduction-to-computational-cognitive-modeling.html"><i class="fa fa-check"></i><b>13</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="13.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.1</b> Further reading</a></li>
+<li class="chapter" data-level="14" data-path="introduction-to-computational-cognitive-modeling-chcogmod.html"><a href="introduction-to-computational-cognitive-modeling-chcogmod.html"><i class="fa fa-check"></i><b>14</b> Introduction to computational cognitive modeling {ch:cogmod}</a><ul>
+<li class="chapter" data-level="14.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>14.1</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>14</b> Multinomial processing trees</a><ul>
-<li class="chapter" data-level="14.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>14.1</b> Modeling multiple categorical responses</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>14.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
-<li class="chapter" data-level="14.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>14.1.2</b> A model for multiple responses using the categorical distribution</a></li>
+<li class="chapter" data-level="15" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>15</b> Multinomial processing trees</a><ul>
+<li class="chapter" data-level="15.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>15.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>15.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
+<li class="chapter" data-level="15.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>15.1.2</b> A model for multiple responses using the categorical distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>14.2</b> Multinomial processing tree (MPT) models</a><ul>
-<li class="chapter" data-level="14.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>14.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
+<li class="chapter" data-level="15.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>15.2</b> Multinomial processing tree (MPT) models</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>15.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="14.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>14.3</b> Further reading</a></li>
-<li class="chapter" data-level="14.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>14.4</b> Exercises</a></li>
+<li class="chapter" data-level="15.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
+<li class="chapter" data-level="15.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>15</b> Mixture models</a><ul>
-<li class="chapter" data-level="15.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>15.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>15.1.1</b> A fast guess model account of the global motion detection task</a></li>
+<li class="chapter" data-level="16" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>16</b> Mixture models</a><ul>
+<li class="chapter" data-level="16.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>16.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>16.1.1</b> A fast guess model account of the global motion detection task</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>15.2</b> Summary</a></li>
-<li class="chapter" data-level="15.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
-<li class="chapter" data-level="15.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.2" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>16.2</b> Summary</a></li>
+<li class="chapter" data-level="16.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.3</b> Further reading</a></li>
+<li class="chapter" data-level="16.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>16.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Appendix</b></span></li>
-<li class="chapter" data-level="16" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>16</b> Important distributions</a></li>
+<li class="chapter" data-level="17" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>17</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -407,10 +410,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="hierarchical-models-with-stan" class="section level2">
-<h2><span class="header-section-number">12.1</span> Hierarchical models with Stan</h2>
+<h2><span class="header-section-number">13.1</span> Hierarchical models with Stan</h2>
 <p>In the following sections, we will revisit and expand on some of the examples from chapter <a href="ch-hierarchical.html#ch:hierarchical">5</a>.</p>
 <div id="varying-intercept-model-with-stan" class="section level3">
-<h3><span class="header-section-number">12.1.1</span> Varying intercept model with Stan</h3>
+<h3><span class="header-section-number">13.1.1</span> Varying intercept model with Stan</h3>
 <p>Recall that in section <a href="sec-N400hierarchical.html#sec:N400hierarchical">5.1</a> we fit models to investigate the effect of Cloze probability on EEG averages in the N400 spatiotemporal time window. For our first model, we’ll make the (unfounded) assumption that only the average signal varies across participants, but all participants share the same effect of Cloze probability. This means that the likelihood incorporates the assumption that the intercept, <span class="math inline">\(\alpha\)</span>, is adjusted with the term <span class="math inline">\(u_i\)</span> for each participant.</p>
 <p><span class="math display">\[\begin{equation}
   signal_n \sim Normal(\alpha + u_{subj[n]} + c\_cloze_n \cdot \beta,\sigma)
@@ -425,7 +428,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  \end{aligned}
  \end{equation}\]</span></p>
 <p>Here <span class="math inline">\(n\)</span> represents each observation, the <span class="math inline">\(n\)</span>th row in the data frame and <span class="math inline">\(subj[n]\)</span> is the participant that corresponds to observation <span class="math inline">\(n\)</span>. We present the mathematical notation of the likelihood with “multiple indexing”: the index of <span class="math inline">\(u\)</span> is provided by the vector <span class="math inline">\(subj\)</span>.</p>
-<p>Before we discuss the Stan implementation, let’s see how the location of the normal likelihood looks like, the vector <span class="math inline">\(\mu\)</span>. There are in total 2827 observations, that means that <span class="math inline">\(\boldsymbol{\mu}=\{\mu_1,\mu_2, \ldots, \mu_{2827}\}\)</span>, and we have 37 participants which means that <span class="math inline">\(\boldsymbol{u}=\{u_1,u_2, \ldots, u_{37}\}\)</span>. The following equality shows that the use of multiple indexing allows us to have a vector of adjustments with only 37 different elements, but that has a length of 2827.</p>
+<p>Before we discuss the Stan implementation, let’s see how the location of the normal likelihood looks like, the vector <span class="math inline">\(\mu\)</span>. There are in total 2863 observations, that means that <span class="math inline">\(\boldsymbol{\mu}=\{\mu_1,\mu_2, \ldots, \mu_{2863}\}\)</span>, and we have 37 participants which means that <span class="math inline">\(\boldsymbol{u}=\{u_1,u_2, \ldots, u_{37}\}\)</span>. The following equality shows that the use of multiple indexing allows us to have a vector of adjustments with only 37 different elements, but that has a length of 2863.</p>
 <p><span class="math display">\[\begin{equation}
  \begin{aligned}
     \boldsymbol{\mu} &amp;=
@@ -442,7 +445,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         \ldots \\
         \mu_{1000} \\
         \ldots \\
-        \mu_{2827}
+        \mu_{2863}
     \end{bmatrix}
 =
     \begin{bmatrix}
@@ -474,7 +477,7 @@ u_{subj[217]} \\
 \ldots \\
 u_{subj[1000]} \\
 \ldots \\
-u_{i[2827]}
+u_{i[2863]}
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -490,7 +493,7 @@ ccloze_{217} \\
 \ldots \\
 ccloze_{1000} \\
 \ldots \\
-ccloze_{2827}
+ccloze_{2863}
 \end{bmatrix}
 \circ
 \begin{bmatrix}
@@ -536,25 +539,25 @@ u_{3} \\
 u_{3} \\
 u_{3} \\
 \ldots \\
-u_{14} \\
+u_{13} \\
 \ldots \\
 u_{37 }
 \end{bmatrix}
 +
 \begin{bmatrix}
-{-0.471} \\
-{-0.441} \\
+{-0.476} \\
+{-0.446} \\
 \ldots \\
-{0.499} \\
-{0.459} \\
+{-0.206} \\
+{0.494} \\
 \ldots \\
-{0.529} \\
-{-0.471} \\
-{0.459} \\
+{-0.136} \\
+{0.094} \\
+{0.294} \\
 \ldots \\
-{-0.471} \\
+{0.524} \\
 \ldots \\
-{0.499 }
+{0.494 }
 \end{bmatrix}
 \circ
 \begin{bmatrix}
@@ -575,7 +578,7 @@ u_{37 }
 \end{aligned}
 \end{equation}\]</span></p>
 <p>In this model each subject has their own intercept adjustment <span class="math inline">\(u_i\)</span>, if <span class="math inline">\(u_i\)</span> is positive, the subject will have a more positive EEG signal than the average subject. As we discussed in <a href="sec-N400hierarchical.html#sec:uncorrelated">5.1.3</a>, since we are estimating <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(u\)</span> at the same time and we assume that the average of the <span class="math inline">\(u\)</span>’s is 0 (since it is assumed to be normally distributed with mean of 0), whatever the subjects have in common “goes” to <span class="math inline">\(\alpha\)</span>, and <span class="math inline">\(u\)</span> only “absorbs” the differences between participants through the variance component <span class="math inline">\(\tau_u\)</span>.</p>
-<p>We can implement this in Stan in the following way:</p>
+<p>We implement this in Stan in the <code>hierarchical1.stan</code>:</p>
 <pre class="stan"><code>data {
   int&lt;lower=1&gt; N;
   vector[N] signal;
@@ -603,32 +606,28 @@ model {
                         c_cloze * beta, sigma);
 }
 </code></pre>
-<p>In the previous Stan code we use <code>int&lt;lower = 1, upper = N_subj&gt; i[N];</code> to define a one-dimensional <em>array</em> of <code>N</code> elements that contains integers (bounded between 1 and <code>N_subj</code>). As we explain in Box <a href="regression-models-in-stan.html#thm:stancontainers">11.2</a>, the difference between vectors and one-dimensional arrays is that vectors can only contain real numbers and can be used with matrix algebra functions, and arrays can contain any type but can’t be used in matrix algebra. Notice that we use <code>normal_lpdf</code> rather than <code>normal_glm_lpdf</code> since at the moment there is no efficient likelihood implementation of hierarchical generalized linear models.</p>
+<p>In the previous Stan code we use <code>int&lt;lower = 1, upper = N_subj&gt; i[N];</code> to define a one-dimensional <em>array</em> of <code>N</code> elements that contains integers (bounded between 1 and <code>N_subj</code>). As we explain in Box <a href="regression-models-in-stan.html#thm:stancontainers">12.2</a>, the difference between vectors and one-dimensional arrays is that vectors can only contain real numbers and can be used with matrix algebra functions, and arrays can contain any type but can’t be used in matrix algebra. Notice that we use <code>normal_lpdf</code> rather than <code>normal_glm_lpdf</code> since at the moment there is no efficient likelihood implementation of hierarchical generalized linear models.</p>
 <p>Save the model as <code>stan_models/hierarchical1.stan</code>, load the data, and fit it.</p>
-<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb587-1" data-line-number="1">df_eeg_data &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/public_noun_data.txt&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb587-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(lab<span class="op">==</span><span class="st">&quot;edin&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb587-3" data-line-number="3"><span class="st">  </span><span class="co"># choose only the relevant columns:</span></a>
-<a class="sourceLine" id="cb587-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(subject, cloze, item, n400) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb587-5" data-line-number="5"><span class="st">  </span><span class="co"># we simplify the subjects id </span></a>
-<a class="sourceLine" id="cb587-6" data-line-number="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subject =</span> <span class="kw">as.factor</span>(subject) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb587-7" data-line-number="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cloze=</span> cloze<span class="op">/</span><span class="dv">100</span> <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cloze<span class="op">/</span><span class="dv">100</span>) )</a>
-<a class="sourceLine" id="cb587-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb587-9" data-line-number="9">ls_eeg_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N=</span><span class="kw">nrow</span>(df_eeg_data),</a>
-<a class="sourceLine" id="cb587-10" data-line-number="10">                    <span class="dt">signal =</span> df_eeg_data<span class="op">$</span>n400,</a>
-<a class="sourceLine" id="cb587-11" data-line-number="11">                    <span class="dt">c_cloze =</span> df_eeg_data<span class="op">$</span>c_cloze,</a>
-<a class="sourceLine" id="cb587-12" data-line-number="12">                    <span class="dt">subj =</span> df_eeg_data<span class="op">$</span>subject,</a>
-<a class="sourceLine" id="cb587-13" data-line-number="13">                    <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg_data<span class="op">$</span>subject))</a></code></pre></div>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb588-1" data-line-number="1">fit_eeg1 &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/hierarchical1.stan&#39;</span>, </a>
-<a class="sourceLine" id="cb588-2" data-line-number="2">                 <span class="dt">data =</span> ls_eeg_data)</a></code></pre></div>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb589-1" data-line-number="1"><span class="kw">print</span>(fit_eeg1, <span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb680-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_eeg&quot;</span>)</a>
+<a class="sourceLine" id="cb680-2" data-line-number="2">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb680-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cloze =</span> cloze <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cloze))</a>
+<a class="sourceLine" id="cb680-4" data-line-number="4">ls_eeg &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N=</span><span class="kw">nrow</span>(df_eeg),</a>
+<a class="sourceLine" id="cb680-5" data-line-number="5">                    <span class="dt">signal =</span> df_eeg<span class="op">$</span>n400,</a>
+<a class="sourceLine" id="cb680-6" data-line-number="6">                    <span class="dt">c_cloze =</span> df_eeg<span class="op">$</span>c_cloze,</a>
+<a class="sourceLine" id="cb680-7" data-line-number="7">                    <span class="dt">subj =</span> df_eeg<span class="op">$</span>subj,</a>
+<a class="sourceLine" id="cb680-8" data-line-number="8">                    <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>subj))</a></code></pre></div>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb681-1" data-line-number="1">hierarchical1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;hierarchical1.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb681-2" data-line-number="2">fit_eeg1 &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> hierarchical1, </a>
+<a class="sourceLine" id="cb681-3" data-line-number="3">                 <span class="dt">data =</span> ls_eeg)</a></code></pre></div>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb682-1" data-line-number="1"><span class="kw">print</span>(fit_eeg1, <span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
 <pre><code>##        mean  2.5% 97.5% n_eff Rhat
-## alpha  3.63  2.80  4.45  1756    1
-## beta   2.33  1.30  3.36  4729    1
-## sigma 11.65 11.34 11.96  5480    1
-## tau_u  2.21  1.59  3.00  2615    1</code></pre>
+## alpha  3.64  2.78  4.48  1738    1
+## beta   2.31  1.30  3.33  5258    1
+## sigma 11.64 11.33 11.96  5112    1
+## tau_u  2.17  1.53  2.98  2174    1</code></pre>
 </div>
 <div id="sec:uncorrstan" class="section level3">
-<h3><span class="header-section-number">12.1.2</span> Uncorrelated varying intercept and slopes model with Stan</h3>
+<h3><span class="header-section-number">13.1.2</span> Uncorrelated varying intercept and slopes model with Stan</h3>
 <p>In the following model, we relax the strong assumption that every participant will be affected equally by the manipulation. For ease of exposition, we start by assuming that the adjustments for the intercept and slope are not correlated, as we did in section <a href="sec-N400hierarchical.html#sec:uncorrelated">5.1.3</a>.</p>
 <p><span class="math display">\[\begin{equation}
   signal_n \sim Normal(\alpha + u_{1,subj[n]} + c\_cloze_n \cdot (\beta+ u_{2,subj[n]}),\sigma)
@@ -644,7 +643,7 @@ model {
  \sigma  &amp;\sim Normal_+(0,50)
  \end{aligned}
  \end{equation}\]</span></p>
-<p>We can implement this in Stan in the following way:</p>
+<p>We implement this in Stan in <code>hierarchical2.stan</code>:</p>
 <pre class="stan"><code>data {
   int&lt;lower=1&gt; N;
   vector[N] signal;
@@ -678,11 +677,9 @@ model {
 <pre><code>  target += normal_lpdf(tau_u | 0, 20)  - 
     2 * normal_lccdf(0 | 0, 20);</code></pre>
 <p>Fit the model as follows:</p>
-<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb593-1" data-line-number="1">fit_eeg2 &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/hierarchical2.stan&#39;</span>, </a>
-<a class="sourceLine" id="cb593-2" data-line-number="2">                 <span class="dt">data =</span> ls_eeg_data)</a></code></pre></div>
-<pre><code>## Warning: There were 3 chains where the estimated Bayesian Fraction of Missing Information was low. See
-## http://mc-stan.org/misc/warnings.html#bfmi-low</code></pre>
-<pre><code>## Warning: Examine the pairs() plot to diagnose sampling problems</code></pre>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb686-1" data-line-number="1">hierarchical2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;hierarchical2.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb686-2" data-line-number="2">fit_eeg2 &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> hierarchical2, </a>
+<a class="sourceLine" id="cb686-3" data-line-number="3">                 <span class="dt">data =</span> ls_eeg)</a></code></pre></div>
 <pre><code>## Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 ## Running the chains for more iterations may help. See
 ## http://mc-stan.org/misc/warnings.html#bulk-ess</code></pre>
@@ -690,33 +687,33 @@ model {
 ## Running the chains for more iterations may help. See
 ## http://mc-stan.org/misc/warnings.html#tail-ess</code></pre>
 <p>We see that there are warnings. As we increase the complexity and the number of parameters, the sampler has a harder time exploring the parameter space:</p>
-<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb598-1" data-line-number="1"><span class="kw">print</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb689-1" data-line-number="1"><span class="kw">print</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
-## alpha     3.64  2.82  4.48  1379 1.00
-## beta      2.36  1.14  3.59  4329 1.00
-## sigma    11.64 11.33 11.95  5213 1.00
-## tau_u[1]  2.22  1.55  3.02  2233 1.00
-## tau_u[2]  1.62  0.30  3.46   105 1.01</code></pre>
-<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb600-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-332-1.svg" width="672" /></p>
+## alpha     3.65  2.79  4.49  1440 1.00
+## beta      2.34  1.11  3.58  3725 1.00
+## sigma    11.62 11.32 11.93  5522 1.00
+## tau_u[1]  2.17  1.51  2.97  2352 1.00
+## tau_u[2]  1.87  0.42  3.56   145 1.04</code></pre>
+<div class="sourceCode" id="cb691"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb691-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-440-1.svg" width="672" /></p>
 <p>We see that <code>tau_u[2]</code> has a low number of effective samples (<code>n_eff</code>) and its chains are not mixing properly. This parameter is specially problematic because there is not too much information about it (every subject is providing only one data point), it’s quite small (in comparison with <code>sigma</code>), it’s bounded by zero, and there is a dependency between this parameter and <code>u[, 2]</code>. This makes the exploration of the sampler quite hard.</p>
 <p>Pairs plots can be useful to uncover pathologies in the sampling, since we can visualize correlations between samples, which are in general problematic. Here we see the samples of <code>tau_u[2]</code> against some of the adjustments to the slope <code>u</code>:</p>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb601-1" data-line-number="1"><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>, <span class="st">&quot;u[2,2]&quot;</span>, <span class="st">&quot;u[3,2]&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-333-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb692-1" data-line-number="1"><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>, <span class="st">&quot;u[2,2]&quot;</span>, <span class="st">&quot;u[3,2]&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-441-1.svg" width="672" /></p>
 <p>Compare with <code>tau_u[1]</code> plotted against the by-participant adjustments to the intercept. Here, instead of funnels we see blobs, indicating no strong correlation between the parameters:</p>
-<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb602-1" data-line-number="1"><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;tau_u[1]&quot;</span>, <span class="st">&quot;u[1,1]&quot;</span>, <span class="st">&quot;u[2,1]&quot;</span>,<span class="st">&quot;u[3,1]&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-334-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb693-1" data-line-number="1"><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;tau_u[1]&quot;</span>, <span class="st">&quot;u[1,1]&quot;</span>, <span class="st">&quot;u[2,1]&quot;</span>,<span class="st">&quot;u[3,1]&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-442-1.svg" width="672" /></p>
 <p>In fact, the problem that the sampler faces is more serious than what our initial plots show. Stan samples in an <em>unconstrained</em> space where all the parameters can range from minus infinity to infinity, and then transforms back the parameters to the constrained space that we specified, where, for example, a variance parameter is restricted to be positive. This means that Stan is actually sampling from an auxiliary parameter equivalent to <code>log(tau_u[2])</code> rather than from <code>tau_u[2]</code>. We can use <code>mcmc_scatter</code> to see the actual funnel:</p>
-<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb603-1" data-line-number="1"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg2), <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</a>
-<a class="sourceLine" id="cb603-2" data-line-number="2">           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-335-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb694-1" data-line-number="1"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg2), <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</a>
+<a class="sourceLine" id="cb694-2" data-line-number="2">           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-443-1.svg" width="672" /></p>
 <p>At the neck of the funnel, <code>tau_u[2]</code> is close to zero (and <code>log(tau_u[2])</code> is a negative number) and thus the adjustment <code>u</code> is constrained to be near 0. This a problem because a step size that’s optimized to work well in the broad part of the funnel will fail to work appropriately in the neck of the funnel and vice versa; see also Neal’s funnel <span class="citation">(Neal <a href="#ref-neal2003">2003</a>)</span> and the optimization chapter of Stan’s manual (<a href="https://mc-stan.org/docs/2_24/stan-users-guide/reparameterization-section.html#ref-Neal:2003" class="uri">https://mc-stan.org/docs/2_24/stan-users-guide/reparameterization-section.html#ref-Neal:2003</a>).
 There are two options, we might just remove the by-participant varying slope since it’s not giving us much information anyway, or we can alleviate this problem by re-parameterizing the model. In general, this is the trickiest and probably most annoying part of modeling. A model can be theoretically and mathematically sound, but still fail to converge. The best advice to solve this type of problems is to start small with simulated data where we know the true values of the parameters, and increase the complexity of the models gradually. Although in this example, the problem was clearly in the parametrization of <code>tau_u[2]</code>, in many cases the biggest hurdle is to identify where the problem lies. Fortunately, the issue with <code>tau_u[2]</code> is a common problem which is easy to solve by using a non-centered parametrization <span class="citation">(Papaspiliopoulos, Roberts, and Sköld <a href="#ref-papaspiliopoulos2007">2007</a>)</span>. The following Box explains the specific re-parametrization we use for the improved version of our Stan code.</p>
 
 <div class="extra">
 
 <div class="theorem">
-<span id="thm:noncenterparam" class="theorem"><strong>Box 12.1  </strong></span><strong>A simple non-centered re-parametrization</strong>
+<span id="thm:noncenterparam" class="theorem"><strong>Box 13.1  </strong></span><strong>A simple non-centered re-parametrization</strong>
 </div>
 <p>The sampler can explore the parameter space more easily if its step size is appropriate for all the parameters. This is achieved when there are no strong correlations between parameters. We want to assume the following</p>
 <p><span class="math display">\[\begin{equation}
@@ -738,7 +735,7 @@ There are two options, we might just remove the by-participant varying slope sin
 <p>A question that might be raised here is whether using a non-centered parametrization is always a good idea. <span class="citation">Betancourt and Girolami (<a href="#ref-betancourt2013hamiltonian">2013</a>)</span> point out that the extremity of the correlation depends on the amount of data, and the efficacy of the parametrization depends on the relative strength of the data. When there is <em>enough</em> data this parametrization is unnecessary and can be harmful. However, cases where there is enough data to render this parametrization useless are also many times cases where the partial pooling of the hierarchical models isn’t needed in the first place. Although data from lab-size experiments seem to benefit from the non-centered parametrization, the jury is still our for larger datasets with thousands of participants from crowdsourcing websites.</p>
 </div>
 
-<p>The following Stan code uses the previous re-parametrization for both <code>tau_u</code>s. Although it’s not strictly necessary for <code>tau_u[1]</code>, it won’t hurt either and the code will be simpler.</p>
+<p>The following Stan code (<code>hierarchical3.stan</code>) uses the previous re-parametrization for both <code>tau_u</code>s. Although it’s not strictly necessary for <code>tau_u[1]</code>, it won’t hurt either and the code will be simpler.</p>
 <pre class="stan"><code>data {
   int&lt;lower=1&gt; N;
   vector[N] signal;
@@ -773,28 +770,29 @@ model {
 }
 </code></pre>
 <p>By re-parametrizing the model we can also optimize it more, we can convert the matrix <code>z_u</code> into a long column vector (in column-major order) and use a single call of <code>std_normal_lpdf</code>, which implements the log PDF of a standard normal distribution, a normal distribution with location 0 and scale 1. The function <code>std_normal_lpdf</code> is more efficient than <code>normal_lpdf(... | 0, 1)</code>. Save the model as <code>stan_models/hierarchical3.stan</code> and fit it.</p>
-<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb605-1" data-line-number="1">fit_eeg3 &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/hierarchical3.stan&#39;</span>, </a>
-<a class="sourceLine" id="cb605-2" data-line-number="2">                 <span class="dt">data =</span> ls_eeg_data)</a></code></pre></div>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb606-1" data-line-number="1"><span class="kw">print</span>(fit_eeg3, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb696-1" data-line-number="1">hierarchical3 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;hierarchical3.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb696-2" data-line-number="2">fit_eeg3 &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> hierarchical3, </a>
+<a class="sourceLine" id="cb696-3" data-line-number="3">                 <span class="dt">data =</span> ls_eeg)</a></code></pre></div>
+<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb697-1" data-line-number="1"><span class="kw">print</span>(fit_eeg3, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
-## alpha     3.62  2.77  4.50  1504    1
-## beta      2.35  1.17  3.52  4517    1
-## sigma    11.63 11.33 11.95  6381    1
-## tau_u[1]  2.21  1.56  3.02  1576    1
-## tau_u[2]  1.56  0.09  3.31  1089    1</code></pre>
-<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb608-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg3, <span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-338-1.svg" width="672" /></p>
+## alpha     3.67  2.85  4.53  1069    1
+## beta      2.33  1.14  3.58  3594    1
+## sigma    11.62 11.32 11.93  5000    1
+## tau_u[1]  2.16  1.53  2.95  1465    1
+## tau_u[2]  1.72  0.14  3.55  1160    1</code></pre>
+<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb699-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg3, <span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-446-1.svg" width="672" /></p>
 <p>Although the samples of <code>tau_u[2]</code> are still correlated with the adjustments for the slope, <code>u[,2]</code>, these latter parameters are not the ones explored by the model, the auxiliary parameters, <code>z_u</code>, are the relevant ones for the sampler:</p>
-<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb609-1" data-line-number="1"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3), <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</a>
-<a class="sourceLine" id="cb609-2" data-line-number="2">           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-339-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb610-1" data-line-number="1"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3), <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;z_u[1,2]&quot;</span>),</a>
-<a class="sourceLine" id="cb610-2" data-line-number="2">           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-339-2.svg" width="672" /></p>
+<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb700-1" data-line-number="1"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3), <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</a>
+<a class="sourceLine" id="cb700-2" data-line-number="2">           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-447-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb701-1" data-line-number="1"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3), <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;z_u[1,2]&quot;</span>),</a>
+<a class="sourceLine" id="cb701-2" data-line-number="2">           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-447-2.svg" width="672" /></p>
 <!-- Before examine how each subject is being affected by the manipulation as we did with `brms`, we'll fit a correlated intercepts and slopes model. -->
 </div>
 <div id="sec:corrstan" class="section level3">
-<h3><span class="header-section-number">12.1.3</span> Correlated varying intercept varying slopes model</h3>
+<h3><span class="header-section-number">13.1.3</span> Correlated varying intercept varying slopes model</h3>
 <p>The likelihood remains identical to the model without a correlation between group-level intercepts and slopes, but priors and hyperpriors change to reflect the potential correlation between by-subject adjustments to intercepts and slopes:</p>
 <p><span class="math display">\[\begin{equation}
   signal_n \sim Normal(\alpha + u_{subj[n],0} + c\_cloze_n \cdot  (\beta + u_{subj[n],1}),\sigma)
@@ -868,7 +866,7 @@ model {
   target += normal_lpdf(signal | alpha + u[subj, 1] +
                         c_cloze .* (beta + u[subj, 2]), sigma);
 }</code></pre>
-<p>In this Stan model, we use some new functions and types:</p>
+<p>In this Stan model (<code>hierarchical_corr.stan</code>), we use some new functions and types:</p>
 <ul>
 <li><code>corr_matrix[n] M;</code> defines a (square) matrix of n rows and n columns called M, symmetrical around a diagonal of ones.</li>
 <li><code>rep_vector(X, n)</code> creates a vector with n columns filled with X.</li>
@@ -876,13 +874,11 @@ model {
 </ul>
 <!-- diag_matrix(vector x) -->
 <!-- The diagonal matrix with diagonal x -->
-<p>Notice that problematic aspects of the first model presented in <a href="hierarchical-models-with-stan.html#sec:uncorrstan">12.1.2</a> (before the reparameterization), that is dependencies between parameters, are also present here. Save the model as <code>stan_models/hierarchical_corr.stan</code> and fit it as follows:</p>
-<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb612-1" data-line-number="1">fit_eeg_corr &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/hierarchical_corr.stan&#39;</span>, </a>
-<a class="sourceLine" id="cb612-2" data-line-number="2">                 <span class="dt">data =</span> ls_eeg_data)</a></code></pre></div>
-<pre><code>## Warning: There were 28 divergent transitions after warmup. See
-## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-## to find out why this is a problem and how to eliminate them.</code></pre>
-<pre><code>## Warning: There were 4 chains where the estimated Bayesian Fraction of Missing Information was low. See
+<p>Notice that problematic aspects of the first model presented in <a href="hierarchical-models-with-stan.html#sec:uncorrstan">13.1.2</a> (before the reparameterization), that is dependencies between parameters, are also present here. Fit the model as follows:</p>
+<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb703-1" data-line-number="1">hierarchical_corr &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;hierarchical_corr.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb703-2" data-line-number="2">fit_eeg_corr &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> hierarchical_corr, </a>
+<a class="sourceLine" id="cb703-3" data-line-number="3">                 <span class="dt">data =</span> ls_eeg)</a></code></pre></div>
+<pre><code>## Warning: There were 2 chains where the estimated Bayesian Fraction of Missing Information was low. See
 ## http://mc-stan.org/misc/warnings.html#bfmi-low</code></pre>
 <pre><code>## Warning: Examine the pairs() plot to diagnose sampling problems</code></pre>
 <pre><code>## Warning: The largest R-hat is NA, indicating chains have not mixed.
@@ -895,22 +891,22 @@ model {
 ## Running the chains for more iterations may help. See
 ## http://mc-stan.org/misc/warnings.html#tail-ess</code></pre>
 <p>As we expected, there are warnings and bad mixing of the chains for <code>tau_u[2]</code></p>
-<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb619-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb709-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
-## alpha     3.66  2.84  4.49  1306 1.00
-## beta      2.35  1.16  3.58  3706 1.00
-## sigma    11.64 11.32 11.96  2612 1.00
-## tau_u[1]  2.21  1.56  3.04  2105 1.00
-## tau_u[2]  1.56  0.28  3.39    88 1.08</code></pre>
-<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb621-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg_corr, <span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-342-1.svg" width="672" /></p>
-<p>Again, we need to reparametrize this model. The non-centered parametrization for this type of model is the so-called Cholesky factorization; the math and the intuition behind this parametrization is explained in Box <a href="hierarchical-models-with-stan.html#thm:cholesky">12.2</a>.</p>
+## alpha     3.66  2.82  4.48  1259 1.00
+## beta      2.34  1.10  3.59  3957 1.00
+## sigma    11.62 11.32 11.92  6076 1.00
+## tau_u[1]  2.19  1.53  3.01  2519 1.00
+## tau_u[2]  1.80  0.33  3.57    92 1.04</code></pre>
+<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb711-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg_corr, <span class="dt">pars=</span><span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-450-1.svg" width="672" /></p>
+<p>Again, we need to reparametrize this model. The non-centered parametrization for this type of model is the so-called Cholesky factorization; the math and the intuition behind this parametrization is explained in Box <a href="hierarchical-models-with-stan.html#thm:cholesky">13.2</a>.</p>
 
 <div class="extra">
 
 
 <div class="theorem">
-<span id="thm:cholesky" class="theorem"><strong>Box 12.2  </strong></span><strong>Cholesky factorization</strong>
+<span id="thm:cholesky" class="theorem"><strong>Box 13.2  </strong></span><strong>Cholesky factorization</strong>
 </div>
 
 <p>Given a (symmetric positive definite or semi-definite matrix) correlation matrix <span class="math inline">\(\boldsymbol{\rho_u}\)</span>, we can get a lower triangular matrix <span class="math inline">\(\mathbf{L_u}\)</span> such that <span class="math inline">\(\mathbf{L_u} \mathbf{L_u}^T=\boldsymbol{\rho_u}\)</span>. The matrix <span class="math inline">\(\mathbf{L_u}\)</span> is called the Cholesky factor of <span class="math inline">\(\mathbf{\rho_u}\)</span>. Intuitively, you can think of <span class="math inline">\(L_u\)</span> as the matrix equivalent of the <em>square root</em> of <span class="math inline">\(\boldsymbol{\rho_u}\)</span>.</p>
@@ -983,71 +979,71 @@ the intercept.</p>
 <ul>
 <li>Let’s assume a correlation of <span class="math inline">\(0.8\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb622-1" data-line-number="1">rho &lt;-<span class="st"> </span><span class="fl">.8</span></a>
-<a class="sourceLine" id="cb622-2" data-line-number="2"><span class="co">#Correlation matrix</span></a>
-<a class="sourceLine" id="cb622-3" data-line-number="3">(rho_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, rho, rho,<span class="dv">1</span>), <span class="dt">ncol =</span> <span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb712-1" data-line-number="1">rho &lt;-<span class="st"> </span><span class="fl">.8</span></a>
+<a class="sourceLine" id="cb712-2" data-line-number="2"><span class="co">#Correlation matrix</span></a>
+<a class="sourceLine" id="cb712-3" data-line-number="3">(rho_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, rho, rho,<span class="dv">1</span>), <span class="dt">ncol =</span> <span class="dv">2</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.8
 ## [2,]  0.8  1.0</code></pre>
-<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb624-1" data-line-number="1"><span class="co"># Cholesky factor:</span></a>
-<a class="sourceLine" id="cb624-2" data-line-number="2"><span class="co"># (we transpose it so that it looks the same as in Stan)</span></a>
-<a class="sourceLine" id="cb624-3" data-line-number="3">(L_u &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">chol</span>(rho_u))) </a></code></pre></div>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb714-1" data-line-number="1"><span class="co"># Cholesky factor:</span></a>
+<a class="sourceLine" id="cb714-2" data-line-number="2"><span class="co"># (we transpose it so that it looks the same as in Stan)</span></a>
+<a class="sourceLine" id="cb714-3" data-line-number="3">(L_u &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">chol</span>(rho_u))) </a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.0
 ## [2,]  0.8  0.6</code></pre>
-<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb626-1" data-line-number="1"><span class="co"># We verify that we recover rho_u,</span></a>
-<a class="sourceLine" id="cb626-2" data-line-number="2"><span class="co"># Recall that %*% indicates matrix multiplication</span></a>
-<a class="sourceLine" id="cb626-3" data-line-number="3">L_u <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L_u)</a></code></pre></div>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb716-1" data-line-number="1"><span class="co"># We verify that we recover rho_u,</span></a>
+<a class="sourceLine" id="cb716-2" data-line-number="2"><span class="co"># Recall that %*% indicates matrix multiplication</span></a>
+<a class="sourceLine" id="cb716-3" data-line-number="3">L_u <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L_u)</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.8
 ## [2,]  0.8  1.0</code></pre>
 <p>1 <em>We generate uncorrelated z from a standard normal distribution assuming only 10 subjects.</em></p>
-<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb628-1" data-line-number="1"> N_subj &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb628-2" data-line-number="2"> (z_u1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
-<pre><code>##  [1] -0.336 -0.347 -1.780  0.286 -1.459  0.964 -0.550 -0.294
-##  [9] -0.268  0.860</code></pre>
-<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb630-1" data-line-number="1"> (z_u2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
-<pre><code>##  [1] -0.2413  1.9984  0.0288 -0.1962  0.4199  1.2495 -0.0866
-##  [8]  0.7659 -0.9106 -0.1701</code></pre>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb718-1" data-line-number="1"> N_subj &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb718-2" data-line-number="2"> (z_u1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
+<pre><code>##  [1]  0.0450  0.3938  1.4372 -0.9989 -0.0346 -0.1552 -0.9233
+##  [8] -0.0449 -1.8949 -0.5965</code></pre>
+<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb720-1" data-line-number="1"> (z_u2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
+<pre><code>##  [1]  0.349 -0.218  0.224 -0.946 -0.189 -0.342  2.402 -0.194
+##  [9] -0.822 -0.618</code></pre>
 <p>2 <em>Matrix of correlated parameters:</em></p>
-<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb632-1" data-line-number="1"><span class="co"># matrix z_u</span></a>
-<a class="sourceLine" id="cb632-2" data-line-number="2"> (z_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(z_u1, z_u2), <span class="dt">ncol =</span> N_subj, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
-<pre><code>##        [,1]   [,2]    [,3]   [,4]  [,5]  [,6]    [,7]
-## [1,] -0.336 -0.347 -1.7798  0.286 -1.46 0.964 -0.5504
-## [2,] -0.241  1.998  0.0288 -0.196  0.42 1.249 -0.0866
-##        [,8]   [,9] [,10]
-## [1,] -0.294 -0.268  0.86
-## [2,]  0.766 -0.911 -0.17</code></pre>
-<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb634-1" data-line-number="1"> L_u <span class="op">%*%</span><span class="st"> </span>z_u</a></code></pre></div>
-<pre><code>##        [,1]   [,2]  [,3]  [,4]   [,5]  [,6]   [,7]   [,8]
-## [1,] -0.336 -0.347 -1.78 0.286 -1.459 0.964 -0.550 -0.294
-## [2,] -0.413  0.921 -1.41 0.111 -0.915 1.521 -0.492  0.225
-##        [,9] [,10]
-## [1,] -0.268 0.860
-## [2,] -0.760 0.586</code></pre>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb722-1" data-line-number="1"><span class="co"># matrix z_u</span></a>
+<a class="sourceLine" id="cb722-2" data-line-number="2"> (z_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(z_u1, z_u2), <span class="dt">ncol =</span> N_subj, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<pre><code>##       [,1]   [,2]  [,3]   [,4]    [,5]   [,6]   [,7]
+## [1,] 0.045  0.394 1.437 -0.999 -0.0346 -0.155 -0.923
+## [2,] 0.349 -0.218 0.224 -0.946 -0.1890 -0.342  2.402
+##         [,8]   [,9]  [,10]
+## [1,] -0.0449 -1.895 -0.596
+## [2,] -0.1939 -0.822 -0.618</code></pre>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb724-1" data-line-number="1"> L_u <span class="op">%*%</span><span class="st"> </span>z_u</a></code></pre></div>
+<pre><code>##       [,1]  [,2] [,3]   [,4]    [,5]   [,6]   [,7]    [,8]
+## [1,] 0.045 0.394 1.44 -0.999 -0.0346 -0.155 -0.923 -0.0449
+## [2,] 0.245 0.184 1.28 -1.367 -0.1410 -0.329  0.703 -0.1522
+##       [,9]  [,10]
+## [1,] -1.89 -0.596
+## [2,] -2.01 -0.848</code></pre>
 <p>3 <em>We’ll use the following diagonal matrix to scale the z_u</em></p>
-<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb636-1" data-line-number="1"> tau_u1 &lt;-<span class="st"> </span><span class="fl">.2</span></a>
-<a class="sourceLine" id="cb636-2" data-line-number="2"> tau_u2 &lt;-<span class="st"> </span><span class="fl">.01</span></a>
-<a class="sourceLine" id="cb636-3" data-line-number="3"> (diag_matrix_tau &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(tau_u1, <span class="dv">0</span>, <span class="dv">0</span>, tau_u2), <span class="dt">ncol =</span> <span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb726-1" data-line-number="1"> tau_u1 &lt;-<span class="st"> </span><span class="fl">.2</span></a>
+<a class="sourceLine" id="cb726-2" data-line-number="2"> tau_u2 &lt;-<span class="st"> </span><span class="fl">.01</span></a>
+<a class="sourceLine" id="cb726-3" data-line-number="3"> (diag_matrix_tau &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(tau_u1, <span class="dv">0</span>, <span class="dv">0</span>, tau_u2), <span class="dt">ncol =</span> <span class="dv">2</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  0.2 0.00
 ## [2,]  0.0 0.01</code></pre>
 <p>4 <em>We finally generate the adjustments for each subject u:</em></p>
-<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb638-1" data-line-number="1"> (u &lt;-<span class="st"> </span>diag_matrix_tau <span class="op">%*%</span><span class="st"> </span>L_u <span class="op">%*%</span><span class="st"> </span>z_u)</a></code></pre></div>
-<pre><code>##          [,1]     [,2]    [,3]    [,4]     [,5]   [,6]
-## [1,] -0.06717 -0.06942 -0.3560 0.05728 -0.29179 0.1928
-## [2,] -0.00413  0.00921 -0.0141 0.00111 -0.00915 0.0152
-##          [,7]     [,8]    [,9]   [,10]
-## [1,] -0.11007 -0.05876 -0.0535 0.17197
-## [2,] -0.00492  0.00225 -0.0076 0.00586</code></pre>
-<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb640-1" data-line-number="1"> <span class="co"># We should find that the rows are correlated ~.8</span></a>
-<a class="sourceLine" id="cb640-2" data-line-number="2"> <span class="kw">cor</span>(u[<span class="dv">1</span>,], u[<span class="dv">2</span>,])</a></code></pre></div>
-<pre><code>## [1] 0.828</code></pre>
-<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb642-1" data-line-number="1"> <span class="co"># We should be able to recover the tau&#39;s as well:</span></a>
-<a class="sourceLine" id="cb642-2" data-line-number="2"> <span class="kw">sd</span>(u[<span class="dv">1</span>,])</a></code></pre></div>
-<pre><code>## [1] 0.175</code></pre>
-<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb644-1" data-line-number="1"> <span class="kw">sd</span>(u[<span class="dv">2</span>,])</a></code></pre></div>
-<pre><code>## [1] 0.00903</code></pre>
+<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb728-1" data-line-number="1"> (u &lt;-<span class="st"> </span>diag_matrix_tau <span class="op">%*%</span><span class="st"> </span>L_u <span class="op">%*%</span><span class="st"> </span>z_u)</a></code></pre></div>
+<pre><code>##         [,1]    [,2]   [,3]    [,4]     [,5]     [,6]
+## [1,] 0.00901 0.07877 0.2874 -0.1998 -0.00692 -0.03104
+## [2,] 0.00245 0.00184 0.0128 -0.0137 -0.00141 -0.00329
+##          [,7]     [,8]    [,9]    [,10]
+## [1,] -0.18467 -0.00897 -0.3790 -0.11929
+## [2,]  0.00703 -0.00152 -0.0201 -0.00848</code></pre>
+<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb730-1" data-line-number="1"> <span class="co"># We should find that the rows are correlated ~.8</span></a>
+<a class="sourceLine" id="cb730-2" data-line-number="2"> <span class="kw">cor</span>(u[<span class="dv">1</span>,], u[<span class="dv">2</span>,])</a></code></pre></div>
+<pre><code>## [1] 0.811</code></pre>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb732-1" data-line-number="1"> <span class="co"># We should be able to recover the tau&#39;s as well:</span></a>
+<a class="sourceLine" id="cb732-2" data-line-number="2"> <span class="kw">sd</span>(u[<span class="dv">1</span>,])</a></code></pre></div>
+<pre><code>## [1] 0.18</code></pre>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb734-1" data-line-number="1"> <span class="kw">sd</span>(u[<span class="dv">2</span>,])</a></code></pre></div>
+<pre><code>## [1] 0.00967</code></pre>
 
 <div/>
 
@@ -1104,37 +1100,39 @@ correlation distribution, such that it implies that <code>L_u * L_u' ~ lkj_corr(
 </ul>
 <p>We can recover the correlation by adding in the <code>generated quantities</code> section a <span class="math inline">\(2 \times 2\)</span> matrix <code>rho_u</code>, defined as <code>rho_u = L_u * L_u';</code>.</p>
 <p>Fit the new model:</p>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb647-1" data-line-number="1">fit_eeg_corr2 &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/hierarchical_corr2.stan&#39;</span>, </a>
-<a class="sourceLine" id="cb647-2" data-line-number="2">                 <span class="dt">data =</span> ls_eeg_data)</a></code></pre></div>
-<p>Unfortunately <code>rstan</code> version 2.21.1 throws spurious warnings here. This is because the Cholesky matrix has elements which are always zero or one, and thus the variance within and between changes, and thus Rhat, is not defined.<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a> However, the parameters of the model have an appropriate number of effective sample size, Rhat, and the chains are mixing well.</p>
-<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb648-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr2, <span class="dt">pars =</span></a>
-<a class="sourceLine" id="cb648-2" data-line-number="2">                       <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;L_u&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb737-1" data-line-number="1">hierarchical_corr2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;hierarchical_corr2.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb737-2" data-line-number="2">fit_eeg_corr2 &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> hierarchical_corr2, </a>
+<a class="sourceLine" id="cb737-3" data-line-number="3">                 <span class="dt">data =</span> ls_eeg)</a></code></pre></div>
+<!-- Unfortunately `rstan` version 2.21.1 throws spurious warnings here. This is because the Cholesky matrix has elements which are always zero or one, and thus the variance within and between changes, and thus Rhat, is not defined.^[The  lightweight interface `cmdstanr` version 0.0.0.9008 for cmdstan version 2.24.0 is not throwing this warning though.] However, the parameters of the model have an appropriate number of effective sample size,  Rhat, and the chains are mixing well. -->
+<p>Notice that the Cholesky matrix has elements which are always zero or one, and thus the variance within and between changes and Rhat are not defined. However, the rest of the parameters of the model have an appropriate number of effective sample size, Rhats are close to one, and the chains are mixing well.</p>
+<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb738-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr2, <span class="dt">pars =</span></a>
+<a class="sourceLine" id="cb738-2" data-line-number="2">                       <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;L_u&quot;</span>))</a></code></pre></div>
 <pre><code>##             mean  2.5% 97.5% n_eff Rhat
-## alpha       3.66  2.81  4.53  1228    1
-## beta        2.35  1.17  3.55  4838    1
-## sigma      11.63 11.33 11.95  6284    1
-## tau_u[1]    2.24  1.60  3.08  1383    1
-## tau_u[2]    1.48  0.07  3.33  1025    1
+## alpha       3.64  2.79  4.46  1572    1
+## beta        2.31  1.11  3.52  3765    1
+## sigma      11.62 11.31 11.93  5395    1
+## tau_u[1]    2.18  1.57  2.96  1543    1
+## tau_u[2]    1.62  0.11  3.40  1080    1
 ## rho_u[1,1]  1.00  1.00  1.00   NaN  NaN
-## rho_u[1,2]  0.19 -0.56  0.79  3512    1
-## rho_u[2,1]  0.19 -0.56  0.79  3512    1
-## rho_u[2,2]  1.00  1.00  1.00  1425    1
+## rho_u[1,2]  0.17 -0.60  0.80  3524    1
+## rho_u[2,1]  0.17 -0.60  0.80  3524    1
+## rho_u[2,2]  1.00  1.00  1.00  2747    1
 ## L_u[1,1]    1.00  1.00  1.00   NaN  NaN
 ## L_u[1,2]    0.00  0.00  0.00   NaN  NaN
-## L_u[2,1]    0.19 -0.56  0.79  3512    1
-## L_u[2,2]    0.91  0.58  1.00  2453    1</code></pre>
-<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb650-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg_corr2, <span class="dt">pars =</span></a>
-<a class="sourceLine" id="cb650-2" data-line-number="2">                           <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;L_u&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-351-1.svg" width="672" /></p>
+## L_u[2,1]    0.17 -0.60  0.80  3524    1
+## L_u[2,2]    0.91  0.58  1.00  2013    1</code></pre>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb740-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg_corr2, <span class="dt">pars =</span></a>
+<a class="sourceLine" id="cb740-2" data-line-number="2">                           <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;L_u&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-458-1.svg" width="672" /></p>
 <p>Is there a correlation between the by-participant intercept and slope?</p>
 <p>Let’s visualize some of the posteriors:</p>
-<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb651-1" data-line-number="1"><span class="kw">mcmc_hist</span>(<span class="kw">as.data.frame</span>(fit_eeg_corr2),</a>
-<a class="sourceLine" id="cb651-2" data-line-number="2">          <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;rho_u[1,2]&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-352-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb741-1" data-line-number="1"><span class="kw">mcmc_hist</span>(<span class="kw">as.data.frame</span>(fit_eeg_corr2),</a>
+<a class="sourceLine" id="cb741-2" data-line-number="2">          <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;rho_u[1,2]&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-459-1.svg" width="672" /></p>
 <p>We can’t really know if they are correlated, it’s clear that we don’t have enough data, the correlation might well be between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>.</p>
 </div>
 <div id="sec:crosscorrstan" class="section level3">
-<h3><span class="header-section-number">12.1.4</span> By-participant and by-items correlated varying intercept varying slopes model</h3>
+<h3><span class="header-section-number">13.1.4</span> By-participant and by-items correlated varying intercept varying slopes model</h3>
 <p>We extend the previous model by adding by-items intercepts and slopes, and priors and hyperpriors that reflect the potential correlation between by-items adjustments to intercepts and slopes:</p>
 <p><span class="math display">\[\begin{equation}
   signal_n \sim Normal(\alpha + u_{subj[n], 1} + w_{item[n], 2} + c\_cloze_n \cdot  (\beta + u_{subj[n],2} + w_{item[n], 2}),\sigma)
@@ -1233,36 +1231,37 @@ generated quantities {
   corr_matrix[2] rho_u = L_u * L_u&#39;;
   corr_matrix[2] rho_w = L_w * L_w&#39;;
 }</code></pre>
-<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb653-1" data-line-number="1">df_eeg_data &lt;-<span class="st"> </span>df_eeg_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb653-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">item =</span> <span class="kw">as.numeric</span>(<span class="kw">as.factor</span>(item)))</a>
-<a class="sourceLine" id="cb653-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb653-4" data-line-number="4">ls_eeg_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_eeg_data),</a>
-<a class="sourceLine" id="cb653-5" data-line-number="5">                    <span class="dt">signal =</span> df_eeg_data<span class="op">$</span>n400,</a>
-<a class="sourceLine" id="cb653-6" data-line-number="6">                    <span class="dt">c_cloze =</span> df_eeg_data<span class="op">$</span>c_cloze,</a>
-<a class="sourceLine" id="cb653-7" data-line-number="7">                    <span class="dt">subj =</span> df_eeg_data<span class="op">$</span>subject,</a>
-<a class="sourceLine" id="cb653-8" data-line-number="8">                    <span class="dt">item =</span> df_eeg_data<span class="op">$</span>item,</a>
-<a class="sourceLine" id="cb653-9" data-line-number="9">                    <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg_data<span class="op">$</span>subject),</a>
-<a class="sourceLine" id="cb653-10" data-line-number="10">                    <span class="dt">N_item =</span>  <span class="kw">max</span>(df_eeg_data<span class="op">$</span>item))</a></code></pre></div>
-<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb654-1" data-line-number="1">fit_eeg_corr_by &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> <span class="st">&#39;stan_models/hierarchical_corr_by.stan&#39;</span>, </a>
-<a class="sourceLine" id="cb654-2" data-line-number="2">                 <span class="dt">data =</span> ls_eeg_data)</a></code></pre></div>
-<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb655-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr_by, <span class="dt">pars =</span></a>
-<a class="sourceLine" id="cb655-2" data-line-number="2">                       <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;tau_w&quot;</span>, <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;rho_w&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb743-1" data-line-number="1">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb743-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">item =</span> <span class="kw">as.numeric</span>(<span class="kw">as.factor</span>(item)))</a>
+<a class="sourceLine" id="cb743-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb743-4" data-line-number="4">ls_eeg &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_eeg),</a>
+<a class="sourceLine" id="cb743-5" data-line-number="5">                    <span class="dt">signal =</span> df_eeg<span class="op">$</span>n400,</a>
+<a class="sourceLine" id="cb743-6" data-line-number="6">                    <span class="dt">c_cloze =</span> df_eeg<span class="op">$</span>c_cloze,</a>
+<a class="sourceLine" id="cb743-7" data-line-number="7">                    <span class="dt">subj =</span> df_eeg<span class="op">$</span>subj,</a>
+<a class="sourceLine" id="cb743-8" data-line-number="8">                    <span class="dt">item =</span> df_eeg<span class="op">$</span>item,</a>
+<a class="sourceLine" id="cb743-9" data-line-number="9">                    <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>subj),</a>
+<a class="sourceLine" id="cb743-10" data-line-number="10">                    <span class="dt">N_item =</span>  <span class="kw">max</span>(df_eeg<span class="op">$</span>item))</a></code></pre></div>
+<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb744-1" data-line-number="1">hierarchical_corr_by &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;hierarchical_corr_by.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb744-2" data-line-number="2">fit_eeg_corr_by &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> hierarchical_corr_by, </a>
+<a class="sourceLine" id="cb744-3" data-line-number="3">                 <span class="dt">data =</span> ls_eeg)</a></code></pre></div>
+<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb745-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr_by, <span class="dt">pars =</span></a>
+<a class="sourceLine" id="cb745-2" data-line-number="2">                       <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;tau_w&quot;</span>, <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;rho_w&quot;</span>))</a></code></pre></div>
 <pre><code>##             mean  2.5% 97.5% n_eff Rhat
-## alpha       3.64  2.76  4.57  1601 1.00
-## beta        2.32  1.01  3.64  3490 1.00
-## sigma      11.50 11.20 11.82  5209 1.00
-## tau_u[1]    2.25  1.59  3.08  1604 1.00
-## tau_u[2]    1.38  0.08  3.21  1162 1.00
-## tau_w[1]    1.53  0.83  2.22  1199 1.00
-## tau_w[2]    2.23  0.22  4.21   692 1.01
+## alpha       3.66  2.73  4.55  2063    1
+## beta        2.31  0.90  3.63  3755    1
+## sigma      11.49 11.20 11.79  5321    1
+## tau_u[1]    2.21  1.54  3.01  1507    1
+## tau_u[2]    1.47  0.07  3.28  1238    1
+## tau_w[1]    1.51  0.84  2.19  1702    1
+## tau_w[2]    2.29  0.22  4.24   996    1
 ## rho_u[1,1]  1.00  1.00  1.00   NaN  NaN
-## rho_u[1,2]  0.14 -0.62  0.78  3666 1.00
-## rho_u[2,1]  0.14 -0.62  0.78  3666 1.00
-## rho_u[2,2]  1.00  1.00  1.00   258 1.00
+## rho_u[1,2]  0.13 -0.62  0.77  4139    1
+## rho_u[2,1]  0.13 -0.62  0.77  4139    1
+## rho_u[2,2]  1.00  1.00  1.00  1215    1
 ## rho_w[1,1]  1.00  1.00  1.00   NaN  NaN
-## rho_w[1,2] -0.40 -0.88  0.33  1926 1.00
-## rho_w[2,1] -0.40 -0.88  0.33  1926 1.00
-## rho_w[2,2]  1.00  1.00  1.00  1636 1.00</code></pre>
+## rho_w[1,2] -0.42 -0.90  0.33  2219    1
+## rho_w[2,1] -0.42 -0.90  0.33  2219    1
+## rho_w[2,2]  1.00  1.00  1.00   344    1</code></pre>
 <!-- A hierarchical log-normal model: The Stroop effect + add interaction here -->
 </div>
 </div>
@@ -1278,19 +1277,13 @@ generated quantities {
 <p>Papaspiliopoulos, Omiros, Gareth O. Roberts, and Martin Sköld. 2007. “A General Framework for the Parametrization of Hierarchical Models.” <em>Statist. Sci.</em> 22 (1). The Institute of Mathematical Statistics: 59–73. <a href="https://doi.org/10.1214/088342307000000014" class="uri">https://doi.org/10.1214/088342307000000014</a>.</p>
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="29">
-<li id="fn29"><p>The lightweight interface <code>cmdstanr</code> version 0.0.0.9008 for cmdstan version 2.24.0 is not throwing this warning though.<a href="hierarchical-models-with-stan.html#fnref29" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="ch-complexstan.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="summary-7.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="summary-8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>

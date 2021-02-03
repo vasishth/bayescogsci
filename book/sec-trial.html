@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.2 Log-normal model: Does trial affect reaction times? | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.2 Log-normal model: Does trial affect reaction times? | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2020-09-13" />
+<meta name="date" content="2021-02-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,18 +50,7 @@
 
 
 
-<script type="text/javascript">
- $(document).ready(function() {
-     $folds = $(".solution");
-     $folds.wrapInner("<div class=\"solution-blck\">"); // wrap a div container around content
-     $folds.prepend("<button class=\"solution-btn\">Show solution</button>");  // add a button
-     $(".solution-blck").toggle();  // fold all blocks
-     $(".solution-btn").on("click", function() {  // add onClick event
-         $(this).text($(this).text() === "Hide solution" ? "Show solution" : "Hide solution");  // if the text equals "Hide solution", change it to "Show solution"or else to "Hide solution" 
-         $(this).next(".solution-blck").toggle("linear");  // "swing" is the default easing function. This can be further customized in its speed or the overall animation itself.
-     })
- });
-</script>
+
 
 
 <style type="text/css">
@@ -153,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="ch-intro.html"><a href="ch-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introprob.html"><a href="introprob.html"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
 <li class="chapter" data-level="1.2" data-path="conditional-probability.html"><a href="conditional-probability.html"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
 <li class="chapter" data-level="1.3" data-path="the-law-of-total-probability.html"><a href="the-law-of-total-probability.html"><i class="fa fa-check"></i><b>1.3</b> The law of total probability</a></li>
@@ -222,9 +211,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
 <li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
 <li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
-<li class="chapter" data-level="3.9" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>3.9</b> Appendix</a><ul>
-<li class="chapter" data-level="3.9.1" data-path="appendix.html"><a href="appendix.html#app:pp"><i class="fa fa-check"></i><b>3.9.1</b> Generating prior predictive distributions with <code>brms</code></a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
 <li class="chapter" data-level="4.1" data-path="sec-pupil.html"><a href="sec-pupil.html"><i class="fa fa-check"></i><b>4.1</b> A first linear regression: Does attentional load affect pupil size?</a><ul>
@@ -248,8 +234,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
 <li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
 <li class="chapter" data-level="4.6" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
-<li class="chapter" data-level="4.7" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="appendix-1.html"><a href="appendix-1.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
+<li class="chapter" data-level="4.7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="appendix.html"><a href="appendix.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
@@ -275,116 +261,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
 <li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
 <li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
-<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cell-means-parameterization-and-posterior-comparisons"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
 <li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="6.3.2" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="6.3.3" data-path="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html"><a href="further-examples-of-contrasts-illustrated-with-a-factor-with-four-levels.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
 <li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
 <li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html"><i class="fa fa-check"></i><b>6.5</b> Examples of contrast coding in a factorial design with two factors</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>6.5.1</b> The difference between an ANOVA and a multiple regression</a></li>
-<li class="chapter" data-level="6.5.2" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>6.5.2</b> Nested effects</a></li>
-<li class="chapter" data-level="6.5.3" data-path="MR-ANOVA.html"><a href="MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>6.5.3</b> Interactions between contrasts</a></li>
-</ul></li>
+<li class="chapter" data-level="6.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>6.5</b> Computing condition means from estimated contrasts</a></li>
 <li class="chapter" data-level="6.6" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>7</b> Meta-analysis and measurement error models</a><ul>
-<li class="chapter" data-level="7.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>7.1</b> Meta-analysis</a></li>
-<li class="chapter" data-level="7.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>7.2</b> Measurement-error models</a></li>
-<li class="chapter" data-level="7.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>7.3</b> Further reading</a></li>
-<li class="chapter" data-level="7.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>8</b> Meta-analysis and measurement error models</a><ul>
+<li class="chapter" data-level="8.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>8.1</b> Meta-analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>8.2</b> Measurement-error models</a></li>
+<li class="chapter" data-level="8.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.3</b> Further reading</a></li>
+<li class="chapter" data-level="8.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>8.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>III Model comparison</b></span></li>
-<li class="chapter" data-level="8" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>8</b> Introduction to model comparison</a></li>
-<li class="chapter" data-level="9" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>9</b> Bayes factors</a><ul>
-<li class="chapter" data-level="9.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>9.1</b> Hypothesis testing using the Bayes factor</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>9.1.1</b> Marginal likelihood</a></li>
-<li class="chapter" data-level="9.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>9.1.2</b> Bayes factor</a></li>
+<li class="chapter" data-level="9" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>9</b> Introduction to model comparison</a></li>
+<li class="chapter" data-level="10" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>10</b> Bayes factors</a><ul>
+<li class="chapter" data-level="10.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>10.1</b> Hypothesis testing using the Bayes factor</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>10.1.1</b> Marginal likelihood</a></li>
+<li class="chapter" data-level="10.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>10.1.2</b> Bayes factor</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>9.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>9.2.1</b> Non-nested models</a></li>
+<li class="chapter" data-level="10.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>10.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sensitivity-analysis"><i class="fa fa-check"></i><b>10.2.1</b> Sensitivity analysis</a></li>
+<li class="chapter" data-level="10.2.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>10.2.2</b> Non-nested models</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html"><i class="fa fa-check"></i><b>9.3</b> Understanding the (in-)stability of Bayes factors</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-the-number-of-iterations-of-the-posterior-sampler"><i class="fa fa-check"></i><b>9.3.1</b> Instability due to the number of iterations of the posterior sampler</a></li>
-<li class="chapter" data-level="9.3.2" data-path="understanding-the-in-stability-of-bayes-factors.html"><a href="understanding-the-in-stability-of-bayes-factors.html#instability-due-to-posterior-uncertainty-and-noise-associated-with-subjects-items-and-residual-variability"><i class="fa fa-check"></i><b>9.3.2</b> Instability due to posterior uncertainty and noise associated with subjects, items, and residual variability</a></li>
+<li class="chapter" data-level="10.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>10.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a></li>
+<li class="chapter" data-level="10.4" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html"><i class="fa fa-check"></i><b>10.4</b> Bayes factors in theory: Stability and accuracy</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#instability-due-to-the-effective-number-of-posterior-samples"><i class="fa fa-check"></i><b>10.4.1</b> Instability due to the effective number of posterior samples</a></li>
+<li class="chapter" data-level="10.4.2" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#inaccuracy-of-bayes-factors-does-the-estimate-approximate-the-true-bayes-factor-well"><i class="fa fa-check"></i><b>10.4.2</b> Inaccuracy of Bayes factors: Does the estimate approximate the true Bayes factor well?</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
-<li class="chapter" data-level="9.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
-<li class="chapter" data-level="9.6" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
+<li class="chapter" data-level="10.5" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html"><i class="fa fa-check"></i><b>10.5</b> Bayes factors in practice: Variability with the data</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variation-associated-with-the-data-subjects-items-and-residual-noise"><i class="fa fa-check"></i><b>10.5.1</b> Variation associated with the data (subjects, items, and residual noise)</a></li>
+<li class="chapter" data-level="10.5.2" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#example-2-inhibitory-and-facilitatory-interference-effects"><i class="fa fa-check"></i><b>10.5.2</b> Example 2: Inhibitory and facilitatory interference effects</a></li>
+<li class="chapter" data-level="10.5.3" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variability-of-the-bayes-factor-posterior-simulations"><i class="fa fa-check"></i><b>10.5.3</b> Variability of the Bayes factor: Posterior simulations</a></li>
+<li class="chapter" data-level="10.5.4" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#visualize-distribution-of-bayes-factors"><i class="fa fa-check"></i><b>10.5.4</b> Visualize distribution of Bayes factors</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>10</b> Cross validation</a><ul>
-<li class="chapter" data-level="10.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>10.1</b> Expected log predictive density of a model</a></li>
-<li class="chapter" data-level="10.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>10.2</b> K-fold and leave-one-out cross-validation</a></li>
-<li class="chapter" data-level="10.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>10.3</b> Testing the N400 effect using cross-validation</a></li>
-<li class="chapter" data-level="10.4" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
-<li class="chapter" data-level="10.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>10.5</b> Further reading</a></li>
-<li class="chapter" data-level="10.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
+<li class="chapter" data-level="10.6" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.6</b> Summary</a></li>
+<li class="chapter" data-level="10.7" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.7</b> Further reading</a></li>
+<li class="chapter" data-level="10.8" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>10.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>11</b> Cross validation</a><ul>
+<li class="chapter" data-level="11.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>11.1</b> Expected log predictive density of a model</a></li>
+<li class="chapter" data-level="11.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>11.2</b> K-fold and leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="11.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>11.3</b> Testing the N400 effect using cross-validation</a></li>
+<li class="chapter" data-level="11.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.4</b> Summary</a></li>
+<li class="chapter" data-level="11.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.5</b> Further reading</a></li>
+<li class="chapter" data-level="11.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>11.6</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced models with Stan</b></span></li>
-<li class="chapter" data-level="11" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>11</b> Introduction to the probabilistic programming language Stan</a><ul>
-<li class="chapter" data-level="11.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>11.1</b> Stan syntax</a></li>
-<li class="chapter" data-level="11.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>11.2</b> A first simple example with Stan: Normal likelihood</a></li>
-<li class="chapter" data-level="11.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>11.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
-<li class="chapter" data-level="11.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>11.4</b> Regression models in Stan</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>11.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
-<li class="chapter" data-level="11.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>11.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
-<li class="chapter" data-level="11.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>11.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
+<li class="chapter" data-level="12" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>12</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="12.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>12.1</b> Stan syntax</a></li>
+<li class="chapter" data-level="12.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>12.2</b> A first simple example with Stan: Normal likelihood</a></li>
+<li class="chapter" data-level="12.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>12.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
+<li class="chapter" data-level="12.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>12.4</b> Regression models in Stan</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>12.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
+<li class="chapter" data-level="12.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>12.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
+<li class="chapter" data-level="12.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>12.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>11.5</b> Model comparison in Stan</a><ul>
-<li class="chapter" data-level="11.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>11.5.1</b> Bayes factor in Stan</a></li>
-<li class="chapter" data-level="11.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>11.5.2</b> Cross validation in Stan</a></li>
+<li class="chapter" data-level="12.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>12.5</b> Model comparison in Stan</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>12.5.1</b> Bayes factor in Stan</a></li>
+<li class="chapter" data-level="12.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>12.5.2</b> Cross validation in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="11.6" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.6</b> Summary</a></li>
-<li class="chapter" data-level="11.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>11.7</b> Further reading</a></li>
-<li class="chapter" data-level="11.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>11.8</b> Exercises</a></li>
+<li class="chapter" data-level="12.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.6</b> Summary</a></li>
+<li class="chapter" data-level="12.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.7</b> Further reading</a></li>
+<li class="chapter" data-level="12.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>12.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>12</b> Complex models and reparametrization</a><ul>
-<li class="chapter" data-level="12.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>12.1</b> Hierarchical models with Stan</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>12.1.1</b> Varying intercept model with Stan</a></li>
-<li class="chapter" data-level="12.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>12.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
-<li class="chapter" data-level="12.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>12.1.3</b> Correlated varying intercept varying slopes model</a></li>
-<li class="chapter" data-level="12.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>12.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="13" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>13</b> Complex models and reparametrization</a><ul>
+<li class="chapter" data-level="13.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>13.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>13.1.1</b> Varying intercept model with Stan</a></li>
+<li class="chapter" data-level="13.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>13.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="13.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>13.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="13.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>13.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.2</b> Summary</a></li>
-<li class="chapter" data-level="12.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
-<li class="chapter" data-level="12.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>12.4</b> Exercises</a></li>
+<li class="chapter" data-level="13.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>13.2</b> Summary</a></li>
+<li class="chapter" data-level="13.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>13.3</b> Further reading</a></li>
+<li class="chapter" data-level="13.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>13.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>V Computational cognitive modeling</b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-to-computational-cognitive-modeling.html"><a href="introduction-to-computational-cognitive-modeling.html"><i class="fa fa-check"></i><b>13</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="13.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.1</b> Further reading</a></li>
+<li class="chapter" data-level="14" data-path="introduction-to-computational-cognitive-modeling-chcogmod.html"><a href="introduction-to-computational-cognitive-modeling-chcogmod.html"><i class="fa fa-check"></i><b>14</b> Introduction to computational cognitive modeling {ch:cogmod}</a><ul>
+<li class="chapter" data-level="14.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>14.1</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>14</b> Multinomial processing trees</a><ul>
-<li class="chapter" data-level="14.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>14.1</b> Modeling multiple categorical responses</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>14.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
-<li class="chapter" data-level="14.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>14.1.2</b> A model for multiple responses using the categorical distribution</a></li>
+<li class="chapter" data-level="15" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>15</b> Multinomial processing trees</a><ul>
+<li class="chapter" data-level="15.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>15.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>15.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
+<li class="chapter" data-level="15.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>15.1.2</b> A model for multiple responses using the categorical distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>14.2</b> Multinomial processing tree (MPT) models</a><ul>
-<li class="chapter" data-level="14.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>14.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
+<li class="chapter" data-level="15.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>15.2</b> Multinomial processing tree (MPT) models</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>15.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="14.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>14.3</b> Further reading</a></li>
-<li class="chapter" data-level="14.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>14.4</b> Exercises</a></li>
+<li class="chapter" data-level="15.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
+<li class="chapter" data-level="15.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>15</b> Mixture models</a><ul>
-<li class="chapter" data-level="15.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>15.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>15.1.1</b> A fast guess model account of the global motion detection task</a></li>
+<li class="chapter" data-level="16" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>16</b> Mixture models</a><ul>
+<li class="chapter" data-level="16.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>16.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>16.1.1</b> A fast guess model account of the global motion detection task</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>15.2</b> Summary</a></li>
-<li class="chapter" data-level="15.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
-<li class="chapter" data-level="15.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.2" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>16.2</b> Summary</a></li>
+<li class="chapter" data-level="16.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.3</b> Further reading</a></li>
+<li class="chapter" data-level="16.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>16.4</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Appendix</b></span></li>
-<li class="chapter" data-level="16" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>16</b> Important distributions</a></li>
+<li class="chapter" data-level="17" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>17</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -408,7 +411,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="sec:trial" class="section level2">
 <h2><span class="header-section-number">4.2</span> Log-normal model: Does trial affect reaction times?</h2>
-<p>Let us revisit the small experiment from section <a href="sec-sampling.html#sec:simplenormal">3.1.1.1</a>, where a participant repeatedly pressed the space bar as fast as possible, without paying attention to the stimuli. We want to know whether the participant tended to speedup (practice effect) or slowdown (fatigue effect) while pressing the space bar.</p>
+<p>Let us revisit the small experiment from section <a href="sec-sampling.html#sec:simplenormal">3.1.1.1</a>, where a participant repeatedly pressed the space bar as fast as possible, without paying attention to the stimuli. We want to know whether the participant tended to speedup (practice effect) or slowdown (fatigue effect) while pressing the space bar. We’ll use the same dataset <code>df_spacebar</code> as before, and we’ll center the column <code>trial</code>:</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1">df_spacebar &lt;-<span class="st"> </span>df_spacebar <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb173-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial))</a></code></pre></div>
 <div id="likelihood-and-priors-for-the-log-normal-model" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Likelihood and priors for the log-normal model</h3>
 <p>If we assume that reaction times are log-normally distributed, we could fit a likelihood such as the following:</p>
@@ -428,61 +433,41 @@ rt_n \sim LogNormal(\alpha + c\_trial_n \cdot \beta,\sigma)
 <p><span class="math display">\[\begin{equation}
 \beta \sim Normal(0, 1)
 \end{equation}\]</span></p>
-<p>We can edit our <code>normal_predictive_distribution_fast</code> from section <a href="sec-ppd.html#sec:ppd">3.5</a> and make it log-normal and dependent on trial:</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1">lognormal_model_pred &lt;-<span class="st"> </span><span class="cf">function</span>(alpha_samples,</a>
-<a class="sourceLine" id="cb178-2" data-line-number="2">                                 beta_samples,</a>
-<a class="sourceLine" id="cb178-3" data-line-number="3">                                 sigma_samples,</a>
-<a class="sourceLine" id="cb178-4" data-line-number="4">                                 N_obs) {</a>
-<a class="sourceLine" id="cb178-5" data-line-number="5">    <span class="co"># pmap extends map2 (and map) for a list of lists:</span></a>
-<a class="sourceLine" id="cb178-6" data-line-number="6">    <span class="kw">pmap_dfr</span>(<span class="kw">list</span>(alpha_samples, beta_samples, sigma_samples),</a>
-<a class="sourceLine" id="cb178-7" data-line-number="7">             <span class="cf">function</span>(alpha, beta, sigma) {</a>
-<a class="sourceLine" id="cb178-8" data-line-number="8">                 <span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb178-9" data-line-number="9">                     <span class="dt">trialn =</span> <span class="kw">seq_len</span>(N_obs),</a>
-<a class="sourceLine" id="cb178-10" data-line-number="10">                     <span class="co"># we center trial:</span></a>
-<a class="sourceLine" id="cb178-11" data-line-number="11">                     <span class="dt">c_trial =</span> trialn <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trialn),</a>
-<a class="sourceLine" id="cb178-12" data-line-number="12">                     <span class="co"># we change the likelihood: </span></a>
-<a class="sourceLine" id="cb178-13" data-line-number="13">                     <span class="co"># Notice rlnorm and the use of alpha and beta</span></a>
-<a class="sourceLine" id="cb178-14" data-line-number="14">                     <span class="dt">rt_pred =</span> <span class="kw">rlnorm</span>(N_obs, alpha <span class="op">+</span><span class="st"> </span>c_trial <span class="op">*</span><span class="st"> </span>beta, sigma)</a>
-<a class="sourceLine" id="cb178-15" data-line-number="15">                 )</a>
-<a class="sourceLine" id="cb178-16" data-line-number="16">             }, <span class="dt">.id =</span> <span class="st">&quot;iter&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb178-17" data-line-number="17"><span class="st">    </span><span class="co"># .id is always a string and needs to be converted to a number</span></a>
-<a class="sourceLine" id="cb178-18" data-line-number="18"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">iter =</span> <span class="kw">as.numeric</span>(iter))</a>
-<a class="sourceLine" id="cb178-19" data-line-number="19">}</a></code></pre></div>
+<!-- We can edit our `normal_predictive_distribution_fast` from section \@ref(sec:ppd) and make it log-normal and dependent on trial: -->
 <p>This is our first attempt for a prior predictive distribution:</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1">N_obs =<span class="st"> </span><span class="dv">361</span></a>
-<a class="sourceLine" id="cb179-2" data-line-number="2">alpha_samples &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">6</span>, <span class="dt">sd =</span><span class="fl">1.5</span>)</a>
-<a class="sourceLine" id="cb179-3" data-line-number="3">sigma_samples &lt;-<span class="st"> </span><span class="kw">rtnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>, <span class="dt">a =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb179-4" data-line-number="4">beta_samples &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb179-5" data-line-number="5">prior_pred &lt;-<span class="st"> </span><span class="kw">lognormal_model_pred</span>(</a>
-<a class="sourceLine" id="cb179-6" data-line-number="6">    <span class="dt">alpha_samples =</span> alpha_samples,</a>
-<a class="sourceLine" id="cb179-7" data-line-number="7">    <span class="dt">beta_samples =</span> beta_samples, </a>
-<a class="sourceLine" id="cb179-8" data-line-number="8">    <span class="dt">sigma_samples =</span> sigma_samples,</a>
-<a class="sourceLine" id="cb179-9" data-line-number="9">    <span class="dt">N_obs =</span> N_obs)</a></code></pre></div>
-<p>We look here at the median effect:</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1">median_effect &lt;-</a>
-<a class="sourceLine" id="cb180-2" data-line-number="2"><span class="st">     </span>prior_pred <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb180-3" data-line-number="3"><span class="st">     </span><span class="kw">group_by</span>(iter) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb180-4" data-line-number="4"><span class="st">     </span><span class="kw">mutate</span>(<span class="dt">diff =</span> rt_pred <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(rt_pred)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb180-5" data-line-number="5"><span class="st">     </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb180-6" data-line-number="6">         <span class="dt">median_rt =</span> <span class="kw">median</span>(diff, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb180-7" data-line-number="7"> )</a></code></pre></div>
-<p>We plot it in Figure <a href="sec-trial.html#fig:priorbeta">4.4</a>, and as expected is center in zero (as our prior), but we see that the distribution of possible medians for the effect is too widely spread out and includes values that are too extreme.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1">df_spacebar_ref &lt;-<span class="st"> </span>df_spacebar <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb174-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rt =</span> <span class="kw">runif</span>(<span class="kw">n</span>(), <span class="dv">0</span>, <span class="dv">10000</span>))</a>
+<a class="sourceLine" id="cb174-3" data-line-number="3">fit_prior_press_trial &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_trial,</a>
+<a class="sourceLine" id="cb174-4" data-line-number="4">  <span class="dt">data =</span> df_spacebar_ref, </a>
+<a class="sourceLine" id="cb174-5" data-line-number="5">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
+<a class="sourceLine" id="cb174-6" data-line-number="6">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb174-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb174-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb174-9" data-line-number="9">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_trial)</a>
+<a class="sourceLine" id="cb174-10" data-line-number="10">  ),</a>
+<a class="sourceLine" id="cb174-11" data-line-number="11">  <span class="dt">sample_prior =</span> <span class="st">&quot;only&quot;</span>,</a>
+<a class="sourceLine" id="cb174-12" data-line-number="12">  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>)</a>
+<a class="sourceLine" id="cb174-13" data-line-number="13">)</a></code></pre></div>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Start sampling</code></pre>
+<p>To plot the median effect, we first define a function that calculates the difference between adjacent trials, and then applies the median to the result. We use that function in <code>pp_check</code> and we show the results in Figure <a href="sec-trial.html#fig:priorbeta">4.8</a>. As expected is center in zero (as our prior), but we see that the distribution of possible medians for the effect is too widely spread out and includes values that are too extreme.</p>
 
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1">median_effect <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb181-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(median_rt)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1">median_effect &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb177-2" data-line-number="2"> <span class="kw">median</span>(x <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(x), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb177-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb177-4" data-line-number="4"><span class="kw">pp_check</span>(fit_prior_press_trial, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;median_effect&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:priorbeta"></span>
 <img src="bookdown_files/figure-html/priorbeta-1.svg" alt="Prior predictive distribution of the median effect of the model defined in 4.2 with \(\beta \sim Normal(0, 1)\)." width="672" />
 <p class="caption">
-FIGURE 4.4: Prior predictive distribution of the median effect of the model defined in <a href="sec-trial.html#sec:trial">4.2</a> with <span class="math inline">\(\beta \sim Normal(0, 1)\)</span>.
+FIGURE 4.8: Prior predictive distribution of the median effect of the model defined in <a href="sec-trial.html#sec:trial">4.2</a> with <span class="math inline">\(\beta \sim Normal(0, 1)\)</span>.
 </p>
 </div>
-<p>We repeat the same procedure with <span class="math inline">\(\beta \sim Normal(0,.01)\)</span>, and we plot it in Figure <a href="sec-trial.html#fig:priorbeta2">4.5</a>. The prior predictive distribution shows us that the prior is still quite vague, it is, however at least in the right order of magnitude. Notice that we are using a distribution of medians because they are less affected by the variance in the posterior predicted distribution; distributions of means will have much more spread. If we want to make the distribution of means more realistic, we would also need to find a more accurate prior for the scale, <span class="math inline">\(\sigma\)</span>.</p>
+<p>We repeat the same procedure with <span class="math inline">\(\beta \sim Normal(0,.01)\)</span>, and we plot it in Figure <a href="sec-trial.html#fig:priorbeta2">4.9</a>. The prior predictive distribution shows us that the prior is still quite vague, it is, however at least in the right order of magnitude. Notice that we are using a distribution of medians because they are less affected by the variance in the posterior predicted distribution; distributions of means will have much more spread. If we want to make the distribution of means more realistic, we would also need to find a more accurate prior for the scale, <span class="math inline">\(\sigma\)</span>.</p>
 
 <div class="figure"><span id="fig:priorbeta2"></span>
 <img src="bookdown_files/figure-html/priorbeta2-1.svg" alt="Prior predictive distribution of the median effect of the model defined in 4.2 with \(\beta \sim Normal(0, .01)\)." width="672" />
 <p class="caption">
-FIGURE 4.5: Prior predictive distribution of the median effect of the model defined in <a href="sec-trial.html#sec:trial">4.2</a> with <span class="math inline">\(\beta \sim Normal(0, .01)\)</span>.
+FIGURE 4.9: Prior predictive distribution of the median effect of the model defined in <a href="sec-trial.html#sec:trial">4.2</a> with <span class="math inline">\(\beta \sim Normal(0, .01)\)</span>.
 </p>
 </div>
 <p>Prior selection might look daunting and a lot of work. However, this work is usually done only the first time we encounter an experimental paradigm; besides, priors can be informed by the estimates from previous experiments (even maximum likelihood estimates from frequentist models can be useful). We will generally use very similar (or identical priors) for analyses dealing with the same type of task. When in doubt, a sensitivity analysis (see section <a href="sec-sensitivity.html#sec:sensitivity">3.3</a>) can tell us whether the posterior distribution depends unintentionally strongly on our prior selection.</p>
@@ -516,7 +501,7 @@ rt_n &amp;\sim LogNormal(\alpha, \sigma)   \cdot \exp\big(c\_trial_n \cdot \beta
 \end{equation}\]</span></p>
 <p>So, essentially, we are assuming that reaction times are log-normally distributed with a median of <span class="math inline">\(\exp(\alpha)\)</span> and that the effect of trial number is multiplicative and grows or decays exponentially with the trial number. This has two important consequences:</p>
 <ol style="list-style-type: decimal">
-<li><p>Different values of the intercept, <span class="math inline">\(\alpha\)</span>, given the same <span class="math inline">\(\beta\)</span>, will affect the difference in reaction times for two adjacent trials (this is in contrast to what happens with an additive model such as normal likelihood); see Figure <a href="sec-trial.html#fig:logexp">4.6</a>. This is because, unlike in the additive case, the intercept doesn’t cancel out:</p>
+<li><p>Different values of the intercept, <span class="math inline">\(\alpha\)</span>, given the same <span class="math inline">\(\beta\)</span>, will affect the difference in reaction times for two adjacent trials (this is in contrast to what happens with an additive model such as normal likelihood); see Figure <a href="sec-trial.html#fig:logexp">4.10</a>. This is because, unlike in the additive case, the intercept doesn’t cancel out:</p>
 <ul>
 <li><p>Additive case:</p>
 <p><span class="math display">\[\begin{equation}
@@ -541,17 +526,17 @@ rt_n &amp;\sim LogNormal(\alpha, \sigma)   \cdot \exp\big(c\_trial_n \cdot \beta
 <div class="figure"><span id="fig:logexp"></span>
 <img src="bookdown_files/figure-html/logexp-1.svg" alt="Fitted value of the difference in reaction time between two adjacent trials, when \(\beta=0.01\) and \(\alpha\) lies between 0.1 and 15. The graph shows how changes in the intercept lead to changes in the difference in reaction times between trials, even if \(\beta\) is fixed." width="672"  />
 <p class="caption">
-FIGURE 4.6: Fitted value of the difference in reaction time between two adjacent trials, when <span class="math inline">\(\beta=0.01\)</span> and <span class="math inline">\(\alpha\)</span> lies between 0.1 and 15. The graph shows how changes in the intercept lead to changes in the difference in reaction times between trials, even if <span class="math inline">\(\beta\)</span> is fixed.
+FIGURE 4.10: Fitted value of the difference in reaction time between two adjacent trials, when <span class="math inline">\(\beta=0.01\)</span> and <span class="math inline">\(\alpha\)</span> lies between 0.1 and 15. The graph shows how changes in the intercept lead to changes in the difference in reaction times between trials, even if <span class="math inline">\(\beta\)</span> is fixed.
 </p>
 </div>
 <ol start="2" style="list-style-type: decimal">
-<li>As the trial number increases, the same value of <span class="math inline">\(\beta\)</span> will have a very different impact on the original scale of the dependent variable: <span class="math inline">\(\beta &lt;0\)</span> will lead to exponential decay and <span class="math inline">\(\beta &gt;0\)</span> will lead to exponential growth; see figure <a href="sec-trial.html#fig:expgd">4.7</a>.</li>
+<li>As the trial number increases, the same value of <span class="math inline">\(\beta\)</span> will have a very different impact on the original scale of the dependent variable: <span class="math inline">\(\beta &lt;0\)</span> will lead to exponential decay and <span class="math inline">\(\beta &gt;0\)</span> will lead to exponential growth; see figure <a href="sec-trial.html#fig:expgd">4.11</a>.</li>
 </ol>
 
 <div class="figure"><span id="fig:expgd"></span>
 <img src="bookdown_files/figure-html/expgd-1.svg" alt="Fitted value of the dependent variable (reaction times in ms) as function of trial number, when (A) \(\beta = -0.01\), exponential decay, and when (B) \(\beta =.01\), exponential growth." width="672"  />
 <p class="caption">
-FIGURE 4.7: Fitted value of the dependent variable (reaction times in ms) as function of trial number, when (A) <span class="math inline">\(\beta = -0.01\)</span>, exponential decay, and when (B) <span class="math inline">\(\beta =.01\)</span>, exponential growth.
+FIGURE 4.11: Fitted value of the dependent variable (reaction times in ms) as function of trial number, when (A) <span class="math inline">\(\beta = -0.01\)</span>, exponential decay, and when (B) <span class="math inline">\(\beta =.01\)</span>, exponential growth.
 </p>
 </div>
 <p>Can exponential growth or decay make sense? We need to consider that if they do make sense, they will be an approximation valid for a specific range of values, at some point we will expect a ceiling or a floor effect: reaction times cannot truly be 0 milliseconds, or take minutes. However, in our specific model, exponential growth or decay <em>by trial</em> is probably a bad approximation: We will predict that our participant will take extremely long (if <span class="math inline">\(\beta &gt;0\)</span>) or extremely short (if <span class="math inline">\(\beta &lt;0\)</span>) time in pressing the space bar in a relatively low number of trials. This doesn’t mean that the likelihood is wrong by itself, but it does mean that at least we need to put a cap on the growth or decay of our experimental manipulation. We can do this if the exponential growth or decay is a function of, for example, log-transformed trial numbers:</p>
@@ -562,7 +547,7 @@ rt_n \sim LogNormal(\alpha + c\_\log\_trial_n) \cdot \beta,\sigma)\\
 <div class="figure"><span id="fig:expgd2"></span>
 <img src="bookdown_files/figure-html/expgd2-1.svg" alt="Fitted value of the dependent variable (reaction times in ms) as function of the natural logarithm of the trial number, when (A) \(\beta=-0.01\), exponential decay, and when (B) \(\beta =.01\), exponential growth." width="672"  />
 <p class="caption">
-FIGURE 4.8: Fitted value of the dependent variable (reaction times in ms) as function of the natural logarithm of the trial number, when (A) <span class="math inline">\(\beta=-0.01\)</span>, exponential decay, and when (B) <span class="math inline">\(\beta =.01\)</span>, exponential growth.
+FIGURE 4.12: Fitted value of the dependent variable (reaction times in ms) as function of the natural logarithm of the trial number, when (A) <span class="math inline">\(\beta=-0.01\)</span>, exponential decay, and when (B) <span class="math inline">\(\beta =.01\)</span>, exponential growth.
 </p>
 </div>
 <p><strong>Log-normal distributions all the way down</strong></p>
@@ -579,69 +564,52 @@ One advantage of assuming log-normally distributed reaction times (but, in fact,
 <div id="the-brms-model-1" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> The <code>brms</code> model</h3>
 <p>We are now relatively satisfied with the priors for our model, and we can fit the data with <code>brms</code>. Notice that we need to specify that the family is <code>lognormal()</code>.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1">df_noreading_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;./data/button_press.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb182-2" data-line-number="2">df_noreading_data &lt;-<span class="st"> </span>df_noreading_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb182-3" data-line-number="3"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">c_trial =</span> trialn <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trialn))</a>
-<a class="sourceLine" id="cb182-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb182-5" data-line-number="5">fit_press_trial &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_trial,</a>
-<a class="sourceLine" id="cb182-6" data-line-number="6">  <span class="dt">data =</span> df_noreading_data,</a>
-<a class="sourceLine" id="cb182-7" data-line-number="7">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
-<a class="sourceLine" id="cb182-8" data-line-number="8">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb182-9" data-line-number="9">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb182-10" data-line-number="10">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb182-11" data-line-number="11">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">.01</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_trial)</a>
-<a class="sourceLine" id="cb182-12" data-line-number="12">  )</a>
-<a class="sourceLine" id="cb182-13" data-line-number="13">)</a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1">fit_press_trial &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_trial,</a>
+<a class="sourceLine" id="cb178-2" data-line-number="2">  <span class="dt">data =</span> df_spacebar,</a>
+<a class="sourceLine" id="cb178-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
+<a class="sourceLine" id="cb178-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb178-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb178-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb178-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">.01</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_trial)</a>
+<a class="sourceLine" id="cb178-8" data-line-number="8">  )</a>
+<a class="sourceLine" id="cb178-9" data-line-number="9">)</a></code></pre></div>
 <p>Instead of printing out the complete output from the model, look at the estimates from the posteriors for the parameters <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\sigma\)</span>. Notice that these parameters are on the log scale:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_press_trial)[,<span class="kw">c</span>(<span class="st">&quot;Estimate&quot;</span>,<span class="st">&quot;Q2.5&quot;</span>,<span class="st">&quot;Q97.5&quot;</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_press_trial)[,<span class="kw">c</span>(<span class="st">&quot;Estimate&quot;</span>,<span class="st">&quot;Q2.5&quot;</span>,<span class="st">&quot;Q97.5&quot;</span>)]</a></code></pre></div>
 <pre><code>##                 Estimate         Q2.5        Q97.5
-## b_Intercept     5.118312     5.106066     5.130912
-## b_c_trial       0.000523     0.000404     0.000644
-## sigma           0.123234     0.114760     0.132270
-## lp__        -1603.640177 -1606.652502 -1602.292950</code></pre>
-<!-- SV: removed
-We have some problems with the scale now. But the effect is not really zero.
-
-
-```r
-posterior_summary(fit_press_trial, pars = "b_c_trial")
-```
-
-```
-##           Estimate Est.Error     Q2.5    Q97.5
-## b_c_trial 0.000523 0.0000622 0.000404 0.000644
-```
--->
+## b_Intercept     5.118323     5.106473     5.130534
+## b_c_trial       0.000525     0.000398     0.000647
+## sigma           0.123371     0.114734     0.132500
+## lp__        -1603.647255 -1606.830939 -1602.298021</code></pre>
 <p>The posterior distributions can be plotted to obtain a graphical summary of all the parameters in the model:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="kw">plot</span>(fit_press_trial)</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-112-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">plot</span>(fit_press_trial)</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-115-1.svg" width="672" /></p>
 <p>Next, we turn to the question of what we can report as our results, and what we can conclude from the data.</p>
 </div>
 <div id="how-to-communicate-the-results-1" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> How to communicate the results?</h3>
-<p>As shown above, the first step is to summarize the posteriors in a table or graphically (or both). If the research relates to the effect estimated by the model, the posterior of <span class="math inline">\(\beta\)</span> can be summarized in the following way: <span class="math inline">\(\hat\beta = 0.00052\)</span>, 95% CrI = <span class="math inline">\([ 0.0004 , 0.00064 ]\)</span>.</p>
+<p>As shown above, the first step is to summarize the posteriors in a table or graphically (or both). If the research relates to the effect estimated by the model, the posterior of <span class="math inline">\(\beta\)</span> can be summarized in the following way: <span class="math inline">\(\hat\beta = 0.00052\)</span>, 95% CrI = <span class="math inline">\([ 0.0004 , 0.00065 ]\)</span>.</p>
 <p>But in most cases, the effect is easier to interpret in milliseconds. We can transform the estimates back to the millisecond scale from the log scale, but we need to take into account that the scale is not linear, and that the effect between two button presses will differ depending on where we are in the experiment.</p>
 <p>We will have a different estimate if we consider the difference between reaction times in a trial at the middle of the experiment (when the centered trial number is zero) and the previous one (when the centered trial number is minus one).</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1">alpha_samples &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_press_trial)<span class="op">$</span>b_Intercept</a>
-<a class="sourceLine" id="cb186-2" data-line-number="2">beta_samples &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_press_trial)<span class="op">$</span>b_c_trial</a>
-<a class="sourceLine" id="cb186-3" data-line-number="3">effect_middle_ms &lt;-<span class="st"> </span><span class="kw">exp</span>(alpha_samples) <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(alpha_samples <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">*</span><span class="st"> </span>beta_samples)</a>
-<a class="sourceLine" id="cb186-4" data-line-number="4"><span class="co">## ms effect in the middle of the expt (mean trial vs. mean trial - 1 ) </span></a>
-<a class="sourceLine" id="cb186-5" data-line-number="5"><span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(effect_middle_ms), <span class="kw">quantile</span>(effect_middle_ms, <span class="kw">c</span>(.<span class="dv">025</span>,.<span class="dv">975</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1">alpha_samples &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_press_trial)<span class="op">$</span>b_Intercept</a>
+<a class="sourceLine" id="cb182-2" data-line-number="2">beta_samples &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_press_trial)<span class="op">$</span>b_c_trial</a>
+<a class="sourceLine" id="cb182-3" data-line-number="3">effect_middle_ms &lt;-<span class="st"> </span><span class="kw">exp</span>(alpha_samples) <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(alpha_samples <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">*</span><span class="st"> </span>beta_samples)</a>
+<a class="sourceLine" id="cb182-4" data-line-number="4"><span class="co">## ms effect in the middle of the expt (mean trial vs. mean trial - 1 ) </span></a>
+<a class="sourceLine" id="cb182-5" data-line-number="5"><span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(effect_middle_ms), <span class="kw">quantile</span>(effect_middle_ms, <span class="kw">c</span>(.<span class="dv">025</span>,.<span class="dv">975</span>)))</a></code></pre></div>
 <pre><code>##   mean   2.5%  97.5% 
-## 0.0873 0.0672 0.1077</code></pre>
+## 0.0876 0.0664 0.1083</code></pre>
 <p>than if we consider the difference between the second trial and the first one:</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1">first_trial &lt;-<span class="st"> </span><span class="kw">min</span>(df_noreading_data<span class="op">$</span>c_trial)</a>
-<a class="sourceLine" id="cb188-2" data-line-number="2">second_trial &lt;-<span class="st"> </span><span class="kw">min</span>(df_noreading_data<span class="op">$</span>c_trial) <span class="op">+</span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb188-3" data-line-number="3">effect_beginning_ms &lt;-<span class="st"> </span><span class="kw">exp</span>(alpha_samples<span class="op">+</span><span class="st">  </span>second_trial <span class="op">*</span><span class="st"> </span>beta_samples) <span class="op">-</span></a>
-<a class="sourceLine" id="cb188-4" data-line-number="4"><span class="st">    </span><span class="kw">exp</span>(alpha_samples<span class="op">+</span><span class="st">  </span>first_trial <span class="op">*</span><span class="st"> </span>beta_samples)</a>
-<a class="sourceLine" id="cb188-5" data-line-number="5"><span class="co">## ms effect from first to second trial:</span></a>
-<a class="sourceLine" id="cb188-6" data-line-number="6"><span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(effect_beginning_ms), <span class="kw">quantile</span>(effect_beginning_ms, <span class="kw">c</span>(.<span class="dv">025</span>,.<span class="dv">975</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1">first_trial &lt;-<span class="st"> </span><span class="kw">min</span>(df_spacebar<span class="op">$</span>c_trial)</a>
+<a class="sourceLine" id="cb184-2" data-line-number="2">second_trial &lt;-<span class="st"> </span><span class="kw">min</span>(df_spacebar<span class="op">$</span>c_trial) <span class="op">+</span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb184-3" data-line-number="3">effect_beginning_ms &lt;-<span class="st"> </span><span class="kw">exp</span>(alpha_samples<span class="op">+</span><span class="st">  </span>second_trial <span class="op">*</span><span class="st"> </span>beta_samples) <span class="op">-</span></a>
+<a class="sourceLine" id="cb184-4" data-line-number="4"><span class="st">    </span><span class="kw">exp</span>(alpha_samples<span class="op">+</span><span class="st">  </span>first_trial <span class="op">*</span><span class="st"> </span>beta_samples)</a>
+<a class="sourceLine" id="cb184-5" data-line-number="5"><span class="co">## ms effect from first to second trial:</span></a>
+<a class="sourceLine" id="cb184-6" data-line-number="6"><span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(effect_beginning_ms), <span class="kw">quantile</span>(effect_beginning_ms, <span class="kw">c</span>(.<span class="dv">025</span>,.<span class="dv">975</span>)))</a></code></pre></div>
 <pre><code>##   mean   2.5%  97.5% 
-## 0.0794 0.0625 0.0960</code></pre>
+## 0.0797 0.0618 0.0965</code></pre>
 <p>There is a slowdown in both cases; when reporting the results of these analyses, one could present the posterior mean and the 95% credible interval and then reason about whether the observed estimates are consistent with the prediction from the theory being investigated.</p>
-<p>The practical relevance of the effect for the research question can be important too. For example, only after 100 button presses do we see a slowdown of 9 ms on average (<span class="math inline">\(0.087 \cdot 100\)</span>), with a 95% credible interval ranging from 6.717 to 10.772. We need to consider whether our uncertainty of this estimate, and the estimated mean effect have any scientific relevance. Such relevance can be established by considering the previous literature, predictions from a quantitative model, or other expert domain knowledge. Sometimes, a quantitative meta-analysis is helpful; for examples, see <span class="citation">Jäger, Engelmann, and Vasishth (<a href="#ref-JaegerEngelmannVasishth2017">2017</a>)</span>, <span class="citation">Mahowald et al. (<a href="#ref-mahowald2016meta">2016</a>)</span>, <span class="citation">Nicenboim, Roettger, and Vasishth (<a href="#ref-NicenboimRoettgeretal">2018</a>)</span>, and <span class="citation">Vasishth et al. (<a href="#ref-vasishthProcessingChineseRelative2013">2013</a>)</span>. We will discuss concrete examples later in the book, in chapters <a href="ch-remame.html#ch:remame">7</a>.
+<p>The practical relevance of the effect for the research question can be important too. For example, only after 100 button presses do we see a slowdown of 9 ms on average (<span class="math inline">\(0.088 \cdot 100\)</span>), with a 95% credible interval ranging from 6.637 to 10.829. We need to consider whether our uncertainty of this estimate, and the estimated mean effect have any scientific relevance. Such relevance can be established by considering the previous literature, predictions from a quantitative model, or other expert domain knowledge. Sometimes, a quantitative meta-analysis is helpful; for examples, see <span class="citation">Jäger, Engelmann, and Vasishth (<a href="#ref-JaegerEngelmannVasishth2017">2017</a>)</span>, <span class="citation">Mahowald et al. (<a href="#ref-mahowald2016meta">2016</a>)</span>, <span class="citation">Nicenboim, Roettger, and Vasishth (<a href="#ref-NicenboimRoettgeretal">2018</a>)</span>, and <span class="citation">Vasishth et al. (<a href="#ref-vasishthProcessingChineseRelative2013">2013</a>)</span>. We will discuss concrete examples later in the book, in chapters <a href="ch-remame.html#ch:remame">8</a>.
 <!-- SV to-do, add example case studies--></p>
-<p>Sometimes, researchers are only interested in establishing that there is an effect; the magnitude and uncertainty of the estimate is of secondary interest. Here, the goal is to argue that there is <strong>evidence</strong> of a slowdown. The word evidence has a special meaning in statistics <span class="citation">(Royall <a href="#ref-Royall">1997</a>)</span>, and in null hypothesis significance testing, a likelihood ratio test is the standard way to argue that one has evidence for an effect. In the Bayesian data analysis context, a Bayes factor hypothesis test must be carried out. We’ll come back to this issue in the model comparison chapters <a href="ch-comparison.html#ch:comparison">8</a>-<a href="ch-cv.html#ch:cv">10</a>.</p>
+<p>Sometimes, researchers are only interested in establishing that there is an effect; the magnitude and uncertainty of the estimate is of secondary interest. Here, the goal is to argue that there is <strong>evidence</strong> of a slowdown. The word evidence has a special meaning in statistics <span class="citation">(Royall <a href="#ref-Royall">1997</a>)</span>, and in null hypothesis significance testing, a likelihood ratio test is the standard way to argue that one has evidence for an effect. In the Bayesian data analysis context, a Bayes factor hypothesis test must be carried out. We’ll come back to this issue in the model comparison chapters <a href="ch-comparison.html#ch:comparison">9</a>-<a href="ch-cv.html#ch:cv">11</a>.</p>
 </div>
 </div>
 <h3>References</h3>
