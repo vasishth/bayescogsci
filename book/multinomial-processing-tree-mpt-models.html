@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>15.2 Multinomial processing tree (MPT) models | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
+  <title>19.2 Multinomial processing tree (MPT) models | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="15.2 Multinomial processing tree (MPT) models | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta property="og:title" content="19.2 Multinomial processing tree (MPT) models | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://vasishth.github.io/Bayes_CogSci/" />
-  <meta property="og:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
+  <meta property="og:image" content="https://vasishth.github.io/Bayes_CogSci//images/temporarycover.jpg" />
   <meta property="og:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
   <meta name="github-repo" content="https://github.com/vasishth/Bayes_CogSci" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="15.2 Multinomial processing tree (MPT) models | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta name="twitter:title" content="19.2 Multinomial processing tree (MPT) models | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   
   <meta name="twitter:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="twitter:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
+  <meta name="twitter:image" content="https://vasishth.github.io/Bayes_CogSci//images/temporarycover.jpg" />
 
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-02-03" />
+<meta name="date" content="2021-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="modeling-multiple-categorical-responses.html"/>
-<link rel="next" href="further-reading-11.html"/>
+<link rel="next" href="further-reading-12.html"/>
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
 
 
 
@@ -116,6 +118,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
@@ -156,41 +159,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.6" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1: Discrete bivariate distributions</a></li>
 <li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
-<li class="chapter" data-level="1.6.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
+<li class="chapter" data-level="1.6.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#sec:generatebivariatedata"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="sec-marginal.html"><a href="sec-marginal.html"><i class="fa fa-check"></i><b>1.7</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
 <li class="chapter" data-level="1.8" data-path="summary-of-useful-r-functions-relating-to-distributions.html"><a href="summary-of-useful-r-functions-relating-to-distributions.html"><i class="fa fa-check"></i><b>1.8</b> Summary of useful R functions relating to distributions</a></li>
-<li class="chapter" data-level="1.9" data-path="summary-of-concepts-introduced-in-this-chapter.html"><a href="summary-of-concepts-introduced-in-this-chapter.html"><i class="fa fa-check"></i><b>1.9</b> Summary of concepts introduced in this chapter</a></li>
+<li class="chapter" data-level="1.9" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>1.9</b> Summary</a></li>
 <li class="chapter" data-level="1.10" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.10</b> Further reading</a></li>
-<li class="chapter" data-level="1.11" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>1.11</b> Exercises</a><ul>
-<li class="chapter" data-level="1.11.1" data-path="exercises.html"><a href="exercises.html#practice-using-the-pnorm-function"><i class="fa fa-check"></i><b>1.11.1</b> Practice using the <code>pnorm</code> function</a></li>
-<li class="chapter" data-level="1.11.2" data-path="exercises.html"><a href="exercises.html#practice-using-the-qnorm-function"><i class="fa fa-check"></i><b>1.11.2</b> Practice using the <code>qnorm</code> function</a></li>
-<li class="chapter" data-level="1.11.3" data-path="exercises.html"><a href="exercises.html#practice-using-qt"><i class="fa fa-check"></i><b>1.11.3</b> Practice using <code>qt</code></a></li>
-<li class="chapter" data-level="1.11.4" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-1"><i class="fa fa-check"></i><b>1.11.4</b> Maximum likelihood estimation 1</a></li>
-<li class="chapter" data-level="1.11.5" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-2"><i class="fa fa-check"></i><b>1.11.5</b> Maximum likelihood estimation 2</a></li>
+<li class="chapter" data-level="1.11" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.11</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="2" data-path="ch-introBDA.html"><a href="ch-introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
+<li class="chapter" data-level="2.1" data-path="bayes-rule.html"><a href="bayes-rule.html"><i class="fa fa-check"></i><b>2.1</b> Bayes’ rule</a></li>
+<li class="chapter" data-level="2.2" data-path="sec-analytical.html"><a href="sec-analytical.html"><i class="fa fa-check"></i><b>2.2</b> Deriving the posterior using Bayes’ rule: An analytical example</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.2.1</b> Choosing a likelihood</a></li>
+<li class="chapter" data-level="2.2.2" data-path="sec-analytical.html"><a href="sec-analytical.html#sec:choosepriortheta"><i class="fa fa-check"></i><b>2.2.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
+<li class="chapter" data-level="2.2.3" data-path="sec-analytical.html"><a href="sec-analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.2.3</b> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
+<li class="chapter" data-level="2.2.4" data-path="sec-analytical.html"><a href="sec-analytical.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.2.4</b> Summary of the procedure</a></li>
+<li class="chapter" data-level="2.2.5" data-path="sec-analytical.html"><a href="sec-analytical.html#visualizing-the-prior-likelihood-and-the-posterior"><i class="fa fa-check"></i><b>2.2.5</b> Visualizing the prior, likelihood, and the posterior</a></li>
+<li class="chapter" data-level="2.2.6" data-path="sec-analytical.html"><a href="sec-analytical.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.2.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
+<li class="chapter" data-level="2.2.7" data-path="sec-analytical.html"><a href="sec-analytical.html#incremental-knowledge-gain-using-prior-knowledge"><i class="fa fa-check"></i><b>2.2.7</b> Incremental knowledge gain using prior knowledge</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introBDA.html"><a href="introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
-<li class="chapter" data-level="2.1" data-path="sec-analytical.html"><a href="sec-analytical.html"><i class="fa fa-check"></i><b>2.1</b> Deriving the posterior using Bayes’ rule: An analytical example</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.1.1</b> Choosing a likelihood</a></li>
-<li class="chapter" data-level="2.1.2" data-path="sec-analytical.html"><a href="sec-analytical.html#sec:choosepriortheta"><i class="fa fa-check"></i><b>2.1.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
-<li class="chapter" data-level="2.1.3" data-path="sec-analytical.html"><a href="sec-analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.1.3</b> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
-<li class="chapter" data-level="2.1.4" data-path="sec-analytical.html"><a href="sec-analytical.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.1.4</b> Summary of the procedure</a></li>
-<li class="chapter" data-level="2.1.5" data-path="sec-analytical.html"><a href="sec-analytical.html#visualizing-the-prior-likelihood-and-the-posterior"><i class="fa fa-check"></i><b>2.1.5</b> Visualizing the prior, likelihood, and the posterior</a></li>
-<li class="chapter" data-level="2.1.6" data-path="sec-analytical.html"><a href="sec-analytical.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.1.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
-<li class="chapter" data-level="2.1.7" data-path="sec-analytical.html"><a href="sec-analytical.html#incremental-knowledge-gain-using-prior-knowledge"><i class="fa fa-check"></i><b>2.1.7</b> Incremental knowledge gain using prior knowledge</a></li>
+<li class="chapter" data-level="2.3" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+<li class="chapter" data-level="2.4" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>2.4</b> Further reading</a></li>
+<li class="chapter" data-level="2.5" data-path="sec-BDAexercises.html"><a href="sec-BDAexercises.html"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="summary-of-concepts-introduced-in-this-chapter-1.html"><a href="summary-of-concepts-introduced-in-this-chapter-1.html"><i class="fa fa-check"></i><b>2.2</b> Summary of concepts introduced in this chapter</a></li>
-<li class="chapter" data-level="2.3" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>2.3</b> Further reading</a></li>
-<li class="chapter" data-level="2.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>2.4</b> Exercises</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="exercises-1.html"><a href="exercises-1.html#exercise-deriving-bayes-rule"><i class="fa fa-check"></i><b>2.4.1</b> Exercise: Deriving Bayes’ rule</a></li>
-<li class="chapter" data-level="2.4.2" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-1"><i class="fa fa-check"></i><b>2.4.2</b> Exercise: Conjugate forms 1</a></li>
-<li class="chapter" data-level="2.4.3" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-2"><i class="fa fa-check"></i><b>2.4.3</b> Exercise: Conjugate forms 2</a></li>
-<li class="chapter" data-level="2.4.4" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-3"><i class="fa fa-check"></i><b>2.4.4</b> Exercise: Conjugate forms 3</a></li>
-<li class="chapter" data-level="2.4.5" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-4"><i class="fa fa-check"></i><b>2.4.5</b> Exercise: Conjugate forms 4</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>II Regression models</b></span></li>
+<li class="part"><span><b>II Regression models with brms</b></span></li>
 <li class="chapter" data-level="3" data-path="ch-compbda.html"><a href="ch-compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a><ul>
 <li class="chapter" data-level="3.1" data-path="sec-sampling.html"><a href="sec-sampling.html"><i class="fa fa-check"></i><b>3.1</b> Deriving the posterior through sampling</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="sec-sampling.html"><a href="sec-sampling.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.1.1</b> Bayesian Regression Models using ‘Stan’: brms</a></li>
@@ -208,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.2" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lnfirst"><i class="fa fa-check"></i><b>3.5.2</b> The log-normal likelihood</a></li>
 <li class="chapter" data-level="3.5.3" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lognormal"><i class="fa fa-check"></i><b>3.5.3</b> Re-fitting a single participant pressing a button repeatedly with a log-normal likelihood</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.6" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
 <li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
 <li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
 </ul></li>
@@ -231,12 +223,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.4" data-path="sec-logistic.html"><a href="sec-logistic.html#sec:comlogis"><i class="fa fa-check"></i><b>4.3.4</b> How to communicate the results?</a></li>
 <li class="chapter" data-level="4.3.5" data-path="sec-logistic.html"><a href="sec-logistic.html#descriptive-adequacy"><i class="fa fa-check"></i><b>4.3.5</b> Descriptive adequacy</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
 <li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
-<li class="chapter" data-level="4.6" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
-<li class="chapter" data-level="4.7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="appendix.html"><a href="appendix.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
-</ul></li>
+<li class="chapter" data-level="4.6" data-path="sec-LMexercises.html"><a href="sec-LMexercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
 <li class="chapter" data-level="5.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical normal model: The N400 effect</a><ul>
@@ -250,144 +239,157 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="sec-stroop.html"><a href="sec-stroop.html"><i class="fa fa-check"></i><b>5.2</b> A hierarchical log-normal model: The Stroop effect</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="sec-stroop.html"><a href="sec-stroop.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.2.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>5.3</b> Summary</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="summary-2.html"><a href="summary-2.html#why-should-we-take-the-trouble-of-fitting-a-bayesian-hierarchical-model"><i class="fa fa-check"></i><b>5.3.1</b> Why should we take the trouble of fitting a Bayesian hierarchical model?</a></li>
+<li class="chapter" data-level="5.3" data-path="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><a href="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><i class="fa fa-check"></i><b>5.3</b> Why fitting a Bayesian hierarchical model is worth the effort</a></li>
+<li class="chapter" data-level="5.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.4</b> Summary</a></li>
+<li class="chapter" data-level="5.5" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
+<li class="chapter" data-level="5.6" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html"><i class="fa fa-check"></i><b>5.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>5.4</b> Further reading</a></li>
-<li class="chapter" data-level="5.5" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+<li class="chapter" data-level="6" data-path="ch-priors.html"><a href="ch-priors.html"><i class="fa fa-check"></i><b>6</b> The Art and Science of Prior Elicitation</a><ul>
+<li class="chapter" data-level="6.1" data-path="a-simple-example-of-eliciting-priors-from-oneself.html"><a href="a-simple-example-of-eliciting-priors-from-oneself.html"><i class="fa fa-check"></i><b>6.1</b> A simple example of eliciting priors from oneself</a></li>
+<li class="chapter" data-level="6.2" data-path="eliciting-priors-from-experts.html"><a href="eliciting-priors-from-experts.html"><i class="fa fa-check"></i><b>6.2</b> Eliciting priors from experts</a></li>
+<li class="chapter" data-level="6.3" data-path="deriving-priors-from-meta-analyses.html"><a href="deriving-priors-from-meta-analyses.html"><i class="fa fa-check"></i><b>6.3</b> Deriving priors from meta-analyses</a></li>
+<li class="chapter" data-level="6.4" data-path="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><a href="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’ posteriors as priors for a new study</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
-<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
-<li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
-<li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
-<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+<li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a></li>
+<li class="chapter" data-level="8" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>8</b> Contrast coding</a><ul>
+<li class="chapter" data-level="8.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>8.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>8.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="8.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>8.1.2</b> Defining hypotheses</a></li>
+<li class="chapter" data-level="8.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>8.1.3</b> Sum contrasts</a></li>
+<li class="chapter" data-level="8.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>8.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
-<li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
-<li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+<li class="chapter" data-level="8.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>8.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>8.2.1</b> Sum contrasts</a></li>
+<li class="chapter" data-level="8.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>8.2.2</b> The hypothesis matrix</a></li>
+<li class="chapter" data-level="8.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>8.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="8.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="8.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b> Helmert contrasts</a></li>
+<li class="chapter" data-level="8.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="8.3.4" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b> Polynomial contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
-<li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
-<li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+<li class="chapter" data-level="8.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>8.4.1</b> Centered contrasts</a></li>
+<li class="chapter" data-level="8.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>8.4.2</b> Orthogonal contrasts</a></li>
+<li class="chapter" data-level="8.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>8.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>6.5</b> Computing condition means from estimated contrasts</a></li>
-<li class="chapter" data-level="6.6" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
+<li class="chapter" data-level="8.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>8.5</b> Computing condition means from estimated contrasts</a></li>
+<li class="chapter" data-level="8.6" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
+<li class="chapter" data-level="8.7" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
+<li class="chapter" data-level="8.8" data-path="sec-Contrastsexercises.html"><a href="sec-Contrastsexercises.html"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
-<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
-<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
-<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+<li class="chapter" data-level="9" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="9.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>9.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>9.1.1</b> Nested effects</a></li>
+<li class="chapter" data-level="9.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>9.1.2</b> Interactions between contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
-<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+<li class="chapter" data-level="9.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>9.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>9.2.1</b> Estimating a group difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="9.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>9.2.2</b> Estimating differences in slopes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
-<li class="chapter" data-level="7.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="9.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>9.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="9.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>9.5</b> Further readings</a></li>
+<li class="chapter" data-level="9.6" data-path="sec-Contrasts2x2exercises.html"><a href="sec-Contrasts2x2exercises.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>8</b> Meta-analysis and measurement error models</a><ul>
-<li class="chapter" data-level="8.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>8.1</b> Meta-analysis</a></li>
-<li class="chapter" data-level="8.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>8.2</b> Measurement-error models</a></li>
-<li class="chapter" data-level="8.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.3</b> Further reading</a></li>
-<li class="chapter" data-level="8.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>8.4</b> Exercises</a></li>
+<li class="part"><span><b>III Advanced models with Stan</b></span></li>
+<li class="chapter" data-level="10" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>10</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="10.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>10.1</b> Stan syntax</a></li>
+<li class="chapter" data-level="10.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>10.2</b> A first simple example with Stan: Normal likelihood</a></li>
+<li class="chapter" data-level="10.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>10.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
+<li class="chapter" data-level="10.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>10.4</b> Regression models in Stan</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>10.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
+<li class="chapter" data-level="10.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>10.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
+<li class="chapter" data-level="10.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>10.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
-<li class="part"><span><b>III Model comparison</b></span></li>
-<li class="chapter" data-level="9" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>9</b> Introduction to model comparison</a></li>
-<li class="chapter" data-level="10" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>10</b> Bayes factors</a><ul>
-<li class="chapter" data-level="10.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>10.1</b> Hypothesis testing using the Bayes factor</a><ul>
-<li class="chapter" data-level="10.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>10.1.1</b> Marginal likelihood</a></li>
-<li class="chapter" data-level="10.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>10.1.2</b> Bayes factor</a></li>
+<li class="chapter" data-level="10.5" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
+<li class="chapter" data-level="10.6" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
+<li class="chapter" data-level="10.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>10.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>10.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sensitivity-analysis"><i class="fa fa-check"></i><b>10.2.1</b> Sensitivity analysis</a></li>
-<li class="chapter" data-level="10.2.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>10.2.2</b> Non-nested models</a></li>
+<li class="chapter" data-level="11" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>11</b> Complex models and reparametrization</a><ul>
+<li class="chapter" data-level="11.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>11.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>11.1.1</b> Varying intercept model with Stan</a></li>
+<li class="chapter" data-level="11.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>11.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="11.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>11.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="11.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>11.1.4</b> By-subject and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>10.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a></li>
-<li class="chapter" data-level="10.4" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html"><i class="fa fa-check"></i><b>10.4</b> Bayes factors in theory: Stability and accuracy</a><ul>
-<li class="chapter" data-level="10.4.1" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#instability-due-to-the-effective-number-of-posterior-samples"><i class="fa fa-check"></i><b>10.4.1</b> Instability due to the effective number of posterior samples</a></li>
-<li class="chapter" data-level="10.4.2" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#inaccuracy-of-bayes-factors-does-the-estimate-approximate-the-true-bayes-factor-well"><i class="fa fa-check"></i><b>10.4.2</b> Inaccuracy of Bayes factors: Does the estimate approximate the true Bayes factor well?</a></li>
+<li class="chapter" data-level="11.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
+<li class="chapter" data-level="11.3" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
+<li class="chapter" data-level="11.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>11.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html"><i class="fa fa-check"></i><b>10.5</b> Bayes factors in practice: Variability with the data</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variation-associated-with-the-data-subjects-items-and-residual-noise"><i class="fa fa-check"></i><b>10.5.1</b> Variation associated with the data (subjects, items, and residual noise)</a></li>
-<li class="chapter" data-level="10.5.2" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#example-2-inhibitory-and-facilitatory-interference-effects"><i class="fa fa-check"></i><b>10.5.2</b> Example 2: Inhibitory and facilitatory interference effects</a></li>
-<li class="chapter" data-level="10.5.3" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variability-of-the-bayes-factor-posterior-simulations"><i class="fa fa-check"></i><b>10.5.3</b> Variability of the Bayes factor: Posterior simulations</a></li>
-<li class="chapter" data-level="10.5.4" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#visualize-distribution-of-bayes-factors"><i class="fa fa-check"></i><b>10.5.4</b> Visualize distribution of Bayes factors</a></li>
+<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom likelihoods in Stan</a></li>
+<li class="part"><span><b>IV Other useful models</b></span></li>
+<li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
+<li class="chapter" data-level="13.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>13.1</b> Meta-analysis</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="meta-analysis.html"><a href="meta-analysis.html#a-meta-analysis-of-similarity-based-interference-in-sentence-comprehension"><i class="fa fa-check"></i><b>13.1.1</b> A meta-analysis of similarity-based interference in sentence comprehension</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.6</b> Summary</a></li>
-<li class="chapter" data-level="10.7" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.7</b> Further reading</a></li>
-<li class="chapter" data-level="10.8" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>10.8</b> Exercises</a></li>
+<li class="chapter" data-level="13.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>13.2</b> Measurement-error models</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="measurement-error-models.html"><a href="measurement-error-models.html#accounting-for-measurement-error-in-a-voice-onset-time-model"><i class="fa fa-check"></i><b>13.2.1</b> Accounting for measurement error in a voice onset time model</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>11</b> Cross validation</a><ul>
-<li class="chapter" data-level="11.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>11.1</b> Expected log predictive density of a model</a></li>
-<li class="chapter" data-level="11.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>11.2</b> K-fold and leave-one-out cross-validation</a></li>
-<li class="chapter" data-level="11.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>11.3</b> Testing the N400 effect using cross-validation</a></li>
-<li class="chapter" data-level="11.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.4</b> Summary</a></li>
-<li class="chapter" data-level="11.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.5</b> Further reading</a></li>
-<li class="chapter" data-level="11.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>11.6</b> Exercises</a></li>
+<li class="chapter" data-level="13.3" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
+<li class="chapter" data-level="13.4" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
+<li class="chapter" data-level="13.5" data-path="sec-REMAMEexercises.html"><a href="sec-REMAMEexercises.html"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>IV Advanced models with Stan</b></span></li>
-<li class="chapter" data-level="12" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>12</b> Introduction to the probabilistic programming language Stan</a><ul>
-<li class="chapter" data-level="12.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>12.1</b> Stan syntax</a></li>
-<li class="chapter" data-level="12.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>12.2</b> A first simple example with Stan: Normal likelihood</a></li>
-<li class="chapter" data-level="12.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>12.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
-<li class="chapter" data-level="12.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>12.4</b> Regression models in Stan</a><ul>
-<li class="chapter" data-level="12.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>12.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
-<li class="chapter" data-level="12.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>12.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
-<li class="chapter" data-level="12.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>12.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
+<li class="chapter" data-level="14" data-path="ch-sat.html"><a href="ch-sat.html"><i class="fa fa-check"></i><b>14</b> SAT</a></li>
+<li class="part"><span><b>V Model comparison and hypothesis testing</b></span></li>
+<li class="chapter" data-level="15" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>15</b> Introduction to model comparison</a></li>
+<li class="chapter" data-level="16" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>16</b> Bayes factors</a><ul>
+<li class="chapter" data-level="16.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>16.1</b> Hypothesis testing using the Bayes factor</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>16.1.1</b> Marginal likelihood</a></li>
+<li class="chapter" data-level="16.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>16.1.2</b> Bayes factor</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>12.5</b> Model comparison in Stan</a><ul>
-<li class="chapter" data-level="12.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>12.5.1</b> Bayes factor in Stan</a></li>
-<li class="chapter" data-level="12.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>12.5.2</b> Cross validation in Stan</a></li>
+<li class="chapter" data-level="16.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>16.2</b> Examining the N400 effect with Bayes factor</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sensitivity-analysis-1"><i class="fa fa-check"></i><b>16.2.1</b> Sensitivity analysis</a></li>
+<li class="chapter" data-level="16.2.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>16.2.2</b> Non-nested models</a></li>
 </ul></li>
-<li class="chapter" data-level="12.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.6</b> Summary</a></li>
-<li class="chapter" data-level="12.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.7</b> Further reading</a></li>
-<li class="chapter" data-level="12.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>12.8</b> Exercises</a></li>
+<li class="chapter" data-level="16.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>16.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>16.3.1</b> Bayes factor in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>13</b> Complex models and reparametrization</a><ul>
-<li class="chapter" data-level="13.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>13.1</b> Hierarchical models with Stan</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>13.1.1</b> Varying intercept model with Stan</a></li>
-<li class="chapter" data-level="13.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>13.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
-<li class="chapter" data-level="13.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>13.1.3</b> Correlated varying intercept varying slopes model</a></li>
-<li class="chapter" data-level="13.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>13.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="16.4" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html"><i class="fa fa-check"></i><b>16.4</b> Bayes factors in theory and in practice</a><ul>
+<li class="chapter" data-level="16.4.1" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-theory-stability-and-accuracy"><i class="fa fa-check"></i><b>16.4.1</b> Bayes factors in theory: Stability and accuracy</a></li>
+<li class="chapter" data-level="16.4.2" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-practice-variability-with-the-data"><i class="fa fa-check"></i><b>16.4.2</b> Bayes factors in practice: Variability with the data</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>13.2</b> Summary</a></li>
-<li class="chapter" data-level="13.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>13.3</b> Further reading</a></li>
-<li class="chapter" data-level="13.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>13.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.5" data-path="summary-10.html"><a href="summary-10.html"><i class="fa fa-check"></i><b>16.5</b> Summary</a></li>
+<li class="chapter" data-level="16.6" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>16.6</b> Further reading</a></li>
+<li class="chapter" data-level="16.7" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>16.7</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>V Computational cognitive modeling</b></span></li>
-<li class="chapter" data-level="14" data-path="introduction-to-computational-cognitive-modeling-chcogmod.html"><a href="introduction-to-computational-cognitive-modeling-chcogmod.html"><i class="fa fa-check"></i><b>14</b> Introduction to computational cognitive modeling {ch:cogmod}</a><ul>
-<li class="chapter" data-level="14.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>14.1</b> Further reading</a></li>
+<li class="chapter" data-level="17" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>17</b> Cross-validation</a><ul>
+<li class="chapter" data-level="17.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>17.1</b> Expected log predictive density of a model</a></li>
+<li class="chapter" data-level="17.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>17.2</b> K-fold and leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="17.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>17.3</b> Testing the N400 effect using cross-validation</a><ul>
+<li class="chapter" data-level="17.3.1" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>17.3.1</b> cross-validation in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>15</b> Multinomial processing trees</a><ul>
-<li class="chapter" data-level="15.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>15.1</b> Modeling multiple categorical responses</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>15.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
-<li class="chapter" data-level="15.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>15.1.2</b> A model for multiple responses using the categorical distribution</a></li>
+<li class="chapter" data-level="17.4" data-path="summary-11.html"><a href="summary-11.html"><i class="fa fa-check"></i><b>17.4</b> Summary</a></li>
+<li class="chapter" data-level="17.5" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>17.5</b> Further reading</a></li>
+<li class="chapter" data-level="17.6" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>17.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>15.2</b> Multinomial processing tree (MPT) models</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>15.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
+<li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
+<li class="chapter" data-level="18" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>18</b> Introduction to computational cognitive modeling</a><ul>
+<li class="chapter" data-level="18.1" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
-<li class="chapter" data-level="15.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
+<li class="chapter" data-level="19" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>19</b> Multinomial processing trees</a><ul>
+<li class="chapter" data-level="19.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>19.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="19.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>19.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
+<li class="chapter" data-level="19.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>19.1.2</b> A model for multiple responses using the categorical distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>16</b> Mixture models</a><ul>
-<li class="chapter" data-level="16.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>16.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>16.1.1</b> A fast guess model account of the global motion detection task</a></li>
+<li class="chapter" data-level="19.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>19.2</b> Multinomial processing tree (MPT) models</a><ul>
+<li class="chapter" data-level="19.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>19.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>16.2</b> Summary</a></li>
-<li class="chapter" data-level="16.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.3</b> Further reading</a></li>
-<li class="chapter" data-level="16.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>16.4</b> Exercises</a></li>
+<li class="chapter" data-level="19.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
+<li class="chapter" data-level="19.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>19.4</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>VI Appendix</b></span></li>
-<li class="chapter" data-level="17" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>17</b> Important distributions</a></li>
+<li class="chapter" data-level="20" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>20</b> Mixture models</a><ul>
+<li class="chapter" data-level="20.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>20.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
+<li class="chapter" data-level="20.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>20.1.1</b> A fast guess model account of the global motion detection task</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="summary-12.html"><a href="summary-12.html"><i class="fa fa-check"></i><b>20.2</b> Summary</a></li>
+<li class="chapter" data-level="20.3" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
+<li class="chapter" data-level="20.4" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>20.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="ch-lognormal.html"><a href="ch-lognormal.html"><i class="fa fa-check"></i><b>21</b> A simple accumulator model to account for choice response time</a></li>
+<li class="part"><span><b>VII Appendix</b></span></li>
+<li class="chapter" data-level="22" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>22</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -410,20 +412,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="multinomial-processing-tree-mpt-models" class="section level2">
-<h2><span class="header-section-number">15.2</span> Multinomial processing tree (MPT) models</h2>
-<p>Multinomial processing tree (MPT) modeling is a method that estimates latent variables that have a psychological interpretation given categorical data <span class="citation">(a review is provided in Batchelder and Riefer <a href="#ref-BatchelderRiefer1999">1999</a>)</span>. In other words, an MPT model is just one way to model categorical responses following a multinomial or categorical distribution. MPT models assume that the observed response categories result from a sequences of underlying cognitive events which are represented as a tree.</p>
+<h2><span class="header-section-number">19.2</span> Multinomial processing tree (MPT) models</h2>
+<p>Multinomial processing tree (MPT) modeling is a method that estimates latent variables that have a psychological interpretation given categorical data <span class="citation">(a review is provided in Batchelder and Riefer <a href="#ref-BatchelderRiefer1999">1999</a>)</span>. In other words, an MPT model is just one way to model categorical responses following a multinomial or categorical distribution. MPT models assume that the observed response categories result from a sequences of underlying cognitive events which are represented as a binary branching tree. Each binary branching is associated with a parameter that represents the probability of going down either branch. Every successive node is assumed to be independent of the preceding node, allowing us to use the product rule from probability theory to compute the probability of going down a particular path. The leaves of the binary branching tree the observed response in the data. The goal is to derive posterior distributions of the latent probability parameters specified for the binary branching in the model.</p>
 <div id="mpts-for-modeling-picture-naming-abilities-in-aphasia" class="section level3">
-<h3><span class="header-section-number">15.2.1</span> MPTs for modeling picture naming abilities in aphasia</h3>
+<h3><span class="header-section-number">19.2.1</span> MPTs for modeling picture naming abilities in aphasia</h3>
 <p><span class="citation">Walker, Hickok, and Fridriksson (<a href="#ref-WalkerEtAl2018">2018</a>)</span> created an MPT model that specifies a set of possible internal errors that lead to the various possible response types during a picture naming trial for aphasic patients. Here we’ll explore a simplification of the original model.</p>
+<p>The model assumes that when an attempt is made to produce a word, errors in production can arise at the whole word level (lexical level) or the segmental level (phonological level). Semantic errors are assumed to arise from the lexical substitutions, and neologism errors from phonological substitutions. Real word responses that are phonologically related to the correct target word can arise from substitutions at the lexical or phonological level.</p>
+<p>The task for the participant is to view a picture and name the object represented in the picture. When an attempt is made to retrieve the word from memory, the following possible steps can unfold (this is a simplified version of the original model):</p>
+<ul>
+<li>Either the participant will make some lexical selection, or fail to make a lexical selection, returning a non-response (NR). The probability of making some lexical selection is <span class="math inline">\(a\)</span>, so the probability of a non-response is <span class="math inline">\(1-a\)</span>, as these are only two possibilities at this initial stage of the binary branching tree. Example: the participant sees the picture of a cat, and either produces the response “I don’t know”, or starts the process of producing a word.</li>
+<li>If a lexical selection is made, some word is selected with probability <span class="math inline">\(t\)</span>, or some other word is chosen with probability <span class="math inline">\(1-t\)</span>.</li>
+<li>Once a word is selected, either some phonological representation is selected with probability <span class="math inline">\(f\)</span>, or some other phonological representation is selected with probability <span class="math inline">\(1-f\)</span>. Example: the produced word could be a mixed word like “rat”, which is semantically and phonologically related to “cat”, or one can start preparing to produce a formally related word or a neologism (see the next step below).<br />
+</li>
+<li>Once a word is selected, there can be a phonological change that leads to a real,formally related word with probability <span class="math inline">\(c\)</span>, or a neologism with probability <span class="math inline">\(1-c\)</span>. Example: the participants produces either a formally related word “hat”, or a neologism like “cag”.</li>
+</ul>
+<p>The end-result of walking down this tree is that the participant either produces a non-response (“I don’t know”), a correct response, a related word, or a neologism. There is more than one way to produce a neologism or a related word, and the posterior probabilities of the various paths will determine the probability of each possible path.</p>
 
 <div class="figure"><span id="fig:MPT-tikz"></span>
 <img src="bookdown_files/figure-html/MPT-tikz-1.svg" alt="Representation of a simplification of the MPT used in Walker, Hickok, and Fridriksson (2018)." width="672" />
 <p class="caption">
-FIGURE 15.3: Representation of a simplification of the MPT used in <span class="citation">Walker, Hickok, and Fridriksson (<a href="#ref-WalkerEtAl2018">2018</a>)</span>.
+FIGURE 19.3: Representation of a simplification of the MPT used in <span class="citation">Walker, Hickok, and Fridriksson (<a href="#ref-WalkerEtAl2018">2018</a>)</span>.
 </p>
 </div>
 <table>
-<caption><span id="tab:MPT-params">TABLE 15.2: </span> Psychological interpretation of the parameters of the MPT model.</caption>
+<caption><span id="tab:MPT-params">TABLE 19.2: </span> Psychological interpretation of the parameters of the MPT model.</caption>
 <thead>
 <tr class="header">
 <th align="left">Param.</th>
@@ -450,8 +462,8 @@ FIGURE 15.3: Representation of a simplification of the MPT used in <span class="
 </tbody>
 </table>
 <div id="calculation-of-the-probabilities" class="section level4">
-<h4><span class="header-section-number">15.2.1.1</span> Calculation of the probabilities</h4>
-<p>By navigating through the branches of the MPT (figure <a href="multinomial-processing-tree-mpt-models.html#fig:MPT-tikz">15.3</a>), we can calculate the probabilities of the four responses (the categorical outcomes), based on the underlying parameters assumed in the MPT:</p>
+<h4><span class="header-section-number">19.2.1.1</span> Calculation of the probabilities</h4>
+<p>By navigating through the branches of the MPT (figure <a href="multinomial-processing-tree-mpt-models.html#fig:MPT-tikz">19.3</a>), we can calculate the probabilities of the four responses (the categorical outcomes), based on the underlying parameters assumed in the MPT:</p>
 <ul>
 <li><span class="math inline">\(P(NR| a,t,f,c)= 1-a\)</span></li>
 <li><span class="math inline">\(P(Neologism| a,t,f,c)= a \cdot (1-t) \cdot (1-f) \cdot (1-c) + a \cdot t \cdot (1-f) \cdot (1-c)\)</span></li>
@@ -462,44 +474,43 @@ FIGURE 15.3: Representation of a simplification of the MPT used in <span class="
 <p>Given that <span class="math inline">\(P(NR| a,t,f,c) + P(Neologism| a,t,f,c) + P(Formal| a,t,f,c) + P(Mixed| a,t,f,c) + P(Correct| a,t,f,c) = 1\)</span>, there is no need to characterize every outcome: we can always calculate the any one of the remaining responses as <span class="math inline">\(1 - other\text{ }responses\)</span>.</p>
 </div>
 <div id="generate-simulated-data" class="section level4">
-<h4><span class="header-section-number">15.2.1.2</span> Generate simulated data</h4>
-<p>First, simulate 200 trials assuming no variability between items and participants. It is necessary to define functions to compute each outcome’s probability, based on the MPT.</p>
+<h4><span class="header-section-number">19.2.1.2</span> Generate simulated data</h4>
+<p>First, simulate 200 trials assuming no variability between items and participants. It is convenient to define functions to compute each outcome’s probability, based on the MPT.</p>
 <div style="page-break-after: always;"></div>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb785-1" data-line-number="1"><span class="co"># Probabilities of different answers</span></a>
-<a class="sourceLine" id="cb785-2" data-line-number="2">Pr_NR &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
-<a class="sourceLine" id="cb785-3" data-line-number="3">    <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>a</a>
-<a class="sourceLine" id="cb785-4" data-line-number="4">Pr_Neologism &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
-<a class="sourceLine" id="cb785-5" data-line-number="5">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>c) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>c)</a>
-<a class="sourceLine" id="cb785-6" data-line-number="6">Pr_Formal &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
-<a class="sourceLine" id="cb785-7" data-line-number="7">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>c <span class="op">+</span><span class="st">  </span>a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>c</a>
-<a class="sourceLine" id="cb785-8" data-line-number="8">Pr_Mixed &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
-<a class="sourceLine" id="cb785-9" data-line-number="9">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>f</a>
-<a class="sourceLine" id="cb785-10" data-line-number="10">Pr_Correct &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
-<a class="sourceLine" id="cb785-11" data-line-number="11">    a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>f</a>
-<a class="sourceLine" id="cb785-12" data-line-number="12"><span class="co"># true underlying values for simulated data</span></a>
-<a class="sourceLine" id="cb785-13" data-line-number="13">a_true &lt;-<span class="st"> </span><span class="fl">.75</span></a>
-<a class="sourceLine" id="cb785-14" data-line-number="14">t_true &lt;-<span class="st"> </span><span class="fl">.9</span></a>
-<a class="sourceLine" id="cb785-15" data-line-number="15">f_true &lt;-<span class="st"> </span><span class="fl">.8</span></a>
-<a class="sourceLine" id="cb785-16" data-line-number="16">c_true &lt;-<span class="st"> </span><span class="fl">.1</span></a>
-<a class="sourceLine" id="cb785-17" data-line-number="17"><span class="co"># Probability of the different answers:</span></a>
-<a class="sourceLine" id="cb785-18" data-line-number="18">Theta &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">NR =</span> <span class="kw">Pr_NR</span>(a_true, t_true, f_true, c_true),</a>
-<a class="sourceLine" id="cb785-19" data-line-number="19">                <span class="dt">Neologism =</span> <span class="kw">Pr_Neologism</span>(a_true, t_true, f_true, c_true),</a>
-<a class="sourceLine" id="cb785-20" data-line-number="20">                <span class="dt">Formal =</span> <span class="kw">Pr_Formal</span>(a_true, t_true, f_true, c_true),</a>
-<a class="sourceLine" id="cb785-21" data-line-number="21">                <span class="dt">Mixed =</span> <span class="kw">Pr_Mixed</span>(a_true, t_true, f_true, c_true),</a>
-<a class="sourceLine" id="cb785-22" data-line-number="22">                <span class="dt">Correct =</span> <span class="kw">Pr_Correct</span>(a_true, t_true, f_true, c_true))</a>
-<a class="sourceLine" id="cb785-23" data-line-number="23">N_trials &lt;-<span class="st"> </span><span class="dv">200</span></a>
-<a class="sourceLine" id="cb785-24" data-line-number="24">(ans &lt;-<span class="st"> </span><span class="kw">rmultinom</span>(<span class="dv">1</span>, N_trials, <span class="kw">c</span>(Theta)))</a></code></pre></div>
+<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb841-1" data-line-number="1"><span class="co"># Probabilities of different answers</span></a>
+<a class="sourceLine" id="cb841-2" data-line-number="2">Pr_NR &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
+<a class="sourceLine" id="cb841-3" data-line-number="3">    <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>a</a>
+<a class="sourceLine" id="cb841-4" data-line-number="4">Pr_Neologism &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
+<a class="sourceLine" id="cb841-5" data-line-number="5">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>c) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>c)</a>
+<a class="sourceLine" id="cb841-6" data-line-number="6">Pr_Formal &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
+<a class="sourceLine" id="cb841-7" data-line-number="7">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>c <span class="op">+</span><span class="st">  </span>a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>c</a>
+<a class="sourceLine" id="cb841-8" data-line-number="8">Pr_Mixed &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
+<a class="sourceLine" id="cb841-9" data-line-number="9">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>f</a>
+<a class="sourceLine" id="cb841-10" data-line-number="10">Pr_Correct &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
+<a class="sourceLine" id="cb841-11" data-line-number="11">    a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>f</a>
+<a class="sourceLine" id="cb841-12" data-line-number="12"><span class="co"># true underlying values for simulated data</span></a>
+<a class="sourceLine" id="cb841-13" data-line-number="13">a_true &lt;-<span class="st"> </span><span class="fl">.75</span></a>
+<a class="sourceLine" id="cb841-14" data-line-number="14">t_true &lt;-<span class="st"> </span><span class="fl">.9</span></a>
+<a class="sourceLine" id="cb841-15" data-line-number="15">f_true &lt;-<span class="st"> </span><span class="fl">.8</span></a>
+<a class="sourceLine" id="cb841-16" data-line-number="16">c_true &lt;-<span class="st"> </span><span class="fl">.1</span></a>
+<a class="sourceLine" id="cb841-17" data-line-number="17"><span class="co"># Probability of the different answers:</span></a>
+<a class="sourceLine" id="cb841-18" data-line-number="18">Theta &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">NR =</span> <span class="kw">Pr_NR</span>(a_true, t_true, f_true, c_true),</a>
+<a class="sourceLine" id="cb841-19" data-line-number="19">                <span class="dt">Neologism =</span> <span class="kw">Pr_Neologism</span>(a_true, t_true, f_true, c_true),</a>
+<a class="sourceLine" id="cb841-20" data-line-number="20">                <span class="dt">Formal =</span> <span class="kw">Pr_Formal</span>(a_true, t_true, f_true, c_true),</a>
+<a class="sourceLine" id="cb841-21" data-line-number="21">                <span class="dt">Mixed =</span> <span class="kw">Pr_Mixed</span>(a_true, t_true, f_true, c_true),</a>
+<a class="sourceLine" id="cb841-22" data-line-number="22">                <span class="dt">Correct =</span> <span class="kw">Pr_Correct</span>(a_true, t_true, f_true, c_true))</a>
+<a class="sourceLine" id="cb841-23" data-line-number="23">N_trials &lt;-<span class="st"> </span><span class="dv">200</span></a>
+<a class="sourceLine" id="cb841-24" data-line-number="24">(ans &lt;-<span class="st"> </span><span class="kw">rmultinom</span>(<span class="dv">1</span>, N_trials, <span class="kw">c</span>(Theta)))</a></code></pre></div>
 <pre><code>##           [,1]
-## NR          58
+## NR          54
 ## Neologism   27
-## Formal       0
-## Mixed       13
+## Formal       7
+## Mixed       10
 ## Correct    102</code></pre>
 </div>
 <div id="sec:MPT-s" class="section level4">
-<h4><span class="header-section-number">15.2.1.3</span> A simple MPT model in Stan</h4>
-<p>mpt_5 &lt;- system.file(“stan_models”, “mpt_5.stan”, package = “bcogsci”)
-The above data can be modeled in Stan as discussed below (see <code>mpt_3</code>). The probabilities of the different categories go into the <code>transformed parameters</code> section. The data are modeled as coming from a multinomial likelihood. If priors are not specified, then a beta distribution with <span class="math inline">\(a=1\)</span> and <span class="math inline">\(b=1\)</span> is assumed for the parameters <span class="math inline">\(a\)</span>, <span class="math inline">\(t\)</span>, <span class="math inline">\(f\)</span>, and <span class="math inline">\(c\)</span>. Notice that unlike <span class="math inline">\(\boldsymbol{\theta}\)</span>, the values of these parameters are independent of each other and they do not sum to one. For this reason, we should not use a Dirichlet prior here.</p>
+<h4><span class="header-section-number">19.2.1.3</span> A simple MPT model in Stan</h4>
+<p>The above data can be modeled in Stan as discussed below (see <code>mpt_3</code>). The probabilities of the different categories go into the <code>transformed parameters</code> section because they are derived from the probability parameters in the model. The data are modeled as coming from a multinomial likelihood. If priors are not specified, then a Beta distribution with <span class="math inline">\(a=1\)</span> and <span class="math inline">\(b=1\)</span> is assumed for the parameters <span class="math inline">\(a\)</span>, <span class="math inline">\(t\)</span>, <span class="math inline">\(f\)</span>, and <span class="math inline">\(c\)</span>. Unlike <span class="math inline">\(\boldsymbol{\theta}\)</span>, the values of these parameters are independent of each other and they do not sum to one. For this reason, we should not use a Dirichlet prior here.</p>
 <p>We define the following model:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
@@ -544,42 +555,45 @@ generated quantities{
   pred_ans = multinomial_rng(theta, 5);
 }</code></pre>
 <p>Fit the model:</p>
-<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb788-1" data-line-number="1">data_sMPT &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_trials =</span> N_trials,</a>
-<a class="sourceLine" id="cb788-2" data-line-number="2">                   <span class="dt">ans =</span> <span class="kw">c</span>(ans)) </a>
-<a class="sourceLine" id="cb788-3" data-line-number="3">mpt_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;mpt_3.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb788-4" data-line-number="4">fit_sMPT &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_<span class="dv">3</span>, <span class="dt">data =</span> data_sMPT)  </a></code></pre></div>
+<div class="sourceCode" id="cb844"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb844-1" data-line-number="1">data_sMPT &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_trials =</span> N_trials,</a>
+<a class="sourceLine" id="cb844-2" data-line-number="2">                   <span class="dt">ans =</span> <span class="kw">c</span>(ans)) </a>
+<a class="sourceLine" id="cb844-3" data-line-number="3">mpt_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;mpt_3.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb844-4" data-line-number="4">fit_sMPT &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_<span class="dv">3</span>, <span class="dt">data =</span> data_sMPT)  </a></code></pre></div>
 <p>Print out a summary of the posterior of the parameter of interest:</p>
-<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb789-1" data-line-number="1"><span class="kw">print</span>(fit_sMPT, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;t&quot;</span>, <span class="st">&quot;f&quot;</span>, <span class="st">&quot;c&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb845"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb845-1" data-line-number="1"><span class="kw">print</span>(fit_sMPT, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;t&quot;</span>, <span class="st">&quot;f&quot;</span>, <span class="st">&quot;c&quot;</span>))</a></code></pre></div>
 <pre><code>##   mean 2.5% 97.5% n_eff Rhat
-## a 0.71 0.64  0.77  4396    1
-## t 0.87 0.81  0.93  4449    1
-## f 0.80 0.73  0.86  4117    1
-## c 0.06 0.01  0.17  4890    1</code></pre>
-<p>Evaluate whether the model recovers the true parameters that generated the data; see Figure <a href="multinomial-processing-tree-mpt-models.html#fig:sMPT-posterior">15.4</a>.</p>
-<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb791-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_sMPT) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb791-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;t&quot;</span>,<span class="st">&quot;f&quot;</span>,<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb791-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">c</span>(a_true, t_true, f_true, c_true)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb791-4" data-line-number="4"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
+## a 0.73 0.66  0.78  4333    1
+## t 0.90 0.83  0.95  4451    1
+## f 0.76 0.69  0.82  4267    1
+## c 0.24 0.12  0.38  4310    1</code></pre>
+<p>What the model gives us is posterior distributions of each of the parameters <code>a</code>, <code>t</code>, <code>f</code>, <code>c</code>. From these we can derive the probabilities of producing the different observed responses, and the posterior predictive distributions, which could be used for model evaluation.</p>
+<p>An important sanity check in modeling is checking whether the model can in principle recover the true parameters that generated the data; see Figure <a href="multinomial-processing-tree-mpt-models.html#fig:sMPT-posterior">19.4</a>.</p>
+<div class="sourceCode" id="cb847"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb847-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_sMPT) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb847-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;t&quot;</span>,<span class="st">&quot;f&quot;</span>,<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb847-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">c</span>(a_true, t_true, f_true, c_true)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb847-4" data-line-number="4"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:sMPT-posterior"></span>
 <img src="bookdown_files/figure-html/sMPT-posterior-1.svg" alt="Posterior distributions and true values of the parameters of the simple MPT model (mpt_3.stan)." width="672" />
 <p class="caption">
-FIGURE 15.4: Posterior distributions and true values of the parameters of the simple MPT model (mpt_3.stan).
+FIGURE 19.4: Posterior distributions and true values of the parameters of the simple MPT model (mpt_3.stan).
 </p>
 </div>
+<p>The above figure shows that the model can indeed recover the true parameters fairly accurately.</p>
 <p>The posteriors of the <span class="math inline">\(\theta\)</span> parameters can also be summarized:</p>
-<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb792-1" data-line-number="1"><span class="kw">print</span>(fit_sMPT, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb848-1" data-line-number="1"><span class="kw">print</span>(fit_sMPT, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</a></code></pre></div>
 <pre><code>##          mean 2.5% 97.5% n_eff Rhat
-## theta[1] 0.29 0.23  0.36  4396    1
-## theta[2] 0.13 0.09  0.18  4251    1
-## theta[3] 0.01 0.00  0.03  4404    1
-## theta[4] 0.07 0.04  0.11  4535    1
-## theta[5] 0.49 0.43  0.56  4169    1</code></pre>
+## theta[1] 0.27 0.22  0.34  4333    1
+## theta[2] 0.13 0.09  0.18  3677    1
+## theta[3] 0.04 0.02  0.07  4347    1
+## theta[4] 0.06 0.03  0.09  4496    1
+## theta[5] 0.49 0.43  0.56  4448    1</code></pre>
+<p>These posteriors tell us the probability of producing each of the possible responses. One further interesting step could be to develop a competing model that assumes a different latent process, and then comparing the performance of the MPT with this competing model, using Bayes factors or k-fold cross-valiation.</p>
 </div>
 <div id="sec:MPT-reg" class="section level4">
-<h4><span class="header-section-number">15.2.1.4</span> An MPT assuming by-item variability</h4>
+<h4><span class="header-section-number">19.2.1.4</span> An MPT assuming by-item variability</h4>
 <p>The use of aggregated data implies the assumption that the estimated parameters do not vary too much between subjects and items. If this assumption is incorrect, the analysis of aggregated data may lead to erroneous conclusions: reliance on aggregated data in the presence of parameter heterogeneity may lead to biased parameter estimates and the underestimation of credible intervals.</p>
 <p>For example, if it is known that <span class="math inline">\(f\)</span> is affected by the phonological complexity of the individual word (e.g., <em>cat</em> is easier to produce than <em>umbrella</em>), the previous model does not have a way to include that information.</p>
-<p>Simulated data can be generated taking into account the <code>complexity</code> of the items. Assume here for simplicity that the complexity of items is scaled and centered; i.e., mean complexity is represented by 0, and the standard deviation is assumed to be 1. Thus, the predictor complexity can be represented as a Normal(0,1). We will assume a regression model that determines the probability to be a function of complexity, determined by some property of the item.</p>
+<p>Simulated data can be generated taking into account the <code>complexity</code> of the items. Assume here for simplicity that the complexity of items is scaled and centered; i.e., mean complexity is represented by 0, and the standard deviation is assumed to be 2. Thus, the predictor complexity can be represented as a Normal(0,1). We will assume a regression model that determines the probability to be a function of complexity, determined by some property of the item.</p>
 <p>One important detail is that <code>f</code> is a probability and needs to be bounded between 0 and 1. To make sure that this property is met, the computation of <code>f</code> for each item will be converted to probability space using the logistic function. This is achieved as follows.</p>
 <p>Suppose that <span class="math inline">\(f\)</span> is a linear function of complexity. For example, two parameters <span class="math inline">\(\alpha_f\)</span> and <span class="math inline">\(\beta_f\)</span> could determine how <span class="math inline">\(f\)</span> is affected by complexity:</p>
 <p><span class="math inline">\(f&#39;_j=\alpha_f + complexity_j\cdot \beta_f\)</span>.</p>
@@ -589,52 +603,52 @@ FIGURE 15.4: Posterior distributions and true values of the parameters of the si
 \end{equation}\]</span></p>
 <p>Then we can recover the probability <span class="math inline">\(p_j\)</span> by solving for <span class="math inline">\(p_j\)</span>:</p>
 <p><span class="math display">\[\begin{equation}
-p_j = \frac{\exp(\mu_j)}{1+\exp(\mu_j)}
+p_j = \frac{\exp(\mu_j)}{1+\exp(\mu_j)} = \frac{1}{1+\exp(-\mu_j)}
 \end{equation}\]</span></p>
 <p>The above is the logistic or inverse logit function: it takes as input <span class="math inline">\(\mu_j\)</span> and returns the corresponding probability <span class="math inline">\(p_j\)</span>. The plogis function in R carries out the calculation shown above.</p>
-<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb794-1" data-line-number="1">N_obs &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb794-2" data-line-number="2">complexity &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_obs,<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb794-3" data-line-number="3"><span class="co">## choose some hypothetical values:</span></a>
-<a class="sourceLine" id="cb794-4" data-line-number="4">f_alpha &lt;-<span class="st"> </span><span class="fl">.3</span></a>
-<a class="sourceLine" id="cb794-5" data-line-number="5">f_beta &lt;-<span class="st"> </span><span class="fl">.05</span></a>
-<a class="sourceLine" id="cb794-6" data-line-number="6"><span class="co">## get probabilities f for each item:</span></a>
-<a class="sourceLine" id="cb794-7" data-line-number="7">f_true &lt;-<span class="st"> </span><span class="kw">plogis</span>(f_alpha <span class="op">+</span><span class="st"> </span>complexity <span class="op">*</span><span class="st"> </span>f_beta)</a></code></pre></div>
-<p>This change in our assumptions entails that the probability of each response changes with the item. The parameters <code>theta</code> now have to be a matrix (this is in R, in Stan, we’ll code it as an array of simplexes).<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a></p>
-<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb795-1" data-line-number="1">theta_NR_v &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">Pr_NR</span>(a_true, t_true, f_true, c_true), N_obs)</a>
-<a class="sourceLine" id="cb795-2" data-line-number="2">theta_Neologism_v &lt;-<span class="st"> </span><span class="kw">Pr_Neologism</span>(a_true, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb795-3" data-line-number="3">theta_Formal_v &lt;-<span class="st"> </span><span class="kw">Pr_Formal</span>(a_true, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb795-4" data-line-number="4">theta_Mixed_v &lt;-<span class="st"> </span><span class="kw">Pr_Mixed</span>(a_true, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb795-5" data-line-number="5">theta_Correct_v &lt;-<span class="st"> </span><span class="kw">Pr_Correct</span>(a_true, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb795-6" data-line-number="6">theta_item &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
-<a class="sourceLine" id="cb795-7" data-line-number="7">  <span class="kw">c</span>(theta_NR_v,</a>
-<a class="sourceLine" id="cb795-8" data-line-number="8">    theta_Neologism_v,</a>
-<a class="sourceLine" id="cb795-9" data-line-number="9">    theta_Formal_v,</a>
-<a class="sourceLine" id="cb795-10" data-line-number="10">    theta_Mixed_v,</a>
-<a class="sourceLine" id="cb795-11" data-line-number="11">    theta_Correct_v),</a>
-<a class="sourceLine" id="cb795-12" data-line-number="12">  <span class="dt">ncol =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb795-13" data-line-number="13"><span class="kw">dim</span>(theta_item)</a></code></pre></div>
+<div class="sourceCode" id="cb850"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb850-1" data-line-number="1">N_obs &lt;-<span class="st"> </span><span class="dv">50</span></a>
+<a class="sourceLine" id="cb850-2" data-line-number="2">complexity &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_obs,<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb850-3" data-line-number="3"><span class="co">## choose some hypothetical values:</span></a>
+<a class="sourceLine" id="cb850-4" data-line-number="4">f_alpha &lt;-<span class="st"> </span><span class="fl">.3</span></a>
+<a class="sourceLine" id="cb850-5" data-line-number="5">f_beta &lt;-<span class="st"> </span><span class="fl">.05</span></a>
+<a class="sourceLine" id="cb850-6" data-line-number="6"><span class="co">## get probabilities f for each item:</span></a>
+<a class="sourceLine" id="cb850-7" data-line-number="7">f_true &lt;-<span class="st"> </span><span class="kw">plogis</span>(f_alpha <span class="op">+</span><span class="st"> </span>complexity <span class="op">*</span><span class="st"> </span>f_beta)</a></code></pre></div>
+<p>This change in our assumptions entails that the probability of each response changes with the item. The parameters <code>theta</code> now have to be a matrix. This is in R; in Stan, we will code it as an array of simplexes, i.e., an array of non-negative values that sums to 1.<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a></p>
+<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb851-1" data-line-number="1">theta_NR_v &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">Pr_NR</span>(a_true, t_true, f_true, c_true), N_obs)</a>
+<a class="sourceLine" id="cb851-2" data-line-number="2">theta_Neologism_v &lt;-<span class="st"> </span><span class="kw">Pr_Neologism</span>(a_true, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb851-3" data-line-number="3">theta_Formal_v &lt;-<span class="st"> </span><span class="kw">Pr_Formal</span>(a_true, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb851-4" data-line-number="4">theta_Mixed_v &lt;-<span class="st"> </span><span class="kw">Pr_Mixed</span>(a_true, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb851-5" data-line-number="5">theta_Correct_v &lt;-<span class="st"> </span><span class="kw">Pr_Correct</span>(a_true, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb851-6" data-line-number="6">theta_item &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
+<a class="sourceLine" id="cb851-7" data-line-number="7">  <span class="kw">c</span>(theta_NR_v,</a>
+<a class="sourceLine" id="cb851-8" data-line-number="8">    theta_Neologism_v,</a>
+<a class="sourceLine" id="cb851-9" data-line-number="9">    theta_Formal_v,</a>
+<a class="sourceLine" id="cb851-10" data-line-number="10">    theta_Mixed_v,</a>
+<a class="sourceLine" id="cb851-11" data-line-number="11">    theta_Correct_v),</a>
+<a class="sourceLine" id="cb851-12" data-line-number="12">  <span class="dt">ncol =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb851-13" data-line-number="13"><span class="kw">dim</span>(theta_item)</a></code></pre></div>
 <pre><code>## [1] 50  5</code></pre>
-<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb797-1" data-line-number="1"><span class="kw">head</span>(theta_item)</a></code></pre></div>
+<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb853-1" data-line-number="1"><span class="kw">head</span>(theta_item)</a></code></pre></div>
 <pre><code>##      [,1]  [,2]   [,3]   [,4]  [,5]
-## [1,] 0.25 0.296 0.0329 0.0421 0.379
-## [2,] 0.25 0.275 0.0306 0.0444 0.400
-## [3,] 0.25 0.271 0.0301 0.0449 0.404
-## [4,] 0.25 0.305 0.0339 0.0411 0.370
-## [5,] 0.25 0.281 0.0312 0.0438 0.394
-## [6,] 0.25 0.282 0.0313 0.0437 0.393</code></pre>
+## [1,] 0.25 0.290 0.0323 0.0427 0.385
+## [2,] 0.25 0.270 0.0301 0.0449 0.405
+## [3,] 0.25 0.299 0.0332 0.0418 0.376
+## [4,] 0.25 0.268 0.0298 0.0452 0.407
+## [5,] 0.25 0.285 0.0317 0.0433 0.390
+## [6,] 0.25 0.320 0.0355 0.0395 0.355</code></pre>
 <p>Generate data:</p>
-<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb799-1" data-line-number="1">sim_data_cx &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">item =</span> <span class="dv">1</span><span class="op">:</span>N_obs,</a>
-<a class="sourceLine" id="cb799-2" data-line-number="2">                      <span class="dt">complexity =</span> complexity,</a>
-<a class="sourceLine" id="cb799-3" data-line-number="3">                      <span class="dt">w_ans =</span> <span class="kw">c</span>(extraDistr<span class="op">::</span><span class="kw">rcat</span>(N_obs,theta_item)))</a>
-<a class="sourceLine" id="cb799-4" data-line-number="4"><span class="kw">head</span>(sim_data_cx)</a></code></pre></div>
+<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb855-1" data-line-number="1">sim_data_cx &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">item =</span> <span class="dv">1</span><span class="op">:</span>N_obs,</a>
+<a class="sourceLine" id="cb855-2" data-line-number="2">                      <span class="dt">complexity =</span> complexity,</a>
+<a class="sourceLine" id="cb855-3" data-line-number="3">                      <span class="dt">w_ans =</span> <span class="kw">c</span>(<span class="kw">rcat</span>(N_obs,theta_item)))</a>
+<a class="sourceLine" id="cb855-4" data-line-number="4"><span class="kw">head</span>(sim_data_cx)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##    item complexity w_ans
 ##   &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt;
-## 1     1     -1.11      5
-## 2     2      1.49      2
-## 3     3      1.99      2
-## 4     4     -2.13      1
-## 5     5      0.753     2
+## 1     1     -0.373     5
+## 2     2      2.05      5
+## 3     3     -1.37      3
+## 4     4      2.37      5
+## 5     5      0.215     1
 ## # … with 1 more row</code></pre>
 <p>The following model (saved in <code>mpt_4.stan</code>) is essentially doing the same as the previous model but instead of fitting a multinomial to the summary of all the trials, it is fitting a categorical distribution to each individual observation. (This is analogous to the difference between the Bernoulli and Binomial distributions). <em>It is still not the appropriate model for the generative process that we are assuming in this section</em>, but it is a good start.</p>
 <pre class="stan"><code>data {
@@ -679,76 +693,76 @@ generated quantities{
 <p>Before moving to the next section, you might want to try to edit the previous chunk of code to incorporate the fact that <code>f</code> is now a transformed parameter that depends on the trial information and two new parameters.</p>
 </div>
 <div id="sec:MPT-h" class="section level4">
-<h4><span class="header-section-number">15.2.1.5</span> A hierarchical MPT in Stan</h4>
+<h4><span class="header-section-number">19.2.1.5</span> A hierarchical MPT in Stan</h4>
 <p>The previous model doesn’t take into account that subjects might vary and that items might vary beyond what is accounted by complexity. Let’s focus on taking into account the differences between subjects.</p>
 <p>Different subjects might be differently motivated to the task. This can be accounted by adding a hierarchical structure to the parameter <code>a</code>. Begin by simulating some data that incorporates by-subject variability.</p>
 <p>First, define the number of items and subjects, and the number of observations:</p>
-<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb802-1" data-line-number="1"><span class="co"># Data:</span></a>
-<a class="sourceLine" id="cb802-2" data-line-number="2">N_item &lt;-<span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb802-3" data-line-number="3">N_subj &lt;-<span class="st"> </span><span class="dv">30</span></a>
-<a class="sourceLine" id="cb802-4" data-line-number="4">N_obs &lt;-<span class="st"> </span>N_item <span class="op">*</span><span class="st"> </span>N_subj </a></code></pre></div>
+<div class="sourceCode" id="cb858"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb858-1" data-line-number="1"><span class="co"># Data:</span></a>
+<a class="sourceLine" id="cb858-2" data-line-number="2">N_item &lt;-<span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb858-3" data-line-number="3">N_subj &lt;-<span class="st"> </span><span class="dv">30</span></a>
+<a class="sourceLine" id="cb858-4" data-line-number="4">N_obs &lt;-<span class="st"> </span>N_item <span class="op">*</span><span class="st"> </span>N_subj </a></code></pre></div>
 <p>Then, generate a vector for subjects and for items. Assume here that each subject sees each item.</p>
-<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb803-1" data-line-number="1">subj &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_subj, <span class="dt">each =</span> N_item)</a>
-<a class="sourceLine" id="cb803-2" data-line-number="2">item &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_item, <span class="dt">time =</span> N_subj)</a></code></pre></div>
+<div class="sourceCode" id="cb859"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb859-1" data-line-number="1">subj &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_subj, <span class="dt">each =</span> N_item)</a>
+<a class="sourceLine" id="cb859-2" data-line-number="2">item &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_item, <span class="dt">time =</span> N_subj)</a></code></pre></div>
 <p>A vector representing complexity is created for the number of items we have, and this vector is repeated as many times as there are subjects:</p>
-<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb804-1" data-line-number="1">complexity &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">rnorm</span>(N_item, <span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">times =</span> N_subj)</a></code></pre></div>
+<div class="sourceCode" id="cb860"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb860-1" data-line-number="1">complexity &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">rnorm</span>(N_item, <span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">times =</span> N_subj)</a></code></pre></div>
 <p>Next, create a data-frame with all the above information:</p>
-<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb805-1" data-line-number="1">(exp_sim &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">subj =</span> subj,</a>
-<a class="sourceLine" id="cb805-2" data-line-number="2">                  <span class="dt">item =</span> item,</a>
-<a class="sourceLine" id="cb805-3" data-line-number="3">                  <span class="dt">complexity =</span> complexity))</a></code></pre></div>
+<div class="sourceCode" id="cb861"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb861-1" data-line-number="1">(exp_sim &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">subj =</span> subj,</a>
+<a class="sourceLine" id="cb861-2" data-line-number="2">                  <span class="dt">item =</span> item,</a>
+<a class="sourceLine" id="cb861-3" data-line-number="3">                  <span class="dt">complexity =</span> complexity))</a></code></pre></div>
 <pre><code>## # A tibble: 600 x 3
 ##    subj  item complexity
 ##   &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;
-## 1     1     1     -4.41 
-## 2     1     2      2.25 
-## 3     1     3     -1.30 
-## 4     1     4      2.15 
-## 5     1     5     -0.924
+## 1     1     1     -0.245
+## 2     1     2     -1.57 
+## 3     1     3     -1.92 
+## 4     1     4      0.486
+## 5     1     5     -2.46 
 ## # … with 595 more rows</code></pre>
-<p>To create subject-level variability in the data, a between-subject standard deviation needs to be defined. This standard deviation represents the deviations of subjects about the grand mean alpha value. It is important to note here that we are defining this adjustment in log-odds space.</p>
-<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb807-1" data-line-number="1"><span class="co"># New parameters, in log-odds space:</span></a>
-<a class="sourceLine" id="cb807-2" data-line-number="2">tau_u &lt;-<span class="st"> </span><span class="fl">1.1</span></a>
-<a class="sourceLine" id="cb807-3" data-line-number="3"><span class="co">## generate subject adjustments in log-odds space:</span></a>
-<a class="sourceLine" id="cb807-4" data-line-number="4">(u &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, tau_u))</a></code></pre></div>
-<pre><code>##  [1]  0.3171  0.7842  0.5824 -1.1936 -1.4544  1.0418  2.5017 -1.0742
-##  [9]  1.3351 -0.8436  0.9294 -0.9816 -0.2546 -0.5611  0.1591 -0.7905
-## [17]  0.2925  1.4323  0.3969 -1.1408  0.6529 -1.6915 -1.9352  0.0131
-## [25] -1.9428  0.1841 -1.7337 -0.5765  0.8625  0.0666</code></pre>
+<p>To create subject-level variability in the data, a between-subject standard deviation needs to be defined. This standard deviation represents the deviations of subjects about the grand mean alpha value. We are defining this adjustment in log-odds space.</p>
+<div class="sourceCode" id="cb863"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb863-1" data-line-number="1"><span class="co"># New parameters, in log-odds space:</span></a>
+<a class="sourceLine" id="cb863-2" data-line-number="2">tau_u &lt;-<span class="st"> </span><span class="fl">1.1</span></a>
+<a class="sourceLine" id="cb863-3" data-line-number="3"><span class="co">## generate subject adjustments in log-odds space:</span></a>
+<a class="sourceLine" id="cb863-4" data-line-number="4">(u &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, tau_u))</a></code></pre></div>
+<pre><code>##  [1] -0.3870 -0.8755  1.3975 -0.0119 -0.0351  0.7544 -0.3142  1.0795
+##  [9] -0.6423  0.3796 -0.6075  0.7253  0.3632  0.8461 -0.2308  0.3600
+## [17] -0.0579  1.0381 -1.4815 -0.9016  0.3912  0.7627  1.2575  1.2101
+## [25]  0.8087  1.1738 -0.8118  0.2833  1.3588  1.0118</code></pre>
 <p>Given the fixed <code>a_true</code> probability value of 0.75, the subject-level values for individual <code>a_true</code> can be derived by (a) first converting the overall <code>a_true</code> value to log-odds space, (b) adding the by-subject adjustment to this converted overall value, and (c) then convert back to probability space using the logistic or inverse logit (plogis) function.</p>
-<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb809-1" data-line-number="1"><span class="co">## convert to log-odds space:</span></a>
-<a class="sourceLine" id="cb809-2" data-line-number="2">alpha_a &lt;-<span class="st"> </span><span class="kw">qlogis</span>(a_true)</a>
-<a class="sourceLine" id="cb809-3" data-line-number="3">a_true_h &lt;-<span class="st"> </span><span class="kw">plogis</span>(alpha_a <span class="op">+</span><span class="st"> </span>u[subj])</a></code></pre></div>
+<div class="sourceCode" id="cb865"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb865-1" data-line-number="1"><span class="co">## convert to log-odds space:</span></a>
+<a class="sourceLine" id="cb865-2" data-line-number="2">alpha_a &lt;-<span class="st"> </span><span class="kw">qlogis</span>(a_true)</a>
+<a class="sourceLine" id="cb865-3" data-line-number="3">a_true_h &lt;-<span class="st"> </span><span class="kw">plogis</span>(alpha_a <span class="op">+</span><span class="st"> </span>u[subj])</a></code></pre></div>
 <p>What this achieves mathematically is adding varying intercepts by subjects to <code>alpha_a</code>, and then the values adjusted by subject are saved in probability space.</p>
 <p>As before, f_true is computed as a function of complexity:</p>
-<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb810-1" data-line-number="1">f_true &lt;-<span class="st"> </span><span class="kw">plogis</span>(f_alpha <span class="op">+</span><span class="st"> </span>complexity <span class="op">*</span><span class="st"> </span>f_beta)</a></code></pre></div>
+<div class="sourceCode" id="cb866"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb866-1" data-line-number="1">f_true &lt;-<span class="st"> </span><span class="kw">plogis</span>(f_alpha <span class="op">+</span><span class="st"> </span>complexity <span class="op">*</span><span class="st"> </span>f_beta)</a></code></pre></div>
 <p>Now, we can define the probabilities of different outcomes:</p>
-<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb811-1" data-line-number="1"><span class="co"># Aux. parameters that define the probabilities:</span></a>
-<a class="sourceLine" id="cb811-2" data-line-number="2">theta_NR_v_h &lt;-<span class="st"> </span><span class="kw">Pr_NR</span>(a_true_h, t_true, f_true, c_true) </a>
-<a class="sourceLine" id="cb811-3" data-line-number="3">theta_Neologism_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Neologism</span>(a_true_h, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb811-4" data-line-number="4">theta_Formal_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Formal</span>(a_true_h, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb811-5" data-line-number="5">theta_Mixed_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Mixed</span>(a_true_h, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb811-6" data-line-number="6">theta_Correct_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Correct</span>(a_true_h, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb811-7" data-line-number="7">theta_h &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
-<a class="sourceLine" id="cb811-8" data-line-number="8">  <span class="kw">c</span>(theta_NR_v_h,</a>
-<a class="sourceLine" id="cb811-9" data-line-number="9">    theta_Neologism_v_h,</a>
-<a class="sourceLine" id="cb811-10" data-line-number="10">    theta_Formal_v_h,</a>
-<a class="sourceLine" id="cb811-11" data-line-number="11">    theta_Mixed_v_h,</a>
-<a class="sourceLine" id="cb811-12" data-line-number="12">    theta_Correct_v_h),</a>
-<a class="sourceLine" id="cb811-13" data-line-number="13">  <span class="dt">ncol =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb811-14" data-line-number="14"><span class="kw">dim</span>(theta_h)</a></code></pre></div>
+<div class="sourceCode" id="cb867"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb867-1" data-line-number="1"><span class="co"># Aux. parameters that define the probabilities:</span></a>
+<a class="sourceLine" id="cb867-2" data-line-number="2">theta_NR_v_h &lt;-<span class="st"> </span><span class="kw">Pr_NR</span>(a_true_h, t_true, f_true, c_true) </a>
+<a class="sourceLine" id="cb867-3" data-line-number="3">theta_Neologism_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Neologism</span>(a_true_h, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb867-4" data-line-number="4">theta_Formal_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Formal</span>(a_true_h, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb867-5" data-line-number="5">theta_Mixed_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Mixed</span>(a_true_h, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb867-6" data-line-number="6">theta_Correct_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Correct</span>(a_true_h, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb867-7" data-line-number="7">theta_h &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
+<a class="sourceLine" id="cb867-8" data-line-number="8">  <span class="kw">c</span>(theta_NR_v_h,</a>
+<a class="sourceLine" id="cb867-9" data-line-number="9">    theta_Neologism_v_h,</a>
+<a class="sourceLine" id="cb867-10" data-line-number="10">    theta_Formal_v_h,</a>
+<a class="sourceLine" id="cb867-11" data-line-number="11">    theta_Mixed_v_h,</a>
+<a class="sourceLine" id="cb867-12" data-line-number="12">    theta_Correct_v_h),</a>
+<a class="sourceLine" id="cb867-13" data-line-number="13">  <span class="dt">ncol =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb867-14" data-line-number="14"><span class="kw">dim</span>(theta_h)</a></code></pre></div>
 <pre><code>## [1] 600   5</code></pre>
 <p>The probability specifications shown above can now generate the simulated data:</p>
-<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb813-1" data-line-number="1"><span class="co"># simulated data:</span></a>
-<a class="sourceLine" id="cb813-2" data-line-number="2">(sim_data_h &lt;-<span class="st"> </span><span class="kw">mutate</span>(exp_sim,</a>
-<a class="sourceLine" id="cb813-3" data-line-number="3">                      <span class="dt">w_ans =</span> extraDistr<span class="op">::</span><span class="kw">rcat</span>(N_obs,theta_h)))</a></code></pre></div>
+<div class="sourceCode" id="cb869"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb869-1" data-line-number="1"><span class="co"># simulated data:</span></a>
+<a class="sourceLine" id="cb869-2" data-line-number="2">(sim_data_h &lt;-<span class="st"> </span><span class="kw">mutate</span>(exp_sim,</a>
+<a class="sourceLine" id="cb869-3" data-line-number="3">                      <span class="dt">w_ans =</span> <span class="kw">rcat</span>(N_obs,theta_h)))</a></code></pre></div>
 <pre><code>## # A tibble: 600 x 4
 ##    subj  item complexity w_ans
 ##   &lt;int&gt; &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt;
-## 1     1     1     -4.41      3
-## 2     1     2      2.25      5
-## 3     1     3     -1.30      2
-## 4     1     4      2.15      5
-## 5     1     5     -0.924     1
+## 1     1     1     -0.245     1
+## 2     1     2     -1.57      5
+## 3     1     3     -1.92      5
+## 4     1     4      0.486     5
+## 5     1     5     -2.46      1
 ## # … with 595 more rows</code></pre>
 <p>We define now the following model. We start by defining relatively weak priors for all the parameters in the following model.</p>
 <p><span class="math display">\[\begin{equation}
@@ -815,17 +829,17 @@ generated quantities{
 }</code></pre>
 <p>It would be a good idea to plot prior predictive distributions for this model; see exercise @ref().
 Next, fit the model to the simulated data. The data are defined as a list:</p>
-<div class="sourceCode" id="cb816"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb816-1" data-line-number="1">sim_list_h &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_obs =</span> <span class="kw">nrow</span>(sim_data_h),</a>
-<a class="sourceLine" id="cb816-2" data-line-number="2">                    <span class="dt">w_ans =</span> sim_data_h<span class="op">$</span>w_ans,</a>
-<a class="sourceLine" id="cb816-3" data-line-number="3">                    <span class="dt">N_subj =</span> <span class="kw">max</span>(sim_data_h<span class="op">$</span>subj),</a>
-<a class="sourceLine" id="cb816-4" data-line-number="4">                    <span class="dt">subj =</span> sim_data_h<span class="op">$</span>subj,</a>
-<a class="sourceLine" id="cb816-5" data-line-number="5">                    <span class="dt">complexity =</span> sim_data_h<span class="op">$</span>complexity)</a></code></pre></div>
-<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb817-1" data-line-number="1">mpt_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;mpt_5.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb817-2" data-line-number="2">fit_mpt_h &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_<span class="dv">5</span>, </a>
-<a class="sourceLine" id="cb817-3" data-line-number="3">              <span class="dt">data =</span> sim_list_h, </a>
-<a class="sourceLine" id="cb817-4" data-line-number="4">              <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>))  </a></code></pre></div>
-<p>Print out a summary of the posterior; also see figure <a href="multinomial-processing-tree-mpt-models.html#fig:mpt-h">15.5</a></p>
-<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb818-1" data-line-number="1"><span class="kw">print</span>(fit_mpt_h, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;t&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;a_alpha&quot;</span>, <span class="st">&quot;f_alpha&quot;</span>, <span class="st">&quot;f_beta&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb872"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb872-1" data-line-number="1">sim_list_h &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_obs =</span> <span class="kw">nrow</span>(sim_data_h),</a>
+<a class="sourceLine" id="cb872-2" data-line-number="2">                    <span class="dt">w_ans =</span> sim_data_h<span class="op">$</span>w_ans,</a>
+<a class="sourceLine" id="cb872-3" data-line-number="3">                    <span class="dt">N_subj =</span> <span class="kw">max</span>(sim_data_h<span class="op">$</span>subj),</a>
+<a class="sourceLine" id="cb872-4" data-line-number="4">                    <span class="dt">subj =</span> sim_data_h<span class="op">$</span>subj,</a>
+<a class="sourceLine" id="cb872-5" data-line-number="5">                    <span class="dt">complexity =</span> sim_data_h<span class="op">$</span>complexity)</a></code></pre></div>
+<div class="sourceCode" id="cb873"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb873-1" data-line-number="1">mpt_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;mpt_5.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb873-2" data-line-number="2">fit_mpt_h &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_<span class="dv">5</span>, </a>
+<a class="sourceLine" id="cb873-3" data-line-number="3">              <span class="dt">data =</span> sim_list_h, </a>
+<a class="sourceLine" id="cb873-4" data-line-number="4">              <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>))  </a></code></pre></div>
+<p>Print out a summary of the posterior; also see figure <a href="multinomial-processing-tree-mpt-models.html#fig:mpt-h">19.5</a></p>
+<div class="sourceCode" id="cb874"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb874-1" data-line-number="1"><span class="kw">print</span>(fit_mpt_h, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;t&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;a_alpha&quot;</span>, <span class="st">&quot;f_alpha&quot;</span>, <span class="st">&quot;f_beta&quot;</span>))</a></code></pre></div>
 <pre><code>##         mean 2.5% 97.5% n_eff Rhat
 ## t       0.90 0.85  0.93  8532    1
 ## c       0.11 0.07  0.16  8373    1
@@ -833,58 +847,58 @@ Next, fit the model to the simulated data. The data are defined as a list:</p>
 ## a_alpha 0.95 0.53  1.40  1789    1
 ## f_alpha 0.20 0.01  0.40  8712    1
 ## f_beta  0.14 0.06  0.23  7245    1</code></pre>
-<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb820-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_mpt_h) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb820-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">c</span>(<span class="st">&quot;tau_u&quot;</span>,<span class="st">&quot;a_alpha&quot;</span>, <span class="st">&quot;t&quot;</span>,<span class="st">&quot;f_alpha&quot;</span>,<span class="st">&quot;f_beta&quot;</span>,<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb820-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">c</span>(tau_u, <span class="kw">qlogis</span>(a_true),  t_true, f_alpha, f_beta, c_true)) </a></code></pre></div>
+<div class="sourceCode" id="cb876"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb876-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_mpt_h) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb876-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">c</span>(<span class="st">&quot;tau_u&quot;</span>,<span class="st">&quot;a_alpha&quot;</span>, <span class="st">&quot;t&quot;</span>,<span class="st">&quot;f_alpha&quot;</span>,<span class="st">&quot;f_beta&quot;</span>,<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb876-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">c</span>(tau_u, <span class="kw">qlogis</span>(a_true),  t_true, f_alpha, f_beta, c_true)) </a></code></pre></div>
 <div class="figure"><span id="fig:mpt-h"></span>
 <img src="bookdown_files/figure-html/mpt-h-1.svg" alt="Posterior of the hierarchical MPT with true values as vertical lines (model `mpt_5.stan`)." width="672" />
 <p class="caption">
-FIGURE 15.5: Posterior of the hierarchical MPT with true values as vertical lines (model <code>mpt_5.stan</code>).
+FIGURE 19.5: Posterior of the hierarchical MPT with true values as vertical lines (model <code>mpt_5.stan</code>).
 </p>
 </div>
-<p>If everything is correctly defined in the model, we should be able to generate posterior predictive data based on our estimates that looks quite similar to the simulated data; see figure <a href="multinomial-processing-tree-mpt-models.html#fig:aggMPT-h">15.6</a>.</p>
-<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb821-1" data-line-number="1">gen_data &lt;-<span class="st"> </span>rstan<span class="op">::</span><span class="kw">extract</span>(fit_mpt_h)<span class="op">$</span>pred_w_ans</a>
-<a class="sourceLine" id="cb821-2" data-line-number="2"><span class="kw">ppc_bars</span>(sim_list_h<span class="op">$</span>w_ans, gen_data) <span class="op">+</span></a>
-<a class="sourceLine" id="cb821-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;Hierarchical model&quot;</span>)</a></code></pre></div>
+<p>If everything is correctly defined in the model, we should be able to generate posterior predictive data based on our estimates that looks quite similar to the simulated data; see figure <a href="multinomial-processing-tree-mpt-models.html#fig:aggMPT-h">19.6</a>.</p>
+<div class="sourceCode" id="cb877"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb877-1" data-line-number="1">gen_data &lt;-<span class="st"> </span>rstan<span class="op">::</span><span class="kw">extract</span>(fit_mpt_h)<span class="op">$</span>pred_w_ans</a>
+<a class="sourceLine" id="cb877-2" data-line-number="2"><span class="kw">ppc_bars</span>(sim_list_h<span class="op">$</span>w_ans, gen_data) <span class="op">+</span></a>
+<a class="sourceLine" id="cb877-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;Hierarchical model&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:aggMPT-h"></span>
 <img src="bookdown_files/figure-html/aggMPT-h-1.svg" alt="Posterior predictive check for aggregated data in the hierarchical MPT model" width="672" />
 <p class="caption">
-FIGURE 15.6: Posterior predictive check for aggregated data in the hierarchical MPT model
+FIGURE 19.6: Posterior predictive check for aggregated data in the hierarchical MPT model
 </p>
 </div>
-<p>It is also useful to look at the individual subjects’ posteriors in figure <a href="multinomial-processing-tree-mpt-models.html#fig:pMPT-h">15.7</a>.</p>
-<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb822-1" data-line-number="1"><span class="kw">ppc_bars_grouped</span>(sim_list_h<span class="op">$</span>w_ans, </a>
-<a class="sourceLine" id="cb822-2" data-line-number="2">                 gen_data, <span class="dt">group =</span> subj) <span class="op">+</span></a>
-<a class="sourceLine" id="cb822-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;By subject plot for the hierarchical model&quot;</span>)</a></code></pre></div>
+<p>It is also useful to look at the individual subjects’ posteriors in figure <a href="multinomial-processing-tree-mpt-models.html#fig:pMPT-h">19.7</a>.</p>
+<div class="sourceCode" id="cb878"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb878-1" data-line-number="1"><span class="kw">ppc_bars_grouped</span>(sim_list_h<span class="op">$</span>w_ans, </a>
+<a class="sourceLine" id="cb878-2" data-line-number="2">                 gen_data, <span class="dt">group =</span> subj) <span class="op">+</span></a>
+<a class="sourceLine" id="cb878-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;By subject plot for the hierarchical model&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:pMPT-h"></span>
 <img src="bookdown_files/figure-html/pMPT-h-1.svg" alt="Individual subjects in the hierarchical MPT model." width="672" />
 <p class="caption">
-FIGURE 15.7: Individual subjects in the hierarchical MPT model.
+FIGURE 19.7: Individual subjects in the hierarchical MPT model.
 </p>
 </div>
 <p>But what about the first <em>non-hierarchical</em> MPT model (<code>mpt_4.stan</code>)?:</p>
-<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb823-1" data-line-number="1">mpt_<span class="dv">4</span> &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;mpt_4.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb823-2" data-line-number="2">fit_sh &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_<span class="dv">4</span>, <span class="dt">data =</span> sim_list_h)  </a></code></pre></div>
-<p>The aggregated data looks great (Figure <a href="multinomial-processing-tree-mpt-models.html#fig:aggMPT-nh">15.8</a>).</p>
-<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb824-1" data-line-number="1">gen_data_sMPT &lt;-<span class="st"> </span>rstan<span class="op">::</span><span class="kw">extract</span>(fit_sh)<span class="op">$</span>pred_w_ans</a>
-<a class="sourceLine" id="cb824-2" data-line-number="2"><span class="kw">ppc_bars</span>(sim_list_h<span class="op">$</span>w_ans, gen_data_sMPT) <span class="op">+</span></a>
-<a class="sourceLine" id="cb824-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;Non-hierarchical model&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb879"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb879-1" data-line-number="1">mpt_<span class="dv">4</span> &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;mpt_4.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb879-2" data-line-number="2">fit_sh &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_<span class="dv">4</span>, <span class="dt">data =</span> sim_list_h)  </a></code></pre></div>
+<p>The aggregated data looks great (Figure <a href="multinomial-processing-tree-mpt-models.html#fig:aggMPT-nh">19.8</a>).</p>
+<div class="sourceCode" id="cb880"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb880-1" data-line-number="1">gen_data_sMPT &lt;-<span class="st"> </span>rstan<span class="op">::</span><span class="kw">extract</span>(fit_sh)<span class="op">$</span>pred_w_ans</a>
+<a class="sourceLine" id="cb880-2" data-line-number="2"><span class="kw">ppc_bars</span>(sim_list_h<span class="op">$</span>w_ans, gen_data_sMPT) <span class="op">+</span></a>
+<a class="sourceLine" id="cb880-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;Non-hierarchical model&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:aggMPT-nh"></span>
 <img src="bookdown_files/figure-html/aggMPT-nh-1.svg" alt="Posterior predictive check for aggregated data in a non-hierarchical MPT model (mpt_4.stan)." width="672" />
 <p class="caption">
-FIGURE 15.8: Posterior predictive check for aggregated data in a non-hierarchical MPT model (mpt_4.stan).
+FIGURE 19.8: Posterior predictive check for aggregated data in a non-hierarchical MPT model (mpt_4.stan).
 </p>
 </div>
-<p>However, the fit to individual subjects looks less good (Figure <a href="multinomial-processing-tree-mpt-models.html#fig:pMPT">15.9</a>).</p>
-<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb825-1" data-line-number="1"><span class="kw">ppc_bars_grouped</span>(sim_list_h<span class="op">$</span>w_ans, gen_data_sMPT, <span class="dt">group =</span> subj) <span class="op">+</span></a>
-<a class="sourceLine" id="cb825-2" data-line-number="2"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;By subject plot for the non-hierarchical model&quot;</span>)</a></code></pre></div>
+<p>However, the fit to individual subjects looks less good (Figure <a href="multinomial-processing-tree-mpt-models.html#fig:pMPT">19.9</a>).</p>
+<div class="sourceCode" id="cb881"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb881-1" data-line-number="1"><span class="kw">ppc_bars_grouped</span>(sim_list_h<span class="op">$</span>w_ans, gen_data_sMPT, <span class="dt">group =</span> subj) <span class="op">+</span></a>
+<a class="sourceLine" id="cb881-2" data-line-number="2"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;By subject plot for the non-hierarchical model&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:pMPT"></span>
 <img src="bookdown_files/figure-html/pMPT-1.svg" alt="Individual subjects in the non-hierarchical MPT model (mpt_4.stan)." width="672" />
 <p class="caption">
-FIGURE 15.9: Individual subjects in the non-hierarchical MPT model (mpt_4.stan).
+FIGURE 19.9: Individual subjects in the non-hierarchical MPT model (mpt_4.stan).
 </p>
 </div>
-<p>The hierachical does a better job of modeling individual-level variability.</p>
+<p>The hierarchical model does a better job of modeling individual-level variability.</p>
 </div>
 </div>
 </div>
@@ -894,13 +908,13 @@ FIGURE 15.9: Individual subjects in the non-hierarchical MPT model (mpt_4.stan).
 <p>Batchelder, William H, and David M Riefer. 1999. “Theoretical and Empirical Review of Multinomial Process Tree Modeling.” <em>Psychonomic Bulletin &amp; Review</em> 6 (1). Springer: 57–86.</p>
 </div>
 <div id="ref-WalkerEtAl2018">
-<p>Walker, Grant M, Gregory Hickok, and Julius Fridriksson. 2018. “A Cognitive Psychometric Model for Assessment of Picture Naming Abilities in Aphasia.” <em>Psychological Assessment</em>. American Psychological Association.</p>
+<p>Walker, Grant M, Gregory Hickok, and Julius Fridriksson. 2018. “A Cognitive Psychometric Model for Assessment of Picture Naming Abilities in Aphasia.” <em>Psychological Assessment</em> 6. American Psychological Association: 809–26. <a href="https://doi.org/10.1037/pas0000529" class="uri">https://doi.org/10.1037/pas0000529</a>.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="31">
-<li id="fn31"><p>Notice below that because the equations depend on <code>f</code> and <code>f</code> is a vector now, the outcome is automatically a vector. But this is not the case for <code>theta_NR_v</code>, and thus we need to repeat the value.<a href="multinomial-processing-tree-mpt-models.html#fnref31" class="footnote-back">↩</a></p></li>
+<ol start="36">
+<li id="fn36"><p>Because the equations depend on <code>f</code> and <code>f</code> is a vector now, the outcome is automatically a vector. But this is not the case for <code>theta_NR_v</code>, and thus we need to repeat the value.<a href="multinomial-processing-tree-mpt-models.html#fnref36" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -909,7 +923,7 @@ FIGURE 15.9: Individual subjects in the non-hierarchical MPT model (mpt_4.stan).
         </div>
       </div>
 <a href="modeling-multiple-categorical-responses.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="further-reading-11.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="further-reading-12.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
@@ -940,7 +954,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/25-MPT.Rmd",
+"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/19-MPT.Rmd",
 "text": "Edit"
 },
 "history": {

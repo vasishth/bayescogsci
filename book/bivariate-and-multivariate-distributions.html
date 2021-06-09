@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.6 Bivariate and multivariate distributions | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.6 Bivariate and multivariate distributions | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://vasishth.github.io/Bayes_CogSci/" />
-  <meta property="og:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
+  <meta property="og:image" content="https://vasishth.github.io/Bayes_CogSci//images/temporarycover.jpg" />
   <meta property="og:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
   <meta name="github-repo" content="https://github.com/vasishth/Bayes_CogSci" />
 
@@ -19,12 +19,12 @@
   <meta name="twitter:title" content="1.6 Bivariate and multivariate distributions | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   
   <meta name="twitter:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="twitter:image" content="https://vasishth.github.io/Bayes_CogSci/images/temporarycover.jpg" />
+  <meta name="twitter:image" content="https://vasishth.github.io/Bayes_CogSci//images/temporarycover.jpg" />
 
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-02-03" />
+<meta name="date" content="2021-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
 
 
 
@@ -116,6 +118,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
@@ -156,41 +159,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.6" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1: Discrete bivariate distributions</a></li>
 <li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
-<li class="chapter" data-level="1.6.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
+<li class="chapter" data-level="1.6.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#sec:generatebivariatedata"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="sec-marginal.html"><a href="sec-marginal.html"><i class="fa fa-check"></i><b>1.7</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
 <li class="chapter" data-level="1.8" data-path="summary-of-useful-r-functions-relating-to-distributions.html"><a href="summary-of-useful-r-functions-relating-to-distributions.html"><i class="fa fa-check"></i><b>1.8</b> Summary of useful R functions relating to distributions</a></li>
-<li class="chapter" data-level="1.9" data-path="summary-of-concepts-introduced-in-this-chapter.html"><a href="summary-of-concepts-introduced-in-this-chapter.html"><i class="fa fa-check"></i><b>1.9</b> Summary of concepts introduced in this chapter</a></li>
+<li class="chapter" data-level="1.9" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>1.9</b> Summary</a></li>
 <li class="chapter" data-level="1.10" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.10</b> Further reading</a></li>
-<li class="chapter" data-level="1.11" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>1.11</b> Exercises</a><ul>
-<li class="chapter" data-level="1.11.1" data-path="exercises.html"><a href="exercises.html#practice-using-the-pnorm-function"><i class="fa fa-check"></i><b>1.11.1</b> Practice using the <code>pnorm</code> function</a></li>
-<li class="chapter" data-level="1.11.2" data-path="exercises.html"><a href="exercises.html#practice-using-the-qnorm-function"><i class="fa fa-check"></i><b>1.11.2</b> Practice using the <code>qnorm</code> function</a></li>
-<li class="chapter" data-level="1.11.3" data-path="exercises.html"><a href="exercises.html#practice-using-qt"><i class="fa fa-check"></i><b>1.11.3</b> Practice using <code>qt</code></a></li>
-<li class="chapter" data-level="1.11.4" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-1"><i class="fa fa-check"></i><b>1.11.4</b> Maximum likelihood estimation 1</a></li>
-<li class="chapter" data-level="1.11.5" data-path="exercises.html"><a href="exercises.html#maximum-likelihood-estimation-2"><i class="fa fa-check"></i><b>1.11.5</b> Maximum likelihood estimation 2</a></li>
+<li class="chapter" data-level="1.11" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.11</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="2" data-path="ch-introBDA.html"><a href="ch-introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
+<li class="chapter" data-level="2.1" data-path="bayes-rule.html"><a href="bayes-rule.html"><i class="fa fa-check"></i><b>2.1</b> Bayes’ rule</a></li>
+<li class="chapter" data-level="2.2" data-path="sec-analytical.html"><a href="sec-analytical.html"><i class="fa fa-check"></i><b>2.2</b> Deriving the posterior using Bayes’ rule: An analytical example</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.2.1</b> Choosing a likelihood</a></li>
+<li class="chapter" data-level="2.2.2" data-path="sec-analytical.html"><a href="sec-analytical.html#sec:choosepriortheta"><i class="fa fa-check"></i><b>2.2.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
+<li class="chapter" data-level="2.2.3" data-path="sec-analytical.html"><a href="sec-analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.2.3</b> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
+<li class="chapter" data-level="2.2.4" data-path="sec-analytical.html"><a href="sec-analytical.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.2.4</b> Summary of the procedure</a></li>
+<li class="chapter" data-level="2.2.5" data-path="sec-analytical.html"><a href="sec-analytical.html#visualizing-the-prior-likelihood-and-the-posterior"><i class="fa fa-check"></i><b>2.2.5</b> Visualizing the prior, likelihood, and the posterior</a></li>
+<li class="chapter" data-level="2.2.6" data-path="sec-analytical.html"><a href="sec-analytical.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.2.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
+<li class="chapter" data-level="2.2.7" data-path="sec-analytical.html"><a href="sec-analytical.html#incremental-knowledge-gain-using-prior-knowledge"><i class="fa fa-check"></i><b>2.2.7</b> Incremental knowledge gain using prior knowledge</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introBDA.html"><a href="introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
-<li class="chapter" data-level="2.1" data-path="sec-analytical.html"><a href="sec-analytical.html"><i class="fa fa-check"></i><b>2.1</b> Deriving the posterior using Bayes’ rule: An analytical example</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.1.1</b> Choosing a likelihood</a></li>
-<li class="chapter" data-level="2.1.2" data-path="sec-analytical.html"><a href="sec-analytical.html#sec:choosepriortheta"><i class="fa fa-check"></i><b>2.1.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
-<li class="chapter" data-level="2.1.3" data-path="sec-analytical.html"><a href="sec-analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.1.3</b> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
-<li class="chapter" data-level="2.1.4" data-path="sec-analytical.html"><a href="sec-analytical.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.1.4</b> Summary of the procedure</a></li>
-<li class="chapter" data-level="2.1.5" data-path="sec-analytical.html"><a href="sec-analytical.html#visualizing-the-prior-likelihood-and-the-posterior"><i class="fa fa-check"></i><b>2.1.5</b> Visualizing the prior, likelihood, and the posterior</a></li>
-<li class="chapter" data-level="2.1.6" data-path="sec-analytical.html"><a href="sec-analytical.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.1.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
-<li class="chapter" data-level="2.1.7" data-path="sec-analytical.html"><a href="sec-analytical.html#incremental-knowledge-gain-using-prior-knowledge"><i class="fa fa-check"></i><b>2.1.7</b> Incremental knowledge gain using prior knowledge</a></li>
+<li class="chapter" data-level="2.3" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
+<li class="chapter" data-level="2.4" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>2.4</b> Further reading</a></li>
+<li class="chapter" data-level="2.5" data-path="sec-BDAexercises.html"><a href="sec-BDAexercises.html"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="summary-of-concepts-introduced-in-this-chapter-1.html"><a href="summary-of-concepts-introduced-in-this-chapter-1.html"><i class="fa fa-check"></i><b>2.2</b> Summary of concepts introduced in this chapter</a></li>
-<li class="chapter" data-level="2.3" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>2.3</b> Further reading</a></li>
-<li class="chapter" data-level="2.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>2.4</b> Exercises</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="exercises-1.html"><a href="exercises-1.html#exercise-deriving-bayes-rule"><i class="fa fa-check"></i><b>2.4.1</b> Exercise: Deriving Bayes’ rule</a></li>
-<li class="chapter" data-level="2.4.2" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-1"><i class="fa fa-check"></i><b>2.4.2</b> Exercise: Conjugate forms 1</a></li>
-<li class="chapter" data-level="2.4.3" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-2"><i class="fa fa-check"></i><b>2.4.3</b> Exercise: Conjugate forms 2</a></li>
-<li class="chapter" data-level="2.4.4" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-3"><i class="fa fa-check"></i><b>2.4.4</b> Exercise: Conjugate forms 3</a></li>
-<li class="chapter" data-level="2.4.5" data-path="exercises-1.html"><a href="exercises-1.html#exercise-conjugate-forms-4"><i class="fa fa-check"></i><b>2.4.5</b> Exercise: Conjugate forms 4</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>II Regression models</b></span></li>
+<li class="part"><span><b>II Regression models with brms</b></span></li>
 <li class="chapter" data-level="3" data-path="ch-compbda.html"><a href="ch-compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a><ul>
 <li class="chapter" data-level="3.1" data-path="sec-sampling.html"><a href="sec-sampling.html"><i class="fa fa-check"></i><b>3.1</b> Deriving the posterior through sampling</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="sec-sampling.html"><a href="sec-sampling.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.1.1</b> Bayesian Regression Models using ‘Stan’: brms</a></li>
@@ -208,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.2" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lnfirst"><i class="fa fa-check"></i><b>3.5.2</b> The log-normal likelihood</a></li>
 <li class="chapter" data-level="3.5.3" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lognormal"><i class="fa fa-check"></i><b>3.5.3</b> Re-fitting a single participant pressing a button repeatedly with a log-normal likelihood</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.6" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
 <li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
 <li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
 </ul></li>
@@ -231,12 +223,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.4" data-path="sec-logistic.html"><a href="sec-logistic.html#sec:comlogis"><i class="fa fa-check"></i><b>4.3.4</b> How to communicate the results?</a></li>
 <li class="chapter" data-level="4.3.5" data-path="sec-logistic.html"><a href="sec-logistic.html#descriptive-adequacy"><i class="fa fa-check"></i><b>4.3.5</b> Descriptive adequacy</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
 <li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
-<li class="chapter" data-level="4.6" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
-<li class="chapter" data-level="4.7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4.7</b> Appendix</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="appendix.html"><a href="appendix.html#sec:preprocessingpupil"><i class="fa fa-check"></i><b>4.7.1</b> Preparation of the pupil size data (section @ref(sec:pupil))</a></li>
-</ul></li>
+<li class="chapter" data-level="4.6" data-path="sec-LMexercises.html"><a href="sec-LMexercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
 <li class="chapter" data-level="5.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical normal model: The N400 effect</a><ul>
@@ -250,144 +239,157 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="sec-stroop.html"><a href="sec-stroop.html"><i class="fa fa-check"></i><b>5.2</b> A hierarchical log-normal model: The Stroop effect</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="sec-stroop.html"><a href="sec-stroop.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.2.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>5.3</b> Summary</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="summary-2.html"><a href="summary-2.html#why-should-we-take-the-trouble-of-fitting-a-bayesian-hierarchical-model"><i class="fa fa-check"></i><b>5.3.1</b> Why should we take the trouble of fitting a Bayesian hierarchical model?</a></li>
+<li class="chapter" data-level="5.3" data-path="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><a href="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><i class="fa fa-check"></i><b>5.3</b> Why fitting a Bayesian hierarchical model is worth the effort</a></li>
+<li class="chapter" data-level="5.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.4</b> Summary</a></li>
+<li class="chapter" data-level="5.5" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
+<li class="chapter" data-level="5.6" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html"><i class="fa fa-check"></i><b>5.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>5.4</b> Further reading</a></li>
-<li class="chapter" data-level="5.5" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+<li class="chapter" data-level="6" data-path="ch-priors.html"><a href="ch-priors.html"><i class="fa fa-check"></i><b>6</b> The Art and Science of Prior Elicitation</a><ul>
+<li class="chapter" data-level="6.1" data-path="a-simple-example-of-eliciting-priors-from-oneself.html"><a href="a-simple-example-of-eliciting-priors-from-oneself.html"><i class="fa fa-check"></i><b>6.1</b> A simple example of eliciting priors from oneself</a></li>
+<li class="chapter" data-level="6.2" data-path="eliciting-priors-from-experts.html"><a href="eliciting-priors-from-experts.html"><i class="fa fa-check"></i><b>6.2</b> Eliciting priors from experts</a></li>
+<li class="chapter" data-level="6.3" data-path="deriving-priors-from-meta-analyses.html"><a href="deriving-priors-from-meta-analyses.html"><i class="fa fa-check"></i><b>6.3</b> Deriving priors from meta-analyses</a></li>
+<li class="chapter" data-level="6.4" data-path="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><a href="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’ posteriors as priors for a new study</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
-<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
-<li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
-<li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
-<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+<li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a></li>
+<li class="chapter" data-level="8" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>8</b> Contrast coding</a><ul>
+<li class="chapter" data-level="8.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>8.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>8.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="8.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>8.1.2</b> Defining hypotheses</a></li>
+<li class="chapter" data-level="8.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>8.1.3</b> Sum contrasts</a></li>
+<li class="chapter" data-level="8.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>8.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
-<li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
-<li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+<li class="chapter" data-level="8.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>8.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>8.2.1</b> Sum contrasts</a></li>
+<li class="chapter" data-level="8.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>8.2.2</b> The hypothesis matrix</a></li>
+<li class="chapter" data-level="8.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>8.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="8.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="8.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b> Helmert contrasts</a></li>
+<li class="chapter" data-level="8.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="8.3.4" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b> Polynomial contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
-<li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
-<li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+<li class="chapter" data-level="8.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>8.4.1</b> Centered contrasts</a></li>
+<li class="chapter" data-level="8.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>8.4.2</b> Orthogonal contrasts</a></li>
+<li class="chapter" data-level="8.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>8.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>6.5</b> Computing condition means from estimated contrasts</a></li>
-<li class="chapter" data-level="6.6" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
+<li class="chapter" data-level="8.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>8.5</b> Computing condition means from estimated contrasts</a></li>
+<li class="chapter" data-level="8.6" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
+<li class="chapter" data-level="8.7" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
+<li class="chapter" data-level="8.8" data-path="sec-Contrastsexercises.html"><a href="sec-Contrastsexercises.html"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
-<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
-<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
-<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+<li class="chapter" data-level="9" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="9.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>9.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>9.1.1</b> Nested effects</a></li>
+<li class="chapter" data-level="9.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>9.1.2</b> Interactions between contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
-<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+<li class="chapter" data-level="9.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>9.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>9.2.1</b> Estimating a group difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="9.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>9.2.2</b> Estimating differences in slopes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
-<li class="chapter" data-level="7.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="9.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>9.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="9.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>9.5</b> Further readings</a></li>
+<li class="chapter" data-level="9.6" data-path="sec-Contrasts2x2exercises.html"><a href="sec-Contrasts2x2exercises.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>8</b> Meta-analysis and measurement error models</a><ul>
-<li class="chapter" data-level="8.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>8.1</b> Meta-analysis</a></li>
-<li class="chapter" data-level="8.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>8.2</b> Measurement-error models</a></li>
-<li class="chapter" data-level="8.3" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.3</b> Further reading</a></li>
-<li class="chapter" data-level="8.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>8.4</b> Exercises</a></li>
+<li class="part"><span><b>III Advanced models with Stan</b></span></li>
+<li class="chapter" data-level="10" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>10</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="10.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>10.1</b> Stan syntax</a></li>
+<li class="chapter" data-level="10.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>10.2</b> A first simple example with Stan: Normal likelihood</a></li>
+<li class="chapter" data-level="10.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>10.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
+<li class="chapter" data-level="10.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>10.4</b> Regression models in Stan</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>10.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
+<li class="chapter" data-level="10.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>10.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
+<li class="chapter" data-level="10.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>10.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
-<li class="part"><span><b>III Model comparison</b></span></li>
-<li class="chapter" data-level="9" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>9</b> Introduction to model comparison</a></li>
-<li class="chapter" data-level="10" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>10</b> Bayes factors</a><ul>
-<li class="chapter" data-level="10.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>10.1</b> Hypothesis testing using the Bayes factor</a><ul>
-<li class="chapter" data-level="10.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>10.1.1</b> Marginal likelihood</a></li>
-<li class="chapter" data-level="10.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>10.1.2</b> Bayes factor</a></li>
+<li class="chapter" data-level="10.5" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
+<li class="chapter" data-level="10.6" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
+<li class="chapter" data-level="10.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>10.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>10.2</b> Testing the N400 effect using null hypothesis testing</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sensitivity-analysis"><i class="fa fa-check"></i><b>10.2.1</b> Sensitivity analysis</a></li>
-<li class="chapter" data-level="10.2.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>10.2.2</b> Non-nested models</a></li>
+<li class="chapter" data-level="11" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>11</b> Complex models and reparametrization</a><ul>
+<li class="chapter" data-level="11.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>11.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>11.1.1</b> Varying intercept model with Stan</a></li>
+<li class="chapter" data-level="11.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>11.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="11.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>11.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="11.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>11.1.4</b> By-subject and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>10.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a></li>
-<li class="chapter" data-level="10.4" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html"><i class="fa fa-check"></i><b>10.4</b> Bayes factors in theory: Stability and accuracy</a><ul>
-<li class="chapter" data-level="10.4.1" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#instability-due-to-the-effective-number-of-posterior-samples"><i class="fa fa-check"></i><b>10.4.1</b> Instability due to the effective number of posterior samples</a></li>
-<li class="chapter" data-level="10.4.2" data-path="bayes-factors-in-theory-stability-and-accuracy.html"><a href="bayes-factors-in-theory-stability-and-accuracy.html#inaccuracy-of-bayes-factors-does-the-estimate-approximate-the-true-bayes-factor-well"><i class="fa fa-check"></i><b>10.4.2</b> Inaccuracy of Bayes factors: Does the estimate approximate the true Bayes factor well?</a></li>
+<li class="chapter" data-level="11.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
+<li class="chapter" data-level="11.3" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
+<li class="chapter" data-level="11.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>11.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html"><i class="fa fa-check"></i><b>10.5</b> Bayes factors in practice: Variability with the data</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variation-associated-with-the-data-subjects-items-and-residual-noise"><i class="fa fa-check"></i><b>10.5.1</b> Variation associated with the data (subjects, items, and residual noise)</a></li>
-<li class="chapter" data-level="10.5.2" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#example-2-inhibitory-and-facilitatory-interference-effects"><i class="fa fa-check"></i><b>10.5.2</b> Example 2: Inhibitory and facilitatory interference effects</a></li>
-<li class="chapter" data-level="10.5.3" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#variability-of-the-bayes-factor-posterior-simulations"><i class="fa fa-check"></i><b>10.5.3</b> Variability of the Bayes factor: Posterior simulations</a></li>
-<li class="chapter" data-level="10.5.4" data-path="bayes-factors-in-practice-variability-with-the-data.html"><a href="bayes-factors-in-practice-variability-with-the-data.html#visualize-distribution-of-bayes-factors"><i class="fa fa-check"></i><b>10.5.4</b> Visualize distribution of Bayes factors</a></li>
+<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom likelihoods in Stan</a></li>
+<li class="part"><span><b>IV Other useful models</b></span></li>
+<li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
+<li class="chapter" data-level="13.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>13.1</b> Meta-analysis</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="meta-analysis.html"><a href="meta-analysis.html#a-meta-analysis-of-similarity-based-interference-in-sentence-comprehension"><i class="fa fa-check"></i><b>13.1.1</b> A meta-analysis of similarity-based interference in sentence comprehension</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>10.6</b> Summary</a></li>
-<li class="chapter" data-level="10.7" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.7</b> Further reading</a></li>
-<li class="chapter" data-level="10.8" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>10.8</b> Exercises</a></li>
+<li class="chapter" data-level="13.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>13.2</b> Measurement-error models</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="measurement-error-models.html"><a href="measurement-error-models.html#accounting-for-measurement-error-in-a-voice-onset-time-model"><i class="fa fa-check"></i><b>13.2.1</b> Accounting for measurement error in a voice onset time model</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>11</b> Cross validation</a><ul>
-<li class="chapter" data-level="11.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>11.1</b> Expected log predictive density of a model</a></li>
-<li class="chapter" data-level="11.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>11.2</b> K-fold and leave-one-out cross-validation</a></li>
-<li class="chapter" data-level="11.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>11.3</b> Testing the N400 effect using cross-validation</a></li>
-<li class="chapter" data-level="11.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>11.4</b> Summary</a></li>
-<li class="chapter" data-level="11.5" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.5</b> Further reading</a></li>
-<li class="chapter" data-level="11.6" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>11.6</b> Exercises</a></li>
+<li class="chapter" data-level="13.3" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
+<li class="chapter" data-level="13.4" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
+<li class="chapter" data-level="13.5" data-path="sec-REMAMEexercises.html"><a href="sec-REMAMEexercises.html"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>IV Advanced models with Stan</b></span></li>
-<li class="chapter" data-level="12" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>12</b> Introduction to the probabilistic programming language Stan</a><ul>
-<li class="chapter" data-level="12.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>12.1</b> Stan syntax</a></li>
-<li class="chapter" data-level="12.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>12.2</b> A first simple example with Stan: Normal likelihood</a></li>
-<li class="chapter" data-level="12.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>12.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
-<li class="chapter" data-level="12.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>12.4</b> Regression models in Stan</a><ul>
-<li class="chapter" data-level="12.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>12.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
-<li class="chapter" data-level="12.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>12.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
-<li class="chapter" data-level="12.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>12.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
+<li class="chapter" data-level="14" data-path="ch-sat.html"><a href="ch-sat.html"><i class="fa fa-check"></i><b>14</b> SAT</a></li>
+<li class="part"><span><b>V Model comparison and hypothesis testing</b></span></li>
+<li class="chapter" data-level="15" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>15</b> Introduction to model comparison</a></li>
+<li class="chapter" data-level="16" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>16</b> Bayes factors</a><ul>
+<li class="chapter" data-level="16.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>16.1</b> Hypothesis testing using the Bayes factor</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>16.1.1</b> Marginal likelihood</a></li>
+<li class="chapter" data-level="16.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>16.1.2</b> Bayes factor</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html"><i class="fa fa-check"></i><b>12.5</b> Model comparison in Stan</a><ul>
-<li class="chapter" data-level="12.5.1" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>12.5.1</b> Bayes factor in Stan</a></li>
-<li class="chapter" data-level="12.5.2" data-path="model-comparison-in-stan.html"><a href="model-comparison-in-stan.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>12.5.2</b> Cross validation in Stan</a></li>
+<li class="chapter" data-level="16.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>16.2</b> Examining the N400 effect with Bayes factor</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sensitivity-analysis-1"><i class="fa fa-check"></i><b>16.2.1</b> Sensitivity analysis</a></li>
+<li class="chapter" data-level="16.2.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>16.2.2</b> Non-nested models</a></li>
 </ul></li>
-<li class="chapter" data-level="12.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>12.6</b> Summary</a></li>
-<li class="chapter" data-level="12.7" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.7</b> Further reading</a></li>
-<li class="chapter" data-level="12.8" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i><b>12.8</b> Exercises</a></li>
+<li class="chapter" data-level="16.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>16.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>16.3.1</b> Bayes factor in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>13</b> Complex models and reparametrization</a><ul>
-<li class="chapter" data-level="13.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>13.1</b> Hierarchical models with Stan</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>13.1.1</b> Varying intercept model with Stan</a></li>
-<li class="chapter" data-level="13.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>13.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
-<li class="chapter" data-level="13.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>13.1.3</b> Correlated varying intercept varying slopes model</a></li>
-<li class="chapter" data-level="13.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>13.1.4</b> By-participant and by-items correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="16.4" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html"><i class="fa fa-check"></i><b>16.4</b> Bayes factors in theory and in practice</a><ul>
+<li class="chapter" data-level="16.4.1" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-theory-stability-and-accuracy"><i class="fa fa-check"></i><b>16.4.1</b> Bayes factors in theory: Stability and accuracy</a></li>
+<li class="chapter" data-level="16.4.2" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-practice-variability-with-the-data"><i class="fa fa-check"></i><b>16.4.2</b> Bayes factors in practice: Variability with the data</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>13.2</b> Summary</a></li>
-<li class="chapter" data-level="13.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>13.3</b> Further reading</a></li>
-<li class="chapter" data-level="13.4" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i><b>13.4</b> Exercises</a></li>
+<li class="chapter" data-level="16.5" data-path="summary-10.html"><a href="summary-10.html"><i class="fa fa-check"></i><b>16.5</b> Summary</a></li>
+<li class="chapter" data-level="16.6" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>16.6</b> Further reading</a></li>
+<li class="chapter" data-level="16.7" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>16.7</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>V Computational cognitive modeling</b></span></li>
-<li class="chapter" data-level="14" data-path="introduction-to-computational-cognitive-modeling-chcogmod.html"><a href="introduction-to-computational-cognitive-modeling-chcogmod.html"><i class="fa fa-check"></i><b>14</b> Introduction to computational cognitive modeling {ch:cogmod}</a><ul>
-<li class="chapter" data-level="14.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>14.1</b> Further reading</a></li>
+<li class="chapter" data-level="17" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>17</b> Cross-validation</a><ul>
+<li class="chapter" data-level="17.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>17.1</b> Expected log predictive density of a model</a></li>
+<li class="chapter" data-level="17.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>17.2</b> K-fold and leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="17.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>17.3</b> Testing the N400 effect using cross-validation</a><ul>
+<li class="chapter" data-level="17.3.1" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>17.3.1</b> cross-validation in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>15</b> Multinomial processing trees</a><ul>
-<li class="chapter" data-level="15.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>15.1</b> Modeling multiple categorical responses</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>15.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
-<li class="chapter" data-level="15.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>15.1.2</b> A model for multiple responses using the categorical distribution</a></li>
+<li class="chapter" data-level="17.4" data-path="summary-11.html"><a href="summary-11.html"><i class="fa fa-check"></i><b>17.4</b> Summary</a></li>
+<li class="chapter" data-level="17.5" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>17.5</b> Further reading</a></li>
+<li class="chapter" data-level="17.6" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>17.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>15.2</b> Multinomial processing tree (MPT) models</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>15.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
+<li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
+<li class="chapter" data-level="18" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>18</b> Introduction to computational cognitive modeling</a><ul>
+<li class="chapter" data-level="18.1" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.3</b> Further reading</a></li>
-<li class="chapter" data-level="15.4" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i><b>15.4</b> Exercises</a></li>
+<li class="chapter" data-level="19" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>19</b> Multinomial processing trees</a><ul>
+<li class="chapter" data-level="19.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>19.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="19.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>19.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
+<li class="chapter" data-level="19.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>19.1.2</b> A model for multiple responses using the categorical distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>16</b> Mixture models</a><ul>
-<li class="chapter" data-level="16.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>16.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>16.1.1</b> A fast guess model account of the global motion detection task</a></li>
+<li class="chapter" data-level="19.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>19.2</b> Multinomial processing tree (MPT) models</a><ul>
+<li class="chapter" data-level="19.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>19.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>16.2</b> Summary</a></li>
-<li class="chapter" data-level="16.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.3</b> Further reading</a></li>
-<li class="chapter" data-level="16.4" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i><b>16.4</b> Exercises</a></li>
+<li class="chapter" data-level="19.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
+<li class="chapter" data-level="19.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>19.4</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>VI Appendix</b></span></li>
-<li class="chapter" data-level="17" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>17</b> Important distributions</a></li>
+<li class="chapter" data-level="20" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>20</b> Mixture models</a><ul>
+<li class="chapter" data-level="20.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>20.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
+<li class="chapter" data-level="20.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>20.1.1</b> A fast guess model account of the global motion detection task</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="summary-12.html"><a href="summary-12.html"><i class="fa fa-check"></i><b>20.2</b> Summary</a></li>
+<li class="chapter" data-level="20.3" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
+<li class="chapter" data-level="20.4" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>20.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="ch-lognormal.html"><a href="ch-lognormal.html"><i class="fa fa-check"></i><b>21</b> A simple accumulator model to account for choice response time</a></li>
+<li class="part"><span><b>VII Appendix</b></span></li>
+<li class="chapter" data-level="22" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>22</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -414,31 +416,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>So far, we have only discussed univariate distributions. It is also possible to specify distributions with two or more dimensions.</p>
 <div id="example-1-discrete-bivariate-distributions" class="section level3">
 <h3><span class="header-section-number">1.6.1</span> Example 1: Discrete bivariate distributions</h3>
-<p>Starting with the discrete case, consider the discrete bivariate distribution shown below. These are data from an experiment where, inter alia, in each trial a Likert acceptability rating and a question-response accuracy were recorded (the data are from a study by <span class="citation">Laurinavichyute (<a href="#ref-AnnaLphd">2020</a>)</span>, used with permission here).</p>
-<p>This figure shows the <em>joint probability mass function</em> of two random variables X and Y. The random variable X consists of 7 possible values (this is the 1-7 Likert response scale), and the random variable Y is question-response accuracies, with 0 representing incorrect responses, and 1 representing correct responses.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">agrmt&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;data/agrmt_discrete_binomial.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2">rating0&lt;-<span class="kw">table</span>(<span class="kw">subset</span>(agrmt,accuracy<span class="op">==</span><span class="dv">0</span>)<span class="op">$</span>rating)</a>
-<a class="sourceLine" id="cb40-3" data-line-number="3">rating1&lt;-<span class="kw">table</span>(<span class="kw">subset</span>(agrmt,accuracy<span class="op">==</span><span class="dv">1</span>)<span class="op">$</span>rating)</a>
-<a class="sourceLine" id="cb40-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb40-5" data-line-number="5">ratingsbivar&lt;-<span class="kw">data.frame</span>(<span class="dt">rating0=</span>rating0,<span class="dt">rating1=</span>rating1)</a>
-<a class="sourceLine" id="cb40-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb40-7" data-line-number="7">ratingsbivar&lt;-ratingsbivar[,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</a>
-<a class="sourceLine" id="cb40-8" data-line-number="8"><span class="kw">colnames</span>(ratingsbivar)&lt;-<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb40-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb40-10" data-line-number="10"><span class="co">## function from the bivariate package:</span></a>
-<a class="sourceLine" id="cb40-11" data-line-number="11">f &lt;-<span class="st"> </span><span class="kw">gbvpmf</span> (ratingsbivar)</a>
-<a class="sourceLine" id="cb40-12" data-line-number="12"><span class="kw">plot</span> (f, <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb40-13" data-line-number="13">       <span class="dt">arrows=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<p>Starting with the discrete case, consider the discrete bivariate distribution shown below. These are data from an experiment where, inter alia, in each trial a Likert acceptability rating and a question-response accuracy were recorded (the data are from a study by <span class="citation">Laurinavichyute (<a href="#ref-AnnaLphd">2020</a>)</span>, used with permission here). You can load the data by loading the <code>bcogsci</code> package.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">library</span>(bcogsci)</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;df_discreteagrmt&quot;</span>)</a></code></pre></div>
+<p>The figure below shows the <em>joint probability mass function</em> of two random variables X and Y. The random variable X consists of 7 possible values (this is the 1-7 Likert response scale), and the random variable Y is question-response accuracies, with 0 representing incorrect responses, and 1 representing correct responses.</p>
 <div class="figure"><span id="fig:bivardiscrete"></span>
 <img src="bookdown_files/figure-html/bivardiscrete-1.svg" alt="Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions." width="672" />
 <p class="caption">
-FIGURE 1.6: Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions.
+FIGURE 1.7: Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions.
 </p>
 </div>
 <p>One can also display the figure as a table.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">probs&lt;-<span class="kw">attr</span>(f,<span class="st">&quot;p&quot;</span>)</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw">t</span>(probs)</a></code></pre></div>
-<pre><code>##     [,1]   [,2]   [,3]   [,4]   [,5]   [,6]   [,7]
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">probs</a></code></pre></div>
+<pre><code>##        1      2      3      4      5      6      7
 ## 0 0.0179 0.0233 0.0400 0.0431 0.0633 0.0489 0.0549
 ## 1 0.0312 0.0533 0.0857 0.0964 0.1469 0.1532 0.1420</code></pre>
 <p>For each possible value of X and Y, we have a joint probability. Given such a bivariate distribution, there are two useful quantities we can compute: the <em>marginal</em> distributions (<span class="math inline">\(p_{X}\)</span> and <span class="math inline">\(p_Y\)</span>), and the <em>conditional</em> distributions (<span class="math inline">\(p_{X|Y}\)</span> and <span class="math inline">\(p_{Y|X}\)</span>).<br />
@@ -453,21 +443,22 @@ p_{Y}(y)=\sum_{x\in S_{X}}p_{X,Y}(x,y).\label{eq-marginal-pmf}
 p_{X}(x)=\sum_{y\in S_{Y}}p_{X,Y}(x,y).\label{eq-marginal-pmf2}
 \end{equation}\]</span></p>
 <p><span class="math inline">\(p_Y\)</span> is easily computed, by summing up the rows; and <span class="math inline">\(p_X\)</span> by summing up the columns. You can see why this is called the marginal distribution; the result appears in the margins of the table.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co">#P(Y)</span></a>
-<a class="sourceLine" id="cb43-2" data-line-number="2">(PY&lt;-<span class="kw">rowSums</span>(<span class="kw">t</span>(probs)))</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co"># P(Y)</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2">(PY &lt;-<span class="st"> </span><span class="kw">rowSums</span>(probs))</a></code></pre></div>
 <pre><code>##     0     1 
 ## 0.291 0.709</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">sum</span>(PY) <span class="co">## sums to 1</span></a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">sum</span>(PY) <span class="co">## sums to 1</span></a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co">#P(X)</span></a>
-<a class="sourceLine" id="cb47-2" data-line-number="2">(PX&lt;-<span class="kw">colSums</span>(<span class="kw">t</span>(probs)))</a></code></pre></div>
-<pre><code>## [1] 0.0491 0.0766 0.1257 0.1394 0.2102 0.2020 0.1969</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">sum</span>(PX) <span class="co">## sums to 1</span></a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="co"># P(X)</span></a>
+<a class="sourceLine" id="cb56-2" data-line-number="2">(PX &lt;-<span class="st"> </span><span class="kw">colSums</span>(probs))</a></code></pre></div>
+<pre><code>##      1      2      3      4      5      6      7 
+## 0.0491 0.0766 0.1257 0.1394 0.2102 0.2020 0.1969</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">sum</span>(PX) <span class="co">## sums to 1</span></a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>The marginal probabilities sum to 1, as they should. The table below shows the marginal probabilities.</p>
 
-<p>Notice that to compute the marginal distribution of X, one is summing over all the Ys; and to compute the marginal distribution of Y, one sums over all the X’s. We say that we are <em>marginalizing out</em> the random variable that we are summing over. One can visualize the two marginal distributions using barplots.</p>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-24-1.svg" width="672" /></p>
+<p>To compute the marginal distribution of X, one is summing over all the Ys; and to compute the marginal distribution of Y, one sums over all the X’s. We say that we are <em>marginalizing out</em> the random variable that we are summing over. One can visualize the two marginal distributions using barplots.</p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-17-1.svg" width="672" /></p>
 <p>For computing conditional distributions, recall that conditional probability is defined as:</p>
 <p><span class="math display">\[\begin{equation}
 p_{X\mid Y}(x\mid y) = \frac{p_{X,Y}(x,y)}{p_Y(y)}  
@@ -534,88 +525,85 @@ F_{X,Y}(u,v) =&amp; P(X&lt;u,Y&lt;v)\\
              =&amp; \int_{-\infty}^u \int_{-\infty}^v f_{X,Y}(x,y)\, dy dx \hbox{ for } (x,y)\in \mathbb{R}^2\\
 \end{split}
 \end{equation}\]</span></p>
-<p>As an aside, notice that the support for the normal distribution ranges from minus infinity to plus infinity. There can however be other PDFs with a more limited support; an example would be a normal distribution whose pdf <span class="math inline">\(f(x)\)</span> is such that the lower bound is truncated at, say, 0. In such a case, the area under the range <span class="math inline">\(\int_{-\infty}^0 f(x) \, dx\)</span> will be 0 because the range lies outside the support of the truncated normal distribution.</p>
+<p>An aside: the support for the normal distribution ranges from minus infinity to plus infinity. There can however be other PDFs with a more limited support; an example would be a normal distribution whose pdf <span class="math inline">\(f(x)\)</span> is such that the lower bound is truncated at, say, 0. In such a case, the area under the range <span class="math inline">\(\int_{-\infty}^0 f(x) \, dx\)</span> will be 0 because the range lies outside the support of the truncated normal distribution.</p>
 <p>Just as in the discrete case, the marginal distributions can be derived by marginalizing out the other random variable:</p>
 <p><span class="math display">\[\begin{equation}
 f_X(x) = \int_{S_Y} f_{X,Y}(x,y)\, dy \quad f_Y(y) = \int_{S_X} f_{X,Y}(x,y)\, dx
 \end{equation}\]</span></p>
 <p>Here, <span class="math inline">\(S_X\)</span> and <span class="math inline">\(S_Y\)</span> are the respective supports.</p>
 <p>Here, the integral sign <span class="math inline">\(\int\)</span> is the continuous equivalent of the summation sign <span class="math inline">\(\sum\)</span> in the discrete case. Luckily, we will never have to compute such integrals ourselves; but it is important to appreciate how a marginal distribution arises from a bivariate distributation—by integrating out or marginalizing out the other random variable.</p>
-<p>A visualization will help. The figures below shows a bivariate distribution with correlation zero (Figure <a href="bivariate-and-multivariate-distributions.html#fig:zerocor">1.7</a>), a positive (Figure <a href="bivariate-and-multivariate-distributions.html#fig:poscor">1.8</a>) and a negative correlation (Figure <a href="bivariate-and-multivariate-distributions.html#fig:negcor">1.9</a>).</p>
+<p>A visualization will help. The figures below shows a bivariate distribution with correlation zero (Figure <a href="bivariate-and-multivariate-distributions.html#fig:zerocor">1.8</a>), a positive (Figure <a href="bivariate-and-multivariate-distributions.html#fig:poscor">1.9</a>) and a negative correlation (Figure <a href="bivariate-and-multivariate-distributions.html#fig:negcor">1.10</a>).</p>
 <div class="figure"><span id="fig:zerocor"></span>
 <img src="bookdown_files/figure-html/zerocor-1.svg" alt="A bivariate Normal distribution with zero correlation. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot." width="672" />
 <p class="caption">
-FIGURE 1.7: A bivariate Normal distribution with zero correlation. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
+FIGURE 1.8: A bivariate Normal distribution with zero correlation. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
 </p>
 </div>
 <div class="figure"><span id="fig:poscor"></span>
 <img src="bookdown_files/figure-html/poscor-1.svg" alt="A bivariate Normal distribution with a positive  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot." width="672" />
 <p class="caption">
-FIGURE 1.8: A bivariate Normal distribution with a positive correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
+FIGURE 1.9: A bivariate Normal distribution with a positive correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
 </p>
 </div>
 <div class="figure"><span id="fig:negcor"></span>
 <img src="bookdown_files/figure-html/negcor-1.svg" alt="A bivariate Normal distribution with a negative  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot." width="672" />
 <p class="caption">
-FIGURE 1.9: A bivariate Normal distribution with a negative correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
+FIGURE 1.10: A bivariate Normal distribution with a negative correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
 </p>
 </div>
 <p>In this book, we will make use of such multivariate distributions a lot, and it will soon become important to know how to generate simulated bivariate or multivariate data that is correlated. So let’s look at that next.</p>
 </div>
-<div id="generate-simulated-bivariate-multivariate-data" class="section level3">
+<div id="sec:generatebivariatedata" class="section level3">
 <h3><span class="header-section-number">1.6.3</span> Generate simulated bivariate (multivariate) data</h3>
 <p>Suppose we want to generate 100 correlated pairs of data, with correlation <span class="math inline">\(\rho=0.6\)</span>. The two random variables have mean 0, and standard deviations 5 and 10 respectively.</p>
-<p>Here is how we would generate such data. First, define a variance-covariance matrix; then, use the multivariate analog of the <code>rnorm</code> function, <code>mvrnorm</code>, to generate <span class="math inline">\(100\)</span> data-points.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">library</span>(MASS)</a>
-<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="co">## define a variance-covariance matrix:</span></a>
-<a class="sourceLine" id="cb51-3" data-line-number="3">Sigma&lt;-<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">5</span><span class="op">^</span><span class="dv">2</span>,<span class="dv">5</span><span class="op">*</span><span class="dv">10</span><span class="op">*</span>.<span class="dv">6</span>,<span class="dv">5</span><span class="op">*</span><span class="dv">10</span><span class="op">*</span>.<span class="dv">6</span>,<span class="dv">10</span><span class="op">^</span><span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb51-4" data-line-number="4">              <span class="dt">byrow=</span><span class="ot">FALSE</span>,<span class="dt">ncol=</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb51-5" data-line-number="5"><span class="co">## generate data:</span></a>
-<a class="sourceLine" id="cb51-6" data-line-number="6">u&lt;-<span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb51-7" data-line-number="7">           <span class="dt">mu=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb51-8" data-line-number="8">           <span class="dt">Sigma=</span>Sigma)</a>
-<a class="sourceLine" id="cb51-9" data-line-number="9"><span class="kw">head</span>(u)</a></code></pre></div>
-<pre><code>##        [,1]  [,2]
-## [1,]  1.801 -5.02
-## [2,]  2.466  7.92
-## [3,] -0.672  7.71
-## [4,] -3.662 -9.29
-## [5,] -0.961  0.74
-## [6,] 11.522 19.53</code></pre>
+<p>Here is how we would generate such data. First, define a variance-covariance matrix; then, use the multivariate analog of the <code>rnorm</code> function, <code>mvrnorm</code>, from the <code>MASS</code> package to generate <span class="math inline">\(100\)</span> data-points.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="co">## define a variance-covariance matrix:</span></a>
+<a class="sourceLine" id="cb60-2" data-line-number="2">Sigma &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">5</span><span class="op">^</span><span class="dv">2</span>, <span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="fl">.6</span>, <span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="fl">.6</span>, <span class="dv">10</span><span class="op">^</span><span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb60-3" data-line-number="3">  <span class="dt">byrow =</span> <span class="ot">FALSE</span>, <span class="dt">ncol =</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb60-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb60-5" data-line-number="5"><span class="co">## generate data:</span></a>
+<a class="sourceLine" id="cb60-6" data-line-number="6">u &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(</a>
+<a class="sourceLine" id="cb60-7" data-line-number="7">  <span class="dt">n =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb60-8" data-line-number="8">  <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb60-9" data-line-number="9">  <span class="dt">Sigma =</span> Sigma</a>
+<a class="sourceLine" id="cb60-10" data-line-number="10">)</a>
+<a class="sourceLine" id="cb60-11" data-line-number="11"><span class="kw">head</span>(u)</a></code></pre></div>
+<pre><code>##        [,1]   [,2]
+## [1,] 11.522  19.53
+## [2,] -5.179   3.68
+## [3,]  0.895 -10.12
+## [4,]  6.253   8.36
+## [5,] -6.794  -5.47
+## [6,] -6.590  -9.70</code></pre>
 <p>A plot confirms that the simulated data are positively correlated.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">plot</span>(u[,<span class="dv">1</span>],u[,<span class="dv">2</span>])</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-26-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="kw">tibble</span>(<span class="dt">u_1 =</span> u[, <span class="dv">1</span>], <span class="dt">u_2 =</span> u[, <span class="dv">2</span>]), <span class="kw">aes</span>(u_<span class="dv">1</span>, u_<span class="dv">2</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-19-1.svg" width="672" /></p>
 <p>As an exercise, try changing the correlation to <span class="math inline">\(0\)</span> or to <span class="math inline">\(-0.6\)</span>, and then plot the bivariate distribution that results.</p>
-<p>One final useful thing to notice about the variance-covariance matrix is that it can be decomposed into the component standard deviations and an underlying correlation matrix. For example, consider the matrix above:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">Sigma</a></code></pre></div>
+<p>One final useful fact about the variance-covariance matrix is that it can be decomposed into the component standard deviations and an underlying correlation matrix. For example, consider the matrix above:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">Sigma</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   25   30
 ## [2,]   30  100</code></pre>
 <p>One can decompose the matrix as follows. The matrix can be seen as the product of a diagonal matrix of the standard deviations and the correlation matrix:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="co">## sds:</span></a>
-<a class="sourceLine" id="cb56-2" data-line-number="2">(sds&lt;-<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="co">## sds:</span></a>
+<a class="sourceLine" id="cb65-2" data-line-number="2">(sds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>))</a></code></pre></div>
 <pre><code>## [1]  5 10</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="co">## diagonal matrix:</span></a>
-<a class="sourceLine" id="cb58-2" data-line-number="2">(sd_diag&lt;-<span class="kw">diag</span>(sds))</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="co">## diagonal matrix:</span></a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">(sd_diag &lt;-<span class="st"> </span><span class="kw">diag</span>(sds))</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    5    0
 ## [2,]    0   10</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="co">## correlation matrix:</span></a>
-<a class="sourceLine" id="cb60-2" data-line-number="2">(corrmatrix&lt;-<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">0.6</span>,<span class="fl">0.6</span>,<span class="dv">1</span>),<span class="dt">ncol=</span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="co">## correlation matrix:</span></a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">(corrmatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="dv">1</span>), <span class="dt">ncol =</span> <span class="dv">2</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.6
 ## [2,]  0.6  1.0</code></pre>
-<p>Given these two matrices, one can reassemble the variance-covariance matrix:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">sd_diag<span class="op">%*%</span>corrmatrix<span class="op">%*%</span>sd_diag                   </a></code></pre></div>
+<p>Given these two matrices, one can reassemble the variance-covariance matrix:<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">sd_diag <span class="op">%*%</span><span class="st"> </span>corrmatrix <span class="op">%*%</span><span class="st"> </span>sd_diag</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   25   30
 ## [2,]   30  100</code></pre>
-<p>There is a built-in convenience function, <code>sdcor3cov</code> in the <code>SIN</code> package that does this calculation, taking the vector of standard deviatios (not the diagonal matrix) and the correlation matrix to yield the variance-covariance matrix:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">SIN<span class="op">::</span><span class="kw">sdcor2cov</span>(<span class="dt">stddev=</span>sds,<span class="dt">corr=</span>corrmatrix)</a></code></pre></div>
-<pre><code>##      [,1] [,2]
-## [1,]   25   30
-## [2,]   30  100</code></pre>
-<p>We will be using this function a lot when simulating data from hierarchical models.</p>
 </div>
 </div>
 <h3>References</h3>
@@ -623,6 +611,12 @@ FIGURE 1.9: A bivariate Normal distribution with a negative correlation of -0.6.
 <div id="ref-AnnaLphd">
 <p>Laurinavichyute, Anna. 2020. “Similarity-Based Interference and Faulty Encoding Accounts of Sentence Processing.” Dissertation, University of Potsdam.</p>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>There is a built-in convenience function, <code>sdcor3cov</code> in the <code>SIN</code> package that does this calculation, taking the vector of standard deviations (not the diagonal matrix) and the correlation matrix to yield the variance-covariance matrix: <code>sdcor2cov(stddev = sds, corr = corrmatrix)</code>.<a href="bivariate-and-multivariate-distributions.html#fnref4" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
