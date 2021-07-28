@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.2 A hierarchical log-normal model: The Stroop effect | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22.8 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.2 A hierarchical log-normal model: The Stroop effect | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-06-09" />
+<meta name="date" content="2021-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -211,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.3" data-path="sec-pupil.html"><a href="sec-pupil.html#how-to-communicate-the-results"><i class="fa fa-check"></i><b>4.1.3</b> How to communicate the results?</a></li>
 <li class="chapter" data-level="4.1.4" data-path="sec-pupil.html"><a href="sec-pupil.html#sec:pupiladq"><i class="fa fa-check"></i><b>4.1.4</b> Descriptive adequacy</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="sec-trial.html"><a href="sec-trial.html"><i class="fa fa-check"></i><b>4.2</b> Log-normal model: Does trial affect reaction times?</a><ul>
+<li class="chapter" data-level="4.2" data-path="sec-trial.html"><a href="sec-trial.html"><i class="fa fa-check"></i><b>4.2</b> Log-normal model: Does trial affect response times?</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="sec-trial.html"><a href="sec-trial.html#likelihood-and-priors-for-the-log-normal-model"><i class="fa fa-check"></i><b>4.2.1</b> Likelihood and priors for the log-normal model</a></li>
 <li class="chapter" data-level="4.2.2" data-path="sec-trial.html"><a href="sec-trial.html#the-brms-model-1"><i class="fa fa-check"></i><b>4.2.2</b> The <code>brms</code> model</a></li>
 <li class="chapter" data-level="4.2.3" data-path="sec-trial.html"><a href="sec-trial.html#how-to-communicate-the-results-1"><i class="fa fa-check"></i><b>4.2.3</b> How to communicate the results?</a></li>
@@ -242,19 +242,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><a href="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><i class="fa fa-check"></i><b>5.3</b> Why fitting a Bayesian hierarchical model is worth the effort</a></li>
 <li class="chapter" data-level="5.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.4</b> Summary</a></li>
 <li class="chapter" data-level="5.5" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
-<li class="chapter" data-level="5.6" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html"><i class="fa fa-check"></i><b>5.6</b> Exercises</a></li>
+<li class="chapter" data-level="5.6" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html"><i class="fa fa-check"></i><b>5.6</b> Exercises</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-normal-likelihood"><i class="fa fa-check"></i><b>5.6.1</b> Exercises with a normal likelihood</a></li>
+<li class="chapter" data-level="5.6.2" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-log-normal-likelihood"><i class="fa fa-check"></i><b>5.6.2</b> Exercises with a log-normal likelihood</a></li>
+<li class="chapter" data-level="5.6.3" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-logistic-regression-bernoulli-likelihood."><i class="fa fa-check"></i><b>5.6.3</b> Exercises with a logistic regression (Bernoulli likelihood).</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="ch-priors.html"><a href="ch-priors.html"><i class="fa fa-check"></i><b>6</b> The Art and Science of Prior Elicitation</a><ul>
-<li class="chapter" data-level="6.1" data-path="a-simple-example-of-eliciting-priors-from-oneself.html"><a href="a-simple-example-of-eliciting-priors-from-oneself.html"><i class="fa fa-check"></i><b>6.1</b> A simple example of eliciting priors from oneself</a></li>
+<li class="chapter" data-level="6.1" data-path="sec-simpleexamplepriors.html"><a href="sec-simpleexamplepriors.html"><i class="fa fa-check"></i><b>6.1</b> Eliciting priors from oneself for a self-paced reading study: A simple example</a></li>
 <li class="chapter" data-level="6.2" data-path="eliciting-priors-from-experts.html"><a href="eliciting-priors-from-experts.html"><i class="fa fa-check"></i><b>6.2</b> Eliciting priors from experts</a></li>
 <li class="chapter" data-level="6.3" data-path="deriving-priors-from-meta-analyses.html"><a href="deriving-priors-from-meta-analyses.html"><i class="fa fa-check"></i><b>6.3</b> Deriving priors from meta-analyses</a></li>
 <li class="chapter" data-level="6.4" data-path="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><a href="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’ posteriors as priors for a new study</a></li>
+<li class="chapter" data-level="6.5" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+<li class="chapter" data-level="6.6" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a></li>
+<li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a><ul>
+<li class="chapter" data-level="7.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>7.1</b> Model building</a></li>
+<li class="chapter" data-level="7.2" data-path="principled-questions-on-a-model.html"><a href="principled-questions-on-a-model.html"><i class="fa fa-check"></i><b>7.2</b> Principled questions on a model</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="principled-questions-on-a-model.html"><a href="principled-questions-on-a-model.html#prior-predictive-checks-checking-consistency-with-domain-expertise"><i class="fa fa-check"></i><b>7.2.1</b> Prior predictive checks: Checking consistency with domain expertise</a></li>
+<li class="chapter" data-level="7.2.2" data-path="principled-questions-on-a-model.html"><a href="principled-questions-on-a-model.html#computational-faithfulness-testing-for-correct-posterior-approximations"><i class="fa fa-check"></i><b>7.2.2</b> Computational faithfulness: Testing for correct posterior approximations</a></li>
+<li class="chapter" data-level="7.2.3" data-path="principled-questions-on-a-model.html"><a href="principled-questions-on-a-model.html#model-sensitivity"><i class="fa fa-check"></i><b>7.2.3</b> Model sensitivity</a></li>
+<li class="chapter" data-level="7.2.4" data-path="principled-questions-on-a-model.html"><a href="principled-questions-on-a-model.html#posterior-predictive-checks-does-the-model-adequately-capture-the-data"><i class="fa fa-check"></i><b>7.2.4</b> Posterior predictive checks: Does the model adequately capture the data?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="exemplary-data-analysis.html"><a href="exemplary-data-analysis.html"><i class="fa fa-check"></i><b>7.3</b> Exemplary data analysis</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="exemplary-data-analysis.html"><a href="exemplary-data-analysis.html#prior-predictive-checks"><i class="fa fa-check"></i><b>7.3.1</b> Prior predictive checks</a></li>
+<li class="chapter" data-level="7.3.2" data-path="exemplary-data-analysis.html"><a href="exemplary-data-analysis.html#adjusting-priors"><i class="fa fa-check"></i><b>7.3.2</b> Adjusting priors</a></li>
+<li class="chapter" data-level="7.3.3" data-path="exemplary-data-analysis.html"><a href="exemplary-data-analysis.html#computational-faithfulness-and-model-sensitivity"><i class="fa fa-check"></i><b>7.3.3</b> Computational faithfulness and model sensitivity</a></li>
+<li class="chapter" data-level="7.3.4" data-path="exemplary-data-analysis.html"><a href="exemplary-data-analysis.html#posterior-predictive-checks-model-adequacy"><i class="fa fa-check"></i><b>7.3.4</b> Posterior predictive checks: Model adequacy</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="7.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>7.5</b> Further reading</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>8</b> Contrast coding</a><ul>
 <li class="chapter" data-level="8.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>8.1</b> Basic concepts illustrated using a two-level factor</a><ul>
 <li class="chapter" data-level="8.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>8.1.1</b> Default contrast coding: Treatment contrasts</a></li>
-<li class="chapter" data-level="8.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>8.1.2</b> Defining hypotheses</a></li>
+<li class="chapter" data-level="8.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>8.1.2</b> Defining comparisons</a></li>
 <li class="chapter" data-level="8.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>8.1.3</b> Sum contrasts</a></li>
 <li class="chapter" data-level="8.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>8.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
@@ -268,6 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b> Helmert contrasts</a></li>
 <li class="chapter" data-level="8.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
 <li class="chapter" data-level="8.3.4" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="8.3.5" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts: monotonic effects</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a><ul>
 <li class="chapter" data-level="8.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>8.4.1</b> Centered contrasts</a></li>
@@ -275,12 +298,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>8.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>8.5</b> Computing condition means from estimated contrasts</a></li>
-<li class="chapter" data-level="8.6" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
-<li class="chapter" data-level="8.7" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
+<li class="chapter" data-level="8.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
+<li class="chapter" data-level="8.7" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
 <li class="chapter" data-level="8.8" data-path="sec-Contrastsexercises.html"><a href="sec-Contrastsexercises.html"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a><ul>
-<li class="chapter" data-level="9.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>9.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="9.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>9.1</b> Contrast coding in a factorial <span class="math inline">\(2 \times 2\)</span> design</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>9.1.1</b> Nested effects</a></li>
 <li class="chapter" data-level="9.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>9.1.2</b> Interactions between contrasts</a></li>
 </ul></li>
@@ -288,8 +311,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>9.2.1</b> Estimating a group difference and controlling for a covariate</a></li>
 <li class="chapter" data-level="9.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>9.2.2</b> Estimating differences in slopes</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>9.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
-<li class="chapter" data-level="9.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>9.3</b> Interactions in generalized linear models (with non-linear link functions) and non-linear models</a></li>
+<li class="chapter" data-level="9.4" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>9.5</b> Further readings</a></li>
 <li class="chapter" data-level="9.6" data-path="sec-Contrasts2x2exercises.html"><a href="sec-Contrasts2x2exercises.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
 </ul></li>
@@ -297,28 +320,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>10</b> Introduction to the probabilistic programming language Stan</a><ul>
 <li class="chapter" data-level="10.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>10.1</b> Stan syntax</a></li>
 <li class="chapter" data-level="10.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>10.2</b> A first simple example with Stan: Normal likelihood</a></li>
-<li class="chapter" data-level="10.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>10.3</b> Another simple example: Cloze probability with Stan: Binomial likelihood</a></li>
+<li class="chapter" data-level="10.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>10.3</b> Another simple example: Cloze probability with Stan with the Binomial likelihood</a></li>
 <li class="chapter" data-level="10.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>10.4</b> Regression models in Stan</a><ul>
 <li class="chapter" data-level="10.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>10.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
 <li class="chapter" data-level="10.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>10.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
 <li class="chapter" data-level="10.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>10.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
-<li class="chapter" data-level="10.6" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
+<li class="chapter" data-level="10.5" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
+<li class="chapter" data-level="10.6" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
 <li class="chapter" data-level="10.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>10.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>11</b> Complex models and reparametrization</a><ul>
-<li class="chapter" data-level="11.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html"><i class="fa fa-check"></i><b>11.1</b> Hierarchical models with Stan</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>11.1.1</b> Varying intercept model with Stan</a></li>
-<li class="chapter" data-level="11.1.2" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>11.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
-<li class="chapter" data-level="11.1.3" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:corrstan"><i class="fa fa-check"></i><b>11.1.3</b> Correlated varying intercept varying slopes model</a></li>
-<li class="chapter" data-level="11.1.4" data-path="hierarchical-models-with-stan.html"><a href="hierarchical-models-with-stan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>11.1.4</b> By-subject and by-items correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="11.1" data-path="sec-hierstan.html"><a href="sec-hierstan.html"><i class="fa fa-check"></i><b>11.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="sec-hierstan.html"><a href="sec-hierstan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>11.1.1</b> Varying intercept model with Stan</a></li>
+<li class="chapter" data-level="11.1.2" data-path="sec-hierstan.html"><a href="sec-hierstan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>11.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="11.1.3" data-path="sec-hierstan.html"><a href="sec-hierstan.html#sec:corrstan"><i class="fa fa-check"></i><b>11.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="11.1.4" data-path="sec-hierstan.html"><a href="sec-hierstan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>11.1.4</b> By-subject and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
-<li class="chapter" data-level="11.3" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
+<li class="chapter" data-level="11.2" data-path="summary-10.html"><a href="summary-10.html"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
+<li class="chapter" data-level="11.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
 <li class="chapter" data-level="11.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>11.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom likelihoods in Stan</a></li>
+<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
 <li class="chapter" data-level="13.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>13.1</b> Meta-analysis</a><ul>
@@ -327,13 +350,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.2" data-path="measurement-error-models.html"><a href="measurement-error-models.html"><i class="fa fa-check"></i><b>13.2</b> Measurement-error models</a><ul>
 <li class="chapter" data-level="13.2.1" data-path="measurement-error-models.html"><a href="measurement-error-models.html#accounting-for-measurement-error-in-a-voice-onset-time-model"><i class="fa fa-check"></i><b>13.2.1</b> Accounting for measurement error in a voice onset time model</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
-<li class="chapter" data-level="13.4" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
+<li class="chapter" data-level="13.3" data-path="summary-11.html"><a href="summary-11.html"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
+<li class="chapter" data-level="13.4" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
 <li class="chapter" data-level="13.5" data-path="sec-REMAMEexercises.html"><a href="sec-REMAMEexercises.html"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="ch-sat.html"><a href="ch-sat.html"><i class="fa fa-check"></i><b>14</b> SAT</a></li>
 <li class="part"><span><b>V Model comparison and hypothesis testing</b></span></li>
-<li class="chapter" data-level="15" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>15</b> Introduction to model comparison</a></li>
+<li class="chapter" data-level="15" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>15</b> Introduction to model comparison</a><ul>
+<li class="chapter" data-level="15.1" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.1</b> Further reading</a></li>
+</ul></li>
 <li class="chapter" data-level="16" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>16</b> Bayes factors</a><ul>
 <li class="chapter" data-level="16.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>16.1</b> Hypothesis testing using the Bayes factor</a><ul>
 <li class="chapter" data-level="16.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>16.1.1</b> Marginal likelihood</a></li>
@@ -343,30 +368,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sensitivity-analysis-1"><i class="fa fa-check"></i><b>16.2.1</b> Sensitivity analysis</a></li>
 <li class="chapter" data-level="16.2.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>16.2.2</b> Non-nested models</a></li>
 </ul></li>
-<li class="chapter" data-level="16.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>16.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a><ul>
-<li class="chapter" data-level="16.3.1" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html#bayes-factor-in-stan"><i class="fa fa-check"></i><b>16.3.1</b> Bayes factor in Stan</a></li>
+<li class="chapter" data-level="16.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>16.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a></li>
+<li class="chapter" data-level="16.4" data-path="bayes-factor-in-stan.html"><a href="bayes-factor-in-stan.html"><i class="fa fa-check"></i><b>16.4</b> Bayes factor in Stan</a></li>
+<li class="chapter" data-level="16.5" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html"><i class="fa fa-check"></i><b>16.5</b> Bayes factors in theory and in practice</a><ul>
+<li class="chapter" data-level="16.5.1" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-theory-stability-and-accuracy"><i class="fa fa-check"></i><b>16.5.1</b> Bayes factors in theory: Stability and accuracy</a></li>
+<li class="chapter" data-level="16.5.2" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-practice-variability-with-the-data"><i class="fa fa-check"></i><b>16.5.2</b> Bayes factors in practice: Variability with the data</a></li>
 </ul></li>
-<li class="chapter" data-level="16.4" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html"><i class="fa fa-check"></i><b>16.4</b> Bayes factors in theory and in practice</a><ul>
-<li class="chapter" data-level="16.4.1" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-theory-stability-and-accuracy"><i class="fa fa-check"></i><b>16.4.1</b> Bayes factors in theory: Stability and accuracy</a></li>
-<li class="chapter" data-level="16.4.2" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-practice-variability-with-the-data"><i class="fa fa-check"></i><b>16.4.2</b> Bayes factors in practice: Variability with the data</a></li>
-</ul></li>
-<li class="chapter" data-level="16.5" data-path="summary-10.html"><a href="summary-10.html"><i class="fa fa-check"></i><b>16.5</b> Summary</a></li>
-<li class="chapter" data-level="16.6" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>16.6</b> Further reading</a></li>
-<li class="chapter" data-level="16.7" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>16.7</b> Exercises</a></li>
+<li class="chapter" data-level="16.6" data-path="summary-12.html"><a href="summary-12.html"><i class="fa fa-check"></i><b>16.6</b> Summary</a></li>
+<li class="chapter" data-level="16.7" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.7</b> Further reading</a></li>
+<li class="chapter" data-level="16.8" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>16.8</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>17</b> Cross-validation</a><ul>
 <li class="chapter" data-level="17.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>17.1</b> Expected log predictive density of a model</a></li>
 <li class="chapter" data-level="17.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>17.2</b> K-fold and leave-one-out cross-validation</a></li>
 <li class="chapter" data-level="17.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>17.3</b> Testing the N400 effect using cross-validation</a><ul>
-<li class="chapter" data-level="17.3.1" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>17.3.1</b> cross-validation in Stan</a></li>
+<li class="chapter" data-level="17.3.1" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html#cross-validation-with-psis-loo"><i class="fa fa-check"></i><b>17.3.1</b> Cross-validation with PSIS-LOO</a></li>
+<li class="chapter" data-level="17.3.2" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html#cross-validation-with-k-fold"><i class="fa fa-check"></i><b>17.3.2</b> Cross-validation with K-fold</a></li>
+<li class="chapter" data-level="17.3.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html#leave-one-group-out-cross-validation"><i class="fa fa-check"></i><b>17.3.3</b> Leave-one-group-out cross-validation</a></li>
 </ul></li>
-<li class="chapter" data-level="17.4" data-path="summary-11.html"><a href="summary-11.html"><i class="fa fa-check"></i><b>17.4</b> Summary</a></li>
-<li class="chapter" data-level="17.5" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>17.5</b> Further reading</a></li>
-<li class="chapter" data-level="17.6" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>17.6</b> Exercises</a></li>
+<li class="chapter" data-level="17.4" data-path="sec-logcv.html"><a href="sec-logcv.html"><i class="fa fa-check"></i><b>17.4</b> Comparing different likelihoods with cross-validation</a></li>
+<li class="chapter" data-level="17.5" data-path="issues-with-cross-validation.html"><a href="issues-with-cross-validation.html"><i class="fa fa-check"></i><b>17.5</b> Issues with cross-validation</a></li>
+<li class="chapter" data-level="17.6" data-path="cross-validation-in-stan.html"><a href="cross-validation-in-stan.html"><i class="fa fa-check"></i><b>17.6</b> Cross-validation in Stan</a><ul>
+<li class="chapter" data-level="17.6.1" data-path="cross-validation-in-stan.html"><a href="cross-validation-in-stan.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>17.6.1</b> PSIS-LOO-CV in Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="summary-13.html"><a href="summary-13.html"><i class="fa fa-check"></i><b>17.7</b> Summary</a></li>
+<li class="chapter" data-level="17.8" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>17.8</b> Further reading</a></li>
+<li class="chapter" data-level="17.9" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>17.9</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
 <li class="chapter" data-level="18" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>18</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="18.1" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
+<li class="chapter" data-level="18.1" data-path="further-reading-14.html"><a href="further-reading-14.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>19</b> Multinomial processing trees</a><ul>
 <li class="chapter" data-level="19.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>19.1</b> Modeling multiple categorical responses</a><ul>
@@ -376,18 +407,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>19.2</b> Multinomial processing tree (MPT) models</a><ul>
 <li class="chapter" data-level="19.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>19.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="19.3" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
+<li class="chapter" data-level="19.3" data-path="further-reading-15.html"><a href="further-reading-15.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
 <li class="chapter" data-level="19.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>19.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>20</b> Mixture models</a><ul>
-<li class="chapter" data-level="20.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html"><i class="fa fa-check"></i><b>20.1</b> A mixture model of the speed-accuracy trade-off</a><ul>
-<li class="chapter" data-level="20.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off.html#a-fast-guess-model-account-of-the-global-motion-detection-task"><i class="fa fa-check"></i><b>20.1.1</b> A fast guess model account of the global motion detection task</a></li>
+<li class="chapter" data-level="20.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><i class="fa fa-check"></i><b>20.1</b> A mixture model of the speed-accuracy trade-off: The fast-guess model account</a><ul>
+<li class="chapter" data-level="20.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html#the-global-motion-detection-task"><i class="fa fa-check"></i><b>20.1.1</b> The global motion detection task</a></li>
+<li class="chapter" data-level="20.1.2" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html#a-very-simple-implementation-of-the-fast-guess-model"><i class="fa fa-check"></i><b>20.1.2</b> A very simple implementation of the fast-guess model</a></li>
+<li class="chapter" data-level="20.1.3" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html#sec:multmix"><i class="fa fa-check"></i><b>20.1.3</b> A multivariate implementation of the fast-guess model</a></li>
+<li class="chapter" data-level="20.1.4" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html#an-implementation-of-the-fast-guess-model-that-takes-instructions-into-account"><i class="fa fa-check"></i><b>20.1.4</b> An implementation of the fast-guess model that takes instructions into account</a></li>
+<li class="chapter" data-level="20.1.5" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html#sec:fastguessh"><i class="fa fa-check"></i><b>20.1.5</b> A hierarchical implementation of the fast-guess model</a></li>
 </ul></li>
-<li class="chapter" data-level="20.2" data-path="summary-12.html"><a href="summary-12.html"><i class="fa fa-check"></i><b>20.2</b> Summary</a></li>
-<li class="chapter" data-level="20.3" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
+<li class="chapter" data-level="20.2" data-path="summary-14.html"><a href="summary-14.html"><i class="fa fa-check"></i><b>20.2</b> Summary</a></li>
+<li class="chapter" data-level="20.3" data-path="further-reading-16.html"><a href="further-reading-16.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
 <li class="chapter" data-level="20.4" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>20.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="ch-lognormal.html"><a href="ch-lognormal.html"><i class="fa fa-check"></i><b>21</b> A simple accumulator model to account for choice response time</a></li>
+<li class="chapter" data-level="21" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html"><i class="fa fa-check"></i><b>21</b> A simple accumulator model to account for choice response time</a></li>
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="22" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>22</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -415,14 +450,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.2</span> A hierarchical log-normal model: The Stroop effect</h2>
 <p>We will illustrate the issues that arise with a log-normal likelihood in a hierarchical model using data from a Stroop task <span class="citation">(Stroop <a href="#ref-stroop1935studies">1935</a>; for a review, see MacLeod <a href="#ref-macleod1991half">1991</a>)</span>. We will analyze a subset of the data of 3337 participants that undertook one variant of the Stroop task as part of the battery of tasks run in <span class="citation">Ebersole et al. (<a href="#ref-ManyLabs3">2016</a>)</span>.</p>
 <p>For this variant of the Stroop task, participants were presented with one word at the center of the screen, which was either “red”, “blue”, and “green” (<em>word</em>) written in either red, blue, or green font (<em>color</em>). In one third of the trials the <em>word</em> matched the <em>color</em> of the text (“congruent” condition) and in the rest of the trials it did not match (“incongruent” condition). Participants were instructed to only pay attention to the color, and press <code>1</code> if the color of the word was red, <code>2</code> if it was blue, and <code>3</code> if it was green. <!-- The complete procedure can be found in https://osf.io/5ykuj/ and the dataset can be found in https://osf.io/n8xa7/. --> The Stroop effect, that is, the difficulty in identifying the color when it mismatches the word in the incongruent condition (e.g., green in color blue) in comparison to a baseline condition, here, the congruent condition (e.g., green in color green) is extremely robust across variations of the task.</p>
-<p>While this task yields two measures: the accuracy of the decision made and the time it took to respond. For the Stroop task, accuracy is usually almost at ceiling level, and to simplify the model, we will ignore it. <span class="citation">(See Nicenboim <a href="#ref-Nicenboim2018StanCon">2018</a> for a cognitive model that incorporates accuracy and reaction times in the same model to analyze the same Stroop data)</span>.</p>
+<p>While this task yields two measures: the accuracy of the decision made and the time it took to respond. For the Stroop task, accuracy is usually almost at ceiling level, and to simplify the model, we will ignore it. <span class="citation">(See Nicenboim <a href="#ref-Nicenboim2018StanCon">2018</a> for a cognitive model that incorporates accuracy and response times in the same model to analyze the same Stroop data)</span>.</p>
 <div id="a-correlated-varying-intercept-varying-slopes-log-normal-model" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> A correlated varying intercept varying slopes log-normal model</h3>
-<p>If our theory only focuses on the difference between the reaction times for the “congruent” vs. “incongruent” condition, we can ignore the actual color presented and what was written and focus on whether there was a match or not between the two. We will need a predictor that indicates whether each trial is congruent or incongruent (<code>c_cond</code>). For simplicity, we will also assume that all participants share the same variance (as we saw in section <a href="sec-N400hierarchical.html#sec:distrmodel">5.1.6</a> changing this assumption leads to distributional regression models). This means that we are going to fit the data with the following likelihood (identical to the likelihood that we fit in section <a href="sec-N400hierarchical.html#sec:mcvivs">5.1.4</a> except that here the location and scale are embedded in a log-normal likelihood rather than a normal one). This likelihood indicates that we are dealing with a hierarchical model with by-subjects varying intercept and varying slopes model:</p>
+<p>If our theory only focuses on the difference between the response times for the “congruent” vs. “incongruent” condition, we can ignore the actual color presented and what was written and focus on whether there was a match or not between the two. We will need a predictor that indicates whether each trial is congruent or incongruent (<code>c_cond</code>). For simplicity, we will also assume that all participants share the same variance (as we saw in section <a href="sec-N400hierarchical.html#sec:distrmodel">5.1.6</a> changing this assumption leads to distributional regression models). This means that we are going to fit the data with the following likelihood (identical to the likelihood that we fit in section <a href="sec-N400hierarchical.html#sec:mcvivs">5.1.4</a> except that here the location and scale are embedded in a log-normal likelihood rather than a normal one). This likelihood indicates that we are dealing with a hierarchical model with by-subjects varying intercept and varying slopes model:</p>
 <p><span class="math display">\[\begin{equation}
   rt_n \sim LogNormal(\alpha + u_{subj[n],1}  + c\_cond_n \cdot  (\beta + u_{subj[n],2}), \sigma)
 \end{equation}\]</span></p>
-<p>We will discuss how to deal with the coding of conditions, such as <code>c_cond</code>, with more details in chapter <a href="ch-contr.html#ch:contr">8</a> <span class="citation">(and see also Daniel J. Schad et al. <a href="#ref-schad2020capitalize">2020</a> for the mathematics underlying different kinds of contrasts)</span>, but for now it will suffice to say that we assign a <code>1</code> to <code>c_cond</code> for the “incongruent” condition and a <code>-1</code> for the “congruent” one (i.e., a sum coding contrast). This will mean that if <span class="math inline">\(\beta\)</span> turns out to be positive, the incongruent condition will be slower than the congruent one. This is because on average the location of the log-normal likelihood for each condition will be as follows. (We could have chosen to do the opposite assignments, and get to the opposite conclusion without any change in the underlying model).</p>
+<p>We will discuss how to deal with the coding of conditions, such as <code>c_cond</code>, with more details in chapter <a href="ch-contr.html#ch:contr">8</a> <span class="citation">(and see also Schad et al. <a href="#ref-schad2020capitalize">2020</a> for the mathematics underlying different kinds of contrasts)</span>, but for now it will suffice to say that we assign a <code>1</code> to <code>c_cond</code> for the “incongruent” condition and a <code>-1</code> for the “congruent” one (i.e., a sum coding contrast). This will mean that if <span class="math inline">\(\beta\)</span> turns out to be positive, the incongruent condition will be slower than the congruent one. This is because on average the location of the log-normal likelihood for each condition will be as follows. (We could have chosen to do the opposite assignments, and get to the opposite conclusion without any change in the underlying model).</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
   \mu_{incongruent} &amp;= \alpha + 1 \cdot  \beta \\
@@ -474,48 +509,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{equation}\]</span></p>
 <p>We are ready to fit a model now. To speed up computation, we subset 50 participants of the original dataset; both the subsetted data and the original dataset can be found in the package <code>bcogsci</code>. (In a real setting, we would obviously not subset the participants.)
 We restrict ourselves to the correct trials only and we add a <code>c_cond</code> predictor with the sum coded variable.</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_stroop&quot;</span>)</a>
-<a class="sourceLine" id="cb246-2" data-line-number="2">(df_stroop &lt;-<span class="st"> </span>df_stroop <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb246-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cond =</span> <span class="kw">if_else</span>(condition <span class="op">==</span><span class="st"> &quot;Incongruent&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_stroop&quot;</span>)</a>
+<a class="sourceLine" id="cb249-2" data-line-number="2">(df_stroop &lt;-<span class="st"> </span>df_stroop <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb249-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cond =</span> <span class="kw">if_else</span>(condition <span class="op">==</span><span class="st"> &quot;Incongruent&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>)))</a></code></pre></div>
 <pre><code>## # A tibble: 3,058 x 5
 ##    subj trial condition      RT c_cond
 ##   &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;       &lt;int&gt;  &lt;dbl&gt;
 ## 1     1     0 Congruent    1484     -1
 ## 2     1     1 Incongruent  1316      1
 ## 3     1     2 Incongruent   628      1
-## 4     1     3 Congruent     511     -1
-## 5     1     4 Congruent     509     -1
-## # … with 3,053 more rows</code></pre>
+## # … with 3,055 more rows</code></pre>
 <p>We fit the model with 4000 iterations rather than with the default of 2000 iterations by chain. This is because if we run the model with the default number of iterations, the following warning appears: <code>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and media Running the chains for more iterations may help. See http://mc-stan.org/misc/warnings.html#bulk-ess</code>.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1">fit_stroop &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(c_cond <span class="op">|</span><span class="st"> </span>subj),</a>
-<a class="sourceLine" id="cb248-2" data-line-number="2">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
-<a class="sourceLine" id="cb248-3" data-line-number="3">  <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb248-4" data-line-number="4">    <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb248-5" data-line-number="5">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb248-6" data-line-number="6">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">.01</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb248-7" data-line-number="7">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb248-8" data-line-number="8">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb248-9" data-line-number="9">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb248-10" data-line-number="10">    ),</a>
-<a class="sourceLine" id="cb248-11" data-line-number="11">  <span class="dt">iter =</span> <span class="dv">4000</span>,</a>
-<a class="sourceLine" id="cb248-12" data-line-number="12">  <span class="dt">data =</span> df_stroop</a>
-<a class="sourceLine" id="cb248-13" data-line-number="13">)</a></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1">fit_stroop &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(c_cond <span class="op">|</span><span class="st"> </span>subj),</a>
+<a class="sourceLine" id="cb251-2" data-line-number="2">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
+<a class="sourceLine" id="cb251-3" data-line-number="3">  <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb251-4" data-line-number="4">    <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb251-5" data-line-number="5">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb251-6" data-line-number="6">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">.01</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb251-7" data-line-number="7">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb251-8" data-line-number="8">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb251-9" data-line-number="9">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb251-10" data-line-number="10">    ),</a>
+<a class="sourceLine" id="cb251-11" data-line-number="11">  <span class="dt">iter =</span> <span class="dv">4000</span>,</a>
+<a class="sourceLine" id="cb251-12" data-line-number="12">  <span class="dt">data =</span> df_stroop</a>
+<a class="sourceLine" id="cb251-13" data-line-number="13">)</a></code></pre></div>
 <p>We will focus on <span class="math inline">\(\beta\)</span> (but you can verify that there is nothing surprising in <code>fit_stroop</code> ):</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_stroop, <span class="dt">pars =</span> <span class="st">&quot;b_c_cond&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_stroop, <span class="dt">pars =</span> <span class="st">&quot;b_c_cond&quot;</span>)</a></code></pre></div>
 <pre><code>##          Estimate Est.Error   Q2.5  Q97.5
 ## b_c_cond    0.027   0.00552 0.0157 0.0374</code></pre>
 <p>After seeing the posterior for <span class="math inline">\(\beta\)</span>, we suspect that the prior might have been too restrictive. If we overlay density plots for prior and posterior distributions this is more evident:</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1">sample_b_post &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_stroop)<span class="op">$</span>b_c_cond</a>
-<a class="sourceLine" id="cb251-2" data-line-number="2"><span class="co"># We generate samples from the prior as well:</span></a>
-<a class="sourceLine" id="cb251-3" data-line-number="3">N &lt;-<span class="st"> </span><span class="kw">length</span>(sample_b_post)</a>
-<a class="sourceLine" id="cb251-4" data-line-number="4">sample_b_prior &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">.01</span>)</a>
-<a class="sourceLine" id="cb251-5" data-line-number="5">samples &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb251-6" data-line-number="6">  <span class="dt">sample =</span> <span class="kw">c</span>(sample_b_post, sample_b_prior),</a>
-<a class="sourceLine" id="cb251-7" data-line-number="7">  <span class="dt">distribution =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;posterior&quot;</span>, N), <span class="kw">rep</span>(<span class="st">&quot;prior&quot;</span>, N))</a>
-<a class="sourceLine" id="cb251-8" data-line-number="8">)</a>
-<a class="sourceLine" id="cb251-9" data-line-number="9"><span class="kw">ggplot</span>(samples, <span class="kw">aes</span>(<span class="dt">x =</span> sample, <span class="dt">fill =</span> distribution)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb251-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">.5</span>)</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-136-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1">sample_b_post &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_stroop)<span class="op">$</span>b_c_cond</a>
+<a class="sourceLine" id="cb254-2" data-line-number="2"><span class="co"># We generate samples from the prior as well:</span></a>
+<a class="sourceLine" id="cb254-3" data-line-number="3">N &lt;-<span class="st"> </span><span class="kw">length</span>(sample_b_post)</a>
+<a class="sourceLine" id="cb254-4" data-line-number="4">sample_b_prior &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">.01</span>)</a>
+<a class="sourceLine" id="cb254-5" data-line-number="5">samples &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb254-6" data-line-number="6">  <span class="dt">sample =</span> <span class="kw">c</span>(sample_b_post, sample_b_prior),</a>
+<a class="sourceLine" id="cb254-7" data-line-number="7">  <span class="dt">distribution =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;posterior&quot;</span>, N), <span class="kw">rep</span>(<span class="st">&quot;prior&quot;</span>, N))</a>
+<a class="sourceLine" id="cb254-8" data-line-number="8">)</a>
+<a class="sourceLine" id="cb254-9" data-line-number="9"><span class="kw">ggplot</span>(samples, <span class="kw">aes</span>(<span class="dt">x =</span> sample, <span class="dt">fill =</span> distribution)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb254-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">.5</span>)</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-138-1.svg" width="672" /></p>
 <div id="sensitivity-analysis" class="section level4">
 <h4><span class="header-section-number">5.2.1.1</span> Sensitivity analysis</h4>
 <p>We see that the posterior distribution covers values much larger than the ones that are in the bulk of the prior distribution. One interesting question that one should ask about one’s analysis is: To what extent is the posterior affected by the prior distribution? We can investigate this with a sensitivity analysis. We will examine what happens for the following priors for <span class="math inline">\(\beta\)</span> by fitting different models with the same priors except for all the parametera, varying only the priors for <span class="math inline">\(\beta\)</span>:</p>
@@ -639,7 +672,7 @@ MedianRT_{diff} &amp;= exp(\alpha + \beta) - \exp(\alpha - \beta)
 \tag{5.2}
 \end{equation}\]</span></p>
 <!-- This means that we need to re-run the models to extract samples from the intercept. -->
-<p>We get the <em>posterior distributions</em> of the median difference between conditions for different models by using equation <a href="sec-stroop.html#eq:medianrt">(5.2)</a>. We calculate the median difference rather than the mean difference because the mean depends on the parameter <span class="math inline">\(\sigma\)</span>, but the median doesn’t; see <a href="sec-ppd.html#sec:lognormal">3.5.3</a>. In the following table, we use <em>means</em>, and 95% quantiles to summarize these posterior distributions. It’s important to realize that the use of mean to summarize the posterior distribution is orthogonal to our use of median to summarize the reaction times by condition: In the first case, we use the median to summarize a group of <em>observations</em>, and in the second case, we use the mean to summarize a group of <em>samples</em> from the posterior–we could have summarized the samples from the posterior with its median as well.</p>
+<p>We get the <em>posterior distributions</em> of the median difference between conditions for different models by using equation <a href="sec-stroop.html#eq:medianrt">(5.2)</a>. We calculate the median difference rather than the mean difference because the mean depends on the parameter <span class="math inline">\(\sigma\)</span>, but the median doesn’t; see <a href="sec-ppd.html#sec:lognormal">3.5.3</a>. In the following table, we use <em>means</em>, and 95% quantiles to summarize these posterior distributions. It’s important to realize that the use of mean to summarize the posterior distribution is orthogonal to our use of median to summarize the response times by condition: In the first case, we use the median to summarize a group of <em>observations</em>, and in the second case, we use the mean to summarize a group of <em>samples</em> from the posterior–we could have summarized the samples from the posterior with its median as well.</p>
 <table>
 <thead>
 <tr>
@@ -745,7 +778,7 @@ normal(0, 2)
 </tbody>
 </table>
 <p>This shows us that the posterior changes substantially when we include wider priors in our model. It seems that the posterior is relatively unaffected for priors with a standard deviation larger than .05, but if we assume a priori that the effect of the manipulation <em>must</em> be small, we will end up finding that. When we include less information about the possible effect sizes with a more diffuse prior–we assume that they can be small but also large–, we allow the data to influence the posterior more.</p>
-<p>Which analysis should one report after carrying out a sensitivity analysis? In the above example, the priors ranging from Normal(0,0.05) to Normal(0,2) show rather similar posterior distributions for the mean difference. The most common approach in Bayesian analysis is to report the results of such relatively uninformative priors (e.g., one could report the posterior associated with the Normal(0,2) here), because this kind of prior allows for a broader range of possible effects and is relatively agnostic. However, if one is using a prior from a previous analysis, then of course it makes sense to use the informative prior; using only informative priors in a Bayesian analysis is rather rare, but is an underutilized approach. Another situation where posterior distributions associated with multiple priors should be reported is when one is carrying out an adversarial sensitivity analysis <span class="citation">(Spiegelhalter, Abrams, and Myles <a href="#ref-spiegelhalter2004bayesian">2004</a>)</span>: one can take a group of agnostic, enthusiastic, and adversarial or skeptical priors that reflect, respectively, a non-commital a priori position, an informed position based on the researcher’s prior beliefs, and an adversarial position based on a scientific opponent’s beliefs. In such a situation, analyses using all three priors can be reported, so that the reader can determine how different prior beliefs influence the posterior. For an example of such an adversarial analysis, see <span class="citation">Vasishth and Engelmann (<a href="#ref-VasishthEngelmann2020">2021</a>)</span>. Finally, when carrying out hypothesis testing using Bayes factors, the choice of the prior on the parameter of interest becomes critically important; in that situation, it is very important to report a sensitivity analysis, showing the Bayes factor as well as well as a summary of the posterior distributions <span class="citation">(Schad et al. <a href="#ref-SchadEtAlBF">2021</a>)</span>; we return to this point in chapter <a href="ch-bf.html#ch:bf">16</a>, which covers Bayes factors.</p>
+<p>Which analysis should one report after carrying out a sensitivity analysis? In the above example, the priors ranging from Normal(0,0.05) to Normal(0,2) show rather similar posterior distributions for the mean difference. The most common approach in Bayesian analysis is to report the results of such relatively uninformative priors (e.g., one could report the posterior associated with the Normal(0,2) here), because this kind of prior allows for a broader range of possible effects and is relatively agnostic. However, if one is using a prior from a previous analysis, then of course it makes sense to use the informative prior; using only informative priors in a Bayesian analysis is rather rare, but is an underutilized approach. Another situation where posterior distributions associated with multiple priors should be reported is when one is carrying out an adversarial sensitivity analysis <span class="citation">(Spiegelhalter, Abrams, and Myles <a href="#ref-spiegelhalter2004bayesian">2004</a>)</span>: one can take a group of agnostic, enthusiastic, and adversarial or skeptical priors that reflect, respectively, a non-commital a priori position, an informed position based on the researcher’s prior beliefs, and an adversarial position based on a scientific opponent’s beliefs. In such a situation, analyses using all three priors can be reported, so that the reader can determine how different prior beliefs influence the posterior. For an example of such an adversarial analysis, see <span class="citation">Vasishth and Engelmann (<a href="#ref-VasishthEngelmann2021">2021</a>)</span>. Finally, when carrying out hypothesis testing using Bayes factors, the choice of the prior on the parameter of interest becomes critically important; in that situation, it is very important to report a sensitivity analysis, showing the Bayes factor as well as well as a summary of the posterior distributions <span class="citation">(Schad et al. <a href="#ref-SchadEtAlBF">2021</a>)</span>; we return to this point in chapter <a href="ch-bf.html#ch:bf">16</a>, which covers Bayes factors.</p>
 </div>
 </div>
 </div>
@@ -761,10 +794,10 @@ normal(0, 2)
 <p>Nicenboim, Bruno. 2018. “The Implementation of a Model of Choice: The (Truncated) Linear Ballistic Accumulator.” In <em>StanCon</em>. Aalto University, Helsinki, Finland. <a href="https://doi.org/10.5281/zenodo.1465990" class="uri">https://doi.org/10.5281/zenodo.1465990</a>.</p>
 </div>
 <div id="ref-SchadEtAlBF">
-<p>Schad, Daniel J., Bruno Nicenboim, Paul-Christian Bürkner, Michael Betancourt, and Shravan Vasishth. 2021. “Workflow Techniques for the Robust Use of Bayes Factors.”</p>
+<p>Schad, Daniel J, Bruno Nicenboim, Paul-Christian Bürkner, Michael Betancourt, and Shravan Vasishth. 2021. “Workflow Techniques for the Robust Use of Bayes Factors.”</p>
 </div>
 <div id="ref-schad2020capitalize">
-<p>Schad, Daniel J., Shravan Vasishth, Sven Hohenstein, and Reinhold Kliegl. 2019. “How to Capitalize on a Priori Contrasts in Linear (Mixed) Models: A Tutorial.” <em>Journal of Memory and Language</em> 110. <a href="https://doi.org/10.1016/j.jml.2019.104038" class="uri">https://doi.org/10.1016/j.jml.2019.104038</a>.</p> 2020. “How to Capitalize on a Priori Contrasts in Linear (Mixed) Models: A Tutorial.” <em>Journal of Memory and Language</em> 110. Elsevier: 104038.</p>
+<p>Schad, Daniel J, Shravan Vasishth, Sven Hohenstein, and Reinhold Kliegl. 2020. “How to Capitalize on a Priori Contrasts in Linear (Mixed) Models: A Tutorial.” <em>Journal of Memory and Language</em> 110. Elsevier: 104038.</p>
 </div>
 <div id="ref-spiegelhalter2004bayesian">
 <p>Spiegelhalter, David J, Keith R Abrams, and Jonathan P Myles. 2004. <em>Bayesian Approaches to Clinical Trials and Health-Care Evaluation</em>. Vol. 13. John Wiley &amp; Sons.</p>
@@ -772,8 +805,8 @@ normal(0, 2)
 <div id="ref-stroop1935studies">
 <p>Stroop, J Ridley. 1935. “Studies of Interference in Serial Verbal Reactions.” <em>Journal of Experimental Psychology</em> 18 (6). Psychological Review Company: 643.</p>
 </div>
-<div id="ref-VasishthEngelmann2020">
-<p>Vasishth, Shravan, and Felix Engelmann. 2021. “Sentence Comprehension as a Cognitive Process: A Computational Approach.” <a href="https://vasishth.github.io/sccp/" class="uri">https://vasishth.github.io/sccp/</a>.</p>
+<div id="ref-VasishthEngelmann2021">
+<p>Vasishth, Shravan, and Felix Engelmann. 2021. <em>Sentence Comprehension as a Cognitive Process: A Computational Approach</em>. Cambridge, UK: Cambridge University Press. <a href="https://vasishth.github.io/sccp/" class="uri">https://vasishth.github.io/sccp/</a>.</p>
 </div>
 </div>
             </section>
@@ -805,6 +838,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -825,6 +859,10 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }
