@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.3 Exemplary data analysis | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.22.8 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.3 Exemplary data analysis | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-07-28" />
+<meta name="date" content="2021-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,7 +52,743 @@
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
+<script>
+// FOLD code from 
+// https://github.com/bblodfon/rtemps/blob/master/docs/bookdown-lite/hide_code.html
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
 
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+<script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    // close the dropdown menu when an option is clicked
+    $("#allCodeButton").dropdown("toggle");
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    // close the dropdown menu when an option is clicked
+    $("#allCodeButton").dropdown("toggle");
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
+  rCodeBlocks.each(function() {
+
+    // if code block has been labeled with class `fold-show`, show the code on init!
+    var classList = $(this).attr('class').split(/\s+/);
+    for (var i = 0; i < classList.length; i++) {
+    if (classList[i] === 'fold-show') {
+        show = true;
+      }
+    }
+
+    // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // hack: return show to false, otherwise all next codeBlocks will be shown!
+    show = false;
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Code');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide');
+    });
+  });
+
+}
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.3.7
+ * http://getbootstrap.com/javascript/#dropdowns
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle="dropdown"]'
+  var Dropdown = function (element) {
+    $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.VERSION = '3.3.7'
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+  function clearMenus(e) {
+    if (e && e.which === 3) return
+    $(backdrop).remove()
+    $(toggle).each(function () {
+      var $this         = $(this)
+      var $parent       = getParent($this)
+      var relatedTarget = { relatedTarget: this }
+
+      if (!$parent.hasClass('open')) return
+
+      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this.attr('aria-expanded', 'false')
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+    })
+  }
+
+  Dropdown.prototype.toggle = function (e) {
+    var $this = $(this)
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    clearMenus()
+
+    if (!isActive) {
+      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
+        // if mobile we use a backdrop because click events don't delegate
+        $(document.createElement('div'))
+          .addClass('dropdown-backdrop')
+          .insertAfter($(this))
+          .on('click', clearMenus)
+      }
+
+      var relatedTarget = { relatedTarget: this }
+      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this
+        .trigger('focus')
+        .attr('aria-expanded', 'true')
+
+      $parent
+        .toggleClass('open')
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
+    }
+
+    return false
+  }
+
+  Dropdown.prototype.keydown = function (e) {
+    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
+
+    var $this = $(this)
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    if (!isActive && e.which != 27 || isActive && e.which == 27) {
+      if (e.which == 27) $parent.find(toggle).trigger('focus')
+      return $this.trigger('click')
+    }
+
+    var desc = ' li:not(.disabled):visible a'
+    var $items = $parent.find('.dropdown-menu' + desc)
+
+    if (!$items.length) return
+
+    var index = $items.index(e.target)
+
+    if (e.which == 38 && index > 0)                 index--         // up
+    if (e.which == 40 && index < $items.length - 1) index++         // down
+    if (!~index)                                    index = 0
+
+    $items.eq(index).trigger('focus')
+  }
+
+
+  // DROPDOWN PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.dropdown')
+
+      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown             = Plugin
+  $.fn.dropdown.Constructor = Dropdown
+
+
+  // DROPDOWN NO CONFLICT
+  // ====================
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  // APPLY TO STANDARD DROPDOWN ELEMENTS
+  // ===================================
+
+  $(document)
+    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
+    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
+
+}(jQuery);
+</script>
+<style type="text/css">
+.code-folding-btn {
+  margin-bottom: 4px;
+}
+
+.row { display: flex; }
+.collapse { display: none; }
+.in { display:block }
+.pull-right > .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.open > .dropdown-menu {
+    display: block;
+    color: #ffffff;
+    background-color: #ffffff;
+    background-image: none;
+    border-color: #92897e;
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #e95420;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #e95420;
+  outline: 0;
+}
+.dropdown-menu > .disabled > a,
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  color: #aea79f;
+}
+
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 1;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 4px 8px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: #ffffff;
+  text-decoration: none;
+}
+.btn:active,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  opacity: 0.65;
+  box-shadow: none;
+}
+a.btn.disabled,
+fieldset[disabled] a.btn {
+  pointer-events: none;
+}
+.btn-default {
+  color: #ffffff;
+  background-color: #aea79f; #important
+  border-color: #aea79f;
+}
+
+.btn-default:focus,
+.btn-default.focus {
+  color: #ffffff;
+  background-color: #978e83;
+  border-color: #6f675e;
+}
+
+.btn-default:hover {
+  color: #ffffff;
+  background-color: #978e83;
+  border-color: #92897e;
+}
+.btn-default:active,
+.btn-default.active,
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
+}
+.btn-group > .btn:first-child {
+  margin-left: 0;
+}
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.btn-group > .btn:last-child:not(:first-child),
+.btn-group > .dropdown-toggle:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.btn-group > .btn-group {
+  float: left;
+}
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child,
+.btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.btn-group .dropdown-toggle:active,
+.btn-group.open .dropdown-toggle {
+  outline: 0;
+}
+.btn-group > .btn + .dropdown-toggle {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+.btn-group > .btn-lg + .dropdown-toggle {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+.btn-group.open .dropdown-toggle {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn-group.open .dropdown-toggle.btn-link {
+  box-shadow: none;
+}
+
+</style>
+<script>
+var str = '<div class="btn-group pull-right" style="position: fixed; right: 50px; top: 10px; z-index: 200"><button type="button" class="btn btn-default btn-xs dropdown-toggle" id="allCodeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast=""><span>Code</span> <span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;"><li><a id="rmd-show-all-code" href="#">Show All Code</a></li><li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li></ul></div>';
+document.write(str);
+</script>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "hide");
+});
+</script>
 
 
 <style type="text/css">
@@ -136,12 +872,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
-<li class="chapter" data-level="0.2" data-path="developing-the-right-mindset-for-this-book.html"><a href="developing-the-right-mindset-for-this-book.html"><i class="fa fa-check"></i><b>0.2</b> Developing the right mindset for this book</a></li>
-<li class="chapter" data-level="0.3" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.3</b> How to read this book</a></li>
-<li class="chapter" data-level="0.4" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.4</b> Online materials</a></li>
-<li class="chapter" data-level="0.5" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.5</b> Software needed</a></li>
-<li class="chapter" data-level="0.6" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>0.6</b> Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="developing-the-right-mindset-for-this-book.html"><a href="developing-the-right-mindset-for-this-book.html"><i class="fa fa-check"></i>Developing the right mindset for this book</a></li>
+<li class="chapter" data-level="" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i>How to read this book</a></li>
+<li class="chapter" data-level="" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i>Online materials</a></li>
+<li class="chapter" data-level="" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i>Software needed</a></li>
+<li class="chapter" data-level="" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i>Acknowledgments</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
@@ -155,10 +891,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.5</b> Continuous random variables: An example using the Normal distribution</a><ul>
 <li class="chapter" data-level="1.5.1" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#an-important-distinction-probability-vs.density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
+<li class="chapter" data-level="1.5.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#truncating-a-normal-distribution"><i class="fa fa-check"></i><b>1.5.2</b> Truncating a normal distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1: Discrete bivariate distributions</a></li>
-<li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#sec:contbivar"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
 <li class="chapter" data-level="1.6.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#sec:generatebivariatedata"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="sec-marginal.html"><a href="sec-marginal.html"><i class="fa fa-check"></i><b>1.7</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
@@ -189,7 +926,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="sec-priorpred.html"><a href="sec-priorpred.html"><i class="fa fa-check"></i><b>3.2</b> Prior predictive distribution</a></li>
 <li class="chapter" data-level="3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html"><i class="fa fa-check"></i><b>3.3</b> The influence of priors: sensitivity analysis</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.3.1</b> Flat uninformative priors</a></li>
+<li class="chapter" data-level="3.3.1" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.3.1</b> Flat, uninformative priors</a></li>
 <li class="chapter" data-level="3.3.2" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#regularizing-priors"><i class="fa fa-check"></i><b>3.3.2</b> Regularizing priors</a></li>
 <li class="chapter" data-level="3.3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#principled-priors"><i class="fa fa-check"></i><b>3.3.3</b> Principled priors</a></li>
 <li class="chapter" data-level="3.3.4" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#informative-priors"><i class="fa fa-check"></i><b>3.3.4</b> Informative priors</a></li>
@@ -198,10 +935,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="sec-ppd.html"><a href="sec-ppd.html"><i class="fa fa-check"></i><b>3.5</b> Posterior predictive distribution</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="sec-ppd.html"><a href="sec-ppd.html#comparing-different-likelihoods"><i class="fa fa-check"></i><b>3.5.1</b> Comparing different likelihoods</a></li>
 <li class="chapter" data-level="3.5.2" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lnfirst"><i class="fa fa-check"></i><b>3.5.2</b> The log-normal likelihood</a></li>
-<li class="chapter" data-level="3.5.3" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lognormal"><i class="fa fa-check"></i><b>3.5.3</b> Re-fitting a single participant pressing a button repeatedly with a log-normal likelihood</a></li>
+<li class="chapter" data-level="3.5.3" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lognormal"><i class="fa fa-check"></i><b>3.5.3</b> Re-fitting a single subject pressing a button repeatedly with a log-normal likelihood</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
-<li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
+<li class="chapter" data-level="3.7" data-path="sec-ch3furtherreading.html"><a href="sec-ch3furtherreading.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
 <li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
@@ -224,28 +961,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.5" data-path="sec-logistic.html"><a href="sec-logistic.html#descriptive-adequacy"><i class="fa fa-check"></i><b>4.3.5</b> Descriptive adequacy</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
-<li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
+<li class="chapter" data-level="4.5" data-path="sec-ch4furtherreading.html"><a href="sec-ch4furtherreading.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
 <li class="chapter" data-level="4.6" data-path="sec-LMexercises.html"><a href="sec-LMexercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
-<li class="chapter" data-level="5.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical normal model: The N400 effect</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#complete-pooling-model-m_cp"><i class="fa fa-check"></i><b>5.1.1</b> Complete-pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.2" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.1.2</b> No-pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.3" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercept and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
+<li class="chapter" data-level="5.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical model with a normal likelihood: The N400 effect</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#complete-pooling-model-m_cp"><i class="fa fa-check"></i><b>5.1.1</b> Complete pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.2" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.1.2</b> No pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.3" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercepts and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
 <li class="chapter" data-level="5.1.4" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:mcvivs"><i class="fa fa-check"></i><b>5.1.4</b> Correlated varying intercept varying slopes model (<span class="math inline">\(M_{h}\)</span>)</a></li>
 <li class="chapter" data-level="5.1.5" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:sih"><i class="fa fa-check"></i><b>5.1.5</b> By-subjects and by-items correlated varying intercept varying slopes model (<span class="math inline">\(M_{sih}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.6" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the so-called maximal models–Distributional regression models</a></li>
+<li class="chapter" data-level="5.1.6" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the maximal model–Distributional regression models</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="sec-stroop.html"><a href="sec-stroop.html"><i class="fa fa-check"></i><b>5.2</b> A hierarchical log-normal model: The Stroop effect</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="sec-stroop.html"><a href="sec-stroop.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.2.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><a href="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><i class="fa fa-check"></i><b>5.3</b> Why fitting a Bayesian hierarchical model is worth the effort</a></li>
 <li class="chapter" data-level="5.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.4</b> Summary</a></li>
-<li class="chapter" data-level="5.5" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
+<li class="chapter" data-level="5.5" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
 <li class="chapter" data-level="5.6" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html"><i class="fa fa-check"></i><b>5.6</b> Exercises</a><ul>
-<li class="chapter" data-level="5.6.1" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-normal-likelihood"><i class="fa fa-check"></i><b>5.6.1</b> Exercises with a normal likelihood</a></li>
-<li class="chapter" data-level="5.6.2" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-log-normal-likelihood"><i class="fa fa-check"></i><b>5.6.2</b> Exercises with a log-normal likelihood</a></li>
-<li class="chapter" data-level="5.6.3" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-logistic-regression-bernoulli-likelihood."><i class="fa fa-check"></i><b>5.6.3</b> Exercises with a logistic regression (Bernoulli likelihood).</a></li>
+<li class="chapter" data-level="" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-normal-likelihood"><i class="fa fa-check"></i>Exercises with a normal likelihood</a></li>
+<li class="chapter" data-level="" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-log-normal-likelihood"><i class="fa fa-check"></i>Exercises with a log-normal likelihood</a></li>
+<li class="chapter" data-level="" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-logistic-regression-bernoulli-likelihood."><i class="fa fa-check"></i>Exercises with a logistic regression (Bernoulli likelihood).</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="ch-priors.html"><a href="ch-priors.html"><i class="fa fa-check"></i><b>6</b> The Art and Science of Prior Elicitation</a><ul>
@@ -254,7 +991,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3" data-path="deriving-priors-from-meta-analyses.html"><a href="deriving-priors-from-meta-analyses.html"><i class="fa fa-check"></i><b>6.3</b> Deriving priors from meta-analyses</a></li>
 <li class="chapter" data-level="6.4" data-path="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><a href="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’ posteriors as priors for a new study</a></li>
 <li class="chapter" data-level="6.5" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
-<li class="chapter" data-level="6.6" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.6" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a><ul>
 <li class="chapter" data-level="7.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>7.1</b> Model building</a></li>
@@ -271,7 +1008,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.4" data-path="exemplary-data-analysis.html"><a href="exemplary-data-analysis.html#posterior-predictive-checks-model-adequacy"><i class="fa fa-check"></i><b>7.3.4</b> Posterior predictive checks: Model adequacy</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
-<li class="chapter" data-level="7.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>7.5</b> Further reading</a></li>
+<li class="chapter" data-level="7.5" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>7.5</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>8</b> Contrast coding</a><ul>
 <li class="chapter" data-level="8.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>8.1</b> Basic concepts illustrated using a two-level factor</a><ul>
@@ -299,7 +1036,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>8.5</b> Computing condition means from estimated contrasts</a></li>
 <li class="chapter" data-level="8.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
-<li class="chapter" data-level="8.7" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
+<li class="chapter" data-level="8.7" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
 <li class="chapter" data-level="8.8" data-path="sec-Contrastsexercises.html"><a href="sec-Contrastsexercises.html"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a><ul>
@@ -327,7 +1064,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>10.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
-<li class="chapter" data-level="10.6" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
+<li class="chapter" data-level="10.6" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
 <li class="chapter" data-level="10.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>10.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>11</b> Complex models and reparametrization</a><ul>
@@ -338,10 +1075,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.4" data-path="sec-hierstan.html"><a href="sec-hierstan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>11.1.4</b> By-subject and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="summary-10.html"><a href="summary-10.html"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
-<li class="chapter" data-level="11.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
+<li class="chapter" data-level="11.3" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
 <li class="chapter" data-level="11.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>11.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a></li>
+<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a><ul>
+<li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+</ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
 <li class="chapter" data-level="13.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>13.1</b> Meta-analysis</a><ul>
@@ -351,13 +1093,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.2.1" data-path="measurement-error-models.html"><a href="measurement-error-models.html#accounting-for-measurement-error-in-a-voice-onset-time-model"><i class="fa fa-check"></i><b>13.2.1</b> Accounting for measurement error in a voice onset time model</a></li>
 </ul></li>
 <li class="chapter" data-level="13.3" data-path="summary-11.html"><a href="summary-11.html"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
-<li class="chapter" data-level="13.4" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
+<li class="chapter" data-level="13.4" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
 <li class="chapter" data-level="13.5" data-path="sec-REMAMEexercises.html"><a href="sec-REMAMEexercises.html"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="ch-sat.html"><a href="ch-sat.html"><i class="fa fa-check"></i><b>14</b> SAT</a></li>
 <li class="part"><span><b>V Model comparison and hypothesis testing</b></span></li>
 <li class="chapter" data-level="15" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>15</b> Introduction to model comparison</a><ul>
-<li class="chapter" data-level="15.1" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.1</b> Further reading</a></li>
+<li class="chapter" data-level="15.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>15.1</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>16</b> Bayes factors</a><ul>
 <li class="chapter" data-level="16.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>16.1</b> Hypothesis testing using the Bayes factor</a><ul>
@@ -375,7 +1117,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.5.2" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-practice-variability-with-the-data"><i class="fa fa-check"></i><b>16.5.2</b> Bayes factors in practice: Variability with the data</a></li>
 </ul></li>
 <li class="chapter" data-level="16.6" data-path="summary-12.html"><a href="summary-12.html"><i class="fa fa-check"></i><b>16.6</b> Summary</a></li>
-<li class="chapter" data-level="16.7" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.7</b> Further reading</a></li>
+<li class="chapter" data-level="16.7" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>16.7</b> Further reading</a></li>
 <li class="chapter" data-level="16.8" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>16.8</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>17</b> Cross-validation</a><ul>
@@ -392,12 +1134,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.6.1" data-path="cross-validation-in-stan.html"><a href="cross-validation-in-stan.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>17.6.1</b> PSIS-LOO-CV in Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="17.7" data-path="summary-13.html"><a href="summary-13.html"><i class="fa fa-check"></i><b>17.7</b> Summary</a></li>
-<li class="chapter" data-level="17.8" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>17.8</b> Further reading</a></li>
+<li class="chapter" data-level="17.8" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>17.8</b> Further reading</a></li>
 <li class="chapter" data-level="17.9" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>17.9</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
 <li class="chapter" data-level="18" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>18</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="18.1" data-path="further-reading-14.html"><a href="further-reading-14.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
+<li class="chapter" data-level="18.1" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>19</b> Multinomial processing trees</a><ul>
 <li class="chapter" data-level="19.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>19.1</b> Modeling multiple categorical responses</a><ul>
@@ -407,7 +1149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>19.2</b> Multinomial processing tree (MPT) models</a><ul>
 <li class="chapter" data-level="19.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>19.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="19.3" data-path="further-reading-15.html"><a href="further-reading-15.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
+<li class="chapter" data-level="19.3" data-path="further-reading-14.html"><a href="further-reading-14.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
 <li class="chapter" data-level="19.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>19.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>20</b> Mixture models</a><ul>
@@ -419,12 +1161,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.1.5" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html#sec:fastguessh"><i class="fa fa-check"></i><b>20.1.5</b> A hierarchical implementation of the fast-guess model</a></li>
 </ul></li>
 <li class="chapter" data-level="20.2" data-path="summary-14.html"><a href="summary-14.html"><i class="fa fa-check"></i><b>20.2</b> Summary</a></li>
-<li class="chapter" data-level="20.3" data-path="further-reading-16.html"><a href="further-reading-16.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
+<li class="chapter" data-level="20.3" data-path="further-reading-15.html"><a href="further-reading-15.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
 <li class="chapter" data-level="20.4" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>20.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html"><i class="fa fa-check"></i><b>21</b> A simple accumulator model to account for choice response time</a></li>
-<li class="part"><span><b>VII Appendix</b></span></li>
-<li class="chapter" data-level="22" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>22</b> Important distributions</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>A</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -450,7 +1192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.3</span> Exemplary data analysis</h2>
 <p>We perform an exemplary analysis of a dataset from <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu">2013</a>)</span>, a dataset that we have already encountered in previous chapters. The methodology they used is the familiar method (self-paced reading) that we encountered in earlier chapters. <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu">2013</a>)</span> collected self-paced reading data using Chinese relative clauses. Relative clauses are sentences like: <em>The student who praised the teacher was very happy</em>. Here, the head noun, <em>student</em>, is modified by a relative clause <em>whoteacher</em>, and the head noun is the subject of the relative clause as well: the student praised the teacher. Such relative clauses are called subject relatives. By contrast, one can also have object relative clauses, where the head noun is modified by a relative clause which takes the head noun as an object. An example is: <em>The student whom the teacher praised was very happy</em>. Here, the teacher praised the student.
 <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu">2013</a>)</span> were interested in testing the hypothesis that Chinese shows an object relative (OR) processing advantage compared to the corresponding subject relative (SR). The theoretical reason for this processing advantage is that, in Chinese, the distance (which can be approximated by counting the number of words intervening) between the relative clause verb (<em>praised</em>) and the head noun is shorter in ORs than SRs . This prediction arises because, unlike English, the relative clause appears before the head noun in Chinese; see <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu">2013</a>)</span> for a detailed explanation.</p>
-<p>Their experimental design had one factor with two levels: (i) object relative sentences, and (ii) subject relative sentences. We use sum coding (-1, +1) for this factor, which we call ‘so’, an abbreviation for subject-object. Following <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu">2013</a>)</span>, we analyze reading time on the target word, which was the head noun of the relative clause. As mentioned above, in Chinese, the head noun appears after the relative clause. By the time the participant reads the head noun, they already know whether they are reading a subject or an object relative. Because the distance between the relative clause verb and the head noun is shorter in object relatives compared to subject relatives, reading the head noun is expected to be easier in object relatives.</p>
+<p>Their experimental design had one factor with two levels: (i) object relative sentences, and (ii) subject relative sentences. We use sum coding (-1, +1) for this factor, which we call ‘so’, an abbreviation for subject-object. Following <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu">2013</a>)</span>, we analyze reading time on the target word, which was the head noun of the relative clause. As mentioned above, in Chinese, the head noun appears after the relative clause. By the time the subject reads the head noun, they already know whether they are reading a subject or an object relative. Because the distance between the relative clause verb and the head noun is shorter in object relatives compared to subject relatives, reading the head noun is expected to be easier in object relatives.</p>
 <p>The dataset contains reading time measurements in milliseconds from <span class="math inline">\(37\)</span> subjects and from <span class="math inline">\(15\)</span> items (there were <span class="math inline">\(16\)</span> items originally, but one item was removed during analysis). The design is a classic repeated measures Latin square design.</p>
 <div id="prior-predictive-checks" class="section level3">
 <h3><span class="header-section-number">7.3.1</span> Prior predictive checks</h3>
@@ -497,19 +1239,19 @@ rt_n \sim LogNormal(\alpha + u_{subj[n],1} + w_{item[n],1} + so_n \cdot  (\beta 
 \rho  &amp;\sim LKJ(2)
 \end{align}\]</span></p>
 <p>We define these priors in <code>brms</code> syntax as follows:</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" data-line-number="1">priors &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb289-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb289-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> so),</a>
-<a class="sourceLine" id="cb289-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb289-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb289-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb289-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" data-line-number="1">priors &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb299-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb299-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> so),</a>
+<a class="sourceLine" id="cb299-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb299-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb299-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb299-7" data-line-number="7">)</a></code></pre></div>
 <p>For the intercept (<span class="math inline">\(\alpha\)</span>) we use a normal distribution with mean <span class="math inline">\(0\)</span> and standard deviation <span class="math inline">\(10\)</span>. This is on the log scale as we assume a lognormal distribution of reading times. That is, this approach assumes a priori that the intercept for reading times varies between <span class="math inline">\(0\)</span> seconds and (one standard deviation) <span class="math inline">\(exp(10) = 22026\)</span> ms (i.e., <span class="math inline">\(22\)</span> sec) or (two standard deviations) <span class="math inline">\(exp(20) = 485165195\)</span> ms (i.e., <span class="math inline">\(135\)</span> hours). Going from seconds to hours within one standard deviation shows how uninformative this prior is.</p>
 <p>Moreover, for the effect of linguistic manipulations on reading times (<span class="math inline">\(\beta\)</span>), one common standard prior is to assume a mean of <span class="math inline">\(0\)</span> and a standard deviation of <span class="math inline">\(1\)</span> (also on the log scale). The prior on the effect size on log scale is a multiplicative factor, that is, the prediction for the effect size depends on the intercept.
 For an intercept of <span class="math inline">\(exp(6) = 403\)</span> ms, a variation to one standard deviation above multiplies the base effect by <span class="math inline">\(2.71\)</span>, increasing the mean from <span class="math inline">\(403\)</span> to <span class="math inline">\(exp(6) \times exp(1) = 1097\)</span>. Likewise a variation to one standard deviation below multiplies the base effect by <span class="math inline">\(1 / 2.71\)</span>, decreasing the mean from <span class="math inline">\(403\)</span> to <span class="math inline">\(exp(6) \times exp(-1) = 148\)</span>.
 This effect size is strongly changed when assuming a different intercept: for a slightly smaller value for the intercept of <span class="math inline">\(exp(5) = 148\)</span> ms, the expected condition difference is reduced to <span class="math inline">\(37\)</span>% (<span class="math inline">\(349\)</span> ms), and for a slightly larger value for the intercept of <span class="math inline">\(exp(7) = 1097\)</span> ms, the condition difference is enhanced to <span class="math inline">\(272\)</span>% (<span class="math inline">\(2578\)</span> ms). Also see Box <a href="sec-trial.html#thm:lognormal">4.3</a> in chapter <a href="ch-reg.html#ch:reg">4</a> for an explanation about the non-linear behavior of the log-normal model.<br />
 Even though it seems <span class="math inline">\(Normal(0,1)\)</span> is not entirely appropriate as a prior for the difference between object-relative and subject-relative sentences (i.e., the slope), we use it for illustrative purposes. We use the same <span class="math inline">\(Normal(0, 1)\)</span> prior for the <span class="math inline">\(\tau\)</span> parameter and <span class="math inline">\(\sigma\)</span>. Finally, for the random effects correlation between the intercept and the slope, we use an <code>lkj</code> prior <span class="citation">(Lewandowski, Kurowicka, and Joe <a href="#ref-Lewandowski:2009aa">2009</a>)</span> with a relatively uninformative/regularizing prior parameter value of <span class="math inline">\(2\)</span> (for visualization of the prior see Figure <a href="exemplary-data-analysis.html#fig:FigLKJ">7.4</a>).</p>
-<div class="figure"><span style="display:block;" id="fig:FigLKJ"></span>
+<div class="figure"><span id="fig:FigLKJ"></span>
 <img src="bookdown_files/figure-html/FigLKJ-1.svg" alt="Shape of the LKJ prior. This is the prior density for the random effects correlation parameter, here used as a prior for the correlation between the effect size (so) and the intercept. The shape shows that correlation estimates close to zero are expected, and that very strong positive correlations (close to 1) or negative correlations (close to -1) are increasingly unlikely. Thus, correlation estimates are regularized towards values of zero." width="288" />
 <p class="caption">
 FIGURE 7.4: Shape of the LKJ prior. This is the prior density for the random effects correlation parameter, here used as a prior for the correlation between the effect size (so) and the intercept. The shape shows that correlation estimates close to zero are expected, and that very strong positive correlations (close to 1) or negative correlations (close to -1) are increasingly unlikely. Thus, correlation estimates are regularized towards values of zero.
@@ -517,41 +1259,41 @@ FIGURE 7.4: Shape of the LKJ prior. This is the prior density for the random eff
 </div>
 <!--\FloatBarrier-->
 <p>For the prior predictive checks, we use these priors to draw random parameter sets from the distributions, and to simulate hypothetical data using the statistical model. We load the data and code the predictor variable <code>so</code>. We next use <code>brms</code> to simulate prior predictive data from the hierarchical model.</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_gibsonwu&quot;</span>)</a>
-<a class="sourceLine" id="cb290-2" data-line-number="2">df_gibsonwu &lt;-<span class="st"> </span>df_gibsonwu <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb290-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">so =</span> <span class="kw">ifelse</span>(type <span class="op">==</span><span class="st"> &quot;obj-ext&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>))</a>
-<a class="sourceLine" id="cb290-4" data-line-number="4"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb290-5" data-line-number="5">fit_prior_gibsonwu &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(so <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(so <span class="op">|</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb290-6" data-line-number="6">  <span class="dt">data =</span> df_gibsonwu,</a>
-<a class="sourceLine" id="cb290-7" data-line-number="7">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
-<a class="sourceLine" id="cb290-8" data-line-number="8">  <span class="dt">prior =</span> priors,</a>
-<a class="sourceLine" id="cb290-9" data-line-number="9">  <span class="dt">sample_prior =</span> <span class="st">&quot;only&quot;</span></a>
-<a class="sourceLine" id="cb290-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_gibsonwu&quot;</span>)</a>
+<a class="sourceLine" id="cb300-2" data-line-number="2">df_gibsonwu &lt;-<span class="st"> </span>df_gibsonwu <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb300-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">so =</span> <span class="kw">ifelse</span>(type <span class="op">==</span><span class="st"> &quot;obj-ext&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>))</a>
+<a class="sourceLine" id="cb300-4" data-line-number="4"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb300-5" data-line-number="5">fit_prior_gibsonwu &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(so <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(so <span class="op">|</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb300-6" data-line-number="6">  <span class="dt">data =</span> df_gibsonwu,</a>
+<a class="sourceLine" id="cb300-7" data-line-number="7">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
+<a class="sourceLine" id="cb300-8" data-line-number="8">  <span class="dt">prior =</span> priors,</a>
+<a class="sourceLine" id="cb300-9" data-line-number="9">  <span class="dt">sample_prior =</span> <span class="st">&quot;only&quot;</span></a>
+<a class="sourceLine" id="cb300-10" data-line-number="10">)</a></code></pre></div>
 <p>Based on the simulated data we can now perform prior predictive checks: we compute summary statistics, and plot the distributions of the summary statistic across simulated datasets. First, we visualize the distribution of the simulated data. For a single dataset, this could be visualized as a histogram. Here, we have a large number of simulated datasets, and thus a large number of histograms. We represent this uncertainty: for each bin, we plot the median as well as quantiles showing where 10%-90%, 20%-80%, 30%-70%, and 40%-60% of the histograms lie <span class="citation">(for R code, see Schad, Betancourt, and Vasishth <a href="#ref-schad2019towardarXiv">2019</a>)</span>. For the current prior data simulations, this shows (see Figure <a href="exemplary-data-analysis.html#fig:figPrior1a">7.5</a> that most of the hypothetical reading times are close to zero or larger than <span class="math inline">\(2000\)</span> ms. It is immediately clear that the data predicted by this prior follows a very implausible distribution: it looks exponential; we would expect a lognormal distribution for reading times. Most data points take on extreme values.</p>
-<div class="figure"><span style="display:block;" id="fig:figPrior1a"></span>
+<div class="figure"><span id="fig:figPrior1a"></span>
 <img src="bookdown_files/figure-html/figPrior1a-1.svg" alt="Prior predictive checks for a high-variance prior. Multivariate summary statistic: Distribution of histograms of reading times shows very short and also very long reading times are expected too frequently by the uninformative prior." width="672" />
 <p class="caption">
 FIGURE 7.5: Prior predictive checks for a high-variance prior. Multivariate summary statistic: Distribution of histograms of reading times shows very short and also very long reading times are expected too frequently by the uninformative prior.
 </p>
 </div>
 <p>As an additional summary statistic, we take a look at the mean per simulated dataset and also at the variance in Figure <a href="exemplary-data-analysis.html#fig:s2000">7.6</a>. We create functions that use as summary statistics the mean and standard deviations; the functions collapse all the values over 2000 ms, making the figure more readable. Then we use these summary statistics to visualize prior predictive checks using the <code>pp_check</code> function, where we enter the prior predictions (<code>fit_prior_gibsonwu</code>) and the relevant summary statistic (<code>mean_2000</code> and <code>sd_2000</code>).</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" data-line-number="1">mean_<span class="dv">2000</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb291-2" data-line-number="2">  tmp &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</a>
-<a class="sourceLine" id="cb291-3" data-line-number="3">  tmp[tmp <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>] &lt;-<span class="st"> </span><span class="dv">2000</span></a>
-<a class="sourceLine" id="cb291-4" data-line-number="4">  tmp</a>
-<a class="sourceLine" id="cb291-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb291-6" data-line-number="6">sd_<span class="dv">2000</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb291-7" data-line-number="7">  tmp &lt;-<span class="st"> </span><span class="kw">sd</span>(x)</a>
-<a class="sourceLine" id="cb291-8" data-line-number="8">  tmp[tmp <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>] &lt;-<span class="st"> </span><span class="dv">2000</span></a>
-<a class="sourceLine" id="cb291-9" data-line-number="9">  tmp</a>
-<a class="sourceLine" id="cb291-10" data-line-number="10">}</a>
-<a class="sourceLine" id="cb291-11" data-line-number="11"><span class="kw">pp_check</span>(fit_prior_gibsonwu, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;mean_2000&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb291-12" data-line-number="12"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Mean RT [ms]&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb291-13" data-line-number="13"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a>
-<a class="sourceLine" id="cb291-14" data-line-number="14"><span class="kw">pp_check</span>(fit_prior_gibsonwu, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;sd_2000&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb291-15" data-line-number="15"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Standard Deviation RT [ms]&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb291-16" data-line-number="16"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:s2000"></span>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" data-line-number="1">mean_<span class="dv">2000</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb301-2" data-line-number="2">  tmp &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</a>
+<a class="sourceLine" id="cb301-3" data-line-number="3">  tmp[tmp <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>] &lt;-<span class="st"> </span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb301-4" data-line-number="4">  tmp</a>
+<a class="sourceLine" id="cb301-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb301-6" data-line-number="6">sd_<span class="dv">2000</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb301-7" data-line-number="7">  tmp &lt;-<span class="st"> </span><span class="kw">sd</span>(x)</a>
+<a class="sourceLine" id="cb301-8" data-line-number="8">  tmp[tmp <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>] &lt;-<span class="st"> </span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb301-9" data-line-number="9">  tmp</a>
+<a class="sourceLine" id="cb301-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb301-11" data-line-number="11"><span class="kw">pp_check</span>(fit_prior_gibsonwu, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;mean_2000&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb301-12" data-line-number="12"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Mean RT [ms]&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb301-13" data-line-number="13"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a>
+<a class="sourceLine" id="cb301-14" data-line-number="14"><span class="kw">pp_check</span>(fit_prior_gibsonwu, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;sd_2000&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb301-15" data-line-number="15"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Standard Deviation RT [ms]&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb301-16" data-line-number="16"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:s2000"></span>
 <img src="bookdown_files/figure-html/s2000-1.svg" alt="Prior predictive distribution of average reading times shows that extremely large reading times of more than 2000 ms are too frequently expected. Distribution of standard deviations of reading times shows that very large variances are over-expected in the priors. Values larger than 2000 are plotted at a value of 2000 for visualization." width="48%" /><img src="bookdown_files/figure-html/s2000-2.svg" alt="Prior predictive distribution of average reading times shows that extremely large reading times of more than 2000 ms are too frequently expected. Distribution of standard deviations of reading times shows that very large variances are over-expected in the priors. Values larger than 2000 are plotted at a value of 2000 for visualization." width="48%" />
 <p class="caption">
 FIGURE 7.6: Prior predictive distribution of average reading times shows that extremely large reading times of more than 2000 ms are too frequently expected. Distribution of standard deviations of reading times shows that very large variances are over-expected in the priors. Values larger than 2000 are plotted at a value of 2000 for visualization.
@@ -559,17 +1301,17 @@ FIGURE 7.6: Prior predictive distribution of average reading times shows that ex
 </div>
 <p>The results, displayed in Figure <a href="exemplary-data-analysis.html#fig:s2000">7.6</a>, show that the mean (or the standard deviation) varies across a wide range, with a substantial number of datasets having a mean (or the standard deviation) larger than <span class="math inline">\(2000\)</span> ms. Again, this reveals a highly implausible assumption about the intercept parameter.</p>
 <p>Moreover, we also plot the size of the effect of object relative minus subject relative sentence as a measure of effect size with the following code. We first compute the summary statistic, here the difference in reading times between subject versus object relative sentences (i.e., variable <code>so</code>). Then we define difference-values larger than <span class="math inline">\(2000\)</span> ms as <span class="math inline">\(2000\)</span> ms, and values smaller than <span class="math inline">\(-2000\)</span> ms as <span class="math inline">\(-2000\)</span> ms because these represent implausibly large/small values and make it easier to read the plot. We plot these prior predictive data using <code>pp_check</code> by supplying the prior samples (<code>fit_prior_gibsonwu</code>) and the summary statistic (<code>effsize_2000</code>).</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" data-line-number="1">effsize_<span class="dv">2000</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb292-2" data-line-number="2">  tmp &lt;-<span class="st"> </span><span class="kw">mean</span>(x[df_gibsonwu<span class="op">$</span>so <span class="op">==</span><span class="st"> </span><span class="op">+</span><span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb292-3" data-line-number="3"><span class="st">         </span><span class="kw">mean</span>(x[df_gibsonwu<span class="op">$</span>so <span class="op">==</span><span class="st"> </span><span class="dv">-1</span>])</a>
-<a class="sourceLine" id="cb292-4" data-line-number="4">  tmp[tmp <span class="op">&gt;</span><span class="st"> </span><span class="op">+</span><span class="dv">2000</span>] &lt;-<span class="st"> </span><span class="op">+</span><span class="dv">2000</span></a>
-<a class="sourceLine" id="cb292-5" data-line-number="5">  tmp[tmp <span class="op">&lt;</span><span class="st"> </span><span class="dv">-2000</span>] &lt;-<span class="st"> </span><span class="dv">-2000</span></a>
-<a class="sourceLine" id="cb292-6" data-line-number="6">  tmp</a>
-<a class="sourceLine" id="cb292-7" data-line-number="7">}</a>
-<a class="sourceLine" id="cb292-8" data-line-number="8"><span class="kw">pp_check</span>(fit_prior_gibsonwu, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;effsize_2000&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb292-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Object - Subject [S-O RT]&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb292-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:diff2000"></span>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" data-line-number="1">effsize_<span class="dv">2000</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb302-2" data-line-number="2">  tmp &lt;-<span class="st"> </span><span class="kw">mean</span>(x[df_gibsonwu<span class="op">$</span>so <span class="op">==</span><span class="st"> </span><span class="op">+</span><span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb302-3" data-line-number="3"><span class="st">         </span><span class="kw">mean</span>(x[df_gibsonwu<span class="op">$</span>so <span class="op">==</span><span class="st"> </span><span class="dv">-1</span>])</a>
+<a class="sourceLine" id="cb302-4" data-line-number="4">  tmp[tmp <span class="op">&gt;</span><span class="st"> </span><span class="op">+</span><span class="dv">2000</span>] &lt;-<span class="st"> </span><span class="op">+</span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb302-5" data-line-number="5">  tmp[tmp <span class="op">&lt;</span><span class="st"> </span><span class="dv">-2000</span>] &lt;-<span class="st"> </span><span class="dv">-2000</span></a>
+<a class="sourceLine" id="cb302-6" data-line-number="6">  tmp</a>
+<a class="sourceLine" id="cb302-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb302-8" data-line-number="8"><span class="kw">pp_check</span>(fit_prior_gibsonwu, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;effsize_2000&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb302-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Object - Subject [S-O RT]&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb302-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:diff2000"></span>
 <img src="bookdown_files/figure-html/diff2000-1.svg" alt="Prior predictive distribution of differences in reading times between object minus subject relatives shows that very large effect sizes are far too frequently expected. Values larger than 2000 (or smaller than -2000) are plotted at a value of 2000 (or -2000) for visualization." width="672" />
 <p class="caption">
 FIGURE 7.7: Prior predictive distribution of differences in reading times between object minus subject relatives shows that very large effect sizes are far too frequently expected. Values larger than 2000 (or smaller than -2000) are plotted at a value of 2000 (or -2000) for visualization.
@@ -577,40 +1319,40 @@ FIGURE 7.7: Prior predictive distribution of differences in reading times betwee
 </div>
 <p>The results in Figure <a href="exemplary-data-analysis.html#fig:diff2000">7.7</a> show that our priors commonly assume differences in reading times between conditions of more than <span class="math inline">\(2000\)</span> ms, which are larger than we would expect for a psycholinguistic manipulation of the kind investigated here. More specifically, given that we model reading times using a lognormal distribution, the expected effect size depends on the value for the intercept. For example, for an intercept of <span class="math inline">\(exp(1) = 2.7\)</span> ms and an effect size in log space of <span class="math inline">\(1\)</span> (i.e., one standard deviation of the prior for the effect size), expected reading times for the two conditions are <span class="math inline">\(exp(1-1) = 1\)</span> ms and <span class="math inline">\(exp(1+1) = 7\)</span> ms. For an intercept of <span class="math inline">\(exp(10) = 22026\)</span> ms, to the contrary, the corresponding reading times for the two conditions would be <span class="math inline">\(exp(10-1) = 8103\)</span> ms and <span class="math inline">\(exp(10+1) = 59874\)</span> ms.</p>
 <p>This implies highly variable expectations for the effect size, including the possibility of very large effect sizes. If there is good reason to believe that the effect size is likely to be relatively small, priors with smaller expected effect sizes may be more reasonable. In chapter @(ch:priors) we discussed different methods for working out ballpark estimates of the range of variation in expected effect sizes.</p>
-<p>It is also useful to look at individual-level differences in the effect of object versus subject relatives. Take a look at the participant with the largest (absolute) difference in reading times between object versus subject relatives in Figure <a href="exemplary-data-analysis.html#fig:maximal2000">7.8</a>.</p>
+<p>It is also useful to look at individual-level differences in the effect of object versus subject relatives. Take a look at the subject with the largest (absolute) difference in reading times between object versus subject relatives in Figure <a href="exemplary-data-analysis.html#fig:maximal2000">7.8</a>.</p>
 <p>Here, we first assign the prior simulated reading time to the data frame <code>df_gibsonwu</code> (terming it <code>rtfake</code>). Then we group the data frame by subject and by experimental condition (<code>so</code>), average prior predictive reading times for each subject and condition, and then compute the difference in reading times between subject versus object relative sentences for each subject (the subset where <code>so == 1</code> minus the subset where <code>so == -1</code>). Now, we can take the absolute value of this difference (<code>abs(tmp$dif)</code>), and take the maximum or standard deviation across all subjects. Again, we set values larger than 2000 ms to a value of 2000 ms for better visibility.</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" data-line-number="1">effsize_max_<span class="dv">2000</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb293-2" data-line-number="2">  df_gibsonwu<span class="op">$</span>rtfake &lt;-<span class="st"> </span>x</a>
-<a class="sourceLine" id="cb293-3" data-line-number="3">  tmp &lt;-<span class="st"> </span>df_gibsonwu <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb293-4" data-line-number="4"><span class="st">    </span><span class="kw">group_by</span>(subj, so) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb293-5" data-line-number="5"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">rtfake =</span> <span class="kw">mean</span>(rtfake)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb293-6" data-line-number="6"><span class="st">    </span><span class="co"># calculates the difference between conditions:</span></a>
-<a class="sourceLine" id="cb293-7" data-line-number="7"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">dif =</span>  rtfake[so <span class="op">==</span><span class="st"> </span><span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>rtfake[so <span class="op">==</span><span class="st"> </span><span class="dv">-1</span>])</a>
-<a class="sourceLine" id="cb293-8" data-line-number="8">  effect_size_max &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">abs</span>(tmp<span class="op">$</span>dif), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb293-9" data-line-number="9">  effect_size_max[effect_size_max <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>] &lt;-<span class="st"> </span><span class="dv">2000</span></a>
-<a class="sourceLine" id="cb293-10" data-line-number="10">  effect_size_max</a>
-<a class="sourceLine" id="cb293-11" data-line-number="11">}</a>
-<a class="sourceLine" id="cb293-12" data-line-number="12">effsize_sd_<span class="dv">2000</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb293-13" data-line-number="13">  df_gibsonwu<span class="op">$</span>rtfake &lt;-<span class="st"> </span>x</a>
-<a class="sourceLine" id="cb293-14" data-line-number="14">  tmp &lt;-<span class="st"> </span>df_gibsonwu <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb293-15" data-line-number="15"><span class="st">    </span><span class="kw">group_by</span>(subj, so) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb293-16" data-line-number="16"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">rtfake =</span> <span class="kw">mean</span>(rtfake)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb293-17" data-line-number="17"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">dif =</span>  rtfake[so <span class="op">==</span><span class="st"> </span><span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>rtfake[so <span class="op">==</span><span class="st"> </span><span class="dv">-1</span>])</a>
-<a class="sourceLine" id="cb293-18" data-line-number="18">  effect_size_SD &lt;-<span class="st"> </span><span class="kw">sd</span>(tmp<span class="op">$</span>dif, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb293-19" data-line-number="19">  effect_size_SD[effect_size_SD <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>] &lt;-<span class="st"> </span><span class="dv">2000</span></a>
-<a class="sourceLine" id="cb293-20" data-line-number="20">  effect_size_SD</a>
-<a class="sourceLine" id="cb293-21" data-line-number="21">}</a>
-<a class="sourceLine" id="cb293-22" data-line-number="22"><span class="kw">pp_check</span>(fit_prior_gibsonwu, </a>
-<a class="sourceLine" id="cb293-23" data-line-number="23">                       <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, </a>
-<a class="sourceLine" id="cb293-24" data-line-number="24">                       <span class="dt">stat =</span> <span class="st">&quot;effsize_max_2000&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb293-25" data-line-number="25"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Max Effect Size [S-O RT]&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb293-26" data-line-number="26"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a>
-<a class="sourceLine" id="cb293-27" data-line-number="27"><span class="kw">pp_check</span>(fit_prior_gibsonwu, </a>
-<a class="sourceLine" id="cb293-28" data-line-number="28">                       <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, </a>
-<a class="sourceLine" id="cb293-29" data-line-number="29">                       <span class="dt">stat =</span> <span class="st">&quot;effsize_sd_2000&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb293-30" data-line-number="30"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;SD Effect Size [S-O RT]&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb293-31" data-line-number="31"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:maximal2000"></span>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" data-line-number="1">effsize_max_<span class="dv">2000</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb303-2" data-line-number="2">  df_gibsonwu<span class="op">$</span>rtfake &lt;-<span class="st"> </span>x</a>
+<a class="sourceLine" id="cb303-3" data-line-number="3">  tmp &lt;-<span class="st"> </span>df_gibsonwu <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb303-4" data-line-number="4"><span class="st">    </span><span class="kw">group_by</span>(subj, so) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb303-5" data-line-number="5"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">rtfake =</span> <span class="kw">mean</span>(rtfake)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb303-6" data-line-number="6"><span class="st">    </span><span class="co"># calculates the difference between conditions:</span></a>
+<a class="sourceLine" id="cb303-7" data-line-number="7"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">dif =</span>  rtfake[so <span class="op">==</span><span class="st"> </span><span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>rtfake[so <span class="op">==</span><span class="st"> </span><span class="dv">-1</span>])</a>
+<a class="sourceLine" id="cb303-8" data-line-number="8">  effect_size_max &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">abs</span>(tmp<span class="op">$</span>dif), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb303-9" data-line-number="9">  effect_size_max[effect_size_max <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>] &lt;-<span class="st"> </span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb303-10" data-line-number="10">  effect_size_max</a>
+<a class="sourceLine" id="cb303-11" data-line-number="11">}</a>
+<a class="sourceLine" id="cb303-12" data-line-number="12">effsize_sd_<span class="dv">2000</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb303-13" data-line-number="13">  df_gibsonwu<span class="op">$</span>rtfake &lt;-<span class="st"> </span>x</a>
+<a class="sourceLine" id="cb303-14" data-line-number="14">  tmp &lt;-<span class="st"> </span>df_gibsonwu <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb303-15" data-line-number="15"><span class="st">    </span><span class="kw">group_by</span>(subj, so) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb303-16" data-line-number="16"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">rtfake =</span> <span class="kw">mean</span>(rtfake)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb303-17" data-line-number="17"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">dif =</span>  rtfake[so <span class="op">==</span><span class="st"> </span><span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>rtfake[so <span class="op">==</span><span class="st"> </span><span class="dv">-1</span>])</a>
+<a class="sourceLine" id="cb303-18" data-line-number="18">  effect_size_SD &lt;-<span class="st"> </span><span class="kw">sd</span>(tmp<span class="op">$</span>dif, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb303-19" data-line-number="19">  effect_size_SD[effect_size_SD <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>] &lt;-<span class="st"> </span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb303-20" data-line-number="20">  effect_size_SD</a>
+<a class="sourceLine" id="cb303-21" data-line-number="21">}</a>
+<a class="sourceLine" id="cb303-22" data-line-number="22"><span class="kw">pp_check</span>(fit_prior_gibsonwu, </a>
+<a class="sourceLine" id="cb303-23" data-line-number="23">                       <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, </a>
+<a class="sourceLine" id="cb303-24" data-line-number="24">                       <span class="dt">stat =</span> <span class="st">&quot;effsize_max_2000&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb303-25" data-line-number="25"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Max Effect Size [S-O RT]&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb303-26" data-line-number="26"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a>
+<a class="sourceLine" id="cb303-27" data-line-number="27"><span class="kw">pp_check</span>(fit_prior_gibsonwu, </a>
+<a class="sourceLine" id="cb303-28" data-line-number="28">                       <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, </a>
+<a class="sourceLine" id="cb303-29" data-line-number="29">                       <span class="dt">stat =</span> <span class="st">&quot;effsize_sd_2000&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb303-30" data-line-number="30"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;SD Effect Size [S-O RT]&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb303-31" data-line-number="31"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:maximal2000"></span>
 <img src="bookdown_files/figure-html/maximal2000-1.svg" alt="Maximal prior predicted effect size (object - subject relatives) across subjects again shows far too many extreme values and standard deviation of effect size (object - subject relatives) across subjects; again far too many extreme values are expected. Values &gt; 2000 or &lt; -2000 are plotted at a value of 2000 or -2000 for visualization." width="48%" /><img src="bookdown_files/figure-html/maximal2000-2.svg" alt="Maximal prior predicted effect size (object - subject relatives) across subjects again shows far too many extreme values and standard deviation of effect size (object - subject relatives) across subjects; again far too many extreme values are expected. Values &gt; 2000 or &lt; -2000 are plotted at a value of 2000 or -2000 for visualization." width="48%" />
 <p class="caption">
 FIGURE 7.8: Maximal prior predicted effect size (object - subject relatives) across subjects again shows far too many extreme values and standard deviation of effect size (object - subject relatives) across subjects; again far too many extreme values are expected. Values &gt; 2000 or &lt; -2000 are plotted at a value of 2000 or -2000 for visualization.
@@ -623,7 +1365,7 @@ FIGURE 7.8: Maximal prior predicted effect size (object - subject relatives) acr
 <h3><span class="header-section-number">7.3.2</span> Adjusting priors</h3>
 <p>Based on these analyses of prior predictive data, we can next use our domain expertise to refine our priors and adjust them to values for which we expect more plausible prior predictive hypothetical data as captured in the summary statistics.</p>
 <p>First, we adapt the intercept; recall that in @(ch:priors) we made a first attempt at coming up with priors for the intercept; now we take our reasoning one step further. Given our prior knowledge about mean reading times (see the discussion in the previous chapter), we could choose a normal distribution in log-space with a mean of <span class="math inline">\(6\)</span>. This corresponds to an expected grand average reading time of <span class="math inline">\(exp(6) = 403\)</span> ms. For the standard deviation, we use a value of SD = <span class="math inline">\(0.6\)</span>. For these prior values, we expect a strongly reduced mean reading time and a strongly reduced residual standard deviation in the simulated hypothetical data. Moreover, we expect that implausibly small or large values for reading times will no longer be expected. For a visualization of the prior distribution of the intercept parameter in log-space and in ms-space see Figure <a href="exemplary-data-analysis.html#fig:figPriorAdjust1">7.9</a>a+b. Other values for the standard deviation that are close to <span class="math inline">\(0.6\)</span>, (e.g., SD = <span class="math inline">\(0.5\)</span> or <span class="math inline">\(0.7\)</span>), may yield similar results. Our goal is not to specify a precise value, but rather to use prior parameter values that are qualitatively in line with our domain expertise about expected observed reading time data, and that do not produce highly implausible hypothetical data.</p>
-<div class="figure"><span style="display:block;" id="fig:figPriorAdjust1"></span>
+<div class="figure"><span id="fig:figPriorAdjust1"></span>
 <img src="bookdown_files/figure-html/figPriorAdjust1-1.svg" alt="Prior distribution in log-space and in ms-space for a toy example of a linear regression. a) Displays the prior distribution of the intercept in log-space. b) Displays the prior distribution of the intercept in ms-space. c) Displays the prior distribution of the effect size in log-space. d) Displays the prior distribution of the effect size in ms-space." width="528" />
 <p class="caption">
 FIGURE 7.9: Prior distribution in log-space and in ms-space for a toy example of a linear regression. a) Displays the prior distribution of the intercept in log-space. b) Displays the prior distribution of the intercept in ms-space. c) Displays the prior distribution of the effect size in log-space. d) Displays the prior distribution of the effect size in ms-space.
@@ -632,17 +1374,17 @@ FIGURE 7.9: Prior distribution in log-space and in ms-space for a toy example of
 <!--\FloatBarrier-->
 <p>Next, for the effect of object minus subject relative sentences, we define a normally distributed prior with mean <span class="math inline">\(0\)</span> and a much smaller standard deviation of <span class="math inline">\(0.05\)</span>. Again, we do not have precise information on the specific value for the standard deviation, but as we saw in chapter @(ch:priors), we have some understanding of the range of variation in Chinese relatives. We expect a generally smaller effect size (see the meta-analysis in chapter @(ch:priors)), and we can check through prior predictive checks (data simulation and investigation of summary statistics) whether this yields a plausible pattern of expected results. Figures <a href="exemplary-data-analysis.html#fig:figPriorAdjust1">7.9</a>c+d show expected effects in log-scale and in ms-scale for a simple linear regression example.</p>
 <p>In addition, we assume much smaller values for the standard deviations in how the intercept and the slope vary across subjects and across items of <span class="math inline">\(0.1\)</span>, and a smaller residual standard deviation of <span class="math inline">\(0.5\)</span>. Our expectation for the correlation between random effects is unchanged. In summary:</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" data-line-number="1">priors2 &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb294-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">0.6</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb294-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.05</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> so),</a>
-<a class="sourceLine" id="cb294-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb294-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb294-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb294-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" data-line-number="1">priors2 &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb304-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">0.6</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb304-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.05</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> so),</a>
+<a class="sourceLine" id="cb304-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb304-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb304-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb304-7" data-line-number="7">)</a></code></pre></div>
 <div id="prior-predictive-checks-after-increasing-the-informativity-of-the-priors" class="section level4">
 <h4><span class="header-section-number">7.3.2.1</span> Prior predictive checks after increasing the informativity of the priors</h4>
 <p>We have now adjusted the priors increasing their informativity. This priors are still not too informative, but they are somewhat principled since they include some of the theory-neutral information that we have. Based on this new set of now weakly informative priors, we can again perform prior predictive checks as we did before. The new prior predictive checks are depicted in figure <a href="exemplary-data-analysis.html#fig:figPrior2">7.10</a>. <!-- using *brms*, which randomly draws samples of parameters from the priors and uses these to simulate data from the statistical model. We can then compute and plot summary statistics for the simulated data. We do not show the R code again for these analyses. --></p>
-<div class="figure"><span style="display:block;" id="fig:figPrior2"></span>
+<div class="figure"><span id="fig:figPrior2"></span>
 <img src="bookdown_files/figure-html/figPrior2-1.svg" alt="Prior predictive checks after adjusting the priors. The figures show prior predictive distributions. a) Histograms of reading times. Shaded areas correspond to 10-90 percent, 20-80 percent, 30-70 percent, and 40-60 percent quantiles across histograms; the solid line indicates the median across hypothetical datasets. This now provides a much more reasonable range of expectations. b)-f) Light blue/grey shows prior predictive distributions, dark blue/grey shows the data. b) Average log reading times now span a more reasonable range of values. c) Differences in reading times between object minus subject relatives; the values are now much more constrained without lots of extreme values. d) Standard deviations of reading times; in contrast to the relatively uninformative priors, values are in a reasonable range. e) Maximal effect size (object - subject relatives) across subjects; again, prior expectations are now much more reasonable compared to the uninformative prior. f) Standard deviation of effect size (object minus subject relative reading times) across subjects; this no longer shows a dominance of extreme values any more. a)-f) Values &gt; 2000 or &lt; -2000 are plotted at 2000 or -2000 for visualization." width="403.2" />
 <p class="caption">
 FIGURE 7.10: Prior predictive checks after adjusting the priors. The figures show prior predictive distributions. a) Histograms of reading times. Shaded areas correspond to 10-90 percent, 20-80 percent, 30-70 percent, and 40-60 percent quantiles across histograms; the solid line indicates the median across hypothetical datasets. This now provides a much more reasonable range of expectations. b)-f) Light blue/grey shows prior predictive distributions, dark blue/grey shows the data. b) Average log reading times now span a more reasonable range of values. c) Differences in reading times between object minus subject relatives; the values are now much more constrained without lots of extreme values. d) Standard deviations of reading times; in contrast to the relatively uninformative priors, values are in a reasonable range. e) Maximal effect size (object - subject relatives) across subjects; again, prior expectations are now much more reasonable compared to the uninformative prior. f) Standard deviation of effect size (object minus subject relative reading times) across subjects; this no longer shows a dominance of extreme values any more. a)-f) Values &gt; 2000 or &lt; -2000 are plotted at 2000 or -2000 for visualization.
@@ -661,30 +1403,30 @@ FIGURE 7.10: Prior predictive checks after adjusting the priors. The figures sho
 <div id="posterior-predictive-checks-model-adequacy" class="section level3">
 <h3><span class="header-section-number">7.3.4</span> Posterior predictive checks: Model adequacy</h3>
 <p>Having examined the prior predictive data in detail, we can now take the observed data and perform posterior inference on it. We start by fitting a maximal <em>brms</em> model to the observed data.</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" data-line-number="1">fit_gibsonwu &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">|</span><span class="st"> </span>item), </a>
-<a class="sourceLine" id="cb295-2" data-line-number="2">  <span class="dt">data =</span> df_gibsonwu,</a>
-<a class="sourceLine" id="cb295-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">lognormal</span>(), </a>
-<a class="sourceLine" id="cb295-4" data-line-number="4">  <span class="dt">prior =</span> priors2</a>
-<a class="sourceLine" id="cb295-5" data-line-number="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" data-line-number="1">fit_gibsonwu &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">|</span><span class="st"> </span>item), </a>
+<a class="sourceLine" id="cb305-2" data-line-number="2">  <span class="dt">data =</span> df_gibsonwu,</a>
+<a class="sourceLine" id="cb305-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">lognormal</span>(), </a>
+<a class="sourceLine" id="cb305-4" data-line-number="4">  <span class="dt">prior =</span> priors2</a>
+<a class="sourceLine" id="cb305-5" data-line-number="5">)</a></code></pre></div>
 <p>One could examine the posteriors from this model (we skip this step for brevity, but the reader should run the above code and examine the posterior summaries):</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" data-line-number="1">fit_gibsonwu</a></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" data-line-number="1">fit_gibsonwu</a></code></pre></div>
 <p>Figure <a href="exemplary-data-analysis.html#fig:FigPosteriorB">7.11</a> shows the posterior distribution for the slope parameter, which estimates the difference in reading times between object minus subject relative sentences.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" data-line-number="1"><span class="kw">mcmc_hist</span>(fit_gibsonwu, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;b_so&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb297-2" data-line-number="2"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Object - subject relatives&quot;</span>, </a>
-<a class="sourceLine" id="cb297-3" data-line-number="3">       <span class="dt">title =</span> <span class="st">&quot;Posterior distribution&quot;</span>)</a></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:FigPosteriorB"></span>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" data-line-number="1"><span class="kw">mcmc_hist</span>(fit_gibsonwu, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;b_so&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb307-2" data-line-number="2"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Object - subject relatives&quot;</span>, </a>
+<a class="sourceLine" id="cb307-3" data-line-number="3">       <span class="dt">title =</span> <span class="st">&quot;Posterior distribution&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:FigPosteriorB"></span>
 <img src="bookdown_files/figure-html/FigPosteriorB-1.svg" alt="Posterior distribution for the slope parameter, estimating the difference in reading times between object relative minus subject relative sentences." width="384" />
 <p class="caption">
 FIGURE 7.11: Posterior distribution for the slope parameter, estimating the difference in reading times between object relative minus subject relative sentences.
 </p>
 </div>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" data-line-number="1">postgw &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_gibsonwu)</a>
-<a class="sourceLine" id="cb298-2" data-line-number="2"><span class="kw">mean</span>(postgw<span class="op">$</span>b_so <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
-<pre><code>## [1] 0.889</code></pre>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" data-line-number="1">postgw &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_gibsonwu)</a>
+<a class="sourceLine" id="cb308-2" data-line-number="2"><span class="kw">mean</span>(postgw<span class="op">$</span>b_so <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## [1] 0.885</code></pre>
 <!--\FloatBarrier-->
 <p>Figure <a href="exemplary-data-analysis.html#fig:FigPosteriorB">7.11</a> shows that the reading times in object relative sentences tends to be slightly faster than in subject relative sentences (p(b&lt;0) = 0.89); this is as predicted by <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu">2013</a>)</span>. However, given the wide <span class="math inline">\(95\)</span>% confidence intervals; it is difficult to rule out the possibility that there is effectively no difference in reading time between the two conditions without doing model comparison (with Bayes factor or cross-validation).</p>
 <p>To assess model adequacy, we perform posterior predictive checks. We simulate data based on posterior samples of parameters. This then allows us to investigate the simulated data by computing the summary statistics that we used in the prior predictive checks, and by comparing model predictions with the observed data.</p>
-<div class="figure"><span style="display:block;" id="fig:FigPost"></span>
+<div class="figure"><span id="fig:FigPost"></span>
 <img src="bookdown_files/figure-html/FigPost-1.svg" alt="Posterior predictive checks for weakly informative priors. Distributions are over posterior predictive simulated data. a) Histograms of reading times. 10-90 percent, 20-80 percent, 30-70 percent, and 40-60 percent quantiles across histograms are shown as shaded areas; the median is shown as a dotted line and the observed data as a solid line. For illustration, values &gt; 2000 are plotted as 2000; modeling was done on the original data. b)-f) Light blue/grey shows the posterior predictive distributions, dark blue/grey shows the data. b) Average reading times. c) Differences in reading times between object minus subject relatives. d) Standard deviations of reading times. e) Maximal effect size (object - subject relatives) across subjects. f) Standard deviation of effect size across subjects." width="576" />
 <p class="caption">
 FIGURE 7.12: Posterior predictive checks for weakly informative priors. Distributions are over posterior predictive simulated data. a) Histograms of reading times. 10-90 percent, 20-80 percent, 30-70 percent, and 40-60 percent quantiles across histograms are shown as shaded areas; the median is shown as a dotted line and the observed data as a solid line. For illustration, values &gt; 2000 are plotted as 2000; modeling was done on the original data. b)-f) Light blue/grey shows the posterior predictive distributions, dark blue/grey shows the data. b) Average reading times. c) Differences in reading times between object minus subject relatives. d) Standard deviations of reading times. e) Maximal effect size (object - subject relatives) across subjects. f) Standard deviation of effect size across subjects.
@@ -702,7 +1444,7 @@ we first look at the distribution of means. The posterior predictive means captu
 <p>Barr, Dale J, Roger Levy, Christoph Scheepers, and Harry J Tily. 2013. “Random Effects Structure for Confirmatory Hypothesis Testing: Keep It Maximal.” <em>Journal of Memory and Language</em> 68 (3). Elsevier: 255–78.</p>
 </div>
 <div id="ref-Betancourt:2018aa">
-<p>Betancourt, Michael. 2018. “Towards a Principled Bayesian Workflow.” <a href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html" class="uri">https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html</a>.</p>
+<p>Betancourt, Michael J. 2018. “Towards a Principled Bayesian Workflow.” <a href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html" class="uri">https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html</a>.</p>
 </div>
 <div id="ref-gibsonwu">
 <p>Gibson, Edward, and H-H Iris Wu. 2013. “Processing Chinese Relative Clauses in Context.” <em>Language and Cognitive Processes</em> 28 (1-2). Taylor &amp; Francis: 125–55.</p>
@@ -714,7 +1456,7 @@ we first look at the distribution of means. The posterior predictive means captu
 <p>Paape, Dario, Bruno Nicenboim, and Shravan Vasishth. 2017. “Does Antecedent Complexity Affect Ellipsis Processing? An Empirical Investigation.” <em>Glossa: A Journal of General Linguistics</em> 2 (1).</p>
 </div>
 <div id="ref-schad2019towardarXiv">
-<p>Schad, Daniel J, Michael Betancourt, and Shravan Vasishth. 2019. “Toward a Principled Bayesian Workflow in Cognitive Science.” <em>arXiv Preprint arXiv:1904.12765</em>.</p>
+<p>Schad, Daniel J., Michael J. Betancourt, and Shravan Vasishth. 2019. “Toward a Principled Bayesian Workflow in Cognitive Science.” <em>arXiv Preprint arXiv:1904.12765</em>.</p>
 </div>
 <div id="ref-Vasishth2018aa">
 <p>Vasishth, Shravan, Daniela Mertzen, Lena A Jäger, and Andrew Gelman. 2018. “The Statistical Significance Filter Leads to Overoptimistic Expectations of Replicability.” <em>Journal of Memory and Language</em> 103: 151–75.</p>
@@ -770,10 +1512,6 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
-"search": {
-"engine": "lunr",
-"options": null
-},
 "toc": {
 "collapse": "none"
 }

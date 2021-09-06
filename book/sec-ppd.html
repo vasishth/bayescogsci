@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.5 Posterior predictive distribution | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.22.8 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.5 Posterior predictive distribution | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-07-28" />
+<meta name="date" content="2021-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,7 +52,743 @@
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
+<script>
+// FOLD code from 
+// https://github.com/bblodfon/rtemps/blob/master/docs/bookdown-lite/hide_code.html
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
 
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+<script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    // close the dropdown menu when an option is clicked
+    $("#allCodeButton").dropdown("toggle");
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    // close the dropdown menu when an option is clicked
+    $("#allCodeButton").dropdown("toggle");
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
+  rCodeBlocks.each(function() {
+
+    // if code block has been labeled with class `fold-show`, show the code on init!
+    var classList = $(this).attr('class').split(/\s+/);
+    for (var i = 0; i < classList.length; i++) {
+    if (classList[i] === 'fold-show') {
+        show = true;
+      }
+    }
+
+    // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // hack: return show to false, otherwise all next codeBlocks will be shown!
+    show = false;
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Code');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide');
+    });
+  });
+
+}
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.3.7
+ * http://getbootstrap.com/javascript/#dropdowns
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle="dropdown"]'
+  var Dropdown = function (element) {
+    $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.VERSION = '3.3.7'
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+  function clearMenus(e) {
+    if (e && e.which === 3) return
+    $(backdrop).remove()
+    $(toggle).each(function () {
+      var $this         = $(this)
+      var $parent       = getParent($this)
+      var relatedTarget = { relatedTarget: this }
+
+      if (!$parent.hasClass('open')) return
+
+      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this.attr('aria-expanded', 'false')
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+    })
+  }
+
+  Dropdown.prototype.toggle = function (e) {
+    var $this = $(this)
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    clearMenus()
+
+    if (!isActive) {
+      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
+        // if mobile we use a backdrop because click events don't delegate
+        $(document.createElement('div'))
+          .addClass('dropdown-backdrop')
+          .insertAfter($(this))
+          .on('click', clearMenus)
+      }
+
+      var relatedTarget = { relatedTarget: this }
+      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this
+        .trigger('focus')
+        .attr('aria-expanded', 'true')
+
+      $parent
+        .toggleClass('open')
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
+    }
+
+    return false
+  }
+
+  Dropdown.prototype.keydown = function (e) {
+    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
+
+    var $this = $(this)
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    if (!isActive && e.which != 27 || isActive && e.which == 27) {
+      if (e.which == 27) $parent.find(toggle).trigger('focus')
+      return $this.trigger('click')
+    }
+
+    var desc = ' li:not(.disabled):visible a'
+    var $items = $parent.find('.dropdown-menu' + desc)
+
+    if (!$items.length) return
+
+    var index = $items.index(e.target)
+
+    if (e.which == 38 && index > 0)                 index--         // up
+    if (e.which == 40 && index < $items.length - 1) index++         // down
+    if (!~index)                                    index = 0
+
+    $items.eq(index).trigger('focus')
+  }
+
+
+  // DROPDOWN PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.dropdown')
+
+      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown             = Plugin
+  $.fn.dropdown.Constructor = Dropdown
+
+
+  // DROPDOWN NO CONFLICT
+  // ====================
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  // APPLY TO STANDARD DROPDOWN ELEMENTS
+  // ===================================
+
+  $(document)
+    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
+    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
+
+}(jQuery);
+</script>
+<style type="text/css">
+.code-folding-btn {
+  margin-bottom: 4px;
+}
+
+.row { display: flex; }
+.collapse { display: none; }
+.in { display:block }
+.pull-right > .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.open > .dropdown-menu {
+    display: block;
+    color: #ffffff;
+    background-color: #ffffff;
+    background-image: none;
+    border-color: #92897e;
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #e95420;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #e95420;
+  outline: 0;
+}
+.dropdown-menu > .disabled > a,
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  color: #aea79f;
+}
+
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 1;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 4px 8px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: #ffffff;
+  text-decoration: none;
+}
+.btn:active,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  opacity: 0.65;
+  box-shadow: none;
+}
+a.btn.disabled,
+fieldset[disabled] a.btn {
+  pointer-events: none;
+}
+.btn-default {
+  color: #ffffff;
+  background-color: #aea79f; #important
+  border-color: #aea79f;
+}
+
+.btn-default:focus,
+.btn-default.focus {
+  color: #ffffff;
+  background-color: #978e83;
+  border-color: #6f675e;
+}
+
+.btn-default:hover {
+  color: #ffffff;
+  background-color: #978e83;
+  border-color: #92897e;
+}
+.btn-default:active,
+.btn-default.active,
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
+}
+.btn-group > .btn:first-child {
+  margin-left: 0;
+}
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.btn-group > .btn:last-child:not(:first-child),
+.btn-group > .dropdown-toggle:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.btn-group > .btn-group {
+  float: left;
+}
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child,
+.btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.btn-group .dropdown-toggle:active,
+.btn-group.open .dropdown-toggle {
+  outline: 0;
+}
+.btn-group > .btn + .dropdown-toggle {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+.btn-group > .btn-lg + .dropdown-toggle {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+.btn-group.open .dropdown-toggle {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn-group.open .dropdown-toggle.btn-link {
+  box-shadow: none;
+}
+
+</style>
+<script>
+var str = '<div class="btn-group pull-right" style="position: fixed; right: 50px; top: 10px; z-index: 200"><button type="button" class="btn btn-default btn-xs dropdown-toggle" id="allCodeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast=""><span>Code</span> <span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;"><li><a id="rmd-show-all-code" href="#">Show All Code</a></li><li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li></ul></div>';
+document.write(str);
+</script>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "hide");
+});
+</script>
 
 
 <style type="text/css">
@@ -136,12 +872,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
-<li class="chapter" data-level="0.2" data-path="developing-the-right-mindset-for-this-book.html"><a href="developing-the-right-mindset-for-this-book.html"><i class="fa fa-check"></i><b>0.2</b> Developing the right mindset for this book</a></li>
-<li class="chapter" data-level="0.3" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.3</b> How to read this book</a></li>
-<li class="chapter" data-level="0.4" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.4</b> Online materials</a></li>
-<li class="chapter" data-level="0.5" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.5</b> Software needed</a></li>
-<li class="chapter" data-level="0.6" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>0.6</b> Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="developing-the-right-mindset-for-this-book.html"><a href="developing-the-right-mindset-for-this-book.html"><i class="fa fa-check"></i>Developing the right mindset for this book</a></li>
+<li class="chapter" data-level="" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i>How to read this book</a></li>
+<li class="chapter" data-level="" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i>Online materials</a></li>
+<li class="chapter" data-level="" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i>Software needed</a></li>
+<li class="chapter" data-level="" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i>Acknowledgments</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
@@ -155,10 +891,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.5</b> Continuous random variables: An example using the Normal distribution</a><ul>
 <li class="chapter" data-level="1.5.1" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#an-important-distinction-probability-vs.density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
+<li class="chapter" data-level="1.5.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#truncating-a-normal-distribution"><i class="fa fa-check"></i><b>1.5.2</b> Truncating a normal distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1: Discrete bivariate distributions</a></li>
-<li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#sec:contbivar"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
 <li class="chapter" data-level="1.6.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#sec:generatebivariatedata"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="sec-marginal.html"><a href="sec-marginal.html"><i class="fa fa-check"></i><b>1.7</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
@@ -189,7 +926,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="sec-priorpred.html"><a href="sec-priorpred.html"><i class="fa fa-check"></i><b>3.2</b> Prior predictive distribution</a></li>
 <li class="chapter" data-level="3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html"><i class="fa fa-check"></i><b>3.3</b> The influence of priors: sensitivity analysis</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.3.1</b> Flat uninformative priors</a></li>
+<li class="chapter" data-level="3.3.1" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.3.1</b> Flat, uninformative priors</a></li>
 <li class="chapter" data-level="3.3.2" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#regularizing-priors"><i class="fa fa-check"></i><b>3.3.2</b> Regularizing priors</a></li>
 <li class="chapter" data-level="3.3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#principled-priors"><i class="fa fa-check"></i><b>3.3.3</b> Principled priors</a></li>
 <li class="chapter" data-level="3.3.4" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#informative-priors"><i class="fa fa-check"></i><b>3.3.4</b> Informative priors</a></li>
@@ -198,10 +935,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="sec-ppd.html"><a href="sec-ppd.html"><i class="fa fa-check"></i><b>3.5</b> Posterior predictive distribution</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="sec-ppd.html"><a href="sec-ppd.html#comparing-different-likelihoods"><i class="fa fa-check"></i><b>3.5.1</b> Comparing different likelihoods</a></li>
 <li class="chapter" data-level="3.5.2" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lnfirst"><i class="fa fa-check"></i><b>3.5.2</b> The log-normal likelihood</a></li>
-<li class="chapter" data-level="3.5.3" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lognormal"><i class="fa fa-check"></i><b>3.5.3</b> Re-fitting a single participant pressing a button repeatedly with a log-normal likelihood</a></li>
+<li class="chapter" data-level="3.5.3" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lognormal"><i class="fa fa-check"></i><b>3.5.3</b> Re-fitting a single subject pressing a button repeatedly with a log-normal likelihood</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
-<li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
+<li class="chapter" data-level="3.7" data-path="sec-ch3furtherreading.html"><a href="sec-ch3furtherreading.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
 <li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
@@ -224,28 +961,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.5" data-path="sec-logistic.html"><a href="sec-logistic.html#descriptive-adequacy"><i class="fa fa-check"></i><b>4.3.5</b> Descriptive adequacy</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
-<li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
+<li class="chapter" data-level="4.5" data-path="sec-ch4furtherreading.html"><a href="sec-ch4furtherreading.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
 <li class="chapter" data-level="4.6" data-path="sec-LMexercises.html"><a href="sec-LMexercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
-<li class="chapter" data-level="5.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical normal model: The N400 effect</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#complete-pooling-model-m_cp"><i class="fa fa-check"></i><b>5.1.1</b> Complete-pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.2" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.1.2</b> No-pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.3" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercept and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
+<li class="chapter" data-level="5.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical model with a normal likelihood: The N400 effect</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#complete-pooling-model-m_cp"><i class="fa fa-check"></i><b>5.1.1</b> Complete pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.2" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.1.2</b> No pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.3" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercepts and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
 <li class="chapter" data-level="5.1.4" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:mcvivs"><i class="fa fa-check"></i><b>5.1.4</b> Correlated varying intercept varying slopes model (<span class="math inline">\(M_{h}\)</span>)</a></li>
 <li class="chapter" data-level="5.1.5" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:sih"><i class="fa fa-check"></i><b>5.1.5</b> By-subjects and by-items correlated varying intercept varying slopes model (<span class="math inline">\(M_{sih}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.6" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the so-called maximal models–Distributional regression models</a></li>
+<li class="chapter" data-level="5.1.6" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the maximal model–Distributional regression models</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="sec-stroop.html"><a href="sec-stroop.html"><i class="fa fa-check"></i><b>5.2</b> A hierarchical log-normal model: The Stroop effect</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="sec-stroop.html"><a href="sec-stroop.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.2.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><a href="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><i class="fa fa-check"></i><b>5.3</b> Why fitting a Bayesian hierarchical model is worth the effort</a></li>
 <li class="chapter" data-level="5.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.4</b> Summary</a></li>
-<li class="chapter" data-level="5.5" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
+<li class="chapter" data-level="5.5" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
 <li class="chapter" data-level="5.6" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html"><i class="fa fa-check"></i><b>5.6</b> Exercises</a><ul>
-<li class="chapter" data-level="5.6.1" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-normal-likelihood"><i class="fa fa-check"></i><b>5.6.1</b> Exercises with a normal likelihood</a></li>
-<li class="chapter" data-level="5.6.2" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-log-normal-likelihood"><i class="fa fa-check"></i><b>5.6.2</b> Exercises with a log-normal likelihood</a></li>
-<li class="chapter" data-level="5.6.3" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-logistic-regression-bernoulli-likelihood."><i class="fa fa-check"></i><b>5.6.3</b> Exercises with a logistic regression (Bernoulli likelihood).</a></li>
+<li class="chapter" data-level="" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-normal-likelihood"><i class="fa fa-check"></i>Exercises with a normal likelihood</a></li>
+<li class="chapter" data-level="" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-log-normal-likelihood"><i class="fa fa-check"></i>Exercises with a log-normal likelihood</a></li>
+<li class="chapter" data-level="" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-logistic-regression-bernoulli-likelihood."><i class="fa fa-check"></i>Exercises with a logistic regression (Bernoulli likelihood).</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="ch-priors.html"><a href="ch-priors.html"><i class="fa fa-check"></i><b>6</b> The Art and Science of Prior Elicitation</a><ul>
@@ -254,7 +991,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3" data-path="deriving-priors-from-meta-analyses.html"><a href="deriving-priors-from-meta-analyses.html"><i class="fa fa-check"></i><b>6.3</b> Deriving priors from meta-analyses</a></li>
 <li class="chapter" data-level="6.4" data-path="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><a href="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’ posteriors as priors for a new study</a></li>
 <li class="chapter" data-level="6.5" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
-<li class="chapter" data-level="6.6" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.6" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a><ul>
 <li class="chapter" data-level="7.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>7.1</b> Model building</a></li>
@@ -271,7 +1008,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.4" data-path="exemplary-data-analysis.html"><a href="exemplary-data-analysis.html#posterior-predictive-checks-model-adequacy"><i class="fa fa-check"></i><b>7.3.4</b> Posterior predictive checks: Model adequacy</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
-<li class="chapter" data-level="7.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>7.5</b> Further reading</a></li>
+<li class="chapter" data-level="7.5" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>7.5</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>8</b> Contrast coding</a><ul>
 <li class="chapter" data-level="8.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>8.1</b> Basic concepts illustrated using a two-level factor</a><ul>
@@ -299,7 +1036,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>8.5</b> Computing condition means from estimated contrasts</a></li>
 <li class="chapter" data-level="8.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
-<li class="chapter" data-level="8.7" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
+<li class="chapter" data-level="8.7" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
 <li class="chapter" data-level="8.8" data-path="sec-Contrastsexercises.html"><a href="sec-Contrastsexercises.html"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a><ul>
@@ -327,7 +1064,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>10.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
-<li class="chapter" data-level="10.6" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
+<li class="chapter" data-level="10.6" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
 <li class="chapter" data-level="10.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>10.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>11</b> Complex models and reparametrization</a><ul>
@@ -338,10 +1075,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.4" data-path="sec-hierstan.html"><a href="sec-hierstan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>11.1.4</b> By-subject and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="summary-10.html"><a href="summary-10.html"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
-<li class="chapter" data-level="11.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
+<li class="chapter" data-level="11.3" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
 <li class="chapter" data-level="11.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>11.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a></li>
+<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a><ul>
+<li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+</ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
 <li class="chapter" data-level="13.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>13.1</b> Meta-analysis</a><ul>
@@ -351,13 +1093,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.2.1" data-path="measurement-error-models.html"><a href="measurement-error-models.html#accounting-for-measurement-error-in-a-voice-onset-time-model"><i class="fa fa-check"></i><b>13.2.1</b> Accounting for measurement error in a voice onset time model</a></li>
 </ul></li>
 <li class="chapter" data-level="13.3" data-path="summary-11.html"><a href="summary-11.html"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
-<li class="chapter" data-level="13.4" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
+<li class="chapter" data-level="13.4" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
 <li class="chapter" data-level="13.5" data-path="sec-REMAMEexercises.html"><a href="sec-REMAMEexercises.html"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="ch-sat.html"><a href="ch-sat.html"><i class="fa fa-check"></i><b>14</b> SAT</a></li>
 <li class="part"><span><b>V Model comparison and hypothesis testing</b></span></li>
 <li class="chapter" data-level="15" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>15</b> Introduction to model comparison</a><ul>
-<li class="chapter" data-level="15.1" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.1</b> Further reading</a></li>
+<li class="chapter" data-level="15.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>15.1</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>16</b> Bayes factors</a><ul>
 <li class="chapter" data-level="16.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>16.1</b> Hypothesis testing using the Bayes factor</a><ul>
@@ -375,7 +1117,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.5.2" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-practice-variability-with-the-data"><i class="fa fa-check"></i><b>16.5.2</b> Bayes factors in practice: Variability with the data</a></li>
 </ul></li>
 <li class="chapter" data-level="16.6" data-path="summary-12.html"><a href="summary-12.html"><i class="fa fa-check"></i><b>16.6</b> Summary</a></li>
-<li class="chapter" data-level="16.7" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.7</b> Further reading</a></li>
+<li class="chapter" data-level="16.7" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>16.7</b> Further reading</a></li>
 <li class="chapter" data-level="16.8" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>16.8</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>17</b> Cross-validation</a><ul>
@@ -392,12 +1134,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.6.1" data-path="cross-validation-in-stan.html"><a href="cross-validation-in-stan.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>17.6.1</b> PSIS-LOO-CV in Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="17.7" data-path="summary-13.html"><a href="summary-13.html"><i class="fa fa-check"></i><b>17.7</b> Summary</a></li>
-<li class="chapter" data-level="17.8" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>17.8</b> Further reading</a></li>
+<li class="chapter" data-level="17.8" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>17.8</b> Further reading</a></li>
 <li class="chapter" data-level="17.9" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>17.9</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
 <li class="chapter" data-level="18" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>18</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="18.1" data-path="further-reading-14.html"><a href="further-reading-14.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
+<li class="chapter" data-level="18.1" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>19</b> Multinomial processing trees</a><ul>
 <li class="chapter" data-level="19.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>19.1</b> Modeling multiple categorical responses</a><ul>
@@ -407,7 +1149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>19.2</b> Multinomial processing tree (MPT) models</a><ul>
 <li class="chapter" data-level="19.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>19.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="19.3" data-path="further-reading-15.html"><a href="further-reading-15.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
+<li class="chapter" data-level="19.3" data-path="further-reading-14.html"><a href="further-reading-14.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
 <li class="chapter" data-level="19.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>19.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>20</b> Mixture models</a><ul>
@@ -419,12 +1161,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.1.5" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html#sec:fastguessh"><i class="fa fa-check"></i><b>20.1.5</b> A hierarchical implementation of the fast-guess model</a></li>
 </ul></li>
 <li class="chapter" data-level="20.2" data-path="summary-14.html"><a href="summary-14.html"><i class="fa fa-check"></i><b>20.2</b> Summary</a></li>
-<li class="chapter" data-level="20.3" data-path="further-reading-16.html"><a href="further-reading-16.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
+<li class="chapter" data-level="20.3" data-path="further-reading-15.html"><a href="further-reading-15.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
 <li class="chapter" data-level="20.4" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>20.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html"><i class="fa fa-check"></i><b>21</b> A simple accumulator model to account for choice response time</a></li>
-<li class="part"><span><b>VII Appendix</b></span></li>
-<li class="chapter" data-level="22" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>22</b> Important distributions</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>A</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -448,7 +1190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="sec:ppd" class="section level2">
 <h2><span class="header-section-number">3.5</span> Posterior predictive distribution</h2>
-<p>The prior predictive distribution is a collection of datasets generated from the model (the likelihood and the priors). After we have seen the data and obtained the posterior distributions of the parameters, we can now use the <em>posterior distributions</em> to generate future data from the model. In other words, given the posterior distributions of the parameters of the model, the posterior predictive distribution shows how future data might look like.</p>
+<p>The prior predictive distribution is a collection of data sets generated from the model (the likelihood and the priors). After we have seen the data and obtained the posterior distributions of the parameters, we can now use the posterior distributions to generate future data from the model. In other words, given the posterior distributions of the parameters of the model, the posterior predictive distribution gives us some indication of what future data might look like, given the data and model of course.</p>
 <p>Once we have the posterior distribution <span class="math inline">\(p(\boldsymbol{\Theta}\mid \boldsymbol{y})\)</span>, we can derive the predictions based on this distribution:</p>
 <p><span class="math display">\[\begin{equation}
 p(\boldsymbol{y_{pred}}\mid \boldsymbol{y} ) = \int_{\boldsymbol{\Theta}} p(\boldsymbol{y_{pred}}, \boldsymbol{\Theta}\mid \boldsymbol{y})\, d\boldsymbol{\Theta}= \int_{\boldsymbol{\Theta}} 
@@ -459,76 +1201,76 @@ p(\boldsymbol{y_{pred}}\mid \boldsymbol{\Theta},\boldsymbol{y})p(\boldsymbol{\Th
 p(\boldsymbol{y_{pred}}\mid \boldsymbol{y} )=\int_{\boldsymbol{\Theta}} p(\boldsymbol{y_{pred}}\mid \boldsymbol{\Theta}) p(\boldsymbol{\Theta}\mid \boldsymbol{y})\, d\boldsymbol{\Theta}
 \tag{3.7}
 \end{equation}\]</span></p>
-<p>We are conditioning <span class="math inline">\(\boldsymbol{y_{pred}}\)</span> only on <span class="math inline">\(\boldsymbol{y}\)</span>, we do not condition on what we don’t know (<span class="math inline">\(\boldsymbol{\Theta}\)</span>); we integrate out the unknown parameters. This posterior predictive distribution is different from the frequentist approach, which gives only a predictive distribution of <span class="math inline">\(\boldsymbol{y_{pred}}\)</span> given our maximum likelihood estimate of <span class="math inline">\(\boldsymbol{\Theta}\)</span> (a point value). As with the prior predictive distribution, we can avoid performing the integration explicitly by generating samples from the posterior predictive distribution. We can use the same function that we created before, <code>normal_predictive_distribution</code>, with the only difference in that instead of sampling <code>mu</code> and <code>sigma</code> from the priors, we use samples from the posterior.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">N_obs &lt;-<span class="st"> </span><span class="kw">nrow</span>(df_spacebar)</a>
-<a class="sourceLine" id="cb119-2" data-line-number="2">mu_samples &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_press)<span class="op">$</span>b_Intercept</a>
-<a class="sourceLine" id="cb119-3" data-line-number="3">sigma_samples &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_press)<span class="op">$</span>sigma</a>
-<a class="sourceLine" id="cb119-4" data-line-number="4"><span class="kw">normal_predictive_distribution</span>(</a>
-<a class="sourceLine" id="cb119-5" data-line-number="5">  <span class="dt">mu_samples =</span> mu_samples,</a>
-<a class="sourceLine" id="cb119-6" data-line-number="6">  <span class="dt">sigma_samples =</span> sigma_samples,</a>
-<a class="sourceLine" id="cb119-7" data-line-number="7">  <span class="dt">N_obs =</span> N_obs</a>
-<a class="sourceLine" id="cb119-8" data-line-number="8">)</a></code></pre></div>
+<p>In Equation <a href="sec-ppd.html#eq:postpp">(3.7)</a>, we are conditioning <span class="math inline">\(\boldsymbol{y_{pred}}\)</span> only on <span class="math inline">\(\boldsymbol{y}\)</span>, we do not condition on what we don’t know (<span class="math inline">\(\boldsymbol{\Theta}\)</span>); we integrate out the unknown parameters. This posterior predictive distribution is different from the frequentist approach, which gives only a predictive distribution of <span class="math inline">\(\boldsymbol{y_{pred}}\)</span> given our maximum likelihood estimate of <span class="math inline">\(\boldsymbol{\Theta}\)</span> (a point value). As with the prior predictive distribution, we can avoid performing the integration explicitly by generating samples from the posterior predictive distribution. We can use the same function that we created before, <code>normal_predictive_distribution</code>, with the only difference in that instead of sampling <code>mu</code> and <code>sigma</code> from the priors, we use samples from the posterior.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">N_obs &lt;-<span class="st"> </span><span class="kw">nrow</span>(df_spacebar)</a>
+<a class="sourceLine" id="cb122-2" data-line-number="2">mu_samples &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_press)<span class="op">$</span>b_Intercept</a>
+<a class="sourceLine" id="cb122-3" data-line-number="3">sigma_samples &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_press)<span class="op">$</span>sigma</a>
+<a class="sourceLine" id="cb122-4" data-line-number="4"><span class="kw">normal_predictive_distribution</span>(</a>
+<a class="sourceLine" id="cb122-5" data-line-number="5">  <span class="dt">mu_samples =</span> mu_samples,</a>
+<a class="sourceLine" id="cb122-6" data-line-number="6">  <span class="dt">sigma_samples =</span> sigma_samples,</a>
+<a class="sourceLine" id="cb122-7" data-line-number="7">  <span class="dt">N_obs =</span> N_obs</a>
+<a class="sourceLine" id="cb122-8" data-line-number="8">)</a></code></pre></div>
 <pre><code>## # A tibble: 1,444,000 x 3
 ##    iter trialn rt_pred
 ##   &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;
-## 1     1      1    146.
-## 2     1      2    155.
-## 3     1      3    187.
+## 1     1      1    163.
+## 2     1      2    149.
+## 3     1      3    162.
 ## # … with 1,443,997 more rows</code></pre>
-<p>The <code>brms</code> function <code>posterior_predict()</code> is a convenient function that gives us samples from the posterior predictive distribution. If we use <code>posterior_predict(fit_press)</code>, we obtain the predicted response times in a matrix, with the samples as rows and the observations (data-points) as columns. (Bear in mind that if we fit a model with <code>sample_prior = &quot;only&quot;</code>, the dependent variable is ignored and <code>posterior_predict</code> will give us samples from the <em>prior</em> predictive distribution).</p>
+<p>The <code>brms</code> function <code>posterior_predict()</code> is a convenient function that gives us samples from the posterior predictive distribution. If we use <code>posterior_predict(fit_press)</code>, we obtain the predicted response times in a matrix, with the samples as rows and the observations (data-points) as columns. (Bear in mind that if we fit a model with <code>sample_prior = &quot;only&quot;</code>, the dependent variable is ignored and <code>posterior_predict</code> will give us samples from the prior predictive distribution).</p>
 <p>We can use the posterior predictive distribution to examine the “descriptive adequacy” of our models <span class="citation">(Gelman et al. <a href="#ref-Gelman14">2014</a>, Chapter 6; Shiffrin et al. <a href="#ref-shiffrinSurveyModelEvaluation2008">2008</a>)</span>; these are called posterior predictive checks, and what we want to establish here is that the posterior predictive data look more or less similar to the observed data. Achieving descriptive adequacy means that the current data could have been generated by the model. While passing a test of descriptive adequacy is not strong evidence in favor of a model, a major failure in descriptive adequacy can be interpreted as strong evidence against a model <span class="citation">(Shiffrin et al. <a href="#ref-shiffrinSurveyModelEvaluation2008">2008</a>)</span>.
-For this reason, comparing the descriptive adequacy of different models is not enough to differentiate between their relative performance. When doing model comparison, it is important to consider the criteria that <span class="citation">Roberts and Pashler (<a href="#ref-rp">2000</a>)</span> define. Although <span class="citation">Roberts and Pashler (<a href="#ref-rp">2000</a>)</span> are more interested in process models and not necessarily Bayesian models, their criteria are important for any kind of model comparison. Their main point is that it is not enough to have a good fit to the data for a model to be convincing. One should check that the range of predictions that the model makes is reasonably constrained; if a model can capture any possible outcome, then the model fit to a particular dataset is not so informative. Thus, although posterior predictive checking is important, it is only a sanity check to assess whether the model behavior is reasonable.</p>
-<p>In many cases, we can simply use the plot functions from <code>brms</code> (that act as wrappers for <code>bayesplot</code> functions). The plotting function <code>pp_check</code>, for example, takes as arguments the model, the number of predicted datasets, and the type of visualization, and it can show us different visualizations of posterior predictive checks. In these type of plots, the observed data are plotted as <span class="math inline">\(y\)</span> and predicted data as <span class="math inline">\(y_{rep}\)</span>. Below, we use <code>pp_check</code> to investigate how well the observed distribution of response times fit our model based on some number (11 and 100) of samples of the posterior predictive distributions (that is, simulated datasets) ; see figures <a href="sec-ppd.html#fig:normalppc">3.8</a> and <a href="sec-ppd.html#fig:normalppc2">3.9</a>.</p>
+For this reason, comparing the descriptive adequacy of different models is not enough to differentiate between their relative performance. When doing model comparison, it is important to consider the criteria that <span class="citation">Roberts and Pashler (<a href="#ref-rp">2000</a>)</span> define. Although <span class="citation">Roberts and Pashler (<a href="#ref-rp">2000</a>)</span> are more interested in process models and not necessarily Bayesian models, their criteria are important for any kind of model comparison. Their main point is that it is not enough to have a good fit to the data for a model to be convincing. One should check that the range of predictions that the model makes is reasonably constrained; if a model can capture any possible outcome, then the model fit to a particular data set is not so informative. Thus, although posterior predictive checking is important, it is only a sanity check to assess whether the model behavior is reasonable.</p>
+<p>In many cases, we can simply use the plot functions from <code>brms</code> (that act as wrappers for <code>bayesplot</code> functions). The plotting function <code>pp_check</code>, for example, takes as arguments the model, the number of predicted data sets, and the type of visualization, and it can show us different visualizations of posterior predictive checks. In these type of plots, the observed data are plotted as <span class="math inline">\(y\)</span> and predicted data as <span class="math inline">\(y_{rep}\)</span>. Below, we use <code>pp_check</code> to investigate how well the observed distribution of response times fit our model based on some number (11 and 100) of samples of the posterior predictive distributions (that is, simulated data sets) ; see Figures <a href="sec-ppd.html#fig:normalppc">3.8</a> and <a href="sec-ppd.html#fig:normalppc2">3.9</a>.</p>
 
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="kw">pp_check</span>(fit_press, <span class="dt">nsamples =</span> <span class="dv">11</span>, <span class="dt">type =</span> <span class="st">&quot;hist&quot;</span>)</a></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:normalppc"></span>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="kw">pp_check</span>(fit_press, <span class="dt">ndraws =</span> <span class="dv">11</span>, <span class="dt">type =</span> <span class="st">&quot;hist&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:normalppc"></span>
 <img src="bookdown_files/figure-html/normalppc-1.svg" alt="Histograms of eleven samples from the posterior predictive distribution of the model fit_press (\(y_{rep}\))." width="672" />
 <p class="caption">
 FIGURE 3.8: Histograms of eleven samples from the posterior predictive distribution of the model <code>fit_press</code> (<span class="math inline">\(y_{rep}\)</span>).
 </p>
 </div>
 
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="kw">pp_check</span>(fit_press, <span class="dt">nsamples =</span> <span class="dv">100</span>, <span class="dt">type =</span> <span class="st">&quot;dens_overlay&quot;</span>)</a></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:normalppc2"></span>
-<img src="bookdown_files/figure-html/normalppc2-1.svg" alt="Posterior predictive check that shows the fit of the model fit_press in comparison to datasets from the posterior predictive distribution using an overlay of density plots." width="672" />
+<div class="sourceCode" id="cb125"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="kw">pp_check</span>(fit_press, <span class="dt">ndraws =</span> <span class="dv">100</span>, <span class="dt">type =</span> <span class="st">&quot;dens_overlay&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:normalppc2"></span>
+<img src="bookdown_files/figure-html/normalppc2-1.svg" alt="Posterior predictive check that shows the fit of the model fit_press in comparison to data sets from the posterior predictive distribution using an overlay of density plots." width="672" />
 <p class="caption">
-FIGURE 3.9: Posterior predictive check that shows the fit of the model <code>fit_press</code> in comparison to datasets from the posterior predictive distribution using an overlay of density plots.
+FIGURE 3.9: Posterior predictive check that shows the fit of the model <code>fit_press</code> in comparison to data sets from the posterior predictive distribution using an overlay of density plots.
 </p>
 </div>
 <p>The data is slightly skewed and has no values shorter than 100 ms, while the predictive distributions are centered and symmetrical; see figures <a href="sec-ppd.html#fig:normalppc">3.8</a> and <a href="sec-ppd.html#fig:normalppc2">3.9</a>. This posterior predictive check shows a slight mismatch between the observed and predicted data. Can we build a better model? We’ll come back to this issue in the next section.</p>
 <div id="comparing-different-likelihoods" class="section level3">
 <h3><span class="header-section-number">3.5.1</span> Comparing different likelihoods</h3>
-<p>Since we know that the response times shouldn’t be normally distributed, we can choose a more realistic distribution for the likelihood. A good candidate is the log-normal distribution since a variable (such as time) that is log-normally distributed takes only positive real values and is right skewed.</p>
+<p>Response times are not usually normally distributed. A more realistic distribution is the log-normal. A random variable (such as time) that is log-normally distributed takes only positive real values and is right-skewed. Although other distributions can also produce data with such properties, the log-normal will turn out to be a pretty reasonable distribution for response times.</p>
 </div>
 <div id="sec:lnfirst" class="section level3">
 <h3><span class="header-section-number">3.5.2</span> The log-normal likelihood</h3>
-<p>If <span class="math inline">\(\boldsymbol{y}\)</span> is log-normally distributed, this means that <span class="math inline">\(\log(\boldsymbol{y})\)</span> is normally distributed.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> The log-normal distribution is again defined using <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, but these correspond to the mean and standard deviation of the normally distributed logarithm of the data <span class="math inline">\(\boldsymbol{y}\)</span>: <span class="math inline">\(\log(\boldsymbol{y})\)</span>. Thus, when we model some data <span class="math inline">\(\boldsymbol{y}\)</span> using the log-normal likelihood, the parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are on a different scale than the data <span class="math inline">\(\boldsymbol{y}\)</span>.</p>
-<!-- We can create a log-normal distribution by exponentiating the samples of a normal distribution. See Figure \@ref(fig:logndemo). -->
-<p><span class="math display">\[\begin{equation}
+<p>If <span class="math inline">\(\boldsymbol{y}\)</span> is log-normally distributed, this means that <span class="math inline">\(\log(\boldsymbol{y})\)</span> is normally distributed.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> The log-normal distribution is also defined using <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, but these are on the log ms scale; they correspond to the mean and standard deviation of the logarithm of the data <span class="math inline">\(\boldsymbol{y}\)</span>, <span class="math inline">\(\log(\boldsymbol{y})\)</span>, which will be normally distributed. Thus, when we model some data <span class="math inline">\(\boldsymbol{y}\)</span> using the log-normal likelihood, the parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are on a different scale than the data <span class="math inline">\(\boldsymbol{y}\)</span>. Equation <a href="sec-ppd.html#eq:lognormalequations">(3.8)</a> shows the relationship between the log-normal and the normal.</p>
+<p><span class="math display" id="eq:lognormalequations">\[\begin{equation}
 \begin{aligned}
-\log(\boldsymbol{y}) &amp;\sim Normal( \mu, \sigma)\\
-\boldsymbol{y} &amp;\sim LogNormal( \mu, \sigma) 
+\log(\boldsymbol{y}) &amp;\sim \mathit{Normal}( \mu, \sigma)\\
+\boldsymbol{y} &amp;\sim \mathit{LogNormal}( \mu, \sigma) 
 \end{aligned}
+\tag{3.8}
 \end{equation}\]</span></p>
-<p>We can obtain samples from the log-normal distribution, using the normal distribution by first setting an auxiliary variable, <span class="math inline">\(z\)</span>, so that <span class="math inline">\(z = log(y)\)</span>. This means that <span class="math inline">\(z \sim \mathit{Normal}(\mu, \sigma)\)</span>.
-Then we can just use <span class="math inline">\(exp(z)\)</span> as samples from the <span class="math inline">\(\mathit{LogNormal}(\mu, \sigma)\)</span>, since <span class="math inline">\(exp(z) = y\)</span>. See Figure <a href="sec-ppd.html#fig:logndemo">3.10</a>.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">mu &lt;-<span class="st"> </span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb123-2" data-line-number="2">sigma &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
-<a class="sourceLine" id="cb123-3" data-line-number="3">N &lt;-<span class="st"> </span><span class="dv">500000</span></a>
-<a class="sourceLine" id="cb123-4" data-line-number="4"><span class="co"># Generate N random samples from a log-normal distribution</span></a>
-<a class="sourceLine" id="cb123-5" data-line-number="5">sl &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(N, mu, sigma)</a>
-<a class="sourceLine" id="cb123-6" data-line-number="6"><span class="kw">ggplot</span>(<span class="kw">tibble</span>(<span class="dt">samples =</span> sl), <span class="kw">aes</span>(samples)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb123-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">50</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb123-8" data-line-number="8"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Log-normal distribution</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb123-9" data-line-number="9"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">70000</span>), <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</a>
-<a class="sourceLine" id="cb123-10" data-line-number="10"><span class="co"># Generate N random samples from a normal distribution,</span></a>
-<a class="sourceLine" id="cb123-11" data-line-number="11"><span class="co"># and then exponentiate them</span></a>
-<a class="sourceLine" id="cb123-12" data-line-number="12">sn &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">rnorm</span>(N, mu, sigma))</a>
-<a class="sourceLine" id="cb123-13" data-line-number="13"><span class="kw">ggplot</span>(<span class="kw">tibble</span>(<span class="dt">samples =</span> sn), <span class="kw">aes</span>(samples)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb123-14" data-line-number="14"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">50</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb123-15" data-line-number="15"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Exponentiated samples of</span><span class="ch">\n</span><span class="st">a normal distribution&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb123-16" data-line-number="16"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">70000</span>), <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</a></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:logndemo"></span>
+<p>We can obtain samples from the log-normal distribution, using the normal distribution by first setting an auxiliary variable, <span class="math inline">\(z\)</span>, so that <span class="math inline">\(z = \log(y)\)</span>. This means that <span class="math inline">\(z \sim \mathit{Normal}(\mu, \sigma)\)</span>.
+Then we can just use <span class="math inline">\(exp(z)\)</span> as samples from the <span class="math inline">\(\mathit{LogNormal}(\mu, \sigma)\)</span>, since <span class="math inline">\(\exp(z) =\exp(\log(y)) = y\)</span>. The code below produces Figure <a href="sec-ppd.html#fig:logndemo">3.10</a>.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">mu &lt;-<span class="st"> </span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb126-2" data-line-number="2">sigma &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb126-3" data-line-number="3">N &lt;-<span class="st"> </span><span class="dv">500000</span></a>
+<a class="sourceLine" id="cb126-4" data-line-number="4"><span class="co"># Generate N random samples from a log-normal distribution</span></a>
+<a class="sourceLine" id="cb126-5" data-line-number="5">sl &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(N, mu, sigma)</a>
+<a class="sourceLine" id="cb126-6" data-line-number="6"><span class="kw">ggplot</span>(<span class="kw">tibble</span>(<span class="dt">samples =</span> sl), <span class="kw">aes</span>(samples)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb126-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">50</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb126-8" data-line-number="8"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Log-normal distribution</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb126-9" data-line-number="9"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">70000</span>), <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</a>
+<a class="sourceLine" id="cb126-10" data-line-number="10"><span class="co"># Generate N random samples from a normal distribution,</span></a>
+<a class="sourceLine" id="cb126-11" data-line-number="11"><span class="co"># and then exponentiate them</span></a>
+<a class="sourceLine" id="cb126-12" data-line-number="12">sn &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">rnorm</span>(N, mu, sigma))</a>
+<a class="sourceLine" id="cb126-13" data-line-number="13"><span class="kw">ggplot</span>(<span class="kw">tibble</span>(<span class="dt">samples =</span> sn), <span class="kw">aes</span>(samples)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb126-14" data-line-number="14"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">50</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb126-15" data-line-number="15"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Exponentiated samples from</span><span class="ch">\n</span><span class="st">a normal distribution&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb126-16" data-line-number="16"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">70000</span>), <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</a></code></pre></div>
+<div class="figure"><span id="fig:logndemo"></span>
 <img src="bookdown_files/figure-html/logndemo-1.svg" alt="Two log-normal distributions with the same parameters generated by either generating samples from a log-normal distribution or exponentiating samples from a normal distribution." width="48%" /><img src="bookdown_files/figure-html/logndemo-2.svg" alt="Two log-normal distributions with the same parameters generated by either generating samples from a log-normal distribution or exponentiating samples from a normal distribution." width="48%" />
 <p class="caption">
 FIGURE 3.10: Two log-normal distributions with the same parameters generated by either generating samples from a log-normal distribution or exponentiating samples from a normal distribution.
@@ -536,144 +1278,181 @@ FIGURE 3.10: Two log-normal distributions with the same parameters generated by 
 </div>
 </div>
 <div id="sec:lognormal" class="section level3">
-<h3><span class="header-section-number">3.5.3</span> Re-fitting a single participant pressing a button repeatedly with a log-normal likelihood</h3>
+<h3><span class="header-section-number">3.5.3</span> Re-fitting a single subject pressing a button repeatedly with a log-normal likelihood</h3>
 <p>If we assume that response times are log-normally distributed, we’ll need to change our likelihood function as follows:</p>
 <p><span class="math display">\[\begin{equation}
-rt_n \sim LogNormal(\mu,\sigma)
+rt_n \sim \mathit{LogNormal}(\mu,\sigma)
 \end{equation}\]</span></p>
-<p>But now the scale of our priors needs to change! We’ll continue with the uniform priors for ease of exposition, even though, as we mentioned earlier, these are not recommended. (We show below these uniform priors, examples of more realistic and useful priors.)</p>
+<p>But now the scale of our priors needs to change! We’ll continue with uniform priors for ease of exposition, even though, as we mentioned earlier, these are not really appropriate here. (Below, we show these uniform priors, as well as examples of more realistic and useful priors.)</p>
 <p><span class="math display" id="eq:logpriorsunif">\[\begin{equation}
 \begin{aligned}
-\mu &amp;\sim Uniform(0, 11) \\
-\sigma &amp;\sim Uniform(0, 1) \\
+\mu &amp;\sim \mathit{Uniform}(0, 11) \\
+\sigma &amp;\sim \mathit{Uniform}(0, 1) \\
 \end{aligned}
-\tag{3.8}
+\tag{3.9}
 \end{equation}\]</span></p>
 <p>Because the parameters are in a different scale than the dependent variable, their interpretation changes and it is more complex than if we were dealing with a linear model that assumes a normal likelihood (location and scale do not coincide with the mean and standard deviation of the log-normal):</p>
 <ul>
 <li><em>The location, <span class="math inline">\(\mu\)</span></em>: In our previous linear model, <span class="math inline">\(\mu\)</span> represented the grand mean (or the grand median, or grand mode, since in a normal distribution the three coincide). But now, the grand mean needs to be calculated in the following way, <span class="math inline">\(\exp(\mu +\sigma ^{2}/2)\)</span>. Interestingly, the grand median will just be <span class="math inline">\(\exp(\mu)\)</span>. We could assume that the grand median, <span class="math inline">\(\exp(\mu)\)</span>, represents the underlying time it takes to press the space bar if there would be no noise, that is, if <span class="math inline">\(\sigma\)</span> would be 0. This also means that the prior of <span class="math inline">\(\mu\)</span> is not in milliseconds, but in log(milliseconds).</li>
 <li><em>The scale, <span class="math inline">\(\sigma\)</span></em>: This is the standard deviation of the normal distribution of <span class="math inline">\(\log(\boldsymbol{y})\)</span>. The standard deviation of a log-normal distribution with <em>location</em> <span class="math inline">\(\mu\)</span> and <em>scale</em> <span class="math inline">\(\sigma\)</span> will be <span class="math inline">\(\exp(\mu +\sigma ^{2}/2)\times \sqrt{\exp(\sigma^2)- 1}\)</span>. Unlike the normal distribution, the spread of the log-normal distribution depends on both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>.</li>
 </ul>
-<p>To understand the meaning of our priors in the millisecond scale, we need to take into account both the priors and the likelihood. We can do this by generating a prior predictive distribution. We can just exponentiate the samples produced by <code>normal_predictive_distribution()</code> (or, alternatively, we could have edited the function and replaced <code>rnorm</code> for <code>rlnorm</code>).</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">N_samples &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb124-2" data-line-number="2">N_obs &lt;-<span class="st"> </span><span class="kw">nrow</span>(df_spacebar)</a>
-<a class="sourceLine" id="cb124-3" data-line-number="3">mu_samples &lt;-<span class="st"> </span><span class="kw">runif</span>(N_samples, <span class="dv">0</span>, <span class="dv">11</span>)</a>
-<a class="sourceLine" id="cb124-4" data-line-number="4">sigma_samples &lt;-<span class="st"> </span><span class="kw">runif</span>(N_samples, <span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb124-5" data-line-number="5">prior_pred_ln &lt;-<span class="st"> </span><span class="kw">normal_predictive_distribution</span>(</a>
-<a class="sourceLine" id="cb124-6" data-line-number="6">  <span class="dt">mu_samples =</span> mu_samples,</a>
-<a class="sourceLine" id="cb124-7" data-line-number="7">  <span class="dt">sigma_samples =</span> sigma_samples,</a>
-<a class="sourceLine" id="cb124-8" data-line-number="8">  <span class="dt">N_obs =</span> N_obs</a>
-<a class="sourceLine" id="cb124-9" data-line-number="9">) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb124-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rt_pred =</span> <span class="kw">exp</span>(rt_pred))</a></code></pre></div>
-<p>And then we plot the distribution of some representative statistics:</p>
+<p>To understand the meaning of our priors on the millisecond scale, we need to take into account both the priors and the likelihood. We can do this by generating a prior predictive distribution. We can just exponentiate the samples produced by <code>normal_predictive_distribution()</code> (or, alternatively, we could have edited the function and replaced <code>rnorm</code> with <code>rlnorm</code>).</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">N_samples &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb127-2" data-line-number="2">N_obs &lt;-<span class="st"> </span><span class="kw">nrow</span>(df_spacebar)</a>
+<a class="sourceLine" id="cb127-3" data-line-number="3">mu_samples &lt;-<span class="st"> </span><span class="kw">runif</span>(N_samples, <span class="dv">0</span>, <span class="dv">11</span>)</a>
+<a class="sourceLine" id="cb127-4" data-line-number="4">sigma_samples &lt;-<span class="st"> </span><span class="kw">runif</span>(N_samples, <span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb127-5" data-line-number="5">prior_pred_ln &lt;-<span class="st"> </span><span class="kw">normal_predictive_distribution</span>(</a>
+<a class="sourceLine" id="cb127-6" data-line-number="6">  <span class="dt">mu_samples =</span> mu_samples,</a>
+<a class="sourceLine" id="cb127-7" data-line-number="7">  <span class="dt">sigma_samples =</span> sigma_samples,</a>
+<a class="sourceLine" id="cb127-8" data-line-number="8">  <span class="dt">N_obs =</span> N_obs</a>
+<a class="sourceLine" id="cb127-9" data-line-number="9">) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb127-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rt_pred =</span> <span class="kw">exp</span>(rt_pred))</a></code></pre></div>
+<p>Next, plot the distribution of some representative statistics; see Figure <a href="#figpriorpredlogunif"><strong>??</strong></a>.</p>
 
-<div class="figure"><span style="display:block;" id="fig:priorpredlogunif"></span>
-<img src="bookdown_files/figure-html/priorpredlogunif-1.svg" alt="Prior predictive distribution of mean, median, minimum, and maximum value of the log-normal model with priors defined in (3.8). The x-axis is log-transformed." width="672" />
+<div class="figure"><span id="fig:priorpredlogunif"></span>
+<img src="bookdown_files/figure-html/priorpredlogunif-1.svg" alt="Prior predictive distribution of mean, median, minimum, and maximum value of the log-normal model with priors defined in Equation (3.9). The x-axis is log-transformed." width="672" />
 <p class="caption">
-FIGURE 3.11: Prior predictive distribution of mean, median, minimum, and maximum value of the log-normal model with priors defined in <a href="sec-ppd.html#eq:logpriorsunif">(3.8)</a>. The x-axis is log-transformed.
+FIGURE 3.11: Prior predictive distribution of mean, median, minimum, and maximum value of the log-normal model with priors defined in Equation <a href="sec-ppd.html#eq:logpriorsunif">(3.9)</a>. The x-axis is log-transformed.
 </p>
 </div>
-<p>While we cannot generate negative values anymore, since <span class="math inline">\(\exp(\)</span>any number<span class="math inline">\() &gt; 0\)</span>, and these priors might work, we can choose better regularizing priors for our model, such as the following:</p>
+<p>We cannot generate negative values any more, since <span class="math inline">\(\exp(\)</span>any finite real number<span class="math inline">\() &gt; 0\)</span>. These priors might work in the sense that the model might converge; but we can choose better, regularizing priors for our model, such as the following:</p>
 <p><span class="math display" id="eq:logpriorsnorm">\[\begin{equation}
 \begin{aligned}
-\mu &amp;\sim Normal(6, 1.5) \\
-\sigma &amp;\sim Normal_+(0, 1) \\
+\mu &amp;\sim \mathit{Normal}(6, 1.5) \\
+\sigma &amp;\sim \mathit{Normal}_+(0, 1) \\
 \end{aligned}
-\tag{3.9}
+\tag{3.10}
 \end{equation}\]</span></p>
-<p>The prior for <span class="math inline">\(\sigma\)</span> here is a truncated distribution, and while its location is zero, this is not its mean. We can calculate its approximate mean from a large number of random samples of the prior distribution using the function <code>rtnorm</code> with <code>a = 0</code> from the package <code>extraDistr</code>.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">rtnorm</span>(<span class="dv">100000</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">a =</span> <span class="dv">0</span>))</a></code></pre></div>
+<p>The prior for <span class="math inline">\(\sigma\)</span> here is a truncated distribution, and although its location is zero, this is not its mean. We can calculate its approximate mean from a large number of random samples of the prior distribution using the function <code>rtnorm</code> from the package <code>extraDistr</code>. In this function, we have to set the parameter <code>a = 0</code> to express the fact that the normal distribution is truncated from the left at 0.</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">rtnorm</span>(<span class="dv">100000</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">a =</span> <span class="dv">0</span>))</a></code></pre></div>
 <pre><code>## [1] 0.798</code></pre>
-<p>While <span class="math inline">\(\mu\)</span> can be negative, the dependent variable can’t be, since the exponent of a negative value, <span class="math inline">\(\exp(\)</span>some negative value<span class="math inline">\()\)</span>, is always greater than <span class="math inline">\(0\)</span>. Even before generating the prior predictive distributions, we can calculate the values within which we are 95% sure that the expected median of the observations will lie. We do this by looking at what happens at two standard deviations away from the mean of the <em>prior</em>, <span class="math inline">\(\mu\)</span>, that is <span class="math inline">\(6 - 2\times 1.5\)</span> and <span class="math inline">\(6 + 2\times 1.5\)</span>, and exponentiating these values:</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb127-2" data-line-number="2">  <span class="dt">lower =</span> <span class="kw">exp</span>(<span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span>),</a>
-<a class="sourceLine" id="cb127-3" data-line-number="3">  <span class="dt">higher =</span> <span class="kw">exp</span>(<span class="dv">6</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span>)</a>
-<a class="sourceLine" id="cb127-4" data-line-number="4">)</a></code></pre></div>
+<p>Although <span class="math inline">\(\mu\)</span> can be negative, the dependent variable can’t be, since the exponent of a finite, negative real number, <span class="math inline">\(\exp(\)</span>some finite negative real value<span class="math inline">\()\)</span>, is always greater than <span class="math inline">\(0\)</span>. Even before generating the prior predictive distributions, we can calculate the values within which we are 95% sure that the expected median of the observations will lie. We do this by looking at what happens at two standard deviations away from the mean of the prior, <span class="math inline">\(\mu\)</span>, that is <span class="math inline">\(6 - 2\times 1.5\)</span> and <span class="math inline">\(6 + 2\times 1.5\)</span>, and exponentiating these values:</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb130-2" data-line-number="2">  <span class="dt">lower =</span> <span class="kw">exp</span>(<span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span>),</a>
+<a class="sourceLine" id="cb130-3" data-line-number="3">  <span class="dt">higher =</span> <span class="kw">exp</span>(<span class="dv">6</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span>)</a>
+<a class="sourceLine" id="cb130-4" data-line-number="4">)</a></code></pre></div>
 <pre><code>##  lower higher 
 ##   20.1 8103.1</code></pre>
-<p>This means that our prior for <span class="math inline">\(\mu\)</span> is still not too informative (these are medians; the actual values generated by the distribution can be much more spread out). We can now plot the distribution of some representative statistics of the prior predictive distributions.
-We use <code>brms</code> to sample from the priors ignoring the <code>rt</code> data, by setting <code>sample_prior = &quot;only&quot;</code>. If we do this before collecting the data, we do need to have <em>some values</em> in <code>rt</code>. Because these values will be plotted alongside with the prior predictive distributions in <code>pp_check</code>, they can be used to provide plausible or implausible response values that we want to compare to the prior predictive realizations. In this case, we choose <span class="math inline">\(Uniform(0,10000)\)</span>.
-We need to specify that the family is <code>lognormal()</code>. In our first example, we had used the family <code>gaussian()</code>.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">df_spacebar_ref &lt;-<span class="st"> </span>df_spacebar <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb129-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rt =</span> <span class="kw">runif</span>(<span class="kw">n</span>(), <span class="dv">0</span>, <span class="dv">10000</span>))</a>
-<a class="sourceLine" id="cb129-3" data-line-number="3">fit_prior_press_ln &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb129-4" data-line-number="4">  <span class="dt">data =</span> df_spacebar_ref,</a>
-<a class="sourceLine" id="cb129-5" data-line-number="5">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
-<a class="sourceLine" id="cb129-6" data-line-number="6">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb129-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb129-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma)</a>
-<a class="sourceLine" id="cb129-9" data-line-number="9">  ),</a>
-<a class="sourceLine" id="cb129-10" data-line-number="10">  <span class="dt">sample_prior =</span> <span class="st">&quot;only&quot;</span></a>
-<a class="sourceLine" id="cb129-11" data-line-number="11">)</a></code></pre></div>
-<p>We plot the predictive distribution of means as follows.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="kw">pp_check</span>(fit_prior_press_ln, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;mean&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb130-2" data-line-number="2"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="dv">300000</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb130-3" data-line-number="3"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="st">&quot;Response times [ms]&quot;</span>,</a>
-<a class="sourceLine" id="cb130-4" data-line-number="4">    <span class="dt">trans =</span> <span class="st">&quot;log&quot;</span>,</a>
-<a class="sourceLine" id="cb130-5" data-line-number="5">    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>),</a>
-<a class="sourceLine" id="cb130-6" data-line-number="6">    <span class="dt">labels =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb130-7" data-line-number="7">      <span class="st">&quot;0.001&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;100&quot;</span>, <span class="st">&quot;1000&quot;</span>, <span class="st">&quot;10000&quot;</span>,</a>
-<a class="sourceLine" id="cb130-8" data-line-number="8">      <span class="st">&quot;100000&quot;</span></a>
-<a class="sourceLine" id="cb130-9" data-line-number="9">    )</a>
-<a class="sourceLine" id="cb130-10" data-line-number="10">  ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb130-11" data-line-number="11"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Prior predictive distribution of means&quot;</span>)</a></code></pre></div>
+<p>This means that our prior for <span class="math inline">\(\mu\)</span> is still not too informative (these are medians; the actual values generated by the log-normal distribution can be much more spread out). We can now plot the distribution of some representative statistics of the prior predictive distributions.
+We use <code>brms</code> to sample from the priors ignoring the <code>rt</code> data, by setting <code>sample_prior = &quot;only&quot;</code>.</p>
+<p>If we want to use <code>brms</code> to generate prior predictive data in this manner before collecting the data, we do need to have <em>some</em> simulated values that represent the vector of dependent variables, <code>rt</code>. Because these values will be plotted alongside with the prior predictive distributions in <code>pp_check</code>, they can be used to compare the prior predictive data with the simulated <code>rt</code> vector. In this case, as an example, we choose <span class="math inline">\(\mathit{Uniform}(0,10000)\)</span> to generate the simulated <code>rt</code> vector. We need to specify that the family is <code>lognormal()</code>. In our first example, we had used the family <code>gaussian()</code>.</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">df_spacebar_ref &lt;-<span class="st"> </span>df_spacebar <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb132-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rt =</span> <span class="kw">runif</span>(<span class="kw">n</span>(), <span class="dv">0</span>, <span class="dv">10000</span>))</a>
+<a class="sourceLine" id="cb132-3" data-line-number="3">fit_prior_press_ln &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb132-4" data-line-number="4">  <span class="dt">data =</span> df_spacebar_ref,</a>
+<a class="sourceLine" id="cb132-5" data-line-number="5">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
+<a class="sourceLine" id="cb132-6" data-line-number="6">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb132-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb132-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma)</a>
+<a class="sourceLine" id="cb132-9" data-line-number="9">  ),</a>
+<a class="sourceLine" id="cb132-10" data-line-number="10">  <span class="dt">sample_prior =</span> <span class="st">&quot;only&quot;</span>,</a>
+<a class="sourceLine" id="cb132-11" data-line-number="11">  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>)</a>
+<a class="sourceLine" id="cb132-12" data-line-number="12">)</a></code></pre></div>
+<p>Plot the prior predictive distribution of means with the following code (the figure is not produced here, to conserve space):</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="kw">pp_check</span>(fit_prior_press_ln, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;mean&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="dv">300000</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb133-3" data-line-number="3"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="st">&quot;Response times [ms]&quot;</span>,</a>
+<a class="sourceLine" id="cb133-4" data-line-number="4">    <span class="dt">trans =</span> <span class="st">&quot;log&quot;</span>,</a>
+<a class="sourceLine" id="cb133-5" data-line-number="5">    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>),</a>
+<a class="sourceLine" id="cb133-6" data-line-number="6">    <span class="dt">labels =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb133-7" data-line-number="7">      <span class="st">&quot;0.001&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;100&quot;</span>, <span class="st">&quot;1000&quot;</span>, <span class="st">&quot;10000&quot;</span>,</a>
+<a class="sourceLine" id="cb133-8" data-line-number="8">      <span class="st">&quot;100000&quot;</span></a>
+<a class="sourceLine" id="cb133-9" data-line-number="9">    )</a>
+<a class="sourceLine" id="cb133-10" data-line-number="10">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb133-11" data-line-number="11"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Prior predictive distribution of means&quot;</span>)</a></code></pre></div>
 <p>To plot the distribution of minimum, and maximum values, we replace <code>mean</code> for <code>min</code>, and <code>max</code> respectively. The three statistics are displayed in Figure <a href="sec-ppd.html#fig:priorpredlognorm">3.12</a>.</p>
 
 <!-- ```{r priorpredlognorm, fig.cap="TEST", message = FALSE, tidy=FALSE, fig.height = 2, fig.show = "hold", echo = FALSE} -->
-<div class="figure"><span style="display:block;" id="fig:priorpredlognorm"></span>
-<img src="bookdown_files/figure-html/priorpredlognorm-1.svg" alt="Prior predictive distribution of mean, maximum, and minimum values of the log-normal model with priors defined in (3.9). The distributions of mean, minimum, and maximum values of the prior predictive distributions are labeled \(y_{rep}\) and the mean, minimum, and maximum values for the “reference” distribution, \(Uniform(0,10000)\), are labeled \(y\). The x-axis is log-transformed." width="672" />
+<div class="sourceCode" id="cb134"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb134-2" data-line-number="2">p1 &lt;-<span class="st"> </span><span class="kw">pp_check</span>(fit_prior_press_ln, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;mean&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-3" data-line-number="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="dv">300000</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-4" data-line-number="4"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="st">&quot;Response times [ms]&quot;</span>,</a>
+<a class="sourceLine" id="cb134-5" data-line-number="5">    <span class="dt">trans =</span> <span class="st">&quot;log&quot;</span>,</a>
+<a class="sourceLine" id="cb134-6" data-line-number="6">    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>),</a>
+<a class="sourceLine" id="cb134-7" data-line-number="7">    <span class="dt">labels =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb134-8" data-line-number="8">      <span class="st">&quot;0.001&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;100&quot;</span>, <span class="st">&quot;1000&quot;</span>, <span class="st">&quot;10000&quot;</span>,</a>
+<a class="sourceLine" id="cb134-9" data-line-number="9">      <span class="st">&quot;100000&quot;</span></a>
+<a class="sourceLine" id="cb134-10" data-line-number="10">    )</a>
+<a class="sourceLine" id="cb134-11" data-line-number="11">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-12" data-line-number="12"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Prior predictive distribution of means&quot;</span>)</a>
+<a class="sourceLine" id="cb134-13" data-line-number="13">p2 &lt;-<span class="st"> </span><span class="kw">pp_check</span>(fit_prior_press_ln, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;min&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-14" data-line-number="14"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="dv">300000</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-15" data-line-number="15"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="st">&quot;Response times [ms]&quot;</span>,</a>
+<a class="sourceLine" id="cb134-16" data-line-number="16">    <span class="dt">trans =</span> <span class="st">&quot;log&quot;</span>,</a>
+<a class="sourceLine" id="cb134-17" data-line-number="17">    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>),</a>
+<a class="sourceLine" id="cb134-18" data-line-number="18">    <span class="dt">labels =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb134-19" data-line-number="19">      <span class="st">&quot;0.001&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;100&quot;</span>, <span class="st">&quot;1000&quot;</span>, <span class="st">&quot;10000&quot;</span>,</a>
+<a class="sourceLine" id="cb134-20" data-line-number="20">      <span class="st">&quot;100000&quot;</span></a>
+<a class="sourceLine" id="cb134-21" data-line-number="21">    )</a>
+<a class="sourceLine" id="cb134-22" data-line-number="22">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-23" data-line-number="23"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Prior predictive distribution of minimum values&quot;</span>)</a>
+<a class="sourceLine" id="cb134-24" data-line-number="24">p3 &lt;-<span class="st"> </span><span class="kw">pp_check</span>(fit_prior_press_ln, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;max&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-25" data-line-number="25"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="dv">300000</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-26" data-line-number="26"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="st">&quot;Response times [ms]&quot;</span>,</a>
+<a class="sourceLine" id="cb134-27" data-line-number="27">    <span class="dt">trans =</span> <span class="st">&quot;log&quot;</span>,</a>
+<a class="sourceLine" id="cb134-28" data-line-number="28">    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>),</a>
+<a class="sourceLine" id="cb134-29" data-line-number="29">    <span class="dt">labels =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb134-30" data-line-number="30">      <span class="st">&quot;0.001&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;1000&quot;</span>, <span class="st">&quot;10000&quot;</span>,</a>
+<a class="sourceLine" id="cb134-31" data-line-number="31">      <span class="st">&quot;100000&quot;</span></a>
+<a class="sourceLine" id="cb134-32" data-line-number="32">    )</a>
+<a class="sourceLine" id="cb134-33" data-line-number="33">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb134-34" data-line-number="34"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Prior predictive distribution of maximum values&quot;</span>)</a>
+<a class="sourceLine" id="cb134-35" data-line-number="35"><span class="kw">plot_grid</span>(p1, p2, p3, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:priorpredlognorm"></span>
+<img src="bookdown_files/figure-html/priorpredlognorm-1.svg" alt="Prior predictive distribution of mean, maximum, and minimum values of the log-normal model with priors defined in Equation (3.10). The distributions of mean, minimum, and maximum values of the prior predictive distributions are labeled \(y_{rep}\) and the mean, minimum, and maximum values for the “reference” distribution, \(\mathit{Uniform}(0,10000)\), are labeled \(y\). The x-axis is log-transformed." width="672" />
 <p class="caption">
-FIGURE 3.12: Prior predictive distribution of mean, maximum, and minimum values of the log-normal model with priors defined in <a href="sec-ppd.html#eq:logpriorsnorm">(3.9)</a>. The distributions of mean, minimum, and maximum values of the prior predictive distributions are labeled <span class="math inline">\(y_{rep}\)</span> and the mean, minimum, and maximum values for the “reference” distribution, <span class="math inline">\(Uniform(0,10000)\)</span>, are labeled <span class="math inline">\(y\)</span>. The x-axis is log-transformed.
+FIGURE 3.12: Prior predictive distribution of mean, maximum, and minimum values of the log-normal model with priors defined in Equation <a href="sec-ppd.html#eq:logpriorsnorm">(3.10)</a>. The distributions of mean, minimum, and maximum values of the prior predictive distributions are labeled <span class="math inline">\(y_{rep}\)</span> and the mean, minimum, and maximum values for the “reference” distribution, <span class="math inline">\(\mathit{Uniform}(0,10000)\)</span>, are labeled <span class="math inline">\(y\)</span>. The x-axis is log-transformed.
 </p>
 </div>
-<p>We see that the priors that we are using are still quite uninformative. The tails of the prior predictive distributions that correspond to our normal priors shown in Figure <a href="sec-ppd.html#fig:priorpredlognorm">3.12</a> are even further to the right reaching more extreme values than for the predictive distributions generated by uniform priors shown in Figure <a href="sec-ppd.html#fig:priorpredlogunif">3.11</a>. Our new priors are still far from perfectly encoding our prior knowledge. We could do more iterations of choosing priors and generating prior predictive distributions until we have priors that generate realistic data. However, given that the bulk of the distributions of mean, maximum, minimum values lie roughly in the correct order of magnitude, these priors are going to be acceptable. In general, we can use summary statistics (e.g., mean, median, min, max) to test whether the priors are in a plausible range. We can do this by defining the extreme data that would be very implausible to ever observe (e.g., response times larger than 1 minute) and choosing priors such that such extreme response times occur only very rarely in the prior predictive distribution.</p>
-<p>We can fit the model now, recall that both the family and prior changes in comparison to our previous example.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1">fit_press_ln &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb131-2" data-line-number="2">  <span class="dt">data =</span> df_spacebar,</a>
-<a class="sourceLine" id="cb131-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
-<a class="sourceLine" id="cb131-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb131-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb131-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma)</a>
-<a class="sourceLine" id="cb131-7" data-line-number="7">  )</a>
-<a class="sourceLine" id="cb131-8" data-line-number="8">)</a></code></pre></div>
+<p>We see that the priors that we are using are still quite uninformative. The tails of the prior predictive distributions that correspond to our normal priors shown in Figure <a href="sec-ppd.html#fig:priorpredlognorm">3.12</a> are even further to the right, reaching more extreme values than for the prior predictive distributions generated by uniform priors (shown in Figure <a href="sec-ppd.html#fig:priorpredlogunif">3.11</a>). Our new priors are still far from perfectly encoding our prior knowledge. We could do more iterations of choosing priors and generating prior predictive distributions until we have priors that generate realistic data. However, given that the bulk of the distributions of mean, maximum, minimum values lie roughly in the correct order of magnitude, these priors are going to be acceptable. In general, we can use summary statistics (e.g., mean, median, min, max) to test whether the priors are in a plausible range. We can do this by defining, for the particular research problem we are studying, the extreme data that would be very implausible to ever observe (e.g., reading times at a word larger than one minute) and choosing priors such that such extreme response times occur only very rarely in the prior predictive distribution.</p>
+<p>We can fit the model now; recall that both the distribution family and prior change in comparison to our previous example.</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1">fit_press_ln &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb135-2" data-line-number="2">  <span class="dt">data =</span> df_spacebar,</a>
+<a class="sourceLine" id="cb135-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
+<a class="sourceLine" id="cb135-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb135-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb135-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma)</a>
+<a class="sourceLine" id="cb135-7" data-line-number="7">  )</a>
+<a class="sourceLine" id="cb135-8" data-line-number="8">)</a></code></pre></div>
 <p>When we look at the summary of the posterior, the parameters are in log-scale:</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">fit_press_ln</a></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1">fit_press_ln</a></code></pre></div>
 <pre><code>## ...
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     5.12      0.01     5.10     5.13 1.00     3200     2444
+## Intercept     5.12      0.01     5.10     5.13 1.00     3635     2779
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.13      0.00     0.13     0.15 1.00     3084     2445
+## sigma     0.13      0.00     0.13     0.14 1.00     2976     2359
 ## 
 ## ...</code></pre>
-<p>If we want to know how long does it take to press the space bar in milliseconds, we need to transform the <span class="math inline">\(\mu\)</span> (or <code>Intercept</code> in the model) to milliseconds. Since we know that the median of the log-normal distribution is <span class="math inline">\(exp(\mu)\)</span>, we do the following to calculate an estimate in milliseconds:</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1">estimate_ms &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">posterior_samples</span>(fit_press_ln)<span class="op">$</span>b_Intercept)</a></code></pre></div>
-<p>If we want to know the mean and 95% credible interval, we do the following:</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(estimate_ms), <span class="kw">quantile</span>(estimate_ms, <span class="dt">probs =</span> <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>)))</a></code></pre></div>
+<p>If we want to know how long it takes to press the space bar in milliseconds, we need to transform the <span class="math inline">\(\mu\)</span> (or <code>Intercept</code> in the model) to milliseconds. Since we know that the median of the log-normal distribution is <span class="math inline">\(\exp(\mu)\)</span>, we do the following to calculate an estimate in milliseconds:</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1">estimate_ms &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">as_draws_df</span>(fit_press_ln)<span class="op">$</span>b_Intercept)</a></code></pre></div>
+<p>If we want to know the mean and 95% credible interval of these samples, we do the following:</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(estimate_ms), <span class="kw">quantile</span>(estimate_ms, <span class="dt">probs =</span> <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>)))</a></code></pre></div>
 <pre><code>##  mean  2.5% 97.5% 
 ##   167   165   169</code></pre>
-<p>We can now verify whether our predicted datasets look similar to
-the real dataset. See Figure <a href="sec-ppd.html#fig:lognppc">3.13</a>; compare this with the earlier Figure <a href="sec-ppd.html#fig:normalppc2">3.9</a>.</p>
+<p>We can now check whether our predicted data sets look similar to
+the real data set. See Figure <a href="sec-ppd.html#fig:lognppc">3.13</a>; compare this with the earlier Figure <a href="sec-ppd.html#fig:normalppc2">3.9</a>.</p>
 
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="kw">pp_check</span>(fit_press_ln, <span class="dt">nsamples =</span> <span class="dv">100</span>)</a></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:lognppc"></span>
-<img src="bookdown_files/figure-html/lognppc-1.svg" alt="Posterior predictive distribution of fit_noreading_ln" width="672" />
+<div class="sourceCode" id="cb141"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1"><span class="kw">pp_check</span>(fit_press_ln, <span class="dt">ndraws =</span> <span class="dv">100</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:lognppc"></span>
+<img src="bookdown_files/figure-html/lognppc-1.svg" alt="Posterior predictive distribution of fit_noreading_ln." width="672" />
 <p class="caption">
-FIGURE 3.13: Posterior predictive distribution of <code>fit_noreading_ln</code>
+FIGURE 3.13: Posterior predictive distribution of <code>fit_noreading_ln</code>.
 </p>
 </div>
-<p><em>Are the posterior predicted data now more similar to the real data, compared to the case where we had a Normal likelihood?</em></p>
-<p>It seems so, but it’s not easy to tell. Another way to examine this would be to look at the distribution of summary statistics. We compare the distribution of representative summary statistics for the datasets generated by different models and compare them to the observed statistics. We suspect that the normal distribution would generate response times that are too fast (since it’s symmetrical) and that the log-normal distribution may capture the long tail better than the normal model. Based on our hunch, we compute the distribution of minimum and maximum values for the posterior predictive distributions, and we compare them with the minimum and maximum value respectively in the data. We do this with <code>pp_check</code>, by using as stat either <code>&quot;min&quot;</code> or <code>&quot;max&quot;</code> for both <code>fit_press</code>, and <code>fit_press_ln</code>; an example is shown below.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1"><span class="kw">pp_check</span>(fit_press, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;min&quot;</span>)</a></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:ppcheckmin"></span>
-<img src="bookdown_files/figure-html/ppcheckmin-1.svg" alt="Distribution of minimum values in a posterior predictive check. The minimum in the data is 110 ms." width="45%" /><img src="bookdown_files/figure-html/ppcheckmin-2.svg" alt="Distribution of minimum values in a posterior predictive check. The minimum in the data is 110 ms." width="45%" />
+<p>Now we ask: Are the posterior predicted data now more similar to the real data, compared to the case where we had a Normal likelihood?</p>
+<p>According to Figure <a href="#fig:logppc"><strong>??</strong></a>, it seems so, but it’s not easy to tell.</p>
+<p>Another way to examine this would be to look at the distribution of summary statistics. We compare the distribution of representative summary statistics for the data sets generated by different models and compare them to the observed statistics. We suspect that the normal distribution would generate response times that are too fast (since it’s symmetrical) and that the log-normal distribution may capture the long tail better than the normal model. Based on our hunch, we compute the distribution of minimum and maximum values for the posterior predictive distributions, and we compare them with the minimum and maximum value respectively in the data. We do this with <code>pp_check</code>, by using as stat either <code>&quot;min&quot;</code> or <code>&quot;max&quot;</code> for both <code>fit_press</code>, and <code>fit_press_ln</code>; an example is shown below. The plots are shown in Figures <a href="sec-ppd.html#fig:ppcheckmin">3.14</a> and <a href="sec-ppd.html#fig:ppcheckmax">3.15</a>.</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="kw">pp_check</span>(fit_press, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;min&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:ppcheckmin"></span>
+<img src="bookdown_files/figure-html/ppcheckmin-1.svg" alt="Distributions of minimum values in a posterior predictive check, using the normal and log-normal probability density functions. The minimum in the data is 110 ms." width="45%" /><img src="bookdown_files/figure-html/ppcheckmin-2.svg" alt="Distributions of minimum values in a posterior predictive check, using the normal and log-normal probability density functions. The minimum in the data is 110 ms." width="45%" />
 <p class="caption">
-FIGURE 3.14: Distribution of minimum values in a posterior predictive check. The minimum in the data is 110 ms.
+FIGURE 3.14: Distributions of minimum values in a posterior predictive check, using the normal and log-normal probability density functions. The minimum in the data is 110 ms.
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:ppcheckmax"></span>
+<div class="figure"><span id="fig:ppcheckmax"></span>
 <img src="bookdown_files/figure-html/ppcheckmax-1.svg" alt="Distribution of maximum values in a posterior predictive check. The maximum in the data is 409 ms." width="45%" /><img src="bookdown_files/figure-html/ppcheckmax-2.svg" alt="Distribution of maximum values in a posterior predictive check. The maximum in the data is 409 ms." width="45%" />
 <p class="caption">
 FIGURE 3.15: Distribution of maximum values in a posterior predictive check. The maximum in the data is 409 ms.
@@ -681,6 +1460,7 @@ FIGURE 3.15: Distribution of maximum values in a posterior predictive check. The
 </div>
 <p>Figure <a href="sec-ppd.html#fig:ppcheckmin">3.14</a> shows that the log-normal likelihood does a slightly better job since the minimum value is contained in the bulk of the log-normal distribution and in the tail of the normal one. Figure <a href="sec-ppd.html#fig:ppcheckmax">3.15</a> shows that both models are unable to capture the maximum value of the observed data. One explanation for this is that the log-normal-ish observations in our data are being generated by the task of pressing as fast as possible, while the observations with long response times are being generated by lapses of attention.
 This would mean that two probability distributions are mixed here; modeling this process involves more complex tools that we will treat in chapter <a href="ch-mixture.html#ch:mixture">20</a>.</p>
+<p>This completes our introduction to <code>brms</code>. We are now ready to learn about more regression models.</p>
 </div>
 </div>
 <h3>References</h3>
@@ -698,7 +1478,7 @@ This would mean that two probability distributions are mixed here; modeling this
 <div class="footnotes">
 <hr />
 <ol start="10">
-<li id="fn10"><p>In fact, <span class="math inline">\(\log_e(\boldsymbol{y})\)</span> or <span class="math inline">\(\ln(\boldsymbol{y})\)</span>, but we’ll write it as just <span class="math inline">\(log()\)</span><a href="sec-ppd.html#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>More precisely, <span class="math inline">\(\log_e(\boldsymbol{y})\)</span> or <span class="math inline">\(\ln(\boldsymbol{y})\)</span>, but we’ll write it as just <span class="math inline">\(log()\)</span>.<a href="sec-ppd.html#fnref10" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -751,10 +1531,6 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
-"search": {
-"engine": "lunr",
-"options": null
-},
 "toc": {
 "collapse": "none"
 }
