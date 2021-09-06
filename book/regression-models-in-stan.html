@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10.4 Regression models in Stan | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.24.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22.8 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10.4 Regression models in Stan | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -24,17 +24,16 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-05" />
+<meta name="date" content="2021-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="sec:clozestan.html"/>
+<link rel="prev" href="sec-clozestan.html"/>
 <link rel="next" href="summary-9.html"/>
-<script src="libs/jquery/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,745 +49,10 @@
 
 
 
+
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
-<script>
-// FOLD code from 
-// https://github.com/bblodfon/rtemps/blob/master/docs/bookdown-lite/hide_code.html
-/* ========================================================================
- * Bootstrap: transition.js v3.3.7
- * http://getbootstrap.com/javascript/#transitions
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
 
-
-+function ($) {
-  'use strict';
-
-  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
-  // ============================================================
-
-  function transitionEnd() {
-    var el = document.createElement('bootstrap')
-
-    var transEndEventNames = {
-      WebkitTransition : 'webkitTransitionEnd',
-      MozTransition    : 'transitionend',
-      OTransition      : 'oTransitionEnd otransitionend',
-      transition       : 'transitionend'
-    }
-
-    for (var name in transEndEventNames) {
-      if (el.style[name] !== undefined) {
-        return { end: transEndEventNames[name] }
-      }
-    }
-
-    return false // explicit for ie8 (  ._.)
-  }
-
-  // http://blog.alexmaccaw.com/css-transitions
-  $.fn.emulateTransitionEnd = function (duration) {
-    var called = false
-    var $el = this
-    $(this).one('bsTransitionEnd', function () { called = true })
-    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
-    setTimeout(callback, duration)
-    return this
-  }
-
-  $(function () {
-    $.support.transition = transitionEnd()
-
-    if (!$.support.transition) return
-
-    $.event.special.bsTransitionEnd = {
-      bindType: $.support.transition.end,
-      delegateType: $.support.transition.end,
-      handle: function (e) {
-        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
-      }
-    }
-  })
-
-}(jQuery);
-</script>
-<script>
-/* ========================================================================
- * Bootstrap: collapse.js v3.3.7
- * http://getbootstrap.com/javascript/#collapse
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-/* jshint latedef: false */
-
-+function ($) {
-  'use strict';
-
-  // COLLAPSE PUBLIC CLASS DEFINITION
-  // ================================
-
-  var Collapse = function (element, options) {
-    this.$element      = $(element)
-    this.options       = $.extend({}, Collapse.DEFAULTS, options)
-    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
-                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
-    this.transitioning = null
-
-    if (this.options.parent) {
-      this.$parent = this.getParent()
-    } else {
-      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
-    }
-
-    if (this.options.toggle) this.toggle()
-  }
-
-  Collapse.VERSION  = '3.3.7'
-
-  Collapse.TRANSITION_DURATION = 350
-
-  Collapse.DEFAULTS = {
-    toggle: true
-  }
-
-  Collapse.prototype.dimension = function () {
-    var hasWidth = this.$element.hasClass('width')
-    return hasWidth ? 'width' : 'height'
-  }
-
-  Collapse.prototype.show = function () {
-    if (this.transitioning || this.$element.hasClass('in')) return
-
-    var activesData
-    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
-
-    if (actives && actives.length) {
-      activesData = actives.data('bs.collapse')
-      if (activesData && activesData.transitioning) return
-    }
-
-    var startEvent = $.Event('show.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    if (actives && actives.length) {
-      Plugin.call(actives, 'hide')
-      activesData || actives.data('bs.collapse', null)
-    }
-
-    var dimension = this.dimension()
-
-    this.$element
-      .removeClass('collapse')
-      .addClass('collapsing')[dimension](0)
-      .attr('aria-expanded', true)
-
-    this.$trigger
-      .removeClass('collapsed')
-      .attr('aria-expanded', true)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse in')[dimension]('')
-      this.transitioning = 0
-      this.$element
-        .trigger('shown.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
-
-    this.$element
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
-  }
-
-  Collapse.prototype.hide = function () {
-    if (this.transitioning || !this.$element.hasClass('in')) return
-
-    var startEvent = $.Event('hide.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    var dimension = this.dimension()
-
-    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
-
-    this.$element
-      .addClass('collapsing')
-      .removeClass('collapse in')
-      .attr('aria-expanded', false)
-
-    this.$trigger
-      .addClass('collapsed')
-      .attr('aria-expanded', false)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.transitioning = 0
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse')
-        .trigger('hidden.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    this.$element
-      [dimension](0)
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
-  }
-
-  Collapse.prototype.toggle = function () {
-    this[this.$element.hasClass('in') ? 'hide' : 'show']()
-  }
-
-  Collapse.prototype.getParent = function () {
-    return $(this.options.parent)
-      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
-      .each($.proxy(function (i, element) {
-        var $element = $(element)
-        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
-      }, this))
-      .end()
-  }
-
-  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
-    var isOpen = $element.hasClass('in')
-
-    $element.attr('aria-expanded', isOpen)
-    $trigger
-      .toggleClass('collapsed', !isOpen)
-      .attr('aria-expanded', isOpen)
-  }
-
-  function getTargetFromTrigger($trigger) {
-    var href
-    var target = $trigger.attr('data-target')
-      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
-
-    return $(target)
-  }
-
-
-  // COLLAPSE PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.collapse')
-      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
-      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
-      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.collapse
-
-  $.fn.collapse             = Plugin
-  $.fn.collapse.Constructor = Collapse
-
-
-  // COLLAPSE NO CONFLICT
-  // ====================
-
-  $.fn.collapse.noConflict = function () {
-    $.fn.collapse = old
-    return this
-  }
-
-
-  // COLLAPSE DATA-API
-  // =================
-
-  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
-    var $this   = $(this)
-
-    if (!$this.attr('data-target')) e.preventDefault()
-
-    var $target = getTargetFromTrigger($this)
-    var data    = $target.data('bs.collapse')
-    var option  = data ? 'toggle' : $this.data()
-
-    Plugin.call($target, option)
-  })
-
-}(jQuery);
-</script>
-<script>
-window.initializeCodeFolding = function(show) {
-
-  // handlers for show-all and hide all
-  $("#rmd-show-all-code").click(function() {
-    // close the dropdown menu when an option is clicked
-    $("#allCodeButton").dropdown("toggle");
-    $('div.r-code-collapse').each(function() {
-      $(this).collapse('show');
-    });
-  });
-  $("#rmd-hide-all-code").click(function() {
-    // close the dropdown menu when an option is clicked
-    $("#allCodeButton").dropdown("toggle");
-    $('div.r-code-collapse').each(function() {
-      $(this).collapse('hide');
-    });
-  });
-
-  // index for unique code element ids
-  var currentIndex = 1;
-
-  // select all R code blocks
-  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
-  rCodeBlocks.each(function() {
-
-    // if code block has been labeled with class `fold-show`, show the code on init!
-    var classList = $(this).attr('class').split(/\s+/);
-    for (var i = 0; i < classList.length; i++) {
-    if (classList[i] === 'fold-show') {
-        show = true;
-      }
-    }
-
-    // create a collapsable div to wrap the code in
-    var div = $('<div class="collapse r-code-collapse"></div>');
-    if (show)
-      div.addClass('in');
-    var id = 'rcode-643E0F36' + currentIndex++;
-    div.attr('id', id);
-    $(this).before(div);
-    $(this).detach().appendTo(div);
-
-    // add a show code button right above
-    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
-    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
-    showCodeButton.append(showCodeText);
-    showCodeButton
-        .attr('data-toggle', 'collapse')
-        .attr('data-target', '#' + id)
-        .attr('aria-expanded', show)
-        .attr('aria-controls', id);
-
-    var buttonRow = $('<div class="row"></div>');
-    var buttonCol = $('<div class="col-md-12"></div>');
-
-    buttonCol.append(showCodeButton);
-    buttonRow.append(buttonCol);
-
-    div.before(buttonRow);
-
-    // hack: return show to false, otherwise all next codeBlocks will be shown!
-    show = false;
-
-    // update state of button on show/hide
-    div.on('hidden.bs.collapse', function () {
-      showCodeText.text('Code');
-    });
-    div.on('show.bs.collapse', function () {
-      showCodeText.text('Hide');
-    });
-  });
-
-}
-</script>
-<script>
-/* ========================================================================
- * Bootstrap: dropdown.js v3.3.7
- * http://getbootstrap.com/javascript/#dropdowns
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // DROPDOWN CLASS DEFINITION
-  // =========================
-
-  var backdrop = '.dropdown-backdrop'
-  var toggle   = '[data-toggle="dropdown"]'
-  var Dropdown = function (element) {
-    $(element).on('click.bs.dropdown', this.toggle)
-  }
-
-  Dropdown.VERSION = '3.3.7'
-
-  function getParent($this) {
-    var selector = $this.attr('data-target')
-
-    if (!selector) {
-      selector = $this.attr('href')
-      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    }
-
-    var $parent = selector && $(selector)
-
-    return $parent && $parent.length ? $parent : $this.parent()
-  }
-
-  function clearMenus(e) {
-    if (e && e.which === 3) return
-    $(backdrop).remove()
-    $(toggle).each(function () {
-      var $this         = $(this)
-      var $parent       = getParent($this)
-      var relatedTarget = { relatedTarget: this }
-
-      if (!$parent.hasClass('open')) return
-
-      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
-
-      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
-
-      if (e.isDefaultPrevented()) return
-
-      $this.attr('aria-expanded', 'false')
-      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
-    })
-  }
-
-  Dropdown.prototype.toggle = function (e) {
-    var $this = $(this)
-
-    if ($this.is('.disabled, :disabled')) return
-
-    var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
-
-    clearMenus()
-
-    if (!isActive) {
-      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
-        // if mobile we use a backdrop because click events don't delegate
-        $(document.createElement('div'))
-          .addClass('dropdown-backdrop')
-          .insertAfter($(this))
-          .on('click', clearMenus)
-      }
-
-      var relatedTarget = { relatedTarget: this }
-      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
-
-      if (e.isDefaultPrevented()) return
-
-      $this
-        .trigger('focus')
-        .attr('aria-expanded', 'true')
-
-      $parent
-        .toggleClass('open')
-        .trigger($.Event('shown.bs.dropdown', relatedTarget))
-    }
-
-    return false
-  }
-
-  Dropdown.prototype.keydown = function (e) {
-    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
-
-    var $this = $(this)
-
-    e.preventDefault()
-    e.stopPropagation()
-
-    if ($this.is('.disabled, :disabled')) return
-
-    var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
-
-    if (!isActive && e.which != 27 || isActive && e.which == 27) {
-      if (e.which == 27) $parent.find(toggle).trigger('focus')
-      return $this.trigger('click')
-    }
-
-    var desc = ' li:not(.disabled):visible a'
-    var $items = $parent.find('.dropdown-menu' + desc)
-
-    if (!$items.length) return
-
-    var index = $items.index(e.target)
-
-    if (e.which == 38 && index > 0)                 index--         // up
-    if (e.which == 40 && index < $items.length - 1) index++         // down
-    if (!~index)                                    index = 0
-
-    $items.eq(index).trigger('focus')
-  }
-
-
-  // DROPDOWN PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.dropdown')
-
-      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
-      if (typeof option == 'string') data[option].call($this)
-    })
-  }
-
-  var old = $.fn.dropdown
-
-  $.fn.dropdown             = Plugin
-  $.fn.dropdown.Constructor = Dropdown
-
-
-  // DROPDOWN NO CONFLICT
-  // ====================
-
-  $.fn.dropdown.noConflict = function () {
-    $.fn.dropdown = old
-    return this
-  }
-
-
-  // APPLY TO STANDARD DROPDOWN ELEMENTS
-  // ===================================
-
-  $(document)
-    .on('click.bs.dropdown.data-api', clearMenus)
-    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
-    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
-    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
-    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
-
-}(jQuery);
-</script>
-<style type="text/css">
-.code-folding-btn {
-  margin-bottom: 4px;
-}
-
-.row { display: flex; }
-.collapse { display: none; }
-.in { display:block }
-.pull-right > .dropdown-menu {
-    right: 0;
-    left: auto;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
-    font-size: 14px;
-    text-align: left;
-    list-style: none;
-    background-color: #fff;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-}
-
-.open > .dropdown-menu {
-    display: block;
-    color: #ffffff;
-    background-color: #ffffff;
-    background-image: none;
-    border-color: #92897e;
-}
-
-.dropdown-menu > li > a {
-  display: block;
-  padding: 3px 20px;
-  clear: both;
-  font-weight: 400;
-  line-height: 1.42857143;
-  color: #000000;
-  white-space: nowrap;
-}
-
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
-  color: #ffffff;
-  text-decoration: none;
-  background-color: #e95420;
-}
-
-.dropdown-menu > .active > a,
-.dropdown-menu > .active > a:hover,
-.dropdown-menu > .active > a:focus {
-  color: #ffffff;
-  text-decoration: none;
-  background-color: #e95420;
-  outline: 0;
-}
-.dropdown-menu > .disabled > a,
-.dropdown-menu > .disabled > a:hover,
-.dropdown-menu > .disabled > a:focus {
-  color: #aea79f;
-}
-
-.dropdown-menu > .disabled > a:hover,
-.dropdown-menu > .disabled > a:focus {
-  text-decoration: none;
-  cursor: not-allowed;
-  background-color: transparent;
-  background-image: none;
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-}
-
-.btn {
-  display: inline-block;
-  margin-bottom: 1;
-  font-weight: normal;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
-  cursor: pointer;
-  background-image: none;
-  border: 1px solid transparent;
-  padding: 4px 8px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  border-radius: 4px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.btn:focus,
-.btn:active:focus,
-.btn.active:focus,
-.btn.focus,
-.btn:active.focus,
-.btn.active.focus {
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-.btn:hover,
-.btn:focus,
-.btn.focus {
-  color: #ffffff;
-  text-decoration: none;
-}
-.btn:active,
-.btn.active {
-  background-image: none;
-  outline: 0;
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
-.btn.disabled,
-.btn[disabled],
-fieldset[disabled] .btn {
-  cursor: not-allowed;
-  filter: alpha(opacity=65);
-  opacity: 0.65;
-  box-shadow: none;
-}
-a.btn.disabled,
-fieldset[disabled] a.btn {
-  pointer-events: none;
-}
-.btn-default {
-  color: #ffffff;
-  background-color: #aea79f; #important
-  border-color: #aea79f;
-}
-
-.btn-default:focus,
-.btn-default.focus {
-  color: #ffffff;
-  background-color: #978e83;
-  border-color: #6f675e;
-}
-
-.btn-default:hover {
-  color: #ffffff;
-  background-color: #978e83;
-  border-color: #92897e;
-}
-.btn-default:active,
-.btn-default.active,
-.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
-  border-radius: 0;
-}
-.btn-group > .btn:first-child {
-  margin-left: 0;
-}
-.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.btn-group > .btn:last-child:not(:first-child),
-.btn-group > .dropdown-toggle:not(:first-child) {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.btn-group > .btn-group {
-  float: left;
-}
-.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
-  border-radius: 0;
-}
-.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child,
-.btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.btn-group .dropdown-toggle:active,
-.btn-group.open .dropdown-toggle {
-  outline: 0;
-}
-.btn-group > .btn + .dropdown-toggle {
-  padding-right: 8px;
-  padding-left: 8px;
-}
-.btn-group > .btn-lg + .dropdown-toggle {
-  padding-right: 12px;
-  padding-left: 12px;
-}
-.btn-group.open .dropdown-toggle {
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
-.btn-group.open .dropdown-toggle.btn-link {
-  box-shadow: none;
-}
-
-</style>
-<script>
-var str = '<div class="btn-group pull-right" style="position: fixed; right: 50px; top: 10px; z-index: 200"><button type="button" class="btn btn-default btn-xs dropdown-toggle" id="allCodeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast=""><span>Code</span> <span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;"><li><a id="rmd-show-all-code" href="#">Show All Code</a></li><li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li></ul></div>';
-document.write(str);
-</script>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "hide");
-});
-</script>
 
 
 <style type="text/css">
@@ -872,128 +136,127 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
-<li class="chapter" data-level="" data-path="developing-the-right-mindset-for-this-book.html"><a href="developing-the-right-mindset-for-this-book.html"><i class="fa fa-check"></i>Developing the right mindset for this book</a></li>
-<li class="chapter" data-level="" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i>How to read this book</a></li>
-<li class="chapter" data-level="" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i>Online materials</a></li>
-<li class="chapter" data-level="" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i>Software needed</a></li>
-<li class="chapter" data-level="" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="0.2" data-path="developing-the-right-mindset-for-this-book.html"><a href="developing-the-right-mindset-for-this-book.html"><i class="fa fa-check"></i><b>0.2</b> Developing the right mindset for this book</a></li>
+<li class="chapter" data-level="0.3" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.3</b> How to read this book</a></li>
+<li class="chapter" data-level="0.4" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.4</b> Online materials</a></li>
+<li class="chapter" data-level="0.5" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.5</b> Software needed</a></li>
+<li class="chapter" data-level="0.6" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>0.6</b> Acknowledgments</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="ch:intro.html"><a href="ch:intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="ch-intro.html"><a href="ch-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introprob.html"><a href="introprob.html"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
 <li class="chapter" data-level="1.2" data-path="conditional-probability.html"><a href="conditional-probability.html"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
 <li class="chapter" data-level="1.3" data-path="the-law-of-total-probability.html"><a href="the-law-of-total-probability.html"><i class="fa fa-check"></i><b>1.3</b> The law of total probability</a></li>
-<li class="chapter" data-level="1.4" data-path="sec:binomialcloze.html"><a href="sec:binomialcloze.html"><i class="fa fa-check"></i><b>1.4</b> Discrete random variables: An example using the Binomial distribution</a><ul>
-<li class="chapter" data-level="1.4.1" data-path="sec:binomialcloze.html"><a href="sec:binomialcloze.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.4.1</b> The mean and variance of the Binomial distribution</a></li>
-<li class="chapter" data-level="1.4.2" data-path="sec:binomialcloze.html"><a href="sec:binomialcloze.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.4.2</b> What information does a probability distribution provide?</a></li>
+<li class="chapter" data-level="1.4" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html"><i class="fa fa-check"></i><b>1.4</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.4.1</b> The mean and variance of the Binomial distribution</a></li>
+<li class="chapter" data-level="1.4.2" data-path="sec-binomialcloze.html"><a href="sec-binomialcloze.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.4.2</b> What information does a probability distribution provide?</a></li>
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.5</b> Continuous random variables: An example using the Normal distribution</a><ul>
 <li class="chapter" data-level="1.5.1" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#an-important-distinction-probability-vs.density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
-<li class="chapter" data-level="1.5.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#truncating-a-normal-distribution"><i class="fa fa-check"></i><b>1.5.2</b> Truncating a normal distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1: Discrete bivariate distributions</a></li>
-<li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#sec:contbivar"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
 <li class="chapter" data-level="1.6.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#sec:generatebivariatedata"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="sec:marginal.html"><a href="sec:marginal.html"><i class="fa fa-check"></i><b>1.7</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
+<li class="chapter" data-level="1.7" data-path="sec-marginal.html"><a href="sec-marginal.html"><i class="fa fa-check"></i><b>1.7</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
 <li class="chapter" data-level="1.8" data-path="summary-of-useful-r-functions-relating-to-distributions.html"><a href="summary-of-useful-r-functions-relating-to-distributions.html"><i class="fa fa-check"></i><b>1.8</b> Summary of useful R functions relating to distributions</a></li>
 <li class="chapter" data-level="1.9" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>1.9</b> Summary</a></li>
 <li class="chapter" data-level="1.10" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.10</b> Further reading</a></li>
-<li class="chapter" data-level="1.11" data-path="sec:Foundationsexercises.html"><a href="sec:Foundationsexercises.html"><i class="fa fa-check"></i><b>1.11</b> Exercises</a></li>
+<li class="chapter" data-level="1.11" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="ch:introBDA.html"><a href="ch:introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
+<li class="chapter" data-level="2" data-path="ch-introBDA.html"><a href="ch-introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
 <li class="chapter" data-level="2.1" data-path="bayes-rule.html"><a href="bayes-rule.html"><i class="fa fa-check"></i><b>2.1</b> Bayes’ rule</a></li>
-<li class="chapter" data-level="2.2" data-path="sec:analytical.html"><a href="sec:analytical.html"><i class="fa fa-check"></i><b>2.2</b> Deriving the posterior using Bayes’ rule: An analytical example</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="sec:analytical.html"><a href="sec:analytical.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.2.1</b> Choosing a likelihood</a></li>
-<li class="chapter" data-level="2.2.2" data-path="sec:analytical.html"><a href="sec:analytical.html#sec:choosepriortheta"><i class="fa fa-check"></i><b>2.2.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
-<li class="chapter" data-level="2.2.3" data-path="sec:analytical.html"><a href="sec:analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.2.3</b> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
-<li class="chapter" data-level="2.2.4" data-path="sec:analytical.html"><a href="sec:analytical.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.2.4</b> Summary of the procedure</a></li>
-<li class="chapter" data-level="2.2.5" data-path="sec:analytical.html"><a href="sec:analytical.html#visualizing-the-prior-likelihood-and-the-posterior"><i class="fa fa-check"></i><b>2.2.5</b> Visualizing the prior, likelihood, and the posterior</a></li>
-<li class="chapter" data-level="2.2.6" data-path="sec:analytical.html"><a href="sec:analytical.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.2.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
-<li class="chapter" data-level="2.2.7" data-path="sec:analytical.html"><a href="sec:analytical.html#incremental-knowledge-gain-using-prior-knowledge"><i class="fa fa-check"></i><b>2.2.7</b> Incremental knowledge gain using prior knowledge</a></li>
+<li class="chapter" data-level="2.2" data-path="sec-analytical.html"><a href="sec-analytical.html"><i class="fa fa-check"></i><b>2.2</b> Deriving the posterior using Bayes’ rule: An analytical example</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="sec-analytical.html"><a href="sec-analytical.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.2.1</b> Choosing a likelihood</a></li>
+<li class="chapter" data-level="2.2.2" data-path="sec-analytical.html"><a href="sec-analytical.html#sec:choosepriortheta"><i class="fa fa-check"></i><b>2.2.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
+<li class="chapter" data-level="2.2.3" data-path="sec-analytical.html"><a href="sec-analytical.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.2.3</b> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
+<li class="chapter" data-level="2.2.4" data-path="sec-analytical.html"><a href="sec-analytical.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.2.4</b> Summary of the procedure</a></li>
+<li class="chapter" data-level="2.2.5" data-path="sec-analytical.html"><a href="sec-analytical.html#visualizing-the-prior-likelihood-and-the-posterior"><i class="fa fa-check"></i><b>2.2.5</b> Visualizing the prior, likelihood, and the posterior</a></li>
+<li class="chapter" data-level="2.2.6" data-path="sec-analytical.html"><a href="sec-analytical.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.2.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
+<li class="chapter" data-level="2.2.7" data-path="sec-analytical.html"><a href="sec-analytical.html#incremental-knowledge-gain-using-prior-knowledge"><i class="fa fa-check"></i><b>2.2.7</b> Incremental knowledge gain using prior knowledge</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
 <li class="chapter" data-level="2.4" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>2.4</b> Further reading</a></li>
-<li class="chapter" data-level="2.5" data-path="sec:BDAexercises.html"><a href="sec:BDAexercises.html"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
+<li class="chapter" data-level="2.5" data-path="sec-BDAexercises.html"><a href="sec-BDAexercises.html"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>II Regression models with brms</b></span></li>
-<li class="chapter" data-level="3" data-path="ch:compbda.html"><a href="ch:compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a><ul>
-<li class="chapter" data-level="3.1" data-path="sec:sampling.html"><a href="sec:sampling.html"><i class="fa fa-check"></i><b>3.1</b> Deriving the posterior through sampling</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="sec:sampling.html"><a href="sec:sampling.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.1.1</b> Bayesian Regression Models using ‘Stan’: brms</a></li>
+<li class="chapter" data-level="3" data-path="ch-compbda.html"><a href="ch-compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a><ul>
+<li class="chapter" data-level="3.1" data-path="sec-sampling.html"><a href="sec-sampling.html"><i class="fa fa-check"></i><b>3.1</b> Deriving the posterior through sampling</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="sec-sampling.html"><a href="sec-sampling.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.1.1</b> Bayesian Regression Models using ‘Stan’: brms</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="sec:priorpred.html"><a href="sec:priorpred.html"><i class="fa fa-check"></i><b>3.2</b> Prior predictive distribution</a></li>
-<li class="chapter" data-level="3.3" data-path="sec:sensitivity.html"><a href="sec:sensitivity.html"><i class="fa fa-check"></i><b>3.3</b> The influence of priors: sensitivity analysis</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="sec:sensitivity.html"><a href="sec:sensitivity.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.3.1</b> Flat, uninformative priors</a></li>
-<li class="chapter" data-level="3.3.2" data-path="sec:sensitivity.html"><a href="sec:sensitivity.html#regularizing-priors"><i class="fa fa-check"></i><b>3.3.2</b> Regularizing priors</a></li>
-<li class="chapter" data-level="3.3.3" data-path="sec:sensitivity.html"><a href="sec:sensitivity.html#principled-priors"><i class="fa fa-check"></i><b>3.3.3</b> Principled priors</a></li>
-<li class="chapter" data-level="3.3.4" data-path="sec:sensitivity.html"><a href="sec:sensitivity.html#informative-priors"><i class="fa fa-check"></i><b>3.3.4</b> Informative priors</a></li>
+<li class="chapter" data-level="3.2" data-path="sec-priorpred.html"><a href="sec-priorpred.html"><i class="fa fa-check"></i><b>3.2</b> Prior predictive distribution</a></li>
+<li class="chapter" data-level="3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html"><i class="fa fa-check"></i><b>3.3</b> The influence of priors: sensitivity analysis</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.3.1</b> Flat uninformative priors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#regularizing-priors"><i class="fa fa-check"></i><b>3.3.2</b> Regularizing priors</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#principled-priors"><i class="fa fa-check"></i><b>3.3.3</b> Principled priors</a></li>
+<li class="chapter" data-level="3.3.4" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#informative-priors"><i class="fa fa-check"></i><b>3.3.4</b> Informative priors</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="sec:revisit.html"><a href="sec:revisit.html"><i class="fa fa-check"></i><b>3.4</b> Revisiting the button-pressing example with different priors</a></li>
-<li class="chapter" data-level="3.5" data-path="sec:ppd.html"><a href="sec:ppd.html"><i class="fa fa-check"></i><b>3.5</b> Posterior predictive distribution</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="sec:ppd.html"><a href="sec:ppd.html#comparing-different-likelihoods"><i class="fa fa-check"></i><b>3.5.1</b> Comparing different likelihoods</a></li>
-<li class="chapter" data-level="3.5.2" data-path="sec:ppd.html"><a href="sec:ppd.html#sec:lnfirst"><i class="fa fa-check"></i><b>3.5.2</b> The log-normal likelihood</a></li>
-<li class="chapter" data-level="3.5.3" data-path="sec:ppd.html"><a href="sec:ppd.html#sec:lognormal"><i class="fa fa-check"></i><b>3.5.3</b> Re-fitting a single subject pressing a button repeatedly with a log-normal likelihood</a></li>
+<li class="chapter" data-level="3.4" data-path="sec-revisit.html"><a href="sec-revisit.html"><i class="fa fa-check"></i><b>3.4</b> Revisiting the button-pressing example with different priors</a></li>
+<li class="chapter" data-level="3.5" data-path="sec-ppd.html"><a href="sec-ppd.html"><i class="fa fa-check"></i><b>3.5</b> Posterior predictive distribution</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="sec-ppd.html"><a href="sec-ppd.html#comparing-different-likelihoods"><i class="fa fa-check"></i><b>3.5.1</b> Comparing different likelihoods</a></li>
+<li class="chapter" data-level="3.5.2" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lnfirst"><i class="fa fa-check"></i><b>3.5.2</b> The log-normal likelihood</a></li>
+<li class="chapter" data-level="3.5.3" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lognormal"><i class="fa fa-check"></i><b>3.5.3</b> Re-fitting a single participant pressing a button repeatedly with a log-normal likelihood</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
-<li class="chapter" data-level="3.7" data-path="sec:ch3furtherreading.html"><a href="sec:ch3furtherreading.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
-<li class="chapter" data-level="3.8" data-path="ex:compbda.html"><a href="ex:compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
+<li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
+<li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="ch:reg.html"><a href="ch:reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
-<li class="chapter" data-level="4.1" data-path="sec:pupil.html"><a href="sec:pupil.html"><i class="fa fa-check"></i><b>4.1</b> A first linear regression: Does attentional load affect pupil size?</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="sec:pupil.html"><a href="sec:pupil.html#likelihood-and-priors"><i class="fa fa-check"></i><b>4.1.1</b> Likelihood and priors</a></li>
-<li class="chapter" data-level="4.1.2" data-path="sec:pupil.html"><a href="sec:pupil.html#the-brms-model"><i class="fa fa-check"></i><b>4.1.2</b> The <code>brms</code> model</a></li>
-<li class="chapter" data-level="4.1.3" data-path="sec:pupil.html"><a href="sec:pupil.html#how-to-communicate-the-results"><i class="fa fa-check"></i><b>4.1.3</b> How to communicate the results?</a></li>
-<li class="chapter" data-level="4.1.4" data-path="sec:pupil.html"><a href="sec:pupil.html#sec:pupiladq"><i class="fa fa-check"></i><b>4.1.4</b> Descriptive adequacy</a></li>
+<li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
+<li class="chapter" data-level="4.1" data-path="sec-pupil.html"><a href="sec-pupil.html"><i class="fa fa-check"></i><b>4.1</b> A first linear regression: Does attentional load affect pupil size?</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="sec-pupil.html"><a href="sec-pupil.html#likelihood-and-priors"><i class="fa fa-check"></i><b>4.1.1</b> Likelihood and priors</a></li>
+<li class="chapter" data-level="4.1.2" data-path="sec-pupil.html"><a href="sec-pupil.html#the-brms-model"><i class="fa fa-check"></i><b>4.1.2</b> The <code>brms</code> model</a></li>
+<li class="chapter" data-level="4.1.3" data-path="sec-pupil.html"><a href="sec-pupil.html#how-to-communicate-the-results"><i class="fa fa-check"></i><b>4.1.3</b> How to communicate the results?</a></li>
+<li class="chapter" data-level="4.1.4" data-path="sec-pupil.html"><a href="sec-pupil.html#sec:pupiladq"><i class="fa fa-check"></i><b>4.1.4</b> Descriptive adequacy</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="sec:trial.html"><a href="sec:trial.html"><i class="fa fa-check"></i><b>4.2</b> Log-normal model: Does trial affect response times?</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="sec:trial.html"><a href="sec:trial.html#likelihood-and-priors-for-the-log-normal-model"><i class="fa fa-check"></i><b>4.2.1</b> Likelihood and priors for the log-normal model</a></li>
-<li class="chapter" data-level="4.2.2" data-path="sec:trial.html"><a href="sec:trial.html#the-brms-model-1"><i class="fa fa-check"></i><b>4.2.2</b> The <code>brms</code> model</a></li>
-<li class="chapter" data-level="4.2.3" data-path="sec:trial.html"><a href="sec:trial.html#how-to-communicate-the-results-1"><i class="fa fa-check"></i><b>4.2.3</b> How to communicate the results?</a></li>
+<li class="chapter" data-level="4.2" data-path="sec-trial.html"><a href="sec-trial.html"><i class="fa fa-check"></i><b>4.2</b> Log-normal model: Does trial affect response times?</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="sec-trial.html"><a href="sec-trial.html#likelihood-and-priors-for-the-log-normal-model"><i class="fa fa-check"></i><b>4.2.1</b> Likelihood and priors for the log-normal model</a></li>
+<li class="chapter" data-level="4.2.2" data-path="sec-trial.html"><a href="sec-trial.html#the-brms-model-1"><i class="fa fa-check"></i><b>4.2.2</b> The <code>brms</code> model</a></li>
+<li class="chapter" data-level="4.2.3" data-path="sec-trial.html"><a href="sec-trial.html#how-to-communicate-the-results-1"><i class="fa fa-check"></i><b>4.2.3</b> How to communicate the results?</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="sec:logistic.html"><a href="sec:logistic.html"><i class="fa fa-check"></i><b>4.3</b> Logistic regression: Does set size affect free recall?</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="sec:logistic.html"><a href="sec:logistic.html#the-likelihood-for-the-logistic-regression-model"><i class="fa fa-check"></i><b>4.3.1</b> The likelihood for the logistic regression model</a></li>
-<li class="chapter" data-level="4.3.2" data-path="sec:logistic.html"><a href="sec:logistic.html#priors-for-the-logistic-regression"><i class="fa fa-check"></i><b>4.3.2</b> Priors for the logistic regression</a></li>
-<li class="chapter" data-level="4.3.3" data-path="sec:logistic.html"><a href="sec:logistic.html#the-brms-model-2"><i class="fa fa-check"></i><b>4.3.3</b> The <code>brms</code> model</a></li>
-<li class="chapter" data-level="4.3.4" data-path="sec:logistic.html"><a href="sec:logistic.html#sec:comlogis"><i class="fa fa-check"></i><b>4.3.4</b> How to communicate the results?</a></li>
-<li class="chapter" data-level="4.3.5" data-path="sec:logistic.html"><a href="sec:logistic.html#descriptive-adequacy"><i class="fa fa-check"></i><b>4.3.5</b> Descriptive adequacy</a></li>
+<li class="chapter" data-level="4.3" data-path="sec-logistic.html"><a href="sec-logistic.html"><i class="fa fa-check"></i><b>4.3</b> Logistic regression: Does set size affect free recall?</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="sec-logistic.html"><a href="sec-logistic.html#the-likelihood-for-the-logistic-regression-model"><i class="fa fa-check"></i><b>4.3.1</b> The likelihood for the logistic regression model</a></li>
+<li class="chapter" data-level="4.3.2" data-path="sec-logistic.html"><a href="sec-logistic.html#priors-for-the-logistic-regression"><i class="fa fa-check"></i><b>4.3.2</b> Priors for the logistic regression</a></li>
+<li class="chapter" data-level="4.3.3" data-path="sec-logistic.html"><a href="sec-logistic.html#the-brms-model-2"><i class="fa fa-check"></i><b>4.3.3</b> The <code>brms</code> model</a></li>
+<li class="chapter" data-level="4.3.4" data-path="sec-logistic.html"><a href="sec-logistic.html#sec:comlogis"><i class="fa fa-check"></i><b>4.3.4</b> How to communicate the results?</a></li>
+<li class="chapter" data-level="4.3.5" data-path="sec-logistic.html"><a href="sec-logistic.html#descriptive-adequacy"><i class="fa fa-check"></i><b>4.3.5</b> Descriptive adequacy</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
-<li class="chapter" data-level="4.5" data-path="sec:ch4furtherreading.html"><a href="sec:ch4furtherreading.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
-<li class="chapter" data-level="4.6" data-path="sec:LMexercises.html"><a href="sec:LMexercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
+<li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
+<li class="chapter" data-level="4.6" data-path="sec-LMexercises.html"><a href="sec-LMexercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="ch:hierarchical.html"><a href="ch:hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
-<li class="chapter" data-level="5.1" data-path="sec:N400hierarchical.html"><a href="sec:N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical model with a normal likelihood: The N400 effect</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="sec:N400hierarchical.html"><a href="sec:N400hierarchical.html#complete-pooling-model-m_cp"><i class="fa fa-check"></i><b>5.1.1</b> Complete pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.2" data-path="sec:N400hierarchical.html"><a href="sec:N400hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.1.2</b> No pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.3" data-path="sec:N400hierarchical.html"><a href="sec:N400hierarchical.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercepts and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.4" data-path="sec:N400hierarchical.html"><a href="sec:N400hierarchical.html#sec:mcvivs"><i class="fa fa-check"></i><b>5.1.4</b> Correlated varying intercept varying slopes model (<span class="math inline">\(M_{h}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.5" data-path="sec:N400hierarchical.html"><a href="sec:N400hierarchical.html#sec:sih"><i class="fa fa-check"></i><b>5.1.5</b> By-subjects and by-items correlated varying intercept varying slopes model (<span class="math inline">\(M_{sih}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.6" data-path="sec:N400hierarchical.html"><a href="sec:N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the maximal model–Distributional regression models</a></li>
+<li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
+<li class="chapter" data-level="5.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical normal model: The N400 effect</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#complete-pooling-model-m_cp"><i class="fa fa-check"></i><b>5.1.1</b> Complete-pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.2" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.1.2</b> No-pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.3" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercept and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.4" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:mcvivs"><i class="fa fa-check"></i><b>5.1.4</b> Correlated varying intercept varying slopes model (<span class="math inline">\(M_{h}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.5" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:sih"><i class="fa fa-check"></i><b>5.1.5</b> By-subjects and by-items correlated varying intercept varying slopes model (<span class="math inline">\(M_{sih}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.6" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the so-called maximal models–Distributional regression models</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="sec:stroop.html"><a href="sec:stroop.html"><i class="fa fa-check"></i><b>5.2</b> A hierarchical log-normal model: The Stroop effect</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="sec:stroop.html"><a href="sec:stroop.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.2.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
+<li class="chapter" data-level="5.2" data-path="sec-stroop.html"><a href="sec-stroop.html"><i class="fa fa-check"></i><b>5.2</b> A hierarchical log-normal model: The Stroop effect</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="sec-stroop.html"><a href="sec-stroop.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.2.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><a href="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><i class="fa fa-check"></i><b>5.3</b> Why fitting a Bayesian hierarchical model is worth the effort</a></li>
 <li class="chapter" data-level="5.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.4</b> Summary</a></li>
-<li class="chapter" data-level="5.5" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
-<li class="chapter" data-level="5.6" data-path="sec:HLMexercises.html"><a href="sec:HLMexercises.html"><i class="fa fa-check"></i><b>5.6</b> Exercises</a><ul>
-<li class="chapter" data-level="" data-path="sec:HLMexercises.html"><a href="sec:HLMexercises.html#exercises-with-a-normal-likelihood"><i class="fa fa-check"></i>Exercises with a normal likelihood</a></li>
-<li class="chapter" data-level="" data-path="sec:HLMexercises.html"><a href="sec:HLMexercises.html#exercises-with-a-log-normal-likelihood"><i class="fa fa-check"></i>Exercises with a log-normal likelihood</a></li>
-<li class="chapter" data-level="" data-path="sec:HLMexercises.html"><a href="sec:HLMexercises.html#exercises-with-a-logistic-regression-bernoulli-likelihood."><i class="fa fa-check"></i>Exercises with a logistic regression (Bernoulli likelihood).</a></li>
+<li class="chapter" data-level="5.5" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
+<li class="chapter" data-level="5.6" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html"><i class="fa fa-check"></i><b>5.6</b> Exercises</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-normal-likelihood"><i class="fa fa-check"></i><b>5.6.1</b> Exercises with a normal likelihood</a></li>
+<li class="chapter" data-level="5.6.2" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-log-normal-likelihood"><i class="fa fa-check"></i><b>5.6.2</b> Exercises with a log-normal likelihood</a></li>
+<li class="chapter" data-level="5.6.3" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-logistic-regression-bernoulli-likelihood."><i class="fa fa-check"></i><b>5.6.3</b> Exercises with a logistic regression (Bernoulli likelihood).</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="ch:priors.html"><a href="ch:priors.html"><i class="fa fa-check"></i><b>6</b> The Art and Science of Prior Elicitation</a><ul>
-<li class="chapter" data-level="6.1" data-path="sec:simpleexamplepriors.html"><a href="sec:simpleexamplepriors.html"><i class="fa fa-check"></i><b>6.1</b> Eliciting priors from oneself for a self-paced reading study: A simple example</a></li>
+<li class="chapter" data-level="6" data-path="ch-priors.html"><a href="ch-priors.html"><i class="fa fa-check"></i><b>6</b> The Art and Science of Prior Elicitation</a><ul>
+<li class="chapter" data-level="6.1" data-path="sec-simpleexamplepriors.html"><a href="sec-simpleexamplepriors.html"><i class="fa fa-check"></i><b>6.1</b> Eliciting priors from oneself for a self-paced reading study: A simple example</a></li>
 <li class="chapter" data-level="6.2" data-path="eliciting-priors-from-experts.html"><a href="eliciting-priors-from-experts.html"><i class="fa fa-check"></i><b>6.2</b> Eliciting priors from experts</a></li>
 <li class="chapter" data-level="6.3" data-path="deriving-priors-from-meta-analyses.html"><a href="deriving-priors-from-meta-analyses.html"><i class="fa fa-check"></i><b>6.3</b> Deriving priors from meta-analyses</a></li>
 <li class="chapter" data-level="6.4" data-path="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><a href="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’ posteriors as priors for a new study</a></li>
 <li class="chapter" data-level="6.5" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
-<li class="chapter" data-level="6.6" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.6" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch:workflow.html"><a href="ch:workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a><ul>
+<li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a><ul>
 <li class="chapter" data-level="7.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>7.1</b> Model building</a></li>
 <li class="chapter" data-level="7.2" data-path="principled-questions-on-a-model.html"><a href="principled-questions-on-a-model.html"><i class="fa fa-check"></i><b>7.2</b> Principled questions on a model</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="principled-questions-on-a-model.html"><a href="principled-questions-on-a-model.html#prior-predictive-checks-checking-consistency-with-domain-expertise"><i class="fa fa-check"></i><b>7.2.1</b> Prior predictive checks: Checking consistency with domain expertise</a></li>
@@ -1008,9 +271,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.4" data-path="exemplary-data-analysis.html"><a href="exemplary-data-analysis.html#posterior-predictive-checks-model-adequacy"><i class="fa fa-check"></i><b>7.3.4</b> Posterior predictive checks: Model adequacy</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
-<li class="chapter" data-level="7.5" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>7.5</b> Further reading</a></li>
+<li class="chapter" data-level="7.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>7.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="ch:contr.html"><a href="ch:contr.html"><i class="fa fa-check"></i><b>8</b> Contrast coding</a><ul>
+<li class="chapter" data-level="8" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>8</b> Contrast coding</a><ul>
 <li class="chapter" data-level="8.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>8.1</b> Basic concepts illustrated using a two-level factor</a><ul>
 <li class="chapter" data-level="8.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>8.1.1</b> Default contrast coding: Treatment contrasts</a></li>
 <li class="chapter" data-level="8.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>8.1.2</b> Defining comparisons</a></li>
@@ -1022,12 +285,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>8.2.2</b> The hypothesis matrix</a></li>
 <li class="chapter" data-level="8.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>8.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="8.3.2" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b> Helmert contrasts</a></li>
-<li class="chapter" data-level="8.3.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="8.3.4" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b> Polynomial contrasts</a></li>
-<li class="chapter" data-level="8.3.5" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts: monotonic effects</a></li>
+<li class="chapter" data-level="8.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="8.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b> Helmert contrasts</a></li>
+<li class="chapter" data-level="8.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="8.3.4" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="8.3.5" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts: monotonic effects</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a><ul>
 <li class="chapter" data-level="8.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>8.4.1</b> Centered contrasts</a></li>
@@ -1036,56 +299,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>8.5</b> Computing condition means from estimated contrasts</a></li>
 <li class="chapter" data-level="8.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
-<li class="chapter" data-level="8.7" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
-<li class="chapter" data-level="8.8" data-path="sec:Contrastsexercises.html"><a href="sec:Contrastsexercises.html"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
+<li class="chapter" data-level="8.7" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
+<li class="chapter" data-level="8.8" data-path="sec-Contrastsexercises.html"><a href="sec-Contrastsexercises.html"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ch:coding2x2.html"><a href="ch:coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a><ul>
-<li class="chapter" data-level="9.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html"><i class="fa fa-check"></i><b>9.1</b> Contrast coding in a factorial <span class="math inline">\(2 \times 2\)</span> design</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>9.1.1</b> Nested effects</a></li>
-<li class="chapter" data-level="9.1.2" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>9.1.2</b> Interactions between contrasts</a></li>
+<li class="chapter" data-level="9" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="9.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>9.1</b> Contrast coding in a factorial <span class="math inline">\(2 \times 2\)</span> design</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>9.1.1</b> Nested effects</a></li>
+<li class="chapter" data-level="9.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>9.1.2</b> Interactions between contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html"><i class="fa fa-check"></i><b>9.2</b> One factor and one covariate</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>9.2.1</b> Estimating a group difference and controlling for a covariate</a></li>
-<li class="chapter" data-level="9.2.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>9.2.2</b> Estimating differences in slopes</a></li>
+<li class="chapter" data-level="9.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>9.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>9.2.1</b> Estimating a group difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="9.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>9.2.2</b> Estimating differences in slopes</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="sec:interactions:NLM.html"><a href="sec:interactions:NLM.html"><i class="fa fa-check"></i><b>9.3</b> Interactions in generalized linear models (with non-linear link functions) and non-linear models</a></li>
+<li class="chapter" data-level="9.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>9.3</b> Interactions in generalized linear models (with non-linear link functions) and non-linear models</a></li>
 <li class="chapter" data-level="9.4" data-path="summary-8.html"><a href="summary-8.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>9.5</b> Further readings</a></li>
-<li class="chapter" data-level="9.6" data-path="sec:Contrasts2x2exercises.html"><a href="sec:Contrasts2x2exercises.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
+<li class="chapter" data-level="9.6" data-path="sec-Contrasts2x2exercises.html"><a href="sec-Contrasts2x2exercises.html"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>III Advanced models with Stan</b></span></li>
-<li class="chapter" data-level="10" data-path="ch:introstan.html"><a href="ch:introstan.html"><i class="fa fa-check"></i><b>10</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="10" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>10</b> Introduction to the probabilistic programming language Stan</a><ul>
 <li class="chapter" data-level="10.1" data-path="stan-syntax.html"><a href="stan-syntax.html"><i class="fa fa-check"></i><b>10.1</b> Stan syntax</a></li>
-<li class="chapter" data-level="10.2" data-path="sec:firststan.html"><a href="sec:firststan.html"><i class="fa fa-check"></i><b>10.2</b> A first simple example with Stan: Normal likelihood</a></li>
-<li class="chapter" data-level="10.3" data-path="sec:clozestan.html"><a href="sec:clozestan.html"><i class="fa fa-check"></i><b>10.3</b> Another simple example: Cloze probability with Stan with the Binomial likelihood</a></li>
+<li class="chapter" data-level="10.2" data-path="sec-firststan.html"><a href="sec-firststan.html"><i class="fa fa-check"></i><b>10.2</b> A first simple example with Stan: Normal likelihood</a></li>
+<li class="chapter" data-level="10.3" data-path="sec-clozestan.html"><a href="sec-clozestan.html"><i class="fa fa-check"></i><b>10.3</b> Another simple example: Cloze probability with Stan with the Binomial likelihood</a></li>
 <li class="chapter" data-level="10.4" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html"><i class="fa fa-check"></i><b>10.4</b> Regression models in Stan</a><ul>
 <li class="chapter" data-level="10.4.1" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:pupilstan"><i class="fa fa-check"></i><b>10.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
 <li class="chapter" data-level="10.4.2" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:interstan"><i class="fa fa-check"></i><b>10.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
 <li class="chapter" data-level="10.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>10.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
-<li class="chapter" data-level="10.6" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
+<li class="chapter" data-level="10.6" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
 <li class="chapter" data-level="10.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>10.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="ch:complexstan.html"><a href="ch:complexstan.html"><i class="fa fa-check"></i><b>11</b> Complex models and reparametrization</a><ul>
-<li class="chapter" data-level="11.1" data-path="sec:hierstan.html"><a href="sec:hierstan.html"><i class="fa fa-check"></i><b>11.1</b> Hierarchical models with Stan</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="sec:hierstan.html"><a href="sec:hierstan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>11.1.1</b> Varying intercept model with Stan</a></li>
-<li class="chapter" data-level="11.1.2" data-path="sec:hierstan.html"><a href="sec:hierstan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>11.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
-<li class="chapter" data-level="11.1.3" data-path="sec:hierstan.html"><a href="sec:hierstan.html#sec:corrstan"><i class="fa fa-check"></i><b>11.1.3</b> Correlated varying intercept varying slopes model</a></li>
-<li class="chapter" data-level="11.1.4" data-path="sec:hierstan.html"><a href="sec:hierstan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>11.1.4</b> By-subject and by-items correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="11" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>11</b> Complex models and reparametrization</a><ul>
+<li class="chapter" data-level="11.1" data-path="sec-hierstan.html"><a href="sec-hierstan.html"><i class="fa fa-check"></i><b>11.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="sec-hierstan.html"><a href="sec-hierstan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>11.1.1</b> Varying intercept model with Stan</a></li>
+<li class="chapter" data-level="11.1.2" data-path="sec-hierstan.html"><a href="sec-hierstan.html#sec:uncorrstan"><i class="fa fa-check"></i><b>11.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="11.1.3" data-path="sec-hierstan.html"><a href="sec-hierstan.html#sec:corrstan"><i class="fa fa-check"></i><b>11.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="11.1.4" data-path="sec-hierstan.html"><a href="sec-hierstan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>11.1.4</b> By-subject and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="summary-10.html"><a href="summary-10.html"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
-<li class="chapter" data-level="11.3" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
+<li class="chapter" data-level="11.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
 <li class="chapter" data-level="11.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>11.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch:custom.html"><a href="ch:custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a><ul>
-<li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
-</ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
-</ul></li>
+<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
-<li class="chapter" data-level="13" data-path="ch:remame.html"><a href="ch:remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
+<li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
 <li class="chapter" data-level="13.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>13.1</b> Meta-analysis</a><ul>
 <li class="chapter" data-level="13.1.1" data-path="meta-analysis.html"><a href="meta-analysis.html#a-meta-analysis-of-similarity-based-interference-in-sentence-comprehension"><i class="fa fa-check"></i><b>13.1.1</b> A meta-analysis of similarity-based interference in sentence comprehension</a></li>
 </ul></li>
@@ -1093,22 +351,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.2.1" data-path="measurement-error-models.html"><a href="measurement-error-models.html#accounting-for-measurement-error-in-a-voice-onset-time-model"><i class="fa fa-check"></i><b>13.2.1</b> Accounting for measurement error in a voice onset time model</a></li>
 </ul></li>
 <li class="chapter" data-level="13.3" data-path="summary-11.html"><a href="summary-11.html"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
-<li class="chapter" data-level="13.4" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
-<li class="chapter" data-level="13.5" data-path="sec:REMAMEexercises.html"><a href="sec:REMAMEexercises.html"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
+<li class="chapter" data-level="13.4" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
+<li class="chapter" data-level="13.5" data-path="sec-REMAMEexercises.html"><a href="sec-REMAMEexercises.html"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="ch:sat.html"><a href="ch:sat.html"><i class="fa fa-check"></i><b>14</b> SAT</a></li>
+<li class="chapter" data-level="14" data-path="ch-sat.html"><a href="ch-sat.html"><i class="fa fa-check"></i><b>14</b> SAT</a></li>
 <li class="part"><span><b>V Model comparison and hypothesis testing</b></span></li>
-<li class="chapter" data-level="15" data-path="ch:comparison.html"><a href="ch:comparison.html"><i class="fa fa-check"></i><b>15</b> Introduction to model comparison</a><ul>
-<li class="chapter" data-level="15.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>15.1</b> Further reading</a></li>
+<li class="chapter" data-level="15" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>15</b> Introduction to model comparison</a><ul>
+<li class="chapter" data-level="15.1" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.1</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="ch:bf.html"><a href="ch:bf.html"><i class="fa fa-check"></i><b>16</b> Bayes factors</a><ul>
+<li class="chapter" data-level="16" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>16</b> Bayes factors</a><ul>
 <li class="chapter" data-level="16.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>16.1</b> Hypothesis testing using the Bayes factor</a><ul>
 <li class="chapter" data-level="16.1.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#marginal-likelihood"><i class="fa fa-check"></i><b>16.1.1</b> Marginal likelihood</a></li>
 <li class="chapter" data-level="16.1.2" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html#bayes-factor"><i class="fa fa-check"></i><b>16.1.2</b> Bayes factor</a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="sec:N400BF.html"><a href="sec:N400BF.html"><i class="fa fa-check"></i><b>16.2</b> Examining the N400 effect with Bayes factor</a><ul>
-<li class="chapter" data-level="16.2.1" data-path="sec:N400BF.html"><a href="sec:N400BF.html#sensitivity-analysis-1"><i class="fa fa-check"></i><b>16.2.1</b> Sensitivity analysis</a></li>
-<li class="chapter" data-level="16.2.2" data-path="sec:N400BF.html"><a href="sec:N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>16.2.2</b> Non-nested models</a></li>
+<li class="chapter" data-level="16.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html"><i class="fa fa-check"></i><b>16.2</b> Examining the N400 effect with Bayes factor</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sensitivity-analysis-1"><i class="fa fa-check"></i><b>16.2.1</b> Sensitivity analysis</a></li>
+<li class="chapter" data-level="16.2.2" data-path="sec-N400BF.html"><a href="sec-N400BF.html#sec:BFnonnested"><i class="fa fa-check"></i><b>16.2.2</b> Non-nested models</a></li>
 </ul></li>
 <li class="chapter" data-level="16.3" data-path="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html"><i class="fa fa-check"></i><b>16.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a></li>
 <li class="chapter" data-level="16.4" data-path="bayes-factor-in-stan.html"><a href="bayes-factor-in-stan.html"><i class="fa fa-check"></i><b>16.4</b> Bayes factor in Stan</a></li>
@@ -1117,10 +375,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.5.2" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-practice-variability-with-the-data"><i class="fa fa-check"></i><b>16.5.2</b> Bayes factors in practice: Variability with the data</a></li>
 </ul></li>
 <li class="chapter" data-level="16.6" data-path="summary-12.html"><a href="summary-12.html"><i class="fa fa-check"></i><b>16.6</b> Summary</a></li>
-<li class="chapter" data-level="16.7" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>16.7</b> Further reading</a></li>
+<li class="chapter" data-level="16.7" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.7</b> Further reading</a></li>
 <li class="chapter" data-level="16.8" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>16.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="ch:cv.html"><a href="ch:cv.html"><i class="fa fa-check"></i><b>17</b> Cross-validation</a><ul>
+<li class="chapter" data-level="17" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>17</b> Cross-validation</a><ul>
 <li class="chapter" data-level="17.1" data-path="expected-log-predictive-density-of-a-model.html"><a href="expected-log-predictive-density-of-a-model.html"><i class="fa fa-check"></i><b>17.1</b> Expected log predictive density of a model</a></li>
 <li class="chapter" data-level="17.2" data-path="k-fold-and-leave-one-out-cross-validation.html"><a href="k-fold-and-leave-one-out-cross-validation.html"><i class="fa fa-check"></i><b>17.2</b> K-fold and leave-one-out cross-validation</a></li>
 <li class="chapter" data-level="17.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html"><i class="fa fa-check"></i><b>17.3</b> Testing the N400 effect using cross-validation</a><ul>
@@ -1128,20 +386,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.3.2" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html#cross-validation-with-k-fold"><i class="fa fa-check"></i><b>17.3.2</b> Cross-validation with K-fold</a></li>
 <li class="chapter" data-level="17.3.3" data-path="testing-the-n400-effect-using-cross-validation.html"><a href="testing-the-n400-effect-using-cross-validation.html#leave-one-group-out-cross-validation"><i class="fa fa-check"></i><b>17.3.3</b> Leave-one-group-out cross-validation</a></li>
 </ul></li>
-<li class="chapter" data-level="17.4" data-path="sec:logcv.html"><a href="sec:logcv.html"><i class="fa fa-check"></i><b>17.4</b> Comparing different likelihoods with cross-validation</a></li>
+<li class="chapter" data-level="17.4" data-path="sec-logcv.html"><a href="sec-logcv.html"><i class="fa fa-check"></i><b>17.4</b> Comparing different likelihoods with cross-validation</a></li>
 <li class="chapter" data-level="17.5" data-path="issues-with-cross-validation.html"><a href="issues-with-cross-validation.html"><i class="fa fa-check"></i><b>17.5</b> Issues with cross-validation</a></li>
 <li class="chapter" data-level="17.6" data-path="cross-validation-in-stan.html"><a href="cross-validation-in-stan.html"><i class="fa fa-check"></i><b>17.6</b> Cross-validation in Stan</a><ul>
 <li class="chapter" data-level="17.6.1" data-path="cross-validation-in-stan.html"><a href="cross-validation-in-stan.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>17.6.1</b> PSIS-LOO-CV in Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="17.7" data-path="summary-13.html"><a href="summary-13.html"><i class="fa fa-check"></i><b>17.7</b> Summary</a></li>
-<li class="chapter" data-level="17.8" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>17.8</b> Further reading</a></li>
+<li class="chapter" data-level="17.8" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>17.8</b> Further reading</a></li>
 <li class="chapter" data-level="17.9" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>17.9</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
-<li class="chapter" data-level="18" data-path="ch:cogmod.html"><a href="ch:cogmod.html"><i class="fa fa-check"></i><b>18</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="18.1" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
+<li class="chapter" data-level="18" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>18</b> Introduction to computational cognitive modeling</a><ul>
+<li class="chapter" data-level="18.1" data-path="further-reading-14.html"><a href="further-reading-14.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="ch:MPT.html"><a href="ch:MPT.html"><i class="fa fa-check"></i><b>19</b> Multinomial processing trees</a><ul>
+<li class="chapter" data-level="19" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>19</b> Multinomial processing trees</a><ul>
 <li class="chapter" data-level="19.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>19.1</b> Modeling multiple categorical responses</a><ul>
 <li class="chapter" data-level="19.1.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:mult"><i class="fa fa-check"></i><b>19.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
 <li class="chapter" data-level="19.1.2" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html#sec:cat"><i class="fa fa-check"></i><b>19.1.2</b> A model for multiple responses using the categorical distribution</a></li>
@@ -1149,10 +407,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>19.2</b> Multinomial processing tree (MPT) models</a><ul>
 <li class="chapter" data-level="19.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>19.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="19.3" data-path="further-reading-14.html"><a href="further-reading-14.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
+<li class="chapter" data-level="19.3" data-path="further-reading-15.html"><a href="further-reading-15.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
 <li class="chapter" data-level="19.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>19.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="ch:mixture.html"><a href="ch:mixture.html"><i class="fa fa-check"></i><b>20</b> Mixture models</a><ul>
+<li class="chapter" data-level="20" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>20</b> Mixture models</a><ul>
 <li class="chapter" data-level="20.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><i class="fa fa-check"></i><b>20.1</b> A mixture model of the speed-accuracy trade-off: The fast-guess model account</a><ul>
 <li class="chapter" data-level="20.1.1" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html#the-global-motion-detection-task"><i class="fa fa-check"></i><b>20.1.1</b> The global motion detection task</a></li>
 <li class="chapter" data-level="20.1.2" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html#a-very-simple-implementation-of-the-fast-guess-model"><i class="fa fa-check"></i><b>20.1.2</b> A very simple implementation of the fast-guess model</a></li>
@@ -1161,12 +419,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.1.5" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html#sec:fastguessh"><i class="fa fa-check"></i><b>20.1.5</b> A hierarchical implementation of the fast-guess model</a></li>
 </ul></li>
 <li class="chapter" data-level="20.2" data-path="summary-14.html"><a href="summary-14.html"><i class="fa fa-check"></i><b>20.2</b> Summary</a></li>
-<li class="chapter" data-level="20.3" data-path="further-reading-15.html"><a href="further-reading-15.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
+<li class="chapter" data-level="20.3" data-path="further-reading-16.html"><a href="further-reading-16.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
 <li class="chapter" data-level="20.4" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>20.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="ch:lognormalrace.html"><a href="ch:lognormalrace.html"><i class="fa fa-check"></i><b>21</b> A simple accumulator model to account for choice response time</a></li>
-<li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="ch:distr.html"><a href="ch:distr.html"><i class="fa fa-check"></i><b>A</b> Important distributions</a></li>
+<li class="chapter" data-level="21" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html"><i class="fa fa-check"></i><b>21</b> A simple accumulator model to account for choice response time</a></li>
+<li class="part"><span><b>VII Appendix</b></span></li>
+<li class="chapter" data-level="22" data-path="ch-distr.html"><a href="ch-distr.html"><i class="fa fa-check"></i><b>22</b> Important distributions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -1190,20 +448,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="regression-models-in-stan" class="section level2">
 <h2><span class="header-section-number">10.4</span> Regression models in Stan</h2>
-<p>In the following sections, we will revisit and expand on some of the examples that we fit with <code>brms</code> in chapter <a href="ch:reg.html#ch:reg">4</a>.</p>
+<p>In the following sections, we will revisit and expand on some of the examples that we fit with <code>brms</code> in chapter <a href="ch-reg.html#ch:reg">4</a>.</p>
 <div id="sec:pupilstan" class="section level3">
 <h3><span class="header-section-number">10.4.1</span> A first linear regression in Stan: Does attentional load affect pupil size?</h3>
-<p>As in section <a href="sec:pupil.html#sec:pupil">4.1</a>, we focus on the effect of cognitive load on one subject’s pupil size with a subset of the data of <span class="citation">Wahn et al. (<a href="#ref-wahnPupilSizesScale2016">2016</a>)</span>. We use the following likelihood and priors. For details about our decision on priors and likelihood, see <a href="sec:pupil.html#sec:pupil">4.1</a>.</p>
+<p>As in section <a href="sec-pupil.html#sec:pupil">4.1</a>, we focus on the effect of cognitive load on one participant’s pupil size with a subset of the data of <span class="citation">Wahn et al. (<a href="#ref-wahnPupilSizesScale2016">2016</a>)</span>. We use the following likelihood and priors. For details about our decision on priors and likelihood, see <a href="sec-pupil.html#sec:pupil">4.1</a>.</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
-p\_size_n &amp;\sim \mathit{Normal}(\alpha + c\_load_n \cdot \beta,\sigma) \\
-\alpha &amp;\sim \mathit{Normal}(1000, 500) \\
-\beta &amp;\sim \mathit{Normal}(0, 100) \\
-\sigma &amp;\sim \mathit{Normal}_+(0, 1000)
+p\_size_n &amp;\sim Normal(\alpha + c\_load_n \cdot \beta,\sigma) \\
+\alpha &amp;\sim Normal(1000, 500) \\
+\beta &amp;\sim Normal(0, 100) \\
+\sigma &amp;\sim Normal_+(0, 1000)
 \end{aligned}
 \end{equation}\]</span></p>
 <p>The Stan model <code>pupil_model.stan</code> follows:</p>
-<pre class="stan fold-show"><code>data {
+<pre class="stan"><code>data {
   int&lt;lower=1&gt; N;
   vector[N] p_size;
   vector[N] c_load;
@@ -1230,7 +488,7 @@ model {
 <p>A statement that requires some explanation is the following:</p>
 <pre><code>target += normal_lpdf(sigma | 0, 1000)
     - normal_lccdf(0 | 0, 1000);</code></pre>
-<p>As in our original example in <a href="sec:pupil.html#sec:pupil">4.1</a>, we are assuming a truncated normal distribution as a prior for <span class="math inline">\(\sigma\)</span>. Not only are we setting a lower boundary to the parameter with <code>lower = 0</code>, but we are also “correcting” its prior distribution by subtracting <code>normal_lccdf(0 | 0, 1000)</code>, where <code>lccdf</code> stands for log complement of a cumulative distribution function. Once we add a lower boundary, the probability mass under <em>half</em> of the “regular” normal distribution should be one, that is, when we integrate from <em>zero</em> (rather than from minus infinity) to infinity. As we saw in Box <a href="sec:pupil.html#thm:truncation">4.1</a>, we need to normalize the PDF by dividing it by the difference of its CDF evaluated in the new boundaries (<span class="math inline">\(a = 0\)</span> and <span class="math inline">\(b = \infty\)</span> in our case):</p>
+<p>As in our original example in <a href="sec-pupil.html#sec:pupil">4.1</a>, we are assuming a truncated normal distribution as a prior for <span class="math inline">\(\sigma\)</span>. Not only are we setting a lower boundary to the parameter with <code>lower = 0</code>, but we are also “correcting” its prior distribution by subtracting <code>normal_lccdf(0 | 0, 1000)</code>, where <code>lccdf</code> stands for log complement of a cumulative distribution function. Once we add a lower boundary, the probability mass under <em>half</em> of the “regular” normal distribution should be one, that is, when we integrate from <em>zero</em> (rather than from minus infinity) to infinity. As we saw in Box <a href="sec-pupil.html#thm:truncation">4.1</a>, we need to normalize the PDF by dividing it by the difference of its CDF evaluated in the new boundaries (<span class="math inline">\(a = 0\)</span> and <span class="math inline">\(b = \infty\)</span> in our case):</p>
 <p><span class="math display" id="eq:truncPDF">\[\begin{equation}
 f_{[a,b]}(x) = \frac{f(x)}{F(b) - F(a)}
 \tag{4.1}
@@ -1242,23 +500,23 @@ log(f_{[a,b]}(x)) = log(f(x)) - log(F(b) - F(a))
 \end{equation}\]</span></p>
 <p>In Stan <span class="math inline">\(\log(f(x))\)</span> corresponds to <code>normal_lpdf(x |...)</code>, and <code>log(F(x))</code> to <code>normal_lcdf(x|...)</code>. Because in our example <span class="math inline">\(b=\infty\)</span>, <span class="math inline">\(F(b) = 1\)</span>, we are dealing with the complement of the log CDF evaluated at <span class="math inline">\(a =0\)</span>, <span class="math inline">\(\log(1 - F(0))\)</span>, that is why we use <code>normal_lccdf(0 | ...)</code>.</p>
 <p>To be able to fit the model, Stan requires the data to be input as a list: First, we load the data and center the dependent variable in a data frame and then we create a list.</p>
-<div class="sourceCode" id="cb600"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb600-1" data-line-number="1">df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb600-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load))</a></code></pre></div>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb601-1" data-line-number="1">ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb601-2" data-line-number="2">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
-<a class="sourceLine" id="cb601-3" data-line-number="3">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
-<a class="sourceLine" id="cb601-4" data-line-number="4">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
-<a class="sourceLine" id="cb601-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb601-6" data-line-number="6">pupil_model &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb601-7" data-line-number="7">  <span class="st">&quot;pupil_model.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb601-8" data-line-number="8">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
-<a class="sourceLine" id="cb601-9" data-line-number="9">)</a>
-<a class="sourceLine" id="cb601-10" data-line-number="10">fit_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_model,</a>
-<a class="sourceLine" id="cb601-11" data-line-number="11">  <span class="dt">data =</span> ls_pupil</a>
-<a class="sourceLine" id="cb601-12" data-line-number="12">)</a></code></pre></div>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb590-1" data-line-number="1">df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb590-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load))</a></code></pre></div>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb591-1" data-line-number="1">ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb591-2" data-line-number="2">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
+<a class="sourceLine" id="cb591-3" data-line-number="3">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
+<a class="sourceLine" id="cb591-4" data-line-number="4">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
+<a class="sourceLine" id="cb591-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb591-6" data-line-number="6">pupil_model &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb591-7" data-line-number="7">  <span class="st">&quot;pupil_model.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb591-8" data-line-number="8">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
+<a class="sourceLine" id="cb591-9" data-line-number="9">)</a>
+<a class="sourceLine" id="cb591-10" data-line-number="10">fit_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_model,</a>
+<a class="sourceLine" id="cb591-11" data-line-number="11">  <span class="dt">data =</span> ls_pupil</a>
+<a class="sourceLine" id="cb591-12" data-line-number="12">)</a></code></pre></div>
 <p>Check the traceplots in <a href="regression-models-in-stan.html#fig:traceplotreg">10.5</a>.</p>
 
-<div class="sourceCode" id="cb602"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb602-1" data-line-number="1"><span class="kw">traceplot</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb592-1" data-line-number="1"><span class="kw">traceplot</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:traceplotreg"></span>
 <img src="bookdown_files/figure-html/traceplotreg-1.svg" alt="Traceplots of alpha, beta, and sigma from the model fit_pupil." width="672" />
 <p class="caption">
@@ -1266,15 +524,15 @@ FIGURE 10.5: Traceplots of <code>alpha</code>, <code>beta</code>, and <code>sigm
 </p>
 </div>
 <p>Examine some summaries of the marginal posterior distributions of the parameters of interest:</p>
-<div class="sourceCode" id="cb603"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb603-1" data-line-number="1"><span class="kw">print</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb593-1" data-line-number="1"><span class="kw">print</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <pre><code>##        mean   2.5% 97.5% n_eff Rhat
 ## alpha 701.4 661.31 741.5  3281    1
 ## beta   33.8   9.87  56.4  3942    1
 ## sigma 128.6 102.97 160.8  3466    1</code></pre>
 <p>Plot the posterior distributions in <a href="regression-models-in-stan.html#fig:postreg">10.6</a>.</p>
 
-<div class="sourceCode" id="cb605"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb605-1" data-line-number="1">df_fit_pupil &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_pupil)</a>
-<a class="sourceLine" id="cb605-2" data-line-number="2"><span class="kw">mcmc_hist</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb595-1" data-line-number="1">df_fit_pupil &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_pupil)</a>
+<a class="sourceLine" id="cb595-2" data-line-number="2"><span class="kw">mcmc_hist</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:postreg"></span>
 <img src="bookdown_files/figure-html/postreg-1.svg" alt="Histograms of the posterior samples of alpha, beta, and sigma from the model fit_pupil." width="672" />
 <p class="caption">
@@ -1282,11 +540,11 @@ FIGURE 10.6: Histograms of the posterior samples of <code>alpha</code>, <code>be
 </p>
 </div>
 <p>If we want to determine how likely it is that the pupil size increased rather than decreased, we can examine the proportion of samples above zero.</p>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb606-1" data-line-number="1"><span class="co"># We are using df_fit_pupil and not the &quot;raw&quot; Stanfit object.</span></a>
-<a class="sourceLine" id="cb606-2" data-line-number="2"><span class="kw">mean</span>(df_fit_pupil<span class="op">$</span>beta <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb596-1" data-line-number="1"><span class="co"># We are using df_fit_pupil and not the &quot;raw&quot; Stanfit object.</span></a>
+<a class="sourceLine" id="cb596-2" data-line-number="2"><span class="kw">mean</span>(df_fit_pupil<span class="op">$</span>beta <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## [1] 0.996</code></pre>
-<p>If we want to generate prior or posterior predictive distributions, we can either create our own functions in R with the <code>purrr</code> function <code>map_dfr</code> (or a for-loop) as we did in section <a href="sec:trial.html#sec:trial">4.2</a> with the function <code>lognormal_model_pred()</code>. Alternatively, we can use the <code>generated quantities</code> block in our model:</p>
-<pre class="stan fold-show"><code>data {
+<p>If we want to generate prior or posterior predictive distributions, we can either create our own functions in R with the <code>purrr</code> function <code>map_dfr</code> (or a for-loop) as we did in section <a href="sec-trial.html#sec:trial">4.2</a> with the function <code>lognormal_model_pred()</code>. Alternatively, we can use the <code>generated quantities</code> block in our model:</p>
+<pre class="stan"><code>data {
   int&lt;lower = 1&gt; N;
   vector[N] c_load;
   int&lt;lower= 0, upper = 1&gt; onlyprior;
@@ -1313,23 +571,21 @@ generated quantities {
 <p>For most of the probability functions, there is a matching pseudorandom number generator (PRNG) with the suffix <code>_rng</code>. Here we are using the vectorized function <code>normal_rng</code>. At the moment not all the PRNG are vectorized, but the ones that are only allow for arrays and, confusingly enough, not vectors. We define arrays by indicating a type, and then between brackets, the length of each dimension. For example to define an array of real numbers with three dimension of length 6, 7, and 10 we write <code>real var[6, 7, 10]</code>. Vectors and matrices are also valid types for an array. See Box <a href="regression-models-in-stan.html#thm:stancontainers">10.2</a> for more about the difference between arrays and vectors, and other algebra types. We also included a data variable called <code>onlyprior</code>, this is an integer that can only be set to 1 (TRUE) or 0 (FALSE). When <code>onlyprior = 1</code>, the likelihood is omitted from the model, <code>p_size</code> is ignored, and <code>p_size_pred</code> is the prior predictive distribution. When <code>onlyprior = 0</code>, the likelihood is incorporated in the model (as it is in the original code <code>pupil_model.stan</code>) using <code>p_size</code>, and <code>p_size_pred</code> is the posterior predictive distribution.</p>
 <p>If we want posterior predictive distributions, we fit the model to the data and set <code>onlyprior = 0</code>, if we want prior predictive distributions, we sample from the priors and set <code>onlyprior = 0</code>. Then we use <code>bayesplot</code> functions to visualize predictive checks.</p>
 <p>For posterior predictive checks, we would do the following:</p>
-<div class="sourceCode" id="cb609"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb609-1" data-line-number="1">ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb609-2" data-line-number="2">  <span class="dt">onlyprior =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb609-3" data-line-number="3">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
-<a class="sourceLine" id="cb609-4" data-line-number="4">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
-<a class="sourceLine" id="cb609-5" data-line-number="5">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
-<a class="sourceLine" id="cb609-6" data-line-number="6">)</a>
-<a class="sourceLine" id="cb609-7" data-line-number="7">pupil_gen &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb609-8" data-line-number="8">                         <span class="st">&quot;pupil_gen.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb609-9" data-line-number="9">                         <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb609-10" data-line-number="10">fit_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> pupil_gen, <span class="dt">data =</span> ls_pupil)</a></code></pre></div>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb599-1" data-line-number="1">ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb599-2" data-line-number="2">  <span class="dt">onlyprior =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb599-3" data-line-number="3">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
+<a class="sourceLine" id="cb599-4" data-line-number="4">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
+<a class="sourceLine" id="cb599-5" data-line-number="5">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
+<a class="sourceLine" id="cb599-6" data-line-number="6">)</a>
+<a class="sourceLine" id="cb599-7" data-line-number="7">pupil_gen &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;pupil_gen.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb599-8" data-line-number="8">fit_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> pupil_gen, <span class="dt">data =</span> ls_pupil)</a></code></pre></div>
 <p>Store the predicted pupil sizes in <code>yrep_pupil</code>. This variable contains an <span class="math inline">\(N_{samples} \times N_{observations}\)</span> matrix, that is, each row of the matrix is a draw from the posterior predictive distribution, i.e., a vector with one element for each of the data points in y.</p>
-<div class="sourceCode" id="cb610"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb610-1" data-line-number="1">yrep_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(fit_pupil)<span class="op">$</span>p_size_pred</a>
-<a class="sourceLine" id="cb610-2" data-line-number="2"><span class="kw">dim</span>(yrep_pupil)</a></code></pre></div>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb600-1" data-line-number="1">yrep_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(fit_pupil)<span class="op">$</span>p_size_pred</a>
+<a class="sourceLine" id="cb600-2" data-line-number="2"><span class="kw">dim</span>(yrep_pupil)</a></code></pre></div>
 <pre><code>## [1] 4000   41</code></pre>
 <p>Predictive checks functions in <code>bayesplot</code> (starting with <code>ppc_</code>) require a vector with the observations in the first argument and a matrix with the predictive distribution as its second argument. As an example, in Figure <a href="regression-models-in-stan.html#fig:densoverlay">10.7</a> we use an overlay of densities and we draw only 50 elements (that is 50 predicted datasets).</p>
 
-<div class="sourceCode" id="cb612"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb612-1" data-line-number="1"><span class="kw">ppc_dens_overlay</span>(df_pupil<span class="op">$</span>p_size, <span class="dt">yrep =</span> yrep_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb602-1" data-line-number="1"><span class="kw">ppc_dens_overlay</span>(df_pupil<span class="op">$</span>p_size, <span class="dt">yrep =</span> yrep_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ])</a></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:densoverlay"></span>
 <img src="bookdown_files/figure-html/densoverlay-1.svg" alt="Posterior predictive check showing 50 predicted density plots from the model fit_pupil against the observed data." width="672" />
 <p class="caption">
@@ -1337,24 +593,24 @@ FIGURE 10.7: Posterior predictive check showing 50 predicted density plots from 
 </p>
 </div>
 <p>For prior predictive distributions, we simply set <code>onlyprior = 1</code>. The observations (<code>p_size</code>) are ignored by the model, but are required by the data block in Stan. If we haven’t collected data yet, we could include a vector of zeros.</p>
-<div class="sourceCode" id="cb613"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb613-1" data-line-number="1">ls_pupil_prior &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb613-2" data-line-number="2">  <span class="dt">onlyprior =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb613-3" data-line-number="3">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
-<a class="sourceLine" id="cb613-4" data-line-number="4">  <span class="co"># or: p_size = rep(0, nrow(df_pupil)),</span></a>
-<a class="sourceLine" id="cb613-5" data-line-number="5">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
-<a class="sourceLine" id="cb613-6" data-line-number="6">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
-<a class="sourceLine" id="cb613-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb613-8" data-line-number="8">prior_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_gen,</a>
-<a class="sourceLine" id="cb613-9" data-line-number="9">  <span class="dt">data =</span> ls_pupil_prior,</a>
-<a class="sourceLine" id="cb613-10" data-line-number="10">  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.90</span>)</a>
-<a class="sourceLine" id="cb613-11" data-line-number="11">)</a></code></pre></div>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb603-1" data-line-number="1">ls_pupil_prior &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb603-2" data-line-number="2">  <span class="dt">onlyprior =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb603-3" data-line-number="3">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
+<a class="sourceLine" id="cb603-4" data-line-number="4">  <span class="co"># or: p_size = rep(0, nrow(df_pupil)),</span></a>
+<a class="sourceLine" id="cb603-5" data-line-number="5">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
+<a class="sourceLine" id="cb603-6" data-line-number="6">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
+<a class="sourceLine" id="cb603-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb603-8" data-line-number="8">prior_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_gen,</a>
+<a class="sourceLine" id="cb603-9" data-line-number="9">  <span class="dt">data =</span> ls_pupil_prior,</a>
+<a class="sourceLine" id="cb603-10" data-line-number="10">  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.90</span>)</a>
+<a class="sourceLine" id="cb603-11" data-line-number="11">)</a></code></pre></div>
 <p>We need to increase the <code>adapt_delta</code> parameter’s default value from 0.80 to 0.90 to simulate the data to avoid divergent transitions. It is important to highlight that we cannot safely ignore the warnings of the last model, even if we are not fitting data. This is so because in practice one is still sampling a density using Hamiltonian Monte Carlo, and thus the prior sampling process can break in the same ways as the posterior sampling process. Predictive checks in <code>bayesplot</code>, as the one shown in Figure <a href="regression-models-in-stan.html#fig:priordensoverlay">10.8</a>, require (at least for now), an argument <code>y</code> with data. If we haven’t collected data yet, we can, for example, use it to provide plausible or implausible values that we want to compare to the prior predictive realizations. In the following example, we set <code>y</code> to be a uniform distribution that ranges between 0 and 1000; this is the distribution density drawn with the darker color in the plot. (Alternatively, we can use <code>ggplot</code> and manually build the plot.) The uniformly distributed data (the dark line) don’t look particularly uniform here; this is because we are simulating only 41 data points.</p>
 
-<div class="sourceCode" id="cb614"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb614-1" data-line-number="1">yrep_prior_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(prior_pupil)<span class="op">$</span>p_size_pred</a>
-<a class="sourceLine" id="cb614-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(</a>
-<a class="sourceLine" id="cb614-3" data-line-number="3">  <span class="kw">runif</span>(ls_pupil_prior<span class="op">$</span>N, <span class="dv">0</span>, <span class="dv">1000</span>),</a>
-<a class="sourceLine" id="cb614-4" data-line-number="4">  yrep_prior_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ]</a>
-<a class="sourceLine" id="cb614-5" data-line-number="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb604-1" data-line-number="1">yrep_prior_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(prior_pupil)<span class="op">$</span>p_size_pred</a>
+<a class="sourceLine" id="cb604-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(</a>
+<a class="sourceLine" id="cb604-3" data-line-number="3">  <span class="kw">runif</span>(ls_pupil_prior<span class="op">$</span>N, <span class="dv">0</span>, <span class="dv">1000</span>),</a>
+<a class="sourceLine" id="cb604-4" data-line-number="4">  yrep_prior_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ]</a>
+<a class="sourceLine" id="cb604-5" data-line-number="5">)</a></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:priordensoverlay"></span>
 <img src="bookdown_files/figure-html/priordensoverlay-1.svg" alt="Prior predictive check showing 50 predicted density plots from the model fit_pupil; the darker density plot depicts a uniform distribution (from 0 to 1000) of synthetic observations." width="672" />
 <p class="caption">
@@ -1367,7 +623,7 @@ FIGURE 10.8: Prior predictive check showing 50 predicted density plots from the 
 <div class="theorem">
 <span id="thm:stancontainers" class="theorem"><strong>Box 10.2  </strong></span><strong>Matrix, vector, or array in Stan?</strong>
 </div>
-<p>Stan contains three basic linear algebra types, <code>vector</code>, <code>row_vector</code>, and <code>matrix</code>. But Stan also allows for building arrays of any dimension from any type of element (integer, real, etc.). This means that there are several ways to define one-dimensional N-sized containers of real numbers,</p>
+<p>Stan contains three basic linear algebra types, <code>vector</code>, <code>row_vector</code>, and <code>matrix</code>. But Stan also allows for building arrays of any dimension from any type of element (integer, real, etc). This means that there are several ways to define one-dimensional N-sized containers of real numbers,</p>
 <pre><code>real a[N];
 vector[N] a;
 row_vector[N] a;</code></pre>
@@ -1393,22 +649,22 @@ for(n in 1:N)
 </div>
 <div id="sec:interstan" class="section level3">
 <h3><span class="header-section-number">10.4.2</span> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</h3>
-<p>We’ll expand the previous model to also include the effect of (centered) trial and its interaction with cognitive load on one subject’s pupil size. Our new likelihood will look as follows:</p>
+<p>We’ll expand the previous model to also include the effect of (centered) trial and its interaction with cognitive load on one participant’s pupil size. Our new likelihood will look as follows:</p>
 <p><span class="math display">\[\begin{equation}
-p\_size_n \sim \mathit{Normal}(\alpha + c\_load_n \cdot \beta_1 + c\_trial \cdot \beta_2 + c\_load \cdot c\_trial \cdot \beta_3, \sigma)
+p\_size_n \sim Normal(\alpha + c\_load_n \cdot \beta_1 + c\_trial \cdot \beta_2 + c\_load \cdot c\_trial \cdot \beta_3, \sigma)
 \end{equation}\]</span></p>
 <p>Define priors for all the new <span class="math inline">\(\beta\)</span>s. Since we don’t have more information about the new predictors, they are sampled from identical prior distributions:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
-\alpha &amp;\sim \mathit{Normal}(1000, 500) \\
-\beta_1 &amp;\sim \mathit{Normal}(0, 100) \\
-\beta_2 &amp;\sim \mathit{Normal}(0, 100) \\
-\beta_3 &amp;\sim \mathit{Normal}(0, 100) \\
-\sigma &amp;\sim \mathit{Normal}_+(0, 1000)
+\alpha &amp;\sim Normal(1000, 500) \\
+\beta_1 &amp;\sim Normal(0, 100) \\
+\beta_2 &amp;\sim Normal(0, 100) \\
+\beta_3 &amp;\sim Normal(0, 100) \\
+\sigma &amp;\sim Normal_+(0, 1000)
 \end{aligned}
 \end{equation}\]</span></p>
 <p>The following Stan model, <code>pupil_int1.stan</code>, is the direct translation of the new priors and likelihood.</p>
-<pre class="stan fold-show"><code>data {
+<pre class="stan"><code>data {
   int&lt;lower = 1&gt; N;
   vector[N] c_load;
   vector[N] c_trial;
@@ -1437,13 +693,13 @@ model {
 <p>There is, however, an alternative notation that can simplify our code. In the following likelihood, <span class="math inline">\(p\_size\)</span> is a vector of N observations (in this case 41), <span class="math inline">\(X\)</span> is the model matrix with a dimension of <span class="math inline">\(N \times N_{pred}\)</span> (in this case <span class="math inline">\(41 \times 3\)</span>), and <span class="math inline">\(\beta\)</span> a vector of <span class="math inline">\(N_{pred}\)</span> (in this case, 3) rows. Assuming that <span class="math inline">\(\beta\)</span> is a vector, we indicate with one line that each beta is sampled from identical prior distributions.</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
-p\_size &amp;\sim \mathit{Normal}(\alpha + X \cdot \beta,\sigma)\\
-\beta &amp;\sim \mathit{Normal}(0, 100) \\
-\sigma &amp;\sim \mathit{Normal}_+(0, 1000)
+p\_size &amp;\sim Normal(\alpha + X \cdot \beta,\sigma)\\
+\beta &amp;\sim Normal(0, 100) \\
+\sigma &amp;\sim Normal_+(0, 1000)
 \end{aligned}
 \end{equation}\]</span></p>
 <p>The translation into Stan code is the following:</p>
-<pre class="stan fold-show"><code>data {
+<pre class="stan"><code>data {
   int&lt;lower = 1&gt; N;
   int&lt;lower = 0&gt; K;   // number of predictors
   matrix[N, K] X;   // model matrix
@@ -1462,29 +718,29 @@ model {
     - normal_lccdf(0 | 0, 1000);
   target += normal_lpdf(p_size | alpha + X * beta, sigma);
 }</code></pre>
-<p>For some likelihood functions, Stan provides a more efficient implementation of the linear regression than the one manually written in the previous code. It’s critical to understand that, in general, a more efficient implementation should not only be faster, but should also achieve the same number of effective samples (or more) than a less efficient implementation (and should also show convergence). In this case, we can achieve that using <code>_glm</code> functions. We can replace the last line with the following statement (the order of the arguments is important):<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a></p>
+<p>For some likelihood functions, Stan provides a more efficient implementation of the linear regression than the one manually written in the previous code. It’s critical to understand that, in general, a more efficient implementation should not only be faster, but should also achieve the same number of effective samples (or more) than a less efficient implementation (and should also show convergence). In this case, we can achieve that using <code>_glm</code> functions. We can replace the last line with the following statement (the order of the arguments is important):<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a></p>
 <pre><code>target += normal_id_glm_lpdf(p_size | X, alpha, beta, sigma);</code></pre>
 <p>The most optimized model, <code>pupil_int.stan</code>, includes this last statement. We prepare the data as follows: First create a centered version of trial, <code>c_trial</code> and load <code>c_load</code>, then use the function <code>model.matrix</code> to create the <code>X</code> matrix that contains in each column our predictors and omits the intercept with <code>0 +</code>.</p>
-<div class="sourceCode" id="cb624"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb624-1" data-line-number="1">df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb624-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb624-3" data-line-number="3">    <span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial),</a>
-<a class="sourceLine" id="cb624-4" data-line-number="4">    <span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load)</a>
-<a class="sourceLine" id="cb624-5" data-line-number="5">  )</a>
-<a class="sourceLine" id="cb624-6" data-line-number="6">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_load <span class="op">*</span><span class="st"> </span>c_trial, df_pupil)</a>
-<a class="sourceLine" id="cb624-7" data-line-number="7">ls_pupil_X &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb624-8" data-line-number="8">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
-<a class="sourceLine" id="cb624-9" data-line-number="9">  <span class="dt">X =</span> X,</a>
-<a class="sourceLine" id="cb624-10" data-line-number="10">  <span class="dt">K =</span> <span class="kw">ncol</span>(X),</a>
-<a class="sourceLine" id="cb624-11" data-line-number="11">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
-<a class="sourceLine" id="cb624-12" data-line-number="12">)</a></code></pre></div>
-<div class="sourceCode" id="cb625"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb625-1" data-line-number="1">pupil_int &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb625-2" data-line-number="2">  <span class="st">&quot;pupil_int.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb625-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
-<a class="sourceLine" id="cb625-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb625-5" data-line-number="5">fit_pupil_int &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_int,</a>
-<a class="sourceLine" id="cb625-6" data-line-number="6">  <span class="dt">data =</span> ls_pupil_X</a>
-<a class="sourceLine" id="cb625-7" data-line-number="7">)</a></code></pre></div>
-<div class="sourceCode" id="cb626"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb626-1" data-line-number="1"><span class="kw">print</span>(fit_pupil_int, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb614-1" data-line-number="1">df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb614-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb614-3" data-line-number="3">    <span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial),</a>
+<a class="sourceLine" id="cb614-4" data-line-number="4">    <span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load)</a>
+<a class="sourceLine" id="cb614-5" data-line-number="5">  )</a>
+<a class="sourceLine" id="cb614-6" data-line-number="6">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_load <span class="op">*</span><span class="st"> </span>c_trial, df_pupil)</a>
+<a class="sourceLine" id="cb614-7" data-line-number="7">ls_pupil_X &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb614-8" data-line-number="8">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
+<a class="sourceLine" id="cb614-9" data-line-number="9">  <span class="dt">X =</span> X,</a>
+<a class="sourceLine" id="cb614-10" data-line-number="10">  <span class="dt">K =</span> <span class="kw">ncol</span>(X),</a>
+<a class="sourceLine" id="cb614-11" data-line-number="11">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
+<a class="sourceLine" id="cb614-12" data-line-number="12">)</a></code></pre></div>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb615-1" data-line-number="1">pupil_int &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb615-2" data-line-number="2">  <span class="st">&quot;pupil_int.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb615-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
+<a class="sourceLine" id="cb615-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb615-5" data-line-number="5">fit_pupil_int &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_int,</a>
+<a class="sourceLine" id="cb615-6" data-line-number="6">  <span class="dt">data =</span> ls_pupil_X</a>
+<a class="sourceLine" id="cb615-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb616-1" data-line-number="1"><span class="kw">print</span>(fit_pupil_int, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <pre><code>##           mean   2.5%  97.5% n_eff Rhat
 ## alpha   699.51 667.23 730.92  4885    1
 ## beta[1]  31.15  11.74  50.05  4520    1
@@ -1493,13 +749,13 @@ model {
 ## sigma   104.36  82.62 134.62  3351    1</code></pre>
 <p>In <a href="regression-models-in-stan.html#fig:pupilintbeta">10.9</a>, we plot here the 95% CrI of the parameters of interest. We use <code>regex_pars</code>, rather than <code>pars</code>, because we want to capture <code>beta[1]</code>, <code>beta[2]</code>, and <code>beta[3]</code>; <code>regex_pars</code> use regular expressions to select the parameters (for information about regular expressions in R see <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html</a>)</p>
 
-<div class="sourceCode" id="cb628"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb628-1" data-line-number="1">df_fit_pupil_int &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_pupil_int)</a>
-<a class="sourceLine" id="cb628-2" data-line-number="2"><span class="kw">mcmc_intervals</span>(fit_pupil_int,</a>
-<a class="sourceLine" id="cb628-3" data-line-number="3">  <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</a>
-<a class="sourceLine" id="cb628-4" data-line-number="4">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
-<a class="sourceLine" id="cb628-5" data-line-number="5">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
-<a class="sourceLine" id="cb628-6" data-line-number="6">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
-<a class="sourceLine" id="cb628-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb618-1" data-line-number="1">df_fit_pupil_int &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_pupil_int)</a>
+<a class="sourceLine" id="cb618-2" data-line-number="2"><span class="kw">mcmc_intervals</span>(fit_pupil_int,</a>
+<a class="sourceLine" id="cb618-3" data-line-number="3">  <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</a>
+<a class="sourceLine" id="cb618-4" data-line-number="4">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
+<a class="sourceLine" id="cb618-5" data-line-number="5">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
+<a class="sourceLine" id="cb618-6" data-line-number="6">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
+<a class="sourceLine" id="cb618-7" data-line-number="7">)</a></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:pupilintbeta"></span>
 <img src="bookdown_files/figure-html/pupilintbeta-1.svg" alt="95% CrI of the effect of load, beta[1], the effect of trial beta[2], and their interaction beta[3]." width="672" />
 <p class="caption">
@@ -1509,17 +765,17 @@ FIGURE 10.9: 95% CrI of the effect of load, <code>beta[1]</code>, the effect of 
 </div>
 <div id="sec:logisticstan" class="section level3">
 <h3><span class="header-section-number">10.4.3</span> Logistic regression in Stan: Does set size and trial affect free recall?</h3>
-<p>We revisit and expand on the analysis presented in <a href="sec:logistic.html#sec:logistic">4.3</a> of a subset of the data of <span class="citation">Oberauer (<a href="#ref-oberauerWorkingMemoryCapacity2019">2019</a>)</span>. In this example, we will investigate whether the length of a list and trial number affect the probability of correctly recalling a word.</p>
-<p>As in section <a href="sec:logistic.html#sec:logistic">4.3</a>, we assume a Bernoulli likelihood with a logit link function, and the following priors (recall that the logistic function is the inverse of the logit).</p>
+<p>We revisit and expand on the analysis presented in <a href="sec-logistic.html#sec:logistic">4.3</a> of a subset of the data of <span class="citation">Oberauer (<a href="#ref-oberauerWorkingMemoryCapacity2019">2019</a>)</span>. In this example, we will investigate whether the length of a list and trial number affect the probability of correctly recalling a word.</p>
+<p>As in section <a href="sec-logistic.html#sec:logistic">4.3</a>, we assume a Bernoulli likelihood with a logit link function, and the following priors (recall that the logistic function is the inverse of the logit).</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
-correct_n &amp;\sim \mathit{Bernoulli}( logistic(\alpha + X \cdot \beta))\\
-\alpha &amp;\sim \mathit{Normal}(0, 1.5) \\
-\beta &amp;\sim \mathit{Normal}(0, 0.1) 
+correct_n &amp;\sim Bernoulli( logistic(\alpha + X \cdot \beta))\\
+\alpha &amp;\sim Normal(0, 1.5) \\
+\beta &amp;\sim Normal(0, 0.1) 
 \end{aligned}
 \end{equation}\]</span></p>
 <p>Where <span class="math inline">\(\beta\)</span> is a vector of size <span class="math inline">\(K = 2\)</span>, <span class="math inline">\(\{\beta_0, \beta_1\}\)</span>. Below in <code>recall.stan</code> we present the most efficient way to code this in Stan.</p>
-<pre class="stan fold-show"><code>data {
+<pre class="stan"><code>data {
   int&lt;lower = 1&gt; N;
   int&lt;lower=0&gt; K;   // number of predictors
   matrix[N, K] X;   // model matrix
@@ -1545,26 +801,24 @@ model {
 <p>Finally, the most transparent form (but less efficient) would be the following for-loop:</p>
 <pre><code>for (n in 1:N)
   target += bernoulli_lpmf(correct[n] | inv_logit(alpha + X[n] * beta));</code></pre>
-<p>To fit the model as <code>recall.stan</code>, prepare the data by centering the trial number first:</p>
-<div class="sourceCode" id="cb634"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb634-1" data-line-number="1">df_recall &lt;-<span class="st"> </span>df_recall <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb634-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial))</a></code></pre></div>
-<p>Next, we create the model matrix, <span class="math inline">\(X\)</span>, and prepare the data as a list. As in section <a href="regression-models-in-stan.html#sec:interstan">10.4.2</a>, we exclude the intercept from the matrix <code>X</code> using <code>0 +...</code>. This is because the Stan code that we are using already takes into account that the first column in the model matrix is going to be a vector of ones.</p>
-<div class="sourceCode" id="cb635"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb635-1" data-line-number="1">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_set_size <span class="op">*</span><span class="st"> </span>c_trial, df_recall)</a>
-<a class="sourceLine" id="cb635-2" data-line-number="2">ls_recall &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb635-3" data-line-number="3">  <span class="dt">correct =</span> df_recall<span class="op">$</span>correct,</a>
-<a class="sourceLine" id="cb635-4" data-line-number="4">  <span class="dt">X =</span> X,</a>
-<a class="sourceLine" id="cb635-5" data-line-number="5">  <span class="dt">K =</span> <span class="kw">ncol</span>(X),</a>
-<a class="sourceLine" id="cb635-6" data-line-number="6">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_recall)</a>
-<a class="sourceLine" id="cb635-7" data-line-number="7">)</a></code></pre></div>
-<div class="sourceCode" id="cb636"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb636-1" data-line-number="1">recall &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb636-2" data-line-number="2">                      <span class="st">&quot;recall.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb636-3" data-line-number="3">                      <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb636-4" data-line-number="4">fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb636-5" data-line-number="5">  <span class="dt">file =</span> recall,</a>
-<a class="sourceLine" id="cb636-6" data-line-number="6">  <span class="dt">data =</span> ls_recall</a>
-<a class="sourceLine" id="cb636-7" data-line-number="7">)</a></code></pre></div>
+<p>To fit the model as <code>recall.stan</code>, prepare the data as follows:</p>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb624-1" data-line-number="1">df_recall &lt;-<span class="st"> </span>df_recall <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb624-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial))</a></code></pre></div>
+<p>As in section <a href="regression-models-in-stan.html#sec:interstan">10.4.2</a>, we exclude the intercept from the matrix <code>X</code> using <code>0 +...</code>. This is because the Stan code that we are using already takes into account that the first column in the model matrix is going to be a vector of ones.</p>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb625-1" data-line-number="1">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_set_size <span class="op">*</span><span class="st"> </span>c_trial, df_recall)</a>
+<a class="sourceLine" id="cb625-2" data-line-number="2">ls_recall &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb625-3" data-line-number="3">  <span class="dt">correct =</span> df_recall<span class="op">$</span>correct,</a>
+<a class="sourceLine" id="cb625-4" data-line-number="4">  <span class="dt">X =</span> X,</a>
+<a class="sourceLine" id="cb625-5" data-line-number="5">  <span class="dt">K =</span> <span class="kw">ncol</span>(X),</a>
+<a class="sourceLine" id="cb625-6" data-line-number="6">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_recall)</a>
+<a class="sourceLine" id="cb625-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb626-1" data-line-number="1">recall &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;recall.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb626-2" data-line-number="2">fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb626-3" data-line-number="3">  <span class="dt">file =</span> recall,</a>
+<a class="sourceLine" id="cb626-4" data-line-number="4">  <span class="dt">data =</span> ls_recall</a>
+<a class="sourceLine" id="cb626-5" data-line-number="5">)</a></code></pre></div>
 <p>After fitting the model we can print and plot summaries of the posterior distribution.</p>
-<div class="sourceCode" id="cb637"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb637-1" data-line-number="1"><span class="kw">print</span>(fit_recall, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb627-1" data-line-number="1"><span class="kw">print</span>(fit_recall, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>))</a></code></pre></div>
 <pre><code>##          mean  2.5% 97.5% n_eff Rhat
 ## alpha    2.00  1.40  2.64  3712    1
 ## beta[1] -0.19 -0.35 -0.02  4094    1
@@ -1572,53 +826,51 @@ model {
 ## beta[3]  0.00 -0.03  0.04  4190    1</code></pre>
 <p>In Figure <a href="regression-models-in-stan.html#fig:cri">10.10</a>, we plot the 95% CrI of the parameters of interest.</p>
 
-<div class="sourceCode" id="cb639"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb639-1" data-line-number="1">df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall)</a>
-<a class="sourceLine" id="cb639-2" data-line-number="2"><span class="kw">mcmc_intervals</span>(df_fit_recall,</a>
-<a class="sourceLine" id="cb639-3" data-line-number="3">  <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</a>
-<a class="sourceLine" id="cb639-4" data-line-number="4">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
-<a class="sourceLine" id="cb639-5" data-line-number="5">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
-<a class="sourceLine" id="cb639-6" data-line-number="6">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
-<a class="sourceLine" id="cb639-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb629-1" data-line-number="1">df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall)</a>
+<a class="sourceLine" id="cb629-2" data-line-number="2"><span class="kw">mcmc_intervals</span>(df_fit_recall,</a>
+<a class="sourceLine" id="cb629-3" data-line-number="3">  <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</a>
+<a class="sourceLine" id="cb629-4" data-line-number="4">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
+<a class="sourceLine" id="cb629-5" data-line-number="5">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
+<a class="sourceLine" id="cb629-6" data-line-number="6">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
+<a class="sourceLine" id="cb629-7" data-line-number="7">)</a></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:cri"></span>
 <img src="bookdown_files/figure-html/cri-1.svg" alt="95% credible intervals of the beta parameters of fit_recall model." width="672" />
 <p class="caption">
 FIGURE 10.10: 95% credible intervals of the <code>beta</code> parameters of <code>fit_recall</code> model.
 </p>
 </div>
-<p>As we did in <a href="sec:logistic.html#sec:comlogis">4.3.4</a>, we might want to communicate the posterior in proportions rather than in log-odds (as seen in the parameters <code>beta</code>). We can do this in R manipulating the dataframe <code>df_fit_recall</code>, or extracting the samples with <code>extract(fit_recall)</code>. Another alternative presented here is by using the generated quantities block. To make the code more compact we declare the type of each variable and store its content in the same line in <code>recall_prop.stan</code>.</p>
-<pre class="stan fold-show"><code>generated quantities {
+<p>As we did in <a href="sec-logistic.html#sec:comlogis">4.3.4</a>, we might want to communicate the posterior in proportions rather than in log-odds (as seen in the parameters <code>beta</code>). We can do this in R manipulating the dataframe <code>df_fit_recall</code>, or extracting the samples with <code>extract(fit_recall)</code>. Another alternative presented here is by using the generated quantities block. To make the code more compact we declare the type of each variable and store its content in the same line in <code>recall_prop.stan</code>.</p>
+<pre class="stan"><code>generated quantities {
   real average_accuracy = inv_logit(alpha);
   vector[K] change_acc = inv_logit(alpha) - inv_logit(alpha - beta);
 }</code></pre>
 <p>Recall that due to the non-linearity of the scale, the effects depend on the average accuracy, and the set size and trial that we start from (in this case we are examining the change of one unit from the average set size and the average trial).</p>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb641-1" data-line-number="1">recall_prop &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb641-2" data-line-number="2">                           <span class="st">&quot;recall_prop.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb641-3" data-line-number="3">                           <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb641-4" data-line-number="4">fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb641-5" data-line-number="5">  <span class="dt">file =</span> recall_prop,</a>
-<a class="sourceLine" id="cb641-6" data-line-number="6">  <span class="dt">data =</span> ls_recall</a>
-<a class="sourceLine" id="cb641-7" data-line-number="7">)</a></code></pre></div>
-<p>The plot in <a href="regression-models-in-stan.html#fig:vaccdet">10.11</a> now shows how the average accuracy deteriorates when the subject is exposed to a set size larger than the average by one, a trial further than the middle one, and the interaction of both.</p>
-<div class="sourceCode" id="cb642"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb642-1" data-line-number="1">df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb642-2" data-line-number="2"><span class="st">  </span><span class="kw">rename</span>(</a>
-<a class="sourceLine" id="cb642-3" data-line-number="3">    <span class="dt">set_size =</span> <span class="st">`</span><span class="dt">change_acc[1]</span><span class="st">`</span>,</a>
-<a class="sourceLine" id="cb642-4" data-line-number="4">    <span class="dt">trial =</span> <span class="st">`</span><span class="dt">change_acc[2]</span><span class="st">`</span>,</a>
-<a class="sourceLine" id="cb642-5" data-line-number="5">    <span class="dt">interaction =</span> <span class="st">`</span><span class="dt">change_acc[3]</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb642-6" data-line-number="6">  )</a>
-<a class="sourceLine" id="cb642-7" data-line-number="7"><span class="kw">mcmc_intervals</span>(df_fit_recall,</a>
-<a class="sourceLine" id="cb642-8" data-line-number="8">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;set_size&quot;</span>, <span class="st">&quot;trial&quot;</span>, <span class="st">&quot;interaction&quot;</span>),</a>
-<a class="sourceLine" id="cb642-9" data-line-number="9">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
-<a class="sourceLine" id="cb642-10" data-line-number="10">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
-<a class="sourceLine" id="cb642-11" data-line-number="11">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
-<a class="sourceLine" id="cb642-12" data-line-number="12">) <span class="op">+</span></a>
-<a class="sourceLine" id="cb642-13" data-line-number="13"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Change in accuracy&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb631-1" data-line-number="1">recall_prop &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;recall_prop.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb631-2" data-line-number="2">fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb631-3" data-line-number="3">  <span class="dt">file =</span> recall_prop,</a>
+<a class="sourceLine" id="cb631-4" data-line-number="4">  <span class="dt">data =</span> ls_recall</a>
+<a class="sourceLine" id="cb631-5" data-line-number="5">)</a></code></pre></div>
+<p>The plot in <a href="regression-models-in-stan.html#fig:vaccdet">10.11</a> now shows how the average accuracy deteriorates when the participant is exposed to a set size larger than the average by one, a trial further than the middle one, and the interaction of both.</p>
+<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb632-1" data-line-number="1">df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb632-2" data-line-number="2"><span class="st">  </span><span class="kw">rename</span>(</a>
+<a class="sourceLine" id="cb632-3" data-line-number="3">    <span class="dt">set_size =</span> <span class="st">`</span><span class="dt">change_acc[1]</span><span class="st">`</span>,</a>
+<a class="sourceLine" id="cb632-4" data-line-number="4">    <span class="dt">trial =</span> <span class="st">`</span><span class="dt">change_acc[2]</span><span class="st">`</span>,</a>
+<a class="sourceLine" id="cb632-5" data-line-number="5">    <span class="dt">interaction =</span> <span class="st">`</span><span class="dt">change_acc[3]</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb632-6" data-line-number="6">  )</a>
+<a class="sourceLine" id="cb632-7" data-line-number="7"><span class="kw">mcmc_intervals</span>(df_fit_recall,</a>
+<a class="sourceLine" id="cb632-8" data-line-number="8">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;set_size&quot;</span>, <span class="st">&quot;trial&quot;</span>, <span class="st">&quot;interaction&quot;</span>),</a>
+<a class="sourceLine" id="cb632-9" data-line-number="9">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
+<a class="sourceLine" id="cb632-10" data-line-number="10">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
+<a class="sourceLine" id="cb632-11" data-line-number="11">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
+<a class="sourceLine" id="cb632-12" data-line-number="12">) <span class="op">+</span></a>
+<a class="sourceLine" id="cb632-13" data-line-number="13"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Change in accuracy&quot;</span>)</a></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:vaccdet"></span>
 <img src="bookdown_files/figure-html/vaccdet-1.svg" alt="Effect of set size, trial, and their interaction on the average accuracy of recall." width="672" />
 <p class="caption">
 FIGURE 10.11: Effect of set size, trial, and their interaction on the average accuracy of recall.
 </p>
 </div>
-<p>The plot in <a href="regression-models-in-stan.html#fig:vaccdet">10.11</a> is showing us that our model is estimating that by increasing the set size by one unit, the recall accuracy of the single subject is deteriorated by 2%. In contrast, there is hardly any trial effect or interaction between trial and set size.</p>
+<p>The plot in <a href="regression-models-in-stan.html#fig:vaccdet">10.11</a> is showing us that our model is estimating that by increasing the set size by one unit, the recall accuracy of the single participant is deteriorated by 2%. In contrast, there is hardly any trial effect or interaction between trial and set size.</p>
 </div>
 </div>
 <h3>References</h3>
@@ -1632,8 +884,8 @@ FIGURE 10.11: Effect of set size, trial, and their interaction on the average ac
 </div>
 <div class="footnotes">
 <hr />
-<ol start="31">
-<li id="fn31"><p>An extra boost in efficiency can be obtained in regular regressions where <code>X</code> and <code>Y</code> are data (rather than parameters as in cases of missing data or measurement error), since this function can be executed on a GPU.<a href="regression-models-in-stan.html#fnref31" class="footnote-back">↩</a></p></li>
+<ol start="28">
+<li id="fn28"><p>An extra boost in efficiency can be obtained in regular regressions where <code>X</code> and <code>Y</code> are data (rather than parameters as in cases of missing data or measurement error), since this function can be executed on a GPU.<a href="regression-models-in-stan.html#fnref28" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1641,11 +893,12 @@ FIGURE 10.11: Effect of set size, trial, and their interaction on the average ac
           </div>
         </div>
       </div>
-<a href="sec:clozestan.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sec-clozestan.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="summary-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/clipboard.min.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
 <script src="libs/gitbook/js/plugin-sharing.js"></script>
@@ -1686,7 +939,7 @@ gitbook.start({
 },
 "download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
 "search": {
-"engine": "fuse",
+"engine": "lunr",
 "options": null
 },
 "toc": {

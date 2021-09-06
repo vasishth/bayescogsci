@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-01" />
+<meta name="date" content="2021-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,743 +52,7 @@
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
-<script>
-// FOLD code from 
-// https://github.com/bblodfon/rtemps/blob/master/docs/bookdown-lite/hide_code.html
-/* ========================================================================
- * Bootstrap: transition.js v3.3.7
- * http://getbootstrap.com/javascript/#transitions
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
 
-
-+function ($) {
-  'use strict';
-
-  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
-  // ============================================================
-
-  function transitionEnd() {
-    var el = document.createElement('bootstrap')
-
-    var transEndEventNames = {
-      WebkitTransition : 'webkitTransitionEnd',
-      MozTransition    : 'transitionend',
-      OTransition      : 'oTransitionEnd otransitionend',
-      transition       : 'transitionend'
-    }
-
-    for (var name in transEndEventNames) {
-      if (el.style[name] !== undefined) {
-        return { end: transEndEventNames[name] }
-      }
-    }
-
-    return false // explicit for ie8 (  ._.)
-  }
-
-  // http://blog.alexmaccaw.com/css-transitions
-  $.fn.emulateTransitionEnd = function (duration) {
-    var called = false
-    var $el = this
-    $(this).one('bsTransitionEnd', function () { called = true })
-    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
-    setTimeout(callback, duration)
-    return this
-  }
-
-  $(function () {
-    $.support.transition = transitionEnd()
-
-    if (!$.support.transition) return
-
-    $.event.special.bsTransitionEnd = {
-      bindType: $.support.transition.end,
-      delegateType: $.support.transition.end,
-      handle: function (e) {
-        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
-      }
-    }
-  })
-
-}(jQuery);
-</script>
-<script>
-/* ========================================================================
- * Bootstrap: collapse.js v3.3.7
- * http://getbootstrap.com/javascript/#collapse
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-/* jshint latedef: false */
-
-+function ($) {
-  'use strict';
-
-  // COLLAPSE PUBLIC CLASS DEFINITION
-  // ================================
-
-  var Collapse = function (element, options) {
-    this.$element      = $(element)
-    this.options       = $.extend({}, Collapse.DEFAULTS, options)
-    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
-                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
-    this.transitioning = null
-
-    if (this.options.parent) {
-      this.$parent = this.getParent()
-    } else {
-      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
-    }
-
-    if (this.options.toggle) this.toggle()
-  }
-
-  Collapse.VERSION  = '3.3.7'
-
-  Collapse.TRANSITION_DURATION = 350
-
-  Collapse.DEFAULTS = {
-    toggle: true
-  }
-
-  Collapse.prototype.dimension = function () {
-    var hasWidth = this.$element.hasClass('width')
-    return hasWidth ? 'width' : 'height'
-  }
-
-  Collapse.prototype.show = function () {
-    if (this.transitioning || this.$element.hasClass('in')) return
-
-    var activesData
-    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
-
-    if (actives && actives.length) {
-      activesData = actives.data('bs.collapse')
-      if (activesData && activesData.transitioning) return
-    }
-
-    var startEvent = $.Event('show.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    if (actives && actives.length) {
-      Plugin.call(actives, 'hide')
-      activesData || actives.data('bs.collapse', null)
-    }
-
-    var dimension = this.dimension()
-
-    this.$element
-      .removeClass('collapse')
-      .addClass('collapsing')[dimension](0)
-      .attr('aria-expanded', true)
-
-    this.$trigger
-      .removeClass('collapsed')
-      .attr('aria-expanded', true)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse in')[dimension]('')
-      this.transitioning = 0
-      this.$element
-        .trigger('shown.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
-
-    this.$element
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
-  }
-
-  Collapse.prototype.hide = function () {
-    if (this.transitioning || !this.$element.hasClass('in')) return
-
-    var startEvent = $.Event('hide.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    var dimension = this.dimension()
-
-    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
-
-    this.$element
-      .addClass('collapsing')
-      .removeClass('collapse in')
-      .attr('aria-expanded', false)
-
-    this.$trigger
-      .addClass('collapsed')
-      .attr('aria-expanded', false)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.transitioning = 0
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse')
-        .trigger('hidden.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    this.$element
-      [dimension](0)
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
-  }
-
-  Collapse.prototype.toggle = function () {
-    this[this.$element.hasClass('in') ? 'hide' : 'show']()
-  }
-
-  Collapse.prototype.getParent = function () {
-    return $(this.options.parent)
-      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
-      .each($.proxy(function (i, element) {
-        var $element = $(element)
-        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
-      }, this))
-      .end()
-  }
-
-  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
-    var isOpen = $element.hasClass('in')
-
-    $element.attr('aria-expanded', isOpen)
-    $trigger
-      .toggleClass('collapsed', !isOpen)
-      .attr('aria-expanded', isOpen)
-  }
-
-  function getTargetFromTrigger($trigger) {
-    var href
-    var target = $trigger.attr('data-target')
-      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
-
-    return $(target)
-  }
-
-
-  // COLLAPSE PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.collapse')
-      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
-      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
-      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.collapse
-
-  $.fn.collapse             = Plugin
-  $.fn.collapse.Constructor = Collapse
-
-
-  // COLLAPSE NO CONFLICT
-  // ====================
-
-  $.fn.collapse.noConflict = function () {
-    $.fn.collapse = old
-    return this
-  }
-
-
-  // COLLAPSE DATA-API
-  // =================
-
-  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
-    var $this   = $(this)
-
-    if (!$this.attr('data-target')) e.preventDefault()
-
-    var $target = getTargetFromTrigger($this)
-    var data    = $target.data('bs.collapse')
-    var option  = data ? 'toggle' : $this.data()
-
-    Plugin.call($target, option)
-  })
-
-}(jQuery);
-</script>
-<script>
-window.initializeCodeFolding = function(show) {
-
-  // handlers for show-all and hide all
-  $("#rmd-show-all-code").click(function() {
-    // close the dropdown menu when an option is clicked
-    $("#allCodeButton").dropdown("toggle");
-    $('div.r-code-collapse').each(function() {
-      $(this).collapse('show');
-    });
-  });
-  $("#rmd-hide-all-code").click(function() {
-    // close the dropdown menu when an option is clicked
-    $("#allCodeButton").dropdown("toggle");
-    $('div.r-code-collapse').each(function() {
-      $(this).collapse('hide');
-    });
-  });
-
-  // index for unique code element ids
-  var currentIndex = 1;
-
-  // select all R code blocks
-  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
-  rCodeBlocks.each(function() {
-
-    // if code block has been labeled with class `fold-show`, show the code on init!
-    var classList = $(this).attr('class').split(/\s+/);
-    for (var i = 0; i < classList.length; i++) {
-    if (classList[i] === 'fold-show') {
-        show = true;
-      }
-    }
-
-    // create a collapsable div to wrap the code in
-    var div = $('<div class="collapse r-code-collapse"></div>');
-    if (show)
-      div.addClass('in');
-    var id = 'rcode-643E0F36' + currentIndex++;
-    div.attr('id', id);
-    $(this).before(div);
-    $(this).detach().appendTo(div);
-
-    // add a show code button right above
-    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
-    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
-    showCodeButton.append(showCodeText);
-    showCodeButton
-        .attr('data-toggle', 'collapse')
-        .attr('data-target', '#' + id)
-        .attr('aria-expanded', show)
-        .attr('aria-controls', id);
-
-    var buttonRow = $('<div class="row"></div>');
-    var buttonCol = $('<div class="col-md-12"></div>');
-
-    buttonCol.append(showCodeButton);
-    buttonRow.append(buttonCol);
-
-    div.before(buttonRow);
-
-    // hack: return show to false, otherwise all next codeBlocks will be shown!
-    show = false;
-
-    // update state of button on show/hide
-    div.on('hidden.bs.collapse', function () {
-      showCodeText.text('Code');
-    });
-    div.on('show.bs.collapse', function () {
-      showCodeText.text('Hide');
-    });
-  });
-
-}
-</script>
-<script>
-/* ========================================================================
- * Bootstrap: dropdown.js v3.3.7
- * http://getbootstrap.com/javascript/#dropdowns
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // DROPDOWN CLASS DEFINITION
-  // =========================
-
-  var backdrop = '.dropdown-backdrop'
-  var toggle   = '[data-toggle="dropdown"]'
-  var Dropdown = function (element) {
-    $(element).on('click.bs.dropdown', this.toggle)
-  }
-
-  Dropdown.VERSION = '3.3.7'
-
-  function getParent($this) {
-    var selector = $this.attr('data-target')
-
-    if (!selector) {
-      selector = $this.attr('href')
-      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    }
-
-    var $parent = selector && $(selector)
-
-    return $parent && $parent.length ? $parent : $this.parent()
-  }
-
-  function clearMenus(e) {
-    if (e && e.which === 3) return
-    $(backdrop).remove()
-    $(toggle).each(function () {
-      var $this         = $(this)
-      var $parent       = getParent($this)
-      var relatedTarget = { relatedTarget: this }
-
-      if (!$parent.hasClass('open')) return
-
-      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
-
-      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
-
-      if (e.isDefaultPrevented()) return
-
-      $this.attr('aria-expanded', 'false')
-      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
-    })
-  }
-
-  Dropdown.prototype.toggle = function (e) {
-    var $this = $(this)
-
-    if ($this.is('.disabled, :disabled')) return
-
-    var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
-
-    clearMenus()
-
-    if (!isActive) {
-      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
-        // if mobile we use a backdrop because click events don't delegate
-        $(document.createElement('div'))
-          .addClass('dropdown-backdrop')
-          .insertAfter($(this))
-          .on('click', clearMenus)
-      }
-
-      var relatedTarget = { relatedTarget: this }
-      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
-
-      if (e.isDefaultPrevented()) return
-
-      $this
-        .trigger('focus')
-        .attr('aria-expanded', 'true')
-
-      $parent
-        .toggleClass('open')
-        .trigger($.Event('shown.bs.dropdown', relatedTarget))
-    }
-
-    return false
-  }
-
-  Dropdown.prototype.keydown = function (e) {
-    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
-
-    var $this = $(this)
-
-    e.preventDefault()
-    e.stopPropagation()
-
-    if ($this.is('.disabled, :disabled')) return
-
-    var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
-
-    if (!isActive && e.which != 27 || isActive && e.which == 27) {
-      if (e.which == 27) $parent.find(toggle).trigger('focus')
-      return $this.trigger('click')
-    }
-
-    var desc = ' li:not(.disabled):visible a'
-    var $items = $parent.find('.dropdown-menu' + desc)
-
-    if (!$items.length) return
-
-    var index = $items.index(e.target)
-
-    if (e.which == 38 && index > 0)                 index--         // up
-    if (e.which == 40 && index < $items.length - 1) index++         // down
-    if (!~index)                                    index = 0
-
-    $items.eq(index).trigger('focus')
-  }
-
-
-  // DROPDOWN PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.dropdown')
-
-      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
-      if (typeof option == 'string') data[option].call($this)
-    })
-  }
-
-  var old = $.fn.dropdown
-
-  $.fn.dropdown             = Plugin
-  $.fn.dropdown.Constructor = Dropdown
-
-
-  // DROPDOWN NO CONFLICT
-  // ====================
-
-  $.fn.dropdown.noConflict = function () {
-    $.fn.dropdown = old
-    return this
-  }
-
-
-  // APPLY TO STANDARD DROPDOWN ELEMENTS
-  // ===================================
-
-  $(document)
-    .on('click.bs.dropdown.data-api', clearMenus)
-    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
-    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
-    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
-    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
-
-}(jQuery);
-</script>
-<style type="text/css">
-.code-folding-btn {
-  margin-bottom: 4px;
-}
-
-.row { display: flex; }
-.collapse { display: none; }
-.in { display:block }
-.pull-right > .dropdown-menu {
-    right: 0;
-    left: auto;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
-    font-size: 14px;
-    text-align: left;
-    list-style: none;
-    background-color: #fff;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-}
-
-.open > .dropdown-menu {
-    display: block;
-    color: #ffffff;
-    background-color: #ffffff;
-    background-image: none;
-    border-color: #92897e;
-}
-
-.dropdown-menu > li > a {
-  display: block;
-  padding: 3px 20px;
-  clear: both;
-  font-weight: 400;
-  line-height: 1.42857143;
-  color: #000000;
-  white-space: nowrap;
-}
-
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
-  color: #ffffff;
-  text-decoration: none;
-  background-color: #e95420;
-}
-
-.dropdown-menu > .active > a,
-.dropdown-menu > .active > a:hover,
-.dropdown-menu > .active > a:focus {
-  color: #ffffff;
-  text-decoration: none;
-  background-color: #e95420;
-  outline: 0;
-}
-.dropdown-menu > .disabled > a,
-.dropdown-menu > .disabled > a:hover,
-.dropdown-menu > .disabled > a:focus {
-  color: #aea79f;
-}
-
-.dropdown-menu > .disabled > a:hover,
-.dropdown-menu > .disabled > a:focus {
-  text-decoration: none;
-  cursor: not-allowed;
-  background-color: transparent;
-  background-image: none;
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-}
-
-.btn {
-  display: inline-block;
-  margin-bottom: 1;
-  font-weight: normal;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
-  cursor: pointer;
-  background-image: none;
-  border: 1px solid transparent;
-  padding: 4px 8px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  border-radius: 4px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.btn:focus,
-.btn:active:focus,
-.btn.active:focus,
-.btn.focus,
-.btn:active.focus,
-.btn.active.focus {
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-.btn:hover,
-.btn:focus,
-.btn.focus {
-  color: #ffffff;
-  text-decoration: none;
-}
-.btn:active,
-.btn.active {
-  background-image: none;
-  outline: 0;
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
-.btn.disabled,
-.btn[disabled],
-fieldset[disabled] .btn {
-  cursor: not-allowed;
-  filter: alpha(opacity=65);
-  opacity: 0.65;
-  box-shadow: none;
-}
-a.btn.disabled,
-fieldset[disabled] a.btn {
-  pointer-events: none;
-}
-.btn-default {
-  color: #ffffff;
-  background-color: #aea79f; #important
-  border-color: #aea79f;
-}
-
-.btn-default:focus,
-.btn-default.focus {
-  color: #ffffff;
-  background-color: #978e83;
-  border-color: #6f675e;
-}
-
-.btn-default:hover {
-  color: #ffffff;
-  background-color: #978e83;
-  border-color: #92897e;
-}
-.btn-default:active,
-.btn-default.active,
-.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
-  border-radius: 0;
-}
-.btn-group > .btn:first-child {
-  margin-left: 0;
-}
-.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.btn-group > .btn:last-child:not(:first-child),
-.btn-group > .dropdown-toggle:not(:first-child) {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.btn-group > .btn-group {
-  float: left;
-}
-.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
-  border-radius: 0;
-}
-.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child,
-.btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.btn-group .dropdown-toggle:active,
-.btn-group.open .dropdown-toggle {
-  outline: 0;
-}
-.btn-group > .btn + .dropdown-toggle {
-  padding-right: 8px;
-  padding-left: 8px;
-}
-.btn-group > .btn-lg + .dropdown-toggle {
-  padding-right: 12px;
-  padding-left: 12px;
-}
-.btn-group.open .dropdown-toggle {
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
-.btn-group.open .dropdown-toggle.btn-link {
-  box-shadow: none;
-}
-
-</style>
-<script>
-var str = '<div class="btn-group pull-right" style="position: fixed; right: 50px; top: 10px; z-index: 200"><button type="button" class="btn btn-default btn-xs dropdown-toggle" id="allCodeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast=""><span>Code</span> <span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;"><li><a id="rmd-show-all-code" href="#">Show All Code</a></li><li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li></ul></div>';
-document.write(str);
-</script>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "hide");
-});
-</script>
 
 
 <style type="text/css">
@@ -872,12 +136,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
-<li class="chapter" data-level="" data-path="developing-the-right-mindset-for-this-book.html"><a href="developing-the-right-mindset-for-this-book.html"><i class="fa fa-check"></i>Developing the right mindset for this book</a></li>
-<li class="chapter" data-level="" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i>How to read this book</a></li>
-<li class="chapter" data-level="" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i>Online materials</a></li>
-<li class="chapter" data-level="" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i>Software needed</a></li>
-<li class="chapter" data-level="" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="0.2" data-path="developing-the-right-mindset-for-this-book.html"><a href="developing-the-right-mindset-for-this-book.html"><i class="fa fa-check"></i><b>0.2</b> Developing the right mindset for this book</a></li>
+<li class="chapter" data-level="0.3" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.3</b> How to read this book</a></li>
+<li class="chapter" data-level="0.4" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.4</b> Online materials</a></li>
+<li class="chapter" data-level="0.5" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.5</b> Software needed</a></li>
+<li class="chapter" data-level="0.6" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>0.6</b> Acknowledgments</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
@@ -891,11 +155,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.5</b> Continuous random variables: An example using the Normal distribution</a><ul>
 <li class="chapter" data-level="1.5.1" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#an-important-distinction-probability-vs.density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
-<li class="chapter" data-level="1.5.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html#truncating-a-normal-distribution"><i class="fa fa-check"></i><b>1.5.2</b> Truncating a normal distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1: Discrete bivariate distributions</a></li>
-<li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#sec:contbivar"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
 <li class="chapter" data-level="1.6.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#sec:generatebivariatedata"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="sec-marginal.html"><a href="sec-marginal.html"><i class="fa fa-check"></i><b>1.7</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
@@ -926,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="sec-priorpred.html"><a href="sec-priorpred.html"><i class="fa fa-check"></i><b>3.2</b> Prior predictive distribution</a></li>
 <li class="chapter" data-level="3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html"><i class="fa fa-check"></i><b>3.3</b> The influence of priors: sensitivity analysis</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.3.1</b> Flat, uninformative priors</a></li>
+<li class="chapter" data-level="3.3.1" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.3.1</b> Flat uninformative priors</a></li>
 <li class="chapter" data-level="3.3.2" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#regularizing-priors"><i class="fa fa-check"></i><b>3.3.2</b> Regularizing priors</a></li>
 <li class="chapter" data-level="3.3.3" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#principled-priors"><i class="fa fa-check"></i><b>3.3.3</b> Principled priors</a></li>
 <li class="chapter" data-level="3.3.4" data-path="sec-sensitivity.html"><a href="sec-sensitivity.html#informative-priors"><i class="fa fa-check"></i><b>3.3.4</b> Informative priors</a></li>
@@ -935,10 +198,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="sec-ppd.html"><a href="sec-ppd.html"><i class="fa fa-check"></i><b>3.5</b> Posterior predictive distribution</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="sec-ppd.html"><a href="sec-ppd.html#comparing-different-likelihoods"><i class="fa fa-check"></i><b>3.5.1</b> Comparing different likelihoods</a></li>
 <li class="chapter" data-level="3.5.2" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lnfirst"><i class="fa fa-check"></i><b>3.5.2</b> The log-normal likelihood</a></li>
-<li class="chapter" data-level="3.5.3" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lognormal"><i class="fa fa-check"></i><b>3.5.3</b> Re-fitting a single subject pressing a button repeatedly with a log-normal likelihood</a></li>
+<li class="chapter" data-level="3.5.3" data-path="sec-ppd.html"><a href="sec-ppd.html#sec:lognormal"><i class="fa fa-check"></i><b>3.5.3</b> Re-fitting a single participant pressing a button repeatedly with a log-normal likelihood</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
-<li class="chapter" data-level="3.7" data-path="sec-ch3furtherreading.html"><a href="sec-ch3furtherreading.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
+<li class="chapter" data-level="3.7" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>3.7</b> Further reading</a></li>
 <li class="chapter" data-level="3.8" data-path="ex-compbda.html"><a href="ex-compbda.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
@@ -961,24 +224,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.5" data-path="sec-logistic.html"><a href="sec-logistic.html#descriptive-adequacy"><i class="fa fa-check"></i><b>4.3.5</b> Descriptive adequacy</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
-<li class="chapter" data-level="4.5" data-path="sec-ch4furtherreading.html"><a href="sec-ch4furtherreading.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
+<li class="chapter" data-level="4.5" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
 <li class="chapter" data-level="4.6" data-path="sec-LMexercises.html"><a href="sec-LMexercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
-<li class="chapter" data-level="5.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical model with a normal likelihood: The N400 effect</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#complete-pooling-model-m_cp"><i class="fa fa-check"></i><b>5.1.1</b> Complete pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.2" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.1.2</b> No pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.3" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercepts and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
+<li class="chapter" data-level="5.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html"><i class="fa fa-check"></i><b>5.1</b> A hierarchical normal model: The N400 effect</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#complete-pooling-model-m_cp"><i class="fa fa-check"></i><b>5.1.1</b> Complete-pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.2" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.1.2</b> No-pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
+<li class="chapter" data-level="5.1.3" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:uncorrelated"><i class="fa fa-check"></i><b>5.1.3</b> Varying intercept and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
 <li class="chapter" data-level="5.1.4" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:mcvivs"><i class="fa fa-check"></i><b>5.1.4</b> Correlated varying intercept varying slopes model (<span class="math inline">\(M_{h}\)</span>)</a></li>
 <li class="chapter" data-level="5.1.5" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:sih"><i class="fa fa-check"></i><b>5.1.5</b> By-subjects and by-items correlated varying intercept varying slopes model (<span class="math inline">\(M_{sih}\)</span>)</a></li>
-<li class="chapter" data-level="5.1.6" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the maximal model–Distributional regression models</a></li>
+<li class="chapter" data-level="5.1.6" data-path="sec-N400hierarchical.html"><a href="sec-N400hierarchical.html#sec:distrmodel"><i class="fa fa-check"></i><b>5.1.6</b> Beyond the so-called maximal models–Distributional regression models</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="sec-stroop.html"><a href="sec-stroop.html"><i class="fa fa-check"></i><b>5.2</b> A hierarchical log-normal model: The Stroop effect</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="sec-stroop.html"><a href="sec-stroop.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.2.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><a href="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html"><i class="fa fa-check"></i><b>5.3</b> Why fitting a Bayesian hierarchical model is worth the effort</a></li>
 <li class="chapter" data-level="5.4" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.4</b> Summary</a></li>
-<li class="chapter" data-level="5.5" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
+<li class="chapter" data-level="5.5" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>5.5</b> Further reading</a></li>
 <li class="chapter" data-level="5.6" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html"><i class="fa fa-check"></i><b>5.6</b> Exercises</a><ul>
 <li class="chapter" data-level="5.6.1" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-normal-likelihood"><i class="fa fa-check"></i><b>5.6.1</b> Exercises with a normal likelihood</a></li>
 <li class="chapter" data-level="5.6.2" data-path="sec-HLMexercises.html"><a href="sec-HLMexercises.html#exercises-with-a-log-normal-likelihood"><i class="fa fa-check"></i><b>5.6.2</b> Exercises with a log-normal likelihood</a></li>
@@ -991,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3" data-path="deriving-priors-from-meta-analyses.html"><a href="deriving-priors-from-meta-analyses.html"><i class="fa fa-check"></i><b>6.3</b> Deriving priors from meta-analyses</a></li>
 <li class="chapter" data-level="6.4" data-path="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><a href="using-previous-experiments-posteriors-as-priors-for-a-new-study.html"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’ posteriors as priors for a new study</a></li>
 <li class="chapter" data-level="6.5" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
-<li class="chapter" data-level="6.6" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.6" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a><ul>
 <li class="chapter" data-level="7.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>7.1</b> Model building</a></li>
@@ -1008,7 +271,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.4" data-path="exemplary-data-analysis.html"><a href="exemplary-data-analysis.html#posterior-predictive-checks-model-adequacy"><i class="fa fa-check"></i><b>7.3.4</b> Posterior predictive checks: Model adequacy</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
-<li class="chapter" data-level="7.5" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>7.5</b> Further reading</a></li>
+<li class="chapter" data-level="7.5" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>7.5</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>8</b> Contrast coding</a><ul>
 <li class="chapter" data-level="8.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>8.1</b> Basic concepts illustrated using a two-level factor</a><ul>
@@ -1036,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="computing-condition-means-from-estimated-contrasts.html"><a href="computing-condition-means-from-estimated-contrasts.html"><i class="fa fa-check"></i><b>8.5</b> Computing condition means from estimated contrasts</a></li>
 <li class="chapter" data-level="8.6" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
-<li class="chapter" data-level="8.7" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
+<li class="chapter" data-level="8.7" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
 <li class="chapter" data-level="8.8" data-path="sec-Contrastsexercises.html"><a href="sec-Contrastsexercises.html"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a><ul>
@@ -1064,7 +327,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4.3" data-path="regression-models-in-stan.html"><a href="regression-models-in-stan.html#sec:logisticstan"><i class="fa fa-check"></i><b>10.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="summary-9.html"><a href="summary-9.html"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
-<li class="chapter" data-level="10.6" data-path="further-reading-6.html"><a href="further-reading-6.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
+<li class="chapter" data-level="10.6" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
 <li class="chapter" data-level="10.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>10.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>11</b> Complex models and reparametrization</a><ul>
@@ -1075,15 +338,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.4" data-path="sec-hierstan.html"><a href="sec-hierstan.html#sec:crosscorrstan"><i class="fa fa-check"></i><b>11.1.4</b> By-subject and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="summary-10.html"><a href="summary-10.html"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
-<li class="chapter" data-level="11.3" data-path="further-reading-7.html"><a href="further-reading-7.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
+<li class="chapter" data-level="11.3" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
 <li class="chapter" data-level="11.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>11.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a><ul>
-<li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
-</ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
-</ul></li>
+<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
 <li class="chapter" data-level="13.1" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>13.1</b> Meta-analysis</a><ul>
@@ -1093,13 +351,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.2.1" data-path="measurement-error-models.html"><a href="measurement-error-models.html#accounting-for-measurement-error-in-a-voice-onset-time-model"><i class="fa fa-check"></i><b>13.2.1</b> Accounting for measurement error in a voice onset time model</a></li>
 </ul></li>
 <li class="chapter" data-level="13.3" data-path="summary-11.html"><a href="summary-11.html"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
-<li class="chapter" data-level="13.4" data-path="further-reading-9.html"><a href="further-reading-9.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
+<li class="chapter" data-level="13.4" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
 <li class="chapter" data-level="13.5" data-path="sec-REMAMEexercises.html"><a href="sec-REMAMEexercises.html"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="ch-sat.html"><a href="ch-sat.html"><i class="fa fa-check"></i><b>14</b> SAT</a></li>
 <li class="part"><span><b>V Model comparison and hypothesis testing</b></span></li>
 <li class="chapter" data-level="15" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>15</b> Introduction to model comparison</a><ul>
-<li class="chapter" data-level="15.1" data-path="further-reading-10.html"><a href="further-reading-10.html"><i class="fa fa-check"></i><b>15.1</b> Further reading</a></li>
+<li class="chapter" data-level="15.1" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>15.1</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>16</b> Bayes factors</a><ul>
 <li class="chapter" data-level="16.1" data-path="hypothesis-testing-using-the-bayes-factor.html"><a href="hypothesis-testing-using-the-bayes-factor.html"><i class="fa fa-check"></i><b>16.1</b> Hypothesis testing using the Bayes factor</a><ul>
@@ -1117,7 +375,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.5.2" data-path="bayes-factors-in-theory-and-in-practice.html"><a href="bayes-factors-in-theory-and-in-practice.html#bayes-factors-in-practice-variability-with-the-data"><i class="fa fa-check"></i><b>16.5.2</b> Bayes factors in practice: Variability with the data</a></li>
 </ul></li>
 <li class="chapter" data-level="16.6" data-path="summary-12.html"><a href="summary-12.html"><i class="fa fa-check"></i><b>16.6</b> Summary</a></li>
-<li class="chapter" data-level="16.7" data-path="further-reading-11.html"><a href="further-reading-11.html"><i class="fa fa-check"></i><b>16.7</b> Further reading</a></li>
+<li class="chapter" data-level="16.7" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>16.7</b> Further reading</a></li>
 <li class="chapter" data-level="16.8" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>16.8</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>17</b> Cross-validation</a><ul>
@@ -1134,12 +392,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.6.1" data-path="cross-validation-in-stan.html"><a href="cross-validation-in-stan.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>17.6.1</b> PSIS-LOO-CV in Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="17.7" data-path="summary-13.html"><a href="summary-13.html"><i class="fa fa-check"></i><b>17.7</b> Summary</a></li>
-<li class="chapter" data-level="17.8" data-path="further-reading-12.html"><a href="further-reading-12.html"><i class="fa fa-check"></i><b>17.8</b> Further reading</a></li>
+<li class="chapter" data-level="17.8" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>17.8</b> Further reading</a></li>
 <li class="chapter" data-level="17.9" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>17.9</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
 <li class="chapter" data-level="18" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>18</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="18.1" data-path="further-reading-13.html"><a href="further-reading-13.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
+<li class="chapter" data-level="18.1" data-path="further-reading-14.html"><a href="further-reading-14.html"><i class="fa fa-check"></i><b>18.1</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>19</b> Multinomial processing trees</a><ul>
 <li class="chapter" data-level="19.1" data-path="modeling-multiple-categorical-responses.html"><a href="modeling-multiple-categorical-responses.html"><i class="fa fa-check"></i><b>19.1</b> Modeling multiple categorical responses</a><ul>
@@ -1149,7 +407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.2" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html"><i class="fa fa-check"></i><b>19.2</b> Multinomial processing tree (MPT) models</a><ul>
 <li class="chapter" data-level="19.2.1" data-path="multinomial-processing-tree-mpt-models.html"><a href="multinomial-processing-tree-mpt-models.html#mpts-for-modeling-picture-naming-abilities-in-aphasia"><i class="fa fa-check"></i><b>19.2.1</b> MPTs for modeling picture naming abilities in aphasia</a></li>
 </ul></li>
-<li class="chapter" data-level="19.3" data-path="further-reading-14.html"><a href="further-reading-14.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
+<li class="chapter" data-level="19.3" data-path="further-reading-15.html"><a href="further-reading-15.html"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
 <li class="chapter" data-level="19.4" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>19.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>20</b> Mixture models</a><ul>
@@ -1161,7 +419,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.1.5" data-path="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html"><a href="a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account.html#sec:fastguessh"><i class="fa fa-check"></i><b>20.1.5</b> A hierarchical implementation of the fast-guess model</a></li>
 </ul></li>
 <li class="chapter" data-level="20.2" data-path="summary-14.html"><a href="summary-14.html"><i class="fa fa-check"></i><b>20.2</b> Summary</a></li>
-<li class="chapter" data-level="20.3" data-path="further-reading-15.html"><a href="further-reading-15.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
+<li class="chapter" data-level="20.3" data-path="further-reading-16.html"><a href="further-reading-16.html"><i class="fa fa-check"></i><b>20.3</b> Further reading</a></li>
 <li class="chapter" data-level="20.4" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i><b>20.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html"><i class="fa fa-check"></i><b>21</b> A simple accumulator model to account for choice response time</a></li>
@@ -1190,37 +448,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="sec:stroop" class="section level2">
 <h2><span class="header-section-number">5.2</span> A hierarchical log-normal model: The Stroop effect</h2>
-<p>Next, using data from <span class="citation">Ebersole et al. (<a href="#ref-ManyLabs3">2016</a>)</span>, we illustrate some of the issues that arise with a log-normal likelihood in a hierarchical model. The data are from a Stroop task <span class="citation">(Stroop <a href="#ref-stroop1935studies">1935</a>; for a review, see MacLeod <a href="#ref-macleod1991half">1991</a>)</span>. We will analyze a subset of the data of 3337 subjects that participated in one variant of the Stroop task; this was part of a battery of tasks run in <span class="citation">Ebersole et al. (<a href="#ref-ManyLabs3">2016</a>)</span>.</p>
-<p>For this variant of the Stroop task, subjects were presented with one word at the center of the screen (“red”, “blue”, or “green”). The word was written in either red, blue, or green color. In one third of the trials, the word matched the color of the text (“congruent” condition); and in the rest of the trials it did not match (“incongruent” condition). Subjects were instructed to only pay attention to the color that the word was written in, and press <code>1</code> if the color was red, <code>2</code> if it was blue, and <code>3</code> if it was green. In the incongruent condition, it is difficult to identify the color when it mismatches the word that is written on the screen. For example, it is hard to respond that the color is blue if the word written on the screen is green but the color it is presented in is blue; naming the color blue here is difficult in comparison to a baseline condition (the congruent condition), in which the word green appears in the color green. This increased difficulty in the incongruent condition is called the Stroop effect; the effect is extremely robust across variations in the task.</p>
-<p>This task yields two measures: the accuracy of the decision made, and the time it took to respond. For the Stroop task, accuracy is usually almost at ceiling; to simplify the model, we will ignore accuracy. For a cognitive model that incorporates accuracy and response times into a model to analyze these Stroop data, see <span class="citation">Nicenboim (<a href="#ref-Nicenboim2018StanCon">2018</a>)</span>.</p>
+<p>We will illustrate the issues that arise with a log-normal likelihood in a hierarchical model using data from a Stroop task <span class="citation">(Stroop <a href="#ref-stroop1935studies">1935</a>; for a review, see MacLeod <a href="#ref-macleod1991half">1991</a>)</span>. We will analyze a subset of the data of 3337 participants that undertook one variant of the Stroop task as part of the battery of tasks run in <span class="citation">Ebersole et al. (<a href="#ref-ManyLabs3">2016</a>)</span>.</p>
+<p>For this variant of the Stroop task, participants were presented with one word at the center of the screen, which was either “red”, “blue”, and “green” (<em>word</em>) written in either red, blue, or green font (<em>color</em>). In one third of the trials the <em>word</em> matched the <em>color</em> of the text (“congruent” condition) and in the rest of the trials it did not match (“incongruent” condition). Participants were instructed to only pay attention to the color, and press <code>1</code> if the color of the word was red, <code>2</code> if it was blue, and <code>3</code> if it was green. <!-- The complete procedure can be found in https://osf.io/5ykuj/ and the dataset can be found in https://osf.io/n8xa7/. --> The Stroop effect, that is, the difficulty in identifying the color when it mismatches the word in the incongruent condition (e.g., green in color blue) in comparison to a baseline condition, here, the congruent condition (e.g., green in color green) is extremely robust across variations of the task.</p>
+<p>While this task yields two measures: the accuracy of the decision made and the time it took to respond. For the Stroop task, accuracy is usually almost at ceiling level, and to simplify the model, we will ignore it. <span class="citation">(See Nicenboim <a href="#ref-Nicenboim2018StanCon">2018</a> for a cognitive model that incorporates accuracy and response times in the same model to analyze the same Stroop data)</span>.</p>
 <div id="a-correlated-varying-intercept-varying-slopes-log-normal-model" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> A correlated varying intercept varying slopes log-normal model</h3>
-<p>If our theory only focuses on the difference between the response times for the “congruent” vs. “incongruent” condition, we can ignore the actual color presented and the word that was written. We can simply focus on whether a trial was congruent or incongruent. Define a predictor <code>c_cond</code> to represent these two conditions. For simplicity, we will also assume that all subjects share the same variance (as we saw in section <a href="sec-N400hierarchical.html#sec:distrmodel">5.1.6</a>, changing this assumption leads to distributional regression models).</p>
-<p>The above assumptions mean that we are going to fit the data with the following likelihood. The likelihood function is identical to the one that we fit in section <a href="sec-N400hierarchical.html#sec:mcvivs">5.1.4</a>, except that here the location and scale are embedded in a log-normal likelihood rather than a normal likelihood. Equation <a href="sec-stroop.html#eq:stroopmodel">(5.2)</a> states that we are dealing with a hierarchical model with by-subjects varying intercepts and varying slopes model:</p>
-<p><span class="math display" id="eq:stroopmodel">\[\begin{equation}
+<p>If our theory only focuses on the difference between the response times for the “congruent” vs. “incongruent” condition, we can ignore the actual color presented and what was written and focus on whether there was a match or not between the two. We will need a predictor that indicates whether each trial is congruent or incongruent (<code>c_cond</code>). For simplicity, we will also assume that all participants share the same variance (as we saw in section <a href="sec-N400hierarchical.html#sec:distrmodel">5.1.6</a> changing this assumption leads to distributional regression models). This means that we are going to fit the data with the following likelihood (identical to the likelihood that we fit in section <a href="sec-N400hierarchical.html#sec:mcvivs">5.1.4</a> except that here the location and scale are embedded in a log-normal likelihood rather than a normal one). This likelihood indicates that we are dealing with a hierarchical model with by-subjects varying intercept and varying slopes model:</p>
+<p><span class="math display">\[\begin{equation}
   rt_n \sim LogNormal(\alpha + u_{subj[n],1}  + c\_cond_n \cdot  (\beta + u_{subj[n],2}), \sigma)
-\tag{5.2}
 \end{equation}\]</span></p>
-<p>In chapter <a href="ch-contr.html#ch:contr">8</a>, we will discuss the sum-contrast coding of the two conditions (<code>c_cond</code>). For now, it suffices to say that we assign a <code>+1</code> to <code>c_cond</code> for the “incongruent” condition, and a <code>-1</code> for the “congruent” condition (i.e., a sum-contrast coding). Under this contrast coding, if the posterior mean of the parameter <span class="math inline">\(\beta\)</span> turns out to be positive, that would mean that the model predicts that the incongruent condition has slower reaction times than the congruent one. This is because on average the location of the log-normal likelihood for each condition will be as follows. In Equation <a href="sec-stroop.html#eq:stroopmodelmeans">(5.3)</a>, <span class="math inline">\(\mu_{incongruent}\)</span> refers to the mean reaction time of the incongruent condition, and <span class="math inline">\(\mu_{incongruent}\)</span> refers to the mean reaction time of the incongruent condition, and <span class="math inline">\(\mu_{congruent}\)</span> to the mean reaction time of the congruent condition.</p>
-<p><span class="math display" id="eq:stroopmodelmeans">\[\begin{equation}
+<p>We will discuss how to deal with the coding of conditions, such as <code>c_cond</code>, with more details in chapter <a href="ch-contr.html#ch:contr">8</a> <span class="citation">(and see also Schad et al. <a href="#ref-schad2020capitalize">2020</a> for the mathematics underlying different kinds of contrasts)</span>, but for now it will suffice to say that we assign a <code>1</code> to <code>c_cond</code> for the “incongruent” condition and a <code>-1</code> for the “congruent” one (i.e., a sum coding contrast). This will mean that if <span class="math inline">\(\beta\)</span> turns out to be positive, the incongruent condition will be slower than the congruent one. This is because on average the location of the log-normal likelihood for each condition will be as follows. (We could have chosen to do the opposite assignments, and get to the opposite conclusion without any change in the underlying model).</p>
+<p><span class="math display">\[\begin{equation}
 \begin{aligned}
   \mu_{incongruent} &amp;= \alpha + 1 \cdot  \beta \\
   \mu_{congruent} &amp;= \alpha + -1 \cdot  \beta
   \end{aligned}
-  \tag{5.3}
 \end{equation}\]</span></p>
-<p>We could have chosen to do the opposite contrast coding assignments: <span class="math inline">\(-1\)</span> for the incongruent condition, and <span class="math inline">\(+1\)</span> for congruent condition. In that case, if the posterior mean of the parameter <span class="math inline">\(\beta\)</span> turns out to be positive, that would mean that the incongruent condition has a <em>faster</em> reaction time than the congruent condition. Given that the Stroop effect is very robust, we do not expect such an outcome. In order to make the <span class="math inline">\(\beta\)</span> parameter’s mean easier to interpret, we have chosen the contrast coding where a positive sign on the mean of <span class="math inline">\(\beta\)</span> implies that the inconguent condition has slower reaction times.</p>
 <p>As always, we need priors for all the parameters in our model. For the population-level parameters (or fixed effects), we use the same priors as we did when we were fitting a regression with a log-normal likelihood in section <a href="sec-ppd.html#sec:lognormal">3.5.3</a>.</p>
 <p><span class="math display">\[\begin{equation}
  \begin{aligned}
    \alpha &amp; \sim Normal(6, 1.5) \\
-   \beta  &amp; \sim Normal(0, 0.01) \\
+   \beta  &amp; \sim Normal(0, .01) \\
     \sigma  &amp;\sim Normal_+(0, 1)
  \end{aligned}
  \end{equation}\]</span></p>
-<p>Here, <span class="math inline">\(\beta\)</span> represents, on the log scale, the change in the intercept <span class="math inline">\(\alpha\)</span> as a function of the experimental manipulation. In this model, <span class="math inline">\(\beta\)</span> will probably be larger in magnitude than for the model that examined the difference in pressing the spacebar for two consecutive trials in section <a href="sec-ppd.html#sec:lognormal">3.5.3</a>. We might need to examine the prior for <span class="math inline">\(\beta\)</span> with predictive distributions, but we will delay this for now.</p>
-<p>In contrast to our previous models, the intercept <span class="math inline">\(\alpha\)</span> is not the grand mean of the location. This is because the conditions were not balanced in the experiment (one-third of the conditions were congruent and two-thirds incongruent). The intercept could be interpreted here as the time (in log-scale) it takes to respond if we ignore the experimental manipulation.<br />
-Next, we turn our attention to the prior specification for the group-level parameters (or random effects). If we assume a possible correlation between by-subject intercepts and slopes, our model will have the following structure. In particular, we have to define priors for the parameters in the variance-covariance matrix <span class="math inline">\(\Sigma_u\)</span>.</p>
+<p>Here, <span class="math inline">\(\beta\)</span> represents the effect of the experimental manipulation in log-scale: how much we increase or decrease the location of the log-normal in comparison to the intercept, <span class="math inline">\(\alpha\)</span>. For this model, <span class="math inline">\(\beta\)</span> will probably be longer than for the model that examined the difference in pressing the spacebar for two consecutive trials in section <a href="sec-ppd.html#sec:lognormal">3.5.3</a>. We might need to examine the prior for <span class="math inline">\(\beta\)</span> with predictive distributions, but we will delay this for now.</p>
+<p>In contrast to our previous models, the intercept, <span class="math inline">\(\alpha\)</span>, is not the grand mean of the location because the conditions were not balanced in the experiment (one third of the conditions were congruent and two thirds incongruent). The intercept could be interpreted here as the time (in log-scale) it takes to answer if we cancel out the experimental manipulation.</p>
+<p>We focus now on the priors for the group-level parameters (or random effects). If we assume a possible correlation between by-participant intercept and slope, our model will have the following structure, which requires us to assign priors to <span class="math inline">\(\Sigma_u\)</span>.</p>
 <p><span class="math display">\[\begin{equation}
  \begin{aligned}
     {\begin{pmatrix}
@@ -1245,7 +499,7 @@ Next, we turn our attention to the prior specification for the group-level param
 \end{pmatrix}}
 \end{aligned}
 \end{equation}\]</span></p>
-<p>In practice, this means that we need priors for the by-subject standard deviations and correlations. For the variance components, we will set a similar prior as for <span class="math inline">\(\sigma\)</span>. We don’t expect the by-group adjustments to the intercept and slope to have more variance than the within-subject variance, so this prior will be quite conservative because they allow a large range of prior uncertainty. We assign the same prior for the correlations as we did in section <a href="sec-N400hierarchical.html#sec:sih">5.1.5</a>.</p>
+<p>In practice this means that we need priors for the by-participant variances and correlations. For the variance components (which, confusingly enough, are actually standard deviations in our prior specification), we will set a similar prior than for <span class="math inline">\(\sigma\)</span>. We don’t expect the by-group adjustments to the intercept and slope to have more variance than the overall observations, so this prior will be quite conservative (keeping a big deal of uncertainty). We assign the same prior for the correlations as we did in <a href="sec-N400hierarchical.html#sec:sih">5.1.5</a>.</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
 \tau_{u_1} &amp;\sim Normal_+(0,1)\\
@@ -1253,11 +507,11 @@ Next, we turn our attention to the prior specification for the group-level param
 \rho_u &amp;\sim LKJcorr(2) 
 \end{aligned}
 \end{equation}\]</span></p>
-<p>We are now ready to fit the model. To speed up computation, we subset 50 subjects of the original data set; both the subsetted data and the original data set can be found in the package <code>bcogsci</code>. If we were analyzing these data for publication in a journal article or the like, we would obviously not subset the data.</p>
-<p>We restrict ourselves to the correct trials only, and add a <code>c_cond</code> predictor, sum-coded as described earlier.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_stroop&quot;</span>)</a>
-<a class="sourceLine" id="cb297-2" data-line-number="2">(df_stroop &lt;-<span class="st"> </span>df_stroop <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb297-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cond =</span> <span class="kw">if_else</span>(condition <span class="op">==</span><span class="st"> &quot;Incongruent&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>)))</a></code></pre></div>
+<p>We are ready to fit a model now. To speed up computation, we subset 50 participants of the original dataset; both the subsetted data and the original dataset can be found in the package <code>bcogsci</code>. (In a real setting, we would obviously not subset the participants.)
+We restrict ourselves to the correct trials only and we add a <code>c_cond</code> predictor with the sum coded variable.</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_stroop&quot;</span>)</a>
+<a class="sourceLine" id="cb249-2" data-line-number="2">(df_stroop &lt;-<span class="st"> </span>df_stroop <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb249-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cond =</span> <span class="kw">if_else</span>(condition <span class="op">==</span><span class="st"> &quot;Incongruent&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>)))</a></code></pre></div>
 <pre><code>## # A tibble: 3,058 x 5
 ##    subj trial condition      RT c_cond
 ##   &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;       &lt;int&gt;  &lt;dbl&gt;
@@ -1265,65 +519,49 @@ Next, we turn our attention to the prior specification for the group-level param
 ## 2     1     1 Incongruent  1316      1
 ## 3     1     2 Incongruent   628      1
 ## # … with 3,055 more rows</code></pre>
-<p>Fit the model with 4000 iterations rather than with the default 2000 iterations by chain. If we were to run the model with the default number of iterations, the following warning would appear: <code>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and media Running the chains for more iterations may help. See http://mc-stan.org/misc/warnings.html#bulk-ess</code>.</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" data-line-number="1">fit_stroop &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(c_cond <span class="op">|</span><span class="st"> </span>subj),</a>
-<a class="sourceLine" id="cb299-2" data-line-number="2">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
-<a class="sourceLine" id="cb299-3" data-line-number="3">  <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb299-4" data-line-number="4">    <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb299-5" data-line-number="5">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb299-6" data-line-number="6">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">.01</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb299-7" data-line-number="7">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb299-8" data-line-number="8">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb299-9" data-line-number="9">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb299-10" data-line-number="10">    ),</a>
-<a class="sourceLine" id="cb299-11" data-line-number="11">  <span class="dt">iter =</span> <span class="dv">4000</span>,</a>
-<a class="sourceLine" id="cb299-12" data-line-number="12">  <span class="dt">data =</span> df_stroop</a>
-<a class="sourceLine" id="cb299-13" data-line-number="13">)</a></code></pre></div>
-<p>We will focus on <span class="math inline">\(\beta\)</span> (but you can verify that there is nothing surprising in the other parameters in the model <code>fit_stroop</code> ); see Figure @ref(fig:plotfit_stroop).</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_stroop, <span class="dt">pars =</span> <span class="st">&quot;b_c_cond&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: Argument &#39;pars&#39; is deprecated. Please use &#39;variable&#39; instead.</code></pre>
+<p>We fit the model with 4000 iterations rather than with the default of 2000 iterations by chain. This is because if we run the model with the default number of iterations, the following warning appears: <code>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and media Running the chains for more iterations may help. See http://mc-stan.org/misc/warnings.html#bulk-ess</code>.</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1">fit_stroop &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(c_cond <span class="op">|</span><span class="st"> </span>subj),</a>
+<a class="sourceLine" id="cb251-2" data-line-number="2">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
+<a class="sourceLine" id="cb251-3" data-line-number="3">  <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb251-4" data-line-number="4">    <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb251-5" data-line-number="5">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb251-6" data-line-number="6">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">.01</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb251-7" data-line-number="7">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb251-8" data-line-number="8">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb251-9" data-line-number="9">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb251-10" data-line-number="10">    ),</a>
+<a class="sourceLine" id="cb251-11" data-line-number="11">  <span class="dt">iter =</span> <span class="dv">4000</span>,</a>
+<a class="sourceLine" id="cb251-12" data-line-number="12">  <span class="dt">data =</span> df_stroop</a>
+<a class="sourceLine" id="cb251-13" data-line-number="13">)</a></code></pre></div>
+<p>We will focus on <span class="math inline">\(\beta\)</span> (but you can verify that there is nothing surprising in <code>fit_stroop</code> ):</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_stroop, <span class="dt">pars =</span> <span class="st">&quot;b_c_cond&quot;</span>)</a></code></pre></div>
 <pre><code>##          Estimate Est.Error   Q2.5  Q97.5
 ## b_c_cond    0.027   0.00552 0.0157 0.0374</code></pre>
-<p>As shown in Figure <a href="sec-stroop.html#fig:priorposteriordiscrepancy">5.14</a>,
-if we overlay the density plots for the prior and posterior distributions of <span class="math inline">\(\beta\)</span>, it becomes evident that the prior might have been too restrictive: the posterior is relatively far from the prior, and the prior strongly down-weights the values that the posterior is centered around. Such a strong discrepancy between the prior and posterior can be investigated with a sensitivity analysis.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" data-line-number="1">sample_b_post &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_stroop)<span class="op">$</span>b_c_cond</a></code></pre></div>
-<pre><code>## Warning: Method &#39;posterior_samples&#39; is deprecated. Please see ?
-## as_draws for recommended alternatives.</code></pre>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" data-line-number="1"><span class="co"># We generate samples from the prior as well:</span></a>
-<a class="sourceLine" id="cb305-2" data-line-number="2">N &lt;-<span class="st"> </span><span class="kw">length</span>(sample_b_post)</a>
-<a class="sourceLine" id="cb305-3" data-line-number="3">sample_b_prior &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">.01</span>)</a>
-<a class="sourceLine" id="cb305-4" data-line-number="4">samples &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb305-5" data-line-number="5">  <span class="dt">sample =</span> <span class="kw">c</span>(sample_b_post, sample_b_prior),</a>
-<a class="sourceLine" id="cb305-6" data-line-number="6">  <span class="dt">distribution =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;posterior&quot;</span>, N), <span class="kw">rep</span>(<span class="st">&quot;prior&quot;</span>, N))</a>
-<a class="sourceLine" id="cb305-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb305-8" data-line-number="8"><span class="kw">ggplot</span>(samples, <span class="kw">aes</span>(<span class="dt">x =</span> sample, <span class="dt">fill =</span> distribution)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb305-9" data-line-number="9"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">.5</span>)</a></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:priorposteriordiscrepancy"></span>
-<img src="bookdown_files/figure-html/priorposteriordiscrepancy-1.svg" alt="The discrepancy between the prior and the posterior distributions for the slope parameter in the model fit_stroop." width="672" />
-<p class="caption">
-FIGURE 5.14: The discrepancy between the prior and the posterior distributions for the slope parameter in the model fit_stroop.
-</p>
-</div>
+<p>After seeing the posterior for <span class="math inline">\(\beta\)</span>, we suspect that the prior might have been too restrictive. If we overlay density plots for prior and posterior distributions this is more evident:</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1">sample_b_post &lt;-<span class="st"> </span><span class="kw">posterior_samples</span>(fit_stroop)<span class="op">$</span>b_c_cond</a>
+<a class="sourceLine" id="cb254-2" data-line-number="2"><span class="co"># We generate samples from the prior as well:</span></a>
+<a class="sourceLine" id="cb254-3" data-line-number="3">N &lt;-<span class="st"> </span><span class="kw">length</span>(sample_b_post)</a>
+<a class="sourceLine" id="cb254-4" data-line-number="4">sample_b_prior &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">.01</span>)</a>
+<a class="sourceLine" id="cb254-5" data-line-number="5">samples &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb254-6" data-line-number="6">  <span class="dt">sample =</span> <span class="kw">c</span>(sample_b_post, sample_b_prior),</a>
+<a class="sourceLine" id="cb254-7" data-line-number="7">  <span class="dt">distribution =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;posterior&quot;</span>, N), <span class="kw">rep</span>(<span class="st">&quot;prior&quot;</span>, N))</a>
+<a class="sourceLine" id="cb254-8" data-line-number="8">)</a>
+<a class="sourceLine" id="cb254-9" data-line-number="9"><span class="kw">ggplot</span>(samples, <span class="kw">aes</span>(<span class="dt">x =</span> sample, <span class="dt">fill =</span> distribution)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb254-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">.5</span>)</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-138-1.svg" width="672" /></p>
 <div id="sensitivity-analysis" class="section level4">
 <h4><span class="header-section-number">5.2.1.1</span> Sensitivity analysis</h4>
-<p>Here, the discrepancy evident in Figure <a href="sec-stroop.html#fig:priorposteriordiscrepancy">5.14</a> is investigated with a sensitivity analysis. We will examine what happens for the following priors for <span class="math inline">\(\beta\)</span>. In the models we fit below, all the other parameters have the same priors as in the model <code>fit_stroop</code>; we vary only the priors for <span class="math inline">\(\beta\)</span>.
-The different priors are:</p>
+<p>We see that the posterior distribution covers values much larger than the ones that are in the bulk of the prior distribution. One interesting question that one should ask about one’s analysis is: To what extent is the posterior affected by the prior distribution? We can investigate this with a sensitivity analysis. We will examine what happens for the following priors for <span class="math inline">\(\beta\)</span> by fitting different models with the same priors except for all the parametera, varying only the priors for <span class="math inline">\(\beta\)</span>:</p>
 <ul>
-<li><span class="math inline">\(\beta \sim Normal(0,0.05)\)</span></li>
-<li><span class="math inline">\(\beta \sim Normal(0,0.1)\)</span></li>
+<li><span class="math inline">\(\beta \sim Normal(0,.05)\)</span></li>
+<li><span class="math inline">\(\beta \sim Normal(0,.1)\)</span></li>
 <li><span class="math inline">\(\beta \sim Normal(0,1)\)</span></li>
 <li><span class="math inline">\(\beta \sim Normal(0,2)\)</span></li>
 </ul>
-<p>We can summarize the estimates of <span class="math inline">\(\beta\)</span> given different priors as shown in Table <a href="sec-stroop.html#tab:priorsslopesmeansCIs">5.1</a>:</p>
+<p>We can summarize the estimates of <span class="math inline">\(\beta\)</span> given different priors in the following way:</p>
 <table>
-<caption>
-<span id="tab:priorsslopesmeansCIs">TABLE 5.1: </span>The summary (mean and 95% credible interval) for the posterior distribution of the slope in the model fit_stroop, given different priors on the slope parameter.
-</caption>
 <thead>
 <tr>
-<th style="text-align:left;">
-prior
-</th>
 <th style="text-align:right;">
 Estimate
 </th>
@@ -1333,13 +571,13 @@ Q2.5
 <th style="text-align:right;">
 Q97.5
 </th>
+<th style="text-align:left;">
+prior
+</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
-normal(0, 0.001)
-</td>
 <td style="text-align:right;">
 0.001
 </td>
@@ -1349,11 +587,11 @@ normal(0, 0.001)
 <td style="text-align:right;">
 0.003
 </td>
+<td style="text-align:left;">
+normal(0, 0.001)
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-normal(0, 0.01)
-</td>
 <td style="text-align:right;">
 0.027
 </td>
@@ -1363,11 +601,25 @@ normal(0, 0.01)
 <td style="text-align:right;">
 0.037
 </td>
+<td style="text-align:left;">
+normal(0, 0.01)
+</td>
 </tr>
 <tr>
+<td style="text-align:right;">
+0.037
+</td>
+<td style="text-align:right;">
+0.025
+</td>
+<td style="text-align:right;">
+0.049
+</td>
 <td style="text-align:left;">
 normal(0, 0.05)
 </td>
+</tr>
+<tr>
 <td style="text-align:right;">
 0.037
 </td>
@@ -1377,25 +629,11 @@ normal(0, 0.05)
 <td style="text-align:right;">
 0.049
 </td>
-</tr>
-<tr>
 <td style="text-align:left;">
 normal(0, 0.1)
 </td>
-<td style="text-align:right;">
-0.037
-</td>
-<td style="text-align:right;">
-0.025
-</td>
-<td style="text-align:right;">
-0.049
-</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-normal(0, 1)
-</td>
 <td style="text-align:right;">
 0.037
 </td>
@@ -1405,11 +643,11 @@ normal(0, 1)
 <td style="text-align:right;">
 0.050
 </td>
+<td style="text-align:left;">
+normal(0, 1)
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-normal(0, 2)
-</td>
 <td style="text-align:right;">
 0.038
 </td>
@@ -1419,23 +657,23 @@ normal(0, 2)
 <td style="text-align:right;">
 0.050
 </td>
+<td style="text-align:left;">
+normal(0, 2)
+</td>
 </tr>
 </tbody>
 </table>
-<p>It might be easier to see how much the posterior difference between conditions changes depending on the prior. In order to answer this question, we need to remember that the median difference between conditions (<span class="math inline">\(MedianRT_{diff}\)</span>) can be calculated as the difference between the exponents of each condition’s medians:</p>
+<p>It might be easier to see how much the posterior difference between conditions changes depending on the prior. In order to answer this question, we need to remember that the median difference between conditions can be calculated as the difference between the exponentiation of each condition:</p>
 <p><span class="math display" id="eq:medianrt">\[\begin{equation}
 \begin{aligned}
 MedianRT_{diff} &amp;= MedianRT_{incongruent} - MedianRT_{congruent}\\
 MedianRT_{diff} &amp;= exp(\alpha + \beta) - \exp(\alpha - \beta)
 \end{aligned}
-\tag{5.4}
+\tag{5.2}
 \end{equation}\]</span></p>
-<p>Equation <a href="sec-stroop.html#eq:medianrt">(5.4)</a> gives us the posterior distributions of the median difference between conditions for the different models. We calculate the median difference rather than the mean difference because the mean depends on the parameter <span class="math inline">\(\sigma\)</span>, but the median doesn’t; see <a href="sec-ppd.html#sec:lognormal">3.5.3</a>.</p>
-<p>Table <a href="sec-stroop.html#tab:meanrtdiffsummary">5.2</a> summarizes the posterior distributions under different priors using the means of the difference in medians, along with 95% credible intervals. It’s important to realize that the use of mean to summarize the posterior distribution is orthogonal to our use of the median to summarize the response times by condition: In the first case, we use the median to summarize a group of <em>observations</em>, and in the second case, we use the mean to summarize a group of <em>samples</em> from the posterior–we could have summarized the samples from the posterior with its median instead of the mean.</p>
+<!-- This means that we need to re-run the models to extract samples from the intercept. -->
+<p>We get the <em>posterior distributions</em> of the median difference between conditions for different models by using equation <a href="sec-stroop.html#eq:medianrt">(5.2)</a>. We calculate the median difference rather than the mean difference because the mean depends on the parameter <span class="math inline">\(\sigma\)</span>, but the median doesn’t; see <a href="sec-ppd.html#sec:lognormal">3.5.3</a>. In the following table, we use <em>means</em>, and 95% quantiles to summarize these posterior distributions. It’s important to realize that the use of mean to summarize the posterior distribution is orthogonal to our use of median to summarize the response times by condition: In the first case, we use the median to summarize a group of <em>observations</em>, and in the second case, we use the mean to summarize a group of <em>samples</em> from the posterior–we could have summarized the samples from the posterior with its median as well.</p>
 <table>
-<caption>
-<span id="tab:meanrtdiffsummary">TABLE 5.2: </span>A summary, under a range of priors, of the posterior distributions of the mean difference between the two conditions, back-transformed to the millisecond scale.
-</caption>
 <thead>
 <tr>
 <th style="text-align:right;">
@@ -1539,9 +777,8 @@ normal(0, 2)
 </tr>
 </tbody>
 </table>
-<p>Table <a href="sec-stroop.html#tab:meanrtdiffsummary">5.2</a> shows us that the posterior changes substantially when we use wider priors. It seems that the posterior is relatively unaffected when we use priors with a standard deviation larger than <span class="math inline">\(0.05\)</span>. However, if we assume a priori that the effect of the manipulation <em>must</em> be small, we will end up obtaining a posterior that is consistent with that belief. When we include less information about the possible effect sizes by using a less informative prior, we allow the data to influence the posterior more. A sensitivity analysis is always an important component of a good-quality Bayesian analysis.</p>
-<p>Which analysis should one report after carrying out a sensitivity analysis? In the above example, the priors ranging from Normal(0,0.05) to Normal(0,2) show rather similar posterior distributions for the mean difference. The most common approach in Bayesian analysis is to report the results of such relatively uninformative priors (e.g., one could report the posterior associated with the Normal(0,2) here), because this kind of prior allows for a broader range of possible effects and is relatively agnostic. However, if there is a good reason to use a prior from a previous analysis, then of course it makes sense to report the analysis with the informative prior alongside an analysis with an uninformative prior. Reporting only informative priors in a Bayesian analysis would is generally not a good idea. The issue is transparency: the reader should know what the posterior looks like for both an informative and an uninformative prior.</p>
-<p>Another situation where posterior distributions associated with multiple priors should be reported is when one is carrying out an adversarial sensitivity analysis <span class="citation">(Spiegelhalter, Abrams, and Myles <a href="#ref-spiegelhalter2004bayesian">2004</a>)</span>: one can take a group of agnostic, enthusiastic, and adversarial or skeptical priors that, respectively, reflect a non-committal a priori position, an informed position based on the researcher’s prior beliefs, and an adversarial position based on a scientific opponent’s beliefs. In such a situation, analyses using all three priors can be reported, so that the reader can determine how different prior beliefs influence the posterior. For an example of such an adversarial analysis, see <span class="citation">Vasishth and Engelmann (<a href="#ref-VasishthEngelmann2021">2021</a>)</span>. Finally, when carrying out hypothesis testing using Bayes factors, the choice of the prior on the parameter of interest becomes critically important; in that situation, it is very important to report a sensitivity analysis, showing the Bayes factor as well as a summary of the posterior distributions <span class="citation">(Schad et al. <a href="#ref-SchadEtAlBF">2021</a>)</span>; we return to this point in chapter <a href="ch-bf.html#ch:bf">16</a>, which covers Bayes factors.</p>
+<p>This shows us that the posterior changes substantially when we include wider priors in our model. It seems that the posterior is relatively unaffected for priors with a standard deviation larger than .05, but if we assume a priori that the effect of the manipulation <em>must</em> be small, we will end up finding that. When we include less information about the possible effect sizes with a more diffuse prior–we assume that they can be small but also large–, we allow the data to influence the posterior more.</p>
+<p>Which analysis should one report after carrying out a sensitivity analysis? In the above example, the priors ranging from Normal(0,0.05) to Normal(0,2) show rather similar posterior distributions for the mean difference. The most common approach in Bayesian analysis is to report the results of such relatively uninformative priors (e.g., one could report the posterior associated with the Normal(0,2) here), because this kind of prior allows for a broader range of possible effects and is relatively agnostic. However, if one is using a prior from a previous analysis, then of course it makes sense to use the informative prior; using only informative priors in a Bayesian analysis is rather rare, but is an underutilized approach. Another situation where posterior distributions associated with multiple priors should be reported is when one is carrying out an adversarial sensitivity analysis <span class="citation">(Spiegelhalter, Abrams, and Myles <a href="#ref-spiegelhalter2004bayesian">2004</a>)</span>: one can take a group of agnostic, enthusiastic, and adversarial or skeptical priors that reflect, respectively, a non-commital a priori position, an informed position based on the researcher’s prior beliefs, and an adversarial position based on a scientific opponent’s beliefs. In such a situation, analyses using all three priors can be reported, so that the reader can determine how different prior beliefs influence the posterior. For an example of such an adversarial analysis, see <span class="citation">Vasishth and Engelmann (<a href="#ref-VasishthEngelmann2021">2021</a>)</span>. Finally, when carrying out hypothesis testing using Bayes factors, the choice of the prior on the parameter of interest becomes critically important; in that situation, it is very important to report a sensitivity analysis, showing the Bayes factor as well as well as a summary of the posterior distributions <span class="citation">(Schad et al. <a href="#ref-SchadEtAlBF">2021</a>)</span>; we return to this point in chapter <a href="ch-bf.html#ch:bf">16</a>, which covers Bayes factors.</p>
 </div>
 </div>
 </div>
@@ -1557,7 +794,10 @@ normal(0, 2)
 <p>Nicenboim, Bruno. 2018. “The Implementation of a Model of Choice: The (Truncated) Linear Ballistic Accumulator.” In <em>StanCon</em>. Aalto University, Helsinki, Finland. <a href="https://doi.org/10.5281/zenodo.1465990" class="uri">https://doi.org/10.5281/zenodo.1465990</a>.</p>
 </div>
 <div id="ref-SchadEtAlBF">
-<p>Schad, Daniel J., Bruno Nicenboim, Paul-Christian Bürkner, Michael Betancourt, and Shravan Vasishth. 2021. “Workflow Techniques for the Robust Use of Bayes Factors.”</p>
+<p>Schad, Daniel J, Bruno Nicenboim, Paul-Christian Bürkner, Michael Betancourt, and Shravan Vasishth. 2021. “Workflow Techniques for the Robust Use of Bayes Factors.”</p>
+</div>
+<div id="ref-schad2020capitalize">
+<p>Schad, Daniel J, Shravan Vasishth, Sven Hohenstein, and Reinhold Kliegl. 2020. “How to Capitalize on a Priori Contrasts in Linear (Mixed) Models: A Tutorial.” <em>Journal of Memory and Language</em> 110. Elsevier: 104038.</p>
 </div>
 <div id="ref-spiegelhalter2004bayesian">
 <p>Spiegelhalter, David J, Keith R Abrams, and Jonathan P Myles. 2004. <em>Bayesian Approaches to Clinical Trials and Health-Care Evaluation</em>. Vol. 13. John Wiley &amp; Sons.</p>
