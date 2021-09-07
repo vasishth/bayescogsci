@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-06" />
+<meta name="date" content="2021-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1232,9 +1232,9 @@ lpd = \frac{1}{N} \sum_{n=1}^{N} \log p(y_n|y, \mathcal{M}_1)
 p_t(y) = \mathit{ Beta}(1, 3)
 \end{equation}\]</span></p>
 <p>We set <span class="math inline">\(N\)</span> and we can only observe <span class="math inline">\(y\)</span>:</p>
-<div class="sourceCode" id="cb867"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb867-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb867-2" data-line-number="2">y_data &lt;-<span class="st"> </span><span class="kw">rbeta</span>(N, <span class="dv">1</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb867-3" data-line-number="3"><span class="kw">head</span>(y_data)</a></code></pre></div>
+<div class="sourceCode" id="cb868"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb868-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb868-2" data-line-number="2">y_data &lt;-<span class="st"> </span><span class="kw">rbeta</span>(N, <span class="dv">1</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb868-3" data-line-number="3"><span class="kw">head</span>(y_data)</a></code></pre></div>
 <pre><code>## [1] 0.6248 0.0296 0.6732 0.0718 0.0369 0.3389</code></pre>
 <p>Let’s say that we fit the Bayesian model, <span class="math inline">\(\mathcal{M}_{1}\)</span>, and somehow, after getting the posterior distribution, we are able derive the analytical form of its posterior predictive distribution for the model:</p>
 <p><span class="math display">\[\begin{equation}
@@ -1246,16 +1246,16 @@ p(y_{pred} | y, \mathcal{M}_1) = \mathit{Beta}(2, 2)
 elpd = u(\mathcal{M}_1) = \int_{y_{pred}} p_t(y_{pred}) \log p(y_{pred} \mid y, \mathcal{M}_1) dy_{pred}
 \end{equation}\]</span></p>
 <p>We can compute this quantity in R. Notice that we don’t introduce the data at any point. However, the data had to be used when <code>p</code>, the posterior predictive distribution, was derived; we skipped that step here.</p>
-<div class="sourceCode" id="cb869"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb869-1" data-line-number="1"><span class="co"># True distribution</span></a>
-<a class="sourceLine" id="cb869-2" data-line-number="2">p_t &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">dbeta</span>(y, <span class="dv">1</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb869-3" data-line-number="3"><span class="co"># Predictive distribution</span></a>
-<a class="sourceLine" id="cb869-4" data-line-number="4">p &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">dbeta</span>(y, <span class="dv">2</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb869-5" data-line-number="5"><span class="co"># Integration</span></a>
-<a class="sourceLine" id="cb869-6" data-line-number="6">integrand &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">p_t</span>(y) <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="kw">p</span>(y))</a>
-<a class="sourceLine" id="cb869-7" data-line-number="7"><span class="kw">integrate</span>(<span class="dt">f =</span> integrand, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb870"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb870-1" data-line-number="1"><span class="co"># True distribution</span></a>
+<a class="sourceLine" id="cb870-2" data-line-number="2">p_t &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">dbeta</span>(y, <span class="dv">1</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb870-3" data-line-number="3"><span class="co"># Predictive distribution</span></a>
+<a class="sourceLine" id="cb870-4" data-line-number="4">p &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">dbeta</span>(y, <span class="dv">2</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb870-5" data-line-number="5"><span class="co"># Integration</span></a>
+<a class="sourceLine" id="cb870-6" data-line-number="6">integrand &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">p_t</span>(y) <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="kw">p</span>(y))</a>
+<a class="sourceLine" id="cb870-7" data-line-number="7"><span class="kw">integrate</span>(<span class="dt">f =</span> integrand, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## -0.375 with absolute error &lt; 0.00000068</code></pre>
 <p>Because we’ll never know <code>p_t</code>, we’ll approximate this integral using our data, <code>y_data</code>. We see below that we can approximate the integration without any reference to <code>p_t</code> as we did in <a href="expected-log-predictive-density-of-a-model.html#eq:elpdapprox">(17.4)</a>:</p>
-<div class="sourceCode" id="cb871"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb871-1" data-line-number="1"><span class="dv">1</span><span class="op">/</span>N <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">p</span>(y_data)))</a></code></pre></div>
+<div class="sourceCode" id="cb872"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb872-1" data-line-number="1"><span class="dv">1</span><span class="op">/</span>N <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">p</span>(y_data)))</a></code></pre></div>
 <pre><code>## [1] -0.383</code></pre>
 <p>The main problem with this approach is that we are using <code>y_data</code> twice, once to derive <code>p</code>, the predictive posterior distribution, and once for the approximation of <span class="math inline">\(elpd\)</span>. We’ll see that cross-validation approaches relay on deriving the posterior predictive distribution with part of the data, and estimating the approximation to <span class="math inline">\(elpd\)</span> with unseen data. (Don’t worry that we don’t know the analytical form of posterior predictive distribution, we saw that we could generate samples from that distribution based on the likelihood and posterior samples.)</p>
 </div>

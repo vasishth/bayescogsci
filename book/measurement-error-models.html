@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-06" />
+<meta name="date" content="2021-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1196,8 +1196,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>As a motivating example, consider the following data.
 We have mean <em>voice onset time</em> (VOT) data from male and female native speakers of Mandarin, along with the standard errors of the mean VOT. VOT is the amount of time that elapses after a stop consonant is released until the vocal cords start vibrating. In addition, for each subject, their average vowel duration is calculated from a separate set of data; the standard error of the average vowel duration is also available.</p>
 <p>Of interest here is the question whether the average time taken to produce a vowel affects VOT. See <span class="citation">Vasishth, Nicenboim, et al. (<a href="#ref-VasishthBeckmanetal">2018</a>)</span> for more details; the data used here are from that paper.</p>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb785-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_VOTmandarin&quot;</span>)</a>
-<a class="sourceLine" id="cb785-2" data-line-number="2"><span class="kw">head</span>(df_VOTmandarin)</a></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb786-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_VOTmandarin&quot;</span>)</a>
+<a class="sourceLine" id="cb786-2" data-line-number="2"><span class="kw">head</span>(df_VOTmandarin)</a></code></pre></div>
 <pre><code>##   subject meanVOT meanvdur sevdur seVOT c_meanvdur
 ## 1     F01   105.7      160   11.6  3.79     -5.312
 ## 2     F02    86.7      177   13.7  4.16     11.536
@@ -1206,9 +1206,9 @@ We have mean <em>voice onset time</em> (VOT) data from male and female native sp
 ## 5     F05    84.6      164   13.0  4.49     -1.109
 ## 6     F06    98.6      210   13.8  4.10     44.113</code></pre>
 <p>At first glance, the relationship between mean vowel duration and centered mean VOT looks quite tantalizing; see Figure <a href="measurement-error-models.html#fig:relmeanVOTvdur">13.2</a>.</p>
-<div class="sourceCode" id="cb787"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb787-1" data-line-number="1"><span class="kw">ggplot</span>(df_VOTmandarin, <span class="kw">aes</span>(<span class="dt">y =</span> meanVOT, <span class="dt">x =</span> c_meanvdur)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb787-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb787-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb788-1" data-line-number="1"><span class="kw">ggplot</span>(df_VOTmandarin, <span class="kw">aes</span>(<span class="dt">y =</span> meanVOT, <span class="dt">x =</span> c_meanvdur)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb788-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb788-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:relmeanVOTvdur"></span>
 <img src="bookdown_files/figure-html/relmeanVOTvdur-1.svg" alt="The relationship between mean voice onset time and centered mean vowel duration" width="672" />
 <p class="caption">
@@ -1216,18 +1216,18 @@ FIGURE 13.2: The relationship between mean voice onset time and centered mean vo
 </p>
 </div>
 <p>A simple linear model shows a somewhat weak association between mean VOT and centered mean vowel duration. The priors are relatively arbitrary but they are in the right order of magnitude given that we know that we are dealing with short times in milliseconds.</p>
-<div class="sourceCode" id="cb788"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb788-1" data-line-number="1">priors &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb788-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">200</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb788-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb788-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma)</a>
-<a class="sourceLine" id="cb788-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb788-6" data-line-number="6">fit_mvot &lt;-<span class="st"> </span><span class="kw">brm</span>(meanVOT <span class="op">~</span><span class="st"> </span>c_meanvdur,</a>
-<a class="sourceLine" id="cb788-7" data-line-number="7">  <span class="dt">data =</span> df_VOTmandarin,</a>
-<a class="sourceLine" id="cb788-8" data-line-number="8">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb788-9" data-line-number="9">  <span class="dt">prior =</span> priors</a>
-<a class="sourceLine" id="cb788-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb789-1" data-line-number="1">priors &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb789-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">200</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb789-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb789-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma)</a>
+<a class="sourceLine" id="cb789-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb789-6" data-line-number="6">fit_mvot &lt;-<span class="st"> </span><span class="kw">brm</span>(meanVOT <span class="op">~</span><span class="st"> </span>c_meanvdur,</a>
+<a class="sourceLine" id="cb789-7" data-line-number="7">  <span class="dt">data =</span> df_VOTmandarin,</a>
+<a class="sourceLine" id="cb789-8" data-line-number="8">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb789-9" data-line-number="9">  <span class="dt">prior =</span> priors</a>
+<a class="sourceLine" id="cb789-10" data-line-number="10">)</a></code></pre></div>
 <p>Figure <a href="measurement-error-models.html#fig:lmplotstanplot2">13.3</a> shows the posterior distribution of the slope in this model. Most of the probability mass is positive, suggesting a possible (small) effect of vowel duration on mean voice onset time. The code to generate the figure appears below. We use <code>brms</code> function <code>mcmc_plot</code>, and we set <code>regex = TRUE</code> to indicate that the <code>variable</code> argument should be treated as a regular expression (in this case, it will capture all the variables starting with <code>b_c_meanvdur</code>).</p>
-<div class="sourceCode" id="cb789"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb789-1" data-line-number="1"><span class="kw">mcmc_plot</span>(fit_mvot, <span class="dt">variable =</span> <span class="st">&quot;^b_c_meanvdur&quot;</span>, <span class="dt">regex =</span> <span class="ot">TRUE</span>, <span class="dt">type =</span> <span class="st">&quot;hist&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb790-1" data-line-number="1"><span class="kw">mcmc_plot</span>(fit_mvot, <span class="dt">variable =</span> <span class="st">&quot;^b_c_meanvdur&quot;</span>, <span class="dt">regex =</span> <span class="ot">TRUE</span>, <span class="dt">type =</span> <span class="st">&quot;hist&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:lmplotstanplot2"></span>
 <img src="bookdown_files/figure-html/lmplotstanplot2-1.svg" alt="The posterior distribution of the slope in the linear model, modeling the effect of centered mean vowel duration on mean voice onset time." width="672" />
 <p class="caption">
@@ -1265,28 +1265,28 @@ x_{n,TRUE} \sim Normal(\chi,\tau)
 \end{equation}\]</span></p>
 <div id="brms-version-of-measurement-error-in-voice-onset-time-model" class="section level4">
 <h4><span class="header-section-number">13.2.1.1</span> brms version of measurement error in voice onset time model</h4>
-<div class="sourceCode" id="cb790"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb790-1" data-line-number="1">priors_me &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb790-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">50</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb790-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb790-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> meanme),</a>
-<a class="sourceLine" id="cb790-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">30</span>), <span class="dt">class =</span> sdme),</a>
-<a class="sourceLine" id="cb790-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">30</span>), <span class="dt">class =</span> sigma)</a>
-<a class="sourceLine" id="cb790-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb791"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb791-1" data-line-number="1">priors_me &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb791-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">50</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb791-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb791-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> meanme),</a>
+<a class="sourceLine" id="cb791-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">30</span>), <span class="dt">class =</span> sdme),</a>
+<a class="sourceLine" id="cb791-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">30</span>), <span class="dt">class =</span> sigma)</a>
+<a class="sourceLine" id="cb791-7" data-line-number="7">)</a></code></pre></div>
 <p>Here the parameter with class <code>meanme</code> and <code>sdme</code> refer to the unknown mean and standard deviation (standard error) of the latent unknown means that generate the underlying vowel duration means, <span class="math inline">\(\chi\)</span> and <span class="math inline">\(\tau\)</span> in <a href="measurement-error-models.html#eq:me">(13.7)</a>. Once we decide on the priors, we use <code>resp_se(.)</code> with <code>sigma = TRUE</code> (i.e, we don’t estimate <span class="math inline">\(y_{n,TRUE}\)</span> explicitly) and we use <code>me(meanvdur, sevdur)</code> to indicate that the dependent variable <code>meanvdur</code> is measured with error and <code>sevdur</code> is its SE. Because of our relatively uninformative priors and the few data points, this model requires us to both tune the <code>control</code> parameter increasing <code>adapt_delta</code> and <code>max_treedepth</code>, and increase the number of iterations.</p>
-<div class="sourceCode" id="cb791"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb791-1" data-line-number="1">fit_mvotme &lt;-<span class="st"> </span><span class="kw">brm</span>(meanVOT <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(seVOT, <span class="dt">sigma =</span> <span class="ot">TRUE</span>) <span class="op">~</span></a>
-<a class="sourceLine" id="cb791-2" data-line-number="2"><span class="st">                    </span><span class="kw">me</span>(c_meanvdur, sevdur),</a>
-<a class="sourceLine" id="cb791-3" data-line-number="3">                  <span class="dt">data =</span> df_VOTmandarin,</a>
-<a class="sourceLine" id="cb791-4" data-line-number="4">                  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb791-5" data-line-number="5">                  <span class="dt">prior =</span> priors_me,</a>
-<a class="sourceLine" id="cb791-6" data-line-number="6">                  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">max_treedepth =</span> <span class="dv">15</span>,</a>
-<a class="sourceLine" id="cb791-7" data-line-number="7">                                 <span class="dt">adapt_delta =</span> <span class="fl">.99999</span>),</a>
-<a class="sourceLine" id="cb791-8" data-line-number="8">                  <span class="dt">iter =</span> <span class="dv">5000</span></a>
-<a class="sourceLine" id="cb791-9" data-line-number="9">                  )</a></code></pre></div>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb792-1" data-line-number="1">fit_mvotme &lt;-<span class="st"> </span><span class="kw">brm</span>(meanVOT <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(seVOT, <span class="dt">sigma =</span> <span class="ot">TRUE</span>) <span class="op">~</span></a>
+<a class="sourceLine" id="cb792-2" data-line-number="2"><span class="st">                    </span><span class="kw">me</span>(c_meanvdur, sevdur),</a>
+<a class="sourceLine" id="cb792-3" data-line-number="3">                  <span class="dt">data =</span> df_VOTmandarin,</a>
+<a class="sourceLine" id="cb792-4" data-line-number="4">                  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb792-5" data-line-number="5">                  <span class="dt">prior =</span> priors_me,</a>
+<a class="sourceLine" id="cb792-6" data-line-number="6">                  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">max_treedepth =</span> <span class="dv">15</span>,</a>
+<a class="sourceLine" id="cb792-7" data-line-number="7">                                 <span class="dt">adapt_delta =</span> <span class="fl">.99999</span>),</a>
+<a class="sourceLine" id="cb792-8" data-line-number="8">                  <span class="dt">iter =</span> <span class="dv">5000</span></a>
+<a class="sourceLine" id="cb792-9" data-line-number="9">                  )</a></code></pre></div>
 <pre><code>## Warning: There were 3 divergent transitions after warmup. See
 ## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 ## to find out why this is a problem and how to eliminate them.</code></pre>
 <pre><code>## Warning: Examine the pairs() plot to diagnose sampling problems</code></pre>
-<div class="sourceCode" id="cb794"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb794-1" data-line-number="1">fit_mvotme</a></code></pre></div>
+<div class="sourceCode" id="cb795"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb795-1" data-line-number="1">fit_mvotme</a></code></pre></div>
 <pre><code>## Warning: There were 3 divergent transitions after warmup. Increasing
 ## adapt_delta above 0.99999 may help. See http://mc-stan.org/misc/
 ## warnings.html#divergent-transitions-after-warmup</code></pre>
@@ -1365,22 +1365,22 @@ model {
     - normal_lccdf(0 | 0, 30);
 }</code></pre>
 <p>Fit it below. As with <code>brms</code>, we are required to tune the <code>control</code> parameter and to increase the number of iterations:</p>
-<div class="sourceCode" id="cb798"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb798-1" data-line-number="1">me &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb798-2" data-line-number="2">                   <span class="st">&quot;me.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb798-3" data-line-number="3">                   <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb798-4" data-line-number="4">ls_me &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_VOTmandarin),</a>
-<a class="sourceLine" id="cb798-5" data-line-number="5">              <span class="dt">y =</span> df_VOTmandarin<span class="op">$</span>meanVOT,</a>
-<a class="sourceLine" id="cb798-6" data-line-number="6">              <span class="dt">SE_y =</span> df_VOTmandarin<span class="op">$</span>seVOT,</a>
-<a class="sourceLine" id="cb798-7" data-line-number="7">              <span class="dt">x =</span> df_VOTmandarin<span class="op">$</span>c_meanvdur,</a>
-<a class="sourceLine" id="cb798-8" data-line-number="8">              <span class="dt">SE_x =</span> df_VOTmandarin<span class="op">$</span>sevdur)</a>
-<a class="sourceLine" id="cb798-9" data-line-number="9">fit_mvotme_stan &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb798-10" data-line-number="10">  <span class="dt">file =</span> me,</a>
-<a class="sourceLine" id="cb798-11" data-line-number="11">  <span class="dt">data =</span> ls_me,</a>
-<a class="sourceLine" id="cb798-12" data-line-number="12">     <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">max_treedepth =</span> <span class="dv">15</span>,</a>
-<a class="sourceLine" id="cb798-13" data-line-number="13">                    <span class="dt">adapt_delta =</span> <span class="fl">.99999</span>),</a>
-<a class="sourceLine" id="cb798-14" data-line-number="14">  <span class="dt">iter =</span> <span class="dv">5000</span></a>
-<a class="sourceLine" id="cb798-15" data-line-number="15">)</a></code></pre></div>
-<div class="sourceCode" id="cb799"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb799-1" data-line-number="1"><span class="kw">print</span>(fit_mvotme_stan , <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb799-1" data-line-number="1">me &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb799-2" data-line-number="2">                   <span class="st">&quot;me.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb799-3" data-line-number="3">                   <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb799-4" data-line-number="4">ls_me &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_VOTmandarin),</a>
+<a class="sourceLine" id="cb799-5" data-line-number="5">              <span class="dt">y =</span> df_VOTmandarin<span class="op">$</span>meanVOT,</a>
+<a class="sourceLine" id="cb799-6" data-line-number="6">              <span class="dt">SE_y =</span> df_VOTmandarin<span class="op">$</span>seVOT,</a>
+<a class="sourceLine" id="cb799-7" data-line-number="7">              <span class="dt">x =</span> df_VOTmandarin<span class="op">$</span>c_meanvdur,</a>
+<a class="sourceLine" id="cb799-8" data-line-number="8">              <span class="dt">SE_x =</span> df_VOTmandarin<span class="op">$</span>sevdur)</a>
+<a class="sourceLine" id="cb799-9" data-line-number="9">fit_mvotme_stan &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb799-10" data-line-number="10">  <span class="dt">file =</span> me,</a>
+<a class="sourceLine" id="cb799-11" data-line-number="11">  <span class="dt">data =</span> ls_me,</a>
+<a class="sourceLine" id="cb799-12" data-line-number="12">     <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">max_treedepth =</span> <span class="dv">15</span>,</a>
+<a class="sourceLine" id="cb799-13" data-line-number="13">                    <span class="dt">adapt_delta =</span> <span class="fl">.99999</span>),</a>
+<a class="sourceLine" id="cb799-14" data-line-number="14">  <span class="dt">iter =</span> <span class="dv">5000</span></a>
+<a class="sourceLine" id="cb799-15" data-line-number="15">)</a></code></pre></div>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb800-1" data-line-number="1"><span class="kw">print</span>(fit_mvotme_stan , <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <pre><code>##        mean  2.5% 97.5% n_eff Rhat
 ## alpha 85.55 78.37  94.1   915 1.00
 ## beta   0.64 -0.57   3.2   326 1.02

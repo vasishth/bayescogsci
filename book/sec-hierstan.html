@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-06" />
+<meta name="date" content="2021-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1387,27 +1387,27 @@ model {
 </code></pre>
 <p>In the previous Stan code we use <code>int&lt;lower = 1, upper = N_subj&gt; subj[N];</code> to define a one-dimensional <em>array</em> of <code>N</code> elements that contains integers (bounded between 1 and <code>N_subj</code>). As we explain in Box <a href="regression-models-in-stan.html#thm:stancontainers">10.2</a>, the difference between vectors and one-dimensional arrays is that vectors can only contain real numbers and can be used with matrix algebra functions, and arrays can contain any type but can’t be used in matrix algebra. We use <code>normal_lpdf</code> rather than <code>normal_glm_lpdf</code> since at the moment there is no efficient likelihood implementation of hierarchical generalized linear models.</p>
 <p>The following code centers the predictor cloze and stores the data required by the Stan model in a list.</p>
-<div class="sourceCode" id="cb663"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb663-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_eeg&quot;</span>)</a>
-<a class="sourceLine" id="cb663-2" data-line-number="2">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb663-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cloze =</span> cloze <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cloze))</a>
-<a class="sourceLine" id="cb663-4" data-line-number="4">ls_eeg &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb663-5" data-line-number="5">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_eeg),</a>
-<a class="sourceLine" id="cb663-6" data-line-number="6">  <span class="dt">signal =</span> df_eeg<span class="op">$</span>n400,</a>
-<a class="sourceLine" id="cb663-7" data-line-number="7">  <span class="dt">c_cloze =</span> df_eeg<span class="op">$</span>c_cloze,</a>
-<a class="sourceLine" id="cb663-8" data-line-number="8">  <span class="dt">subj =</span> df_eeg<span class="op">$</span>subj,</a>
-<a class="sourceLine" id="cb663-9" data-line-number="9">  <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>subj)</a>
-<a class="sourceLine" id="cb663-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb664-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_eeg&quot;</span>)</a>
+<a class="sourceLine" id="cb664-2" data-line-number="2">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb664-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cloze =</span> cloze <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cloze))</a>
+<a class="sourceLine" id="cb664-4" data-line-number="4">ls_eeg &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb664-5" data-line-number="5">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_eeg),</a>
+<a class="sourceLine" id="cb664-6" data-line-number="6">  <span class="dt">signal =</span> df_eeg<span class="op">$</span>n400,</a>
+<a class="sourceLine" id="cb664-7" data-line-number="7">  <span class="dt">c_cloze =</span> df_eeg<span class="op">$</span>c_cloze,</a>
+<a class="sourceLine" id="cb664-8" data-line-number="8">  <span class="dt">subj =</span> df_eeg<span class="op">$</span>subj,</a>
+<a class="sourceLine" id="cb664-9" data-line-number="9">  <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>subj)</a>
+<a class="sourceLine" id="cb664-10" data-line-number="10">)</a></code></pre></div>
 <p>Fit the model:</p>
-<div class="sourceCode" id="cb664"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb664-1" data-line-number="1">hierarchical1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb664-2" data-line-number="2">  <span class="st">&quot;hierarchical1.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb664-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
-<a class="sourceLine" id="cb664-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb664-5" data-line-number="5">fit_eeg1 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb664-6" data-line-number="6">  <span class="dt">file =</span> hierarchical1,</a>
-<a class="sourceLine" id="cb664-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
-<a class="sourceLine" id="cb664-8" data-line-number="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb665-1" data-line-number="1">hierarchical1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb665-2" data-line-number="2">  <span class="st">&quot;hierarchical1.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb665-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
+<a class="sourceLine" id="cb665-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb665-5" data-line-number="5">fit_eeg1 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb665-6" data-line-number="6">  <span class="dt">file =</span> hierarchical1,</a>
+<a class="sourceLine" id="cb665-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
+<a class="sourceLine" id="cb665-8" data-line-number="8">)</a></code></pre></div>
 <p>Summary of the model:</p>
-<div class="sourceCode" id="cb665"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb665-1" data-line-number="1"><span class="kw">print</span>(fit_eeg1, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb666"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb666-1" data-line-number="1"><span class="kw">print</span>(fit_eeg1, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</a></code></pre></div>
 <pre><code>##        mean  2.5% 97.5% n_eff Rhat
 ## alpha  3.64  2.82  4.47  1679    1
 ## beta   2.30  1.27  3.33  5678    1
@@ -1465,14 +1465,14 @@ model {
 <pre><code>  target += normal_lpdf(tau_u | 0, 20)  - 
     2 * normal_lccdf(0 | 0, 20);</code></pre>
 <p>Fit the model as follows:</p>
-<div class="sourceCode" id="cb669"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb669-1" data-line-number="1">hierarchical2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb669-2" data-line-number="2">  <span class="st">&quot;hierarchical2.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb669-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
-<a class="sourceLine" id="cb669-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb669-5" data-line-number="5">fit_eeg2 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb669-6" data-line-number="6">  <span class="dt">file =</span> hierarchical2,</a>
-<a class="sourceLine" id="cb669-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
-<a class="sourceLine" id="cb669-8" data-line-number="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb670-1" data-line-number="1">hierarchical2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb670-2" data-line-number="2">  <span class="st">&quot;hierarchical2.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb670-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
+<a class="sourceLine" id="cb670-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb670-5" data-line-number="5">fit_eeg2 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb670-6" data-line-number="6">  <span class="dt">file =</span> hierarchical2,</a>
+<a class="sourceLine" id="cb670-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
+<a class="sourceLine" id="cb670-8" data-line-number="8">)</a></code></pre></div>
 <pre><code>## Warning: There were 3 chains where the estimated Bayesian Fraction of Missing Information was low. See
 ## http://mc-stan.org/misc/warnings.html#bfmi-low</code></pre>
 <pre><code>## Warning: Examine the pairs() plot to diagnose sampling problems</code></pre>
@@ -1484,7 +1484,7 @@ model {
 ## http://mc-stan.org/misc/warnings.html#tail-ess</code></pre>
 <p>We see that there are warnings. As we increase the complexity and the number of parameters, the sampler has a harder time exploring the parameter space.</p>
 <p>Show the summary of the model below:</p>
-<div class="sourceCode" id="cb674"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb674-1" data-line-number="1"><span class="kw">print</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb675"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb675-1" data-line-number="1"><span class="kw">print</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
 ## alpha     3.63  2.77  4.43  1435 1.00
 ## beta      2.33  1.12  3.51  3607 1.00
@@ -1494,7 +1494,7 @@ model {
 <p>We see that <code>tau_u[2]</code> has a low number of effective samples (<code>n_eff</code>).</p>
 <p>Plot a traceplot displayed in Figure <a href="sec-hierstan.html#fig:traceploteeg2">11.1</a>:</p>
 
-<div class="sourceCode" id="cb676"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb676-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb677"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb677-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:traceploteeg2"></span>
 <img src="bookdown_files/figure-html/traceploteeg2-1.svg" alt="Traceplots of alpha, beta, tau_u, and sigma from the model fit_eeg2." width="672" />
 <p class="caption">
@@ -1504,7 +1504,7 @@ FIGURE 11.1: Traceplots of <code>alpha</code>, <code>beta</code>, <code>tau_u</c
 <p>Figure <a href="sec-hierstan.html#fig:traceploteeg2">11.1</a> shows that the chains of the parameter <code>tau_u[2]</code> are not mixing properly. This parameter is specially problematic because there are not enough data from each subject to estimate this parameter accurately, its estimated mean is quite small (in comparison with <code>sigma</code>), it’s bounded by zero, and there is a dependency between this parameter and <code>u[, 2]</code>. This makes the exploration by the sampler quite hard.</p>
 <p>Pairs plots can be useful to uncover pathologies in the sampling, since we can visualize correlations between samples, which are in general problematic. The following code creates a pair plot where we see the samples of <code>tau_u[2]</code> against some of the adjustments to the slope <code>u</code>; see Figure <a href="sec-hierstan.html#fig:pairsfunnel">11.2</a>.</p>
 
-<div class="sourceCode" id="cb677"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb677-1" data-line-number="1"><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>, <span class="st">&quot;u[2,2]&quot;</span>, <span class="st">&quot;u[3,2]&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb678"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb678-1" data-line-number="1"><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>, <span class="st">&quot;u[2,2]&quot;</span>, <span class="st">&quot;u[3,2]&quot;</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:pairsfunnel"></span>
 <img src="bookdown_files/figure-html/pairsfunnel-1.svg" alt="Pair plots showing a relatively strong correlations (funnel-shaped clouds of samples) between the samples of \(\tau_2\) and some of the by-subject adjustments to the slope." width="672" />
 <p class="caption">
@@ -1513,7 +1513,7 @@ FIGURE 11.2: Pair plots showing a relatively strong correlations (funnel-shaped 
 </div>
 <p>Compare with <code>tau_u[1]</code> plotted against the by-subject adjustments to the intercept. In Figure <a href="sec-hierstan.html#fig:pairsblobs">11.3</a>, instead of funnels we see blobs, indicating no strong correlation between the parameters.</p>
 
-<div class="sourceCode" id="cb678"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb678-1" data-line-number="1"><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[1]&quot;</span>, <span class="st">&quot;u[1,1]&quot;</span>, <span class="st">&quot;u[2,1]&quot;</span>, <span class="st">&quot;u[3,1]&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb679"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb679-1" data-line-number="1"><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[1]&quot;</span>, <span class="st">&quot;u[1,1]&quot;</span>, <span class="st">&quot;u[2,1]&quot;</span>, <span class="st">&quot;u[3,1]&quot;</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:pairsblobs"></span>
 <img src="bookdown_files/figure-html/pairsblobs-1.svg" alt="Pair plots showing no strong correlation (blob-shaped clouds of samples) between the samples of \(\tau_1\) and some of the by-subject adjustments to the intercept." width="672" />
 <p class="caption">
@@ -1523,10 +1523,10 @@ FIGURE 11.3: Pair plots showing no strong correlation (blob-shaped clouds of sam
 <p>In contrast to Figure <a href="sec-hierstan.html#fig:pairsblobs">11.3</a> that shows blob-shaped clouds of samples, Figure <a href="sec-hierstan.html#fig:pairsfunnel">11.2</a> shows a relatively strong correlation between the samples of some of the parameters of the model, in particular <span class="math inline">\(\tau_2\)</span> and the samples of <span class="math inline">\(u_{i,2}\)</span>. This strong correlation is hindering the exploration of the sampler leading to the warnings we saw in Stan.
 However, the problem that the sampler faces is, in fact, more serious than what our initial plots show. Stan samples in an <em>unconstrained</em> space where all the parameters can range from minus infinity to infinity, and then transforms back the parameters to the constrained space that we specified where, for example, a standard deviation parameter is restricted to be positive. This means that Stan is actually sampling from an auxiliary parameter equivalent to <code>log(tau_u[2])</code> rather than from <code>tau_u[2]</code>. We can use <code>mcmc_scatter</code> to see the actual funnel; see Figure <a href="sec-hierstan.html#fig:scatterpairs">11.4</a>.</p>
 
-<div class="sourceCode" id="cb679"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb679-1" data-line-number="1"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg2),</a>
-<a class="sourceLine" id="cb679-2" data-line-number="2">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</a>
-<a class="sourceLine" id="cb679-3" data-line-number="3">  <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>)</a>
-<a class="sourceLine" id="cb679-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb680"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb680-1" data-line-number="1"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg2),</a>
+<a class="sourceLine" id="cb680-2" data-line-number="2">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</a>
+<a class="sourceLine" id="cb680-3" data-line-number="3">  <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>)</a>
+<a class="sourceLine" id="cb680-4" data-line-number="4">)</a></code></pre></div>
 <div class="figure"><span id="fig:scatterpairs"></span>
 <img src="bookdown_files/figure-html/scatterpairs-1.svg" alt="Pair plots showing a strong correlation (funnel-shaped clouds of samples) between the samples of \(\tau_2\) and one of the by-subject adjustments to the intercept (\(u_{1,2}\))." width="672" />
 <p class="caption">
@@ -1596,24 +1596,24 @@ model {
 }
 </code></pre>
 <p>By re-parametrizing the model we can also optimize it more, we can convert the matrix <code>z_u</code> into a long column vector (in column-major order, that is, concatenating the columns from left to right) and that allows us to use a single call of <code>std_normal_lpdf</code>, which implements the log PDF of a standard normal distribution, a normal distribution with location 0 and scale 1. The function <code>std_normal_lpdf</code> is more efficient than <code>normal_lpdf(... | 0, 1)</code>. We fit the model named <code>hierarchical3.stan</code>.</p>
-<div class="sourceCode" id="cb681"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb681-1" data-line-number="1">hierarchical3 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb681-2" data-line-number="2">  <span class="st">&quot;hierarchical3.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb681-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
-<a class="sourceLine" id="cb681-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb681-5" data-line-number="5">fit_eeg3 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb681-6" data-line-number="6">  <span class="dt">file =</span> hierarchical3,</a>
-<a class="sourceLine" id="cb681-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
-<a class="sourceLine" id="cb681-8" data-line-number="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb682-1" data-line-number="1">hierarchical3 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb682-2" data-line-number="2">  <span class="st">&quot;hierarchical3.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb682-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
+<a class="sourceLine" id="cb682-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb682-5" data-line-number="5">fit_eeg3 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb682-6" data-line-number="6">  <span class="dt">file =</span> hierarchical3,</a>
+<a class="sourceLine" id="cb682-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
+<a class="sourceLine" id="cb682-8" data-line-number="8">)</a></code></pre></div>
 <p>We verify that the model worked as expected by printing its summary and traceplots; see Figure <a href="sec-hierstan.html#fig:traceploteeg3">11.5</a>.</p>
 
-<div class="sourceCode" id="cb682"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb682-1" data-line-number="1"><span class="kw">print</span>(fit_eeg3, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb683-1" data-line-number="1"><span class="kw">print</span>(fit_eeg3, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
 ## alpha     3.65  2.80  4.46  1642    1
 ## beta      2.32  1.12  3.50  5478    1
 ## tau_u[1]  2.16  1.53  2.94  1744    1
 ## tau_u[2]  1.63  0.10  3.41  1265    1
 ## sigma    11.62 11.32 11.93  7134    1</code></pre>
-<div class="sourceCode" id="cb684"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb684-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg3, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb685"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb685-1" data-line-number="1"><span class="kw">traceplot</span>(fit_eeg3, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:traceploteeg3"></span>
 <img src="bookdown_files/figure-html/traceploteeg3-1.svg" alt="Traceplots of alpha, beta, tau_u, and sigma from the model fit_eeg3." width="672" />
 <p class="caption">
@@ -1623,11 +1623,11 @@ FIGURE 11.5: Traceplots of <code>alpha</code>, <code>beta</code>, <code>tau_u</c
 <p>Although the samples of <code>tau_u[2]</code> are still correlated with the adjustments for the slope, <code>u[,2]</code>, these latter parameters are not the ones explored by the model, the auxiliary parameters, <code>z_u</code>, are the relevant ones for the sampler. The plots <a href="sec-hierstan.html#fig:pairstauu">11.6</a> and <a href="sec-hierstan.html#fig:pairstauz">11.7</a> show that although <code>log(tau_u[2])</code> and <code>u[1,2]</code> are still correlated,
 <code>log(tau_u[2])</code> and <code>z_u[1,2]</code> are not.</p>
 
-<div class="sourceCode" id="cb685"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb685-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb685-2" data-line-number="2"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3),</a>
-<a class="sourceLine" id="cb685-3" data-line-number="3">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</a>
-<a class="sourceLine" id="cb685-4" data-line-number="4">  <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>)</a>
-<a class="sourceLine" id="cb685-5" data-line-number="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb686-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb686-2" data-line-number="2"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3),</a>
+<a class="sourceLine" id="cb686-3" data-line-number="3">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</a>
+<a class="sourceLine" id="cb686-4" data-line-number="4">  <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>)</a>
+<a class="sourceLine" id="cb686-5" data-line-number="5">)</a></code></pre></div>
 <div class="figure"><span id="fig:pairstauu"></span>
 <img src="bookdown_files/figure-html/pairstauu-1.svg" alt="Pair plots showing a clear correlations (funnel-shaped clouds of samples) between the samples of \(\tau_2\) and some of the by-subject adjustments to the slope." width="672" />
 <p class="caption">
@@ -1635,11 +1635,11 @@ FIGURE 11.6: Pair plots showing a clear correlations (funnel-shaped clouds of sa
 </p>
 </div>
 
-<div class="sourceCode" id="cb686"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb686-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb686-2" data-line-number="2"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3),</a>
-<a class="sourceLine" id="cb686-3" data-line-number="3">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;z_u[1,2]&quot;</span>),</a>
-<a class="sourceLine" id="cb686-4" data-line-number="4">  <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>)</a>
-<a class="sourceLine" id="cb686-5" data-line-number="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb687"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb687-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb687-2" data-line-number="2"><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3),</a>
+<a class="sourceLine" id="cb687-3" data-line-number="3">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;z_u[1,2]&quot;</span>),</a>
+<a class="sourceLine" id="cb687-4" data-line-number="4">  <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>)</a>
+<a class="sourceLine" id="cb687-5" data-line-number="5">)</a></code></pre></div>
 <div class="figure"><span id="fig:pairstauz"></span>
 <img src="bookdown_files/figure-html/pairstauz-1.svg" alt="Pair plots showing no clear correlation between the samples of \(\tau_2\) and some of the by-subject auxiliary parameters (z_u) used to build the adjustments to the slope." width="672" />
 <p class="caption">
@@ -1734,14 +1734,14 @@ computes a variance-covariance matrix from the vector of standard deviations and
 <!-- diag_matrix(vector x) -->
 <!-- The diagonal matrix with diagonal x -->
 <p>Problematic aspects of the first model presented in section <a href="sec-hierstan.html#sec:uncorrstan">11.1.2</a> (before the reparameterization), that is, dependencies between parameters, are also present here. Fit the model as follows:</p>
-<div class="sourceCode" id="cb688"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb688-1" data-line-number="1">hierarchical_corr &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb688-2" data-line-number="2">  <span class="st">&quot;hierarchical_corr.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb688-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
-<a class="sourceLine" id="cb688-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb688-5" data-line-number="5">fit_eeg_corr &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb688-6" data-line-number="6">  <span class="dt">file =</span> hierarchical_corr,</a>
-<a class="sourceLine" id="cb688-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
-<a class="sourceLine" id="cb688-8" data-line-number="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb689"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb689-1" data-line-number="1">hierarchical_corr &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb689-2" data-line-number="2">  <span class="st">&quot;hierarchical_corr.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb689-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
+<a class="sourceLine" id="cb689-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb689-5" data-line-number="5">fit_eeg_corr &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb689-6" data-line-number="6">  <span class="dt">file =</span> hierarchical_corr,</a>
+<a class="sourceLine" id="cb689-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
+<a class="sourceLine" id="cb689-8" data-line-number="8">)</a></code></pre></div>
 <pre><code>## Warning: There were 4 chains where the estimated Bayesian Fraction of Missing Information was low. See
 ## http://mc-stan.org/misc/warnings.html#bfmi-low</code></pre>
 <pre><code>## Warning: Examine the pairs() plot to diagnose sampling problems</code></pre>
@@ -1755,7 +1755,7 @@ computes a variance-covariance matrix from the vector of standard deviations and
 ## Running the chains for more iterations may help. See
 ## http://mc-stan.org/misc/warnings.html#tail-ess</code></pre>
 <p>As we expected, there are warnings and bad mixing of the chains for <code>tau_u[2]</code>; see also the traceplot in Figure <a href="sec-hierstan.html#fig:traceploteegcorr">11.8</a>.</p>
-<div class="sourceCode" id="cb694"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb694-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb695-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
 ## alpha     3.66  2.82  4.49  1426 1.00
 ## beta      2.33  1.07  3.60  3158 1.00
@@ -1763,8 +1763,8 @@ computes a variance-covariance matrix from the vector of standard deviations and
 ## tau_u[2]  1.72  0.29  3.53   106 1.06
 ## sigma    11.62 11.33 11.93  6181 1.00</code></pre>
 
-<div class="sourceCode" id="cb696"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb696-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb696-2" data-line-number="2"><span class="kw">traceplot</span>(fit_eeg_corr, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb697"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb697-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb697-2" data-line-number="2"><span class="kw">traceplot</span>(fit_eeg_corr, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:traceploteegcorr"></span>
 <img src="bookdown_files/figure-html/traceploteegcorr-1.svg" alt="Traceplots of alpha, beta, tau_u, and sigma from the model fit_eeg_corr." width="672" />
 <p class="caption">
@@ -1776,11 +1776,9 @@ FIGURE 11.8: Traceplots of <code>alpha</code>, <code>beta</code>, <code>tau_u</c
 
 <div class="extra">
 
-
 <div class="theorem">
 <span id="thm:cholesky" class="theorem"><strong>Box 11.2  </strong></span><strong>Cholesky factorization</strong>
 </div>
-
 <p>First, some definitions that we will need below. A matrix is square if the number of rows and columns is identical. A square matrix <span class="math inline">\(A\)</span> is symmetric if <span class="math inline">\(A^T = A\)</span>, i.e., if transposing the matrix gives the matrix back. Suppose that <span class="math inline">\(A\)</span> is a known matrix with real numbers. If <span class="math inline">\(\boldsymbol{x}\)</span> is a vector of variables with length <span class="math inline">\(p\)</span> (a <span class="math inline">\(p\times 1\)</span> matrix), then <span class="math inline">\(x^T A x\)</span> is called a quadratic form in <span class="math inline">\(x\)</span> (<span class="math inline">\(x^T A x\)</span> will be a scalar, <span class="math inline">\(1\times 1\)</span>). If <span class="math inline">\(x^TAx&gt;0\)</span> for all <span class="math inline">\(x\)</span>, then <span class="math inline">\(A\)</span> is a positive definite matrix. If <span class="math inline">\(x^TAx\geq 0\)</span> for all <span class="math inline">\(x\)</span>, then <span class="math inline">\(A\)</span> is positive semi-definite.</p>
 <p>We encountered correlation matrices first in section <a href="bivariate-and-multivariate-distributions.html#sec:generatebivariatedata">1.6.3</a>. A correlation matrix is always symmetric, has 1’s along the diagonal, and real values ranging between -1 and 1 on the off-diagonals. Given a correlation matrix <span class="math inline">\(\boldsymbol{\rho_u}\)</span> that is positive definite or semi-definite, we can decompose it into a lower triangular matrix <span class="math inline">\(\mathbf{L_u}\)</span> such that <span class="math inline">\(\mathbf{L_u}\mathbf{L_u}^T=\boldsymbol{\rho_u}\)</span>. The matrix <span class="math inline">\(\mathbf{L_u}\)</span> is called the Cholesky factor of <span class="math inline">\(\boldsymbol{\rho_u}\)</span>. Intuitively, you can think of <span class="math inline">\(L_u\)</span> as the matrix equivalent of the square root of <span class="math inline">\(\boldsymbol{\rho_u}\)</span>. More details on the Cholesky factorization are in <span class="citation">Gentle (<a href="#ref-Gentle">2007</a>)</span>.</p>
 <p><span class="math display">\[\begin{equation}
@@ -1852,36 +1850,36 @@ the intercept.</p>
 <ul>
 <li>Let’s assume a correlation of <span class="math inline">\(0.8\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb697"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb697-1" data-line-number="1">rho &lt;-<span class="st"> </span><span class="fl">.8</span></a>
-<a class="sourceLine" id="cb697-2" data-line-number="2"><span class="co"># Correlation matrix</span></a>
-<a class="sourceLine" id="cb697-3" data-line-number="3">(rho_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, rho, rho, <span class="dv">1</span>), <span class="dt">ncol =</span> <span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb698-1" data-line-number="1">rho &lt;-<span class="st"> </span><span class="fl">.8</span></a>
+<a class="sourceLine" id="cb698-2" data-line-number="2"><span class="co"># Correlation matrix</span></a>
+<a class="sourceLine" id="cb698-3" data-line-number="3">(rho_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, rho, rho, <span class="dv">1</span>), <span class="dt">ncol =</span> <span class="dv">2</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.8
 ## [2,]  0.8  1.0</code></pre>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb699-1" data-line-number="1"><span class="co"># Cholesky factor:</span></a>
-<a class="sourceLine" id="cb699-2" data-line-number="2"><span class="co"># (Transpose it so that it looks the same as in Stan)</span></a>
-<a class="sourceLine" id="cb699-3" data-line-number="3">(L_u &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">chol</span>(rho_u)))</a></code></pre></div>
+<div class="sourceCode" id="cb700"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb700-1" data-line-number="1"><span class="co"># Cholesky factor:</span></a>
+<a class="sourceLine" id="cb700-2" data-line-number="2"><span class="co"># (Transpose it so that it looks the same as in Stan)</span></a>
+<a class="sourceLine" id="cb700-3" data-line-number="3">(L_u &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">chol</span>(rho_u)))</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.0
 ## [2,]  0.8  0.6</code></pre>
-<div class="sourceCode" id="cb701"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb701-1" data-line-number="1"><span class="co"># Verify that we recover rho_u,</span></a>
-<a class="sourceLine" id="cb701-2" data-line-number="2"><span class="co"># Recall that %*% indicates matrix multiplication</span></a>
-<a class="sourceLine" id="cb701-3" data-line-number="3">L_u <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L_u)</a></code></pre></div>
+<div class="sourceCode" id="cb702"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb702-1" data-line-number="1"><span class="co"># Verify that we recover rho_u,</span></a>
+<a class="sourceLine" id="cb702-2" data-line-number="2"><span class="co"># Recall that %*% indicates matrix multiplication</span></a>
+<a class="sourceLine" id="cb702-3" data-line-number="3">L_u <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L_u)</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.8
 ## [2,]  0.8  1.0</code></pre>
 <p>1 <em>Generate uncorrelated z from a standard normal distribution assuming only 10 subjects.</em></p>
-<div class="sourceCode" id="cb703"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb703-1" data-line-number="1">N_subj &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb703-2" data-line-number="2">(z_u1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb704"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb704-1" data-line-number="1">N_subj &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb704-2" data-line-number="2">(z_u1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
 <pre><code>##  [1] -0.751 -1.048 -2.201  0.851  0.241  0.269  1.625 -1.178
 ##  [9] -0.545 -0.810</code></pre>
-<div class="sourceCode" id="cb705"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb705-1" data-line-number="1">(z_u2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb706"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb706-1" data-line-number="1">(z_u2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
 <pre><code>##  [1] -0.119  2.244  1.105 -0.907  0.610 -1.083 -0.959  0.643
 ##  [9]  1.060 -0.312</code></pre>
 <p>2 <em>Create matrix of correlated parameters:</em></p>
 <p>First, create a matrix with the uncorrelated parameters:</p>
-<div class="sourceCode" id="cb707"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb707-1" data-line-number="1"><span class="co"># matrix z_u</span></a>
-<a class="sourceLine" id="cb707-2" data-line-number="2">(z_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(z_u1, z_u2), <span class="dt">ncol =</span> N_subj, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb708"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb708-1" data-line-number="1"><span class="co"># matrix z_u</span></a>
+<a class="sourceLine" id="cb708-2" data-line-number="2">(z_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(z_u1, z_u2), <span class="dt">ncol =</span> N_subj, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>##        [,1]  [,2]  [,3]   [,4]  [,5]   [,6]   [,7]   [,8]
 ## [1,] -0.751 -1.05 -2.20  0.851 0.241  0.269  1.625 -1.178
 ## [2,] -0.119  2.24  1.11 -0.907 0.610 -1.083 -0.959  0.643
@@ -1889,36 +1887,34 @@ the intercept.</p>
 ## [1,] -0.545 -0.810
 ## [2,]  1.060 -0.312</code></pre>
 <p>Then, generate correlated parameters by pre-multiplying the <span class="math inline">\(\mathbf{z}_u\)</span> matrix with <span class="math inline">\(\mathbf{L}_u\)</span>.</p>
-<div class="sourceCode" id="cb709"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb709-1" data-line-number="1">L_u <span class="op">%*%</span><span class="st"> </span>z_u</a></code></pre></div>
+<div class="sourceCode" id="cb710"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb710-1" data-line-number="1">L_u <span class="op">%*%</span><span class="st"> </span>z_u</a></code></pre></div>
 <pre><code>##        [,1]   [,2] [,3]  [,4]  [,5]   [,6]  [,7]   [,8]   [,9]  [,10]
 ## [1,] -0.751 -1.048 -2.2 0.851 0.241  0.269 1.625 -1.178 -0.545 -0.810
 ## [2,] -0.672  0.508 -1.1 0.136 0.559 -0.435 0.724 -0.556  0.200 -0.835</code></pre>
 <p>3 <em>Use the following diagonal matrix to scale the z_u</em></p>
-<div class="sourceCode" id="cb711"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb711-1" data-line-number="1">tau_u1 &lt;-<span class="st"> </span><span class="fl">.2</span></a>
-<a class="sourceLine" id="cb711-2" data-line-number="2">tau_u2 &lt;-<span class="st"> </span><span class="fl">.01</span></a>
-<a class="sourceLine" id="cb711-3" data-line-number="3">(diag_matrix_tau &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="kw">c</span>(tau_u1, tau_u2)))</a></code></pre></div>
+<div class="sourceCode" id="cb712"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb712-1" data-line-number="1">tau_u1 &lt;-<span class="st"> </span><span class="fl">.2</span></a>
+<a class="sourceLine" id="cb712-2" data-line-number="2">tau_u2 &lt;-<span class="st"> </span><span class="fl">.01</span></a>
+<a class="sourceLine" id="cb712-3" data-line-number="3">(diag_matrix_tau &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="kw">c</span>(tau_u1, tau_u2)))</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  0.2 0.00
 ## [2,]  0.0 0.01</code></pre>
 <p>4 <em>Finally, generate the adjustments for each subject u:</em></p>
-<div class="sourceCode" id="cb713"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb713-1" data-line-number="1">(u &lt;-<span class="st"> </span>diag_matrix_tau <span class="op">%*%</span><span class="st"> </span>L_u <span class="op">%*%</span><span class="st"> </span>z_u)</a></code></pre></div>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb714-1" data-line-number="1">(u &lt;-<span class="st"> </span>diag_matrix_tau <span class="op">%*%</span><span class="st"> </span>L_u <span class="op">%*%</span><span class="st"> </span>z_u)</a></code></pre></div>
 <pre><code>##          [,1]     [,2]   [,3]    [,4]    [,5]     [,6]
 ## [1,] -0.15019 -0.20956 -0.440 0.17016 0.04824  0.05384
 ## [2,] -0.00672  0.00508 -0.011 0.00136 0.00559 -0.00435
 ##         [,7]     [,8]   [,9]    [,10]
 ## [1,] 0.32491 -0.23551 -0.109 -0.16196
 ## [2,] 0.00724 -0.00556  0.002 -0.00835</code></pre>
-<div class="sourceCode" id="cb715"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb715-1" data-line-number="1"><span class="co"># The rows are correlated ~.8</span></a>
-<a class="sourceLine" id="cb715-2" data-line-number="2"><span class="kw">cor</span>(u[<span class="dv">1</span>, ], u[<span class="dv">2</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb716-1" data-line-number="1"><span class="co"># The rows are correlated ~.8</span></a>
+<a class="sourceLine" id="cb716-2" data-line-number="2"><span class="kw">cor</span>(u[<span class="dv">1</span>, ], u[<span class="dv">2</span>, ])</a></code></pre></div>
 <pre><code>## [1] 0.679</code></pre>
-<div class="sourceCode" id="cb717"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb717-1" data-line-number="1"><span class="co"># The tau&#39;s can be recovered as well:</span></a>
-<a class="sourceLine" id="cb717-2" data-line-number="2"><span class="kw">sd</span>(u[<span class="dv">1</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb718-1" data-line-number="1"><span class="co"># The tau&#39;s can be recovered as well:</span></a>
+<a class="sourceLine" id="cb718-2" data-line-number="2"><span class="kw">sd</span>(u[<span class="dv">1</span>, ])</a></code></pre></div>
 <pre><code>## [1] 0.222</code></pre>
-<div class="sourceCode" id="cb719"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb719-1" data-line-number="1"><span class="kw">sd</span>(u[<span class="dv">2</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb720"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb720-1" data-line-number="1"><span class="kw">sd</span>(u[<span class="dv">2</span>, ])</a></code></pre></div>
 <pre><code>## [1] 0.00649</code></pre>
-
-<div/>
-
+</div>
 <p>The reparameterization of the model, which allows for a correlation between adjustments for the intercepts and slopes, in <code>hierarchical_corr2.stan</code> is the following:</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower=1&gt; N;
@@ -1972,20 +1968,20 @@ correlation distribution. It implies that <code>L_u * L_u' = \rho_u ~ lkj_corr(2
 </ul>
 <p>One can recover the correlation by adding in the <code>generated quantities</code> section a <span class="math inline">\(2 \times 2\)</span> matrix <code>rho_u</code>, defined as <code>rho_u = L_u * L_u';</code>.</p>
 <p>Fit the new model:</p>
-<div class="sourceCode" id="cb722"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb722-1" data-line-number="1">hierarchical_corr2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb722-2" data-line-number="2">  <span class="st">&quot;hierarchical_corr2.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb722-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
-<a class="sourceLine" id="cb722-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb722-5" data-line-number="5">fit_eeg_corr2 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb722-6" data-line-number="6">  <span class="dt">file =</span> hierarchical_corr2,</a>
-<a class="sourceLine" id="cb722-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
-<a class="sourceLine" id="cb722-8" data-line-number="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb723"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb723-1" data-line-number="1">hierarchical_corr2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb723-2" data-line-number="2">  <span class="st">&quot;hierarchical_corr2.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb723-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
+<a class="sourceLine" id="cb723-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb723-5" data-line-number="5">fit_eeg_corr2 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb723-6" data-line-number="6">  <span class="dt">file =</span> hierarchical_corr2,</a>
+<a class="sourceLine" id="cb723-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
+<a class="sourceLine" id="cb723-8" data-line-number="8">)</a></code></pre></div>
 <!-- Unfortunately `rstan` version 2.21.1 throws spurious warnings here. This is because the Cholesky matrix has elements which are always zero or one, and thus the variance within and between changes, and thus Rhat, is not defined.^[The  lightweight interface `cmdstanr` version 0.0.0.9008 for cmdstan version 2.24.0 is not throwing this warning though.] However, the parameters of the model have an appropriate number of effective sample size,  Rhat, and the chains are mixing well. -->
 <p>The Cholesky matrix has elements which are always zero or one, and thus the variance within and between chains (and therefore Rhat) are not defined. However, the rest of the parameters of the model have an appropriate number of effective sample size (more than 10% of the total number of post-warmup samples), Rhats are close to one, and the chains are mixing well; see also the traceplots in Figure <a href="sec-hierstan.html#fig:traceploteegcorr2">11.9</a>.</p>
-<div class="sourceCode" id="cb723"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb723-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr2,</a>
-<a class="sourceLine" id="cb723-2" data-line-number="2">  <span class="dt">pars =</span></a>
-<a class="sourceLine" id="cb723-3" data-line-number="3">    <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;L_u&quot;</span>)</a>
-<a class="sourceLine" id="cb723-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb724-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr2,</a>
+<a class="sourceLine" id="cb724-2" data-line-number="2">  <span class="dt">pars =</span></a>
+<a class="sourceLine" id="cb724-3" data-line-number="3">    <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;L_u&quot;</span>)</a>
+<a class="sourceLine" id="cb724-4" data-line-number="4">)</a></code></pre></div>
 <pre><code>##             mean  2.5% 97.5% n_eff Rhat
 ## alpha       3.65  2.81  4.47  1276    1
 ## beta        2.32  1.11  3.56  3847    1
@@ -2001,11 +1997,11 @@ correlation distribution. It implies that <code>L_u * L_u' = \rho_u ~ lkj_corr(2
 ## L_u[2,1]    0.16 -0.59  0.79  3102    1
 ## L_u[2,2]    0.92  0.59  1.00  1886    1</code></pre>
 
-<div class="sourceCode" id="cb725"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb725-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb725-2" data-line-number="2"><span class="kw">traceplot</span>(fit_eeg_corr2,</a>
-<a class="sourceLine" id="cb725-3" data-line-number="3">  <span class="dt">pars =</span></a>
-<a class="sourceLine" id="cb725-4" data-line-number="4">    <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;L_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>)</a>
-<a class="sourceLine" id="cb725-5" data-line-number="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb726-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb726-2" data-line-number="2"><span class="kw">traceplot</span>(fit_eeg_corr2,</a>
+<a class="sourceLine" id="cb726-3" data-line-number="3">  <span class="dt">pars =</span></a>
+<a class="sourceLine" id="cb726-4" data-line-number="4">    <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;L_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>)</a>
+<a class="sourceLine" id="cb726-5" data-line-number="5">)</a></code></pre></div>
 <div class="figure"><span id="fig:traceploteegcorr2"></span>
 <img src="bookdown_files/figure-html/traceploteegcorr2-1.svg" alt="Traceplots of alpha, beta, tau_u, and sigma from the model fit_eeg_corr." width="672" />
 <p class="caption">
@@ -2015,9 +2011,9 @@ FIGURE 11.9: Traceplots of <code>alpha</code>, <code>beta</code>, <code>tau_u</c
 <p>Is there a correlation between the by-subject intercept and slope?</p>
 <p>Let’s visualize some of the posteriors in Figure <a href="sec-hierstan.html#fig:posteegcorr2">11.10</a> with the following code:</p>
 
-<div class="sourceCode" id="cb726"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb726-1" data-line-number="1"><span class="kw">mcmc_hist</span>(<span class="kw">as.data.frame</span>(fit_eeg_corr2),</a>
-<a class="sourceLine" id="cb726-2" data-line-number="2">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;rho_u[1,2]&quot;</span>)</a>
-<a class="sourceLine" id="cb726-3" data-line-number="3">)</a></code></pre></div>
+<div class="sourceCode" id="cb727"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb727-1" data-line-number="1"><span class="kw">mcmc_hist</span>(<span class="kw">as.data.frame</span>(fit_eeg_corr2),</a>
+<a class="sourceLine" id="cb727-2" data-line-number="2">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;rho_u[1,2]&quot;</span>)</a>
+<a class="sourceLine" id="cb727-3" data-line-number="3">)</a></code></pre></div>
 <div class="figure"><span id="fig:posteegcorr2"></span>
 <img src="bookdown_files/figure-html/posteegcorr2-1.svg" alt="Histograms of the samples of the posteriors of beta and rho_u[1,2] from the model fit_eeg_corr2." width="672" />
 <p class="caption">
@@ -2142,32 +2138,32 @@ generated quantities {
   corr_matrix[2] rho_w = L_w * L_w&#39;;
 }</code></pre>
 <p>Add item as a number to the data and store it in a list:</p>
-<div class="sourceCode" id="cb728"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb728-1" data-line-number="1">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb728-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">item =</span> <span class="kw">as.numeric</span>(<span class="kw">as.factor</span>(item)))</a>
-<a class="sourceLine" id="cb728-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb728-4" data-line-number="4">ls_eeg &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb728-5" data-line-number="5">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_eeg),</a>
-<a class="sourceLine" id="cb728-6" data-line-number="6">  <span class="dt">signal =</span> df_eeg<span class="op">$</span>n400,</a>
-<a class="sourceLine" id="cb728-7" data-line-number="7">  <span class="dt">c_cloze =</span> df_eeg<span class="op">$</span>c_cloze,</a>
-<a class="sourceLine" id="cb728-8" data-line-number="8">  <span class="dt">subj =</span> df_eeg<span class="op">$</span>subj,</a>
-<a class="sourceLine" id="cb728-9" data-line-number="9">  <span class="dt">item =</span> df_eeg<span class="op">$</span>item,</a>
-<a class="sourceLine" id="cb728-10" data-line-number="10">  <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>subj),</a>
-<a class="sourceLine" id="cb728-11" data-line-number="11">  <span class="dt">N_item =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>item)</a>
-<a class="sourceLine" id="cb728-12" data-line-number="12">)</a></code></pre></div>
+<div class="sourceCode" id="cb729"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb729-1" data-line-number="1">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb729-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">item =</span> <span class="kw">as.numeric</span>(<span class="kw">as.factor</span>(item)))</a>
+<a class="sourceLine" id="cb729-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb729-4" data-line-number="4">ls_eeg &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb729-5" data-line-number="5">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_eeg),</a>
+<a class="sourceLine" id="cb729-6" data-line-number="6">  <span class="dt">signal =</span> df_eeg<span class="op">$</span>n400,</a>
+<a class="sourceLine" id="cb729-7" data-line-number="7">  <span class="dt">c_cloze =</span> df_eeg<span class="op">$</span>c_cloze,</a>
+<a class="sourceLine" id="cb729-8" data-line-number="8">  <span class="dt">subj =</span> df_eeg<span class="op">$</span>subj,</a>
+<a class="sourceLine" id="cb729-9" data-line-number="9">  <span class="dt">item =</span> df_eeg<span class="op">$</span>item,</a>
+<a class="sourceLine" id="cb729-10" data-line-number="10">  <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>subj),</a>
+<a class="sourceLine" id="cb729-11" data-line-number="11">  <span class="dt">N_item =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>item)</a>
+<a class="sourceLine" id="cb729-12" data-line-number="12">)</a></code></pre></div>
 <p>Fit the model:</p>
-<div class="sourceCode" id="cb729"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb729-1" data-line-number="1">hierarchical_corr_by &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb729-2" data-line-number="2">  <span class="st">&quot;hierarchical_corr_by.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb729-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
-<a class="sourceLine" id="cb729-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb729-5" data-line-number="5">fit_eeg_corr_by &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb729-6" data-line-number="6">  <span class="dt">file =</span> hierarchical_corr_by,</a>
-<a class="sourceLine" id="cb729-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
-<a class="sourceLine" id="cb729-8" data-line-number="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb730"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb730-1" data-line-number="1">hierarchical_corr_by &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb730-2" data-line-number="2">  <span class="st">&quot;hierarchical_corr_by.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb730-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
+<a class="sourceLine" id="cb730-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb730-5" data-line-number="5">fit_eeg_corr_by &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb730-6" data-line-number="6">  <span class="dt">file =</span> hierarchical_corr_by,</a>
+<a class="sourceLine" id="cb730-7" data-line-number="7">  <span class="dt">data =</span> ls_eeg</a>
+<a class="sourceLine" id="cb730-8" data-line-number="8">)</a></code></pre></div>
 <p>Print the summary:</p>
-<div class="sourceCode" id="cb730"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb730-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr_by,</a>
-<a class="sourceLine" id="cb730-2" data-line-number="2">  <span class="dt">pars =</span></a>
-<a class="sourceLine" id="cb730-3" data-line-number="3">    <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;tau_w&quot;</span>, <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;rho_w&quot;</span>)</a>
-<a class="sourceLine" id="cb730-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb731"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb731-1" data-line-number="1"><span class="kw">print</span>(fit_eeg_corr_by,</a>
+<a class="sourceLine" id="cb731-2" data-line-number="2">  <span class="dt">pars =</span></a>
+<a class="sourceLine" id="cb731-3" data-line-number="3">    <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;tau_w&quot;</span>, <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;rho_w&quot;</span>)</a>
+<a class="sourceLine" id="cb731-4" data-line-number="4">)</a></code></pre></div>
 <pre><code>##             mean  2.5% 97.5% n_eff Rhat
 ## alpha       3.66  2.76  4.54  2630 1.00
 ## beta        2.30  0.95  3.63  4973 1.00

@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-06" />
+<meta name="date" content="2021-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1310,26 +1310,28 @@ generated quantities {
   real p_size_pred[N];
   p_size_pred = normal_rng(alpha + c_load * beta, sigma);
 }</code></pre>
-<p>For most of the probability functions, there is a matching pseudorandom number generator (PRNG) with the suffix <code>_rng</code>. Here we are using the vectorized function <code>normal_rng</code>. At the moment not all the PRNG are vectorized, but the ones that are only allow for arrays and, confusingly enough, not vectors. We define arrays by indicating a type, and then between brackets, the length of each dimension. For example to define an array of real numbers with three dimension of length 6, 7, and 10 we write <code>real var[6, 7, 10]</code>. Vectors and matrices are also valid types for an array. See Box <a href="regression-models-in-stan.html#thm:stancontainers">10.2</a> for more about the difference between arrays and vectors, and other algebra types. We also included a data variable called <code>onlyprior</code>, this is an integer that can only be set to 1 (TRUE) or 0 (FALSE). When <code>onlyprior = 1</code>, the likelihood is omitted from the model, <code>p_size</code> is ignored, and <code>p_size_pred</code> is the prior predictive distribution. When <code>onlyprior = 0</code>, the likelihood is incorporated in the model (as it is in the original code <code>pupil_model.stan</code>) using <code>p_size</code>, and <code>p_size_pred</code> is the posterior predictive distribution.</p>
+<p>For most of the probability functions, there is a matching pseudorandom number generator (PRNG) with the suffix <code>_rng</code>. Here we are using the vectorized function <code>normal_rng</code>. Once <code>p_size_pred</code> is declared as an array of size <code>N</code>, the following statement generates <span class="math inline">\(N\)</span> predictions (for each iteration of the sampler):</p>
+<pre><code>p_size_pred = normal_rng(alpha + c_load * beta, sigma);</code></pre>
+<p>At the moment not all the PRNG are vectorized, but the ones that are only allow for arrays and, confusingly enough, not vectors. We define arrays by indicating a type, and then between brackets, the length of each dimension. For example to define an array of real numbers with three dimension of length 6, 7, and 10 we write <code>real var[6, 7, 10]</code>. Vectors and matrices are also valid types for an array. See Box <a href="regression-models-in-stan.html#thm:stancontainers">10.2</a> for more about the difference between arrays and vectors, and other algebra types. We also included a data variable called <code>onlyprior</code>, this is an integer that can only be set to 1 (TRUE) or 0 (FALSE). When <code>onlyprior = 1</code>, the likelihood is omitted from the model, <code>p_size</code> is ignored, and <code>p_size_pred</code> is the prior predictive distribution. When <code>onlyprior = 0</code>, the likelihood is incorporated in the model (as it is in the original code <code>pupil_model.stan</code>) using <code>p_size</code>, and <code>p_size_pred</code> is the posterior predictive distribution.</p>
 <p>If we want posterior predictive distributions, we fit the model to the data and set <code>onlyprior = 0</code>, if we want prior predictive distributions, we sample from the priors and set <code>onlyprior = 0</code>. Then we use <code>bayesplot</code> functions to visualize predictive checks.</p>
 <p>For posterior predictive checks, we would do the following:</p>
-<div class="sourceCode" id="cb609"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb609-1" data-line-number="1">ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb609-2" data-line-number="2">  <span class="dt">onlyprior =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb609-3" data-line-number="3">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
-<a class="sourceLine" id="cb609-4" data-line-number="4">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
-<a class="sourceLine" id="cb609-5" data-line-number="5">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
-<a class="sourceLine" id="cb609-6" data-line-number="6">)</a>
-<a class="sourceLine" id="cb609-7" data-line-number="7">pupil_gen &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb609-8" data-line-number="8">                         <span class="st">&quot;pupil_gen.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb609-9" data-line-number="9">                         <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb609-10" data-line-number="10">fit_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> pupil_gen, <span class="dt">data =</span> ls_pupil)</a></code></pre></div>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb610-1" data-line-number="1">ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb610-2" data-line-number="2">  <span class="dt">onlyprior =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb610-3" data-line-number="3">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
+<a class="sourceLine" id="cb610-4" data-line-number="4">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
+<a class="sourceLine" id="cb610-5" data-line-number="5">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
+<a class="sourceLine" id="cb610-6" data-line-number="6">)</a>
+<a class="sourceLine" id="cb610-7" data-line-number="7">pupil_gen &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb610-8" data-line-number="8">                         <span class="st">&quot;pupil_gen.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb610-9" data-line-number="9">                         <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb610-10" data-line-number="10">fit_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> pupil_gen, <span class="dt">data =</span> ls_pupil)</a></code></pre></div>
 <p>Store the predicted pupil sizes in <code>yrep_pupil</code>. This variable contains an <span class="math inline">\(N_{samples} \times N_{observations}\)</span> matrix, that is, each row of the matrix is a draw from the posterior predictive distribution, i.e., a vector with one element for each of the data points in y.</p>
-<div class="sourceCode" id="cb610"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb610-1" data-line-number="1">yrep_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(fit_pupil)<span class="op">$</span>p_size_pred</a>
-<a class="sourceLine" id="cb610-2" data-line-number="2"><span class="kw">dim</span>(yrep_pupil)</a></code></pre></div>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb611-1" data-line-number="1">yrep_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(fit_pupil)<span class="op">$</span>p_size_pred</a>
+<a class="sourceLine" id="cb611-2" data-line-number="2"><span class="kw">dim</span>(yrep_pupil)</a></code></pre></div>
 <pre><code>## [1] 4000   41</code></pre>
 <p>Predictive checks functions in <code>bayesplot</code> (starting with <code>ppc_</code>) require a vector with the observations in the first argument and a matrix with the predictive distribution as its second argument. As an example, in Figure <a href="regression-models-in-stan.html#fig:densoverlay">10.7</a> we use an overlay of densities and we draw only 50 elements (that is 50 predicted datasets).</p>
 
-<div class="sourceCode" id="cb612"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb612-1" data-line-number="1"><span class="kw">ppc_dens_overlay</span>(df_pupil<span class="op">$</span>p_size, <span class="dt">yrep =</span> yrep_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb613"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb613-1" data-line-number="1"><span class="kw">ppc_dens_overlay</span>(df_pupil<span class="op">$</span>p_size, <span class="dt">yrep =</span> yrep_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ])</a></code></pre></div>
 <div class="figure"><span id="fig:densoverlay"></span>
 <img src="bookdown_files/figure-html/densoverlay-1.svg" alt="Posterior predictive check showing 50 predicted density plots from the model fit_pupil against the observed data." width="672" />
 <p class="caption">
@@ -1337,24 +1339,24 @@ FIGURE 10.7: Posterior predictive check showing 50 predicted density plots from 
 </p>
 </div>
 <p>For prior predictive distributions, we simply set <code>onlyprior = 1</code>. The observations (<code>p_size</code>) are ignored by the model, but are required by the data block in Stan. If we haven’t collected data yet, we could include a vector of zeros.</p>
-<div class="sourceCode" id="cb613"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb613-1" data-line-number="1">ls_pupil_prior &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb613-2" data-line-number="2">  <span class="dt">onlyprior =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb613-3" data-line-number="3">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
-<a class="sourceLine" id="cb613-4" data-line-number="4">  <span class="co"># or: p_size = rep(0, nrow(df_pupil)),</span></a>
-<a class="sourceLine" id="cb613-5" data-line-number="5">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
-<a class="sourceLine" id="cb613-6" data-line-number="6">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
-<a class="sourceLine" id="cb613-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb613-8" data-line-number="8">prior_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_gen,</a>
-<a class="sourceLine" id="cb613-9" data-line-number="9">  <span class="dt">data =</span> ls_pupil_prior,</a>
-<a class="sourceLine" id="cb613-10" data-line-number="10">  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.90</span>)</a>
-<a class="sourceLine" id="cb613-11" data-line-number="11">)</a></code></pre></div>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb614-1" data-line-number="1">ls_pupil_prior &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb614-2" data-line-number="2">  <span class="dt">onlyprior =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb614-3" data-line-number="3">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
+<a class="sourceLine" id="cb614-4" data-line-number="4">  <span class="co"># or: p_size = rep(0, nrow(df_pupil)),</span></a>
+<a class="sourceLine" id="cb614-5" data-line-number="5">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
+<a class="sourceLine" id="cb614-6" data-line-number="6">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
+<a class="sourceLine" id="cb614-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb614-8" data-line-number="8">prior_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_gen,</a>
+<a class="sourceLine" id="cb614-9" data-line-number="9">  <span class="dt">data =</span> ls_pupil_prior,</a>
+<a class="sourceLine" id="cb614-10" data-line-number="10">  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.90</span>)</a>
+<a class="sourceLine" id="cb614-11" data-line-number="11">)</a></code></pre></div>
 <p>We need to increase the <code>adapt_delta</code> parameter’s default value from 0.80 to 0.90 to simulate the data to avoid divergent transitions. It is important to highlight that we cannot safely ignore the warnings of the last model, even if we are not fitting data. This is so because in practice one is still sampling a density using Hamiltonian Monte Carlo, and thus the prior sampling process can break in the same ways as the posterior sampling process. Predictive checks in <code>bayesplot</code>, as the one shown in Figure <a href="regression-models-in-stan.html#fig:priordensoverlay">10.8</a>, require (at least for now), an argument <code>y</code> with data. If we haven’t collected data yet, we can, for example, use it to provide plausible or implausible values that we want to compare to the prior predictive realizations. In the following example, we set <code>y</code> to be a uniform distribution that ranges between 0 and 1000; this is the distribution density drawn with the darker color in the plot. (Alternatively, we can use <code>ggplot</code> and manually build the plot.) The uniformly distributed data (the dark line) don’t look particularly uniform here; this is because we are simulating only 41 data points.</p>
 
-<div class="sourceCode" id="cb614"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb614-1" data-line-number="1">yrep_prior_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(prior_pupil)<span class="op">$</span>p_size_pred</a>
-<a class="sourceLine" id="cb614-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(</a>
-<a class="sourceLine" id="cb614-3" data-line-number="3">  <span class="kw">runif</span>(ls_pupil_prior<span class="op">$</span>N, <span class="dv">0</span>, <span class="dv">1000</span>),</a>
-<a class="sourceLine" id="cb614-4" data-line-number="4">  yrep_prior_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ]</a>
-<a class="sourceLine" id="cb614-5" data-line-number="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb615-1" data-line-number="1">yrep_prior_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(prior_pupil)<span class="op">$</span>p_size_pred</a>
+<a class="sourceLine" id="cb615-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(</a>
+<a class="sourceLine" id="cb615-3" data-line-number="3">  <span class="kw">runif</span>(ls_pupil_prior<span class="op">$</span>N, <span class="dv">0</span>, <span class="dv">1000</span>),</a>
+<a class="sourceLine" id="cb615-4" data-line-number="4">  yrep_prior_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ]</a>
+<a class="sourceLine" id="cb615-5" data-line-number="5">)</a></code></pre></div>
 <div class="figure"><span id="fig:priordensoverlay"></span>
 <img src="bookdown_files/figure-html/priordensoverlay-1.svg" alt="Prior predictive check showing 50 predicted density plots from the model fit_pupil; the darker density plot depicts a uniform distribution (from 0 to 1000) of synthetic observations." width="672" />
 <p class="caption">
@@ -1465,26 +1467,26 @@ model {
 <p>For some likelihood functions, Stan provides a more efficient implementation of the linear regression than the one manually written in the previous code. It’s critical to understand that, in general, a more efficient implementation should not only be faster, but should also achieve the same number of effective samples (or more) than a less efficient implementation (and should also show convergence). In this case, we can achieve that using <code>_glm</code> functions. We can replace the last line with the following statement (the order of the arguments is important):<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a></p>
 <pre><code>target += normal_id_glm_lpdf(p_size | X, alpha, beta, sigma);</code></pre>
 <p>The most optimized model, <code>pupil_int.stan</code>, includes this last statement. We prepare the data as follows: First create a centered version of trial, <code>c_trial</code> and load <code>c_load</code>, then use the function <code>model.matrix</code> to create the <code>X</code> matrix that contains in each column our predictors and omits the intercept with <code>0 +</code>.</p>
-<div class="sourceCode" id="cb624"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb624-1" data-line-number="1">df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb624-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb624-3" data-line-number="3">    <span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial),</a>
-<a class="sourceLine" id="cb624-4" data-line-number="4">    <span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load)</a>
-<a class="sourceLine" id="cb624-5" data-line-number="5">  )</a>
-<a class="sourceLine" id="cb624-6" data-line-number="6">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_load <span class="op">*</span><span class="st"> </span>c_trial, df_pupil)</a>
-<a class="sourceLine" id="cb624-7" data-line-number="7">ls_pupil_X &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb624-8" data-line-number="8">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
-<a class="sourceLine" id="cb624-9" data-line-number="9">  <span class="dt">X =</span> X,</a>
-<a class="sourceLine" id="cb624-10" data-line-number="10">  <span class="dt">K =</span> <span class="kw">ncol</span>(X),</a>
-<a class="sourceLine" id="cb624-11" data-line-number="11">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
-<a class="sourceLine" id="cb624-12" data-line-number="12">)</a></code></pre></div>
-<div class="sourceCode" id="cb625"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb625-1" data-line-number="1">pupil_int &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb625-2" data-line-number="2">  <span class="st">&quot;pupil_int.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb625-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
-<a class="sourceLine" id="cb625-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb625-5" data-line-number="5">fit_pupil_int &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_int,</a>
-<a class="sourceLine" id="cb625-6" data-line-number="6">  <span class="dt">data =</span> ls_pupil_X</a>
-<a class="sourceLine" id="cb625-7" data-line-number="7">)</a></code></pre></div>
-<div class="sourceCode" id="cb626"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb626-1" data-line-number="1"><span class="kw">print</span>(fit_pupil_int, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb625-1" data-line-number="1">df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb625-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb625-3" data-line-number="3">    <span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial),</a>
+<a class="sourceLine" id="cb625-4" data-line-number="4">    <span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load)</a>
+<a class="sourceLine" id="cb625-5" data-line-number="5">  )</a>
+<a class="sourceLine" id="cb625-6" data-line-number="6">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_load <span class="op">*</span><span class="st"> </span>c_trial, df_pupil)</a>
+<a class="sourceLine" id="cb625-7" data-line-number="7">ls_pupil_X &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb625-8" data-line-number="8">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
+<a class="sourceLine" id="cb625-9" data-line-number="9">  <span class="dt">X =</span> X,</a>
+<a class="sourceLine" id="cb625-10" data-line-number="10">  <span class="dt">K =</span> <span class="kw">ncol</span>(X),</a>
+<a class="sourceLine" id="cb625-11" data-line-number="11">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
+<a class="sourceLine" id="cb625-12" data-line-number="12">)</a></code></pre></div>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb626-1" data-line-number="1">pupil_int &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb626-2" data-line-number="2">  <span class="st">&quot;pupil_int.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb626-3" data-line-number="3">  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></a>
+<a class="sourceLine" id="cb626-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb626-5" data-line-number="5">fit_pupil_int &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_int,</a>
+<a class="sourceLine" id="cb626-6" data-line-number="6">  <span class="dt">data =</span> ls_pupil_X</a>
+<a class="sourceLine" id="cb626-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb627-1" data-line-number="1"><span class="kw">print</span>(fit_pupil_int, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <pre><code>##           mean   2.5%  97.5% n_eff Rhat
 ## alpha   699.51 667.23 730.92  4885    1
 ## beta[1]  31.15  11.74  50.05  4520    1
@@ -1493,13 +1495,13 @@ model {
 ## sigma   104.36  82.62 134.62  3351    1</code></pre>
 <p>In <a href="regression-models-in-stan.html#fig:pupilintbeta">10.9</a>, we plot here the 95% CrI of the parameters of interest. We use <code>regex_pars</code>, rather than <code>pars</code>, because we want to capture <code>beta[1]</code>, <code>beta[2]</code>, and <code>beta[3]</code>; <code>regex_pars</code> use regular expressions to select the parameters (for information about regular expressions in R see <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html</a>)</p>
 
-<div class="sourceCode" id="cb628"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb628-1" data-line-number="1">df_fit_pupil_int &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_pupil_int)</a>
-<a class="sourceLine" id="cb628-2" data-line-number="2"><span class="kw">mcmc_intervals</span>(fit_pupil_int,</a>
-<a class="sourceLine" id="cb628-3" data-line-number="3">  <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</a>
-<a class="sourceLine" id="cb628-4" data-line-number="4">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
-<a class="sourceLine" id="cb628-5" data-line-number="5">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
-<a class="sourceLine" id="cb628-6" data-line-number="6">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
-<a class="sourceLine" id="cb628-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb629-1" data-line-number="1">df_fit_pupil_int &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_pupil_int)</a>
+<a class="sourceLine" id="cb629-2" data-line-number="2"><span class="kw">mcmc_intervals</span>(fit_pupil_int,</a>
+<a class="sourceLine" id="cb629-3" data-line-number="3">  <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</a>
+<a class="sourceLine" id="cb629-4" data-line-number="4">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
+<a class="sourceLine" id="cb629-5" data-line-number="5">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
+<a class="sourceLine" id="cb629-6" data-line-number="6">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
+<a class="sourceLine" id="cb629-7" data-line-number="7">)</a></code></pre></div>
 <div class="figure"><span id="fig:pupilintbeta"></span>
 <img src="bookdown_files/figure-html/pupilintbeta-1.svg" alt="95% CrI of the effect of load, beta[1], the effect of trial beta[2], and their interaction beta[3]." width="672" />
 <p class="caption">
@@ -1546,25 +1548,26 @@ model {
 <pre><code>for (n in 1:N)
   target += bernoulli_lpmf(correct[n] | inv_logit(alpha + X[n] * beta));</code></pre>
 <p>To fit the model as <code>recall.stan</code>, prepare the data by centering the trial number first:</p>
-<div class="sourceCode" id="cb634"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb634-1" data-line-number="1">df_recall &lt;-<span class="st"> </span>df_recall <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb634-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial))</a></code></pre></div>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb635-1" data-line-number="1">df_recall &lt;-<span class="st"> </span>df_recall <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb635-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_set_size =</span> set_size <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(set_size),</a>
+<a class="sourceLine" id="cb635-3" data-line-number="3">         <span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial))</a></code></pre></div>
 <p>Next, we create the model matrix, <span class="math inline">\(X\)</span>, and prepare the data as a list. As in section <a href="regression-models-in-stan.html#sec:interstan">10.4.2</a>, we exclude the intercept from the matrix <code>X</code> using <code>0 +...</code>. This is because the Stan code that we are using already takes into account that the first column in the model matrix is going to be a vector of ones.</p>
-<div class="sourceCode" id="cb635"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb635-1" data-line-number="1">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_set_size <span class="op">*</span><span class="st"> </span>c_trial, df_recall)</a>
-<a class="sourceLine" id="cb635-2" data-line-number="2">ls_recall &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb635-3" data-line-number="3">  <span class="dt">correct =</span> df_recall<span class="op">$</span>correct,</a>
-<a class="sourceLine" id="cb635-4" data-line-number="4">  <span class="dt">X =</span> X,</a>
-<a class="sourceLine" id="cb635-5" data-line-number="5">  <span class="dt">K =</span> <span class="kw">ncol</span>(X),</a>
-<a class="sourceLine" id="cb635-6" data-line-number="6">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_recall)</a>
-<a class="sourceLine" id="cb635-7" data-line-number="7">)</a></code></pre></div>
-<div class="sourceCode" id="cb636"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb636-1" data-line-number="1">recall &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb636-2" data-line-number="2">                      <span class="st">&quot;recall.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb636-3" data-line-number="3">                      <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb636-4" data-line-number="4">fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb636-5" data-line-number="5">  <span class="dt">file =</span> recall,</a>
-<a class="sourceLine" id="cb636-6" data-line-number="6">  <span class="dt">data =</span> ls_recall</a>
+<div class="sourceCode" id="cb636"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb636-1" data-line-number="1">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_set_size <span class="op">*</span><span class="st"> </span>c_trial, df_recall)</a>
+<a class="sourceLine" id="cb636-2" data-line-number="2">ls_recall &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb636-3" data-line-number="3">  <span class="dt">correct =</span> df_recall<span class="op">$</span>correct,</a>
+<a class="sourceLine" id="cb636-4" data-line-number="4">  <span class="dt">X =</span> X,</a>
+<a class="sourceLine" id="cb636-5" data-line-number="5">  <span class="dt">K =</span> <span class="kw">ncol</span>(X),</a>
+<a class="sourceLine" id="cb636-6" data-line-number="6">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_recall)</a>
 <a class="sourceLine" id="cb636-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb637-1" data-line-number="1">recall &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb637-2" data-line-number="2">                      <span class="st">&quot;recall.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb637-3" data-line-number="3">                      <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb637-4" data-line-number="4">fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb637-5" data-line-number="5">  <span class="dt">file =</span> recall,</a>
+<a class="sourceLine" id="cb637-6" data-line-number="6">  <span class="dt">data =</span> ls_recall</a>
+<a class="sourceLine" id="cb637-7" data-line-number="7">)</a></code></pre></div>
 <p>After fitting the model we can print and plot summaries of the posterior distribution.</p>
-<div class="sourceCode" id="cb637"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb637-1" data-line-number="1"><span class="kw">print</span>(fit_recall, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb638"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb638-1" data-line-number="1"><span class="kw">print</span>(fit_recall, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>))</a></code></pre></div>
 <pre><code>##          mean  2.5% 97.5% n_eff Rhat
 ## alpha    2.00  1.40  2.64  3712    1
 ## beta[1] -0.19 -0.35 -0.02  4094    1
@@ -1572,13 +1575,13 @@ model {
 ## beta[3]  0.00 -0.03  0.04  4190    1</code></pre>
 <p>In Figure <a href="regression-models-in-stan.html#fig:cri">10.10</a>, we plot the 95% CrI of the parameters of interest.</p>
 
-<div class="sourceCode" id="cb639"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb639-1" data-line-number="1">df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall)</a>
-<a class="sourceLine" id="cb639-2" data-line-number="2"><span class="kw">mcmc_intervals</span>(df_fit_recall,</a>
-<a class="sourceLine" id="cb639-3" data-line-number="3">  <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</a>
-<a class="sourceLine" id="cb639-4" data-line-number="4">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
-<a class="sourceLine" id="cb639-5" data-line-number="5">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
-<a class="sourceLine" id="cb639-6" data-line-number="6">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
-<a class="sourceLine" id="cb639-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb640-1" data-line-number="1">df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall)</a>
+<a class="sourceLine" id="cb640-2" data-line-number="2"><span class="kw">mcmc_intervals</span>(df_fit_recall,</a>
+<a class="sourceLine" id="cb640-3" data-line-number="3">  <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</a>
+<a class="sourceLine" id="cb640-4" data-line-number="4">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
+<a class="sourceLine" id="cb640-5" data-line-number="5">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
+<a class="sourceLine" id="cb640-6" data-line-number="6">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
+<a class="sourceLine" id="cb640-7" data-line-number="7">)</a></code></pre></div>
 <div class="figure"><span id="fig:cri"></span>
 <img src="bookdown_files/figure-html/cri-1.svg" alt="95% credible intervals of the beta parameters of fit_recall model." width="672" />
 <p class="caption">
@@ -1591,27 +1594,27 @@ FIGURE 10.10: 95% credible intervals of the <code>beta</code> parameters of <cod
   vector[K] change_acc = inv_logit(alpha) - inv_logit(alpha - beta);
 }</code></pre>
 <p>Recall that due to the non-linearity of the scale, the effects depend on the average accuracy, and the set size and trial that we start from (in this case we are examining the change of one unit from the average set size and the average trial).</p>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb641-1" data-line-number="1">recall_prop &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb641-2" data-line-number="2">                           <span class="st">&quot;recall_prop.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb641-3" data-line-number="3">                           <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb641-4" data-line-number="4">fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb641-5" data-line-number="5">  <span class="dt">file =</span> recall_prop,</a>
-<a class="sourceLine" id="cb641-6" data-line-number="6">  <span class="dt">data =</span> ls_recall</a>
-<a class="sourceLine" id="cb641-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb642-1" data-line-number="1">recall_prop &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb642-2" data-line-number="2">                           <span class="st">&quot;recall_prop.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb642-3" data-line-number="3">                           <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb642-4" data-line-number="4">fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb642-5" data-line-number="5">  <span class="dt">file =</span> recall_prop,</a>
+<a class="sourceLine" id="cb642-6" data-line-number="6">  <span class="dt">data =</span> ls_recall</a>
+<a class="sourceLine" id="cb642-7" data-line-number="7">)</a></code></pre></div>
 <p>The plot in <a href="regression-models-in-stan.html#fig:vaccdet">10.11</a> now shows how the average accuracy deteriorates when the subject is exposed to a set size larger than the average by one, a trial further than the middle one, and the interaction of both.</p>
-<div class="sourceCode" id="cb642"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb642-1" data-line-number="1">df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb642-2" data-line-number="2"><span class="st">  </span><span class="kw">rename</span>(</a>
-<a class="sourceLine" id="cb642-3" data-line-number="3">    <span class="dt">set_size =</span> <span class="st">`</span><span class="dt">change_acc[1]</span><span class="st">`</span>,</a>
-<a class="sourceLine" id="cb642-4" data-line-number="4">    <span class="dt">trial =</span> <span class="st">`</span><span class="dt">change_acc[2]</span><span class="st">`</span>,</a>
-<a class="sourceLine" id="cb642-5" data-line-number="5">    <span class="dt">interaction =</span> <span class="st">`</span><span class="dt">change_acc[3]</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb642-6" data-line-number="6">  )</a>
-<a class="sourceLine" id="cb642-7" data-line-number="7"><span class="kw">mcmc_intervals</span>(df_fit_recall,</a>
-<a class="sourceLine" id="cb642-8" data-line-number="8">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;set_size&quot;</span>, <span class="st">&quot;trial&quot;</span>, <span class="st">&quot;interaction&quot;</span>),</a>
-<a class="sourceLine" id="cb642-9" data-line-number="9">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
-<a class="sourceLine" id="cb642-10" data-line-number="10">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
-<a class="sourceLine" id="cb642-11" data-line-number="11">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
-<a class="sourceLine" id="cb642-12" data-line-number="12">) <span class="op">+</span></a>
-<a class="sourceLine" id="cb642-13" data-line-number="13"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Change in accuracy&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb643-1" data-line-number="1">df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb643-2" data-line-number="2"><span class="st">  </span><span class="kw">rename</span>(</a>
+<a class="sourceLine" id="cb643-3" data-line-number="3">    <span class="dt">set_size =</span> <span class="st">`</span><span class="dt">change_acc[1]</span><span class="st">`</span>,</a>
+<a class="sourceLine" id="cb643-4" data-line-number="4">    <span class="dt">trial =</span> <span class="st">`</span><span class="dt">change_acc[2]</span><span class="st">`</span>,</a>
+<a class="sourceLine" id="cb643-5" data-line-number="5">    <span class="dt">interaction =</span> <span class="st">`</span><span class="dt">change_acc[3]</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb643-6" data-line-number="6">  )</a>
+<a class="sourceLine" id="cb643-7" data-line-number="7"><span class="kw">mcmc_intervals</span>(df_fit_recall,</a>
+<a class="sourceLine" id="cb643-8" data-line-number="8">  <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;set_size&quot;</span>, <span class="st">&quot;trial&quot;</span>, <span class="st">&quot;interaction&quot;</span>),</a>
+<a class="sourceLine" id="cb643-9" data-line-number="9">  <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</a>
+<a class="sourceLine" id="cb643-10" data-line-number="10">  <span class="dt">prob =</span> <span class="fl">.8</span>,</a>
+<a class="sourceLine" id="cb643-11" data-line-number="11">  <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span></a>
+<a class="sourceLine" id="cb643-12" data-line-number="12">) <span class="op">+</span></a>
+<a class="sourceLine" id="cb643-13" data-line-number="13"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Change in accuracy&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:vaccdet"></span>
 <img src="bookdown_files/figure-html/vaccdet-1.svg" alt="Effect of set size, trial, and their interaction on the average accuracy of recall." width="672" />
 <p class="caption">

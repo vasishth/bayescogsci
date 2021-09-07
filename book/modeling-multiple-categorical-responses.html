@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-06" />
+<meta name="date" content="2021-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1193,10 +1193,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>One way to model categorical responses is using multinomial or categorical distributions.
 The categorical responses could be “yes” or “no”; “blue”, “red” or “yellow”; “true”, “false”, or “I don’t know”; or more complicated categories, but crucially the response of each observation can be coded as only belonging to only one category. The multinomial and the categorical distribution represent two ways of characterizing the underlying generative process for such data.</p>
 <p>The <em>multinomial distribution</em> is the generalization of the binomial distribution for more than two possible outcomes. Recall that the binomial works like this: in order to randomly generate the number of successes in observation consisting of 10 trials, with the probability of success 0.5, one can type:</p>
-<div class="sourceCode" id="cb932"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb932-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb933"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb933-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>It is possible to repeatedly generate multiple observations as follows. Suppose five simulated observations are needed, each with 10 trials:</p>
-<div class="sourceCode" id="cb934"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb934-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb935"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb935-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
 <pre><code>## [1] 2 8 4 5 3</code></pre>
 <p>Now, suppose that there are N=3 possible answers to a question (yes, no don’t know), and suppose that the probabilities of producing each answer are:</p>
 <ul>
@@ -1205,12 +1205,12 @@ The categorical responses could be “yes” or “no”; “blue”, “red” 
 <li><span class="math inline">\(P(\)</span>don’t know<span class="math inline">\()=0.8\)</span></li>
 </ul>
 <p>The probabilities must sum to 1, because those are the only three possible outcomes. Given such a situation, it is possible to simulate a single experiment with 10 trials, where each of the three possibilities appears a certain number of times. We do this with <code>rmnom</code> from the <code>extraDistr</code> package (one could have used <code>rmultinom()</code> in R equally well, but the output would look a bit different):</p>
-<div class="sourceCode" id="cb936"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb936-1" data-line-number="1">(random_sample &lt;-<span class="st"> </span><span class="kw">rmnom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.8</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb937"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb937-1" data-line-number="1">(random_sample &lt;-<span class="st"> </span><span class="kw">rmnom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.8</span>)))</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    0    9</code></pre>
 <p>The above call returns the result of the random sample: 1 cases of the first answer type, 0 cases of the second; and 9 cases of the third.</p>
 <p>Analogously to the binomial function shown above, five observations can be simulated, each having 10 trials:</p>
-<div class="sourceCode" id="cb938"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb938-1" data-line-number="1"><span class="kw">rmnom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.8</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb939"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb939-1" data-line-number="1"><span class="kw">rmnom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.8</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    1    8
 ## [2,]    1    0    9
@@ -1218,17 +1218,17 @@ The categorical responses could be “yes” or “no”; “blue”, “red” 
 ## [4,]    1    1    8
 ## [5,]    1    1    8</code></pre>
 <p>The <em>categorical distribution</em> is the generalization of the Bernoulli distribution for more than two possible outcomes, and it is the special case of the multinomial distribution when we have only one trial. Recall that the Bernoulli distribution can be used as follows. If we carry out a coin toss (each coin toss counts as a single trial), we will either get a heads or a tails:</p>
-<div class="sourceCode" id="cb940"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb940-1" data-line-number="1"><span class="kw">rbern</span>(<span class="dv">5</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb941"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb941-1" data-line-number="1"><span class="kw">rbern</span>(<span class="dv">5</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
 <pre><code>## [1] 0 1 1 1 1</code></pre>
-<div class="sourceCode" id="cb942"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb942-1" data-line-number="1"><span class="co">## equivalent rbinom command:</span></a>
-<a class="sourceLine" id="cb942-2" data-line-number="2"><span class="kw">rbinom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb943"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb943-1" data-line-number="1"><span class="co">## equivalent rbinom command:</span></a>
+<a class="sourceLine" id="cb943-2" data-line-number="2"><span class="kw">rbinom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
 <pre><code>## [1] 0 0 1 1 0</code></pre>
 <p>Thus, what the Bernoulli is to the Binomial, the Categorical is to the Multinomial. For example, one can simulate five observations, each of which will give one of the three responses with the given probabilities. We do this with <code>rcat</code> from the <code>extraDistr</code> package.</p>
-<div class="sourceCode" id="cb944"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb944-1" data-line-number="1"><span class="kw">rcat</span>(<span class="dv">5</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.8</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>, <span class="st">&quot;dontknow&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb945"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb945-1" data-line-number="1"><span class="kw">rcat</span>(<span class="dv">5</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.8</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>, <span class="st">&quot;dontknow&quot;</span>))</a></code></pre></div>
 <pre><code>## [1] dontknow dontknow dontknow dontknow dontknow
 ## Levels: yes no dontknow</code></pre>
 <p>The above is analogous to using the multinomial with <code>size = 1</code> (a single trial in each experiment). In the output below, the <code>rmnom</code> function shows which of the three categories is produced.</p>
-<div class="sourceCode" id="cb946"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb946-1" data-line-number="1"><span class="kw">rmnom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.8</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb947"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb947-1" data-line-number="1"><span class="kw">rmnom</span>(<span class="dv">5</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.8</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    0    0    1
 ## [2,]    0    0    1
@@ -1283,22 +1283,22 @@ The categorical responses could be “yes” or “no”; “blue”, “red” 
 </tbody>
 </table>
 <p>First, generate data assuming a multinomial distribution. The outcomes will be determined by a vector <span class="math inline">\(\boldsymbol{\theta}\)</span> (called <code>true_theta</code> below in the R code) that indicates the probability of each outcome:</p>
-<div class="sourceCode" id="cb948"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb948-1" data-line-number="1">(true_theta &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">theta_NR =</span> <span class="fl">.2</span>, </a>
-<a class="sourceLine" id="cb948-2" data-line-number="2">                     <span class="dt">theta_Neologism =</span> <span class="fl">.1</span>,</a>
-<a class="sourceLine" id="cb948-3" data-line-number="3">                     <span class="dt">theta_Formal =</span> <span class="fl">.2</span>,</a>
-<a class="sourceLine" id="cb948-4" data-line-number="4">                     <span class="dt">theta_Mixed =</span> <span class="fl">.08</span>,</a>
-<a class="sourceLine" id="cb948-5" data-line-number="5">                     <span class="dt">theta_Correct =</span>  <span class="dv">1</span> <span class="op">-</span></a>
-<a class="sourceLine" id="cb948-6" data-line-number="6"><span class="st">  </span>(theta_NR <span class="op">+</span><span class="st"> </span>theta_Neologism <span class="op">+</span><span class="st"> </span>theta_Formal <span class="op">+</span><span class="st"> </span>theta_Mixed)))</a></code></pre></div>
+<div class="sourceCode" id="cb949"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb949-1" data-line-number="1">(true_theta &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">theta_NR =</span> <span class="fl">.2</span>, </a>
+<a class="sourceLine" id="cb949-2" data-line-number="2">                     <span class="dt">theta_Neologism =</span> <span class="fl">.1</span>,</a>
+<a class="sourceLine" id="cb949-3" data-line-number="3">                     <span class="dt">theta_Formal =</span> <span class="fl">.2</span>,</a>
+<a class="sourceLine" id="cb949-4" data-line-number="4">                     <span class="dt">theta_Mixed =</span> <span class="fl">.08</span>,</a>
+<a class="sourceLine" id="cb949-5" data-line-number="5">                     <span class="dt">theta_Correct =</span>  <span class="dv">1</span> <span class="op">-</span></a>
+<a class="sourceLine" id="cb949-6" data-line-number="6"><span class="st">  </span>(theta_NR <span class="op">+</span><span class="st"> </span>theta_Neologism <span class="op">+</span><span class="st"> </span>theta_Formal <span class="op">+</span><span class="st"> </span>theta_Mixed)))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 5
 ##   theta_NR theta_Neologism theta_Formal theta_Mixed theta_Correct
 ##      &lt;dbl&gt;           &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
 ## 1      0.2             0.1          0.2        0.08          0.42</code></pre>
-<div class="sourceCode" id="cb950"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb950-1" data-line-number="1"><span class="co">## The probabilities must sum to 1:</span></a>
-<a class="sourceLine" id="cb950-2" data-line-number="2"><span class="kw">sum</span>(true_theta)</a></code></pre></div>
+<div class="sourceCode" id="cb951"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb951-1" data-line-number="1"><span class="co">## The probabilities must sum to 1:</span></a>
+<a class="sourceLine" id="cb951-2" data-line-number="2"><span class="kw">sum</span>(true_theta)</a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>Given this vector of probabilities <span class="math inline">\(\boldsymbol{\theta}\)</span>, generate values assuming a multinomial distribution of responses in 100 trials:</p>
-<div class="sourceCode" id="cb952"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb952-1" data-line-number="1">N_trials &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb952-2" data-line-number="2">(ans_mn &lt;-<span class="st"> </span><span class="kw">rmultinom</span>(<span class="dv">1</span>, N_trials, true_theta))</a></code></pre></div>
+<div class="sourceCode" id="cb953"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb953-1" data-line-number="1">N_trials &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb953-2" data-line-number="2">(ans_mn &lt;-<span class="st"> </span><span class="kw">rmultinom</span>(<span class="dv">1</span>, N_trials, true_theta))</a></code></pre></div>
 <pre><code>##                 [,1]
 ## theta_NR          16
 ## theta_Neologism   10
@@ -1332,21 +1332,21 @@ generated quantities{
 }
 </code></pre>
 <p>Fit the model:</p>
-<div class="sourceCode" id="cb955"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb955-1" data-line-number="1"><span class="co"># Create a list:</span></a>
-<a class="sourceLine" id="cb955-2" data-line-number="2"><span class="co"># c(ans_mn) makes a vector out of the matrix ans_mn</span></a>
-<a class="sourceLine" id="cb955-3" data-line-number="3">data_mn &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_trials =</span> N_trials,</a>
-<a class="sourceLine" id="cb955-4" data-line-number="4">                 <span class="dt">ans =</span> <span class="kw">c</span>(ans_mn)) </a></code></pre></div>
-<div class="sourceCode" id="cb956"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb956-1" data-line-number="1"><span class="kw">str</span>(data_mn)</a></code></pre></div>
+<div class="sourceCode" id="cb956"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb956-1" data-line-number="1"><span class="co"># Create a list:</span></a>
+<a class="sourceLine" id="cb956-2" data-line-number="2"><span class="co"># c(ans_mn) makes a vector out of the matrix ans_mn</span></a>
+<a class="sourceLine" id="cb956-3" data-line-number="3">data_mn &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_trials =</span> N_trials,</a>
+<a class="sourceLine" id="cb956-4" data-line-number="4">                 <span class="dt">ans =</span> <span class="kw">c</span>(ans_mn)) </a></code></pre></div>
+<div class="sourceCode" id="cb957"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb957-1" data-line-number="1"><span class="kw">str</span>(data_mn)</a></code></pre></div>
 <pre><code>## List of 2
 ##  $ N_trials: num 100
 ##  $ ans     : int [1:5] 16 10 20 8 46</code></pre>
-<div class="sourceCode" id="cb958"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb958-1" data-line-number="1">multinom &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb958-2" data-line-number="2">                        <span class="st">&quot;multinom.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb958-3" data-line-number="3">                        <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb958-4" data-line-number="4">fit_mn &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> multinom, </a>
-<a class="sourceLine" id="cb958-5" data-line-number="5">               <span class="dt">data =</span> data_mn)</a></code></pre></div>
+<div class="sourceCode" id="cb959"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb959-1" data-line-number="1">multinom &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb959-2" data-line-number="2">                        <span class="st">&quot;multinom.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb959-3" data-line-number="3">                        <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb959-4" data-line-number="4">fit_mn &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> multinom, </a>
+<a class="sourceLine" id="cb959-5" data-line-number="5">               <span class="dt">data =</span> data_mn)</a></code></pre></div>
 <p>Next, we use <code>mcmc_recover_hist</code> to confirm that the posterior distributions of the elements of <span class="math inline">\(\boldsymbol{\theta}\)</span> are close to the true values that were set up when simulating the data. See Figure <a href="modeling-multiple-categorical-responses.html#fig:multin-posterior">19.1</a>.</p>
-<div class="sourceCode" id="cb959"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb959-1" data-line-number="1"><span class="kw">print</span>(fit_mn, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb960"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb960-1" data-line-number="1"><span class="kw">print</span>(fit_mn, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</a></code></pre></div>
 <pre><code>##          mean 2.5% 97.5% n_eff Rhat
 ## theta[1] 0.16 0.10  0.24  3475    1
 ## theta[2] 0.11 0.06  0.18  4615    1
@@ -1354,10 +1354,10 @@ generated quantities{
 ## theta[4] 0.09 0.04  0.15  4419    1
 ## theta[5] 0.44 0.35  0.53  4484    1</code></pre>
 
-<div class="sourceCode" id="cb961"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb961-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_mn) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb961-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;theta&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb961-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">unlist</span>(true_theta)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb961-4" data-line-number="4"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb962"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb962-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_mn) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb962-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;theta&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb962-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">unlist</span>(true_theta)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb962-4" data-line-number="4"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:multin-posterior"></span>
 <img src="bookdown_files/figure-html/multin-posterior-1.svg" alt="Posterior distributions and true means of theta for the multinomial model defined in multinom.stan." width="672" />
 <p class="caption">
@@ -1389,22 +1389,22 @@ generated quantities{
 }
 </code></pre>
 <p>Given the same set of probabilities <span class="math inline">\(\boldsymbol{\theta}\)</span> as above, generate 100 individual observations:</p>
-<div class="sourceCode" id="cb963"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb963-1" data-line-number="1">N_obs &lt;-<span class="st"> </span><span class="dv">100</span> </a>
-<a class="sourceLine" id="cb963-2" data-line-number="2">ans_cat &lt;-<span class="st"> </span><span class="kw">rcat</span>(N_obs, <span class="dt">prob =</span> <span class="kw">as.matrix</span>(true_theta))</a></code></pre></div>
+<div class="sourceCode" id="cb964"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb964-1" data-line-number="1">N_obs &lt;-<span class="st"> </span><span class="dv">100</span> </a>
+<a class="sourceLine" id="cb964-2" data-line-number="2">ans_cat &lt;-<span class="st"> </span><span class="kw">rcat</span>(N_obs, <span class="dt">prob =</span> <span class="kw">as.matrix</span>(true_theta))</a></code></pre></div>
 <p>The above output is how Stan expects to see the data. The data fed into the Stan model is defined as a list as usual:</p>
-<div class="sourceCode" id="cb964"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb964-1" data-line-number="1">data_cat &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_obs =</span> N_obs,</a>
-<a class="sourceLine" id="cb964-2" data-line-number="2">                  <span class="dt">w_ans =</span> ans_cat)</a>
-<a class="sourceLine" id="cb964-3" data-line-number="3"><span class="kw">str</span>(data_cat)</a></code></pre></div>
+<div class="sourceCode" id="cb965"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb965-1" data-line-number="1">data_cat &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_obs =</span> N_obs,</a>
+<a class="sourceLine" id="cb965-2" data-line-number="2">                  <span class="dt">w_ans =</span> ans_cat)</a>
+<a class="sourceLine" id="cb965-3" data-line-number="3"><span class="kw">str</span>(data_cat)</a></code></pre></div>
 <pre><code>## List of 2
 ##  $ N_obs: num 100
 ##  $ w_ans: num [1:100] 2 1 3 1 2 3 3 5 3 1 ...</code></pre>
 <p>Fitting the Stan model (<code>categorical.stan</code>) should yield approximately the same <span class="math inline">\(\boldsymbol{\theta}\)</span> as with the multinomial likelihood defined in the model <code>multinom.stan</code>. See Figure <a href="modeling-multiple-categorical-responses.html#fig:cat-posterior">19.2</a>.</p>
-<div class="sourceCode" id="cb966"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb966-1" data-line-number="1">categorical &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb966-2" data-line-number="2">                           <span class="st">&quot;categorical.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb966-3" data-line-number="3">                           <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb966-4" data-line-number="4">fit_cat &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> categorical, </a>
-<a class="sourceLine" id="cb966-5" data-line-number="5">                <span class="dt">data =</span> data_cat)  </a></code></pre></div>
-<div class="sourceCode" id="cb967"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb967-1" data-line-number="1"><span class="kw">print</span>(fit_cat, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb967"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb967-1" data-line-number="1">categorical &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb967-2" data-line-number="2">                           <span class="st">&quot;categorical.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb967-3" data-line-number="3">                           <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb967-4" data-line-number="4">fit_cat &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> categorical, </a>
+<a class="sourceLine" id="cb967-5" data-line-number="5">                <span class="dt">data =</span> data_cat)  </a></code></pre></div>
+<div class="sourceCode" id="cb968"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb968-1" data-line-number="1"><span class="kw">print</span>(fit_cat, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</a></code></pre></div>
 <pre><code>##          mean 2.5% 97.5% n_eff Rhat
 ## theta[1] 0.22 0.14  0.30  4467    1
 ## theta[2] 0.09 0.05  0.15  4822    1
@@ -1412,10 +1412,10 @@ generated quantities{
 ## theta[4] 0.11 0.06  0.18  4181    1
 ## theta[5] 0.40 0.31  0.49  3954    1</code></pre>
 <p>Again we confirm that the posterior distributions of the elements of <span class="math inline">\(\boldsymbol{\theta}\)</span> are close to their true values; see Figure <a href="modeling-multiple-categorical-responses.html#fig:cat-posterior">19.2</a>.</p>
-<div class="sourceCode" id="cb969"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb969-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_cat) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb969-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;theta&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb969-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">unlist</span>(true_theta)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb969-4" data-line-number="4"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb970"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb970-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_cat) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb970-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;theta&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb970-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">unlist</span>(true_theta)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb970-4" data-line-number="4"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:cat-posterior"></span>
 <img src="bookdown_files/figure-html/cat-posterior-1.svg" alt="Posterior distributions and true means of theta for the categorical model categorical.stan." width="672" />
 <p class="caption">

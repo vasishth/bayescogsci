@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-06" />
+<meta name="date" content="2021-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1196,8 +1196,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <p>Load the following data set:</p>
-<div class="sourceCode" id="cb801"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb801-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_buerki&quot;</span>)</a>
-<a class="sourceLine" id="cb801-2" data-line-number="2"><span class="kw">head</span>(df_buerki)</a></code></pre></div>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb802-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_buerki&quot;</span>)</a>
+<a class="sourceLine" id="cb802-2" data-line-number="2"><span class="kw">head</span>(df_buerki)</a></code></pre></div>
 <pre><code>##                  study   d    se study_id
 ## 1 Collina 2013 Exp.1 a  24 13.09        1
 ## 2 Collina 2013 Exp.1 b -25 17.00        2
@@ -1205,7 +1205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4     Mahon 2007 Exp.1  17 12.24        4
 ## 5     Mahon 2007 Exp.2  57 13.96        5
 ## 6    Mahon 2007 Exp. 4  17  8.01        6</code></pre>
-<div class="sourceCode" id="cb803"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb803-1" data-line-number="1">df_buerki &lt;-<span class="st"> </span><span class="kw">subset</span>(df_buerki, se <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.60</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb804"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb804-1" data-line-number="1">df_buerki &lt;-<span class="st"> </span><span class="kw">subset</span>(df_buerki, se <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.60</span>)</a></code></pre></div>
 <p>The data are from <span class="citation">Bürki et al. (<a href="#ref-BuerkiEtAl2020">2020</a>)</span>. We have a summary of the effect estimates (d) and standard errors (se) of the estimates from 162 published experiments on a phenomenon called <strong>semantic picture-word interference</strong>. We removed an implausibly low SE in the code above, but the results don’t change regardless of whether we keep them or not, because we have a lot of studies.</p>
 <p>In this experimental paradigm, subjects are asked to name a picture while ignoring a distractor word (which is either related or unrelated to the picture). The word can be printed on the picture itself, or presented auditorily. The dependent measure is the response latency, or time interval between the presentation of the picture and the onset of the vocal response. Theory says that distractors that come from the same semantic category as the picture to be named lead to a slower response then when the distractor comes from a different semantic category.</p>
 <p>Carry out a random effects meta-analysis using brms and display the posterior distribution of the effect, along with the posterior of the between study standard deviation.</p>
@@ -1220,8 +1220,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <p>Load the following data:</p>
-<div class="sourceCode" id="cb804"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb804-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_VOTenglish&quot;</span>)</a>
-<a class="sourceLine" id="cb804-2" data-line-number="2"><span class="kw">head</span>(df_VOTenglish)</a></code></pre></div>
+<div class="sourceCode" id="cb805"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb805-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_VOTenglish&quot;</span>)</a>
+<a class="sourceLine" id="cb805-2" data-line-number="2"><span class="kw">head</span>(df_VOTenglish)</a></code></pre></div>
 <pre><code>##   subject meanVOT seVOT meanvdur sevdur
 ## 1     F01   108.1  4.56      171   11.7
 ## 2     F02    92.5  4.62      189   12.7

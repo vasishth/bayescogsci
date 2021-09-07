@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-06" />
+<meta name="date" content="2021-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1258,30 +1258,30 @@ P(NR| a,t,f,c) + P(Neologism| a,t,f,c) + P(Formal| a,t,f,c) + P(Mixed| a,t,f,c) 
 <h4><span class="header-section-number">19.2.1.2</span> Generate simulated data</h4>
 <p>First, simulate 200 trials assuming no variability between items and subjects. It is convenient to define functions to compute each outcome’s probability, based on the MPT.</p>
 <div style="page-break-after: always;"></div>
-<div class="sourceCode" id="cb970"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb970-1" data-line-number="1"><span class="co"># Probabilities of different answers</span></a>
-<a class="sourceLine" id="cb970-2" data-line-number="2">Pr_NR &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
-<a class="sourceLine" id="cb970-3" data-line-number="3">    <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>a</a>
-<a class="sourceLine" id="cb970-4" data-line-number="4">Pr_Neologism &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
-<a class="sourceLine" id="cb970-5" data-line-number="5">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>c) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>c)</a>
-<a class="sourceLine" id="cb970-6" data-line-number="6">Pr_Formal &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
-<a class="sourceLine" id="cb970-7" data-line-number="7">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>c <span class="op">+</span><span class="st">  </span>a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>c</a>
-<a class="sourceLine" id="cb970-8" data-line-number="8">Pr_Mixed &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
-<a class="sourceLine" id="cb970-9" data-line-number="9">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>f</a>
-<a class="sourceLine" id="cb970-10" data-line-number="10">Pr_Correct &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
-<a class="sourceLine" id="cb970-11" data-line-number="11">    a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>f</a>
-<a class="sourceLine" id="cb970-12" data-line-number="12"><span class="co"># true underlying values for simulated data</span></a>
-<a class="sourceLine" id="cb970-13" data-line-number="13">a_true &lt;-<span class="st"> </span><span class="fl">.75</span></a>
-<a class="sourceLine" id="cb970-14" data-line-number="14">t_true &lt;-<span class="st"> </span><span class="fl">.9</span></a>
-<a class="sourceLine" id="cb970-15" data-line-number="15">f_true &lt;-<span class="st"> </span><span class="fl">.8</span></a>
-<a class="sourceLine" id="cb970-16" data-line-number="16">c_true &lt;-<span class="st"> </span><span class="fl">.1</span></a>
-<a class="sourceLine" id="cb970-17" data-line-number="17"><span class="co"># Probability of the different answers:</span></a>
-<a class="sourceLine" id="cb970-18" data-line-number="18">Theta &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">NR =</span> <span class="kw">Pr_NR</span>(a_true, t_true, f_true, c_true),</a>
-<a class="sourceLine" id="cb970-19" data-line-number="19">                <span class="dt">Neologism =</span> <span class="kw">Pr_Neologism</span>(a_true, t_true, f_true, c_true),</a>
-<a class="sourceLine" id="cb970-20" data-line-number="20">                <span class="dt">Formal =</span> <span class="kw">Pr_Formal</span>(a_true, t_true, f_true, c_true),</a>
-<a class="sourceLine" id="cb970-21" data-line-number="21">                <span class="dt">Mixed =</span> <span class="kw">Pr_Mixed</span>(a_true, t_true, f_true, c_true),</a>
-<a class="sourceLine" id="cb970-22" data-line-number="22">                <span class="dt">Correct =</span> <span class="kw">Pr_Correct</span>(a_true, t_true, f_true, c_true))</a>
-<a class="sourceLine" id="cb970-23" data-line-number="23">N_trials &lt;-<span class="st"> </span><span class="dv">200</span></a>
-<a class="sourceLine" id="cb970-24" data-line-number="24">(ans &lt;-<span class="st"> </span><span class="kw">rmultinom</span>(<span class="dv">1</span>, N_trials, <span class="kw">c</span>(Theta)))</a></code></pre></div>
+<div class="sourceCode" id="cb971"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb971-1" data-line-number="1"><span class="co"># Probabilities of different answers</span></a>
+<a class="sourceLine" id="cb971-2" data-line-number="2">Pr_NR &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
+<a class="sourceLine" id="cb971-3" data-line-number="3">    <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>a</a>
+<a class="sourceLine" id="cb971-4" data-line-number="4">Pr_Neologism &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
+<a class="sourceLine" id="cb971-5" data-line-number="5">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>c) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>c)</a>
+<a class="sourceLine" id="cb971-6" data-line-number="6">Pr_Formal &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
+<a class="sourceLine" id="cb971-7" data-line-number="7">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>c <span class="op">+</span><span class="st">  </span>a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f) <span class="op">*</span><span class="st"> </span>c</a>
+<a class="sourceLine" id="cb971-8" data-line-number="8">Pr_Mixed &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
+<a class="sourceLine" id="cb971-9" data-line-number="9">    a <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t) <span class="op">*</span><span class="st"> </span>f</a>
+<a class="sourceLine" id="cb971-10" data-line-number="10">Pr_Correct &lt;-<span class="st"> </span><span class="cf">function</span>(a, t, f, c)</a>
+<a class="sourceLine" id="cb971-11" data-line-number="11">    a <span class="op">*</span><span class="st"> </span>t <span class="op">*</span><span class="st"> </span>f</a>
+<a class="sourceLine" id="cb971-12" data-line-number="12"><span class="co"># true underlying values for simulated data</span></a>
+<a class="sourceLine" id="cb971-13" data-line-number="13">a_true &lt;-<span class="st"> </span><span class="fl">.75</span></a>
+<a class="sourceLine" id="cb971-14" data-line-number="14">t_true &lt;-<span class="st"> </span><span class="fl">.9</span></a>
+<a class="sourceLine" id="cb971-15" data-line-number="15">f_true &lt;-<span class="st"> </span><span class="fl">.8</span></a>
+<a class="sourceLine" id="cb971-16" data-line-number="16">c_true &lt;-<span class="st"> </span><span class="fl">.1</span></a>
+<a class="sourceLine" id="cb971-17" data-line-number="17"><span class="co"># Probability of the different answers:</span></a>
+<a class="sourceLine" id="cb971-18" data-line-number="18">Theta &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">NR =</span> <span class="kw">Pr_NR</span>(a_true, t_true, f_true, c_true),</a>
+<a class="sourceLine" id="cb971-19" data-line-number="19">                <span class="dt">Neologism =</span> <span class="kw">Pr_Neologism</span>(a_true, t_true, f_true, c_true),</a>
+<a class="sourceLine" id="cb971-20" data-line-number="20">                <span class="dt">Formal =</span> <span class="kw">Pr_Formal</span>(a_true, t_true, f_true, c_true),</a>
+<a class="sourceLine" id="cb971-21" data-line-number="21">                <span class="dt">Mixed =</span> <span class="kw">Pr_Mixed</span>(a_true, t_true, f_true, c_true),</a>
+<a class="sourceLine" id="cb971-22" data-line-number="22">                <span class="dt">Correct =</span> <span class="kw">Pr_Correct</span>(a_true, t_true, f_true, c_true))</a>
+<a class="sourceLine" id="cb971-23" data-line-number="23">N_trials &lt;-<span class="st"> </span><span class="dv">200</span></a>
+<a class="sourceLine" id="cb971-24" data-line-number="24">(ans &lt;-<span class="st"> </span><span class="kw">rmultinom</span>(<span class="dv">1</span>, N_trials, <span class="kw">c</span>(Theta)))</a></code></pre></div>
 <pre><code>##           [,1]
 ## NR          57
 ## Neologism   27
@@ -1336,14 +1336,14 @@ generated quantities{
   pred_ans = multinomial_rng(theta, 5);
 }</code></pre>
 <p>Fit the model:</p>
-<div class="sourceCode" id="cb973"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb973-1" data-line-number="1">data_sMPT &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_trials =</span> N_trials,</a>
-<a class="sourceLine" id="cb973-2" data-line-number="2">                   <span class="dt">ans =</span> <span class="kw">c</span>(ans)) </a>
-<a class="sourceLine" id="cb973-3" data-line-number="3">mpt_mnm &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb973-4" data-line-number="4">                       <span class="st">&quot;mpt_mnm.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb973-5" data-line-number="5">                       <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb973-6" data-line-number="6">fit_sMPT &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_mnm, <span class="dt">data =</span> data_sMPT)  </a></code></pre></div>
+<div class="sourceCode" id="cb974"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb974-1" data-line-number="1">data_sMPT &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_trials =</span> N_trials,</a>
+<a class="sourceLine" id="cb974-2" data-line-number="2">                   <span class="dt">ans =</span> <span class="kw">c</span>(ans)) </a>
+<a class="sourceLine" id="cb974-3" data-line-number="3">mpt_mnm &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb974-4" data-line-number="4">                       <span class="st">&quot;mpt_mnm.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb974-5" data-line-number="5">                       <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb974-6" data-line-number="6">fit_sMPT &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_mnm, <span class="dt">data =</span> data_sMPT)  </a></code></pre></div>
 <p>Print out a summary of the posterior of the parameter of interest:</p>
-<div class="sourceCode" id="cb974"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb974-1" data-line-number="1"><span class="kw">print</span>(fit_sMPT, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;t&quot;</span>, <span class="st">&quot;f&quot;</span>, <span class="st">&quot;c&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb975"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb975-1" data-line-number="1"><span class="kw">print</span>(fit_sMPT, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;t&quot;</span>, <span class="st">&quot;f&quot;</span>, <span class="st">&quot;c&quot;</span>))</a></code></pre></div>
 <pre><code>##   mean 2.5% 97.5% n_eff Rhat
 ## a 0.71 0.65  0.77  3807    1
 ## t 0.83 0.76  0.89  4827    1
@@ -1351,10 +1351,10 @@ generated quantities{
 ## c 0.15 0.05  0.28  5236    1</code></pre>
 <p>What the model gives us is posterior distributions of each of the parameters <code>a</code>, <code>t</code>, <code>f</code>, <code>c</code>. From these we can derive the probabilities of producing the different observed responses, and the posterior predictive distributions, which could be used for model evaluation.</p>
 <p>An important sanity check in modeling is checking whether the model can in principle recover the true parameters that generated the data; see Figure <a href="multinomial-processing-tree-mpt-models.html#fig:sMPT-posterior">19.4</a>.</p>
-<div class="sourceCode" id="cb976"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb976-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_sMPT) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb976-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;t&quot;</span>,<span class="st">&quot;f&quot;</span>,<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb976-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">c</span>(a_true, t_true, f_true, c_true)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb976-4" data-line-number="4"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb977"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb977-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_sMPT) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb977-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;t&quot;</span>,<span class="st">&quot;f&quot;</span>,<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb977-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">c</span>(a_true, t_true, f_true, c_true)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb977-4" data-line-number="4"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:sMPT-posterior"></span>
 <img src="bookdown_files/figure-html/sMPT-posterior-1.svg" alt="Posterior distributions and true values of the parameters of the simple MPT model (mpt_mnm.stan)." width="672" />
 <p class="caption">
@@ -1363,7 +1363,7 @@ FIGURE 19.4: Posterior distributions and true values of the parameters of the si
 </div>
 <p>The above figure shows that the model can indeed recover the true parameters fairly accurately.</p>
 <p>The posterior distributions of the <span class="math inline">\(\boldsymbol{\theta}\)</span> parameters can also be summarized:</p>
-<div class="sourceCode" id="cb977"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb977-1" data-line-number="1"><span class="kw">print</span>(fit_sMPT, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb978"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb978-1" data-line-number="1"><span class="kw">print</span>(fit_sMPT, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</a></code></pre></div>
 <pre><code>##          mean 2.5% 97.5% n_eff Rhat
 ## theta[1] 0.29 0.23  0.35  3807    1
 ## theta[2] 0.13 0.09  0.18  4191    1
@@ -1392,47 +1392,47 @@ The MPT that we present here is just re-parametrizing the vector <span class="ma
 p_j = \frac{\exp(\mu_j)}{1+\exp(\mu_j)} = \frac{1}{1+\exp(-\mu_j)}
 \end{equation}\]</span></p>
 <p>The above is the logistic or inverse logit function: it takes as input <span class="math inline">\(\mu_j\)</span> and returns the corresponding probability <span class="math inline">\(p_j\)</span>. The <code>plogis</code> function in R carries out the calculation shown above.</p>
-<div class="sourceCode" id="cb979"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb979-1" data-line-number="1">N_obs &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb979-2" data-line-number="2">complexity &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_obs, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb979-3" data-line-number="3"><span class="co">## choose some hypothetical values:</span></a>
-<a class="sourceLine" id="cb979-4" data-line-number="4">alpha_f &lt;-<span class="st"> </span><span class="fl">.3</span></a>
-<a class="sourceLine" id="cb979-5" data-line-number="5"><span class="co"># the negative sign indicates that</span></a>
-<a class="sourceLine" id="cb979-6" data-line-number="6"><span class="co"># increased complexity will lead to a reduced value of f</span></a>
-<a class="sourceLine" id="cb979-7" data-line-number="7">beta_f &lt;-<span class="st"> </span><span class="fl">-.3</span></a>
-<a class="sourceLine" id="cb979-8" data-line-number="8"><span class="co"># f&#39; as a linear function of complexity</span></a>
-<a class="sourceLine" id="cb979-9" data-line-number="9">f_prime &lt;-<span class="st"> </span>alpha_f <span class="op">+</span><span class="st"> </span>complexity <span class="op">*</span><span class="st"> </span>beta_f</a>
-<a class="sourceLine" id="cb979-10" data-line-number="10"><span class="kw">head</span>(f_prime)</a></code></pre></div>
+<div class="sourceCode" id="cb980"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb980-1" data-line-number="1">N_obs &lt;-<span class="st"> </span><span class="dv">50</span></a>
+<a class="sourceLine" id="cb980-2" data-line-number="2">complexity &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_obs, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb980-3" data-line-number="3"><span class="co">## choose some hypothetical values:</span></a>
+<a class="sourceLine" id="cb980-4" data-line-number="4">alpha_f &lt;-<span class="st"> </span><span class="fl">.3</span></a>
+<a class="sourceLine" id="cb980-5" data-line-number="5"><span class="co"># the negative sign indicates that</span></a>
+<a class="sourceLine" id="cb980-6" data-line-number="6"><span class="co"># increased complexity will lead to a reduced value of f</span></a>
+<a class="sourceLine" id="cb980-7" data-line-number="7">beta_f &lt;-<span class="st"> </span><span class="fl">-.3</span></a>
+<a class="sourceLine" id="cb980-8" data-line-number="8"><span class="co"># f&#39; as a linear function of complexity</span></a>
+<a class="sourceLine" id="cb980-9" data-line-number="9">f_prime &lt;-<span class="st"> </span>alpha_f <span class="op">+</span><span class="st"> </span>complexity <span class="op">*</span><span class="st"> </span>beta_f</a>
+<a class="sourceLine" id="cb980-10" data-line-number="10"><span class="kw">head</span>(f_prime)</a></code></pre></div>
 <pre><code>## [1]  0.602  0.458 -0.529  0.450  0.533  0.569</code></pre>
-<div class="sourceCode" id="cb981"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb981-1" data-line-number="1"><span class="co">## probabilities f for each item</span></a>
-<a class="sourceLine" id="cb981-2" data-line-number="2">f_true &lt;-<span class="st"> </span><span class="kw">plogis</span>(f_prime)</a>
-<a class="sourceLine" id="cb981-3" data-line-number="3"><span class="kw">head</span>(f_true)</a></code></pre></div>
+<div class="sourceCode" id="cb982"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb982-1" data-line-number="1"><span class="co">## probabilities f for each item</span></a>
+<a class="sourceLine" id="cb982-2" data-line-number="2">f_true &lt;-<span class="st"> </span><span class="kw">plogis</span>(f_prime)</a>
+<a class="sourceLine" id="cb982-3" data-line-number="3"><span class="kw">head</span>(f_true)</a></code></pre></div>
 <pre><code>## [1] 0.646 0.612 0.371 0.611 0.630 0.639</code></pre>
 <p>This change in our assumptions entails that the probability of each response changes depending on the item associated with each observation. The parameters <code>theta</code> now have to be a matrix. This is in R; in Stan, we will code it as an array of simplexes, i.e., an array of non-negative values that sums to 1.</p>
 <p>We continue with the functions defined in <a href="multinomial-processing-tree-mpt-models.html#sec:mpt-data">19.2.1.2</a>, and the same values for <code>a_true</code>, <code>t_true</code>, and <code>c_true</code> as defined in that section. Since most of the equations depend on <code>f</code>, and <code>f</code> is a vector now, the outcomes are automatically vectors. But this is not the case for <code>theta_NR_v</code>, and thus we need to repeat the value.</p>
-<div class="sourceCode" id="cb983"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb983-1" data-line-number="1">theta_NR_v &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">Pr_NR</span>(a_true, t_true, f_true, c_true), N_obs)</a>
-<a class="sourceLine" id="cb983-2" data-line-number="2">theta_Neologism_v &lt;-<span class="st"> </span><span class="kw">Pr_Neologism</span>(a_true, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb983-3" data-line-number="3">theta_Formal_v &lt;-<span class="st"> </span><span class="kw">Pr_Formal</span>(a_true, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb983-4" data-line-number="4">theta_Mixed_v &lt;-<span class="st"> </span><span class="kw">Pr_Mixed</span>(a_true, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb983-5" data-line-number="5">theta_Correct_v &lt;-<span class="st"> </span><span class="kw">Pr_Correct</span>(a_true, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb983-6" data-line-number="6">theta_item &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
-<a class="sourceLine" id="cb983-7" data-line-number="7">  <span class="kw">c</span>(theta_NR_v,</a>
-<a class="sourceLine" id="cb983-8" data-line-number="8">    theta_Neologism_v,</a>
-<a class="sourceLine" id="cb983-9" data-line-number="9">    theta_Formal_v,</a>
-<a class="sourceLine" id="cb983-10" data-line-number="10">    theta_Mixed_v,</a>
-<a class="sourceLine" id="cb983-11" data-line-number="11">    theta_Correct_v),</a>
-<a class="sourceLine" id="cb983-12" data-line-number="12">  <span class="dt">ncol =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb983-13" data-line-number="13"><span class="kw">dim</span>(theta_item)</a></code></pre></div>
+<div class="sourceCode" id="cb984"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb984-1" data-line-number="1">theta_NR_v &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">Pr_NR</span>(a_true, t_true, f_true, c_true), N_obs)</a>
+<a class="sourceLine" id="cb984-2" data-line-number="2">theta_Neologism_v &lt;-<span class="st"> </span><span class="kw">Pr_Neologism</span>(a_true, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb984-3" data-line-number="3">theta_Formal_v &lt;-<span class="st"> </span><span class="kw">Pr_Formal</span>(a_true, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb984-4" data-line-number="4">theta_Mixed_v &lt;-<span class="st"> </span><span class="kw">Pr_Mixed</span>(a_true, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb984-5" data-line-number="5">theta_Correct_v &lt;-<span class="st"> </span><span class="kw">Pr_Correct</span>(a_true, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb984-6" data-line-number="6">theta_item &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
+<a class="sourceLine" id="cb984-7" data-line-number="7">  <span class="kw">c</span>(theta_NR_v,</a>
+<a class="sourceLine" id="cb984-8" data-line-number="8">    theta_Neologism_v,</a>
+<a class="sourceLine" id="cb984-9" data-line-number="9">    theta_Formal_v,</a>
+<a class="sourceLine" id="cb984-10" data-line-number="10">    theta_Mixed_v,</a>
+<a class="sourceLine" id="cb984-11" data-line-number="11">    theta_Correct_v),</a>
+<a class="sourceLine" id="cb984-12" data-line-number="12">  <span class="dt">ncol =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb984-13" data-line-number="13"><span class="kw">dim</span>(theta_item)</a></code></pre></div>
 <pre><code>## [1] 50  5</code></pre>
-<div class="sourceCode" id="cb985"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb985-1" data-line-number="1"><span class="kw">head</span>(theta_item,<span class="dt">n =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb986"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb986-1" data-line-number="1"><span class="kw">head</span>(theta_item,<span class="dt">n =</span> <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##      [,1]  [,2]   [,3]   [,4]  [,5]
 ## [1,] 0.25 0.239 0.0265 0.0485 0.436
 ## [2,] 0.25 0.262 0.0291 0.0459 0.413
 ## [3,] 0.25 0.425 0.0472 0.0278 0.250</code></pre>
 <p>Store this in a data frame.</p>
-<div class="sourceCode" id="cb987"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb987-1" data-line-number="1">sim_data_cx &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">item =</span> <span class="dv">1</span><span class="op">:</span>N_obs,</a>
-<a class="sourceLine" id="cb987-2" data-line-number="2">                      <span class="dt">complexity =</span> complexity,</a>
-<a class="sourceLine" id="cb987-3" data-line-number="3">                      <span class="dt">w_ans =</span> <span class="kw">c</span>(<span class="kw">rcat</span>(N_obs,theta_item)))</a>
-<a class="sourceLine" id="cb987-4" data-line-number="4">sim_data_cx</a></code></pre></div>
+<div class="sourceCode" id="cb988"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb988-1" data-line-number="1">sim_data_cx &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">item =</span> <span class="dv">1</span><span class="op">:</span>N_obs,</a>
+<a class="sourceLine" id="cb988-2" data-line-number="2">                      <span class="dt">complexity =</span> complexity,</a>
+<a class="sourceLine" id="cb988-3" data-line-number="3">                      <span class="dt">w_ans =</span> <span class="kw">c</span>(<span class="kw">rcat</span>(N_obs,theta_item)))</a>
+<a class="sourceLine" id="cb988-4" data-line-number="4">sim_data_cx</a></code></pre></div>
 <pre><code>## # A tibble: 50 x 3
 ##    item complexity w_ans
 ##   &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt;
@@ -1488,19 +1488,19 @@ generated quantities{
 <p>The previous model doesn’t take into account that subjects might vary (and neither does the modification to this model that is suggested in exercise <a href="exercises-4.html#exr:edit-mpt-cat">19.3</a>). Let’s focus on taking into account the differences between subjects.</p>
 <p>Different subjects might not be equally motivated to do the task. This can be accounted by adding a hierarchical structure to the parameter <code>a</code>, the probability of initiating an attempt. Begin by simulating some data that incorporates by-subject variability.</p>
 <p>First, define the number of items and subjects, and the number of observations:</p>
-<div class="sourceCode" id="cb990"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb990-1" data-line-number="1"><span class="co"># Data:</span></a>
-<a class="sourceLine" id="cb990-2" data-line-number="2">N_item &lt;-<span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb990-3" data-line-number="3">N_subj &lt;-<span class="st"> </span><span class="dv">30</span></a>
-<a class="sourceLine" id="cb990-4" data-line-number="4">N_obs &lt;-<span class="st"> </span>N_item <span class="op">*</span><span class="st"> </span>N_subj </a></code></pre></div>
+<div class="sourceCode" id="cb991"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb991-1" data-line-number="1"><span class="co"># Data:</span></a>
+<a class="sourceLine" id="cb991-2" data-line-number="2">N_item &lt;-<span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb991-3" data-line-number="3">N_subj &lt;-<span class="st"> </span><span class="dv">30</span></a>
+<a class="sourceLine" id="cb991-4" data-line-number="4">N_obs &lt;-<span class="st"> </span>N_item <span class="op">*</span><span class="st"> </span>N_subj </a></code></pre></div>
 <p>Then, generate a vector for subjects and for items. Assume here that each subject sees each item.</p>
-<div class="sourceCode" id="cb991"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb991-1" data-line-number="1">subj &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_subj, <span class="dt">each =</span> N_item)</a>
-<a class="sourceLine" id="cb991-2" data-line-number="2">item &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_item, <span class="dt">time =</span> N_subj)</a></code></pre></div>
+<div class="sourceCode" id="cb992"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb992-1" data-line-number="1">subj &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_subj, <span class="dt">each =</span> N_item)</a>
+<a class="sourceLine" id="cb992-2" data-line-number="2">item &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_item, <span class="dt">time =</span> N_subj)</a></code></pre></div>
 <p>A vector representing complexity is created for the number of items we have, and this vector is repeated as many times as there are subjects:</p>
-<div class="sourceCode" id="cb992"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb992-1" data-line-number="1">complexity &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">rnorm</span>(N_item, <span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">times =</span> N_subj)</a></code></pre></div>
+<div class="sourceCode" id="cb993"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb993-1" data-line-number="1">complexity &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">rnorm</span>(N_item, <span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">times =</span> N_subj)</a></code></pre></div>
 <p>Next, create a data frame with all the above information:</p>
-<div class="sourceCode" id="cb993"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb993-1" data-line-number="1">(exp_sim &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">subj =</span> subj,</a>
-<a class="sourceLine" id="cb993-2" data-line-number="2">                  <span class="dt">item =</span> item,</a>
-<a class="sourceLine" id="cb993-3" data-line-number="3">                  <span class="dt">complexity =</span> complexity))</a></code></pre></div>
+<div class="sourceCode" id="cb994"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb994-1" data-line-number="1">(exp_sim &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">subj =</span> subj,</a>
+<a class="sourceLine" id="cb994-2" data-line-number="2">                  <span class="dt">item =</span> item,</a>
+<a class="sourceLine" id="cb994-3" data-line-number="3">                  <span class="dt">complexity =</span> complexity))</a></code></pre></div>
 <pre><code>## # A tibble: 600 x 3
 ##    subj  item complexity
 ##   &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;
@@ -1509,11 +1509,11 @@ generated quantities{
 ## 3     1     3    -1.73  
 ## # … with 597 more rows</code></pre>
 <p>To create subject-level variability in the data, a between-subject standard deviation needs to be defined. This standard deviation represents the deviations of subjects about the grand mean. We are defining this adjustment in log-odds space.</p>
-<div class="sourceCode" id="cb995"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb995-1" data-line-number="1"><span class="co"># New parameters, in log-odds space:</span></a>
-<a class="sourceLine" id="cb995-2" data-line-number="2">tau_u_a &lt;-<span class="st"> </span><span class="fl">1.1</span></a>
-<a class="sourceLine" id="cb995-3" data-line-number="3"><span class="co">## generate subject adjustments in log-odds space:</span></a>
-<a class="sourceLine" id="cb995-4" data-line-number="4">u_a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, tau_u_a)</a>
-<a class="sourceLine" id="cb995-5" data-line-number="5"><span class="kw">str</span>(u_a)</a></code></pre></div>
+<div class="sourceCode" id="cb996"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb996-1" data-line-number="1"><span class="co"># New parameters, in log-odds space:</span></a>
+<a class="sourceLine" id="cb996-2" data-line-number="2">tau_u_a &lt;-<span class="st"> </span><span class="fl">1.1</span></a>
+<a class="sourceLine" id="cb996-3" data-line-number="3"><span class="co">## generate subject adjustments in log-odds space:</span></a>
+<a class="sourceLine" id="cb996-4" data-line-number="4">u_a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, tau_u_a)</a>
+<a class="sourceLine" id="cb996-5" data-line-number="5"><span class="kw">str</span>(u_a)</a></code></pre></div>
 <pre><code>##  num [1:30] 0.5395 1.3084 0.0701 0.1569 0.0763 ...</code></pre>
 <p>Given the fixed <code>a_true</code> probability value of 0.75, the subject-level values for individual <code>a_true</code> can be derived by (a) first converting the overall <code>a_true</code> value to log-odds space, (b) adding the by-subject adjustment to this converted overall value, and (c) then converting back to probability space using the logistic or inverse logit (<code>plogis</code>) function. Essentially we generate data assuming the following:</p>
 <p><span class="math display">\[\begin{equation}
@@ -1524,37 +1524,37 @@ a_{h,n} &amp;= logit^{-1}(a_h&#39;)
 \end{equation}\]</span></p>
 <p>Where <span class="math inline">\(u_{a,subj[n]}\)</span> is a vector with the same length as the total number of observations. The meaning of this notation was explained in the section <a href="sec-hierstan.html#sec:hierstan">11.1</a> of chapter <a href="ch-complexstan.html#ch:complexstan">11</a>.</p>
 <p>This is done in R as follows:</p>
-<div class="sourceCode" id="cb997"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb997-1" data-line-number="1"><span class="co">## convert the intercept to log-odds space:</span></a>
-<a class="sourceLine" id="cb997-2" data-line-number="2">alpha_a &lt;-<span class="st"> </span><span class="kw">qlogis</span>(a_true)</a>
-<a class="sourceLine" id="cb997-3" data-line-number="3"><span class="co">## a_h&#39; in log-odds space:</span></a>
-<a class="sourceLine" id="cb997-4" data-line-number="4">a_h_prime &lt;-<span class="st">  </span>alpha_a <span class="op">+</span><span class="st"> </span>u_a[subj]</a>
-<a class="sourceLine" id="cb997-5" data-line-number="5"><span class="co">## convert back to probability space</span></a>
-<a class="sourceLine" id="cb997-6" data-line-number="6">a_true_h &lt;-<span class="st"> </span><span class="kw">plogis</span>(a_h_prime)</a>
-<a class="sourceLine" id="cb997-7" data-line-number="7"><span class="kw">str</span>(a_true_h)</a></code></pre></div>
+<div class="sourceCode" id="cb998"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb998-1" data-line-number="1"><span class="co">## convert the intercept to log-odds space:</span></a>
+<a class="sourceLine" id="cb998-2" data-line-number="2">alpha_a &lt;-<span class="st"> </span><span class="kw">qlogis</span>(a_true)</a>
+<a class="sourceLine" id="cb998-3" data-line-number="3"><span class="co">## a_h&#39; in log-odds space:</span></a>
+<a class="sourceLine" id="cb998-4" data-line-number="4">a_h_prime &lt;-<span class="st">  </span>alpha_a <span class="op">+</span><span class="st"> </span>u_a[subj]</a>
+<a class="sourceLine" id="cb998-5" data-line-number="5"><span class="co">## convert back to probability space</span></a>
+<a class="sourceLine" id="cb998-6" data-line-number="6">a_true_h &lt;-<span class="st"> </span><span class="kw">plogis</span>(a_h_prime)</a>
+<a class="sourceLine" id="cb998-7" data-line-number="7"><span class="kw">str</span>(a_true_h)</a></code></pre></div>
 <pre><code>##  num [1:600] 0.837 0.837 0.837 0.837 0.837 ...</code></pre>
 <p>What this achieves mathematically is adding varying intercepts by subjects to <code>alpha_a</code>, and then the values adjusted by subject are saved in probability space.</p>
 <p>As before, <code>f_true</code> is computed as a function of complexity:</p>
-<div class="sourceCode" id="cb999"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb999-1" data-line-number="1">f_true &lt;-<span class="st"> </span><span class="kw">plogis</span>(alpha_f <span class="op">+</span><span class="st"> </span>complexity <span class="op">*</span><span class="st"> </span>beta_f)</a></code></pre></div>
+<div class="sourceCode" id="cb1000"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1000-1" data-line-number="1">f_true &lt;-<span class="st"> </span><span class="kw">plogis</span>(alpha_f <span class="op">+</span><span class="st"> </span>complexity <span class="op">*</span><span class="st"> </span>beta_f)</a></code></pre></div>
 <p>Now, we can define the probabilities of different outcomes:</p>
-<div class="sourceCode" id="cb1000"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1000-1" data-line-number="1"><span class="co"># Aux. parameters that define the probabilities:</span></a>
-<a class="sourceLine" id="cb1000-2" data-line-number="2">theta_NR_v_h &lt;-<span class="st"> </span><span class="kw">Pr_NR</span>(a_true_h, t_true, f_true, c_true) </a>
-<a class="sourceLine" id="cb1000-3" data-line-number="3">theta_Neologism_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Neologism</span>(a_true_h, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb1000-4" data-line-number="4">theta_Formal_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Formal</span>(a_true_h, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb1000-5" data-line-number="5">theta_Mixed_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Mixed</span>(a_true_h, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb1000-6" data-line-number="6">theta_Correct_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Correct</span>(a_true_h, t_true, f_true, c_true)</a>
-<a class="sourceLine" id="cb1000-7" data-line-number="7">theta_h &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
-<a class="sourceLine" id="cb1000-8" data-line-number="8">  <span class="kw">c</span>(theta_NR_v_h,</a>
-<a class="sourceLine" id="cb1000-9" data-line-number="9">    theta_Neologism_v_h,</a>
-<a class="sourceLine" id="cb1000-10" data-line-number="10">    theta_Formal_v_h,</a>
-<a class="sourceLine" id="cb1000-11" data-line-number="11">    theta_Mixed_v_h,</a>
-<a class="sourceLine" id="cb1000-12" data-line-number="12">    theta_Correct_v_h),</a>
-<a class="sourceLine" id="cb1000-13" data-line-number="13">  <span class="dt">ncol =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb1000-14" data-line-number="14"><span class="kw">dim</span>(theta_h)</a></code></pre></div>
+<div class="sourceCode" id="cb1001"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1001-1" data-line-number="1"><span class="co"># Aux. parameters that define the probabilities:</span></a>
+<a class="sourceLine" id="cb1001-2" data-line-number="2">theta_NR_v_h &lt;-<span class="st"> </span><span class="kw">Pr_NR</span>(a_true_h, t_true, f_true, c_true) </a>
+<a class="sourceLine" id="cb1001-3" data-line-number="3">theta_Neologism_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Neologism</span>(a_true_h, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb1001-4" data-line-number="4">theta_Formal_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Formal</span>(a_true_h, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb1001-5" data-line-number="5">theta_Mixed_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Mixed</span>(a_true_h, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb1001-6" data-line-number="6">theta_Correct_v_h &lt;-<span class="st"> </span><span class="kw">Pr_Correct</span>(a_true_h, t_true, f_true, c_true)</a>
+<a class="sourceLine" id="cb1001-7" data-line-number="7">theta_h &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
+<a class="sourceLine" id="cb1001-8" data-line-number="8">  <span class="kw">c</span>(theta_NR_v_h,</a>
+<a class="sourceLine" id="cb1001-9" data-line-number="9">    theta_Neologism_v_h,</a>
+<a class="sourceLine" id="cb1001-10" data-line-number="10">    theta_Formal_v_h,</a>
+<a class="sourceLine" id="cb1001-11" data-line-number="11">    theta_Mixed_v_h,</a>
+<a class="sourceLine" id="cb1001-12" data-line-number="12">    theta_Correct_v_h),</a>
+<a class="sourceLine" id="cb1001-13" data-line-number="13">  <span class="dt">ncol =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1001-14" data-line-number="14"><span class="kw">dim</span>(theta_h)</a></code></pre></div>
 <pre><code>## [1] 600   5</code></pre>
 <p>The probability specifications shown above can now generate the simulated data:</p>
-<div class="sourceCode" id="cb1002"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1002-1" data-line-number="1"><span class="co"># simulated data:</span></a>
-<a class="sourceLine" id="cb1002-2" data-line-number="2">(sim_data_h &lt;-<span class="st"> </span><span class="kw">mutate</span>(exp_sim,</a>
-<a class="sourceLine" id="cb1002-3" data-line-number="3">                      <span class="dt">w_ans =</span> <span class="kw">rcat</span>(N_obs,theta_h)))</a></code></pre></div>
+<div class="sourceCode" id="cb1003"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1003-1" data-line-number="1"><span class="co"># simulated data:</span></a>
+<a class="sourceLine" id="cb1003-2" data-line-number="2">(sim_data_h &lt;-<span class="st"> </span><span class="kw">mutate</span>(exp_sim,</a>
+<a class="sourceLine" id="cb1003-3" data-line-number="3">                      <span class="dt">w_ans =</span> <span class="kw">rcat</span>(N_obs,theta_h)))</a></code></pre></div>
 <pre><code>## # A tibble: 600 x 4
 ##    subj  item complexity w_ans
 ##   &lt;int&gt; &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt;
@@ -1633,19 +1633,19 @@ generated quantities{
     pred_w_ans[n] = categorical_rng(theta[n]);
 }</code></pre>
 <p>It would be a good idea to plot prior predictive distributions for this model; we skip this step here. Next, fit the model to the simulated data, by first defining the data as a list:</p>
-<div class="sourceCode" id="cb1005"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1005-1" data-line-number="1">sim_list_h &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_obs =</span> <span class="kw">nrow</span>(sim_data_h),</a>
-<a class="sourceLine" id="cb1005-2" data-line-number="2">                    <span class="dt">w_ans =</span> sim_data_h<span class="op">$</span>w_ans,</a>
-<a class="sourceLine" id="cb1005-3" data-line-number="3">                    <span class="dt">N_subj =</span> <span class="kw">max</span>(sim_data_h<span class="op">$</span>subj),</a>
-<a class="sourceLine" id="cb1005-4" data-line-number="4">                    <span class="dt">subj =</span> sim_data_h<span class="op">$</span>subj,</a>
-<a class="sourceLine" id="cb1005-5" data-line-number="5">                    <span class="dt">complexity =</span> sim_data_h<span class="op">$</span>complexity)</a></code></pre></div>
-<div class="sourceCode" id="cb1006"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1006-1" data-line-number="1">mpt_h &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb1006-2" data-line-number="2">                     <span class="st">&quot;mpt_h.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb1006-3" data-line-number="3">                     <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb1006-4" data-line-number="4">fit_mpt_h &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_h, </a>
-<a class="sourceLine" id="cb1006-5" data-line-number="5">              <span class="dt">data =</span> sim_list_h, </a>
-<a class="sourceLine" id="cb1006-6" data-line-number="6">              <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>))  </a></code></pre></div>
+<div class="sourceCode" id="cb1006"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1006-1" data-line-number="1">sim_list_h &lt;-<span class="st">  </span><span class="kw">list</span>(<span class="dt">N_obs =</span> <span class="kw">nrow</span>(sim_data_h),</a>
+<a class="sourceLine" id="cb1006-2" data-line-number="2">                    <span class="dt">w_ans =</span> sim_data_h<span class="op">$</span>w_ans,</a>
+<a class="sourceLine" id="cb1006-3" data-line-number="3">                    <span class="dt">N_subj =</span> <span class="kw">max</span>(sim_data_h<span class="op">$</span>subj),</a>
+<a class="sourceLine" id="cb1006-4" data-line-number="4">                    <span class="dt">subj =</span> sim_data_h<span class="op">$</span>subj,</a>
+<a class="sourceLine" id="cb1006-5" data-line-number="5">                    <span class="dt">complexity =</span> sim_data_h<span class="op">$</span>complexity)</a></code></pre></div>
+<div class="sourceCode" id="cb1007"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1007-1" data-line-number="1">mpt_h &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb1007-2" data-line-number="2">                     <span class="st">&quot;mpt_h.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb1007-3" data-line-number="3">                     <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb1007-4" data-line-number="4">fit_mpt_h &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_h, </a>
+<a class="sourceLine" id="cb1007-5" data-line-number="5">              <span class="dt">data =</span> sim_list_h, </a>
+<a class="sourceLine" id="cb1007-6" data-line-number="6">              <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>))  </a></code></pre></div>
 <p>Print out a summary of the posterior.</p>
-<div class="sourceCode" id="cb1007"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1007-1" data-line-number="1"><span class="kw">print</span>(fit_mpt_h, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;t&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;tau_u_a&quot;</span>, <span class="st">&quot;alpha_a&quot;</span>, <span class="st">&quot;alpha_f&quot;</span>, <span class="st">&quot;beta_f&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1008"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1008-1" data-line-number="1"><span class="kw">print</span>(fit_mpt_h, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;t&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;tau_u_a&quot;</span>, <span class="st">&quot;alpha_a&quot;</span>, <span class="st">&quot;alpha_f&quot;</span>, <span class="st">&quot;beta_f&quot;</span>))</a></code></pre></div>
 <pre><code>##          mean  2.5% 97.5% n_eff Rhat
 ## t        0.89  0.85  0.93  9672    1
 ## c        0.08  0.05  0.13  7253    1
@@ -1655,24 +1655,24 @@ generated quantities{
 ## beta_f  -0.33 -0.44 -0.22  8174    1</code></pre>
 <p>If we had fit this to real data, we would now conclude that (i) given the value of <code>beta_f</code>, complexity has an adverse effect on the probability of retrieving the correct phonemes, and (ii) given the value of <code>tau_u_a</code>, there is a great deal of variation in the subjects’ probability of initiating an attempt at each trial. Furthermore, if we had some expectation about <span class="math inline">\(t\)</span> and <span class="math inline">\(c\)</span> based on previous research we could conclude that our results are in line (or not) with previous findings.</p>
 <p>One could inspect how one unit of complexity is affecting the probability of retrieving the correct phoneme (<span class="math inline">\(f\)</span>). We first derive the value of <code>f</code> for an item of zero complexity (that is <span class="math inline">\(\alpha_{f} + 0 \times \beta_{f}\)</span>) and then the value of <code>f</code> for an item with a complexity of one (<span class="math inline">\(\alpha_{f} + 1 \times \beta_{f}\)</span>). We are interested in summarizing the difference between the two:</p>
-<div class="sourceCode" id="cb1009"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1009-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_mpt_h) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1009-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(alpha_f, beta_f) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1009-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">f_0 =</span> <span class="kw">plogis</span>(alpha_f),</a>
-<a class="sourceLine" id="cb1009-4" data-line-number="4">         <span class="dt">f_1 =</span> <span class="kw">plogis</span>(alpha_f <span class="op">+</span><span class="st"> </span>beta_f),</a>
-<a class="sourceLine" id="cb1009-5" data-line-number="5">         <span class="dt">diff_f =</span> f_<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f_<span class="dv">0</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1009-6" data-line-number="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Estimate =</span> <span class="kw">mean</span>(diff_f),</a>
-<a class="sourceLine" id="cb1009-7" data-line-number="7">          <span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">quantile</span>(diff_f, <span class="fl">0.025</span>),</a>
-<a class="sourceLine" id="cb1009-8" data-line-number="8">          <span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">quantile</span>(diff_f, <span class="fl">0.975</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1010"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1010-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_mpt_h) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1010-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(alpha_f, beta_f) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1010-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">f_0 =</span> <span class="kw">plogis</span>(alpha_f),</a>
+<a class="sourceLine" id="cb1010-4" data-line-number="4">         <span class="dt">f_1 =</span> <span class="kw">plogis</span>(alpha_f <span class="op">+</span><span class="st"> </span>beta_f),</a>
+<a class="sourceLine" id="cb1010-5" data-line-number="5">         <span class="dt">diff_f =</span> f_<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>f_<span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1010-6" data-line-number="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Estimate =</span> <span class="kw">mean</span>(diff_f),</a>
+<a class="sourceLine" id="cb1010-7" data-line-number="7">          <span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">quantile</span>(diff_f, <span class="fl">0.025</span>),</a>
+<a class="sourceLine" id="cb1010-8" data-line-number="8">          <span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">quantile</span>(diff_f, <span class="fl">0.975</span>))</a></code></pre></div>
 <pre><code>##   Estimate   2.5%   97.5%
 ## 1   -0.081 -0.109 -0.0535</code></pre>
 <p>One further interesting step could be to develop a competing model that assumes a different latent process, and then comparing the performance of the MPT with this competing model, using Bayes factors or K-fold-CV (or both).</p>
 <p>Since we generated the data based on known latent parameters, we also plot the posteriors together with the true values of the parameters in Figure <a href="multinomial-processing-tree-mpt-models.html#fig:mpt-h">19.5</a>. This is something that we can only do with simulated data.</p>
-<div class="sourceCode" id="cb1011"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1011-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_mpt_h) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1011-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(tau_u_a, alpha_a, t, alpha_f, beta_f, c) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1011-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">c</span>(tau_u_a,</a>
-<a class="sourceLine" id="cb1011-4" data-line-number="4">                             <span class="kw">qlogis</span>(a_true),</a>
-<a class="sourceLine" id="cb1011-5" data-line-number="5">                             t_true, alpha_f,</a>
-<a class="sourceLine" id="cb1011-6" data-line-number="6">                             beta_f, c_true)) </a></code></pre></div>
+<div class="sourceCode" id="cb1012"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1012-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_mpt_h) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1012-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(tau_u_a, alpha_a, t, alpha_f, beta_f, c) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1012-3" data-line-number="3"><span class="st">  </span><span class="kw">mcmc_recover_hist</span>(<span class="dt">true =</span> <span class="kw">c</span>(tau_u_a,</a>
+<a class="sourceLine" id="cb1012-4" data-line-number="4">                             <span class="kw">qlogis</span>(a_true),</a>
+<a class="sourceLine" id="cb1012-5" data-line-number="5">                             t_true, alpha_f,</a>
+<a class="sourceLine" id="cb1012-6" data-line-number="6">                             beta_f, c_true)) </a></code></pre></div>
 <div class="figure"><span id="fig:mpt-h"></span>
 <img src="bookdown_files/figure-html/mpt-h-1.svg" alt="Posterior of the hierarchical MPT with true values as vertical lines (model `mpt_h.stan`)." width="672" />
 <p class="caption">
@@ -1680,9 +1680,9 @@ FIGURE 19.5: Posterior of the hierarchical MPT with true values as vertical line
 </p>
 </div>
 <p>If everything is correctly defined in the model, we should be able to generate posterior predictive data based on our estimates that looks quite similar to the simulated data; see Figure <a href="multinomial-processing-tree-mpt-models.html#fig:aggMPT-h">19.6</a>.</p>
-<div class="sourceCode" id="cb1012"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1012-1" data-line-number="1">gen_data &lt;-<span class="st"> </span>rstan<span class="op">::</span><span class="kw">extract</span>(fit_mpt_h)<span class="op">$</span>pred_w_ans</a>
-<a class="sourceLine" id="cb1012-2" data-line-number="2"><span class="kw">ppc_bars</span>(sim_list_h<span class="op">$</span>w_ans, gen_data) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1012-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;Hierarchical model&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1013"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1013-1" data-line-number="1">gen_data &lt;-<span class="st"> </span>rstan<span class="op">::</span><span class="kw">extract</span>(fit_mpt_h)<span class="op">$</span>pred_w_ans</a>
+<a class="sourceLine" id="cb1013-2" data-line-number="2"><span class="kw">ppc_bars</span>(sim_list_h<span class="op">$</span>w_ans, gen_data) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1013-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;Hierarchical model&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:aggMPT-h"></span>
 <img src="bookdown_files/figure-html/aggMPT-h-1.svg" alt="Posterior predictive check for aggregated data in the hierarchical MPT model" width="672" />
 <p class="caption">
@@ -1690,9 +1690,9 @@ FIGURE 19.6: Posterior predictive check for aggregated data in the hierarchical 
 </p>
 </div>
 <p>It is also useful to look at the individual subjects’ posteriors; these are shown in Figure <a href="multinomial-processing-tree-mpt-models.html#fig:pMPT-h">19.7</a>.</p>
-<div class="sourceCode" id="cb1013"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1013-1" data-line-number="1"><span class="kw">ppc_bars_grouped</span>(sim_list_h<span class="op">$</span>w_ans, </a>
-<a class="sourceLine" id="cb1013-2" data-line-number="2">                 gen_data, <span class="dt">group =</span> subj) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1013-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;By-subject plot for the hierarchical model&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1014"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1014-1" data-line-number="1"><span class="kw">ppc_bars_grouped</span>(sim_list_h<span class="op">$</span>w_ans, </a>
+<a class="sourceLine" id="cb1014-2" data-line-number="2">                 gen_data, <span class="dt">group =</span> subj) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1014-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;By-subject plot for the hierarchical model&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:pMPT-h"></span>
 <img src="bookdown_files/figure-html/pMPT-h-1.svg" alt="Individual subjects in the hierarchical MPT model." width="672" />
 <p class="caption">
@@ -1700,14 +1700,14 @@ FIGURE 19.7: Individual subjects in the hierarchical MPT model.
 </p>
 </div>
 <p>But what about the first <em>non-hierarchical</em> MPT model (<code>mpt_cat.stan</code>)?:</p>
-<div class="sourceCode" id="cb1014"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1014-1" data-line-number="1">mpt_cat &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb1014-2" data-line-number="2">                       <span class="st">&quot;mpt_cat.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb1014-3" data-line-number="3">                       <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb1014-4" data-line-number="4">fit_sh &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_cat, <span class="dt">data =</span> sim_list_h)  </a></code></pre></div>
+<div class="sourceCode" id="cb1015"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1015-1" data-line-number="1">mpt_cat &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb1015-2" data-line-number="2">                       <span class="st">&quot;mpt_cat.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb1015-3" data-line-number="3">                       <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb1015-4" data-line-number="4">fit_sh &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> mpt_cat, <span class="dt">data =</span> sim_list_h)  </a></code></pre></div>
 <p>The aggregated data looks great (Figure <a href="multinomial-processing-tree-mpt-models.html#fig:aggMPT-nh">19.8</a>).</p>
-<div class="sourceCode" id="cb1015"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1015-1" data-line-number="1">gen_data_sMPT &lt;-<span class="st"> </span>rstan<span class="op">::</span><span class="kw">extract</span>(fit_sh)<span class="op">$</span>pred_w_ans</a>
-<a class="sourceLine" id="cb1015-2" data-line-number="2"><span class="kw">ppc_bars</span>(sim_list_h<span class="op">$</span>w_ans, gen_data_sMPT) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1015-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;Non-hierarchical model&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1016"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1016-1" data-line-number="1">gen_data_sMPT &lt;-<span class="st"> </span>rstan<span class="op">::</span><span class="kw">extract</span>(fit_sh)<span class="op">$</span>pred_w_ans</a>
+<a class="sourceLine" id="cb1016-2" data-line-number="2"><span class="kw">ppc_bars</span>(sim_list_h<span class="op">$</span>w_ans, gen_data_sMPT) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1016-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;Non-hierarchical model&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:aggMPT-nh"></span>
 <img src="bookdown_files/figure-html/aggMPT-nh-1.svg" alt="Posterior predictive check for aggregated data in a non-hierarchical MPT model (mpt_cat.stan)." width="672" />
 <p class="caption">
@@ -1715,8 +1715,8 @@ FIGURE 19.8: Posterior predictive check for aggregated data in a non-hierarchica
 </p>
 </div>
 <p>However, the fit to individual subjects looks less good (Figure <a href="multinomial-processing-tree-mpt-models.html#fig:pMPT">19.9</a>).</p>
-<div class="sourceCode" id="cb1016"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1016-1" data-line-number="1"><span class="kw">ppc_bars_grouped</span>(sim_list_h<span class="op">$</span>w_ans, gen_data_sMPT, <span class="dt">group =</span> subj) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1016-2" data-line-number="2"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;By-subject plot for the non-hierarchical model&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1017"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1017-1" data-line-number="1"><span class="kw">ppc_bars_grouped</span>(sim_list_h<span class="op">$</span>w_ans, gen_data_sMPT, <span class="dt">group =</span> subj) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1017-2" data-line-number="2"><span class="st">  </span><span class="kw">ggtitle</span> (<span class="st">&quot;By-subject plot for the non-hierarchical model&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:pMPT"></span>
 <img src="bookdown_files/figure-html/pMPT-1.svg" alt="Individual subjects in the non-hierarchical MPT model (mpt_cat.stan)." width="672" />
 <p class="caption">

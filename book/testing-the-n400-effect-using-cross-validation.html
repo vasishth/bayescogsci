@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-06" />
+<meta name="date" content="2021-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1192,18 +1192,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">17.3</span> Testing the N400 effect using cross-validation</h2>
 <p>Similarly as we did in section <a href="sec-N400BF.html#sec:N400BF">16.2</a> with the Bayes factor, we revisit section <a href="sec-N400hierarchical.html#sec:N400hierarchical">5.1</a>, where we estimated the effect of cloze probability on the N400 average signal. We consider two models here, a model that includes the effect of cloze probability, such as <code>fit_N400_sih</code> from section <a href="sec-N400hierarchical.html#sec:sih">5.1.5</a>, and a null model.</p>
 <p>We can verify that the likelihood that we fit was appropriate for a hierarchical model that includes an effect of cloze probability as follows:</p>
-<div class="sourceCode" id="cb873"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb873-1" data-line-number="1"><span class="kw">formula</span>(fit_N400_sih)</a></code></pre></div>
+<div class="sourceCode" id="cb874"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb874-1" data-line-number="1"><span class="kw">formula</span>(fit_N400_sih)</a></code></pre></div>
 <pre><code>## n400 ~ c_cloze + (c_cloze | subj) + (c_cloze | item)</code></pre>
 <p>In contrast to situation with Bayes factor, priors are less critical for cross-validation. Priors are only important in cross-validation to the extent that they affect parameter estimation: As we saw previously, very narrow priors can bias the posterior; and unrealistically wide priors can lead to convergence problems. The number of samples is also less critical than with Bayes factor, most of the uncertainty in the estimates of the <span class="math inline">\(\widehat{elpd}\)</span> is due to the number of observations. However, a very small number of samples can affect the <span class="math inline">\(\widehat{elpd}\)</span> because the posterior estimation will be affected by the small sample size.
 We update our previous formula to define a null model as follows:</p>
-<div class="sourceCode" id="cb875"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb875-1" data-line-number="1">fit_N400_sih_null &lt;-<span class="st"> </span><span class="kw">update</span>(fit_N400_sih, <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>c_cloze)</a></code></pre></div>
+<div class="sourceCode" id="cb876"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb876-1" data-line-number="1">fit_N400_sih_null &lt;-<span class="st"> </span><span class="kw">update</span>(fit_N400_sih, <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>c_cloze)</a></code></pre></div>
 <!-- we'll try to decide whether the n  -->
 <!-- We'll revisit null hypothesis testing using this time 10-fold cross-validation. We first need to create 10 new data sets, each one has 90% of the data for training (i.e., estimating parameters), and 10% for validation (evaluating the log-likelihood of new data). -->
 <!-- We use `kfold_split_stratified` from the `loo` package to create indexes for the validation data of each fold so that each subject is equally represented in each fold (i.e., stratified by subjects): -->
 <div id="cross-validation-with-psis-loo" class="section level3">
 <h3><span class="header-section-number">17.3.1</span> Cross-validation with PSIS-LOO</h3>
 <p>Estimating <span class="math inline">\(elpd\)</span> using PSIS-LOO is very straightforward with <code>brms</code>, which uses the package <code>loo</code> as a back-end. There is no need to refit the model, and <code>loo</code> takes care of the applying the PSIS approximation to derive estimates and standard errors.</p>
-<div class="sourceCode" id="cb876"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb876-1" data-line-number="1">(loo_sih &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_N400_sih))</a></code></pre></div>
+<div class="sourceCode" id="cb877"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb877-1" data-line-number="1">(loo_sih &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_N400_sih))</a></code></pre></div>
 <pre><code>## 
 ## Computed from 4000 by 2863 log-likelihood matrix
 ## 
@@ -1216,7 +1216,7 @@ We update our previous formula to define a null model as follows:</p>
 ## 
 ## All Pareto k estimates are good (k &lt; 0.5).
 ## See help(&#39;pareto-k-diagnostic&#39;) for details.</code></pre>
-<div class="sourceCode" id="cb878"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb878-1" data-line-number="1">(loo_sih_null &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_N400_sih_null))</a></code></pre></div>
+<div class="sourceCode" id="cb879"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb879-1" data-line-number="1">(loo_sih_null &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_N400_sih_null))</a></code></pre></div>
 <pre><code>## 
 ## Computed from 4000 by 2863 log-likelihood matrix
 ## 
@@ -1236,19 +1236,19 @@ We update our previous formula to define a null model as follows:</p>
 <li><code>looic</code> is simply <code>-2*elpd_loo</code>, the <span class="math inline">\(elpd\)</span> on the deviance scale. This is called the information criterion is mainly provided for historical reasons: other information criteria like AIC (Akaike Information Criterion) and DIC (Deviance Information Criterion) are commonly used in model selection.</li>
 </ol>
 <p>It’s important to bear in mind that the PSIS-LOO approximation to LOO can only be trusted if Pareto k estimates (<span class="math inline">\(\hat{k}\)</span>) are smaller than 0.7. To compare the models, we need to take a look at the difference between <code>elpd_loo</code> and the standard error of that difference:</p>
-<div class="sourceCode" id="cb880"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb880-1" data-line-number="1"><span class="kw">loo_compare</span>(loo_sih, loo_sih_null)</a></code></pre></div>
+<div class="sourceCode" id="cb881"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb881-1" data-line-number="1"><span class="kw">loo_compare</span>(loo_sih, loo_sih_null)</a></code></pre></div>
 <pre><code>##                   elpd_diff se_diff
 ## fit_N400_sih       0.0       0.0   
 ## fit_N400_sih_null -2.9       2.5</code></pre>
 <p>Although the model that includes cloze probability as a predictor has higher predictive accuracy, the difference is smaller than 4 and it’s smaller than two SE. This means that from the perspective LOO-CV, both models are almost indistinguishable! In fact, the same will happen if we compare the model with logarithmic predictability to the linear or null model; see exercise <a href="exercises-3.html#exr:logcv">17.1</a>.</p>
 <p>We could also check whether the alternative model is making good predictions <em>somewhere</em> by examining the difference in pointwise predictive accuracy as a function of, for example, cloze probability. In the following plot we subtract the predictive accuracy of the alternative model by the accuracy of the null model; we can interpret now larger differences as an advantage for the alternative model. However, we see that as far as <em>posterior predictive accuracy</em> goes, both models are quite similar. Figure <a href="testing-the-n400-effect-using-cross-validation.html#fig:diffpredacc">17.1</a> shows that the difference in predictive accuracy is symmetrical with respect to the zero; as we go further from the mean cloze (which is around <span class="math inline">\(0.5\)</span>), the differences in predictions are larger but they span over positive and negative values.</p>
 <p>The following code stores the difference in predictive accuracy of the models in a variable and plots it in Figure <a href="testing-the-n400-effect-using-cross-validation.html#fig:diffpredacc">17.1</a>.</p>
-<div class="sourceCode" id="cb882"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb882-1" data-line-number="1">df_eeg &lt;-<span class="st"> </span><span class="kw">mutate</span>(df_eeg,</a>
-<a class="sourceLine" id="cb882-2" data-line-number="2">  <span class="dt">diff_elpd =</span> loo_sih<span class="op">$</span>pointwise[, <span class="st">&quot;elpd_loo&quot;</span>] <span class="op">-</span></a>
-<a class="sourceLine" id="cb882-3" data-line-number="3"><span class="st">    </span>loo_sih_null<span class="op">$</span>pointwise[, <span class="st">&quot;elpd_loo&quot;</span>]</a>
-<a class="sourceLine" id="cb882-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb882-5" data-line-number="5"><span class="kw">ggplot</span>(df_eeg, <span class="kw">aes</span>(<span class="dt">x =</span> cloze, <span class="dt">y =</span> diff_elpd)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb882-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.4</span>, <span class="dt">position =</span> <span class="kw">position_jitter</span>(<span class="dt">w =</span> <span class="fl">.001</span>, <span class="dt">h =</span> <span class="dv">0</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb883"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb883-1" data-line-number="1">df_eeg &lt;-<span class="st"> </span><span class="kw">mutate</span>(df_eeg,</a>
+<a class="sourceLine" id="cb883-2" data-line-number="2">  <span class="dt">diff_elpd =</span> loo_sih<span class="op">$</span>pointwise[, <span class="st">&quot;elpd_loo&quot;</span>] <span class="op">-</span></a>
+<a class="sourceLine" id="cb883-3" data-line-number="3"><span class="st">    </span>loo_sih_null<span class="op">$</span>pointwise[, <span class="st">&quot;elpd_loo&quot;</span>]</a>
+<a class="sourceLine" id="cb883-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb883-5" data-line-number="5"><span class="kw">ggplot</span>(df_eeg, <span class="kw">aes</span>(<span class="dt">x =</span> cloze, <span class="dt">y =</span> diff_elpd)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb883-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.4</span>, <span class="dt">position =</span> <span class="kw">position_jitter</span>(<span class="dt">w =</span> <span class="fl">.001</span>, <span class="dt">h =</span> <span class="dv">0</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:diffpredacc"></span>
 <img src="bookdown_files/figure-html/diffpredacc-1.svg" alt="Difference in predictive accuracy between a model including the effect of cloze and a null model. A larger (more positive) difference indicates an advantage for the model that includes the effect of cloze." width="672" />
 <p class="caption">
@@ -1261,14 +1261,14 @@ FIGURE 17.1: Difference in predictive accuracy between a model including the eff
 <h3><span class="header-section-number">17.3.2</span> Cross-validation with K-fold</h3>
 <p>Estimating <span class="math inline">\(elpd\)</span> using k-fold-CV has the advantage of omitting one layer of approximations: the <span class="math inline">\(elpd\)</span> based on PSIS-LOO-CV is an approximation of the <span class="math inline">\(elpd\)</span> based on <em>exact</em> LOO-CV (and we saw how any cross-validation approach gave as an approximation to the true <span class="math inline">\(elpd\)</span>). This means that we don’t need to worry about <span class="math inline">\(\hat{k}\)</span>. However, K-fold also uses a reduced training set in comparison with LOO, worsening the approximation to the true generating process <span class="math inline">\(p_{t}\)</span>.</p>
 <p>Because we divide our data into folds, we need to think about the way we split the data: We could do it randomly, but we take the risk that in some of the training sets, observations from a subject, for example, would be completely absent. This will lead to large differences in predictive accuracy between folds. We can avoid that by using stratification: we split the observations into groups ensuring that relative category frequencies are approximately preserved. We do this with the <code>kfold()</code> function, available in the package <code>brms</code>, by setting <code>folds = &quot;stratified&quot;</code> and <code>group = &quot;subj&quot;</code>, by default <code>K</code> is set to 10, but that can be changed.</p>
-<div class="sourceCode" id="cb883"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb883-1" data-line-number="1">kfold_sih &lt;-<span class="st"> </span><span class="kw">kfold</span>(fit_N400_sih,</a>
-<a class="sourceLine" id="cb883-2" data-line-number="2">                    <span class="dt">folds =</span> <span class="st">&quot;stratified&quot;</span>,</a>
-<a class="sourceLine" id="cb883-3" data-line-number="3">                    <span class="dt">group =</span> <span class="st">&quot;subj&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb884"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb884-1" data-line-number="1">kfold_sih_null &lt;-<span class="st"> </span><span class="kw">kfold</span>(fit_N400_sih_null,</a>
-<a class="sourceLine" id="cb884-2" data-line-number="2">                         <span class="dt">folds =</span> <span class="st">&quot;stratified&quot;</span>,</a>
-<a class="sourceLine" id="cb884-3" data-line-number="3">                         <span class="dt">group =</span> <span class="st">&quot;subj&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb884"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb884-1" data-line-number="1">kfold_sih &lt;-<span class="st"> </span><span class="kw">kfold</span>(fit_N400_sih,</a>
+<a class="sourceLine" id="cb884-2" data-line-number="2">                    <span class="dt">folds =</span> <span class="st">&quot;stratified&quot;</span>,</a>
+<a class="sourceLine" id="cb884-3" data-line-number="3">                    <span class="dt">group =</span> <span class="st">&quot;subj&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb885"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb885-1" data-line-number="1">kfold_sih_null &lt;-<span class="st"> </span><span class="kw">kfold</span>(fit_N400_sih_null,</a>
+<a class="sourceLine" id="cb885-2" data-line-number="2">                         <span class="dt">folds =</span> <span class="st">&quot;stratified&quot;</span>,</a>
+<a class="sourceLine" id="cb885-3" data-line-number="3">                         <span class="dt">group =</span> <span class="st">&quot;subj&quot;</span>)</a></code></pre></div>
 <p>Running K-fold CV takes some time since each model is refit K times. We can now inspect the <span class="math inline">\(elpd\)</span> values:</p>
-<div class="sourceCode" id="cb885"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb885-1" data-line-number="1">kfold_sih</a></code></pre></div>
+<div class="sourceCode" id="cb886"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb886-1" data-line-number="1">kfold_sih</a></code></pre></div>
 <pre><code>## 
 ## Based on 10-fold cross-validation
 ## 
@@ -1276,7 +1276,7 @@ FIGURE 17.1: Difference in predictive accuracy between a model including the eff
 ## elpd_kfold -11097.4 46.6
 ## p_kfold        85.7  3.5
 ## kfoldic     22194.8 93.1</code></pre>
-<div class="sourceCode" id="cb887"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb887-1" data-line-number="1">kfold_sih_null</a></code></pre></div>
+<div class="sourceCode" id="cb888"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb888-1" data-line-number="1">kfold_sih_null</a></code></pre></div>
 <pre><code>## 
 ## Based on 10-fold cross-validation
 ## 
@@ -1285,7 +1285,7 @@ FIGURE 17.1: Difference in predictive accuracy between a model including the eff
 ## p_kfold        93.3  3.7
 ## kfoldic     22197.5 93.0</code></pre>
 <p>We compare the two models using <code>loo_compare</code> (regardless if we have used PSIS-LOO-CV or K-fold-CV):</p>
-<div class="sourceCode" id="cb889"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb889-1" data-line-number="1"><span class="kw">loo_compare</span>(kfold_sih, kfold_sih_null)</a></code></pre></div>
+<div class="sourceCode" id="cb890"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb890-1" data-line-number="1"><span class="kw">loo_compare</span>(kfold_sih, kfold_sih_null)</a></code></pre></div>
 <pre><code>##                   elpd_diff se_diff
 ## fit_N400_sih       0.0       0.0   
 ## fit_N400_sih_null -1.3       4.1</code></pre>
@@ -1294,13 +1294,13 @@ FIGURE 17.1: Difference in predictive accuracy between a model including the eff
 <div id="leave-one-group-out-cross-validation" class="section level3">
 <h3><span class="header-section-number">17.3.3</span> Leave-one-group-out cross-validation</h3>
 <p>An alternative to split the observations randomly using stratification is to treat naturally occurring clusters as folds, this is leave-one-group-out cross-validation (LOGO-CV). By doing this we can interpret the output of cross-validation as the capacity of the models for generalizing to unseen clusters. We implement LOGO-CV with subjects.</p>
-<div class="sourceCode" id="cb891"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb891-1" data-line-number="1">logo_sih &lt;-<span class="st"> </span><span class="kw">kfold</span>(fit_N400_sih,</a>
-<a class="sourceLine" id="cb891-2" data-line-number="2">                    <span class="dt">group =</span> <span class="st">&quot;subj&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb892"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb892-1" data-line-number="1">logo_sih_null &lt;-<span class="st"> </span><span class="kw">kfold</span>(fit_N400_sih_null,</a>
-<a class="sourceLine" id="cb892-2" data-line-number="2">                         <span class="dt">group =</span> <span class="st">&quot;subj&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb892"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb892-1" data-line-number="1">logo_sih &lt;-<span class="st"> </span><span class="kw">kfold</span>(fit_N400_sih,</a>
+<a class="sourceLine" id="cb892-2" data-line-number="2">                    <span class="dt">group =</span> <span class="st">&quot;subj&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb893"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb893-1" data-line-number="1">logo_sih_null &lt;-<span class="st"> </span><span class="kw">kfold</span>(fit_N400_sih_null,</a>
+<a class="sourceLine" id="cb893-2" data-line-number="2">                         <span class="dt">group =</span> <span class="st">&quot;subj&quot;</span>)</a></code></pre></div>
 <p>Running LOGO CV with subjects takes some time since each model is refit as many times as we have subjects, in this case 37 times! We can now inspect the <span class="math inline">\(elpd\)</span> estimates and evaluate which model generalizes better to unseen subjects.</p>
 <p>We compare the models using <code>loo_compare</code>.</p>
-<div class="sourceCode" id="cb893"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb893-1" data-line-number="1"><span class="kw">loo_compare</span>(logo_sih, logo_sih_null)</a></code></pre></div>
+<div class="sourceCode" id="cb894"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb894-1" data-line-number="1"><span class="kw">loo_compare</span>(logo_sih, logo_sih_null)</a></code></pre></div>
 <pre><code>##                   elpd_diff se_diff
 ## fit_N400_sih       0.0       0.0   
 ## fit_N400_sih_null -1.5       2.3</code></pre>

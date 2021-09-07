@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-06" />
+<meta name="date" content="2021-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1217,11 +1217,11 @@ rt_n \sim \mathit{Normal}(\mu, \sigma)
 </div>
 
 <p>We want to fit both response times and accuracy with the same model. We simulate the data as follows:</p>
-<div class="sourceCode" id="cb643"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb643-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">500</span></a>
-<a class="sourceLine" id="cb643-2" data-line-number="2">df_sim &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb643-3" data-line-number="3">  <span class="dt">rt =</span> <span class="kw">rlnorm</span>(N, <span class="dt">mean =</span> <span class="dv">6</span>, <span class="dt">sd =</span> <span class="fl">.5</span>),</a>
-<a class="sourceLine" id="cb643-4" data-line-number="4">  <span class="dt">correct =</span> <span class="kw">rbern</span>(N, <span class="dt">prob =</span> <span class="fl">.85</span>)</a>
-<a class="sourceLine" id="cb643-5" data-line-number="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb644-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">500</span></a>
+<a class="sourceLine" id="cb644-2" data-line-number="2">df_sim &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb644-3" data-line-number="3">  <span class="dt">rt =</span> <span class="kw">rlnorm</span>(N, <span class="dt">mean =</span> <span class="dv">6</span>, <span class="dt">sd =</span> <span class="fl">.5</span>),</a>
+<a class="sourceLine" id="cb644-4" data-line-number="4">  <span class="dt">correct =</span> <span class="kw">rbern</span>(N, <span class="dt">prob =</span> <span class="fl">.85</span>)</a>
+<a class="sourceLine" id="cb644-5" data-line-number="5">)</a></code></pre></div>
 <p>We build the following model:</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower = 1&gt; N;
@@ -1240,12 +1240,12 @@ model {
     target += bernoulli_lpdf(correct[n] | theta);
 }</code></pre>
 <p>Why is this model not working?</p>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb645-1" data-line-number="1">ls_sim &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb645-2" data-line-number="2">  <span class="dt">rt =</span> df_sim<span class="op">$</span>rt,</a>
-<a class="sourceLine" id="cb645-3" data-line-number="3">  <span class="dt">correct =</span> df_sim<span class="op">$</span>correct</a>
-<a class="sourceLine" id="cb645-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb645-5" data-line-number="5">incorrect &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;incorrect.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb645-6" data-line-number="6">fit_sim &lt;-<span class="st"> </span><span class="kw">stan</span>(incorrect, <span class="dt">data =</span> ls_sim)</a></code></pre></div>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb646-1" data-line-number="1">ls_sim &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb646-2" data-line-number="2">  <span class="dt">rt =</span> df_sim<span class="op">$</span>rt,</a>
+<a class="sourceLine" id="cb646-3" data-line-number="3">  <span class="dt">correct =</span> df_sim<span class="op">$</span>correct</a>
+<a class="sourceLine" id="cb646-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb646-5" data-line-number="5">incorrect &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, <span class="st">&quot;incorrect.stan&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb646-6" data-line-number="6">fit_sim &lt;-<span class="st"> </span><span class="kw">stan</span>(incorrect, <span class="dt">data =</span> ls_sim)</a></code></pre></div>
 <pre><code>## SYNTAX ERROR, MESSAGE(S) FROM PARSER:</code></pre>
 <pre><code>## Variable &quot;mu&quot; does not exist.</code></pre>
 <pre><code>##  error in &#39;model5ada44ed05b11_incorrect&#39; at line 11, column 26</code></pre>
@@ -1266,7 +1266,7 @@ model {
 
 <p>Edit the simple example with Stan from section <a href="sec-firststan.html#sec:firststan">10.2</a>, and replace the normal distribution with a skew normal distribution. (Don’t forget to add a prior to the new parameter, and check Wikipedia and Stan documentation for more information about the distribution).</p>
 <p>Fit the following data:</p>
-<div class="sourceCode" id="cb658"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb658-1" data-line-number="1">Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb659-1" data-line-number="1">Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</a></code></pre></div>
 <p>Does the estimate of the new parameter make sense?</p>
 
 <div class="exercise">
@@ -1300,8 +1300,8 @@ model {
 </div>
 
 <p><span class="citation">Paolacci, Chandler, and Ipeirotis (<a href="#ref-Paolaccietal">2010</a>)</span> examined whether the results of some classic experiments differ between a university pool population and subjects recruited from Mechanical Turk. We’ll examine whether the results of the conjunction fallacy experiment <span class="citation">(or Linda problem: Tversky and Kahneman <a href="#ref-TverskyKahneman1983">1983</a>)</span> are replicated for both groups.</p>
-<div class="sourceCode" id="cb660"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb660-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_fallacy&quot;</span>)</a>
-<a class="sourceLine" id="cb660-2" data-line-number="2">df_fallacy</a></code></pre></div>
+<div class="sourceCode" id="cb661"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb661-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_fallacy&quot;</span>)</a>
+<a class="sourceLine" id="cb661-2" data-line-number="2">df_fallacy</a></code></pre></div>
 <pre><code>## # A tibble: 268 x 2
 ##   source answer
 ##   &lt;chr&gt;   &lt;int&gt;
