@@ -1418,7 +1418,7 @@ model {
 <h3><span class="header-section-number">11.1.2</span> Uncorrelated varying intercept and slopes model with Stan</h3>
 <p>In the following model, we relax the strong assumption that every subject will be affected equally by the manipulation. For ease of exposition, we start by assuming that the adjustments for the intercept and slope are not correlated, as we did in section <a href="sec-N400hierarchical.html#sec:uncorrelated">5.1.3</a>.</p>
 <p><span class="math display">\[\begin{equation}
-  signal_n \sim \mathit{Normal}(\alpha + u_{1,subj[n]} + c\_cloze_n \cdot (\beta+ u_{2,subj[n]}),\sigma)
+  signal_n \sim \mathit{Normal}(\alpha + u_{subj[n],1} + c\_cloze_n \cdot (\beta+ u_{subj[n],2}),\sigma)
 \end{equation}\]</span></p>
 <p><span class="math display">\[\begin{equation}
  \begin{aligned}
