@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1246,29 +1247,29 @@ FIGURE 16.5: Posterior probabilities for the H0 are plotted as a function of pri
 </div>
 <div id="determine-priors-using-meta-analysis" class="section level4">
 <h4><span class="header-section-number">16.5.2.3</span> Determine priors using meta-analysis</h4>
-<p>One good way to obtain priors for Bayesian analyses, and specifically for Bayes factor analyses, is to use results from meta-analyses on the subject. Here, we take the prior for the experimental manipulation of agreement attraction from the published meta-analysis <span class="citation">(Jäger, Engelmann, and Vasishth <a href="#ref-JaegerEngelmannVasishth2017">2017</a>)</span>.<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a></p>
+<p>One good way to obtain priors for Bayesian analyses, and specifically for Bayes factor analyses, is to use results from meta-analyses on the subject. Here, we take the prior for the experimental manipulation of agreement attraction from the published meta-analysis <span class="citation">(Jäger, Engelmann, and Vasishth <a href="#ref-JaegerEngelmannVasishth2017">2017</a>)</span>.<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a></p>
 <p>The mean effect size (difference in reading time between the two experimental conditions) in the meta-analysis is <span class="math inline">\(-22\)</span> milliseconds (ms), with <span class="math inline">\(95\% \;CI = [-36 \; -9]\)</span> <span class="citation">(cf., Jäger, Engelmann, and Vasishth <a href="#ref-JaegerEngelmannVasishth2017">2017</a>, Table 4)</span>. This means that on average, the target word (i.e., the verb) in sentences such as (2) is on average read <span class="math inline">\(22\)</span> milliseconds faster than in sentences such as (1). The size of the effect is measured on the millisecond scale, assuming a normal distribution of effect sizes across studies.</p>
 <p>However, individual reading times usually do not follow a normal distribution. Instead, a better assumption about the distribution of reading times is a log-normal distribution. This is what we will assume in the <code>brms</code> model. Therefore, to use the prior from the meta-analysis in the Bayesian analysis, we have to transform the prior values from the millisecond scale to log millisecond scale.</p>
 <p>We have performed this transformation in <span class="citation">Schad et al. (<a href="#ref-SchadEtAlBF">2021</a>)</span>. Based on these calculations, the prior for the experimental factor of interference effects is set to a normal distribution with mean = <span class="math inline">\(-0.03\)</span> and standard deviation = <span class="math inline">\(0.009\)</span>. For the other model parameters, we use mildly informative priors based on our recent analysis of a principled Bayesian workflow <span class="citation">(Schad, Betancourt, and Vasishth <a href="#ref-schad2020toward">2020</a>)</span>.</p>
-<div class="sourceCode" id="cb862"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb862-1" data-line-number="1">priors &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb862-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb862-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="op">-</span><span class="fl">0.03</span>, <span class="fl">0.009</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb862-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb862-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb862-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb862-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb861"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb861-1" data-line-number="1">priors &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb861-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb861-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="op">-</span><span class="fl">0.03</span>, <span class="fl">0.009</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb861-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb861-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb861-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb861-7" data-line-number="7">)</a></code></pre></div>
 </div>
 <div id="running-a-hierarchical-bayesian-analysis" class="section level4">
 <h4><span class="header-section-number">16.5.2.4</span> Running a hierarchical Bayesian analysis</h4>
 <p>We now run a <code>brms</code> model on the data. We use a large number of iterations (<code>iter</code> <span class="math inline">\(= 10000\)</span>) such that we can compute stable Bayes factor estimates. We use bridge sampling to estimate the Bayes factor of the alternative model, which includes a fixed effect for the experimental condition agreement attraction (<code>x</code>; i.e., sentence type), against the null model where the fixed effect of sentence type is excluded. For the agreement attraction effect of sentence type, we use sum contrast coding (i.e., -1 and +1).</p>
 <p>We estimate Bayes factors between a full model, where the effect of agreement attraction is included, and a null model, where the effect of agreement attraction is absent, using the command <code>bayes_factor(lml_m1_lagoE1, lml_m0_lagoE1)</code>. It computes the Bayes factor <span class="math inline">\(BF_{10}\)</span>, that is, the evidence of the alternative over the null.</p>
 <p>We first show the results from the posterior analyses:</p>
-<div class="sourceCode" id="cb863"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb863-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">fixef</span>(m1_lagoE1), <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb862"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb862-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">fixef</span>(m1_lagoE1), <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error  Q2.5 Q97.5
 ## Intercept     6.02      0.06  5.90  6.13
 ## x            -0.03      0.01 -0.04 -0.01</code></pre>
 <p>They show that for the fixed effect <code>x</code>, capturing the agreement attraction effect, the 95% credible interval does not overlap with zero. This indicates that there is some hint that the effect may have the expected negative direction, reflecting shorter reading times in the plural condition. As mentioned earlier, this does not provide a direct test of the hypothesis that the effect exists and is not zero. This is not tested here, because we did not specify the null hypothesis of zero effect explicitly. We can, however, make inference on this null hypothesis by using the Bayes factor. We now look at the Bayes factor of the alternative model compared to the null model (<span class="math inline">\(BF_{10}\)</span>):</p>
-<div class="sourceCode" id="cb865"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb865-1" data-line-number="1">h_lagoE1<span class="op">$</span>bf</a></code></pre></div>
+<div class="sourceCode" id="cb864"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb864-1" data-line-number="1">h_lagoE1<span class="op">$</span>bf</a></code></pre></div>
 <pre><code>## [1] 6.29</code></pre>
 <p>It shows a Bayes factor of <span class="math inline">\(6\)</span>, suggesting that there is some support for the alternative model, which contains the fixed effect of agreement attraction. That is, this provides evidence for the alternative hypothesis that there is a difference between the experimental conditions, i.e., a facilitatory effect in the plural condition of the size derived from the meta analysis.</p>
 </div>
@@ -1276,7 +1277,7 @@ FIGURE 16.5: Posterior probabilities for the H0 are plotted as a function of pri
 <h4><span class="header-section-number">16.5.2.5</span> Variability of the Bayes factor: Posterior simulations</h4>
 <p>One way to investigate how variable the outcome of Bayes factor analyses can be (given that the Bayes factor is computed in a stable and accurate way), is to run posterior simulations based on a fitted model. That is, one can assume that the truth is approximately known (as approximated by the posterior model fit), and that based on this “truth” several artificial data sets are simulated. Computing the Bayes factor analysis again on the simulated data can provide some insight into how variable the Bayes factor will be in a situation where the “true” data generating process is always the same, and where variations in Bayes factor results have to be attributed to random noise in subjects, items, residual variation, and to uncertainty about the precise true parameter values.</p>
 <p>We can take the Bayesian hierarchical model fitted to the data from <span class="citation">Lago et al. (<a href="#ref-lago2015agreement">2015</a>)</span>, and run posterior predictive simulations. In these simulations, one takes posterior samples for the model parameters (i.e., <span class="math inline">\(p(\Theta \mid y)\)</span>), and for each posterior sample of the model parameters, one can simulate new data <span class="math inline">\(\tilde{y}\)</span> from the model <span class="math inline">\(p(\tilde{y} \mid \Theta)\)</span>. That is, posterior predictive simulations are a Bayesian way to perform artificial data simulation. The posterior predictive distribution is written as: <span class="math inline">\(p(\tilde{y} \mid y) = \int p(\tilde{y} \mid \Theta) p(\Theta \mid y) d \Theta\)</span>. Posterior predictive simulations from the fitted <code>brms</code> model can be performed using the brms-function <code>posterior_predict()</code>.</p>
-<div class="sourceCode" id="cb867"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb867-1" data-line-number="1">pred_lagoE1 &lt;-<span class="st"> </span><span class="kw">posterior_predict</span>(m1_lagoE1)</a></code></pre></div>
+<div class="sourceCode" id="cb866"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb866-1" data-line-number="1">pred_lagoE1 &lt;-<span class="st"> </span><span class="kw">posterior_predict</span>(m1_lagoE1)</a></code></pre></div>
 <p>The question that we are interested in here now is, how much information is contained in this posterior simulated data. That is, we can run Bayesian models on this posterior simulated data and compute Bayes factors to test whether in the simulated data there is evidence for agreement attraction effects. Of great interest to us is then the question of how variable the results of these Bayes factor analyses will be across different simulated replications of the same study.</p>
 <p>We now perform this analysis for <span class="math inline">\(50\)</span> different artificial data sets simulated from the posterior predictive distribution. For each of these data sets, we can proceed in exactly the same way as we did for the real observed experimental data. That is, <span class="math inline">\(50\)</span> times, we again fit the same <code>brms</code> model, now to the simulated data, and using the same prior as before. For each simulated data set, we use bridge sampling to compute the Bayes factor of the alternative model compared to a null model where the agreement attraction effect (fixed effect predictor of sentence type, <code>x</code>) is set to <span class="math inline">\(0\)</span>. For each simulated posterior predictive data set, we store the resulting Bayes factor. We again use the prior from the meta analysis.</p>
 </div>
@@ -1340,8 +1341,8 @@ that is, the faster the plural noun condition (i.e., “cabinets” in the examp
 </div>
 <div class="footnotes">
 <hr />
-<ol start="37">
-<li id="fn37"><p>This meta-analysis already includes the data that we want to make inference about; thus, this meta-analysis estimate is not really the right estimate to use, since it involves using the data twice. We ignore this detail here because our goal is simply to illustrate the approach.<a href="bayes-factors-in-theory-and-in-practice.html#fnref37" class="footnote-back">↩</a></p></li>
+<ol start="40">
+<li id="fn40"><p>This meta-analysis already includes the data that we want to make inference about; thus, this meta-analysis estimate is not really the right estimate to use, since it involves using the data twice. We ignore this detail here because our goal is simply to illustrate the approach.<a href="bayes-factors-in-theory-and-in-practice.html#fnref40" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1382,8 +1383,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/16-BF.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1393,7 +1394,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

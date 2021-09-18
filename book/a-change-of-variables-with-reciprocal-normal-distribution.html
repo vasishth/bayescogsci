@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="ch-custom.html"/>
-<link rel="next" href="further-reading-8.html"/>
+<link rel="next" href="a-handmade-distribution.html"/>
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1200,11 +1201,11 @@ y &amp;\sim \mathit{RecNormal}(\mu, \sigma)
 \end{equation}\]</span></p>
 <p>An interesting aspect of the rec-normal is that it affords an interpretation of the location parameter in terms of rate or speed rather than time. As it happens with the log-normal, both the location, <span class="math inline">\(\mu\)</span> and scale, <span class="math inline">\(\sigma\)</span> are not in the same scale of the dependent variable, they are in the same scale as <span class="math inline">\(1/y\)</span>.</p>
 <p>By setting <span class="math inline">\(\mu = .002\)</span> and <span class="math inline">\(\sigma =.0004\)</span> we generate data that looks right-skewed and not unlike a distribution of response times, the code below shows some summary statistics of the generated data.</p>
-<div class="sourceCode" id="cb733"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb733-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb733-2" data-line-number="2">mu &lt;-<span class="st"> </span><span class="fl">.002</span></a>
-<a class="sourceLine" id="cb733-3" data-line-number="3">sigma &lt;-<span class="st"> </span><span class="fl">.0004</span></a>
-<a class="sourceLine" id="cb733-4" data-line-number="4">rt &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">rnorm</span>(N, mu, sigma)</a>
-<a class="sourceLine" id="cb733-5" data-line-number="5"><span class="kw">c</span>(<span class="kw">mean</span>(rt), <span class="kw">sd</span>(rt), <span class="kw">min</span>(rt), <span class="kw">max</span>(rt))</a></code></pre></div>
+<div class="sourceCode" id="cb736"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb736-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb736-2" data-line-number="2">mu &lt;-<span class="st"> </span><span class="fl">.002</span></a>
+<a class="sourceLine" id="cb736-3" data-line-number="3">sigma &lt;-<span class="st"> </span><span class="fl">.0004</span></a>
+<a class="sourceLine" id="cb736-4" data-line-number="4">rt &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">rnorm</span>(N, mu, sigma) </a>
+<a class="sourceLine" id="cb736-5" data-line-number="5"><span class="kw">c</span>(<span class="kw">mean</span>(rt), <span class="kw">sd</span>(rt), <span class="kw">min</span>(rt), <span class="kw">max</span>(rt))</a></code></pre></div>
 <pre><code>## [1]  524  124  282 2646</code></pre>
 <p>Figure <a href="a-change-of-variables-with-reciprocal-normal-distribution.html#fig:recnormalhist">12.1</a> shows the distribution generated with the code shown above.</p>
 
@@ -1219,7 +1220,7 @@ FIGURE 12.1: Distribution of synthetic data with a rec-normal distribution with 
 \\ priors go here
 target += normal_lpdf(recRT | mu, sigma); 
 }</code></pre>
-<p>One issue here is that the parameters of the likelihood, <code>mu</code> and <code>sigma</code> are going to be very far away from the unit scale (<span class="math inline">\(0.002\)</span> and <span class="math inline">\(0.004\)</span> respectively). Due to the way Stan’s sampler is built, parameters that are too small (&lt;&lt;1) or too large (&gt;&gt;1) can cause convergence problems. A straightforward solution is to fit the normal distribution to parameters in seconds rather than milliseconds. We can do that using the <code>transformed parameters</code> block. Although we use <code>mu</code> and <code>sigma</code> to fit the data, the priors are on <code>mu_s</code> and <code>sigma_s</code>.</p>
+<p>One issue here is that the parameters of the likelihood, <code>mu</code> and <code>sigma</code> are going to be very far away from the unit scale (<span class="math inline">\(0.002\)</span> and <span class="math inline">\(0.004\)</span> respectively). Due to the way Stan’s sampler is built, parameters that are too small (&lt;&lt;1) or too large (&gt;&gt;1) can cause convergence problems. A straightforward solution is to fit the normal distribution to parameters in reciprocal of seconds rather than milliseconds. We can do that using the <code>transformed parameters</code> block. Although we use <code>mu</code> and <code>sigma</code> to fit the data, the priors are on <code>mu_s</code> and <code>sigma_s</code>.</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower = 1&gt; N;
   vector[N] recRT;
@@ -1238,17 +1239,17 @@ model {
   target += normal_lpdf(recRT | mu, sigma);
 }</code></pre>
 <p>Fit and display the summary of the previous model:</p>
-<div class="sourceCode" id="cb737"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb737-1" data-line-number="1">normal_recrt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb737-2" data-line-number="2">                            <span class="st">&quot;normal_recrt.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb737-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb737-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(normal_recrt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">recRT =</span> <span class="dv">1</span><span class="op">/</span>rt))</a></code></pre></div>
-<div class="sourceCode" id="cb738"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb738-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb740-1" data-line-number="1">normal_recrt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb740-2" data-line-number="2">                            <span class="st">&quot;normal_recrt.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb740-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>) </a>
+<a class="sourceLine" id="cb740-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(normal_recrt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">recRT =</span> <span class="dv">1</span><span class="op">/</span>rt))</a></code></pre></div>
+<div class="sourceCode" id="cb741"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb741-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>##         mean   2.5%  97.5% n_eff Rhat
 ## mu    0.0020 0.0020 0.0020  4126    1
 ## sigma 0.0004 0.0004 0.0004  2757    1</code></pre>
 <p>Is a rec-normal likelihood more appropriate than a log-normal likelihood?
 We won’t be able to compare the models, because the dependent variables are different: we cannot compare reciprocal response times with untransformed response times. Model comparison with cross validation or Bayes factor can only compare models with the same dependent variables.</p>
-<p>This requires us to do a <em>changes of variables</em>. The change of variables requires an adjustment to the (unnormalized log) posterior probability to account for the distortion caused by the transform.<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a> The probability must be scaled by a <em>Jacobian</em> adjustment, which, in the univariate case as this one, is the absolute value of the derivative of the transform.<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a></p>
+<p>This requires us to do a <em>changes of variables</em>. The change of variables requires an adjustment to the (unnormalized log) posterior probability to account for the distortion caused by the transform.<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a> The probability must be scaled by a <em>Jacobian</em> adjustment, which, in the univariate case as this one, is the absolute value of the derivative of the transform.<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a></p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
 p(\mathit{RT}_n | \mu, \sigma )&amp; = \mathit{Normal}(1/\mathit{RT}_n | \mu, \sigma) | \frac{d}{d\mathit{RT}_n} 1/\mathit{RT}_n| = \\
@@ -1257,18 +1258,18 @@ p(\mathit{RT}_n | \mu, \sigma )&amp; = \mathit{Normal}(1/\mathit{RT}_n | \mu, \s
  \end{aligned}
 \end{equation}\]</span></p>
 <p>If we omit the Jacobian adjustment, we are essentially fitting the wrong model, and how bad our results would be depend on the how large the Jacobian adjustment is for our model.</p>
-<p>Because Stan works in log-space, rather than multiplying the Jacobian adjustment, we add its logarithm to the log-probability density</p>
+<p>Because Stan works in log-space, rather than multiplying the Jacobian adjustment, we add its logarithm to the log-probability density (<span class="math inline">\(\log(1/\mathit{RT}_n^2) = - 2 \cdot log(\mathit{RT}_n)\)</span>).</p>
 <p><span class="math display">\[\begin{equation}
 log(\mathit{Normal}(1/\mathit{RT}_n | \mu, \sigma)) - 2 \cdot log(\mathit{RT}_n) 
 \end{equation}\]</span></p>
 <p>We do this in Stan for <span class="math inline">\(RT_{1}\)</span> to <span class="math inline">\(RT_{N}\)</span> as follows:</p>
 <pre><code>target += normal_lpdf(1 ./ RT | mu, sigma) 
           - sum(2 * log(RT));</code></pre>
-<p>It’s important to consider when we write this in Stan that vectorized <code>_lpdf</code> functions are already summing together the log-PDF evaluated at each element of the vector. If <code>RT</code> is a vector of data with <span class="math inline">\(N\)</span> elements <span class="math inline">\(\{RT_{1}, RT_{2}, \ldots , RT_{N} \}\)</span> then doing <code>normal_lpdf(RT | mu, sigma)</code> in Stan is equivalent to the following equation:</p>
+<p>It’s important to consider when we write this in Stan that vectorized <code>_lpdf</code> functions are already summing together the log-PDF evaluated at each element of the vector, and <code>1 ./ RT</code> yields the reciprocal of each element of <code>RT</code>. If <code>1 ./ RT</code> is a vector of data with <span class="math inline">\(N\)</span> elements <span class="math inline">\(\{1/RT_{1}, 1/RT_{2}, \ldots , 1/RT_{N} \}\)</span> then doing <code>normal_lpdf(1 ./ RT | mu, sigma)</code> in Stan is equivalent to the following equation:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
-&amp;log( Normal(RT_{1} | \mu, \sigma) \cdot \ldots \cdot Normal(RT_{N} | \mu, \sigma)) \\
-&amp;= \sum_n^N log(Normal(RT_n) | \mu, \sigma))
+&amp;log( Normal(1 / RT_{1} | \mu, \sigma) \cdot \ldots \cdot Normal( 1 / RT_{N} | \mu, \sigma)) \\
+&amp;= \sum_n^N log(Normal( 1 / RT_n) | \mu, \sigma))
 \end{aligned}
 \end{equation}\]</span></p>
 <p>In contrast, because, <code>2 * log(RT)</code> in Stan creates a vector such as <span class="math inline">\(\{2 \cdot log(RT_1); 2 \cdot log(RT_{2}); \ldots;2 \cdot log(RT_{N}) \}\)</span>, we need to sum the elements in this case.</p>
@@ -1295,17 +1296,17 @@ model {
     - sum(2 * log(RT));
 }</code></pre>
 <p>Fit the model to the data.</p>
-<div class="sourceCode" id="cb742"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb742-1" data-line-number="1">recnormal_rt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb742-2" data-line-number="2">                            <span class="st">&quot;recnormal_rt.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb742-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb742-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt)) </a></code></pre></div>
+<div class="sourceCode" id="cb745"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb745-1" data-line-number="1">recnormal_rt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb745-2" data-line-number="2">                            <span class="st">&quot;recnormal_rt.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb745-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>) </a>
+<a class="sourceLine" id="cb745-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt)) </a></code></pre></div>
 <p>Print the posterior.</p>
-<div class="sourceCode" id="cb743"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb743-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb746"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb746-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>##         mean   2.5%  97.5% n_eff Rhat
 ## mu    0.0020 0.0020 0.0020  3830    1
 ## sigma 0.0004 0.0004 0.0004  2537    1</code></pre>
 <p>We get the same results as before, but now we could potentially compare this model to one that assumes a log-normal likelihood, for example.</p>
-<p>An important question is the following: Does every operation on parameters requires a Jacobian adjustment? Essentially if we assign a distribution to a parameter and <em>then</em> we apply some mathematical operation we are doing a <em>transformation</em> and this does not require a Jacobian adjustment. This is the case when we only have parameters at the left of the pipe <code>|</code> in a PDF or PMF. Alternatively, if we a apply a mathematical operation on a parameter <em>first</em>, and we assign a distribution to the modified parameter afterwards, we have a change of variables that requires a Jacobian adjustment. This is the case when we have some operation over a parameter (or a transformed parameter) at the left of the pipe <code>|</code> in the PDF or PMF. This is the reason for <code>1/RT</code> requiring a Jacobian adjustment, but not for <code>mu_s</code>, <code>mu</code>, <code>sigma_s</code>, or <code>sigma_s</code> in the previous model.</p>
+<p>An important question is the following: Does every operation on parameters requires a Jacobian adjustment? Essentially if we assign a distribution to a parameter and <em>then</em> we apply some mathematical operation we are doing a <em>transformation</em> and this does not require a Jacobian adjustment. This is the case when we only have parameters at the left of the pipe <code>|</code> in a PDF or PMF. Alternatively, if we a apply a mathematical operation on a parameter <em>first</em>, and we assign a distribution to the modified parameter afterwards, we have a change of variables that requires a Jacobian adjustment. This is the case when we have some operation over a parameter (or a transformed parameter) at the left of the pipe <code>|</code> in the PDF or PMF. This is the reason for <code>1 ./ RT</code> requiring a Jacobian adjustment, but not for <code>mu_s</code>, <code>mu</code>, <code>sigma_s</code>, or <code>sigma_s</code> in the previous model.</p>
 <p>As a last step, we can encapsulate our new distribution in a function, and we also create a random number generator function. We do this in a block called functions. To create a function, we need to specify the type of every argument and the type that the function returns.</p>
 <p>As a simple example, if we would like a function to center a vector, we would do it as follows:</p>
 <pre><code>functions {
@@ -1325,8 +1326,9 @@ model {
 ...
 }
 </code></pre>
-<p>We want to create a log(PDF) function, similar to the native Stan functions that end in <code>_lpdf</code>. Our function will takes as arguments a vector <code>RT</code>, and a real <code>mu</code> and <code>sigma</code>. In <code>_lpdf</code> functions, (some of) the arguments (e.g., <code>RT</code>, <code>mu</code>, and <code>sigma</code>) can be vectorized, but the output of the function is always a real number: the sum of the log(PDF) evaluated at every value of the random variable at the left of the pipe. As we show below, to do that we just move the content of <code>target</code> inside our new function. However, unlike native <code>lpdf</code> functions, we cannot overload our function, that is, we cannot have the same function name for different vectorizations in the arguments. See further reading for more about Stan functions.</p>
+<p>We want to create a log(PDF) function, similar to the native Stan functions that end in <code>_lpdf</code>. Our function will take as arguments a vector <code>RT</code>, and real numbers <code>mu</code> and <code>sigma</code>. In <code>_lpdf</code> functions, (some of) the arguments (e.g., <code>RT</code>, <code>mu</code>, and <code>sigma</code>) can be vectorized, but the output of the function is always a real number: the sum of the log(PDF) evaluated at every value of the random variable at the left of the pipe. As we show below, to do that we just move the content of <code>target</code> inside our new function. However, unlike native <code>lpdf</code> functions, we cannot overload our function, that is, we cannot have the same function name for different vectorizations in the arguments. See further reading for more about Stan functions.</p>
 <p>For our custom random number generator function ending <code>_rng</code>, we have the added complication that the function is truncated. We opt for a not that efficient implementation for the sake of clarity. We simply generate random values from a normal distribution, we do the reciprocal transformation and if they are above zero we return them, otherwise we draw a new number. A more efficient, but more complex implementation can be found in section 18.10 of the Stan’s user guide <span class="citation">(Stan Development Team <a href="#ref-Stan2021">2021</a>)</span>.</p>
+<p>The complete code can be found in <code>recnormal_rt_f.stan</code> and it is shown below.</p>
 <pre class="stan fold-show"><code>functions {
   real recnormal_lpdf(vector RT, real mu, real sigma){
     real lpdf;
@@ -1365,33 +1367,51 @@ generated quantities {
     rt_pred[n] = recnormal_rng(mu, sigma);
 }</code></pre>
 <p>Fit the model:</p>
-<div class="sourceCode" id="cb747"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb747-1" data-line-number="1">recnormal_rt_f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb747-2" data-line-number="2">                            <span class="st">&quot;recnormal_rt_f.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb747-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb747-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt_f, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt)) </a></code></pre></div>
+<div class="sourceCode" id="cb750"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb750-1" data-line-number="1">recnormal_rt_f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb750-2" data-line-number="2">                            <span class="st">&quot;recnormal_rt_f.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb750-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb750-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt_f, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt))  </a></code></pre></div>
 <p>Print the summary:</p>
-<div class="sourceCode" id="cb748"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb748-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb751"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb751-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>##         mean   2.5%  97.5% n_eff Rhat
-## mu    0.0020 0.0020 0.0020  3802    1
-## sigma 0.0004 0.0004 0.0004  2641    1</code></pre>
-<div class="sourceCode" id="cb750"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb750-1" data-line-number="1"><span class="kw">ppc_dens_overlay</span>(rt, <span class="dt">yrep =</span> <span class="kw">extract</span>(fit_rec)<span class="op">$</span>rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>, ]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb750-2" data-line-number="2"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-375-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb751"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb751-1" data-line-number="1">post_rec &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_rec) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb751-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>)</a>
-<a class="sourceLine" id="cb751-3" data-line-number="3"><span class="kw">mcmc_recover_hist</span>(post_rec, <span class="dt">true =</span> <span class="kw">c</span>(mu, sigma))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-376-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb752"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb752-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_spacebar&quot;</span>)</a>
-<a class="sourceLine" id="cb752-2" data-line-number="2">fit_rec_sb &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt_f,</a>
-<a class="sourceLine" id="cb752-3" data-line-number="3">                <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_spacebar),</a>
-<a class="sourceLine" id="cb752-4" data-line-number="4">                            <span class="dt">RT =</span> df_spacebar<span class="op">$</span>rt)) </a></code></pre></div>
-<div class="sourceCode" id="cb753"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb753-1" data-line-number="1"><span class="kw">print</span>(fit_rec_sb, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
-<pre><code>##         mean   2.5%  97.5% n_eff Rhat
-## mu    0.0060 0.0060 0.0061  2889    1
-## sigma 0.0008 0.0007 0.0008  2800    1</code></pre>
-<div class="sourceCode" id="cb755"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb755-1" data-line-number="1"><span class="kw">ppc_dens_overlay</span>(df_spacebar<span class="op">$</span>rt, <span class="dt">yrep =</span> <span class="kw">extract</span>(fit_rec_sb)<span class="op">$</span>rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>, ]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb755-2" data-line-number="2"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-379-1.svg" width="672" /></p>
+## mu    0.0020 0.0020 0.0020  4246    1
+## sigma 0.0004 0.0004 0.0004  2437    1</code></pre>
+<p>The model converged, but did it work? At the very least we expect that the synthetic data that we used to test the model shows a perfect fit when we posterior predictive checks. This is because we are fitting the data with the same function that we use to generate the data. Figure <a href="a-change-of-variables-with-reciprocal-normal-distribution.html#fig:ppcheckrec">12.2</a> shows that this is the case.</p>
+
+<div class="sourceCode" id="cb753"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb753-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb753-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(rt, <span class="dt">yrep =</span> <span class="kw">extract</span>(fit_rec)<span class="op">$</span>rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>, ]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb753-3" data-line-number="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</a></code></pre></div>
+<div class="figure"><span id="fig:ppcheckrec"></span>
+<img src="bookdown_files/figure-html/ppcheckrec-1.svg" alt="Posterior predictive check of fit_rec in comparison with the synthetic data." width="672" />
+<p class="caption">
+FIGURE 12.2: Posterior predictive check of <code>fit_rec</code> in comparison with the synthetic data.
+</p>
+</div>
+<p>Furthermore, the true values of the parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> should be well inside their posterior distribution. We investigate this by plotting the true values of the parameters together with their posterior distributions using the function <code>mcmc_recover_hist</code> of <code>bayesplot</code> as shown below:</p>
+
+<div class="sourceCode" id="cb754"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb754-1" data-line-number="1">post_rec &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_rec) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb754-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>)</a>
+<a class="sourceLine" id="cb754-3" data-line-number="3"><span class="kw">mcmc_recover_hist</span>(post_rec, <span class="dt">true =</span> <span class="kw">c</span>(mu, sigma))</a></code></pre></div>
+<div class="figure"><span id="fig:recoveryrec"></span>
+<img src="bookdown_files/figure-html/recoveryrec-1.svg" alt="Posterior distributions of the parameters of fit_rec together with their true values." width="672" />
+<p class="caption">
+FIGURE 12.3: Posterior distributions of the parameters of <code>fit_rec</code> together with their true values.
+</p>
+</div>
+<!-- Exercise about the df_spacebar -->
+<!-- ```{r, results = "hide", message = FALSE} -->
+<!-- data("df_spacebar") -->
+<!-- fit_rec_sb <- stan(recnormal_rt_f, -->
+<!--                 data = list(N = nrow(df_spacebar), -->
+<!--                             RT = df_spacebar$rt))  -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- print(fit_rec_sb, pars = c("mu", "sigma"), digits = 4) -->
+<!-- ``` -->
+<!-- ```{r, message = FALSE} -->
+<!-- ppc_dens_overlay(df_spacebar$rt, yrep = extract(fit_rec_sb)$rt_pred[1:500, ]) + -->
+<!--   coord_cartesian(xlim = c(0, 2000)) -->
+<!-- ``` -->
 <div id="simulation-based-calibration" class="section level3">
 <h3><span class="header-section-number">12.1.1</span> Simulation based calibration</h3>
 <pre class="stan fold-show"><code>functions {
@@ -1446,16 +1466,20 @@ generated quantities {
   for(n in 1:N)
     log_lik[n] = recnormal_lpdf([RT[n]]&#39; | mu, sigma);
 }</code></pre>
-<div class="sourceCode" id="cb757"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb757-1" data-line-number="1">recnormal_sbc &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb757-2" data-line-number="2">                            <span class="st">&quot;recnormal_sbc.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb757-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb757-4" data-line-number="4">output_sbc &lt;-<span class="st"> </span><span class="kw">sbc</span>(recnormal_sbc, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb757-5" data-line-number="5">                                         <span class="dt">mu_s_loc =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb757-6" data-line-number="6">                                         <span class="dt">mu_s_scale =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb757-7" data-line-number="7">                                         <span class="dt">sigma_s_loc =</span> <span class="kw">log</span>(.<span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb757-8" data-line-number="8">                                         <span class="dt">sigma_s_scale =</span> <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb757-9" data-line-number="9">              <span class="dt">M =</span> <span class="dv">500</span>,</a>
-<a class="sourceLine" id="cb757-10" data-line-number="10">              <span class="dt">refresh =</span> <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb756"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb756-1" data-line-number="1">recnormal_sbc &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb756-2" data-line-number="2">                            <span class="st">&quot;recnormal_sbc.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb756-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb756-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb756-5" data-line-number="5">mod_recnormal_sbc &lt;-<span class="st"> </span><span class="kw">stan_model</span>(recnormal_sbc)</a>
+<a class="sourceLine" id="cb756-6" data-line-number="6">output_sbc &lt;-<span class="st"> </span><span class="kw">sbc</span>(mod_recnormal_sbc, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb756-7" data-line-number="7">                                         <span class="dt">mu_s_loc =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb756-8" data-line-number="8">                                         <span class="dt">mu_s_scale =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb756-9" data-line-number="9">                                         <span class="dt">sigma_s_loc =</span> <span class="kw">log</span>(.<span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb756-10" data-line-number="10">                                         <span class="dt">sigma_s_scale =</span> <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb756-11" data-line-number="11">                  <span class="dt">M =</span><span class="dv">5</span>)</a></code></pre></div>
+<blockquote>
+<p>TO FINISH</p>
+</blockquote>
 <!-- https://betanalpha.github.io/assets/case_studies/probability_theory.html#6_interpretations_of_probability -->
 <!-- https://discourse.mc-stan.org/t/why-transformations-need-to-be-invertible-in-change-of-variable-in-probability-theory/22317/12 -->
 <!-- The generalized gamma distribution is a continuous probability distribution with three parameters. It is a generalization of the two-parameter gamma distribution. Since many distributions commonly used for parametric models in survival analysis (such as the Exponential distribution, the Weibull distribution and the Gamma distribution) are special cases of the generalized gamma, -->
@@ -1477,9 +1501,9 @@ generated quantities {
 </div>
 <div class="footnotes">
 <hr />
-<ol start="32">
-<li id="fn32"><p>Not every transformation is valid, univariate changes of variables must be monotonic and differentiable, multivariate changes of variables must be injective and differentiable.<a href="a-change-of-variables-with-reciprocal-normal-distribution.html#fnref32" class="footnote-back">↩</a></p></li>
-<li id="fn33"><p>In the multivariate case, it is equal to the absolute determinant of the Jacobian, the matrix of all its first-order partial derivatives, of the transform.<a href="a-change-of-variables-with-reciprocal-normal-distribution.html#fnref33" class="footnote-back">↩</a></p></li>
+<ol start="35">
+<li id="fn35"><p>Not every transformation is valid, univariate changes of variables must be monotonic and differentiable, multivariate changes of variables must be injective and differentiable.<a href="a-change-of-variables-with-reciprocal-normal-distribution.html#fnref35" class="footnote-back">↩</a></p></li>
+<li id="fn36"><p>In the multivariate case, it is equal to the absolute determinant of the Jacobian, the matrix of all its first-order partial derivatives, of the transform.<a href="a-change-of-variables-with-reciprocal-normal-distribution.html#fnref36" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1488,7 +1512,7 @@ generated quantities {
         </div>
       </div>
 <a href="ch-custom.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="further-reading-8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="a-handmade-distribution.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
@@ -1520,8 +1544,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/12-customlik.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1531,7 +1555,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

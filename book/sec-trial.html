@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1228,13 +1229,19 @@ rt_n \sim \mathit{LogNormal}(\alpha + c\_trial_n \cdot \beta,\sigma)
 <a class="sourceLine" id="cb175-12" data-line-number="12">  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>),</a>
 <a class="sourceLine" id="cb175-13" data-line-number="13">  <span class="dt">iter =</span> <span class="dv">3000</span></a>
 <a class="sourceLine" id="cb175-14" data-line-number="14">)</a></code></pre></div>
-<p>In order to understand the type of data that we are assuming a priori with the prior of the parameter <span class="math inline">\(\beta\)</span>, we’ll plot the closely related to the mean difference, but more intuitive median difference between the effects at adjacent trials. As the prior of <span class="math inline">\(\beta\)</span> gets wider we are going to observe larger differences between adjacent trials. The objective of the prior predictive checks is to calibrate the prior of <span class="math inline">\(\beta\)</span> to obtain a plausible range of differences.
-We are going to plot a distribution of medians because they are less affected by the variance in the posterior predicted distribution; distributions of means will have much more spread. If we want to make the distribution of means more realistic, we would also need to find a more accurate prior for the scale, <span class="math inline">\(\sigma\)</span>. (Recall that the mean of log-normal distributed values depend on both the location, <span class="math inline">\(\mu\)</span> and the scale, <span class="math inline">\(\sigma\)</span>, of the distribution.) To plot the median effect, we first define a function that calculates the difference between adjacent trials, and then applies the median to the result. We use that function in <code>pp_check</code> and we show the results in Figure <a href="sec-trial.html#fig:priorbeta">4.6</a>. As expected, it is centered on zero (as our prior), but we see that the distribution of possible medians for the effect is too widely spread out and includes values that are too extreme.</p>
+<p>In order to understand the type of data that we are assuming a priori with the prior of the parameter <span class="math inline">\(\beta\)</span>, we’ll plot the median difference between the effects at adjacent trials. As the prior of <span class="math inline">\(\beta\)</span> gets wider we are going to observe larger differences between adjacent trials. The objective of the prior predictive checks is to calibrate the prior of <span class="math inline">\(\beta\)</span> to obtain a plausible range of differences.
+We are going to plot a distribution of medians because they are less affected by the variance in the posterior predicted distribution than the distribution of mean differences; distributions of means will have much more spread. If we want to make the distribution of means more realistic, we would also need to find a more accurate prior for the scale, <span class="math inline">\(\sigma\)</span>. (Recall that the mean of log-normal distributed values depend on both the location, <span class="math inline">\(\mu\)</span> and the scale, <span class="math inline">\(\sigma\)</span>, of the distribution.) To plot the median effect, we first define a function that calculates the difference between adjacent trials, and then applies the median to the result. We use that function in <code>pp_check</code> and we show the results in Figure <a href="sec-trial.html#fig:priorbeta">4.6</a>. As expected, it is centered on zero (as our prior), but we see that the distribution of possible medians for the effect is too widely spread out and includes values that are too extreme.</p>
 
 <div class="sourceCode" id="cb176"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1">median_effect &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
 <a class="sourceLine" id="cb176-2" data-line-number="2">  <span class="kw">median</span>(x <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(x), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb176-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb176-4" data-line-number="4"><span class="kw">pp_check</span>(fit_prior_press_trial, <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;median_effect&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb176-4" data-line-number="4"><span class="kw">pp_check</span>(fit_prior_press_trial,</a>
+<a class="sourceLine" id="cb176-5" data-line-number="5">         <span class="dt">type =</span> <span class="st">&quot;stat&quot;</span>,</a>
+<a class="sourceLine" id="cb176-6" data-line-number="6">         <span class="dt">stat =</span> <span class="st">&quot;median_effect&quot;</span>,</a>
+<a class="sourceLine" id="cb176-7" data-line-number="7">  <span class="co"># each bin has a width of 500ms       </span></a>
+<a class="sourceLine" id="cb176-8" data-line-number="8">         <span class="dt">binwidth =</span> <span class="dv">500</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb176-9" data-line-number="9"><span class="st">  </span><span class="co"># cut the top of the plot to improve its scale</span></a>
+<a class="sourceLine" id="cb176-10" data-line-number="10"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">50</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:priorbeta"></span>
 <img src="bookdown_files/figure-html/priorbeta-1.svg" alt="Prior predictive distribution of the median effect of the model defined in 4.2 with \(\beta \sim \mathit{Normal}(0, 1)\)." width="672" />
 <p class="caption">
@@ -1244,9 +1251,9 @@ FIGURE 4.6: Prior predictive distribution of the median effect of the model defi
 <p>We repeat the same procedure with <span class="math inline">\(\beta \sim \mathit{Normal}(0,0.01)\)</span>, and we plot it in Figure <a href="sec-trial.html#fig:priorbeta2">4.7</a>. The prior predictive distribution shows us that the prior is still quite vague, it is, however at least in the right order of magnitude.</p>
 
 <div class="figure"><span id="fig:priorbeta2"></span>
-<img src="bookdown_files/figure-html/priorbeta2-1.svg" alt="Prior predictive distribution of the median effect of the model defined in 4.2 with \(\beta \sim \mathit{Normal}(0, .01)\)." width="672" />
+<img src="bookdown_files/figure-html/priorbeta2-1.svg" alt="Prior predictive distribution of the median effect of the model defined in 4.2 with \(\beta \sim \mathit{Normal}(0, 0.01)\)." width="672" />
 <p class="caption">
-FIGURE 4.7: Prior predictive distribution of the median effect of the model defined in <a href="sec-trial.html#sec:trial">4.2</a> with <span class="math inline">\(\beta \sim \mathit{Normal}(0, .01)\)</span>.
+FIGURE 4.7: Prior predictive distribution of the median effect of the model defined in <a href="sec-trial.html#sec:trial">4.2</a> with <span class="math inline">\(\beta \sim \mathit{Normal}(0, 0.01)\)</span>.
 </p>
 </div>
 <p>Prior selection might look daunting and a lot of work. However, this work is usually done only the first time we encounter an experimental paradigm; besides, priors can be informed by the estimates from previous experiments (even maximum likelihood estimates from frequentist models can be useful). We will generally use very similar (or identical priors) for analyses dealing with the same type of task. When in doubt, a sensitivity analysis (see section <a href="sec-sensitivity.html#sec:sensitivity">3.3</a>) can tell us whether the posterior distribution depends unintentionally strongly on our prior selection. We will return to the issue of prior selection in chapter <a href="ch-priors.html#ch:priors">6</a>.</p>
@@ -1267,17 +1274,17 @@ FIGURE 4.7: Prior predictive distribution of the median effect of the model defi
 \tag{4.4}
 \end{equation}\]</span></p>
 <p>The family of normal distributions is closed under linear transformations: that is, if <span class="math inline">\(X\)</span> is normally distributed with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>, then (for any real numbers <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>), <span class="math inline">\(a X + b\)</span> is also normally distributed, with mean <span class="math inline">\(a \mu +b\)</span> (and standard deviation <span class="math inline">\(\sqrt{a^2\sigma^2}=|a|\sigma\)</span>).</p>
-<p>This means that, assuming <span class="math inline">\(Z \sim \mathit{Normal}(\mu, \sigma)\)</span>, Equation <a href="sec-trial.html#eq:aX">(4.4)</a> can be re-written as follows:</p>
+<p>This means that, assuming <span class="math inline">\(Z \sim \mathit{Normal}(\alpha, \sigma)\)</span>, Equation <a href="sec-trial.html#eq:aX">(4.4)</a> can be re-written as follows:</p>
 <!-- BN: Shravan said that he would explain this property in the first section -->
 <p><span class="math display" id="eq:rtlogliknoncen">\[\begin{equation}
 \log(rt_n) = Z + c\_trial_n \cdot \beta
 \tag{4.5}
 \end{equation}\]</span></p>
-<p>We exponentiate both sides, and we use the property of exponents that <span class="math inline">\(\exp(x+y)\)</span> is equal to <span class="math inline">\(\exp(x) \cdot \exp(y)\)</span>.</p>
+<p>We exponentiate both sides, and we use the property of exponents that <span class="math inline">\(\exp(x+y)\)</span> is equal to <span class="math inline">\(\exp(x) \cdot \exp(y)\)</span>, and we set <span class="math inline">\(Y =\exp(Z)\)</span>.</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
 rt_n &amp;= \exp \big(Z  + c\_trial_n \cdot \beta\big) \\
-rt_n &amp;= \exp\big(Z \big)   \cdot \exp\big(c\_trial_n \cdot \beta\big) \\
+rt_n &amp;= \exp(Z )   \cdot \exp\big(c\_trial_n \cdot \beta\big) \\
 rt_n &amp;= Y \cdot \exp\big(c\_trial_n \cdot \beta\big) 
 \end{aligned}
 \end{equation}\]</span></p>
@@ -1357,10 +1364,10 @@ One advantage of assuming log-normally distributed response times (but, in fact,
 <p>Instead of printing out the complete output from the model, look at the estimates from the posteriors for the parameters <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\sigma\)</span>. These parameters are on the log scale:</p>
 <div class="sourceCode" id="cb178"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_press_trial)[, <span class="kw">c</span>(<span class="st">&quot;Estimate&quot;</span>, <span class="st">&quot;Q2.5&quot;</span>, <span class="st">&quot;Q97.5&quot;</span>)]</a></code></pre></div>
 <pre><code>##                 Estimate         Q2.5        Q97.5
-## b_Intercept     5.118579     5.106466     5.131421
-## b_c_trial       0.000523     0.000402     0.000648
-## sigma           0.123337     0.114541     0.133650
-## lp__        -1603.700631 -1607.041006 -1602.282713</code></pre>
+## b_Intercept     5.118260     5.105102     5.130999
+## b_c_trial       0.000525     0.000404     0.000647
+## sigma           0.123301     0.114904     0.132869
+## lp__        -1603.697096 -1607.010464 -1602.302228</code></pre>
 <p>The posterior distributions can be plotted to obtain a graphical summary of all the parameters in the model (Figure <a href="sec-trial.html#fig:posteriorsfitpresstrial">4.11</a>:</p>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="kw">plot</span>(fit_press_trial)</a></code></pre></div>
 <div class="figure"><span id="fig:posteriorsfitpresstrial"></span>
@@ -1373,7 +1380,7 @@ FIGURE 4.11: Posterior distributions of the model of the effect of trial on butt
 </div>
 <div id="how-to-communicate-the-results-1" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> How to communicate the results?</h3>
-<p>As shown above, the first step is to summarize the posteriors in a table or graphically (or both). If the research relates to the effect estimated by the model, the posterior of <span class="math inline">\(\beta\)</span> can be summarized in the following way: <span class="math inline">\(\hat\beta = 0.00052\)</span>, 95% CrI = <span class="math inline">\([ 0.0004 , 0.00065 ]\)</span>.</p>
+<p>As shown above, the first step is to summarize the posteriors in a table or graphically (or both). If the research relates to the effect estimated by the model, the posterior of <span class="math inline">\(\beta\)</span> can be summarized in the following way: <span class="math inline">\(\hat\beta = 0.00053\)</span>, 95% CrI = <span class="math inline">\([ 0.0004 , 0.00065 ]\)</span>.</p>
 <p>The effect is easier to interpret in milliseconds. We can transform the estimates back to the millisecond scale from the log scale, but we need to take into account that the scale is not linear, and that the effect between two button presses will differ depending on where we are in the experiment.</p>
 <p>We will have a certain estimate if we consider the difference between response times in a trial at the middle of the experiment (when the centered trial number is zero) and the previous one (when the centered trial number is minus one).</p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1">alpha_samples &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_press_trial)<span class="op">$</span>b_Intercept</a>
@@ -1387,7 +1394,7 @@ FIGURE 4.11: Posterior distributions of the model of the effect of trial on butt
 <a class="sourceLine" id="cb181-9" data-line-number="9">  <span class="kw">quantile</span>(effect_middle_ms, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a>
 <a class="sourceLine" id="cb181-10" data-line-number="10">)</a></code></pre></div>
 <pre><code>##   mean   2.5%  97.5% 
-## 0.0874 0.0670 0.1083</code></pre>
+## 0.0877 0.0675 0.1081</code></pre>
 <p>We will obtain different estimate if we consider the difference between the second and the first trial:</p>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1">first_trial &lt;-<span class="st"> </span><span class="kw">min</span>(df_spacebar<span class="op">$</span>c_trial)</a>
 <a class="sourceLine" id="cb183-2" data-line-number="2">second_trial &lt;-<span class="st"> </span><span class="kw">min</span>(df_spacebar<span class="op">$</span>c_trial) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
@@ -1400,11 +1407,16 @@ FIGURE 4.11: Posterior distributions of the model of the effect of trial on butt
 <a class="sourceLine" id="cb183-9" data-line-number="9">  <span class="kw">quantile</span>(effect_beginning_ms, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a>
 <a class="sourceLine" id="cb183-10" data-line-number="10">)</a></code></pre></div>
 <pre><code>##   mean   2.5%  97.5% 
-## 0.0795 0.0623 0.0965</code></pre>
+## 0.0798 0.0628 0.0962</code></pre>
+<!-- The function `conditional_effects(...)[]` from `brms` can also do this for us. Without the `[]` the function will plot the results rather than print them. By default, the median estimates are shown rather than the mean (this can be changed by setting `robust = FALSE`) and all main effects and two-way interactions estimated in the model are shown (this can be changed by including, for example, `effects = "A:B"`).  -->
+<!-- ```{r} -->
+<!-- conditional_effects(fit_press_trial , robust = FALSE)[] -->
+<!-- conditional_effects(fit_press_trial, conditions = df_spacebar %>% slice(1) %>% select(c_trial) , robust = FALSE) -->
+<!-- ``` -->
 <p>There is a slowdown in both cases; when reporting the results of these analyses, one could present the posterior mean and the 95% credible interval and then reason about whether the observed estimates are consistent with the prediction from the theory being investigated.</p>
-<p>The practical relevance of the effect for the research question can be important too. For example, only after 100 button presses do we see a slowdown of 9 ms on average (<span class="math inline">\(0.087 \cdot 100\)</span>), with a 95% credible interval ranging from 6.696 to 10.834. We need to consider whether our uncertainty of this estimate, and the estimated mean effect have any scientific relevance. Such relevance can be established by considering the previous literature, predictions from a quantitative model, or other expert domain knowledge. Sometimes, a quantitative meta-analysis is helpful; for examples, see <span class="citation">Jäger, Engelmann, and Vasishth (<a href="#ref-JaegerEngelmannVasishth2017">2017</a>)</span>, <span class="citation">Mahowald et al. (<a href="#ref-mahowald2016meta">2016</a>)</span>, <span class="citation">Nicenboim, Roettger, and Vasishth (<a href="#ref-NicenboimRoettgeretal">2018</a>)</span>, and <span class="citation">Vasishth et al. (<a href="#ref-VasishthetalPLoSOne2013">2013</a>)</span>. We will discuss meta-analysis in later in the book, in chapter <a href="ch-remame.html#ch:remame">13</a>.
+<p>The practical relevance of the effect for the research question can be important too. For example, only after 100 button presses do we see a slowdown of 9 ms on average (<span class="math inline">\(0.088 \cdot 100\)</span>), with a 95% credible interval ranging from 6.747 to 10.807. We need to consider whether our uncertainty of this estimate, and the estimated mean effect have any scientific relevance. Such relevance can be established by considering the previous literature, predictions from a quantitative model, or other expert domain knowledge. Sometimes, a quantitative meta-analysis is helpful; for examples, see <span class="citation">Jäger, Engelmann, and Vasishth (<a href="#ref-JaegerEngelmannVasishth2017">2017</a>)</span>, <span class="citation">Mahowald et al. (<a href="#ref-mahowald2016meta">2016</a>)</span>, <span class="citation">Nicenboim, Roettger, and Vasishth (<a href="#ref-NicenboimRoettgeretal">2018</a>)</span>, and <span class="citation">Vasishth et al. (<a href="#ref-VasishthetalPLoSOne2013">2013</a>)</span>. We will discuss meta-analysis in later in the book, in chapter <a href="ch-remame.html#ch:remame">13</a>.
 <!-- SV to-do, add example case studies--></p>
-<p>Sometimes, researchers are only interested in establishing that an effect is present or absent; the magnitude and uncertainty of the estimate is of secondary interest. Here, the goal is to argue that there is <strong>evidence</strong> of a slowdown. The word evidence has a special meaning in statistics <span class="citation">(Royall <a href="#ref-Royall">1997</a>)</span>, and in null hypothesis significance testing, a likelihood ratio test is the standard way to argue that one has evidence for an effect. In the Bayesian data analysis context, in order such a question, a Bayes factor analysis must be carried out. We’ll come back to this issue in the model comparison chapters <a href="ch-comparison.html#ch:comparison">15</a>-<a href="ch-cv.html#ch:cv">17</a>.</p>
+<p>Sometimes, researchers are only interested in establishing that an effect is present or absent; the magnitude and uncertainty of the estimate is of secondary interest. Here, the goal is to argue that there is <strong>evidence</strong> of a slowdown. The word evidence has a special meaning in statistics <span class="citation">(Royall <a href="#ref-Royall">1997</a>)</span>, and in null hypothesis significance testing, a likelihood ratio test is the standard way to argue that one has evidence for an effect. In the Bayesian data analysis context, in order to answer such a question, a Bayes factor analysis must be carried out. We’ll come back to this issue in the model comparison chapters <a href="ch-comparison.html#ch:comparison">15</a>-<a href="ch-cv.html#ch:cv">17</a>.</p>
 </div>
 </div>
 <h3>References</h3>
@@ -1481,8 +1493,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/04-regressions.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1492,7 +1504,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

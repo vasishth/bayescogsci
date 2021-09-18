@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1195,10 +1196,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">13.1.1</span> A meta-analysis of similarity-based interference in sentence comprehension</h3>
 <p>The model is set up as follows. For each study <span class="math inline">\(n\)</span>, let effect<span class="math inline">\(_n\)</span> be the effect of interest, and let <span class="math inline">\(SE_n\)</span> be the standard error of the effect. A concrete example from a recent meta-analysis is the effect of similarity-based interference in sentence comprehension <span class="citation">(Jäger, Engelmann, and Vasishth <a href="#ref-JaegerEngelmannVasishth2017">2017</a>)</span>; when two nouns are more similar to each other, there is greater processing difficulty (i.e., longer reading times in milliseconds) when an attempt is made to retrieve one of the nouns to complete a linguistic dependency. The estimate of the effect and its standard error is the information we have from each study <span class="math inline">\(n\)</span>.</p>
 <p>First, we load the data, and we add an id that identifies each experiment.</p>
-<div class="sourceCode" id="cb758"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb758-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_sbi&quot;</span>)</a>
-<a class="sourceLine" id="cb758-2" data-line-number="2">(df_sbi &lt;-<span class="st"> </span>df_sbi <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb758-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">study_id =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()))</a></code></pre></div>
-<pre><code>## # A tibble: 12 x 4
+<div class="sourceCode" id="cb764"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb764-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_sbi&quot;</span>)</a>
+<a class="sourceLine" id="cb764-2" data-line-number="2">(df_sbi &lt;-<span class="st"> </span>df_sbi <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb764-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">study_id =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()))</a></code></pre></div>
+<pre><code>## # A tibble: 12 × 4
 ##   publication      effect    SE study_id
 ##   &lt;chr&gt;             &lt;int&gt; &lt;int&gt;    &lt;int&gt;
 ## 1 VanDyke07E1LoSem     13    30        1
@@ -1238,33 +1239,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="brms-version-of-the-meta-analysis-model" class="section level4">
 <h4><span class="header-section-number">13.1.1.1</span> brms version of the meta-analysis model</h4>
 <p>First, define the priors:</p>
-<div class="sourceCode" id="cb760"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb760-1" data-line-number="1">priors &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb760-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb760-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> sd)</a>
-<a class="sourceLine" id="cb760-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb766-1" data-line-number="1">priors &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb766-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb766-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> sd)</a>
+<a class="sourceLine" id="cb766-4" data-line-number="4">)</a></code></pre></div>
 <p>Fit the model as follows. Because of our relatively uninformative priors and the few data points, the models of this chapter require us to tune the <code>control</code> parameter, increasing <code>adapt_delta</code> and <code>max_treedepth</code>.</p>
-<div class="sourceCode" id="cb761"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb761-1" data-line-number="1">fit_sbi &lt;-<span class="st"> </span><span class="kw">brm</span>(effect <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(<span class="st">`</span><span class="dt">SE</span><span class="st">`</span>, <span class="dt">sigma =</span> <span class="ot">FALSE</span>) <span class="op">~</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb761-2" data-line-number="2">               <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>study_id),</a>
-<a class="sourceLine" id="cb761-3" data-line-number="3">  <span class="dt">data =</span> df_sbi,</a>
-<a class="sourceLine" id="cb761-4" data-line-number="4">  <span class="dt">prior =</span> priors,</a>
-<a class="sourceLine" id="cb761-5" data-line-number="5">  <span class="dt">control =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb761-6" data-line-number="6">    <span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</a>
-<a class="sourceLine" id="cb761-7" data-line-number="7">    <span class="dt">max_treedepth =</span> <span class="dv">12</span></a>
-<a class="sourceLine" id="cb761-8" data-line-number="8">  )</a>
-<a class="sourceLine" id="cb761-9" data-line-number="9">)</a></code></pre></div>
+<div class="sourceCode" id="cb767"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb767-1" data-line-number="1">fit_sbi &lt;-<span class="st"> </span><span class="kw">brm</span>(effect <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(<span class="st">`</span><span class="dt">SE</span><span class="st">`</span>, <span class="dt">sigma =</span> <span class="ot">FALSE</span>) <span class="op">~</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb767-2" data-line-number="2">               <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>study_id),</a>
+<a class="sourceLine" id="cb767-3" data-line-number="3">  <span class="dt">data =</span> df_sbi,</a>
+<a class="sourceLine" id="cb767-4" data-line-number="4">  <span class="dt">prior =</span> priors,</a>
+<a class="sourceLine" id="cb767-5" data-line-number="5">  <span class="dt">control =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb767-6" data-line-number="6">    <span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</a>
+<a class="sourceLine" id="cb767-7" data-line-number="7">    <span class="dt">max_treedepth =</span> <span class="dv">12</span></a>
+<a class="sourceLine" id="cb767-8" data-line-number="8">  )</a>
+<a class="sourceLine" id="cb767-9" data-line-number="9">)</a></code></pre></div>
 <p>The posterior of <span class="math inline">\(\zeta\)</span> and <span class="math inline">\(\tau\)</span> are summarized below as <code>Intercept</code> and <code>sd(Intercept)</code>.</p>
-<div class="sourceCode" id="cb762"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb762-1" data-line-number="1">fit_sbi</a></code></pre></div>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb768-1" data-line-number="1">fit_sbi</a></code></pre></div>
 <pre><code>## ...
 ## Group-Level Effects: 
 ## ~study_id (Number of levels: 12) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-## sd(Intercept)    11.94      7.76     0.68    29.87 1.00      790
+## sd(Intercept)    12.04      7.75     0.82    29.44 1.01      675
 ##               Tail_ESS
-## sd(Intercept)     1289
+## sd(Intercept)     1143
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept    13.79      6.51     2.94    29.07 1.00     1121     1079
+## Intercept    13.70      6.47     2.82    28.90 1.01     1405     1479
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
@@ -1316,97 +1317,97 @@ Z \sim Normal(\mu_X + \mu_Y, \sqrt{\sigma_X^2 + \sigma_Y^2})
 \text{effect}_n \sim Normal(\zeta, \sqrt{SE^2 + \tau^2}) \tag{13.5}
 \end{equation}\]</span></p>
 <p>We can fit this in <code>brms</code> as follows. Importantly, in this model specification, one should not include the + <code>(1 | study_id)</code>, and the prior for <span class="math inline">\(\tau\)</span> should now be specified to <code>sigma</code>.</p>
-<div class="sourceCode" id="cb764"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb764-1" data-line-number="1">priors2 &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb764-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb764-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> sigma)</a>
-<a class="sourceLine" id="cb764-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb764-5" data-line-number="5">fit_sbi_sigma &lt;-<span class="st"> </span><span class="kw">brm</span>(effect <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(<span class="st">`</span><span class="dt">SE</span><span class="st">`</span>, <span class="dt">sigma =</span> <span class="ot">TRUE</span>) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb764-6" data-line-number="6">  <span class="dt">data =</span> df_sbi,</a>
-<a class="sourceLine" id="cb764-7" data-line-number="7">  <span class="dt">prior =</span> priors2,</a>
-<a class="sourceLine" id="cb764-8" data-line-number="8">  <span class="dt">control =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb764-9" data-line-number="9">    <span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</a>
-<a class="sourceLine" id="cb764-10" data-line-number="10">    <span class="dt">max_treedepth =</span> <span class="dv">12</span></a>
-<a class="sourceLine" id="cb764-11" data-line-number="11">  )</a>
-<a class="sourceLine" id="cb764-12" data-line-number="12">)</a></code></pre></div>
+<div class="sourceCode" id="cb770"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb770-1" data-line-number="1">priors2 &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb770-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb770-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> sigma)</a>
+<a class="sourceLine" id="cb770-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb770-5" data-line-number="5">fit_sbi_sigma &lt;-<span class="st"> </span><span class="kw">brm</span>(effect <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(<span class="st">`</span><span class="dt">SE</span><span class="st">`</span>, <span class="dt">sigma =</span> <span class="ot">TRUE</span>) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb770-6" data-line-number="6">  <span class="dt">data =</span> df_sbi,</a>
+<a class="sourceLine" id="cb770-7" data-line-number="7">  <span class="dt">prior =</span> priors2,</a>
+<a class="sourceLine" id="cb770-8" data-line-number="8">  <span class="dt">control =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb770-9" data-line-number="9">    <span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</a>
+<a class="sourceLine" id="cb770-10" data-line-number="10">    <span class="dt">max_treedepth =</span> <span class="dv">12</span></a>
+<a class="sourceLine" id="cb770-11" data-line-number="11">  )</a>
+<a class="sourceLine" id="cb770-12" data-line-number="12">)</a></code></pre></div>
 <p>There are slight differences with <code>fit_sbi</code> due to the different parametrization and the sampling process, but the results are very similar:</p>
-<div class="sourceCode" id="cb765"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb765-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_sbi_sigma,</a>
-<a class="sourceLine" id="cb765-2" data-line-number="2">                  <span class="dt">variable =</span> <span class="kw">c</span>(<span class="st">&quot;b_Intercept&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb771"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb771-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_sbi_sigma,</a>
+<a class="sourceLine" id="cb771-2" data-line-number="2">                  <span class="dt">variable =</span> <span class="kw">c</span>(<span class="st">&quot;b_Intercept&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <pre><code>##             Estimate Est.Error  Q2.5 Q97.5
-## b_Intercept     13.7      6.23 3.791  28.4
-## sigma           11.5      7.51 0.587  28.2</code></pre>
+## b_Intercept     13.4      6.08 3.248  27.6
+## sigma           11.5      7.82 0.446  29.9</code></pre>
 <p>If we are not interested in the underlying effects in each study, this parametrization of the meta-analysis can be faster and more robust (i.e., it has less potential convergence issues). A major drawback is that we can no longer display a forest plot as we do in Figure <a href="meta-analysis.html#fig:forest">13.1</a>.</p>
 </div>
 <p>Another interesting by-product of a random-effects meta-analysis is the possibility of displaying a forest plot (Figure <a href="meta-analysis.html#fig:forest">13.1</a>). A forest plot shows the meta-analytic estimate (the parameter <code>b_Intercept</code> in brms) alongside the original estimates effect<span class="math inline">\(_n\)</span> (and their SE<span class="math inline">\(_n\)</span>) and the posterior distributions of the <span class="math inline">\(\zeta_n\)</span> for each study (we reconstruct these estimates by adding <code>b_Intercept</code> to the parameters starting with <code>r_</code> in <code>brms</code>). The original estimates are the ones fed to the model as data and the posterior distributions of the <span class="math inline">\(\zeta_n\)</span> are calculated, as in previous hierarchical models, after the information from all studies is pooled together. The <span class="math inline">\(\zeta_n\)</span> estimates are shrunken estimates of each study’s (unknown) true effect, shrunken towards the grand mean <span class="math inline">\(\zeta\)</span>, and weighted by the standard error observed in each study <span class="math inline">\(n\)</span>. The <span class="math inline">\(\zeta_n\)</span> for a particular study is shrunk more towards the grand mean <span class="math inline">\(\zeta\)</span> when the study’s standard error is large (i.e., when the estimate is very imprecise). The code below shows how to build a forest plot step by step.</p>
 
-<div class="sourceCode" id="cb767"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb767-1" data-line-number="1"><span class="co"># First, change the format of the data</span></a>
-<a class="sourceLine" id="cb767-2" data-line-number="2"><span class="co"># so that it looks like the output of brms</span></a>
-<a class="sourceLine" id="cb767-3" data-line-number="3">df_sbi &lt;-<span class="st"> </span>df_sbi <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb767-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb767-5" data-line-number="5">    <span class="dt">Q2.5 =</span> effect <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE,</a>
-<a class="sourceLine" id="cb767-6" data-line-number="6">    <span class="dt">Q97.5 =</span> effect <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE,</a>
-<a class="sourceLine" id="cb767-7" data-line-number="7">    <span class="dt">Estimate =</span> effect,</a>
-<a class="sourceLine" id="cb767-8" data-line-number="8">    <span class="dt">type =</span> <span class="st">&quot;original&quot;</span></a>
-<a class="sourceLine" id="cb767-9" data-line-number="9">  )</a>
-<a class="sourceLine" id="cb767-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb767-11" data-line-number="11"><span class="co"># Extract the meta-analytical estimate:</span></a>
-<a class="sourceLine" id="cb767-12" data-line-number="12">df_Intercept &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_sbi,</a>
-<a class="sourceLine" id="cb767-13" data-line-number="13">                                  <span class="dt">variable =</span> <span class="kw">c</span>(<span class="st">&quot;b_Intercept&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb767-14" data-line-number="14"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb767-15" data-line-number="15"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">publication =</span> <span class="st">&quot;M.A. estimate&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb767-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb767-17" data-line-number="17"><span class="co"># For the pooled estimated effect of the individual studies</span></a>
-<a class="sourceLine" id="cb767-18" data-line-number="18"><span class="co"># we need to do the following:</span></a>
-<a class="sourceLine" id="cb767-19" data-line-number="19"><span class="co"># meta-analytical estimate (intercept) + adjustments:</span></a>
-<a class="sourceLine" id="cb767-20" data-line-number="20"><span class="co"># 1. extract the meta-analytical estimate:</span></a>
-<a class="sourceLine" id="cb767-21" data-line-number="21">intercept &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">as_draws_df</span>(fit_sbi)<span class="op">$</span>b_Intercept)</a>
-<a class="sourceLine" id="cb767-22" data-line-number="22"><span class="co"># 2. extract the adjustments</span></a>
-<a class="sourceLine" id="cb767-23" data-line-number="23">adj_names &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;r_study_id[&quot;</span>,</a>
-<a class="sourceLine" id="cb767-24" data-line-number="24">                    <span class="kw">unique</span>(df_sbi<span class="op">$</span>study_id),</a>
-<a class="sourceLine" id="cb767-25" data-line-number="25">                    <span class="st">&quot;,Intercept]&quot;</span>)</a>
-<a class="sourceLine" id="cb767-26" data-line-number="26">adj &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">as_draws_df</span>(fit_sbi)[adj_names])</a></code></pre></div>
+<div class="sourceCode" id="cb773"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb773-1" data-line-number="1"><span class="co"># First, change the format of the data</span></a>
+<a class="sourceLine" id="cb773-2" data-line-number="2"><span class="co"># so that it looks like the output of brms</span></a>
+<a class="sourceLine" id="cb773-3" data-line-number="3">df_sbi &lt;-<span class="st"> </span>df_sbi <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb773-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb773-5" data-line-number="5">    <span class="dt">Q2.5 =</span> effect <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE,</a>
+<a class="sourceLine" id="cb773-6" data-line-number="6">    <span class="dt">Q97.5 =</span> effect <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE,</a>
+<a class="sourceLine" id="cb773-7" data-line-number="7">    <span class="dt">Estimate =</span> effect,</a>
+<a class="sourceLine" id="cb773-8" data-line-number="8">    <span class="dt">type =</span> <span class="st">&quot;original&quot;</span></a>
+<a class="sourceLine" id="cb773-9" data-line-number="9">  )</a>
+<a class="sourceLine" id="cb773-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb773-11" data-line-number="11"><span class="co"># Extract the meta-analytical estimate:</span></a>
+<a class="sourceLine" id="cb773-12" data-line-number="12">df_Intercept &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_sbi,</a>
+<a class="sourceLine" id="cb773-13" data-line-number="13">                                  <span class="dt">variable =</span> <span class="kw">c</span>(<span class="st">&quot;b_Intercept&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb773-14" data-line-number="14"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb773-15" data-line-number="15"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">publication =</span> <span class="st">&quot;M.A. estimate&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb773-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb773-17" data-line-number="17"><span class="co"># For the pooled estimated effect of the individual studies</span></a>
+<a class="sourceLine" id="cb773-18" data-line-number="18"><span class="co"># we need to do the following:</span></a>
+<a class="sourceLine" id="cb773-19" data-line-number="19"><span class="co"># meta-analytical estimate (intercept) + adjustments:</span></a>
+<a class="sourceLine" id="cb773-20" data-line-number="20"><span class="co"># 1. extract the meta-analytical estimate:</span></a>
+<a class="sourceLine" id="cb773-21" data-line-number="21">intercept &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">as_draws_df</span>(fit_sbi)<span class="op">$</span>b_Intercept)</a>
+<a class="sourceLine" id="cb773-22" data-line-number="22"><span class="co"># 2. extract the adjustments</span></a>
+<a class="sourceLine" id="cb773-23" data-line-number="23">adj_names &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;r_study_id[&quot;</span>,</a>
+<a class="sourceLine" id="cb773-24" data-line-number="24">                    <span class="kw">unique</span>(df_sbi<span class="op">$</span>study_id),</a>
+<a class="sourceLine" id="cb773-25" data-line-number="25">                    <span class="st">&quot;,Intercept]&quot;</span>)</a>
+<a class="sourceLine" id="cb773-26" data-line-number="26">adj &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">as_draws_df</span>(fit_sbi)[adj_names])</a></code></pre></div>
 <pre><code>## Warning: Dropping &#39;draws_df&#39; class as required metadata was removed.</code></pre>
-<div class="sourceCode" id="cb769"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb769-1" data-line-number="1"><span class="co"># 3. add them:</span></a>
-<a class="sourceLine" id="cb769-2" data-line-number="2">by_study &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(intercept <span class="op">+</span><span class="st"> </span>adj)</a>
-<a class="sourceLine" id="cb769-3" data-line-number="3"><span class="co"># Summarize them by getting a table with the mean and the</span></a>
-<a class="sourceLine" id="cb769-4" data-line-number="4"><span class="co"># quantiles for each column and then binding them.</span></a>
-<a class="sourceLine" id="cb769-5" data-line-number="5">df_model &lt;-<span class="st"> </span><span class="kw">lapply</span>(by_study, <span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb769-6" data-line-number="6">  <span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb769-7" data-line-number="7">    <span class="dt">Estimate =</span> <span class="kw">mean</span>(x),</a>
-<a class="sourceLine" id="cb769-8" data-line-number="8">    <span class="dt">Q2.5 =</span> <span class="kw">quantile</span>(x, <span class="fl">.025</span>),</a>
-<a class="sourceLine" id="cb769-9" data-line-number="9">    <span class="dt">Q97.5 =</span> <span class="kw">quantile</span>(x, <span class="fl">.975</span>)</a>
-<a class="sourceLine" id="cb769-10" data-line-number="10">  )</a>
-<a class="sourceLine" id="cb769-11" data-line-number="11">}) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb769-12" data-line-number="12"><span class="st">  </span><span class="kw">bind_rows</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb769-13" data-line-number="13"><span class="st">  </span><span class="co"># Add a column to identify the posteriors,</span></a>
-<a class="sourceLine" id="cb769-14" data-line-number="14"><span class="st">  </span><span class="co"># and another column to id the publication:</span></a>
-<a class="sourceLine" id="cb769-15" data-line-number="15"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb769-16" data-line-number="16">    <span class="dt">type =</span> <span class="st">&quot;adjusted&quot;</span>,</a>
-<a class="sourceLine" id="cb769-17" data-line-number="17">    <span class="dt">publication =</span> df_sbi<span class="op">$</span>publication</a>
-<a class="sourceLine" id="cb769-18" data-line-number="18">  )</a>
-<a class="sourceLine" id="cb769-19" data-line-number="19"><span class="co"># Bind the original data,</span></a>
-<a class="sourceLine" id="cb769-20" data-line-number="20"><span class="co"># the adjusted estimates and the m.a. estimate:</span></a>
-<a class="sourceLine" id="cb769-21" data-line-number="21"><span class="kw">bind_rows</span>(df_sbi, df_model, df_Intercept) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb769-22" data-line-number="22"><span class="st">  </span><span class="co"># Plot:</span></a>
-<a class="sourceLine" id="cb769-23" data-line-number="23"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(</a>
-<a class="sourceLine" id="cb769-24" data-line-number="24">    <span class="dt">x =</span> Estimate,</a>
-<a class="sourceLine" id="cb769-25" data-line-number="25">    <span class="dt">y =</span> publication,</a>
-<a class="sourceLine" id="cb769-26" data-line-number="26">    <span class="dt">xmin =</span> Q2<span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb769-27" data-line-number="27">    <span class="dt">xmax =</span> Q97<span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb769-28" data-line-number="28">    <span class="dt">color =</span> type</a>
-<a class="sourceLine" id="cb769-29" data-line-number="29">  )) <span class="op">+</span></a>
-<a class="sourceLine" id="cb769-30" data-line-number="30"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(.<span class="dv">5</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb769-31" data-line-number="31"><span class="st">  </span><span class="kw">geom_errorbarh</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(.<span class="dv">5</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb769-32" data-line-number="32"><span class="st">  </span><span class="co"># Add the meta-analytical estimate and CrI</span></a>
-<a class="sourceLine" id="cb769-33" data-line-number="33"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Q2<span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb769-34" data-line-number="34">             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</a>
-<a class="sourceLine" id="cb769-35" data-line-number="35">             <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb769-36" data-line-number="36"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Q97<span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb769-37" data-line-number="37">             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</a>
-<a class="sourceLine" id="cb769-38" data-line-number="38">             <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb769-39" data-line-number="39"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Estimate,</a>
-<a class="sourceLine" id="cb769-40" data-line-number="40">             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</a>
-<a class="sourceLine" id="cb769-41" data-line-number="41">             <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb769-42" data-line-number="42"><span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;adjusted&quot;</span>,<span class="st">&quot;original&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb775"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb775-1" data-line-number="1"><span class="co"># 3. add them:</span></a>
+<a class="sourceLine" id="cb775-2" data-line-number="2">by_study &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(intercept <span class="op">+</span><span class="st"> </span>adj)</a>
+<a class="sourceLine" id="cb775-3" data-line-number="3"><span class="co"># Summarize them by getting a table with the mean and the</span></a>
+<a class="sourceLine" id="cb775-4" data-line-number="4"><span class="co"># quantiles for each column and then binding them.</span></a>
+<a class="sourceLine" id="cb775-5" data-line-number="5">df_model &lt;-<span class="st"> </span><span class="kw">lapply</span>(by_study, <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb775-6" data-line-number="6">  <span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb775-7" data-line-number="7">    <span class="dt">Estimate =</span> <span class="kw">mean</span>(x),</a>
+<a class="sourceLine" id="cb775-8" data-line-number="8">    <span class="dt">Q2.5 =</span> <span class="kw">quantile</span>(x, <span class="fl">.025</span>),</a>
+<a class="sourceLine" id="cb775-9" data-line-number="9">    <span class="dt">Q97.5 =</span> <span class="kw">quantile</span>(x, <span class="fl">.975</span>)</a>
+<a class="sourceLine" id="cb775-10" data-line-number="10">  )</a>
+<a class="sourceLine" id="cb775-11" data-line-number="11">}) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb775-12" data-line-number="12"><span class="st">  </span><span class="kw">bind_rows</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb775-13" data-line-number="13"><span class="st">  </span><span class="co"># Add a column to identify the posteriors,</span></a>
+<a class="sourceLine" id="cb775-14" data-line-number="14"><span class="st">  </span><span class="co"># and another column to id the publication:</span></a>
+<a class="sourceLine" id="cb775-15" data-line-number="15"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb775-16" data-line-number="16">    <span class="dt">type =</span> <span class="st">&quot;adjusted&quot;</span>,</a>
+<a class="sourceLine" id="cb775-17" data-line-number="17">    <span class="dt">publication =</span> df_sbi<span class="op">$</span>publication</a>
+<a class="sourceLine" id="cb775-18" data-line-number="18">  )</a>
+<a class="sourceLine" id="cb775-19" data-line-number="19"><span class="co"># Bind the original data,</span></a>
+<a class="sourceLine" id="cb775-20" data-line-number="20"><span class="co"># the adjusted estimates and the m.a. estimate:</span></a>
+<a class="sourceLine" id="cb775-21" data-line-number="21"><span class="kw">bind_rows</span>(df_sbi, df_model, df_Intercept) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb775-22" data-line-number="22"><span class="st">  </span><span class="co"># Plot:</span></a>
+<a class="sourceLine" id="cb775-23" data-line-number="23"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(</a>
+<a class="sourceLine" id="cb775-24" data-line-number="24">    <span class="dt">x =</span> Estimate,</a>
+<a class="sourceLine" id="cb775-25" data-line-number="25">    <span class="dt">y =</span> publication,</a>
+<a class="sourceLine" id="cb775-26" data-line-number="26">    <span class="dt">xmin =</span> Q2<span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb775-27" data-line-number="27">    <span class="dt">xmax =</span> Q97<span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb775-28" data-line-number="28">    <span class="dt">color =</span> type</a>
+<a class="sourceLine" id="cb775-29" data-line-number="29">  )) <span class="op">+</span></a>
+<a class="sourceLine" id="cb775-30" data-line-number="30"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(.<span class="dv">5</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb775-31" data-line-number="31"><span class="st">  </span><span class="kw">geom_errorbarh</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(.<span class="dv">5</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb775-32" data-line-number="32"><span class="st">  </span><span class="co"># Add the meta-analytical estimate and CrI</span></a>
+<a class="sourceLine" id="cb775-33" data-line-number="33"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Q2<span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb775-34" data-line-number="34">             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</a>
+<a class="sourceLine" id="cb775-35" data-line-number="35">             <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb775-36" data-line-number="36"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Q97<span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb775-37" data-line-number="37">             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</a>
+<a class="sourceLine" id="cb775-38" data-line-number="38">             <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb775-39" data-line-number="39"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Estimate,</a>
+<a class="sourceLine" id="cb775-40" data-line-number="40">             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</a>
+<a class="sourceLine" id="cb775-41" data-line-number="41">             <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb775-42" data-line-number="42"><span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;adjusted&quot;</span>,<span class="st">&quot;original&quot;</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:forest"></span>
 <img src="bookdown_files/figure-html/forest-1.svg" alt="Forest plot showing the original and the adjusted estimates computed from each study from the random-effects meta-analysis. The error bars on the original estimates show 95% confidence intervals, and those on the adjusted estimates show 95% credible intervals." width="672" />
 <p class="caption">
@@ -1437,22 +1438,22 @@ model {
     - normal_lccdf(0 | 0, 100);
 }</code></pre>
 <p>Fit the model as follows:</p>
-<div class="sourceCode" id="cb771"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb771-1" data-line-number="1">ma0 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb771-2" data-line-number="2">                   <span class="st">&quot;meta-analysis0.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb771-3" data-line-number="3">                   <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb771-4" data-line-number="4">ls_sbi &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_sbi),</a>
-<a class="sourceLine" id="cb771-5" data-line-number="5">               <span class="dt">effect =</span> df_sbi<span class="op">$</span>effect,</a>
-<a class="sourceLine" id="cb771-6" data-line-number="6">               <span class="dt">SE =</span> df_sbi<span class="op">$</span>SE,</a>
-<a class="sourceLine" id="cb771-7" data-line-number="7">               <span class="dt">study_id =</span> df_sbi<span class="op">$</span>study_id)</a>
-<a class="sourceLine" id="cb771-8" data-line-number="8">fit_sbi0 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb771-9" data-line-number="9">  <span class="dt">file =</span> ma0,</a>
-<a class="sourceLine" id="cb771-10" data-line-number="10">  <span class="dt">data =</span> ls_sbi,</a>
-<a class="sourceLine" id="cb771-11" data-line-number="11">   <span class="dt">control =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb771-12" data-line-number="12">    <span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</a>
-<a class="sourceLine" id="cb771-13" data-line-number="13">    <span class="dt">max_treedepth =</span> <span class="dv">12</span></a>
-<a class="sourceLine" id="cb771-14" data-line-number="14">  )</a>
-<a class="sourceLine" id="cb771-15" data-line-number="15">)</a></code></pre></div>
-<pre><code>## Warning: There were 5 divergent transitions after warmup. See
+<div class="sourceCode" id="cb777"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb777-1" data-line-number="1">ma0 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb777-2" data-line-number="2">                   <span class="st">&quot;meta-analysis0.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb777-3" data-line-number="3">                   <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>) </a>
+<a class="sourceLine" id="cb777-4" data-line-number="4">ls_sbi &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_sbi),</a>
+<a class="sourceLine" id="cb777-5" data-line-number="5">               <span class="dt">effect =</span> df_sbi<span class="op">$</span>effect,</a>
+<a class="sourceLine" id="cb777-6" data-line-number="6">               <span class="dt">SE =</span> df_sbi<span class="op">$</span>SE,</a>
+<a class="sourceLine" id="cb777-7" data-line-number="7">               <span class="dt">study_id =</span> df_sbi<span class="op">$</span>study_id)</a>
+<a class="sourceLine" id="cb777-8" data-line-number="8">fit_sbi0 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb777-9" data-line-number="9">  <span class="dt">file =</span> ma0,</a>
+<a class="sourceLine" id="cb777-10" data-line-number="10">  <span class="dt">data =</span> ls_sbi,</a>
+<a class="sourceLine" id="cb777-11" data-line-number="11">   <span class="dt">control =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb777-12" data-line-number="12">    <span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</a>
+<a class="sourceLine" id="cb777-13" data-line-number="13">    <span class="dt">max_treedepth =</span> <span class="dv">12</span></a>
+<a class="sourceLine" id="cb777-14" data-line-number="14">  )</a>
+<a class="sourceLine" id="cb777-15" data-line-number="15">)</a></code></pre></div>
+<pre><code>## Warning: There were 1 divergent transitions after warmup. See
 ## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 ## to find out why this is a problem and how to eliminate them.</code></pre>
 <pre><code>## Warning: There were 1 chains where the estimated Bayesian Fraction of Missing Information was low. See
@@ -1465,8 +1466,8 @@ model {
 ## Running the chains for more iterations may help. See
 ## http://mc-stan.org/misc/warnings.html#tail-ess</code></pre>
 <p>We see that there are warnings. We can use pairs plots as in <a href="sec-hierstan.html#sec:uncorrstan">11.1.2</a> to uncover pathologies in the sampling. Here we see the samples of <code>zeta</code> and <code>tau</code> are highly correlated:</p>
-<div class="sourceCode" id="cb777"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb777-1" data-line-number="1"><span class="kw">pairs</span>(fit_sbi0, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-393-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb783"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb783-1" data-line-number="1"><span class="kw">pairs</span>(fit_sbi0, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-387-1.svg" width="672" /></p>
 <p>We face a similar problem as we faced in <a href="sec-hierstan.html#sec:uncorrstan">11.1.2</a>, namely, the sampler cannot properly explore the neck of the funnel-shaped space because, because of the strong correlation between the parameters. The solution is, as in <a href="sec-hierstan.html#sec:uncorrstan">11.1.2</a>, a non-centered parametrization. We re-write <a href="meta-analysis.html#eq:ma0">(13.1)</a> as follows:</p>
 <p><span class="math display" id="eq:ma1">\[\begin{equation}
 \begin{aligned}
@@ -1502,21 +1503,21 @@ model {
     - normal_lccdf(0 | 0, 100);
 }</code></pre>
 <p>The model converges with values virtually identical to the ones of the <code>brms</code> model.</p>
-<div class="sourceCode" id="cb779"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb779-1" data-line-number="1">ma1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb779-2" data-line-number="2">                   <span class="st">&quot;meta-analysis1.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb779-3" data-line-number="3">                   <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>) </a>
-<a class="sourceLine" id="cb779-4" data-line-number="4">fit_sbi1 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb779-5" data-line-number="5">  <span class="dt">file =</span> ma1,</a>
-<a class="sourceLine" id="cb779-6" data-line-number="6">  <span class="dt">data =</span> ls_sbi,</a>
-<a class="sourceLine" id="cb779-7" data-line-number="7">   <span class="dt">control =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb779-8" data-line-number="8">    <span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</a>
-<a class="sourceLine" id="cb779-9" data-line-number="9">    <span class="dt">max_treedepth =</span> <span class="dv">12</span></a>
-<a class="sourceLine" id="cb779-10" data-line-number="10">  )</a>
-<a class="sourceLine" id="cb779-11" data-line-number="11">)</a></code></pre></div>
-<div class="sourceCode" id="cb780"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb780-1" data-line-number="1"><span class="kw">print</span>(fit_sbi1, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb785"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb785-1" data-line-number="1">ma1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb785-2" data-line-number="2">                   <span class="st">&quot;meta-analysis1.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb785-3" data-line-number="3">                   <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>) </a>
+<a class="sourceLine" id="cb785-4" data-line-number="4">fit_sbi1 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb785-5" data-line-number="5">  <span class="dt">file =</span> ma1,</a>
+<a class="sourceLine" id="cb785-6" data-line-number="6">  <span class="dt">data =</span> ls_sbi,</a>
+<a class="sourceLine" id="cb785-7" data-line-number="7">   <span class="dt">control =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb785-8" data-line-number="8">    <span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</a>
+<a class="sourceLine" id="cb785-9" data-line-number="9">    <span class="dt">max_treedepth =</span> <span class="dv">12</span></a>
+<a class="sourceLine" id="cb785-10" data-line-number="10">  )</a>
+<a class="sourceLine" id="cb785-11" data-line-number="11">)</a></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb786-1" data-line-number="1"><span class="kw">print</span>(fit_sbi1, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</a></code></pre></div>
 <pre><code>##      mean 2.5% 97.5% n_eff Rhat
-## zeta 13.4 3.30  27.6   994    1
-## tau  11.7 0.79  28.9   917    1</code></pre>
+## zeta 13.2 2.92    27  1656 1.00
+## tau  11.4 0.81    28   936 1.01</code></pre>
 <p>We can also reparametrize the model slightly differently, if we set <span class="math inline">\(U_{n} \sim Normal(0 , SE_n)\)</span> then,</p>
 <p><span class="math display">\[\begin{equation}
 \text{effect}_n =  U_n + \zeta_n 
@@ -1545,18 +1546,18 @@ model {
     - normal_lccdf(0 | 0, 100);
 }</code></pre>
 <p>Fit it below:</p>
-<div class="sourceCode" id="cb783"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb783-1" data-line-number="1">ma2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb783-2" data-line-number="2">                   <span class="st">&quot;meta-analysis2.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb783-3" data-line-number="3">                   <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb783-4" data-line-number="4">fit_sbi2 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb783-5" data-line-number="5">  <span class="dt">file =</span> ma2,</a>
-<a class="sourceLine" id="cb783-6" data-line-number="6">  <span class="dt">data =</span> ls_sbi,</a>
-<a class="sourceLine" id="cb783-7" data-line-number="7">  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>)</a>
-<a class="sourceLine" id="cb783-8" data-line-number="8">)</a></code></pre></div>
-<div class="sourceCode" id="cb784"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb784-1" data-line-number="1"><span class="kw">print</span>(fit_sbi2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb789-1" data-line-number="1">ma2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb789-2" data-line-number="2">                   <span class="st">&quot;meta-analysis2.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb789-3" data-line-number="3">                   <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb789-4" data-line-number="4">fit_sbi2 &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb789-5" data-line-number="5">  <span class="dt">file =</span> ma2,</a>
+<a class="sourceLine" id="cb789-6" data-line-number="6">  <span class="dt">data =</span> ls_sbi,</a>
+<a class="sourceLine" id="cb789-7" data-line-number="7">  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>)</a>
+<a class="sourceLine" id="cb789-8" data-line-number="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb790-1" data-line-number="1"><span class="kw">print</span>(fit_sbi2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</a></code></pre></div>
 <pre><code>##      mean 2.5% 97.5% n_eff Rhat
-## zeta 13.8 3.58  27.4  1024    1
-## tau  11.8 0.77  29.2  1082    1</code></pre>
+## zeta 13.4 3.33  27.3  1138    1
+## tau  11.8 0.82  28.6  1423    1</code></pre>
 </div>
 </div>
 </div>
@@ -1604,8 +1605,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/13-REMA-ME.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1615,7 +1616,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

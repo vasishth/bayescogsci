@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1212,14 +1213,14 @@ p(y_{pred}\mid y,  \mathcal{M}_1)=\int_\Theta p(y_{pred}\mid \Theta, \mathcal{M}
 elpd = u(\mathcal{M}_1) = \int_{y_{pred}} p_t(y_{pred}) \log p(y_{pred} \mid y, \mathcal{M}_1) dy_{pred}
 \tag{17.3}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(p_t\)</span> is the true data generating distribution. If we consider a set of models, the model with the highest <span class="math inline">\(elpd\)</span> is the model with the predictions that are the closest to the ones of the true data generating process.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a> The intuition behind Equation <a href="expected-log-predictive-density-of-a-model.html#eq:elpd">(17.3)</a> is that we are evaluating the predictive distribution of <span class="math inline">\(\mathcal{M}_1\)</span> over all possible future data weighted by how likely the future data is according to its true distribution. This means that observations that are very likely according to the true model will have a higher weight than unlikely ones.</p>
+<p>where <span class="math inline">\(p_t\)</span> is the true data generating distribution. If we consider a set of models, the model with the highest <span class="math inline">\(elpd\)</span> is the model with the predictions that are the closest to the ones of the true data generating process.<a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a> The intuition behind Equation <a href="expected-log-predictive-density-of-a-model.html#eq:elpd">(17.3)</a> is that we are evaluating the predictive distribution of <span class="math inline">\(\mathcal{M}_1\)</span> over all possible future data weighted by how likely the future data is according to its true distribution. This means that observations that are very likely according to the true model will have a higher weight than unlikely ones.</p>
 <p>But we don’t know the true data-generating distribution, <span class="math inline">\(p_t\)</span>! If we knew it, we wouldn’t be looking for the best model, since <span class="math inline">\(p_t\)</span> <em>is</em> the best model.</p>
 <p>We can use the observed data distribution as a proxy for the true data generation distribution. So instead of weighting the predictive distribution by the true density of all possible future data, we just use the <span class="math inline">\(N\)</span> observations that we have. We can do that because our observations are presumed to be samples from the true distribution of the data: Under this assumption, observations with higher likelihood according to the true distribution of the data will also be more commonly obtained. This means that instead of integrating, we sum the posterior predictive density of the observations and we give to each observation the same weight; this is valid because observations that are more common will be already appearing more often (see also Box <a href="expected-log-predictive-density-of-a-model.html#thm:integral">17.1</a>). This quantity is called <em>log pointwise predictive density</em> or <span class="math inline">\(lpd\)</span> <span class="citation">(without the <span class="math inline">\(1/N\)</span> in Vehtari, Gelman, and Gabry <a href="#ref-vehtariPracticalBayesianModel2017">2017</a><a href="#ref-vehtariPracticalBayesianModel2017">b</a>)</span>:</p>
 <p><span class="math display" id="eq:elpdapprox">\[\begin{equation}
 lpd = \frac{1}{N} \sum_{n=1}^{N} \log p(y_n|y, \mathcal{M}_1) 
 \tag{17.4}
 \end{equation}\]</span></p>
-<p>The <span class="math inline">\(lpd\)</span> is an overestimate of <em>elpd</em> for actual future data, because the parameters of the posterior predictive distribution are estimated with the same observations that we are considering out-of-sample. Incidentally, this also explains why posterior predictive checks are generally optimistic and good fits cannot be taken too seriously, but they do capture very strong model misspecifications.<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a></p>
+<p>The <span class="math inline">\(lpd\)</span> is an overestimate of <em>elpd</em> for actual future data, because the parameters of the posterior predictive distribution are estimated with the same observations that we are considering out-of-sample. Incidentally, this also explains why posterior predictive checks are generally optimistic and good fits cannot be taken too seriously, but they do capture very strong model misspecifications.<a href="#fn42" class="footnote-ref" id="fnref42"><sup>42</sup></a></p>
 <p>However, we can obtain a less optimistic estimate of the predictive performance of a model using cross-validation <span class="citation">(Geisser and Eddy <a href="#ref-GeisserEddy1979">1979</a>)</span> as we explain next <span class="citation">(there are, however, also other alternatives to cross-validation; these are presented in Vehtari and Ojanen <a href="#ref-VehtariOjanen2012">2012</a>)</span>.</p>
 
 <div class="extra">
@@ -1229,16 +1230,16 @@ lpd = \frac{1}{N} \sum_{n=1}^{N} \log p(y_n|y, \mathcal{M}_1)
 </div>
 <p>As an example, let’s imagine that we have <span class="math inline">\(N\)</span> observations in an experiment. The true generative process (which is always unknown to us) is a Beta distribution as follows:</p>
 <p><span class="math display">\[\begin{equation}
-p_t(y) = \mathit{ Beta}(1, 3)
+p_t(y) = \mathit{ Beta}(y | 1, 3)
 \end{equation}\]</span></p>
 <p>We set <span class="math inline">\(N\)</span> and we can only observe <span class="math inline">\(y\)</span>:</p>
-<div class="sourceCode" id="cb868"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb868-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb868-2" data-line-number="2">y_data &lt;-<span class="st"> </span><span class="kw">rbeta</span>(N, <span class="dv">1</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb868-3" data-line-number="3"><span class="kw">head</span>(y_data)</a></code></pre></div>
-<pre><code>## [1] 0.6248 0.0296 0.6732 0.0718 0.0369 0.3389</code></pre>
+<div class="sourceCode" id="cb867"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb867-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb867-2" data-line-number="2">y_data &lt;-<span class="st"> </span><span class="kw">rbeta</span>(N, <span class="dv">1</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb867-3" data-line-number="3"><span class="kw">head</span>(y_data)</a></code></pre></div>
+<pre><code>## [1] 0.1547 0.3337 0.0103 0.2937 0.2070 0.6836</code></pre>
 <p>Let’s say that we fit the Bayesian model, <span class="math inline">\(\mathcal{M}_{1}\)</span>, and somehow, after getting the posterior distribution, we are able derive the analytical form of its posterior predictive distribution for the model:</p>
 <p><span class="math display">\[\begin{equation}
-p(y_{pred} | y, \mathcal{M}_1) = \mathit{Beta}(2, 2)
+p(y_{pred} | y, \mathcal{M}_1) = \mathit{Beta}(y_pred | 2, 2)
 \end{equation}\]</span></p>
 <p>This distribution will tell us how likely different future observations will be, and it also entails that our future observations will be bounded by 0 and 1. (Any observation outside this range will have a probability density of zero).</p>
 <p>Imagine that we could know the true distribution of the data, <span class="math inline">\(p_t\)</span>, which is conveniently close to our posterior predictive distribution. This means that equation <a href="expected-log-predictive-density-of-a-model.html#eq:elpd">(17.3)</a>, repeated below, is simple enough, and we know all its terms:</p>
@@ -1246,17 +1247,17 @@ p(y_{pred} | y, \mathcal{M}_1) = \mathit{Beta}(2, 2)
 elpd = u(\mathcal{M}_1) = \int_{y_{pred}} p_t(y_{pred}) \log p(y_{pred} \mid y, \mathcal{M}_1) dy_{pred}
 \end{equation}\]</span></p>
 <p>We can compute this quantity in R. Notice that we don’t introduce the data at any point. However, the data had to be used when <code>p</code>, the posterior predictive distribution, was derived; we skipped that step here.</p>
-<div class="sourceCode" id="cb870"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb870-1" data-line-number="1"><span class="co"># True distribution</span></a>
-<a class="sourceLine" id="cb870-2" data-line-number="2">p_t &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">dbeta</span>(y, <span class="dv">1</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb870-3" data-line-number="3"><span class="co"># Predictive distribution</span></a>
-<a class="sourceLine" id="cb870-4" data-line-number="4">p &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">dbeta</span>(y, <span class="dv">2</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb870-5" data-line-number="5"><span class="co"># Integration</span></a>
-<a class="sourceLine" id="cb870-6" data-line-number="6">integrand &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">p_t</span>(y) <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="kw">p</span>(y))</a>
-<a class="sourceLine" id="cb870-7" data-line-number="7"><span class="kw">integrate</span>(<span class="dt">f =</span> integrand, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb869"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb869-1" data-line-number="1"><span class="co"># True distribution</span></a>
+<a class="sourceLine" id="cb869-2" data-line-number="2">p_t &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">dbeta</span>(y, <span class="dv">1</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb869-3" data-line-number="3"><span class="co"># Predictive distribution</span></a>
+<a class="sourceLine" id="cb869-4" data-line-number="4">p &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">dbeta</span>(y, <span class="dv">2</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb869-5" data-line-number="5"><span class="co"># Integration</span></a>
+<a class="sourceLine" id="cb869-6" data-line-number="6">integrand &lt;-<span class="st"> </span><span class="cf">function</span>(y) <span class="kw">p_t</span>(y) <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="kw">p</span>(y))</a>
+<a class="sourceLine" id="cb869-7" data-line-number="7"><span class="kw">integrate</span>(<span class="dt">f =</span> integrand, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## -0.375 with absolute error &lt; 0.00000068</code></pre>
 <p>Because we’ll never know <code>p_t</code>, we’ll approximate this integral using our data, <code>y_data</code>. We see below that we can approximate the integration without any reference to <code>p_t</code> as we did in <a href="expected-log-predictive-density-of-a-model.html#eq:elpdapprox">(17.4)</a>:</p>
-<div class="sourceCode" id="cb872"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb872-1" data-line-number="1"><span class="dv">1</span><span class="op">/</span>N <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">p</span>(y_data)))</a></code></pre></div>
-<pre><code>## [1] -0.383</code></pre>
+<div class="sourceCode" id="cb871"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb871-1" data-line-number="1"><span class="dv">1</span><span class="op">/</span>N <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">p</span>(y_data)))</a></code></pre></div>
+<pre><code>## [1] -0.368</code></pre>
 <p>The main problem with this approach is that we are using <code>y_data</code> twice, once to derive <code>p</code>, the predictive posterior distribution, and once for the approximation of <span class="math inline">\(elpd\)</span>. We’ll see that cross-validation approaches relay on deriving the posterior predictive distribution with part of the data, and estimating the approximation to <span class="math inline">\(elpd\)</span> with unseen data. (Don’t worry that we don’t know the analytical form of posterior predictive distribution, we saw that we could generate samples from that distribution based on the likelihood and posterior samples.)</p>
 </div>
 
@@ -1283,9 +1284,9 @@ elpd = u(\mathcal{M}_1) = \int_{y_{pred}} p_t(y_{pred}) \log p(y_{pred} \mid y, 
 </div>
 <div class="footnotes">
 <hr />
-<ol start="38">
-<li id="fn38"><p>Maximizing the <span class="math inline">\(elpd\)</span> in <a href="expected-log-predictive-density-of-a-model.html#eq:elpd">(17.3)</a> is also equivalent to minimizing the Kullback–Leibler (KL) divergence from the true data generating distribution <span class="math inline">\(p_t(y_{pred})\)</span> to the <em>posterior predictive distribution</em> of the candidate model <span class="math inline">\(\mathcal{M}_1\)</span>.<a href="expected-log-predictive-density-of-a-model.html#fnref38" class="footnote-back">↩</a></p></li>
-<li id="fn39"><p>The double use of the data is also a problem when one relies on information criteria like the Akaike Information Criterion (AIC) or the Bayesian Information Criterion (BIC).<a href="expected-log-predictive-density-of-a-model.html#fnref39" class="footnote-back">↩</a></p></li>
+<ol start="41">
+<li id="fn41"><p>Maximizing the <span class="math inline">\(elpd\)</span> in <a href="expected-log-predictive-density-of-a-model.html#eq:elpd">(17.3)</a> is also equivalent to minimizing the Kullback–Leibler (KL) divergence from the true data generating distribution <span class="math inline">\(p_t(y_{pred})\)</span> to the <em>posterior predictive distribution</em> of the candidate model <span class="math inline">\(\mathcal{M}_1\)</span>.<a href="expected-log-predictive-density-of-a-model.html#fnref41" class="footnote-back">↩</a></p></li>
+<li id="fn42"><p>The double use of the data is also a problem when one relies on information criteria like the Akaike Information Criterion (AIC) or the Bayesian Information Criterion (BIC).<a href="expected-log-predictive-density-of-a-model.html#fnref42" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1326,8 +1327,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/17-CV.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1337,7 +1338,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

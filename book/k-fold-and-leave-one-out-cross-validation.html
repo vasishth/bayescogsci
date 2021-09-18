@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1209,7 +1210,7 @@ In K-fold-CV, several observations are held out in same (validation) fold. This 
 <!-- The quantity $\widehat{elpd}$ is a Bayesian alternative to the Akaike Information Criterion (AIC).  -->
 An alternative to using <span class="math inline">\(\widehat{elpd}\)</span> is to examine <span class="math inline">\(-2\times \widehat{elpd}\)</span>, which is equivalent to deviance, and is called the LOO Information Criterion (LOOIC).</p>
 <p>The approximation to the true data generating distribution is worse when fewer observations are used, and thus ideally we would set <span class="math inline">\(K =N\)</span>, and thus computing LOO-CV rather than K-fold-CV. The main advantage of LOO-CV is its robustness, since the training set is as similar as possible to the real data, while the same observations are never used simultaneously for training and evaluating the predictions. A major disadvantage is the computational burden <span class="citation">(Vehtari and Ojanen <a href="#ref-VehtariOjanen2012">2012</a>)</span>, since we need to fit a model as many times as the number of observations. The package <code>loo</code> provides an approximation to LOO-CV, Pareto smoothed importance sampling leave-one-out <span class="citation">(PSIS-LOO; Vehtari and Gelman <a href="#ref-VehtariGelman2015Pareto">2015</a>; Vehtari, Gelman, and Gabry <a href="#ref-vehtariPracticalBayesianModel2017">2017</a><a href="#ref-vehtariPracticalBayesianModel2017">b</a>)</span>, which as we show next is relatively straightforward to use in <code>brms</code> and in Stan models (see <a href="https://mc-stan.org/loo/articles/loo2-with-rstan.html" class="uri">https://mc-stan.org/loo/articles/loo2-with-rstan.html</a>). However, in some cases, its estimates can be unreliable, which is indicated by the estimated shape parameter <span class="math inline">\(\hat{k}\)</span> of the generalized Pareto distribution. In those cases, where one or several pointwise predictive density have associated large (larger than 0.5 or 0.7, see <a href="https://mc-stan.org/loo/reference/pareto-k-diagnostic.html" class="uri">https://mc-stan.org/loo/reference/pareto-k-diagnostic.html</a>) <span class="math inline">\(\hat{k}\)</span>, either (i) the problematic predictions can be refitted with exact LOO-CV, (ii) one can try some additional computations using the existing posterior sample based on the moment matching approximation <span class="citation">(see <a href="https://mc-stan.org/loo/articles/loo2-moment-matching.html" class="uri">https://mc-stan.org/loo/articles/loo2-moment-matching.html</a> and Paananen et al. <a href="#ref-Paananen_2021">2021</a>)</span>, or (iii) alternatively one can abandon PSIS-LOO-CV and use K-fold-CV, with K typically set to 10.</p>
-<p>One of the main disadvantages of cross-validation (in comparison with Bayes factor at least) is that the numerical difference in predictive accuracy is hard to interpret. As a rule if thumb, it has been suggested that if the <code>elpd</code> difference (<code>elpd_diff</code> in <code>loo</code> package) is less than 4, the difference is small, and if it is larger than 4, one should compare that difference to its standard error (<code>se_diff</code>).<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a></p>
+<p>One of the main disadvantages of cross-validation (in comparison with Bayes factor at least) is that the numerical difference in predictive accuracy is hard to interpret. As a rule if thumb, it has been suggested that if the <code>elpd</code> difference (<code>elpd_diff</code> in <code>loo</code> package) is less than 4, the difference is small, and if it is larger than 4, one should compare that difference to its standard error (<code>se_diff</code>).<a href="#fn43" class="footnote-ref" id="fnref43"><sup>43</sup></a></p>
 
 <div class="extra">
 
@@ -1276,8 +1277,8 @@ se(\widehat{elpd}_{\mathcal{M}1} - \widehat{elpd}_{\mathcal{M}2}) = \sqrt{N \mat
 </div>
 <div class="footnotes">
 <hr />
-<ol start="40">
-<li id="fn40"><p>See <a href="https://avehtari.github.io/modelselection/CV-FAQ.html" class="uri">https://avehtari.github.io/modelselection/CV-FAQ.html</a><a href="k-fold-and-leave-one-out-cross-validation.html#fnref40" class="footnote-back">↩</a></p></li>
+<ol start="43">
+<li id="fn43"><p>See <a href="https://avehtari.github.io/modelselection/CV-FAQ.html" class="uri">https://avehtari.github.io/modelselection/CV-FAQ.html</a><a href="k-fold-and-leave-one-out-cross-validation.html#fnref43" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1318,8 +1319,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/17-CV.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1329,7 +1330,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1227,14 +1228,14 @@ FIGURE 16.1: Beta distribution with parameters a = 4 and b = 2.
 </p>
 </div>
 <p>To compute the marginal likelihood, equation <a href="hypothesis-testing-using-the-bayes-factor.html#eq:marginall">(16.1)</a> shows that we need to multiply the likelihood with the prior. The marginal likelihood is then the area under the curve, that is, the likelihood averaged across all possible values for the model parameter (the probability of success).</p>
-<p>Based on this data, likelihood, and prior we can calculate the marginal likelihood, that is, this area under the curve, in the following way using R:<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></p>
-<div class="sourceCode" id="cb807"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb807-1" data-line-number="1"><span class="co"># First we multiply the likelihood with the prior</span></a>
-<a class="sourceLine" id="cb807-2" data-line-number="2">plik1 &lt;-<span class="st"> </span><span class="cf">function</span>(theta) {</a>
-<a class="sourceLine" id="cb807-3" data-line-number="3">  <span class="kw">dbinom</span>(<span class="dt">x =</span> <span class="dv">80</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> theta) <span class="op">*</span></a>
-<a class="sourceLine" id="cb807-4" data-line-number="4"><span class="st">    </span><span class="kw">dbeta</span>(<span class="dt">x =</span> theta, <span class="dt">shape1 =</span> <span class="dv">4</span>, <span class="dt">shape2 =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb807-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb807-6" data-line-number="6"><span class="co"># Then we integrate (compute the area under the curve):</span></a>
-<a class="sourceLine" id="cb807-7" data-line-number="7">(MargLik1 &lt;-<span class="st"> </span><span class="kw">integrate</span>(<span class="dt">f =</span> plik1, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>)<span class="op">$</span>value)</a></code></pre></div>
+<p>Based on this data, likelihood, and prior we can calculate the marginal likelihood, that is, this area under the curve, in the following way using R:<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a></p>
+<div class="sourceCode" id="cb811"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb811-1" data-line-number="1"><span class="co"># First we multiply the likelihood with the prior</span></a>
+<a class="sourceLine" id="cb811-2" data-line-number="2">plik1 &lt;-<span class="st"> </span><span class="cf">function</span>(theta) {</a>
+<a class="sourceLine" id="cb811-3" data-line-number="3">  <span class="kw">dbinom</span>(<span class="dt">x =</span> <span class="dv">80</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> theta) <span class="op">*</span></a>
+<a class="sourceLine" id="cb811-4" data-line-number="4"><span class="st">    </span><span class="kw">dbeta</span>(<span class="dt">x =</span> theta, <span class="dt">shape1 =</span> <span class="dv">4</span>, <span class="dt">shape2 =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb811-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb811-6" data-line-number="6"><span class="co"># Then we integrate (compute the area under the curve):</span></a>
+<a class="sourceLine" id="cb811-7" data-line-number="7">(MargLik1 &lt;-<span class="st"> </span><span class="kw">integrate</span>(<span class="dt">f =</span> plik1, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>)<span class="op">$</span>value)</a></code></pre></div>
 <pre><code>## [1] 0.02</code></pre>
 <p>Importantly, one would prefer a model that gives a higher marginal likelihood, i.e., a higher likelihood of observing the data after integrating out the influence of the model parameter(s) (here: <span class="math inline">\(\theta\)</span>). A model will yield a high marginal likelihood if it makes a high proportion of good predictions (i.e., model 2 in Figure <a href="hypothesis-testing-using-the-bayes-factor.html#fig:OccamFactor">16.2</a>; Figure adapted from <span class="citation">Bishop (<a href="#ref-bishop2006pattern">2006</a>)</span>).
 Model predictions are normalized, that is, the total probability that models assign to different expected data patterns is the same for all models.
@@ -1248,11 +1249,11 @@ FIGURE 16.2: Shown are the schematic probabilities, p(Data), that each of three 
 <p>By contrast, good models (Figure <a href="hypothesis-testing-using-the-bayes-factor.html#fig:OccamFactor">16.2</a>, model 2) will make very specific predictions, where the specific predictions are consistent with the observed data. Here, all the predictive probability density is located at the “location” where the observed data fall, and little probability density is located at other places, providing good support for the model. Of course, specific predictions can also be wrong, when expectations differ from what the observed data actually look like (Figure <a href="hypothesis-testing-using-the-bayes-factor.html#fig:OccamFactor">16.2</a>, model 1).</p>
 <p>Having a natural Occam factor is good for posterior inference, i.e., for assessing how much (continuous) evidence there is for one model or another. However, it doesn’t necessarily imply good decision making or hypothesis testing, i.e., to make discrete decisions about which model explains the data best, or on which model to base further actions.</p>
 <p>Here, we provide two examples of more flexible models. First, the following model assumes the same likelihood and the same distribution function for the prior. However, we assume a less informative prior, with prior parameters <span class="math inline">\(a = 1\)</span> and <span class="math inline">\(b = 1\)</span> (i.e., only one prior “success” and one prior “failure”), which provides more prior spread than the first model. Again, we can formulate our model as multiplying the likelihood with the prior, and integrate out the influence of the parameter <span class="math inline">\(\theta\)</span>:</p>
-<div class="sourceCode" id="cb809"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb809-1" data-line-number="1">plik2 &lt;-<span class="st"> </span><span class="cf">function</span>(theta) {</a>
-<a class="sourceLine" id="cb809-2" data-line-number="2">  <span class="kw">dbinom</span>(<span class="dt">x =</span> <span class="dv">80</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> theta) <span class="op">*</span></a>
-<a class="sourceLine" id="cb809-3" data-line-number="3"><span class="st">    </span><span class="kw">dbeta</span>(<span class="dt">x =</span> theta, <span class="dt">shape1 =</span> <span class="dv">1</span>, <span class="dt">shape2 =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb809-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb809-5" data-line-number="5">(MargLik2 &lt;-<span class="st"> </span><span class="kw">integrate</span>(<span class="dt">f =</span> plik2, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>)<span class="op">$</span>value)</a></code></pre></div>
+<div class="sourceCode" id="cb813"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb813-1" data-line-number="1">plik2 &lt;-<span class="st"> </span><span class="cf">function</span>(theta) {</a>
+<a class="sourceLine" id="cb813-2" data-line-number="2">  <span class="kw">dbinom</span>(<span class="dt">x =</span> <span class="dv">80</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> theta) <span class="op">*</span></a>
+<a class="sourceLine" id="cb813-3" data-line-number="3"><span class="st">    </span><span class="kw">dbeta</span>(<span class="dt">x =</span> theta, <span class="dt">shape1 =</span> <span class="dv">1</span>, <span class="dt">shape2 =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb813-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb813-5" data-line-number="5">(MargLik2 &lt;-<span class="st"> </span><span class="kw">integrate</span>(<span class="dt">f =</span> plik2, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>)<span class="op">$</span>value)</a></code></pre></div>
 <pre><code>## [1] 0.0099</code></pre>
 <p>We can see that this second model is more flexible: due to the more spread-out prior, it is compatible with a larger range of possible observed data patterns. However, when we integrate out the <span class="math inline">\(\theta\)</span> parameter to obtain the marginal likelihood, we can see that this flexibility also comes with a cost: the model has a smaller marginal likelihood (<span class="math inline">\(0.00990\)</span>) than the first model (<span class="math inline">\(0.01998\)</span>). Thus, on average (averaged across all possible values of <span class="math inline">\(\theta\)</span>) the second model performs worse in explaining the specific data that we observed compared to the first model, and has less support from the data.</p>
 <p>A model might be more “complex” because it has a more spread-out prior, or alternatively because it has a more complex likelihood function, which uses a larger number of parameters to explain the same data. Here we implement a third model, which assumes a more complex likelihood by using a Beta-Binomial distribution. The Beta-Binomial distribution is equivalent to the Binomial distribution, with one important difference: In the Binomial distribution the probability of success <span class="math inline">\(\theta\)</span> is fixed across trials. In the Beta-Binomial distribution, the probability of success is fixed for each trial, but is drawn from a Beta distribution across trials. Thus, <span class="math inline">\(\theta\)</span> can differ between trials. In the Beta-Binomial distribution, we thus assume that the likelihood function is a combination of a Binomial distribution and a Beta distribution of the probability <span class="math inline">\(\theta\)</span>, which yields:</p>
@@ -1260,15 +1261,15 @@ FIGURE 16.2: Shown are the schematic probabilities, p(Data), that each of three 
 p(X = k \mid a, b) = \frac{B(k+a, n-k+b)}{B(a,b)}
 \end{equation}\]</span></p>
 <p>What is important here is that this more complex distribution has two parameters (<span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>; rather than one, <span class="math inline">\(\theta\)</span>) to explain the same data. We assume log-normally distributed priors for the <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> parameters, with location zero and scale <span class="math inline">\(100\)</span>, which correspond to the mean (<span class="math inline">\(0\)</span>) and standard deviation (<span class="math inline">\(100\)</span>) of the distribution on the log scale. The likelihood of this combined Beta-Binomial distribution is given by the R-function <code>dbbinom()</code> in the package <code>extraDistr</code>. We can now write down the likelihood times the priors (given as log-normal densities, <code>dlnorm()</code>), and integrate out the influence of the two free model parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> using numerical integration (applying <code>integrate</code> twice):</p>
-<div class="sourceCode" id="cb811"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb811-1" data-line-number="1">plik3 &lt;-<span class="st"> </span><span class="cf">function</span>(a, b) {</a>
-<a class="sourceLine" id="cb811-2" data-line-number="2">  extraDistr<span class="op">::</span><span class="kw">dbbinom</span>(<span class="dt">x =</span> <span class="dv">80</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">alpha =</span> a, <span class="dt">beta =</span> b) <span class="op">*</span></a>
-<a class="sourceLine" id="cb811-3" data-line-number="3"><span class="st">    </span><span class="kw">dlnorm</span>(<span class="dt">x =</span> a, <span class="dt">meanlog =</span> <span class="dv">0</span>, <span class="dt">sdlog =</span> <span class="dv">100</span>) <span class="op">*</span></a>
-<a class="sourceLine" id="cb811-4" data-line-number="4"><span class="st">    </span><span class="kw">dlnorm</span>(<span class="dt">x =</span> b, <span class="dt">meanlog =</span> <span class="dv">0</span>, <span class="dt">sdlog =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb811-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb811-6" data-line-number="6"><span class="co"># Compute marginal likelihood by applying integrate twice</span></a>
-<a class="sourceLine" id="cb811-7" data-line-number="7">f &lt;-<span class="st"> </span><span class="cf">function</span>(b) <span class="kw">integrate</span>(<span class="cf">function</span>(a) <span class="kw">plik3</span>(a, b), <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)<span class="op">$</span>value</a>
-<a class="sourceLine" id="cb811-8" data-line-number="8"><span class="co"># integrate requires a vectorized function:</span></a>
-<a class="sourceLine" id="cb811-9" data-line-number="9">(MargLik3 &lt;-<span class="st"> </span><span class="kw">integrate</span>(<span class="kw">Vectorize</span>(f), <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)<span class="op">$</span>value)</a></code></pre></div>
+<div class="sourceCode" id="cb815"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb815-1" data-line-number="1">plik3 &lt;-<span class="st"> </span><span class="cf">function</span>(a, b) {</a>
+<a class="sourceLine" id="cb815-2" data-line-number="2">  extraDistr<span class="op">::</span><span class="kw">dbbinom</span>(<span class="dt">x =</span> <span class="dv">80</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">alpha =</span> a, <span class="dt">beta =</span> b) <span class="op">*</span></a>
+<a class="sourceLine" id="cb815-3" data-line-number="3"><span class="st">    </span><span class="kw">dlnorm</span>(<span class="dt">x =</span> a, <span class="dt">meanlog =</span> <span class="dv">0</span>, <span class="dt">sdlog =</span> <span class="dv">100</span>) <span class="op">*</span></a>
+<a class="sourceLine" id="cb815-4" data-line-number="4"><span class="st">    </span><span class="kw">dlnorm</span>(<span class="dt">x =</span> b, <span class="dt">meanlog =</span> <span class="dv">0</span>, <span class="dt">sdlog =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb815-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb815-6" data-line-number="6"><span class="co"># Compute marginal likelihood by applying integrate twice</span></a>
+<a class="sourceLine" id="cb815-7" data-line-number="7">f &lt;-<span class="st"> </span><span class="cf">function</span>(b) <span class="kw">integrate</span>(<span class="cf">function</span>(a) <span class="kw">plik3</span>(a, b), <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)<span class="op">$</span>value</a>
+<a class="sourceLine" id="cb815-8" data-line-number="8"><span class="co"># integrate requires a vectorized function:</span></a>
+<a class="sourceLine" id="cb815-9" data-line-number="9">(MargLik3 &lt;-<span class="st"> </span><span class="kw">integrate</span>(<span class="kw">Vectorize</span>(f), <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)<span class="op">$</span>value)</a></code></pre></div>
 <pre><code>## [1] 0.00000707</code></pre>
 <p>The results show that this third model has an even smaller marginal likelihood compared to the first two (<span class="math inline">\(0.000007\)</span>). With its two parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, this third model has a lot of flexibility to explain a lot of different patterns of observed empirical results. However, again, this increased flexibility comes at a cost, and the simple pattern of observed data does not seem to require such complex model assumptions. The small value for the marginal likelihood indicates that this complex model has less support from the data.</p>
 <p>That is, for this present simple example case, we would prefer model 1 over the other two, since it has the largest marginal likelihood (<span class="math inline">\(0.01998\)</span>), and we would prefer model 2 over model 3, since the marginal likelihood of model 2 (<span class="math inline">\(0.00990\)</span>) is larger than that of model 3 (<span class="math inline">\(0.000007\)</span>). The decision about which model is preferred is based on comparing the marginal likelihoods.</p>
@@ -1421,8 +1422,8 @@ The current implementation of the Savage–Dickey method in brms can be unstable
 </div>
 <div class="footnotes">
 <hr />
-<ol start="34">
-<li id="fn34"><p>Given that the posterior is analytically available for Beta-distributed priors for the Binomial distribution, we could alternatively compute the posterior first, and then integrate out the probability <span class="math inline">\(p\)</span>. For increased generalization to the following examples, here we show the version where the likelihood and the prior are multiplied.<a href="hypothesis-testing-using-the-bayes-factor.html#fnref34" class="footnote-back">↩</a></p></li>
+<ol start="37">
+<li id="fn37"><p>Given that the posterior is analytically available for Beta-distributed priors for the Binomial distribution, we could alternatively compute the posterior first, and then integrate out the probability <span class="math inline">\(p\)</span>. For increased generalization to the following examples, here we show the version where the likelihood and the prior are multiplied.<a href="hypothesis-testing-using-the-bayes-factor.html#fnref37" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1463,8 +1464,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/16-BF.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1474,7 +1475,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

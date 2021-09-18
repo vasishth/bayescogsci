@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1207,22 +1208,22 @@ model {
 }
 </code></pre>
 <p>There is only one parameter in this model, cloze probability represented with the parameter <code>theta</code>, which is a real number constrained between 0 and 1. Another difference between this and the previous example is that the likelihood function ends with <code>_lpmf</code> rather than with <code>_lpdf</code>. This is because Stan differentiates between distributions of continuous variables, i.e, probability density functions (PDF), and distributions of discrete variables, i.e., probability mass functions (PMF).</p>
-<div class="sourceCode" id="cb593"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb593-1" data-line-number="1">lst_cloze_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">k =</span> <span class="dv">80</span>, <span class="dt">N =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb593-2" data-line-number="2">binomial_cloze &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb593-3" data-line-number="3">                              <span class="st">&quot;binomial_cloze.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb593-4" data-line-number="4">                              <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb593-5" data-line-number="5">fit_cloze &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb593-6" data-line-number="6">  <span class="dt">file =</span> binomial_cloze,</a>
-<a class="sourceLine" id="cb593-7" data-line-number="7">  <span class="dt">data =</span> lst_cloze_data</a>
-<a class="sourceLine" id="cb593-8" data-line-number="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb596-1" data-line-number="1">lst_cloze_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">k =</span> <span class="dv">80</span>, <span class="dt">N =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb596-2" data-line-number="2">binomial_cloze &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb596-3" data-line-number="3">                              <span class="st">&quot;binomial_cloze.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb596-4" data-line-number="4">                              <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb596-5" data-line-number="5">fit_cloze &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb596-6" data-line-number="6">  <span class="dt">file =</span> binomial_cloze,</a>
+<a class="sourceLine" id="cb596-7" data-line-number="7">  <span class="dt">data =</span> lst_cloze_data</a>
+<a class="sourceLine" id="cb596-8" data-line-number="8">)</a></code></pre></div>
 <p>We print the summary of the posterior distribution of <span class="math inline">\(\theta\)</span> below, and we show its posterior distribution graphically (see Figure <a href="sec-clozestan.html#fig:posttheta">10.4</a>).</p>
 
-<div class="sourceCode" id="cb594"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb594-1" data-line-number="1"><span class="kw">print</span>(fit_cloze, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb597-1" data-line-number="1"><span class="kw">print</span>(fit_cloze, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</a></code></pre></div>
 <pre><code>##       mean 2.5% 97.5% n_eff Rhat
 ## theta 0.78 0.69  0.85  1385    1</code></pre>
-<div class="sourceCode" id="cb596"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb596-1" data-line-number="1">df_fit_cloze &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_cloze)</a>
-<a class="sourceLine" id="cb596-2" data-line-number="2"><span class="kw">mcmc_dens</span>(df_fit_cloze, <span class="dt">pars =</span> <span class="st">&quot;theta&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb596-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">mean</span>(df_fit_cloze<span class="op">$</span>theta))</a></code></pre></div>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb599-1" data-line-number="1">df_fit_cloze &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_cloze)</a>
+<a class="sourceLine" id="cb599-2" data-line-number="2"><span class="kw">mcmc_dens</span>(df_fit_cloze, <span class="dt">pars =</span> <span class="st">&quot;theta&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb599-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">mean</span>(df_fit_cloze<span class="op">$</span>theta))</a></code></pre></div>
 <div class="figure"><span id="fig:posttheta"></span>
 <img src="bookdown_files/figure-html/posttheta-1.svg" alt="Posterior distribution of the cloze probability of umbrella; parameter \(\theta\)." width="672" />
 <p class="caption">
@@ -1268,8 +1269,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/10-introstan.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1279,7 +1280,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

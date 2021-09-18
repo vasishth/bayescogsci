@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1191,11 +1192,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort" class="section level2">
 <h2><span class="header-section-number">5.3</span> Why fitting a Bayesian hierarchical model is worth the effort</h2>
 <p>Carrying out Bayesian data analysis clearly requires much more effort than fitting a frequentist model: we have to define priors, verify that our model works, and decide how to interpret the results. By comparison, fitting a linear mixed model using <code>lme4</code> consists of only a single line of code. But there is a hidden cost to the relatively high speed furnished by the functions such as <code>lmer</code>. First, the model fit using <code>lmer</code> or the like makes many assumptions, but they are hidden from the user. This is not a problem for the knowledgeable modeler, but very dangerous for the naive user. A second conceptual problem is that the way frequentist models are typically used is to answer a binary question: is the effect “significant” or not? If a result is significant, the paper is considered worth publishing; if not, it is not. Although frequentist models can quickly answer the question that the null hypothesis test poses, the frequentist test answers the wrong question. For discussion, see <span class="citation">Vasishth and Nicenboim (<a href="#ref-VasishthNicenboimStatMeth">2016</a>)</span>.</p>
-<p>Nevertheless, it is natural to ask why one should bother to go through all the trouble of fitting a Bayesian model. Here, we give two reasons why fitting a Bayesian hierarchical models is worth the effort and time.</p>
-<ul>
-<li><p><strong>Flexibility in model specification</strong>: The approach we have presented here can be used to extend essentially any parameter of any model. This includes popular uses, such as logistic and Poisson regressions, and also useful models that are relatively rarely used in cognitive science, such as multi-logistic regression <span class="citation">(e.g., accuracy in some task with more than two answers), ordered logistic (e.g., ratings, Bürkner and Vuorre <a href="#ref-burkner2018ordinal">2018</a>)</span>, and models with a shifted log-normal distribution <span class="citation">(see Nicenboim, Logačev, et al. <a href="#ref-NicenboimEtAl2016Frontiersb">2016</a>; Rouder <a href="#ref-Rouder2005">2005</a>)</span>. We provide examples of this flexibility in the coming chapters. By contrast, a frequentist model, although easy to fit quickly, forces the user to use an inflexible canned model, which may not necessarily make sense for their data.</p></li>
-<li><p><strong>Ability to develop complex hierarchical computational process models</strong>: Complex cognitive models can be extended hierarchically in a straightforward way, see <span class="citation">Lee (<a href="#ref-Lee2011">2011</a>)</span> and <span class="citation">Lee and Wagenmakers (<a href="#ref-LeeWagenmakers2014">2014</a>)</span>. This is because, as we have seen with distributional regression models in section <a href="sec-N400hierarchical.html#sec:distrmodel">5.1.6</a>, any parameter can have a group-level effect structure. Some examples of hierarchical computational cognitive models in psycholinguistics are <span class="citation">Logačev and Vasishth (<a href="#ref-LogacevVasishth2015">2016</a>)</span>, <span class="citation">Nicenboim and Vasishth (<a href="#ref-nicenboimModelsRetrievalSentence2018">2018</a>)</span>, <span class="citation">Vasishth et al. (<a href="#ref-VasishthEtAl2017Modelling">2017</a>)</span>, <span class="citation">Vasishth, Jaeger, and Nicenboim (<a href="#ref-VasishthEtAl2017Feature">2017</a>)</span>, <span class="citation">Lissón et al. (<a href="#ref-lisson_2020">2021</a>)</span>, <span class="citation">Logacev and Dokudan (<a href="#ref-logacev-dokudan-2021-multinomial">2021</a>)</span>, <span class="citation">Paape et al. (<a href="#ref-PaapeEtAlMPT2020">2021</a>)</span>, <span class="citation">Yadav, Smith, and Vasishth (<a href="#ref-yadavencret2021">2021</a><a href="#ref-yadavencret2021">a</a>)</span>, and <span class="citation">Yadav, Smith, and Vasishth (<a href="#ref-yadaviccm2021">2021</a><a href="#ref-yadaviccm2021">b</a>)</span>. The hierarchical Bayesian modeling approach can even be extended to process models that cannot be expressed as a likelihood function, although in such cases one may have to write one’s own sampler; for an example from psycholinguistics, see <span class="citation">Yadav et al. (<a href="#ref-yadavindiff2021">2021</a>)</span>. Most of the papers mentioned above provide example code using Stan or <code>brms</code>.</p></li>
-</ul>
+<p>Nevertheless, it is natural to ask why one should bother to go through all the trouble of fitting a Bayesian model. An important reason is the flexibility in model specification. The approach we have presented here can be used to extend essentially any parameter of any model. This includes popular uses, such as logistic and Poisson regressions, and also useful models that are relatively rarely used in cognitive science, such as multi-logistic regression <span class="citation">(e.g., accuracy in some task with more than two answers), ordered logistic (e.g., ratings, Bürkner and Vuorre <a href="#ref-burkner2018ordinal">2018</a>)</span>, models with a shifted log-normal distribution <span class="citation">(see Nicenboim, Logačev, et al. <a href="#ref-NicenboimEtAl2016Frontiersb">2016</a>; Rouder <a href="#ref-Rouder2005">2005</a>)</span>, and distributional regression models (as shown in <a href="sec-N400hierarchical.html#sec:distrmodel">5.1.6</a>. By contrast, a frequentist model, although easy to fit quickly, forces the user to use an inflexible canned model, which may not necessarily make sense for their data.</p>
+<p>This flexibility allows us also to go beyond the statistical models discussed before, and to develop complex hierarchical computational process models that are tailored to specific phenomena. An example are computational cognitive models, these can be extended hierarchically in a straightforward way, see <span class="citation">Lee (<a href="#ref-Lee2011">2011</a>)</span> and <span class="citation">Lee and Wagenmakers (<a href="#ref-LeeWagenmakers2014">2014</a>)</span>. This is because, as we have seen with distributional regression models in section <a href="sec-N400hierarchical.html#sec:distrmodel">5.1.6</a>, any parameter can have a group-level effect structure. Some examples of hierarchical computational cognitive models in psycholinguistics are <span class="citation">Logačev and Vasishth (<a href="#ref-LogacevVasishth2015">2016</a>)</span>, <span class="citation">Nicenboim and Vasishth (<a href="#ref-nicenboimModelsRetrievalSentence2018">2018</a>)</span>, <span class="citation">Vasishth et al. (<a href="#ref-VasishthEtAl2017Modelling">2017</a>)</span>, <span class="citation">Vasishth, Jaeger, and Nicenboim (<a href="#ref-VasishthEtAl2017Feature">2017</a>)</span>, <span class="citation">Lissón et al. (<a href="#ref-lisson_2020">2021</a>)</span>, <span class="citation">Logacev and Dokudan (<a href="#ref-logacev-dokudan-2021-multinomial">2021</a>)</span>, <span class="citation">Paape et al. (<a href="#ref-PaapeEtAlMPT2020">2021</a>)</span>, <span class="citation">Yadav, Smith, and Vasishth (<a href="#ref-yadavencret2021">2021</a><a href="#ref-yadavencret2021">a</a>)</span>, and <span class="citation">Yadav, Smith, and Vasishth (<a href="#ref-yadaviccm2021">2021</a><a href="#ref-yadaviccm2021">b</a>)</span>. The hierarchical Bayesian modeling approach can even be extended to process models that cannot be expressed as a likelihood function, although in such cases one may have to write one’s own sampler; for an example from psycholinguistics, see <span class="citation">Yadav et al. (<a href="#ref-yadavindiff2021">2021</a>)</span>.<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>. We discuss and implement in Stan some relatively simple computational cognitive models in chapters <a href="ch-cogmod.html#ch:cogmod">18</a>-<a href="ch-lognormalrace.html#ch:lognormalrace">21</a>.</p>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
@@ -1248,6 +1246,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Yadav, Himanshu, Garrett Smith, and Shravan Vasishth. 2021b. “Is Similarity-Based Interference Caused by Lossy Compression or Cue-Based Retrieval? A Computational Evaluation.” <em>Proceedings of the International Conference on Cognitive Modeling</em>.</p>
 </div>
 </div>
+<div class="footnotes">
+<hr />
+<ol start="23">
+<li id="fn23"><p>Most of the papers mentioned above provide example code using Stan or <code>brms</code><a href="why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort.html#fnref23" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>
@@ -1286,8 +1290,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/05-hierarchical.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1297,7 +1301,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1208,13 +1209,13 @@ up(\Theta|y) \propto p(\Theta|y)
 \end{equation}\]</span></p>
 <p>(The notation <span class="math inline">\(up(\cdot)\)</span> that we are using here is not standard in statistics; we are using it only for pedagogical convenience.)</p>
 <p>Stan sampler uses Hamiltonian dynamics and treats the vector of parameters, <span class="math inline">\(\Theta\)</span> (that could range from a vector containing a couple of parameters, e.g., <span class="math inline">\(&lt;\mu,\sigma&gt;\)</span>, to a vector of hundreds of parameters in hierarchical models), as the position of a frictionless particle that glides on the <em>negative logarithm of the unnormalized posterior</em>.
-That means that high probability places are valleys and low probability places are peaks in this space.<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a> However, Stan doesn’t just let the particle glide until the bottom of this space. If we let that happen, we would find the mode of the posterior distribution, rather than samples. Stan uses a complex algorithm to determine the weight of the particle and the momentum that we apply to it, as well as when to stop the particle trajectory to take a sample. Because we need to know the speed of this particle, Stan needs to be able to calculate the derivative of the log unnormalized posterior with respect to the parameters (recall that speed is the first derivative of position). This means that if the parameter space is differentiable (is relatively smooth, and does not have any break or angle) and if the parameters of the Stan algorithm are well adjusted–as should happen in the warm-up period–these samples are going to represent samples of the true posterior distribution. Bear in mind that the geometry of the posterior has a big influence on whether the algorithm will converge (fast) or not: If the space is very flat, because there isn’t much data and the priors are not informative, then the particle may need to glide for a long time before it gets to a high probability area; if there are several valleys (multimodality) the particle may never leave the vicinity of one of them; and if the space is funnel shaped, the particle may never explore the funnel. One of the reasons for the difficulties in exploring complicated spaces is that the continuous path of the “particle” is discretized and divided into steps, and the <em>step size</em> is optimized for the entire posterior space. In spaces that are too complex, such as a funnel, a step size might be too small to explore the wide part of the funnel, but too large to explore the narrow part; we will deal with this problem in section <a href="sec-hierstan.html#sec:uncorrstan">11.1.2</a>.</p>
+That means that high probability places are valleys and low probability places are peaks in this space.<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a> However, Stan doesn’t just let the particle glide until the bottom of this space. If we let that happen, we would find the mode of the posterior distribution, rather than samples. Stan uses a complex algorithm to determine the weight of the particle and the momentum that we apply to it, as well as when to stop the particle trajectory to take a sample. Because we need to know the speed of this particle, Stan needs to be able to calculate the derivative of the log unnormalized posterior with respect to the parameters (recall that speed is the first derivative of position). This means that if the parameter space is differentiable (is relatively smooth, and does not have any break or angle) and if the parameters of the Stan algorithm are well adjusted–as should happen in the warm-up period–these samples are going to represent samples of the true posterior distribution. Bear in mind that the geometry of the posterior has a big influence on whether the algorithm will converge (fast) or not: If the space is very flat, because there isn’t much data and the priors are not informative, then the particle may need to glide for a long time before it gets to a high probability area; if there are several valleys (multimodality) the particle may never leave the vicinity of one of them; and if the space is funnel shaped, the particle may never explore the funnel. One of the reasons for the difficulties in exploring complicated spaces is that the continuous path of the “particle” is discretized and divided into steps, and the <em>step size</em> is optimized for the entire posterior space. In spaces that are too complex, such as a funnel, a step size might be too small to explore the wide part of the funnel, but too large to explore the narrow part; we will deal with this problem in section <a href="sec-hierstan.html#sec:uncorrstan">11.1.2</a>.</p>
 <p>Although our following example assumes a vector of two parameters and thus a simple geometry, real world examples can easily have hundreds of parameters defining an unnormalized posterior space with hundreds of dimensions.</p>
 <p>One question that might arise here is the following: Given that we already know the shape of the posterior, why do we need samples? After all, the posterior is just the unnormalized posterior multiplied by some number, the normalizing constant.</p>
 <p>To make this discussion concrete, let’s say that we have a subject that participates in a memory test, and in each trial we get a noisy score from their true working memory score. We assume that at each trial, the score is elicited with normally distributed noise. If we want to estimate the score and how much the noise makes it vary from trial to trial, we are assuming a normal likelihood and we want to estimate its mean and standard deviation.</p>
 <p>We will use simulated data produced by a normal distribution with a true mean of 3 and a true standard deviation of 10:</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb567-1" data-line-number="1">Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb567-2" data-line-number="2"><span class="kw">head</span>(Y)</a></code></pre></div>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb570-1" data-line-number="1">Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb570-2" data-line-number="2"><span class="kw">head</span>(Y)</a></code></pre></div>
 <pre><code>## [1] 23.65 24.94  4.57 -5.64  4.65 -3.53</code></pre>
 <p>As always, given our prior knowledge, we decide on priors. In this case, we use a log-normal prior for the standard deviation, <span class="math inline">\(\sigma\)</span>, since it can only be positive, but except for that, the prior distributions are quite arbitrary in this example.</p>
 <p><span class="math display" id="eq:priorsdem">\[\begin{equation}
@@ -1231,13 +1232,13 @@ up(\mu, \sigma |y) = \prod_n^{100} \mathit{Normal}(y_n|\mu, \sigma) \cdot \mathi
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(y = {23.647, 24.936, \ldots}\)</span></p>
 <p>We can also define the unnormalized posterior, <span class="math inline">\(up(\cdot)\)</span>, as a function in R:</p>
-<div class="sourceCode" id="cb569"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb569-1" data-line-number="1">up &lt;-<span class="st"> </span><span class="cf">function</span>(y, mu, sigma) {</a>
-<a class="sourceLine" id="cb569-2" data-line-number="2">  <span class="kw">dnorm</span>(<span class="dt">x =</span> mu, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">20</span>) <span class="op">*</span></a>
-<a class="sourceLine" id="cb569-3" data-line-number="3"><span class="st">    </span><span class="kw">dlnorm</span>(<span class="dt">x =</span> sigma, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">1</span>) <span class="op">*</span></a>
-<a class="sourceLine" id="cb569-4" data-line-number="4"><span class="st">    </span><span class="kw">prod</span>(<span class="kw">dnorm</span>(<span class="dt">x =</span> y, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))</a>
-<a class="sourceLine" id="cb569-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb572-1" data-line-number="1">up &lt;-<span class="st"> </span><span class="cf">function</span>(y, mu, sigma) {</a>
+<a class="sourceLine" id="cb572-2" data-line-number="2">  <span class="kw">dnorm</span>(<span class="dt">x =</span> mu, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">20</span>) <span class="op">*</span></a>
+<a class="sourceLine" id="cb572-3" data-line-number="3"><span class="st">    </span><span class="kw">dlnorm</span>(<span class="dt">x =</span> sigma, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">1</span>) <span class="op">*</span></a>
+<a class="sourceLine" id="cb572-4" data-line-number="4"><span class="st">    </span><span class="kw">prod</span>(<span class="kw">dnorm</span>(<span class="dt">x =</span> y, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))</a>
+<a class="sourceLine" id="cb572-5" data-line-number="5">}</a></code></pre></div>
 <p>For example, if we want to know the unnormalized posterior density for the vector of parameters <span class="math inline">\(&lt;\mu,\sigma&gt; = &lt;0, 5&gt;\)</span>, we do the following:</p>
-<div class="sourceCode" id="cb570"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb570-1" data-line-number="1"><span class="kw">up</span>(<span class="dt">y =</span> Y, <span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb573-1" data-line-number="1"><span class="kw">up</span>(<span class="dt">y =</span> Y, <span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] 5.59e-201</code></pre>
 <p>The shape of the unnormalized posterior density is completely defined and it will look like Figure <a href="ch-introstan.html#fig:up">10.1</a>.</p>
 
@@ -1251,7 +1252,7 @@ FIGURE 10.1: The unnormalized posterior defined by Equation <a href="ch-introsta
 This is because the unnormalized posterior distribution represents the general shape of the posterior distribution. With just the shape of an unknown distribution, we can only answer the following question: What is the most (or least) likely value of the vector of parameters? We can answer this question by searching for the highest (or lowest) place in that shape. This leads us to the estimate of the maximum a posteriori (MAP), which is the Bayesian counterpart of the maximum likelihood estimate (MLE). (However, if we can recognize the shape as a distribution, we are in a different situation. In that case, we might know already the formulas for the expectation, variance, etc. This is what we did in chapter <a href="ch-introBDA.html#ch:introBDA">2</a>, but it is an unusual situation in realistic analyses.)
 As we mentioned before, if we want to get posterior density values, we need the denominator of the Bayes rule (or marginal likelihood), <span class="math inline">\(p(y)\)</span>, which requires integrating the unnormalized posterior. Even this is not too useful if we want to communicate findings, almost every summary statistic require us to solve more integrals, and except for a handful of cases, these integrals might not have an analytical solution.</p>
 <p>As we mentioned before, the only summary that we can get with an unnormalized posterior shape (that we don’t recognize as a familiar distribution) is its mode (or the MAP: the highest point in Figure <a href="ch-introstan.html#fig:up">10.1</a>, or the lowest point of the negative log unnormalized log posterior). However, even calculating the mode is not always trivial. In simple cases as this one, one can calculate it analytically; but in more complex cases relatively complicated algorithms are needed.</p>
-<p>If we want to be able to calculate summary statistics of the posterior distribution (mean, quantiles, etc.), we are going to need samples from this distribution. This is because with enough samples of a probability distribution, we can achieve very good approximations of summary statistics. Stan will take care of returning samples from the posterior distribution, if the log unnormalized posterior distribution is differentiable and can be expressed as follows:<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a></p>
+<p>If we want to be able to calculate summary statistics of the posterior distribution (mean, quantiles, etc.), we are going to need samples from this distribution. This is because with enough samples of a probability distribution, we can achieve very good approximations of summary statistics. Stan will take care of returning samples from the posterior distribution, if the log unnormalized posterior distribution is differentiable and can be expressed as follows:<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a></p>
 <p><span class="math display" id="eq:logup">\[\begin{equation}
 \log(up(\Theta|y)) = \sum_n log(p(y_n|\Theta)) + \sum_q log(p(\Theta_q))
 \tag{10.6}
@@ -1292,9 +1293,9 @@ As we mentioned before, if we want to get posterior density values, we need the 
 </div>
 <div class="footnotes">
 <hr />
-<ol start="27">
-<li id="fn27"><p>In the specific case of a model with two parameters, e.g., <span class="math inline">\(&lt;\mu,\sigma&gt;\)</span>, the physical analogy works quite well: The <span class="math inline">\(&lt;x,y&gt;\)</span> coordinates of the particle would be determined by <span class="math inline">\(&lt;\mu,\sigma&gt;\)</span>, and its <span class="math inline">\(z\)</span> coordinate would be established by the height of the unnormalized posterior.<a href="ch-introstan.html#fnref27" class="footnote-back">↩</a></p></li>
-<li id="fn28"><p>Incidentally, this <span class="math inline">\(\log(up(\dot))\)</span> is the variable <code>target</code> in a Stan model and <code>lp__</code> in its output; see Box <a href="sec-firststan.html#thm:target">10.1</a>.<a href="ch-introstan.html#fnref28" class="footnote-back">↩</a></p></li>
+<ol start="29">
+<li id="fn29"><p>In the specific case of a model with two parameters, e.g., <span class="math inline">\(&lt;\mu,\sigma&gt;\)</span>, the physical analogy works quite well: The <span class="math inline">\(&lt;x,y&gt;\)</span> coordinates of the particle would be determined by <span class="math inline">\(&lt;\mu,\sigma&gt;\)</span>, and its <span class="math inline">\(z\)</span> coordinate would be established by the height of the unnormalized posterior.<a href="ch-introstan.html#fnref29" class="footnote-back">↩</a></p></li>
+<li id="fn30"><p>Incidentally, this <span class="math inline">\(\log(up(\dot))\)</span> is the variable <code>target</code> in a Stan model and <code>lp__</code> in its output; see Box <a href="sec-firststan.html#thm:target">10.1</a>.<a href="ch-introstan.html#fnref30" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1335,8 +1336,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/10-introstan.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1346,7 +1347,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

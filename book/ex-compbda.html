@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1206,7 +1207,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
-<p>Can you come up with very informative priors that bias the posterior in a noticeable way (use normal distributions for priors, not uniform priors)? Generate and plot prior predictive distributions based on this prior.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Can you come up with very informative priors that bias the posterior in a noticeable way (use normal distributions for priors, not uniform priors)?</li>
+<li>Generate and plot prior predictive distributions based on this prior and plot them.</li>
+<li>Generate posterior predictive distributions based on this prior and plot them.</li>
+</ol>
 
 <div class="exercise">
 <span id="exr:ppd" class="exercise"><strong>Exercise 3.3  </strong></span>Posterior predictive checks with a log-normal model.
@@ -1214,7 +1219,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <ol style="list-style-type: lower-alpha">
-<li>Generate posterior predictive distributions based on the previous model (<a href="ex-compbda.html#exr:compbda-biasedpost">3.2</a>) and plot them.</li>
 <li>For the log-normal model <code>fit_press_ln</code>, change the prior of <span class="math inline">\(\sigma\)</span> so that it is a log-normal distribution with location (<span class="math inline">\(\mu\)</span>) of <span class="math inline">\(-2\)</span> and scale (<span class="math inline">\(\sigma\)</span>) of <span class="math inline">\(.5\)</span>. What does such a prior imply about your belief regarding button-pressing times in milliseconds? Is it a good prior? Generate and plot prior predictive distributions. Do the new estimates change compared to earlier models when you fit the model?</li>
 <li>For the log-normal model, what is the mean (rather than median) time that takes to press the space bar, what is the standard deviation of the response times in milliseconds?</li>
 </ol>
@@ -1269,8 +1273,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/03-compbayes.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1280,7 +1284,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

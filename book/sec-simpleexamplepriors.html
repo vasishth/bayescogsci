@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1199,33 +1200,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb275-3" data-line-number="3"><span class="kw">mutate</span>(<span class="dt">c_cond =</span> <span class="kw">if_else</span>(condition <span class="op">==</span><span class="st"> &quot;objgap&quot;</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">-1</span><span class="op">/</span><span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb275-4" data-line-number="4">fit_gg05 &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_cond <span class="op">||</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb275-5" data-line-number="5"><span class="st">                  </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_cond <span class="op">||</span><span class="st"> </span>item), df_gg05_rc)</a></code></pre></div>
-<pre><code>## Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-## Running the chains for more iterations may help. See
-## http://mc-stan.org/misc/warnings.html#tail-ess</code></pre>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" data-line-number="1">(default_b &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_gg05,</a>
-<a class="sourceLine" id="cb277-2" data-line-number="2">                                    <span class="dt">variable =</span> <span class="st">&quot;b_c_cond&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" data-line-number="1">(default_b &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_gg05,</a>
+<a class="sourceLine" id="cb276-2" data-line-number="2">                                    <span class="dt">variable =</span> <span class="st">&quot;b_c_cond&quot;</span>))</a></code></pre></div>
 <pre><code>##          Estimate Est.Error Q2.5 Q97.5
-## b_c_cond      103      36.2 31.5   175</code></pre>
+## b_c_cond      102      35.7 34.9   175</code></pre>
 <p>The estimates from this model are remarkably similar to those from a frequentist linear mixed model <span class="citation">(Bates, Mächler, et al. <a href="#ref-lme4">2015</a><a href="#ref-lme4">a</a>)</span>:</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" data-line-number="1"> fit_lmer &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_cond <span class="op">||</span><span class="st"> </span>subj) <span class="op">+</span></a>
-<a class="sourceLine" id="cb279-2" data-line-number="2"><span class="st">                   </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_cond <span class="op">||</span><span class="st"> </span>item), df_gg05_rc)</a>
-<a class="sourceLine" id="cb279-3" data-line-number="3"> b &lt;-<span class="st"> </span><span class="kw">summary</span>(fit_lmer)<span class="op">$</span>coefficients[<span class="st">&quot;c_cond&quot;</span>, <span class="st">&quot;Estimate&quot;</span>]</a>
-<a class="sourceLine" id="cb279-4" data-line-number="4"> SE &lt;-<span class="st"> </span><span class="kw">summary</span>(fit_lmer)<span class="op">$</span>coefficients[<span class="st">&quot;c_cond&quot;</span>, <span class="st">&quot;Std. Error&quot;</span>]</a>
-<a class="sourceLine" id="cb279-5" data-line-number="5"> <span class="co">## estimate of the slope and</span></a>
-<a class="sourceLine" id="cb279-6" data-line-number="6"> <span class="co">## lower and upper bounds of the 95% CI:</span></a>
-<a class="sourceLine" id="cb279-7" data-line-number="7"> (lmer_b &lt;-<span class="st"> </span><span class="kw">c</span>(b, b <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE), b <span class="op">+</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE)))</a></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" data-line-number="1"> fit_lmer &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_cond <span class="op">||</span><span class="st"> </span>subj) <span class="op">+</span></a>
+<a class="sourceLine" id="cb278-2" data-line-number="2"><span class="st">                   </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_cond <span class="op">||</span><span class="st"> </span>item), df_gg05_rc)</a>
+<a class="sourceLine" id="cb278-3" data-line-number="3"> b &lt;-<span class="st"> </span><span class="kw">summary</span>(fit_lmer)<span class="op">$</span>coefficients[<span class="st">&quot;c_cond&quot;</span>, <span class="st">&quot;Estimate&quot;</span>]</a>
+<a class="sourceLine" id="cb278-4" data-line-number="4"> SE &lt;-<span class="st"> </span><span class="kw">summary</span>(fit_lmer)<span class="op">$</span>coefficients[<span class="st">&quot;c_cond&quot;</span>, <span class="st">&quot;Std. Error&quot;</span>]</a>
+<a class="sourceLine" id="cb278-5" data-line-number="5"> <span class="co">## estimate of the slope and</span></a>
+<a class="sourceLine" id="cb278-6" data-line-number="6"> <span class="co">## lower and upper bounds of the 95% CI:</span></a>
+<a class="sourceLine" id="cb278-7" data-line-number="7"> (lmer_b &lt;-<span class="st"> </span><span class="kw">c</span>(b, b <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE), b <span class="op">+</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE)))</a></code></pre></div>
 <pre><code> ## [1] 102.3  29.9 174.7</code></pre>
 <p>The similarity between the estimates from the Bayesian and frequentist models is due to the fact that default priors, being relatively vague, don’t influence the posterior much. This leads to the likelihood dominating in determining the posteriors. In general, such vague priors on the parameters will show a similar lack of influence on the posterior <span class="citation">(Spiegelhalter, Abrams, and Myles <a href="#ref-spiegelhalter2004bayesian">2004</a>)</span>. We can quickly establish this in the above example by using another vague prior:</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" data-line-number="1"> fit_gg05_unif &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_cond <span class="op">||</span><span class="st"> </span>subj) <span class="op">+</span></a>
-<a class="sourceLine" id="cb281-2" data-line-number="2"><span class="st">                       </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_cond <span class="op">||</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb281-3" data-line-number="3">        <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb281-4" data-line-number="4">          <span class="kw">prior</span>(<span class="kw">uniform</span>(<span class="op">-</span><span class="dv">2000</span>, <span class="dv">2000</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb281-5" data-line-number="5">          <span class="kw">prior</span>(<span class="kw">uniform</span>(<span class="op">-</span><span class="dv">2000</span>, <span class="dv">2000</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> <span class="st">&quot;c_cond&quot;</span>),</a>
-<a class="sourceLine" id="cb281-6" data-line-number="6">          <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">500</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb281-7" data-line-number="7">          <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">500</span>), <span class="dt">class =</span> sigma)),</a>
-<a class="sourceLine" id="cb281-8" data-line-number="8">        df_gg05_rc,</a>
-<a class="sourceLine" id="cb281-9" data-line-number="9">        <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.999</span>,</a>
-<a class="sourceLine" id="cb281-10" data-line-number="10">                       <span class="dt">max_treedepth =</span> <span class="dv">15</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" data-line-number="1"> fit_gg05_unif &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_cond <span class="op">||</span><span class="st"> </span>subj) <span class="op">+</span></a>
+<a class="sourceLine" id="cb280-2" data-line-number="2"><span class="st">                       </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>c_cond <span class="op">||</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb280-3" data-line-number="3">        <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb280-4" data-line-number="4">          <span class="kw">prior</span>(<span class="kw">uniform</span>(<span class="op">-</span><span class="dv">2000</span>, <span class="dv">2000</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb280-5" data-line-number="5">          <span class="kw">prior</span>(<span class="kw">uniform</span>(<span class="op">-</span><span class="dv">2000</span>, <span class="dv">2000</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> <span class="st">&quot;c_cond&quot;</span>),</a>
+<a class="sourceLine" id="cb280-6" data-line-number="6">          <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">500</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb280-7" data-line-number="7">          <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">500</span>), <span class="dt">class =</span> sigma)),</a>
+<a class="sourceLine" id="cb280-8" data-line-number="8">        df_gg05_rc,</a>
+<a class="sourceLine" id="cb280-9" data-line-number="9">        <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.999</span>,</a>
+<a class="sourceLine" id="cb280-10" data-line-number="10">                       <span class="dt">max_treedepth =</span> <span class="dv">15</span>))</a></code></pre></div>
 <pre><code> ## Warning: It appears as if you have specified a lower bounded prior on a parameter that has no natural lower bound.
  ## If this is really what you want, please specify argument &#39;lb&#39; of &#39;set_prior&#39; appropriately.
  ## Warning occurred for prior 
@@ -1234,9 +1232,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  ## If this is really what you want, please specify argument &#39;ub&#39; of &#39;set_prior&#39; appropriately.
  ## Warning occurred for prior 
  ## b_c_cond ~ uniform(-2000, 2000)</code></pre>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" data-line-number="1">(uniform_b &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_gg05_unif, <span class="dt">variable =</span> <span class="kw">c</span>(<span class="st">&quot;b_c_cond&quot;</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" data-line-number="1">(uniform_b &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_gg05_unif, <span class="dt">variable =</span> <span class="kw">c</span>(<span class="st">&quot;b_c_cond&quot;</span>)))</a></code></pre></div>
 <pre><code>##          Estimate Est.Error Q2.5 Q97.5
-## b_c_cond      102      37.6 26.7   177</code></pre>
+## b_c_cond      102      39.1 25.3   180</code></pre>
 <p>We get warnings because <code>brms</code> wants us to discourage us from using a uniform prior, but the model converged.</p>
 <p>As shown in Table <a href="sec-simpleexamplepriors.html#tab:slopesmeansCIs">6.1</a>, when we compare the means of the posteriors from this versus the other two model estimates shown above, we see that they are all very similar.</p>
 <table>
@@ -1279,10 +1277,10 @@ Frequentist
 Default prior
 </td>
 <td style="text-align:right;">
-103
+102
 </td>
 <td style="text-align:right;">
-32
+35
 </td>
 <td style="text-align:right;">
 175
@@ -1296,10 +1294,10 @@ Uniform
 102
 </td>
 <td style="text-align:right;">
-27
+25
 </td>
 <td style="text-align:right;">
-177
+180
 </td>
 </tr>
 </tbody>
@@ -1349,12 +1347,12 @@ FIGURE 6.2: Distributions of reading times from ten self-paced reading studies. 
 <p>In this particular example, it makes sense to assume that large effects like 100 ms are unlikely; this is so even if we do occasionally see estimates as high as these in published data. We would be unwilling to take such large effects seriously because a major reason for observing overly large estimates in a one-word region of interest would be publication bias coupled with Type M error <span class="citation">(Gelman and Carlin <a href="#ref-gelmancarlin">2014</a>)</span>. Published studies in psycholinguistics are often underpowered, which leads to exaggerated estimates being published (Type M error). Because big news effects are encouraged in major journals, overestimates tend to get published prefentially. See <span class="citation">Vasishth et al. (<a href="#ref-VasishthetalPLoSOne2013">2013</a>)</span>, <span class="citation">Vasishth, Mertzen, et al. (<a href="#ref-Vasishth2018aa">2018</a>)</span>, <span class="citation">Nicenboim, Vasishth, et al. (<a href="#ref-NicenboimEtAlCogSci2018">2018</a>)</span>, and <span class="citation">Jäger et al. (<a href="#ref-jager2020interference">2020</a>)</span> for detailed discussion of this point in the context of psycholinguistics.</p>
 <p>Of course, if our experiment is designed so that the critical region constitutes several words, as in the <span class="citation">Fedorenko, Gibson, and Rohde (<a href="#ref-fedorenko2006nature">2006</a>)</span> study, then one would have to choose a prior with a larger mean and standard deviation.</p>
 <p>A related important issue to consider when defining priors is the scale in which the parameter is defined. For example, if we were analyzing the <span class="citation">Grodner and Gibson (<a href="#ref-grodner">2005</a>)</span> experiment using the log-normal likelihood, then the intercept and slope are on the log millisecond scale. A uniform prior on the intercept and slope parameter imply rather strange priors on the millisecond scale. For example, suppose we assume that the intercept on the log ms scale has priors Normal(0,10) and the slope has a prior Normal(0,1). In the millisecond scale, the priors on the intercept and slope imply range from a very broad range of reading times, ranging from a very large negative value to a very large positive value, which obviously makes little sense:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" data-line-number="1">intercept &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100000</span>,<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb286-2" data-line-number="2">slope &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100000</span>, <span class="dt">mean =</span> <span class="dv">0</span>,<span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb286-3" data-line-number="3">effect &lt;-<span class="st"> </span><span class="kw">exp</span>(intercept <span class="op">+</span><span class="st"> </span>slope<span class="op">/</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(intercept <span class="op">-</span><span class="st"> </span>slope<span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb286-4" data-line-number="4"><span class="kw">quantile</span>(effect, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" data-line-number="1">intercept &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100000</span>,<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb285-2" data-line-number="2">slope &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100000</span>, <span class="dt">mean =</span> <span class="dv">0</span>,<span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb285-3" data-line-number="3">effect &lt;-<span class="st"> </span><span class="kw">exp</span>(intercept <span class="op">+</span><span class="st"> </span>slope<span class="op">/</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(intercept <span class="op">-</span><span class="st"> </span>slope<span class="op">/</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb285-4" data-line-number="4"><span class="kw">quantile</span>(effect, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
 <pre><code>##     2.5%    97.5% 
-## -7242655  9189633</code></pre>
+## -7739083  7828298</code></pre>
 <p>Similarly, if in a logistic regression, we assume that the intercept and slope on the log odds scale for the intercept and slope in a two-condition design are Normal(0,10) and Normal(0,1) respectively, this implies that, with <span class="math inline">\(\pm 0.5\)</span> effect coding for the two conditions, on the probability scale the prior probabilities for the intercept and slope are as in Figure <a href="sec-simpleexamplepriors.html#fig:logisticprior">6.3</a>.</p>
 <div class="figure"><span id="fig:logisticprior"></span>
 <img src="bookdown_files/figure-html/logisticprior-1.svg" alt="The effect of normal priors defined on log-odds space for the intercept and slope in a logistic regression, transformed to probability space." width="672" />
@@ -1365,20 +1363,20 @@ FIGURE 6.3: The effect of normal priors defined on log-odds space for the interc
 <p>Figure <a href="sec-simpleexamplepriors.html#fig:logisticprior">6.3</a> shows that the prior on the intercept seems quite unreasonable for most applications (0 and 1 are most likely values); the prior on the slope is not too unreasonable (although this depends on the particular question being studied). Of course, if there is sufficient data, the likelihood will dominate over the priors. In that case, even the relatively unreasonable prior on the intercept will lead to a posterior that will be mainly affected by the likelihood.</p>
 <p>A frequently asked question from newcomers to Bayes is: what if I define a too restricted prior? Wouldn’t that bias the posterior distribution? This concern is often raised by critics of Bayesian methods. The key point here is that a good Bayesian analysis always involves a sensitivity analysis, and also includes prior and posterior predictive checks under different priors. One should reject the priors that make no sense in the particular research problem we are working on, or which unreasonably bias the posterior. As one gains experience with Bayesian modeling, these concerns will recede as we come to understand how useful and important priors are for interpreting the data.</p>
 <p>As an extreme example of an overly specific prior, if one were to define a <span class="math inline">\(Normal(0,10)\)</span> prior for the <span class="math inline">\(\alpha\)</span> and/or <span class="math inline">\(\beta\)</span> parameters on the millisecond scale for the <span class="citation">Grodner and Gibson (<a href="#ref-grodner">2005</a>)</span> example above; that would definitely bias the posterior for the parameters. Let’s check this:</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" data-line-number="1">restrictive_priors &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb288-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb288-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb288-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">500</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb288-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">500</span>), <span class="dt">class =</span> sigma)</a>
-<a class="sourceLine" id="cb288-6" data-line-number="6">)</a>
-<a class="sourceLine" id="cb288-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb288-8" data-line-number="8">fit_restrictive &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(c_cond <span class="op">||</span><span class="st"> </span>subj) <span class="op">+</span></a>
-<a class="sourceLine" id="cb288-9" data-line-number="9"><span class="st">                         </span>( c_cond <span class="op">||</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb288-10" data-line-number="10">        <span class="dt">prior =</span> restrictive_priors,</a>
-<a class="sourceLine" id="cb288-11" data-line-number="11">        <span class="co"># Increase the iterations to avoid warnings</span></a>
-<a class="sourceLine" id="cb288-12" data-line-number="12">        <span class="dt">iter =</span> <span class="dv">4000</span>,</a>
-<a class="sourceLine" id="cb288-13" data-line-number="13">        df_gg05_rc)</a></code></pre></div>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" data-line-number="1"><span class="kw">summary</span>(fit_restrictive)</a></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" data-line-number="1">restrictive_priors &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb287-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb287-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb287-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">500</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb287-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">500</span>), <span class="dt">class =</span> sigma)</a>
+<a class="sourceLine" id="cb287-6" data-line-number="6">)</a>
+<a class="sourceLine" id="cb287-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb287-8" data-line-number="8">fit_restrictive &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(c_cond <span class="op">||</span><span class="st"> </span>subj) <span class="op">+</span></a>
+<a class="sourceLine" id="cb287-9" data-line-number="9"><span class="st">                         </span>( c_cond <span class="op">||</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb287-10" data-line-number="10">        <span class="dt">prior =</span> restrictive_priors,</a>
+<a class="sourceLine" id="cb287-11" data-line-number="11">        <span class="co"># Increase the iterations to avoid warnings</span></a>
+<a class="sourceLine" id="cb287-12" data-line-number="12">        <span class="dt">iter =</span> <span class="dv">4000</span>,</a>
+<a class="sourceLine" id="cb287-13" data-line-number="13">        df_gg05_rc)</a></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" data-line-number="1"><span class="kw">summary</span>(fit_restrictive)</a></code></pre></div>
 <pre><code>##  Family: gaussian 
 ##   Links: mu = identity; sigma = identity 
 ## Formula: RT ~ c_cond + (c_cond || subj) + (c_cond || item) 
@@ -1389,28 +1387,28 @@ FIGURE 6.3: The effect of normal priors defined on log-odds space for the interc
 ## Group-Level Effects: 
 ## ~item (Number of levels: 16) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-## sd(Intercept)   417.13     86.71   279.83   625.79 1.00      877
-## sd(c_cond)       84.97     43.01     9.32   179.31 1.00     2054
+## sd(Intercept)   414.59     83.33   282.92   605.79 1.00     1003
+## sd(c_cond)       85.40     43.49     7.38   177.42 1.00     1887
 ##               Tail_ESS
-## sd(Intercept)     1795
-## sd(c_cond)        2788
+## sd(Intercept)     2161
+## sd(c_cond)        2738
 ## 
 ## ~subj (Number of levels: 42) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-## sd(Intercept)   161.52     23.55   119.79   212.65 1.00     2546
-## sd(c_cond)      168.57     38.29    94.23   245.06 1.00     3201
+## sd(Intercept)   162.33     23.94   122.01   217.54 1.00     2897
+## sd(c_cond)      167.39     37.86    98.14   245.87 1.00     3216
 ##               Tail_ESS
-## sd(Intercept)     4251
-## sd(c_cond)        3853
+## sd(Intercept)     4118
+## sd(c_cond)        4604
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     3.94     10.21   -16.06    23.86 1.00    15871     5132
-## c_cond        5.72      9.79   -13.46    24.78 1.00    13335     6132
+## Intercept     3.98      9.91   -15.07    23.56 1.00    15532     5657
+## c_cond        5.77      9.86   -13.29    25.22 1.00    14647     6068
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma   305.65      9.25   288.56   324.76 1.00     9639     5977
+## sigma   305.67      9.09   288.44   324.29 1.00     9496     5647
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -1560,8 +1558,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/06-priors.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1571,7 +1569,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

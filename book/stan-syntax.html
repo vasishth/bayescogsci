@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1191,20 +1192,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="stan-syntax" class="section level2">
 <h2><span class="header-section-number">10.1</span> Stan syntax</h2>
 <p>A Stan program is usually saved as a <code>.stan</code> file and accessed through R (or other interfaces) and it is organized into a sequence of optional and obligatory blocks, which must be written in order. The Stan language is different from R and it is loosely based on C++; one important aspect to pay attention to is that every statement ends in a semi-colon, <code>;</code>. Blocks (<code>{}</code>) do not end in semi-colons. Some functions in Stan are written in the same way as in R (e.g., <code>mean</code>, <code>sum</code>, <code>max</code>, <code>min</code>). But some are different; when in doubt, <a href="https://mc-stan.org/users/documentation/">Stan documentation</a> can be extremely helpful. In addition, the package <code>rstan</code> provides the function <code>lookup()</code> to look up for translations of functions. For example, in <a href="sec-logistic.html#sec:logistic">4.3</a>, we saw that the R function <code>plogis()</code> is needed to convert from log-odds to probability space. If we need it in a Stan program, we can look for it in the following way:</p>
-<div class="sourceCode" id="cb572"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb572-1" data-line-number="1"><span class="kw">lookup</span>(plogis)</a></code></pre></div>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb575-1" data-line-number="1"><span class="kw">lookup</span>(plogis)</a></code></pre></div>
 <pre><code>##       StanFunction                         Arguments ReturnType
 ## 227      inv_logit                             (T x)          R
 ## 260  log_inv_logit                             (T x)          R
 ## 261   logistic_cdf  (reals y, reals mu, reals sigma)       real
 ## 262 logistic_lccdf (reals y , reals mu, reals sigma)       real
 ## 263  logistic_lcdf (reals y , reals mu, reals sigma)       real</code></pre>
-<p>There are three columns in the output of this call. The first one indicates Stan function names, the second one their arguments with their type, and the third one the type they return. Unlike R, Stan is strict with the type of the variables.<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a> If we need to decide on the function, we’ll probably need to go to the Stan documentation, and figure out which is the one that matches our specific needs (it would be <code>inv_logit()</code>).</p>
+<p>There are three columns in the output of this call. The first one indicates Stan function names, the second one their arguments with their type, and the third one the type they return. Unlike R, Stan is strict with the type of the variables.<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a> If we need to decide on the function, we’ll probably need to go to the Stan documentation, and figure out which is the one that matches our specific needs (it would be <code>inv_logit()</code>).</p>
 <p>Another important difference with R is that every variable needs to be declared at the beginning of a block with its type (real, integer, vector, matrix, etc.). The next two sections exemplify these details through basic Stan programs.</p>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="29">
-<li id="fn29"><p>In these output, there are some types that are new to the R user (but they are also used in C++): <code>reals</code> indicates that any of <code>real</code>, <code>real[]</code>, <code>vector</code>, or <code>row_vector</code>. A return type <code>R</code> with an input type <code>T</code> indicates that the type of the output of the function is the same as type of the argument.<a href="stan-syntax.html#fnref29" class="footnote-back">↩</a></p></li>
+<ol start="31">
+<li id="fn31"><p>In these output, there are some types that are new to the R user (but they are also used in C++): <code>reals</code> indicates that any of <code>real</code>, <code>real[]</code>, <code>vector</code>, or <code>row_vector</code>. A return type <code>R</code> with an input type <code>T</code> indicates that the type of the output of the function is the same as type of the argument.<a href="stan-syntax.html#fnref31" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1245,8 +1246,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/10-introstan.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1256,7 +1257,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

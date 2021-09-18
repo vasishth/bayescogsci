@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1243,7 +1244,7 @@ p\_size_n \sim \mathit{Normal}(\alpha + c\_load_n \cdot \beta,\sigma)
 <div class="sourceCode" id="cb149"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1">samples &lt;-<span class="st"> </span><span class="kw">rtnorm</span>(<span class="dv">20000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb149-2" data-line-number="2"><span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(samples), <span class="dt">sd =</span> <span class="kw">sd</span>(samples))</a></code></pre></div>
 <pre><code>## mean   sd 
-##  799  601</code></pre>
+##  804  606</code></pre>
 <p>We still need to set a prior for <span class="math inline">\(\beta\)</span>, the change in pupil size produced by the attentional load. Given that pupil size changes are not easily perceptible (we don’t usually observe changes in pupil size in our day-to-day life), we expect them to be much smaller than the pupil size, so we use the following prior:</p>
 <p><span class="math display">\[\begin{equation}
 \beta \sim \mathit{Normal}(0, 100)
@@ -1252,7 +1253,7 @@ p\_size_n \sim \mathit{Normal}(\alpha + c\_load_n \cdot \beta,\sigma)
 <div class="sourceCode" id="cb151"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="kw">c</span>(<span class="kw">qnorm</span>(.<span class="dv">025</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">100</span>), <span class="kw">qnorm</span>(.<span class="dv">975</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">100</span>))</a></code></pre></div>
 <pre><code>## [1] -196  196</code></pre>
 <p>That is, we don’t expect changes in size that increase or decrease the pupil size more than 200 units for one unit increase in load.</p>
-<p>The priors we have specified here are relatively uninformative; as mentioned earlier, this is because we don’t have much prior experience with pupil size studies. In other settings, we might have more prior knowledge and experience; in that case, we would use somewhat more principled priors. We will return to this point in the chapter on priors (chapter <a href="ch-priors.html#ch:priors">6</a>) and the workflow chapter (chapter <a href="ch-workflow.html#ch:workflow">7</a>).</p>
+<p>The priors we have specified here are relatively uninformative; as mentioned earlier, this is because we don’t have much prior experience with pupil size studies. In other settings, we might have more prior knowledge and experience; in that case, we would use somewhat more principled priors. We will return to this point in the chapter on priors (chapter <a href="ch-priors.html#ch:priors">6</a>) and on a Bayesian workflow (chapter <a href="ch-workflow.html#ch:workflow">7</a>).</p>
 
 <div class="extra">
 
@@ -1303,7 +1304,7 @@ Normal_+(x |0, \sigma) = \frac{Normal(x | 0, \sigma)}{1/2}
 <pre><code>## [1] 798</code></pre>
 <p>We get similar results calculating the average of 20000 samples.</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">rtnorm</span>(<span class="dv">20000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">0</span>))</a></code></pre></div>
-<pre><code>## [1] 798</code></pre>
+<pre><code>## [1] 795</code></pre>
 </div>
 </div>
 <div id="the-brms-model" class="section level3">
@@ -1312,7 +1313,7 @@ Normal_+(x |0, \sigma) = \frac{Normal(x | 0, \sigma)}{1/2}
 <div class="sourceCode" id="cb160"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_pupil&quot;</span>)</a>
 <a class="sourceLine" id="cb160-2" data-line-number="2">(df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb160-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load)))</a></code></pre></div>
-<pre><code>## # A tibble: 41 x 5
+<pre><code>## # A tibble: 41 × 5
 ##    subj trial  load p_size c_load
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 ## 1   701     1     2  1021. -0.439
@@ -1329,7 +1330,7 @@ Normal_+(x |0, \sigma) = \frac{Normal(x | 0, \sigma)}{1/2}
 <a class="sourceLine" id="cb162-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> c_load)</a>
 <a class="sourceLine" id="cb162-8" data-line-number="8">  )</a>
 <a class="sourceLine" id="cb162-9" data-line-number="9">)</a></code></pre></div>
-<p>The only difference from our previous models is that we now have a predictor in the formula and in the priors. Priors for predictors are indicated with <code>class = b</code>, and the specific predictor with <code>coef = c_load</code>. If we want to set the same priors to different predictors we can omit the argument <code>coef</code>. We can remove the <code>1</code> of the formula, and <code>brm()</code> will fit the exact same model as when we specify <code>1</code> explicitly. If we really want to remove the intercept we indicate this with <code>0 +...</code> or <code>-1 +...</code>. See also the Box <a href="sec-pupil.html#thm:intercept">4.2</a> for more details about the treatment of the intercepts by <code>brms</code>.</p>
+<p>The only difference from our previous models is that we now have a predictor in the formula and in the priors. Priors for predictors are indicated with <code>class = b</code>, and the specific predictor with <code>coef = c_load</code>. If we want to set the same priors to different predictors we can omit the argument <code>coef</code>. We can remove the <code>1</code> of the formula, and <code>brm()</code> will fit the exact same model as when we specify <code>1</code> explicitly. If we really want to remove the intercept we indicate this with <code>0 +...</code> or <code>-1 +...</code>. See also the Box <a href="sec-pupil.html#thm:intercept">4.2</a> for more details about the treatment of the intercepts by <code>brms</code>. The priors are normal distributions for the intercept (<span class="math inline">\(\alpha\)</span>) and the slope (<span class="math inline">\(\beta\)</span>), and a truncated normal distribution for the scale of the likelihood (<span class="math inline">\(\sigma\)</span>), which in this case, since we are dealing with a normal distribution, it coincides with its the standard deviation. <code>brms</code> will automatically truncate that distribution and allow for only positive values.</p>
 <p>Inspect the output of our model now. The posteriors and trace plots are shown in Figure <a href="sec-pupil.html#fig:posteriorsloadpupilsize">4.2</a>; the figure is generated by typing:</p>
 
 <div class="sourceCode" id="cb163"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">plot</span>(fit_pupil)</a></code></pre></div>
@@ -1343,12 +1344,12 @@ FIGURE 4.2: Posterior distributions of the parameters in the brms model <code>fi
 <pre><code>## ...
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept   701.11     20.39   661.43   741.18 1.00     3482     2753
-## c_load       34.04     11.98    10.92    57.66 1.00     3704     3208
+## Intercept   701.44     20.14   662.11   742.18 1.00     3688     2650
+## c_load       33.60     12.04     9.32    56.84 1.00     3883     2813
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma   128.93     15.26   103.32   161.11 1.00     3549     2742
+## sigma   129.02     15.61   102.84   163.19 1.00     3145     2487
 ## 
 ## ...</code></pre>
 <p>In the next section, we discuss how one can communicate the relevant information from the model.</p>
@@ -1358,9 +1359,9 @@ FIGURE 4.2: Posterior distributions of the parameters in the brms model <code>fi
 <div class="theorem">
 <span id="thm:intercept" class="theorem"><strong>Box 4.2  </strong></span><strong>Intercepts in <code>brms</code></strong>
 </div>
-<p>When we set up a prior for the intercept in <code>brms</code>, we actually set a prior for an intercept <em>assuming that all the predictors are centered</em>. This means that <em>when predictors are not centered</em> (and only then), there is a mismatch between the interpretation of the intercept as returned in the output of <code>brms</code> and the interpretation of the intercept with respect to its prior specification. In this case, only the intercept in the output corresponds to the formula in the <code>brms</code> call. However, as we show below, when the intercept is much larger than the effects that we are considering in the formula (what we generally call <span class="math inline">\(\beta\)</span>), this discrepancy hardly matters.</p>
-<p>The reason for this mismatch when our predictors are uncentered is that <code>brms</code> increases sampling efficiency by <em>automatically</em> centering all the predictors <em>internally</em> (that is the population-level design matrix <span class="math inline">\(X\)</span> is internally centered around its column means when <code>brms</code> fits a model). This did not matter in our previous examples because we centered our predictor (or we had none), but it might matter if we want to have uncentered predictors. In the design we are discussing, a non-centered predictor of load will mean that the intercept, <span class="math inline">\(\alpha\)</span>, has a straightforward interpretation (in many cases, however, an intercept with a non-centered predictor won’t have a straightforward interpretation): the pupil size when there is no attention load. This is in contrast with the centered version presented before, where the intercept represented the the pupil size for the average load of <code>2.44</code> (<code>c_load = 0</code>). The difference between the non-centered model (below) and the centered version presented before is depicted in Figure <a href="sec-pupil.html#fig:centered-non-centered">4.3</a>.</p>
-<p>We might be more sure about prior values for the no load condition, and we want to set the following prior to our new <span class="math inline">\(\alpha\)</span>: <span class="math inline">\(Normal(800,200)\)</span>. In this case, we should fit the following model:</p>
+<p>When we set up a prior for the intercept in <code>brms</code>, we actually set a prior for an intercept assuming that all the predictors are centered. This means that when predictors are not centered (and only then), there is a mismatch between the interpretation of the intercept as returned in the output of <code>brms</code> and the interpretation of the intercept with respect to its prior specification. In this case, only the intercept in the output corresponds to the formula in the <code>brms</code> call. However, as we show below, when the intercept is much larger than the effects that we are considering in the formula (what we generally call <span class="math inline">\(\beta\)</span>), this discrepancy hardly matters.</p>
+<p>The reason for this mismatch when our predictors are uncentered is that <code>brms</code> increases sampling efficiency by automatically centering all the predictors internally (that is the population-level design matrix <span class="math inline">\(X\)</span> is internally centered around its column means when <code>brms</code> fits a model). This did not matter in our previous examples because we centered our predictor (or we had none), but it might matter if we want to have uncentered predictors. In the design we are discussing, a non-centered predictor of load will mean that the intercept, <span class="math inline">\(\alpha\)</span>, has a straightforward interpretation (in many cases, however, an intercept with a non-centered predictor won’t have a straightforward interpretation): the pupil size when there is no attention load. This is in contrast with the centered version presented before, where the intercept represented the the pupil size for the average load of <code>2.44</code> (<code>c_load = 0</code>). The difference between the non-centered model (below) and the centered version presented before is depicted in Figure <a href="sec-pupil.html#fig:centered-non-centered">4.3</a>.</p>
+<p>We might be more sure about prior values for the no load condition, and we want to set the following prior to our new <span class="math inline">\(\alpha\)</span>: <span class="math inline">\(\mathit{Normal}(800,200)\)</span>. In this case, we should fit the following model:</p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">prior_nc &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
 <a class="sourceLine" id="cb166-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">800</span>, <span class="dv">200</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> Intercept),</a>
 <a class="sourceLine" id="cb166-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1000</span>), <span class="dt">class =</span> sigma),</a>
@@ -1384,21 +1385,21 @@ FIGURE 4.3: Regression lines for the non-centered and centered linear regression
 <div class="sourceCode" id="cb167"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_pupil_non_centered,</a>
 <a class="sourceLine" id="cb167-2" data-line-number="2">                  <span class="dt">variable =</span> <span class="kw">c</span>(<span class="st">&quot;b_Intercept&quot;</span>, <span class="st">&quot;b_load&quot;</span>))</a></code></pre></div>
 <pre><code>##             Estimate Est.Error   Q2.5 Q97.5
-## b_Intercept    625.1      34.9 557.47 692.0
-## b_load          31.7      11.8   9.67  54.8</code></pre>
-<p>Notice the following potential pitfall. A model like the one below will fit a non-centered load predictor, but will assign a prior of <span class="math inline">\(Normal(800,200)\)</span> to the intercept of a <em>centered</em> model, <span class="math inline">\(\alpha_{centered}\)</span>, and not the current intercept, <span class="math inline">\(\alpha\)</span>.</p>
+## b_Intercept    625.5      36.1 554.42 696.9
+## b_load          31.9      12.1   7.59  55.2</code></pre>
+<p>Notice the following potential pitfall. A model like the one below will fit a non-centered load predictor, but will assign a prior of <span class="math inline">\(\mathit{Normal}(800,200)\)</span> to the intercept of a centered model, <span class="math inline">\(\alpha_{centered}\)</span>, and not the current intercept, <span class="math inline">\(\alpha\)</span>.</p>
 <div class="sourceCode" id="cb169"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1">fit_pupil_wrong &lt;-<span class="st"> </span><span class="kw">brm</span>(p_size <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>load,</a>
 <a class="sourceLine" id="cb169-2" data-line-number="2">  <span class="dt">data =</span> df_pupil,</a>
 <a class="sourceLine" id="cb169-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
 <a class="sourceLine" id="cb169-4" data-line-number="4">  <span class="dt">prior =</span> prior_nc</a>
 <a class="sourceLine" id="cb169-5" data-line-number="5">)</a></code></pre></div>
-<p>What does it mean to set a prior to <span class="math inline">\(\alpha_{centered}\)</span> in a model that <em>doesn’t</em> include <span class="math inline">\(\alpha_{centered}\)</span>?</p>
+<p>What does it mean to set a prior to <span class="math inline">\(\alpha_{centered}\)</span> in a model that doesn’t include <span class="math inline">\(\alpha_{centered}\)</span>?</p>
 <p>The fitted values of the non-centered model and the centered one are identical, that is, the values of the response distribution without the residual error (when <span class="math inline">\(\sigma =0\)</span>) are identical for both models:</p>
 <p><span class="math display" id="eq:fitted">\[\begin{equation}
 \alpha + load_n \cdot \beta = \alpha_{centered} + (load_n - mean(load)) \cdot \beta 
 \tag{4.2}
 \end{equation}\]</span></p>
-<p>The left side of Equation <a href="sec-pupil.html#eq:fitted">(4.2)</a> refers to the fitted values based on our current non-centered model, and the right side refers to the fitted values based on the centered model. We can re-arrange terms to understand what is the effect of a prior on <span class="math inline">\(\alpha_{centered}\)</span> in our model that <em>doesn’t</em> include <span class="math inline">\(\alpha_{centered}\)</span>.</p>
+<p>The left side of Equation <a href="sec-pupil.html#eq:fitted">(4.2)</a> refers to the fitted values based on our current non-centered model, and the right side refers to the fitted values based on the centered model. We can re-arrange terms to understand what is the effect of a prior on <span class="math inline">\(\alpha_{centered}\)</span> in our model that doesn’t include <span class="math inline">\(\alpha_{centered}\)</span>.</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
 \alpha + load_n \cdot \beta &amp;= \alpha_{centered} + load_n\cdot \beta - mean(load) \cdot \beta\\
@@ -1413,11 +1414,11 @@ When <span class="math inline">\(\beta\)</span> is very small (or the means of o
 </div>
 <div id="how-to-communicate-the-results" class="section level3">
 <h3><span class="header-section-number">4.1.3</span> How to communicate the results?</h3>
-<p>We want to answer our research question “What is the effect of attentional load on the subject’s pupil size?” For that we’ll need to examine what happens with the posterior distribution of <span class="math inline">\(\beta\)</span>, which is printed out as <code>c_load</code> in the summary of <code>brms</code>. The summary of the posterior tells us that the most likely values of <span class="math inline">\(\beta\)</span> will be around the mean of the posterior, 34.04, and we can be 95% certain that the value of <span class="math inline">\(\beta\)</span>, given the model and the data, lies between 10.92 and 57.66.</p>
-<p>We see that as the attentional load increases, the pupil size of the subject becomes larger. If we want to determine how likely it is that the pupil size increased rather than decreased, we can examine the proportion of samples above zero. (The intercept and the slopes are always preceded by <code>b_</code> in <code>brms</code>. One can see all the names of parameters being estimated with <code>parnames()</code>.)</p>
+<p>We want to answer our research question “What is the effect of attentional load on the subject’s pupil size?” For that we’ll need to examine what happens with the posterior distribution of <span class="math inline">\(\beta\)</span>, which is printed out as <code>c_load</code> in the summary of <code>brms</code>. The summary of the posterior tells us that the most likely values of <span class="math inline">\(\beta\)</span> will be around the mean of the posterior, 33.6, and we can be 95% certain that the value of <span class="math inline">\(\beta\)</span>, given the model and the data, lies between 9.32 and 56.84.</p>
+<p>We see that as the attentional load increases, the pupil size of the subject becomes larger. If we want to determine how likely it is that the pupil size increased rather than decreased, we can examine the proportion of samples above zero. (The intercept and the slopes are always preceded by <code>b_</code> in <code>brms</code>. One can see all the names of parameters being estimated with <code>variables()</code>.)</p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">as_draws_df</span>(fit_pupil)<span class="op">$</span>b_c_load <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## [1] 0.997</code></pre>
-<p><strong>This high probability does not mean that the effect of load is non-zero. In order to make such a claim, we would have to compare the model with an alternative model in which the model assumes that the effect of load is 0. We’ll come back to this issue in the model comparison chapter <a href="ch-comparison.html#ch:comparison">15</a>.</strong></p>
+<p><strong>This high probability does not mean that the effect of load is non-zero.</strong> It means instead that it’s much more likely that the effect is positive rather than negative. In order to claim that the effect is likely to be non-zero, we would have to compare the model with an alternative model in which the model assumes that the effect of load is 0. We’ll come back to this issue in the model comparison chapter <a href="ch-comparison.html#ch:comparison">15</a>.</p>
 </div>
 <div id="sec:pupiladq" class="section level3">
 <h3><span class="header-section-number">4.1.4</span> Descriptive adequacy</h3>
@@ -1531,8 +1532,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/04-regressions.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1542,7 +1543,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

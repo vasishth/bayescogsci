@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1422,9 +1423,9 @@ FIGURE 7.11: Posterior distribution for the slope parameter, estimating the diff
 </div>
 <div class="sourceCode" id="cb308"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" data-line-number="1">postgw &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_gibsonwu)</a>
 <a class="sourceLine" id="cb308-2" data-line-number="2"><span class="kw">mean</span>(postgw<span class="op">$</span>b_so <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
-<pre><code>## [1] 0.885</code></pre>
+<pre><code>## [1] 0.884</code></pre>
 <!--\FloatBarrier-->
-<p>Figure <a href="exemplary-data-analysis.html#fig:FigPosteriorB">7.11</a> shows that the reading times in object relative sentences tends to be slightly faster than in subject relative sentences (p(b&lt;0) = 0.89); this is as predicted by <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu">2013</a>)</span>. However, given the wide <span class="math inline">\(95\)</span>% confidence intervals; it is difficult to rule out the possibility that there is effectively no difference in reading time between the two conditions without doing model comparison (with Bayes factor or cross-validation).</p>
+<p>Figure <a href="exemplary-data-analysis.html#fig:FigPosteriorB">7.11</a> shows that the reading times in object relative sentences tends to be slightly faster than in subject relative sentences (p(b&lt;0) = 0.88); this is as predicted by <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu">2013</a>)</span>. However, given the wide <span class="math inline">\(95\)</span>% confidence intervals; it is difficult to rule out the possibility that there is effectively no difference in reading time between the two conditions without doing model comparison (with Bayes factor or cross-validation).</p>
 <p>To assess model adequacy, we perform posterior predictive checks. We simulate data based on posterior samples of parameters. This then allows us to investigate the simulated data by computing the summary statistics that we used in the prior predictive checks, and by comparing model predictions with the observed data.</p>
 <div class="figure"><span id="fig:FigPost"></span>
 <img src="bookdown_files/figure-html/FigPost-1.svg" alt="Posterior predictive checks for weakly informative priors. Distributions are over posterior predictive simulated data. a) Histograms of reading times. 10-90 percent, 20-80 percent, 30-70 percent, and 40-60 percent quantiles across histograms are shown as shaded areas; the median is shown as a dotted line and the observed data as a solid line. For illustration, values &gt; 2000 are plotted as 2000; modeling was done on the original data. b)-f) Light blue/grey shows the posterior predictive distributions, dark blue/grey shows the data. b) Average reading times. c) Differences in reading times between object minus subject relatives. d) Standard deviations of reading times. e) Maximal effect size (object - subject relatives) across subjects. f) Standard deviation of effect size across subjects." width="576" />
@@ -1500,8 +1501,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/07-workflow.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1511,7 +1512,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1199,23 +1200,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="exr:pcorrect" class="exercise"><strong>Exercise 20.1  </strong></span>Changes in the true values.
 </div>
 
-<p>Change the true value of <code>p_correct</code> to .5 and .1, and generate data for the non-hierarchical model. Can you recover the value of this parameter. Does the model still converge?</p>
+<p>Change the true value of <code>p_correct</code> to .5 and .1, and generate data for the non-hierarchical model. Can you recover the value of this parameter. Perform posterior predictive checks.</p>
 
 <div class="exercise">
-<span id="exr:mixbias" class="exercise"><strong>Exercise 20.2  </strong></span>Guessing bias in the model.
+<span id="exr:mixhier" class="exercise"><strong>Exercise 20.2  </strong></span>RTs in schizophrenic patients and control.
 </div>
 
-<p>In the original model, it was assumed that subjects might have a bias (a preference) to one of the two answers when they were in the guessing mode.</p>
+<p>Reaction times for schizophrenic patients in a simple visual tracking experiment show more variability than for non-schizophrenic controls; Figure <a href="exercises-5.html#fig:schiz">20.20</a>. It has been argued that at least some of this extra variability arises from an attentional lapse that delays some responses. We’ll use the data examined in <span class="citation">(<span class="citeproc-not-found" data-reference-id="belin1990"><strong>???</strong></span>)</span> (<code>df_schizophrenia</code> in the <code>bcogsci</code> package) analysis to investigate some potential models:</p>
+<p><span class="math inline">\(M_1\)</span>. Both schizophrenic and controls show attentional lapses, but the lapses are more common in schizophrenics. Other than that there is no difference in the latent response times and the lapses of attention.
+<span class="math inline">\(M_2\)</span>. Only schizophrenic patients show attentional lapses. Other than that there is no difference in the latent response times.
+<span class="math inline">\(M_3\)</span>. There no (meaningful number) of lapses of attention in neither group.</p>
+<ol style="list-style-type: decimal">
+<li>Fit the three models.</li>
+<li>Do posterior predictive checks for each model; can they account for the data?</li>
+<li>Do model comparison (with Bayes factor and cross-validation)</li>
+</ol>
+
+<div class="sourceCode" id="cb1102"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb1102-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb1102-2" data-line-number="2"><span class="kw">ggplot</span>(df_schizophrenia, <span class="kw">aes</span>(rt)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1102-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1102-4" data-line-number="4"><span class="st">  </span><span class="kw">facet_grid</span>(<span class="dt">rows =</span> <span class="kw">vars</span>(<span class="kw">factor</span>(patient, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;schizophrenic&quot;</span>))))</a></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<div class="figure"><span id="fig:schiz"></span>
+<img src="bookdown_files/figure-html/schiz-1.svg" alt="Distribution of reaction times for control and schizophrenic patients in df_schizophrenia." width="672" />
+<p class="caption">
+FIGURE 20.20: Distribution of reaction times for control and schizophrenic patients in <code>df_schizophrenia</code>.
+</p>
+</div>
+
+<div class="exercise">
+<span id="exr:mixbias" class="exercise"><strong>Exercise 20.3  </strong></span><strong>Advanced:</strong> Guessing bias in the model.
+</div>
+
+<p>In the original model, it was assumed that subjects might have a bias (a preference) to one of the two answers when they were in the guessing mode. To fit this model we need to change the dependent variable and add more information, now we not only care if the participant answered correctly or not, but also which answer they gave (left or right).</p>
 <ul>
-<li>Implement a unique bias for all the subjects. (Tip: we hard-coded that there was no bias with <code>bernoulli_lpmf(acc[n] |.5))</code>.) Fit the new model to (a subset of) the data.</li>
+<li>Implement a unique bias for all the subjects. Fit the new model to (a subset of) the data.</li>
 <li>Implement a hierarchical bias, that is there is a common bias, but every subject has its adjustment. Fit the new model to (a subset of) the data.</li>
 </ul>
-
-<div class="exercise">
-<span id="exr:mixhier" class="exercise"><strong>Exercise 20.3  </strong></span>More hierarchical parameters.
-</div>
-
-<p>Change the hierarchical mixture model and assume that the probability of being engaged in the task also vary by subject. Fit the new model to (a subset of) the data.</p>
 <!-- https://discourse.mc-stan.org/t/mixture-model-fails-on-cmdstanr-when-conditioning-theta-on-subject-but-not-on-rstan/22018 -->
 
 </div>
@@ -1258,8 +1279,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/20-mixtures.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1269,7 +1290,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

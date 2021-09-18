@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1277,6 +1278,10 @@ FIGURE 8.2: Means and error bars (showing standard errors) for a simulated datas
 ## H0.c3vs2: 0 = F3 - F2
 ## H0.c4vs3: 0 = F4 - F3
 ## 
+## Call:
+## hypr(c2vs1 = F2 - F1 ~ 0, c3vs2 = F3 - F2 ~ 0, c4vs3 = F4 - F3 ~ 
+##     0, levels = c(&quot;F1&quot;, &quot;F2&quot;, &quot;F3&quot;, &quot;F4&quot;))
+## 
 ## Hypothesis matrix (transposed):
 ##    c2vs1 c3vs2 c4vs3
 ## F1 -1     0     0   
@@ -1310,11 +1315,11 @@ Next, we apply the repeated contrasts to the factor <code>F</code> in the exampl
 <a class="sourceLine" id="cb361-9" data-line-number="9">  )</a>
 <a class="sourceLine" id="cb361-10" data-line-number="10">)</a></code></pre></div>
 <div class="sourceCode" id="cb362"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" data-line-number="1"><span class="kw">fixef</span>(fit_Rep)</a></code></pre></div>
-<pre><code>##           Estimate Est.Error  Q2.5 Q97.5
-## Intercept    20.01      2.48  14.9 24.94
-## Fc2vs1        9.58      7.15  -4.7 23.69
-## Fc3vs2       -9.27      6.98 -22.2  4.85
-## Fc4vs3       29.17      6.86  15.7 42.38</code></pre>
+<pre><code>##           Estimate Est.Error   Q2.5 Q97.5
+## Intercept    19.98      2.57  14.81 25.17
+## Fc2vs1        9.72      6.94  -3.96 23.30
+## Fc3vs2       -9.37      6.87 -22.75  4.33
+## Fc4vs3       29.17      6.70  15.17 42.20</code></pre>
 <p>The results show that as expected, the regression coefficients reflect the differences that were of interest: the regression coefficient (<code>Estimate</code>) <code>Fc2vs1</code> has a value of <span class="math inline">\(10\)</span>, which exactly corresponds to the difference between the condition mean for <code>F2</code> (<span class="math inline">\(20\)</span>) minus the condition mean for <code>F1</code> (<span class="math inline">\(10\)</span>), i.e., <span class="math inline">\(20 - 10 = 10\)</span>. Likewise, the regression coefficient <code>Fc3vs2</code> has a value of <span class="math inline">\(-10\)</span>, which corresponds to the difference between the condition mean for <code>F3</code> (<span class="math inline">\(10\)</span>) minus the condition mean for <code>F2</code> (<span class="math inline">\(20\)</span>), i.e., <span class="math inline">\(10 - 20 = -10\)</span>. Finally, the regression coefficient <code>Fc4vs3</code> has a value of roughly <span class="math inline">\(30\)</span>, which reflects the difference between condition <code>F4</code> (<span class="math inline">\(40\)</span>) minus condition <code>F3</code> (<span class="math inline">\(10\)</span>), i.e., <span class="math inline">\(40 - 10 = 30\)</span>. Thus, the regression coefficients estimate differences between successive or neighboring condition means.</p>
 </div>
 <div id="helmertcontrasts" class="section level3">
@@ -1329,8 +1334,13 @@ Next, we apply the repeated contrasts to the factor <code>F</code> in the exampl
 <a class="sourceLine" id="cb364-7" data-line-number="7">HcHel</a></code></pre></div>
 <pre><code>## hypr object containing 3 null hypotheses:
 ## H0.b1: 0 = F2 - F1
-## H0.b2: 0 = F3 - 1/2*F1 - 1/2*F2
-## H0.b3: 0 = F4 - 1/3*F1 - 1/3*F2 - 1/3*F3
+## H0.b2: 0 = (2*F3 - F1 - F2)/2
+## H0.b3: 0 = (3*F4 - F1 - F2 - F3)/3
+## 
+## Call:
+## hypr(b1 = F2 - F1 ~ 0, b2 = F3 - 1/2 * F1 - 1/2 * F2 ~ 0, b3 = F4 - 
+##     1/3 * F1 - 1/3 * F2 - 1/3 * F3 ~ 0, levels = c(&quot;F1&quot;, &quot;F2&quot;, 
+## &quot;F3&quot;, &quot;F4&quot;))
 ## 
 ## Hypothesis matrix (transposed):
 ##    b1   b2   b3  
@@ -1364,13 +1374,14 @@ Next, we apply the repeated contrasts to the factor <code>F</code> in the exampl
 <a class="sourceLine" id="cb368-9" data-line-number="9">  )</a>
 <a class="sourceLine" id="cb368-10" data-line-number="10">)</a></code></pre></div>
 <pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## recompiling to avoid crashing R session</code></pre>
 <pre><code>## Start sampling</code></pre>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" data-line-number="1"><span class="kw">fixef</span>(fit_Hel)</a></code></pre></div>
-<pre><code>##           Estimate Est.Error   Q2.5 Q97.5
-## Intercept    20.05      2.52  15.06 24.97
-## Fb1           9.87      6.93  -3.63 23.69
-## Fb2          -4.77      6.11 -16.87  7.57
-## Fb3          26.28      5.68  14.61 37.39</code></pre>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" data-line-number="1"><span class="kw">fixef</span>(fit_Hel)</a></code></pre></div>
+<pre><code>##           Estimate Est.Error  Q2.5 Q97.5
+## Intercept    19.96      2.51  15.0 24.99
+## Fb1           9.72      6.83  -3.8 23.37
+## Fb2          -4.91      5.98 -16.3  6.95
+## Fb3          26.27      5.71  14.8 37.52</code></pre>
 <p>When we fit the Bayesian model using our custom Helmert contrast, we can see that the estimates reflect the comparisons outlined above. The first estimate <code>Fb1</code> has a value of roughly <span class="math inline">\(10\)</span>, reflecting the difference between conditions F1 and F2. The second estimate <code>Fb2</code> has a value of <span class="math inline">\(5\)</span>, which reflects the difference between condition F3 (<span class="math inline">\(10\)</span>) and the average of the first two conditions (<span class="math inline">\((10+20)/2=15\)</span>). Last, the estimate <code>Fb3</code> reflects the difference between F4 (<span class="math inline">\(40\)</span>) minus the average of the first three, which is <span class="math inline">\((10+20+10)/3=13.3\)</span>, and is thus <span class="math inline">\(40-13.3=26.7\)</span>.</p>
 
 <div class="extra">
@@ -1380,19 +1391,24 @@ Next, we apply the repeated contrasts to the factor <code>F</code> in the exampl
 </div>
 <p>Above, we have introduced the treatment contrast, where each contrast compares one condition to a baseline condition. We have discussed that the intercept in the treatment contrast estimates the condition mean for the baseline condition. There are some applications where this behavior may seem sub-optimal. This can be the case in experimental designs with multiple factors, where we may want to use centered contrasts (we will discuss this below). Moreover, the contrast coding of the fixed effects also defines what the random effects assess. If the intercept assesses the grand mean - rather than the baseline condition - in generalized linear mixed effects models, then the random intercepts reflect the grand mean variance, rather than the variance in the baseline condition.</p>
 <p>Interestingly, it is possible to design a treatment contrast where the intercept reflects the grand mean. We implement this using the <code>hypr</code> package. The trick is to add the intercept explicitly as a comparison of the average of all four condition means:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" data-line-number="1">HcTrGM &lt;-<span class="st"> </span><span class="kw">hypr</span>(</a>
-<a class="sourceLine" id="cb373-2" data-line-number="2">  <span class="dt">b0 =</span> <span class="op">~</span><span class="st"> </span>(F1 <span class="op">+</span><span class="st"> </span>F2 <span class="op">+</span><span class="st"> </span>F3 <span class="op">+</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb373-3" data-line-number="3">  <span class="dt">b1 =</span> F2 <span class="op">~</span><span class="st"> </span>F1,</a>
-<a class="sourceLine" id="cb373-4" data-line-number="4">  <span class="dt">b2 =</span> F3 <span class="op">~</span><span class="st"> </span>F1,</a>
-<a class="sourceLine" id="cb373-5" data-line-number="5">  <span class="dt">b3 =</span> F4 <span class="op">~</span><span class="st"> </span>F1,</a>
-<a class="sourceLine" id="cb373-6" data-line-number="6">  <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F2&quot;</span>, <span class="st">&quot;F3&quot;</span>, <span class="st">&quot;F4&quot;</span>)</a>
-<a class="sourceLine" id="cb373-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb373-8" data-line-number="8">HcTrGM</a></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb374-1" data-line-number="1">HcTrGM &lt;-<span class="st"> </span><span class="kw">hypr</span>(</a>
+<a class="sourceLine" id="cb374-2" data-line-number="2">  <span class="dt">b0 =</span> <span class="op">~</span><span class="st"> </span>(F1 <span class="op">+</span><span class="st"> </span>F2 <span class="op">+</span><span class="st"> </span>F3 <span class="op">+</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb374-3" data-line-number="3">  <span class="dt">b1 =</span> F2 <span class="op">~</span><span class="st"> </span>F1,</a>
+<a class="sourceLine" id="cb374-4" data-line-number="4">  <span class="dt">b2 =</span> F3 <span class="op">~</span><span class="st"> </span>F1,</a>
+<a class="sourceLine" id="cb374-5" data-line-number="5">  <span class="dt">b3 =</span> F4 <span class="op">~</span><span class="st"> </span>F1,</a>
+<a class="sourceLine" id="cb374-6" data-line-number="6">  <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F2&quot;</span>, <span class="st">&quot;F3&quot;</span>, <span class="st">&quot;F4&quot;</span>)</a>
+<a class="sourceLine" id="cb374-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb374-8" data-line-number="8">HcTrGM</a></code></pre></div>
 <pre><code>## hypr object containing 4 null hypotheses:
-## H0.b0: 0 = 1/4*F1 + 1/4*F2 + 1/4*F3 + 1/4*F4
+## H0.b0: 0 = (F1 + F2 + F3 + F4)/4  (Intercept)
 ## H0.b1: 0 = F2 - F1
 ## H0.b2: 0 = F3 - F1
 ## H0.b3: 0 = F4 - F1
+## 
+## Call:
+## hypr(b0 = 1/4 * F1 + 1/4 * F2 + 1/4 * F3 + 1/4 * F4 ~ 0, b1 = F2 - 
+##     F1 ~ 0, b2 = F3 - F1 ~ 0, b3 = F4 - F1 ~ 0, levels = c(&quot;F1&quot;, 
+## &quot;F2&quot;, &quot;F3&quot;, &quot;F4&quot;))
 ## 
 ## Hypothesis matrix (transposed):
 ##    b0  b1  b2  b3 
@@ -1408,24 +1424,27 @@ Next, we apply the repeated contrasts to the factor <code>F</code> in the exampl
 ## F3    1 -1/4  3/4 -1/4
 ## F4    1 -1/4 -1/4  3/4</code></pre>
 <p>The hypothesis matrix now explicitly codes the intercept as the first column, where all hypothesis weights are equal and sum up to one. This is coding the intercept. The other hypothesis weights are as expected for the treatment contrast. The contrast matrix now looks very different compared to the standard treatment contrast. Next, we fit a model with this adapted treatment contrast. The function <code>contr.hypothesis</code> automatically removes the intercept that is encoded in <code>HcTrGM</code>, since this is automatically added by brms.</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb375-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(HcTrGM)</a>
-<a class="sourceLine" id="cb375-2" data-line-number="2">fit_TrGM &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb375-3" data-line-number="3">  <span class="dt">data =</span> df_contrasts3,</a>
-<a class="sourceLine" id="cb375-4" data-line-number="4">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb375-5" data-line-number="5">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb375-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb375-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb375-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb375-9" data-line-number="9">  )</a>
-<a class="sourceLine" id="cb375-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb376-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(HcTrGM)</a>
+<a class="sourceLine" id="cb376-2" data-line-number="2">fit_TrGM &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb376-3" data-line-number="3">  <span class="dt">data =</span> df_contrasts3,</a>
+<a class="sourceLine" id="cb376-4" data-line-number="4">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb376-5" data-line-number="5">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb376-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb376-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb376-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb376-9" data-line-number="9">  )</a>
+<a class="sourceLine" id="cb376-10" data-line-number="10">)</a></code></pre></div>
 <pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Error in open.connection(con, open = mode) : 
+##   Timeout was reached: [github.com] Resolving timed out after 10000 milliseconds</code></pre>
+<pre><code>## recompiling to avoid crashing R session</code></pre>
 <pre><code>## Start sampling</code></pre>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb378-1" data-line-number="1"><span class="kw">fixef</span>(fit_TrGM)</a></code></pre></div>
-<pre><code>##           Estimate Est.Error  Q2.5 Q97.5
-## Intercept    19.97      2.42  15.3  24.8
-## Fb1           9.68      6.72  -3.5  23.3
-## Fb2          -0.04      7.00 -13.7  13.9
-## Fb3          29.55      6.80  15.8  43.2</code></pre>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" data-line-number="1"><span class="kw">fixef</span>(fit_TrGM)</a></code></pre></div>
+<pre><code>##           Estimate Est.Error   Q2.5 Q97.5
+## Intercept    20.07      2.53  15.31  25.1
+## Fb1           9.52      6.86  -4.85  23.0
+## Fb2          -0.31      6.92 -14.30  13.3
+## Fb3          29.43      6.88  14.92  42.3</code></pre>
 <p>The results show that the coefficients reflect comparisons of each condition F2, F3, and F4 to the baseline condition F1. However, the intercept now captures the grand mean across all four conditions of <span class="math inline">\(20\)</span>.</p>
 </div>
 </div>
@@ -1433,7 +1452,7 @@ Next, we apply the repeated contrasts to the factor <code>F</code> in the exampl
 <h3><span class="header-section-number">8.3.3</span> Contrasts in linear regression analysis: The design or model matrix</h3>
 <p>We have now discussed how different contrasts are created from the hypothesis matrix. However, we have not treated in detail how exactly contrasts are used in a linear model. Here, we will see that the contrasts for a factor in a linear model are just the same thing as continuous numeric predictors (i.e., covariates) in a linear/multiple regression analysis. That is, contrasts are the way to encode discrete factor levels into numeric predictor variables to use in linear/multiple regression analysis, by encoding which differences between factor levels are estimated.
 The contrast matrix <span class="math inline">\(X_c\)</span> that we have looked at so far has one entry (row) for each experimental condition. For use in a linear model, however, the contrast matrix is coded into a design or model matrix <span class="math inline">\(X\)</span>, where each individual data point has one row. The design matrix <span class="math inline">\(X\)</span> can be extracted using the function <code>model.matrix()</code>:</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" data-line-number="1">(<span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(HcRep)) <span class="co"># contrast matrix</span></a></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb383-1" data-line-number="1">(<span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(HcRep)) <span class="co"># contrast matrix</span></a></code></pre></div>
 <pre><code>##    c2vs1 c3vs2 c4vs3
 ## F1 -0.75  -0.5 -0.25
 ## F2  0.25  -0.5 -0.25
@@ -1441,8 +1460,8 @@ The contrast matrix <span class="math inline">\(X_c\)</span> that we have looked
 ## F4  0.25   0.5  0.75
 ## attr(,&quot;class&quot;)
 ## [1] &quot;hypr_cmat&quot; &quot;matrix&quot;    &quot;array&quot;</code></pre>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb382-1" data-line-number="1">covars &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F, df_contrasts3) <span class="co"># design matrix</span></a>
-<a class="sourceLine" id="cb382-2" data-line-number="2">(covars &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(covars))</a></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" data-line-number="1">covars &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F, df_contrasts3) <span class="co"># design matrix</span></a>
+<a class="sourceLine" id="cb385-2" data-line-number="2">(covars &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(covars))</a></code></pre></div>
 <pre><code>##    (Intercept) Fc2vs1 Fc3vs2 Fc4vs3
 ## 1            1  -0.75   -0.5  -0.25
 ## 2            1  -0.75   -0.5  -0.25
@@ -1466,67 +1485,67 @@ The contrast matrix <span class="math inline">\(X_c\)</span> that we have looked
 ## 20           1   0.25    0.5   0.75</code></pre>
 <p>For each of the <span class="math inline">\(20\)</span> subjects, four numbers are stored in this model matrix. They represent the three values of three predictor variables used to predict response times in the task. Indeed, this matrix is exactly the design matrix <span class="math inline">\(X\)</span> commonly used in multiple regression analysis, where each column represents one numeric predictor variable (covariate), and the first column codes the intercept term.</p>
 <p>To further illustrate this, the covariates are extracted from this design matrix and stored separately as numeric predictor variables in the data-frame:</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" data-line-number="1">df_contrasts3[, <span class="kw">c</span>(<span class="st">&quot;Fc2vs1&quot;</span>, <span class="st">&quot;Fc3vs2&quot;</span>, <span class="st">&quot;Fc4vs3&quot;</span>)] &lt;-<span class="st"> </span>covars[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" data-line-number="1">df_contrasts3[, <span class="kw">c</span>(<span class="st">&quot;Fc2vs1&quot;</span>, <span class="st">&quot;Fc3vs2&quot;</span>, <span class="st">&quot;Fc4vs3&quot;</span>)] &lt;-<span class="st"> </span>covars[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
 <p>They are now used as numeric predictor variables in a multiple regression analysis:</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" data-line-number="1">fit_m3 &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Fc2vs1 <span class="op">+</span><span class="st"> </span>Fc3vs2 <span class="op">+</span><span class="st"> </span>Fc4vs3,</a>
-<a class="sourceLine" id="cb385-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
-<a class="sourceLine" id="cb385-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb385-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb385-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb385-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb385-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb385-8" data-line-number="8">  )</a>
-<a class="sourceLine" id="cb385-9" data-line-number="9">)</a></code></pre></div>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" data-line-number="1"><span class="kw">fixef</span>(fit_m3)</a></code></pre></div>
-<pre><code>##           Estimate Est.Error   Q2.5 Q97.5
-## Intercept    20.09      2.46  15.29 24.81
-## Fc2vs1        9.61      6.88  -3.87 22.63
-## Fc3vs2       -9.32      6.73 -22.23  4.22
-## Fc4vs3       29.23      6.79  15.30 42.23</code></pre>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" data-line-number="1">fit_m3 &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Fc2vs1 <span class="op">+</span><span class="st"> </span>Fc3vs2 <span class="op">+</span><span class="st"> </span>Fc4vs3,</a>
+<a class="sourceLine" id="cb388-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
+<a class="sourceLine" id="cb388-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb388-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb388-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb388-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb388-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb388-8" data-line-number="8">  )</a>
+<a class="sourceLine" id="cb388-9" data-line-number="9">)</a></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" data-line-number="1"><span class="kw">fixef</span>(fit_m3)</a></code></pre></div>
+<pre><code>##           Estimate Est.Error  Q2.5 Q97.5
+## Intercept    19.96      2.48  15.0 24.85
+## Fc2vs1        9.67      6.73  -3.5 23.66
+## Fc3vs2       -9.65      7.02 -23.3  4.23
+## Fc4vs3       29.58      7.27  15.1 44.00</code></pre>
 <p>The results show that the regression coefficients are the same as in the contrast-based analysis shown in the previous section. This demonstrates that contrasts serve to code discrete factor levels into a linear/multiple regression analysis by numerically encoding comparisons between specific condition means.</p>
 </div>
 <div id="polynomialContrasts" class="section level3">
 <h3><span class="header-section-number">8.3.4</span> Polynomial contrasts</h3>
 <p>Polynomial contrasts are another option for analyzing factors. Suppose that we expect a linear trend across conditions, where the response increases by a constant magnitude with each successive factor level. This could be the expectation when four levels of a factor reflect decreasing levels of word frequency (i.e., four factor levels: high, medium-high, medium-low, and low word frequency), where one expects the lowest response for high frequency words, and successively higher responses for lower word frequencies. The effect for each individual level of a factor may not be strong enough for detecting it in the statistical model. Specifying a linear trend in a polynomial constrast allows us to pool the whole increase into a single coefficient for the linear trend, increasing statistical sensitivity for estimating/detecting the increase. Such a specification constrains the estimate to one interpretable parameter, e.g., a linear increase across factor levels. The larger the number of factor levels, the more parsimonious are polynomial contrasts compared to contrast-based specifications as introduced in the previous sections. Going beyond a linear trend, one may also have expectations about quadratic trends. For example, one may expect an increase only among very low frequency words, but no difference between high and medium-high frequency words.</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" data-line-number="1">Xpol &lt;-<span class="st"> </span><span class="kw">contr.poly</span>(<span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb388-2" data-line-number="2">(<span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span>Xpol)</a></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" data-line-number="1">Xpol &lt;-<span class="st"> </span><span class="kw">contr.poly</span>(<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb391-2" data-line-number="2">(<span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span>Xpol)</a></code></pre></div>
 <pre><code>##          .L   .Q     .C
 ## [1,] -0.671  0.5 -0.224
 ## [2,] -0.224 -0.5  0.671
 ## [3,]  0.224 -0.5 -0.671
 ## [4,]  0.671  0.5  0.224</code></pre>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" data-line-number="1">fit_Pol &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb390-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
-<a class="sourceLine" id="cb390-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb390-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb390-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb390-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb390-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb390-8" data-line-number="8">  )</a>
-<a class="sourceLine" id="cb390-9" data-line-number="9">)</a></code></pre></div>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" data-line-number="1"><span class="kw">fixef</span>(fit_Pol)</a></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb393-1" data-line-number="1">fit_Pol &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb393-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
+<a class="sourceLine" id="cb393-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb393-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb393-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb393-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb393-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb393-8" data-line-number="8">  )</a>
+<a class="sourceLine" id="cb393-9" data-line-number="9">)</a></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" data-line-number="1"><span class="kw">fixef</span>(fit_Pol)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error  Q2.5 Q97.5
-## Intercept    20.01      2.55 14.96  25.1
-## F.L          17.63      4.91  8.06  27.1
-## F.Q           9.84      4.93  0.01  19.4
-## F.C          13.21      4.89  3.41  22.9</code></pre>
+## Intercept    20.01      2.42 15.33  24.7
+## F.L          17.84      4.91  8.06  27.7
+## F.Q           9.82      4.81 -0.28  19.5
+## F.C          13.34      4.89  3.69  23.0</code></pre>
 <p>In this example, condition means increase across factor levels in a linear fashion, but there may also be quadratic and cubic trends.</p>
 </div>
 <div id="an-alternative-to-contrasts-monotonic-effects" class="section level3">
 <h3><span class="header-section-number">8.3.5</span> An alternative to contrasts: monotonic effects</h3>
 <p>An alternative to specifying contrasts to estimate specific comparisons between factor levels is monotonic effects <span class="citation">(<a href="https://paul-buerkner.github.io/brms/articles/brms_monotonic.html" class="uri">https://paul-buerkner.github.io/brms/articles/brms_monotonic.html</a>; Bürkner and Charpentier <a href="#ref-burkner2020modelling">2020</a>)</span>. This simply assumes that the dependent variable increases (or decreases) in a monotonic fashion across levels of an ordered factor. In this kind of analysis, one does not define contrasts specifying differences between (groups of) factor levels. Instead, one estimates one parameter which captures the average increase (or decrease) in the dependent variable associated with two neighboring factor levels. Moreover, one estimates the percentages of the overall increase (or decrease) that is associated with each of the differences between neighboring factor levels (i.e., similar to simple difference contrasts, but measured in percentage increase, and assuming monotonicity, i.e., that the same increase or decrease is present for all simple differences).</p>
 <p>To implement a monotonic analysis, we first code the factor <code>F</code> as being an ordered factor (i.e.,<code>ordered=TRUE</code>). Then, we specify that we want to estimate a monotonic effect of <code>F</code> using the notation <code>mo(F)</code> in our call to brms:</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb393-1" data-line-number="1">df_contrasts3<span class="op">$</span>F &lt;-<span class="st"> </span><span class="kw">factor</span>(df_contrasts3<span class="op">$</span>F, <span class="dt">ordered=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb393-2" data-line-number="2">fit_mo &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">mo</span>(F),</a>
-<a class="sourceLine" id="cb393-3" data-line-number="3">  <span class="dt">data =</span> df_contrasts3,</a>
-<a class="sourceLine" id="cb393-4" data-line-number="4">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb393-5" data-line-number="5">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb393-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb393-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb393-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb393-9" data-line-number="9">  )</a>
-<a class="sourceLine" id="cb393-10" data-line-number="10">)</a></code></pre></div>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" data-line-number="1"><span class="kw">summary</span>(fit_mo)</a></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" data-line-number="1">df_contrasts3<span class="op">$</span>F &lt;-<span class="st"> </span><span class="kw">factor</span>(df_contrasts3<span class="op">$</span>F, <span class="dt">ordered=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb396-2" data-line-number="2">fit_mo &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">mo</span>(F),</a>
+<a class="sourceLine" id="cb396-3" data-line-number="3">  <span class="dt">data =</span> df_contrasts3,</a>
+<a class="sourceLine" id="cb396-4" data-line-number="4">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb396-5" data-line-number="5">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb396-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb396-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb396-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb396-9" data-line-number="9">  )</a>
+<a class="sourceLine" id="cb396-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" data-line-number="1"><span class="kw">summary</span>(fit_mo)</a></code></pre></div>
 <pre><code>##  Family: gaussian 
 ##   Links: mu = identity; sigma = identity 
 ## Formula: DV ~ 1 + mo(F) 
@@ -1536,25 +1555,25 @@ The contrast matrix <span class="math inline">\(X_c\)</span> that we have looked
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     9.35      4.34     0.05    17.48 1.00     1627     1693
-## moF           9.50      2.46     4.49    14.41 1.00     1622     1968
+## Intercept     9.45      4.36     0.21    17.64 1.00     1593     1412
+## moF           9.47      2.47     4.19    14.18 1.00     1612     1849
 ## 
 ## Simplex Parameters: 
 ##         Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## moF1[1]     0.20      0.14     0.01     0.54 1.00     2283     1567
-## moF1[2]     0.11      0.10     0.00     0.39 1.00     1950     1824
-## moF1[3]     0.69      0.17     0.28     0.94 1.00     2254     2103
+## moF1[1]     0.19      0.14     0.01     0.52 1.00     2101     1875
+## moF1[2]     0.11      0.11     0.00     0.43 1.00     2857     2259
+## moF1[3]     0.70      0.17     0.29     0.94 1.00     2350     1919
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma    11.87      2.29     8.35    17.23 1.00     1964     2169
+## sigma    11.73      2.29     8.26    17.20 1.00     2252     2280
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<p>The results show that there is an overall positive population-level effect of the factor <code>F</code> with an estimate (<code>moF</code>) of 9.5, reflecting an average increase in the dependent variables of roughly 10 with each level of <code>F</code>. The model summary shows estimates for the simplex parameters, which represent the ratios of the overall increase associated with <code>F</code> that can be attributed to each of the differences between neighboring factor levels. The results show that most of the increase is associated with <code>moF1[3]</code>, i.e., with the last difference, reflecting the difference between <code>F3</code> and <code>F4</code>, whereas the other two differences (<code>moF1[1]</code>, reflecting the difference between F1 and F2, and <code>moF1[2]</code>, reflecting the difference between F2 and F3) are smaller. Comparing conditional effects between a model using polynomial contrasts and a model assuming monotonic effects makes it clear that the current model “forces” the effects to increase in a monotonic fashion; see Figure <a href="sec-4levelFactor.html#fig:condmopol">8.3</a>.</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" data-line-number="1"><span class="kw">conditional_effects</span>(fit_Pol) </a>
-<a class="sourceLine" id="cb396-2" data-line-number="2"><span class="kw">conditional_effects</span>(fit_mo)</a></code></pre></div>
+<p>The results show that there is an overall positive population-level effect of the factor <code>F</code> with an estimate (<code>moF</code>) of 9.47, reflecting an average increase in the dependent variables of roughly 9 with each level of <code>F</code>. The model summary shows estimates for the simplex parameters, which represent the ratios of the overall increase associated with <code>F</code> that can be attributed to each of the differences between neighboring factor levels. The results show that most of the increase is associated with <code>moF1[3]</code>, i.e., with the last difference, reflecting the difference between <code>F3</code> and <code>F4</code>, whereas the other two differences (<code>moF1[1]</code>, reflecting the difference between F1 and F2, and <code>moF1[2]</code>, reflecting the difference between F2 and F3) are smaller. Comparing conditional effects between a model using polynomial contrasts and a model assuming monotonic effects makes it clear that the current model “forces” the effects to increase in a monotonic fashion; see Figure <a href="sec-4levelFactor.html#fig:condmopol">8.3</a>.</p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" data-line-number="1"><span class="kw">conditional_effects</span>(fit_Pol) </a>
+<a class="sourceLine" id="cb399-2" data-line-number="2"><span class="kw">conditional_effects</span>(fit_mo)</a></code></pre></div>
 <div class="figure"><span id="fig:condmopol"></span>
 <img src="bookdown_files/figure-html/condmopol-1.svg" alt="Conditional effects using the polinomial contrasts on the left side vs. assuming monotic effects on the right side." width="48%" /><img src="bookdown_files/figure-html/condmopol-2.svg" alt="Conditional effects using the polinomial contrasts on the left side vs. assuming monotic effects on the right side." width="48%" />
 <p class="caption">
@@ -1562,12 +1581,12 @@ FIGURE 8.3: Conditional effects using the polinomial contrasts on the left side 
 </p>
 </div>
 <p>This is regardless of the information provided in the data; see the posterior predictive checks in Figure <a href="sec-4levelFactor.html#fig:checkmopol">8.4</a>.</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" data-line-number="1"><span class="kw">pp_check</span>(fit_Pol, <span class="dt">type =</span> <span class="st">&quot;violin_grouped&quot;</span>, <span class="dt">group =</span> <span class="st">&quot;F&quot;</span>, <span class="dt">y_draw =</span> <span class="st">&quot;points&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb397-2" data-line-number="2"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb397-3" data-line-number="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">55</span>, <span class="dv">105</span>))</a>
-<a class="sourceLine" id="cb397-4" data-line-number="4"><span class="kw">pp_check</span>(fit_mo, <span class="dt">type =</span> <span class="st">&quot;violin_grouped&quot;</span>, <span class="dt">group =</span> <span class="st">&quot;F&quot;</span>, <span class="dt">y_draw =</span> <span class="st">&quot;points&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb397-5" data-line-number="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb397-6" data-line-number="6"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">55</span>, <span class="dv">105</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" data-line-number="1"><span class="kw">pp_check</span>(fit_Pol, <span class="dt">type =</span> <span class="st">&quot;violin_grouped&quot;</span>, <span class="dt">group =</span> <span class="st">&quot;F&quot;</span>, <span class="dt">y_draw =</span> <span class="st">&quot;points&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb400-2" data-line-number="2"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb400-3" data-line-number="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">55</span>, <span class="dv">105</span>))</a>
+<a class="sourceLine" id="cb400-4" data-line-number="4"><span class="kw">pp_check</span>(fit_mo, <span class="dt">type =</span> <span class="st">&quot;violin_grouped&quot;</span>, <span class="dt">group =</span> <span class="st">&quot;F&quot;</span>, <span class="dt">y_draw =</span> <span class="st">&quot;points&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb400-5" data-line-number="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb400-6" data-line-number="6"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">55</span>, <span class="dv">105</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:checkmopol"></span>
 <img src="bookdown_files/figure-html/checkmopol-1.svg" alt="Posterior predictive distributions by condition using the polynomial contrasts on the left side vs. assuming monotonic effects on the right side." width="48%" /><img src="bookdown_files/figure-html/checkmopol-2.svg" alt="Posterior predictive distributions by condition using the polynomial contrasts on the left side vs. assuming monotonic effects on the right side." width="48%" />
 <p class="caption">
@@ -1628,8 +1647,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/08-coding.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1639,7 +1658,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

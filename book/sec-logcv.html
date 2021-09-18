@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1192,24 +1193,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">17.4</span> Comparing different likelihoods with cross-validation</h2>
 <p>We now compare two models with different likelihoods. In section <a href="sec-ppd.html#sec:lognormal">3.5.3</a> from chapter <a href="ch-compbda.html#ch:compbda">3</a>, we saw how a log-normal distribution was a more appropriate likelihood than a normal distribution for response times data. This was because response times are bounded by zero and right skewed, unlike the symmetrical normal distribution. Now we’ll use PSIS-LOO-CV to compare the predictive accuracy of the Stroop model from section <a href="sec-stroop.html#sec:stroop">5.2</a> in chapter <a href="ch-hierarchical.html#ch:hierarchical">5</a>, which assumed a log-normal likelihood to fit response times of correct responses with a similar model which assumes a normal likelihood.</p>
 <p>We load the data from <code>bcogsci</code>, create a sum coded predictor (see chapter <a href="ch-contr.html#ch:contr">8</a> for more details), and fit the model as in section <a href="sec-stroop.html#sec:stroop">5.2</a>.</p>
-<div class="sourceCode" id="cb896"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb896-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_stroop&quot;</span>)</a>
-<a class="sourceLine" id="cb896-2" data-line-number="2">df_stroop &lt;-<span class="st"> </span>df_stroop <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb896-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cond =</span> <span class="kw">if_else</span>(condition <span class="op">==</span><span class="st"> &quot;Incongruent&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb897"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb897-1" data-line-number="1">fit_stroop &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(c_cond <span class="op">|</span><span class="st"> </span>subj),</a>
-<a class="sourceLine" id="cb897-2" data-line-number="2">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
-<a class="sourceLine" id="cb897-3" data-line-number="3">  <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb897-4" data-line-number="4">    <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb897-5" data-line-number="5">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb897-6" data-line-number="6">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb897-7" data-line-number="7">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb897-8" data-line-number="8">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb897-9" data-line-number="9">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb897-10" data-line-number="10">    ),</a>
-<a class="sourceLine" id="cb897-11" data-line-number="11">  <span class="dt">data =</span> df_stroop</a>
-<a class="sourceLine" id="cb897-12" data-line-number="12">)</a></code></pre></div>
+<div class="sourceCode" id="cb895"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb895-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_stroop&quot;</span>)</a>
+<a class="sourceLine" id="cb895-2" data-line-number="2">df_stroop &lt;-<span class="st"> </span>df_stroop <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb895-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cond =</span> <span class="kw">if_else</span>(condition <span class="op">==</span><span class="st"> &quot;Incongruent&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb896"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb896-1" data-line-number="1">fit_stroop &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(c_cond <span class="op">|</span><span class="st"> </span>subj),</a>
+<a class="sourceLine" id="cb896-2" data-line-number="2">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
+<a class="sourceLine" id="cb896-3" data-line-number="3">  <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb896-4" data-line-number="4">    <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb896-5" data-line-number="5">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb896-6" data-line-number="6">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb896-7" data-line-number="7">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb896-8" data-line-number="8">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb896-9" data-line-number="9">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb896-10" data-line-number="10">    ),</a>
+<a class="sourceLine" id="cb896-11" data-line-number="11">  <span class="dt">data =</span> df_stroop</a>
+<a class="sourceLine" id="cb896-12" data-line-number="12">)</a></code></pre></div>
 <p>We can calculate the <span class="math inline">\(elpd_{loo}\)</span> for the original model with the log-normal likelihood.</p>
-<div class="sourceCode" id="cb898"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb898-1" data-line-number="1">loo_stroop_log &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_stroop)</a></code></pre></div>
-<div class="sourceCode" id="cb899"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb899-1" data-line-number="1">loo_stroop_log </a></code></pre></div>
+<div class="sourceCode" id="cb897"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb897-1" data-line-number="1">loo_stroop_log &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_stroop)</a></code></pre></div>
+<div class="sourceCode" id="cb898"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb898-1" data-line-number="1">loo_stroop_log </a></code></pre></div>
 <pre><code>## 
 ## Computed from 4000 by 3058 log-likelihood matrix
 ## 
@@ -1231,21 +1232,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## See help(&#39;pareto-k-diagnostic&#39;) for details.</code></pre>
 <p>The summary shows that <span class="math inline">\(k\)</span> estimates are ok.</p>
 <p>Now we fit a similar model where we assume that the likelihood is a normal distribution. It’s important now to change the priors since they are in a different scale (namely, in milliseconds). We choose reasonable but wide priors. We can do a sensitivity analysis, if we are unsure about the priors. However, unlike what happened with the Bayes factor in chapter <a href="ch-bf.html#ch:bf">16</a>, priors are going to affect cross-validation based model comparison only as far as they have a noticeable effect on the posterior distribution.</p>
-<div class="sourceCode" id="cb901"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb901-1" data-line-number="1">fit_stroop_normal &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(c_cond <span class="op">|</span><span class="st"> </span>subj),</a>
-<a class="sourceLine" id="cb901-2" data-line-number="2">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb901-3" data-line-number="3">  <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb901-4" data-line-number="4">    <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb901-5" data-line-number="5">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">400</span>, <span class="dv">600</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb901-6" data-line-number="6">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb901-7" data-line-number="7">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">300</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb901-8" data-line-number="8">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">300</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb901-9" data-line-number="9">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb901-10" data-line-number="10">    ),</a>
-<a class="sourceLine" id="cb901-11" data-line-number="11">  <span class="dt">data =</span> df_stroop</a>
-<a class="sourceLine" id="cb901-12" data-line-number="12">)</a></code></pre></div>
+<div class="sourceCode" id="cb900"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb900-1" data-line-number="1">fit_stroop_normal &lt;-<span class="st"> </span><span class="kw">brm</span>(RT <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span>(c_cond <span class="op">|</span><span class="st"> </span>subj),</a>
+<a class="sourceLine" id="cb900-2" data-line-number="2">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb900-3" data-line-number="3">  <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb900-4" data-line-number="4">    <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb900-5" data-line-number="5">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">400</span>, <span class="dv">600</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb900-6" data-line-number="6">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb900-7" data-line-number="7">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">300</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb900-8" data-line-number="8">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">300</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb900-9" data-line-number="9">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb900-10" data-line-number="10">    ),</a>
+<a class="sourceLine" id="cb900-11" data-line-number="11">  <span class="dt">data =</span> df_stroop</a>
+<a class="sourceLine" id="cb900-12" data-line-number="12">)</a></code></pre></div>
 <p>If we try to obtain <span class="math inline">\(elpd\)</span> based on PSIS-LOO-CV, we’ll find several large <span class="math inline">\(\hat{k}\)</span> values.</p>
-<div class="sourceCode" id="cb902"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb902-1" data-line-number="1">loo_stroop_normal &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_stroop_normal)</a></code></pre></div>
-<div class="sourceCode" id="cb903"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb903-1" data-line-number="1">loo_stroop_normal</a></code></pre></div>
+<div class="sourceCode" id="cb901"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb901-1" data-line-number="1">loo_stroop_normal &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_stroop_normal)</a></code></pre></div>
+<div class="sourceCode" id="cb902"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb902-1" data-line-number="1">loo_stroop_normal</a></code></pre></div>
 <pre><code>## 
 ## Computed from 4000 by 3058 log-likelihood matrix
 ## 
@@ -1264,8 +1265,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##    (1, Inf)   (very bad)    1   0.0%   3         
 ## See help(&#39;pareto-k-diagnostic&#39;) for details.</code></pre>
 <p>We can try the model matching approximation for problematic observations, by setting <code>moment_match = TRUE</code> in the <code>loo()</code> call (and we also need to fit the model with <code>save_pars = save_pars(all = TRUE)</code>). In this particular case, this approximation won’t solve our problem. We skip that step here. We can use exact LOO (rather than its approximation) for the problematic observations. By setting <code>reloo = TRUE</code>, we re-fit the 3 problematic observations with <span class="math inline">\(\hat{k}\)</span> values over <span class="math inline">\(0.7\)</span> using exact LOO-CV.</p>
-<div class="sourceCode" id="cb905"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb905-1" data-line-number="1">loo_stroop_normal &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_stroop_normal, <span class="dt">reloo =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb906"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb906-1" data-line-number="1">loo_stroop_normal</a></code></pre></div>
+<div class="sourceCode" id="cb904"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb904-1" data-line-number="1">loo_stroop_normal &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_stroop_normal, <span class="dt">reloo =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb905"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb905-1" data-line-number="1">loo_stroop_normal</a></code></pre></div>
 <pre><code>## 
 ## Computed from 4000 by 3058 log-likelihood matrix
 ## 
@@ -1286,17 +1287,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## All Pareto k estimates are ok (k &lt; 0.7).
 ## See help(&#39;pareto-k-diagnostic&#39;) for details.</code></pre>
 <p>We are ready to compare the models.</p>
-<div class="sourceCode" id="cb908"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb908-1" data-line-number="1"><span class="kw">loo_compare</span>(loo_stroop_log, loo_stroop_normal)</a></code></pre></div>
+<div class="sourceCode" id="cb907"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb907-1" data-line-number="1"><span class="kw">loo_compare</span>(loo_stroop_log, loo_stroop_normal)</a></code></pre></div>
 <pre><code>##                   elpd_diff se_diff
 ## fit_stroop            0.0       0.0
 ## fit_stroop_normal -1843.6     533.8</code></pre>
 <p>Here cross-validation shows a clear advantage for the model with the log-normal likelihood. We visualize the pointwise predictive accuracy in Figure <a href="sec-logcv.html#fig:diffpredacclog">17.2</a>. At first glance it might seem that the advantage of the log-normal likelihood lies in being able to capture extremely slow observations.</p>
-<div class="sourceCode" id="cb910"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb910-1" data-line-number="1">df_stroop &lt;-<span class="st"> </span><span class="kw">mutate</span>(df_stroop,</a>
-<a class="sourceLine" id="cb910-2" data-line-number="2">  <span class="dt">diff_elpd =</span> loo_stroop_log<span class="op">$</span>pointwise[, <span class="st">&quot;elpd_loo&quot;</span>] <span class="op">-</span></a>
-<a class="sourceLine" id="cb910-3" data-line-number="3"><span class="st">    </span>loo_stroop_normal<span class="op">$</span>pointwise[, <span class="st">&quot;elpd_loo&quot;</span>]</a>
-<a class="sourceLine" id="cb910-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb910-5" data-line-number="5"><span class="kw">ggplot</span>(df_stroop, <span class="kw">aes</span>(<span class="dt">x =</span> RT, <span class="dt">y =</span> diff_elpd)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb910-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb909"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb909-1" data-line-number="1">df_stroop &lt;-<span class="st"> </span><span class="kw">mutate</span>(df_stroop,</a>
+<a class="sourceLine" id="cb909-2" data-line-number="2">  <span class="dt">diff_elpd =</span> loo_stroop_log<span class="op">$</span>pointwise[, <span class="st">&quot;elpd_loo&quot;</span>] <span class="op">-</span></a>
+<a class="sourceLine" id="cb909-3" data-line-number="3"><span class="st">    </span>loo_stroop_normal<span class="op">$</span>pointwise[, <span class="st">&quot;elpd_loo&quot;</span>]</a>
+<a class="sourceLine" id="cb909-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb909-5" data-line-number="5"><span class="kw">ggplot</span>(df_stroop, <span class="kw">aes</span>(<span class="dt">x =</span> RT, <span class="dt">y =</span> diff_elpd)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb909-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.4</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:diffpredacclog"></span>
 <img src="bookdown_files/figure-html/diffpredacclog-1.svg" alt="Difference in predictive accuracy between a Stroop model with a log-normal likelihood vs. a model with a normal likelihood. A larger (more positive) difference indicates an advantage for the model with the log-normal likelihood." width="672" />
 <p class="caption">
@@ -1304,10 +1305,10 @@ FIGURE 17.2: Difference in predictive accuracy between a Stroop model with a log
 </p>
 </div>
 <p>We zoom in to visualize the pointwise predictive accuracy for observations with response times smaller than 2 seconds in <a href="sec-logcv.html#fig:diffpredacclog2">17.3</a>. Here, we see that the advantage of the log-normal likelihood lies in being able to account for most of the observations in the data set, which occur around the 500 ms.</p>
-<div class="sourceCode" id="cb911"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb911-1" data-line-number="1"><span class="kw">ggplot</span>(df_stroop, <span class="kw">aes</span>(<span class="dt">x =</span> RT, <span class="dt">y =</span> diff_elpd)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb911-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb911-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb911-4" data-line-number="4"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb910"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb910-1" data-line-number="1"><span class="kw">ggplot</span>(df_stroop, <span class="kw">aes</span>(<span class="dt">x =</span> RT, <span class="dt">y =</span> diff_elpd)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb910-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb910-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb910-4" data-line-number="4"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>)) </a></code></pre></div>
 <div class="figure"><span id="fig:diffpredacclog2"></span>
 <img src="bookdown_files/figure-html/diffpredacclog2-1.svg" alt="Difference in predictive accuracy between a Stroop model with a log-normal likelihood vs. a model with a normal likelihood for observations smaller than 2 seconds. A larger (more positive) difference indicates an advantage for the model with the log-normal likelihood." width="672" />
 <p class="caption">
@@ -1353,8 +1354,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/17-CV.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1364,7 +1365,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

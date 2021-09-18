@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1205,7 +1206,7 @@ The Bayes factor answers this question about the evidence in favor of an effect 
 <p>As we saw before, the Bayes factor is highly sensitive to the priors. In the example presented above, both models are identical except for the effect of interest, <span class="math inline">\(\beta\)</span>, and so the prior on this parameter will play a major role in the calculation of the Bayes factor.</p>
 <p>Next, we will run a hierarchical model which includes random intercepts and slopes by items and by subjects. We will use relatively informative priors on all the parameters – this speeds up computation and implies realistic expectations about the parameters. However, the prior on <span class="math inline">\(\beta\)</span> will be <strong>crucial</strong> for the calculation of the Bayes factor. <!--We start by assuming that the prior mean on $\beta$ is zero, that is, a priori we assume the parameter is centered on zero. However, we are still not sure about the variance of the prior on $\beta$.--></p>
 <p>Building good priors is a challenging task. Indeed, it is one of the crucial steps involved in a principled Bayesian workflow <span class="citation">(Schad, Betancourt, and Vasishth <a href="#ref-schad2020toward">2020</a>)</span>, which we will discuss in a later chapter.</p>
-<p>One possible way we can build a good prior for the parameter <span class="math inline">\(\beta\)</span> estimating the influence of cloze probability here is the following. The reasoning below is based on domain knowledge; but there is room for differences of opinion here. In a realistic data analysis situation, we would carry out a sensitivity analysis using a range of priors to determine the extent of influence of the priors.<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></p>
+<p>One possible way we can build a good prior for the parameter <span class="math inline">\(\beta\)</span> estimating the influence of cloze probability here is the following. The reasoning below is based on domain knowledge; but there is room for differences of opinion here. In a realistic data analysis situation, we would carry out a sensitivity analysis using a range of priors to determine the extent of influence of the priors.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a></p>
 <ol style="list-style-type: decimal">
 <li>One may want to be agnostic regarding the direction of the effect; that means that we will center the prior of <span class="math inline">\(\beta\)</span> on zero by specifying that the mean of the prior distribution is zero. However, we are still not sure about the variance of the prior on <span class="math inline">\(\beta\)</span>.</li>
 <li>One would need to know a bit about the variation on the dependent variable that we are analyzing. After re-analyzing the data from a couple of EEG experiments available from osf.io, we can say that for N400 averages, the standard deviation of the signal is between 8-15 microvolts <span class="citation">(Nicenboim, Vasishth, and Rösler <a href="#ref-nicenboim2020words">2020</a><a href="#ref-nicenboim2020words">b</a>)</span>.</li>
@@ -1214,86 +1215,86 @@ The Bayes factor answers this question about the evidence in favor of an effect 
 </ol>
 <p>An additional and highly recommended way to obtain good priors <span class="citation">(Schad, Betancourt, and Vasishth <a href="#ref-schad2020toward">2020</a>, also see the chapter later in the present book on a principled Bayesian workflow)</span> is to perform prior predictive checks. Here, the idea is to simulate data from the model and the priors, and then to analyze the simulated data using summary statistics. For example, it would be possible to compute the summary statistic of the difference in the N400 between high versus low cloze probability. The simulations would yield a distribution of differences. Arguably, this distribution of differences, that is, the data analyses of the simulated data, are much easier to judge for plausibility than the prior parameters specifying prior distributions. That is, we might find it easier to judge whether a difference in voltage between high and low cloze probability is plausible rather than judging the parameters of the model. For reasons of brevity, we skip performing these calculations here (but see the later chapter on developing a workflow for details).</p>
 <p>Instead, we will start with the prior <span class="math inline">\(\beta \sim Normal(0,5)\)</span> (since 5 microvolts is roughly 30% of 15, which is the upper bound of the expected standard deviation of the EEG signal).</p>
-<div class="sourceCode" id="cb813"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb813-1" data-line-number="1">priors1 &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb813-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">2</span>, <span class="dv">5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb813-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb813-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">10</span>, <span class="dv">5</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb813-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb813-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">4</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb813-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb817"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb817-1" data-line-number="1">priors1 &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb817-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">2</span>, <span class="dv">5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb817-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb817-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">10</span>, <span class="dv">5</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb817-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb817-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">4</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb817-7" data-line-number="7">)</a></code></pre></div>
 <p>We load the dataset on N400 amplitudes, which has data on cloze probabilities <span class="citation">(Nieuwland et al. <a href="#ref-nieuwlandLargescaleReplicationStudy2018">2018</a>)</span>. We mean-center the cloze probability measure to make the intercept and the random intercepts easier to interpret (i.e., after centering, they represent the grand mean and the average variability around the grand mean across subjects or items).</p>
-<div class="sourceCode" id="cb814"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb814-1" data-line-number="1"><span class="kw">data</span>(df_eeg)</a>
-<a class="sourceLine" id="cb814-2" data-line-number="2">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">c_cloze =</span> cloze <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cloze))</a></code></pre></div>
+<div class="sourceCode" id="cb818"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb818-1" data-line-number="1"><span class="kw">data</span>(df_eeg)</a>
+<a class="sourceLine" id="cb818-2" data-line-number="2">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">c_cloze =</span> cloze <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cloze))</a></code></pre></div>
 <p>We will need a large number of samples to be able to get stable estimates of the Bayes factor with bridge sampling, for this reason a large number of sampling iterations (<code>n = 20000</code>) is specified. Because otherwise we see warnings, we also set <code>adapt_delta = 0.9</code> to ensure that the posterior sampler is working correctly. For Bayes factors analyses, it’s necessary to set the argument <code>save_pars = save_pars(all = TRUE)</code>. This setting is a precondition for later performing Bridge sampling for computing the Bayes factor.</p>
-<div class="sourceCode" id="cb815"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb815-1" data-line-number="1">fit_N400_h_linear &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span></a>
-<a class="sourceLine" id="cb815-2" data-line-number="2"><span class="st">  </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb815-3" data-line-number="3"><span class="dt">prior =</span> priors1,</a>
-<a class="sourceLine" id="cb815-4" data-line-number="4"><span class="dt">warmup =</span> <span class="dv">2000</span>,</a>
-<a class="sourceLine" id="cb815-5" data-line-number="5"><span class="dt">iter =</span> <span class="dv">20000</span>,</a>
-<a class="sourceLine" id="cb815-6" data-line-number="6"><span class="dt">cores =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb815-7" data-line-number="7"><span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.9</span>),</a>
-<a class="sourceLine" id="cb815-8" data-line-number="8"><span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb815-9" data-line-number="9"><span class="dt">data =</span> df_eeg</a>
-<a class="sourceLine" id="cb815-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb819"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb819-1" data-line-number="1">fit_N400_h_linear &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span></a>
+<a class="sourceLine" id="cb819-2" data-line-number="2"><span class="st">  </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb819-3" data-line-number="3"><span class="dt">prior =</span> priors1,</a>
+<a class="sourceLine" id="cb819-4" data-line-number="4"><span class="dt">warmup =</span> <span class="dv">2000</span>,</a>
+<a class="sourceLine" id="cb819-5" data-line-number="5"><span class="dt">iter =</span> <span class="dv">20000</span>,</a>
+<a class="sourceLine" id="cb819-6" data-line-number="6"><span class="dt">cores =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb819-7" data-line-number="7"><span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.9</span>),</a>
+<a class="sourceLine" id="cb819-8" data-line-number="8"><span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb819-9" data-line-number="9"><span class="dt">data =</span> df_eeg</a>
+<a class="sourceLine" id="cb819-10" data-line-number="10">)</a></code></pre></div>
 <p>Next, take a look at the population-level results from the Bayesian modeling.</p>
-<div class="sourceCode" id="cb816"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb816-1" data-line-number="1"><span class="kw">fixef</span>(fit_N400_h_linear)</a></code></pre></div>
+<div class="sourceCode" id="cb820"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb820-1" data-line-number="1"><span class="kw">fixef</span>(fit_N400_h_linear)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error Q2.5 Q97.5
 ## Intercept     3.65      0.45 2.76  4.53
 ## c_cloze       2.33      0.65 1.05  3.59</code></pre>
 <p>We can now take a look at the estimates and at the credible intervals. The effect of Cloze probability (<code>c_cloze</code>) is <span class="math inline">\(2.33\)</span> with a 95% credible interval ranging from <span class="math inline">\(1.05\)</span> to <span class="math inline">\(3.59\)</span>. While this provides an initial hint that highly probable words may elicit a stronger N400 compared to low probable words, by just looking at the posterior there is no way to quantify evidence for the question whether this effect is different from zero. Model comparison is needed to answer this question.</p>
 <p>To this end, we run the model again, now without the parameter of interest, i.e., the null model. This is a model where our prior for <span class="math inline">\(\beta\)</span> is that it is exactly zero.</p>
-<div class="sourceCode" id="cb818"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb818-1" data-line-number="1">fit_N400_h_null &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span></a>
-<a class="sourceLine" id="cb818-2" data-line-number="2"><span class="st">  </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb818-3" data-line-number="3"><span class="dt">prior =</span> priors1[priors1<span class="op">$</span>class <span class="op">!=</span><span class="st"> &quot;b&quot;</span>, ],</a>
-<a class="sourceLine" id="cb818-4" data-line-number="4"><span class="dt">warmup =</span> <span class="dv">2000</span>,</a>
-<a class="sourceLine" id="cb818-5" data-line-number="5"><span class="dt">iter =</span> <span class="dv">20000</span>,</a>
-<a class="sourceLine" id="cb818-6" data-line-number="6"><span class="dt">cores =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb818-7" data-line-number="7"><span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.9</span>),</a>
-<a class="sourceLine" id="cb818-8" data-line-number="8"><span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb818-9" data-line-number="9"><span class="dt">data =</span> df_eeg</a>
-<a class="sourceLine" id="cb818-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb822"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb822-1" data-line-number="1">fit_N400_h_null &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span></a>
+<a class="sourceLine" id="cb822-2" data-line-number="2"><span class="st">  </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb822-3" data-line-number="3"><span class="dt">prior =</span> priors1[priors1<span class="op">$</span>class <span class="op">!=</span><span class="st"> &quot;b&quot;</span>, ],</a>
+<a class="sourceLine" id="cb822-4" data-line-number="4"><span class="dt">warmup =</span> <span class="dv">2000</span>,</a>
+<a class="sourceLine" id="cb822-5" data-line-number="5"><span class="dt">iter =</span> <span class="dv">20000</span>,</a>
+<a class="sourceLine" id="cb822-6" data-line-number="6"><span class="dt">cores =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb822-7" data-line-number="7"><span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.9</span>),</a>
+<a class="sourceLine" id="cb822-8" data-line-number="8"><span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb822-9" data-line-number="9"><span class="dt">data =</span> df_eeg</a>
+<a class="sourceLine" id="cb822-10" data-line-number="10">)</a></code></pre></div>
 <p>Now everything is ready to compute the log marginal likelihood, that is, the probability of the data given the model, after integrating out the model parameters. In the toy examples shown above, we had used the R-function <code>integrate()</code> to perform this integration. This is not possible for the more realistic and more complex models that are considered here because the integrals that have to be solved are too high-dimensional and complex for these simple functions to do the job. Instead, a standard approach to sampling realistic complex models is to use bridge sampling <span class="citation">(Quentin F Gronau et al. <a href="#ref-gronauTutorialBridgeSampling2017">2017</a><a href="#ref-gronauTutorialBridgeSampling2017">b</a>; Quentin F Gronau, Singmann, and Wagenmakers <a href="#ref-gronauBridgesamplingPackageEstimating2017">2017</a>)</span>. We perform this integration using the function <code>bridge_sampler()</code> for each of the two models:</p>
-<div class="sourceCode" id="cb819"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb819-1" data-line-number="1">margLogLik_linear &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_N400_h_linear, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb819-2" data-line-number="2">margLogLik_null &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_N400_h_null, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb823"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb823-1" data-line-number="1">margLogLik_linear &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_N400_h_linear, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb823-2" data-line-number="2">margLogLik_null &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_N400_h_null, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>This gives us the marginal log likelihoods for each of the models. From these, we can compute the Bayes factors. The function <code>bayes_factor()</code> is a convenient function to calculate the Bayes factor.</p>
-<div class="sourceCode" id="cb820"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb820-1" data-line-number="1">(BF_ln &lt;-<span class="st"> </span><span class="kw">bayes_factor</span>(margLogLik_linear, margLogLik_null))</a></code></pre></div>
+<div class="sourceCode" id="cb824"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb824-1" data-line-number="1">(BF_ln &lt;-<span class="st"> </span><span class="kw">bayes_factor</span>(margLogLik_linear, margLogLik_null))</a></code></pre></div>
 <pre><code>## Estimated Bayes factor in favor of x1 over x2: 50.96782</code></pre>
 <p>Alternatively, the Bayes factor can be computed manually as well. First, we compute the difference in marginal log likelihoods, then we transform this difference in log likelihoods to the likelihood scale (<code>exp()</code>). A difference in exponential scale is the same as a ratio in non-exponentiated scale: <code>exp(a-b) = exp(a)/exp(b)</code>, that is, it computes the Bayes factor. However, the values <code>exp(ml1)</code> and <code>exp(ml2)</code> are too small to be represented accurately by R. Therefore, for numerical reasons, it is important to take the difference first and to compute the exponential afterwards <code>exp(a-b)</code>, i.e., <code>exp(margLogLik_linear$logml - margLogLik_null$logml)</code>, which yields the same result as the <code>bayes_factor()</code> command.</p>
-<div class="sourceCode" id="cb822"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb822-1" data-line-number="1"><span class="kw">exp</span>(margLogLik_linear<span class="op">$</span>logml <span class="op">-</span><span class="st"> </span>margLogLik_null<span class="op">$</span>logml)</a></code></pre></div>
+<div class="sourceCode" id="cb826"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb826-1" data-line-number="1"><span class="kw">exp</span>(margLogLik_linear<span class="op">$</span>logml <span class="op">-</span><span class="st"> </span>margLogLik_null<span class="op">$</span>logml)</a></code></pre></div>
 <pre><code>## [1] 51</code></pre>
 <p>The Bayes factor is quite large in this example, and provides strong evidence for the alternative model, which includes a coefficient representing the effect of cloze probability. That is, under the criteria shown in Table <a href="hypothesis-testing-using-the-bayes-factor.html#tab:BFs">16.1</a>, the Bayes factor provides strong evidence for an effect of cloze probability.</p>
 <p>In this example, there was good prior information about the free model parameter <span class="math inline">\(\beta\)</span>. However, what happens if we are not sure about the prior for the model parameter? It might happen that we compare the null model with a very “bad” alternative model, because our prior for <span class="math inline">\(\beta\)</span> is not appropriate.</p>
 <p>For example, assuming that we do not know much about N400 effects, or that we do not want to make strong assumptions, we might be inclined to use very vague and uninformative priors. For example, these could look as follows (where all the priors except for <code>b</code> remain identical):</p>
-<div class="sourceCode" id="cb824"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb824-1" data-line-number="1">priors_vague &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb824-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">2</span>, <span class="dv">5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb824-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">500</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb824-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">10</span>, <span class="dv">5</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb824-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb824-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">4</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb824-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb828"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb828-1" data-line-number="1">priors_vague &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb828-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">2</span>, <span class="dv">5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb828-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">500</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb828-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">10</span>, <span class="dv">5</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb828-5" data-line-number="5">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb828-6" data-line-number="6">  <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">4</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb828-7" data-line-number="7">)</a></code></pre></div>
 <p>We can use these uninformative priors in the Bayesian model:</p>
-<div class="sourceCode" id="cb825"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb825-1" data-line-number="1">fit_N400_h_linear_vague &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span></a>
-<a class="sourceLine" id="cb825-2" data-line-number="2"><span class="st">  </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb825-3" data-line-number="3"><span class="dt">prior =</span> priors_vague,</a>
-<a class="sourceLine" id="cb825-4" data-line-number="4"><span class="dt">warmup =</span> <span class="dv">2000</span>,</a>
-<a class="sourceLine" id="cb825-5" data-line-number="5"><span class="dt">iter =</span> <span class="dv">20000</span>,</a>
-<a class="sourceLine" id="cb825-6" data-line-number="6"><span class="dt">cores =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb825-7" data-line-number="7"><span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.9</span>),</a>
-<a class="sourceLine" id="cb825-8" data-line-number="8"><span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb825-9" data-line-number="9"><span class="dt">data =</span> df_eeg</a>
-<a class="sourceLine" id="cb825-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb829"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb829-1" data-line-number="1">fit_N400_h_linear_vague &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span></a>
+<a class="sourceLine" id="cb829-2" data-line-number="2"><span class="st">  </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb829-3" data-line-number="3"><span class="dt">prior =</span> priors_vague,</a>
+<a class="sourceLine" id="cb829-4" data-line-number="4"><span class="dt">warmup =</span> <span class="dv">2000</span>,</a>
+<a class="sourceLine" id="cb829-5" data-line-number="5"><span class="dt">iter =</span> <span class="dv">20000</span>,</a>
+<a class="sourceLine" id="cb829-6" data-line-number="6"><span class="dt">cores =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb829-7" data-line-number="7"><span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.9</span>),</a>
+<a class="sourceLine" id="cb829-8" data-line-number="8"><span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb829-9" data-line-number="9"><span class="dt">data =</span> df_eeg</a>
+<a class="sourceLine" id="cb829-10" data-line-number="10">)</a></code></pre></div>
 <p>Interestingly, we can still estimate the effect of cloze probability fairly well:</p>
-<div class="sourceCode" id="cb826"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb826-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_N400_h_linear_vague, <span class="dt">variable =</span> <span class="st">&quot;b_c_cloze&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb830"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb830-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_N400_h_linear_vague, <span class="dt">variable =</span> <span class="st">&quot;b_c_cloze&quot;</span>)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error Q2.5 Q97.5
 ## b_c_cloze     2.37     0.652 1.07  3.64</code></pre>
 <p>Next, we again perform the bridge sampling for the alternative model.</p>
-<div class="sourceCode" id="cb828"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb828-1" data-line-number="1">margLogLik_linear_vague &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_N400_h_linear_vague, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb832"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb832-1" data-line-number="1">margLogLik_linear_vague &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_N400_h_linear_vague, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>We compute the Bayes factor for the alternative over the null model, <span class="math inline">\(BF_{10}\)</span>:</p>
 <!-- BN: need to recalculate, but BF is not working in my computer now -->
-<div class="sourceCode" id="cb829"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb829-1" data-line-number="1">(BF_lnVague &lt;-<span class="st"> </span><span class="kw">bayes_factor</span>(margLogLik_linear_vague, margLogLik_null))</a></code></pre></div>
+<div class="sourceCode" id="cb833"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb833-1" data-line-number="1">(BF_lnVague &lt;-<span class="st"> </span><span class="kw">bayes_factor</span>(margLogLik_linear_vague, margLogLik_null))</a></code></pre></div>
 <pre><code>## Estimated Bayes factor in favor of x1 over x2: 0.56000</code></pre>
 <p>This is easier to read as the evidence for null model over the alternative:</p>
-<div class="sourceCode" id="cb831"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb831-1" data-line-number="1"><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>BF_lnVague[[<span class="dv">1</span>]]</a></code></pre></div>
+<div class="sourceCode" id="cb835"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb835-1" data-line-number="1"><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>BF_lnVague[[<span class="dv">1</span>]]</a></code></pre></div>
 <pre><code>## [1] 1.79</code></pre>
 <p>The results show that there is no evidence in favor of the effect of Cloze probability. The reason for that is that priors are never uninformative when it comes to Bayes factors. The wide prior specifies that both very small and very large effect sizes are possible (with some considerable probability), but there is relatively little evidence in the data for such large effect sizes.</p>
 <p>Indeed, very recently, Uri Simonsohn has criticized Bayes factors because they might provide evidence in favor of the null and against a very specific alternative model, when the researchers only knew the direction of the effect (see <a href="https://datacolada.org/78a" class="uri">https://datacolada.org/78a</a>). This can happen when very uninformative vague priors are used.</p>
@@ -1303,33 +1304,33 @@ The Bayes factor answers this question about the evidence in favor of an effect 
 <h3><span class="header-section-number">16.2.1</span> Sensitivity analysis</h3>
 <p>Here, we perform a sensitivtiy analysis by examining Bayes factors for several models. Each model has the same likelihood but a different prior for <span class="math inline">\(\beta\)</span>. For all of the priors we assume a normal distribution with a mean of zero. Assuming a mean of zero means that we do not make any assumption a priori that the effect differs from zero. If the effect should differ from zero, we want the data to tell us that. What differs between the different priors is their standard deviation. That is, what differs is the amount of uncertainty about the effect size that we allow for in the prior. A large standard deviation allows for very large effect sizes, whereas a small standard deviation implies the assumption that we expect the effect not to be very large. Although a model with a wide prior (i.e., large standard deviation) also allocates prior probability to small effect sizes, it allocates much less probability to small effect sizes compared to a model with a narrow prior. Thus, if the effect size in the observed data is actually small, then a model with a narrow prior (small standard deviation) will have a better chance of detecting the effect.</p>
 <p>Next, we try out a range of standard deviations, ranging from 1 to a much wider prior that has a standard deviation of 100. In practice, for the experiment method we are discussing here, it would not be a good idea to define very large standard deviations such as 100 microvolts, since they imply unrealistically large effect sizes. However, we include such a large value here just for illustration. Such a sensitivity analysis takes a very long time: here, we are running 11 models, where each model involves a lot of iterations to obtain stable Bayes factor estimates.</p>
-<div class="sourceCode" id="cb833"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb833-1" data-line-number="1">prior_sd &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb833-2" data-line-number="2">BF &lt;-<span class="st"> </span><span class="kw">c</span>()</a>
-<a class="sourceLine" id="cb833-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(prior_sd)) {</a>
-<a class="sourceLine" id="cb833-4" data-line-number="4">  psd &lt;-<span class="st"> </span>prior_sd[i]</a>
-<a class="sourceLine" id="cb833-5" data-line-number="5">  <span class="co"># for each prior we fit the model</span></a>
-<a class="sourceLine" id="cb833-6" data-line-number="6">  fit &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb833-7" data-line-number="7">    <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb833-8" data-line-number="8">      <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb833-9" data-line-number="9">        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">2</span>, <span class="dv">5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb833-10" data-line-number="10">        <span class="kw">set_prior</span>(<span class="kw">paste0</span>(<span class="st">&quot;normal(0,&quot;</span>, psd, <span class="st">&quot;)&quot;</span>), <span class="dt">class =</span> <span class="st">&quot;b&quot;</span>),</a>
-<a class="sourceLine" id="cb833-11" data-line-number="11">        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">10</span>, <span class="dv">5</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb833-12" data-line-number="12">        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb833-13" data-line-number="13">        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">4</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb833-14" data-line-number="14">      ),</a>
-<a class="sourceLine" id="cb833-15" data-line-number="15">    <span class="dt">warmup =</span> <span class="dv">2000</span>,</a>
-<a class="sourceLine" id="cb833-16" data-line-number="16">    <span class="dt">iter =</span> <span class="dv">20000</span>,</a>
-<a class="sourceLine" id="cb833-17" data-line-number="17">    <span class="dt">cores =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb833-18" data-line-number="18">    <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.9</span>),</a>
-<a class="sourceLine" id="cb833-19" data-line-number="19">    <span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb833-20" data-line-number="20">    <span class="dt">data =</span> df_eeg</a>
-<a class="sourceLine" id="cb833-21" data-line-number="21">  )</a>
-<a class="sourceLine" id="cb833-22" data-line-number="22">  <span class="co"># for each model we run a brigde sampler</span></a>
-<a class="sourceLine" id="cb833-23" data-line-number="23">  lml_linear_beta &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb833-24" data-line-number="24">  <span class="co"># we store the Bayes factor compared to the null model</span></a>
-<a class="sourceLine" id="cb833-25" data-line-number="25">  BF &lt;-<span class="st"> </span><span class="kw">c</span>(BF, <span class="kw">bayes_factor</span>(lml_linear_beta, lml_null)<span class="op">$</span>bf)</a>
-<a class="sourceLine" id="cb833-26" data-line-number="26">}</a>
-<a class="sourceLine" id="cb833-27" data-line-number="27">BFs &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">beta_sd =</span> prior_sd, BF)</a></code></pre></div>
+<div class="sourceCode" id="cb837"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb837-1" data-line-number="1">prior_sd &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb837-2" data-line-number="2">BF &lt;-<span class="st"> </span><span class="kw">c</span>()</a>
+<a class="sourceLine" id="cb837-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(prior_sd)) {</a>
+<a class="sourceLine" id="cb837-4" data-line-number="4">  psd &lt;-<span class="st"> </span>prior_sd[i]</a>
+<a class="sourceLine" id="cb837-5" data-line-number="5">  <span class="co"># for each prior we fit the model</span></a>
+<a class="sourceLine" id="cb837-6" data-line-number="6">  fit &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb837-7" data-line-number="7">    <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb837-8" data-line-number="8">      <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb837-9" data-line-number="9">        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">2</span>, <span class="dv">5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb837-10" data-line-number="10">        <span class="kw">set_prior</span>(<span class="kw">paste0</span>(<span class="st">&quot;normal(0,&quot;</span>, psd, <span class="st">&quot;)&quot;</span>), <span class="dt">class =</span> <span class="st">&quot;b&quot;</span>),</a>
+<a class="sourceLine" id="cb837-11" data-line-number="11">        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">10</span>, <span class="dv">5</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb837-12" data-line-number="12">        <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb837-13" data-line-number="13">        <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">4</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb837-14" data-line-number="14">      ),</a>
+<a class="sourceLine" id="cb837-15" data-line-number="15">    <span class="dt">warmup =</span> <span class="dv">2000</span>,</a>
+<a class="sourceLine" id="cb837-16" data-line-number="16">    <span class="dt">iter =</span> <span class="dv">20000</span>,</a>
+<a class="sourceLine" id="cb837-17" data-line-number="17">    <span class="dt">cores =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb837-18" data-line-number="18">    <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.9</span>),</a>
+<a class="sourceLine" id="cb837-19" data-line-number="19">    <span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb837-20" data-line-number="20">    <span class="dt">data =</span> df_eeg</a>
+<a class="sourceLine" id="cb837-21" data-line-number="21">  )</a>
+<a class="sourceLine" id="cb837-22" data-line-number="22">  <span class="co"># for each model we run a brigde sampler</span></a>
+<a class="sourceLine" id="cb837-23" data-line-number="23">  lml_linear_beta &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb837-24" data-line-number="24">  <span class="co"># we store the Bayes factor compared to the null model</span></a>
+<a class="sourceLine" id="cb837-25" data-line-number="25">  BF &lt;-<span class="st"> </span><span class="kw">c</span>(BF, <span class="kw">bayes_factor</span>(lml_linear_beta, lml_null)<span class="op">$</span>bf)</a>
+<a class="sourceLine" id="cb837-26" data-line-number="26">}</a>
+<a class="sourceLine" id="cb837-27" data-line-number="27">BFs &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">beta_sd =</span> prior_sd, BF)</a></code></pre></div>
 <p>For each model, we run bridge sampling and we compute the Bayes factor of the model against our baseline or null model, which does not contain a fixed effect of Cloze probability (<span class="math inline">\(BF_{10}\)</span>). Next, we need a way to visualize all the Bayes factors. We plot them in Figure <a href="sec-N400BF.html#fig:BFpriorsX">16.3</a> as a function of the prior width.</p>
 <div class="figure"><span id="fig:BFpriorsX"></span>
 <img src="bookdown_files/figure-html/BFpriorsX-1.svg" alt="Prior sensitivity analysis for the Bayes factor" width="672" />
@@ -1356,11 +1357,11 @@ FIGURE 16.3: Prior sensitivity analysis for the Bayes factor
 <!-- This is essentially the same as to use the mean of the posterior Cloze probability assuming a beta prior of $a=1, b=1$. --></p>
 <div/>
 
-<div class="sourceCode" id="cb834"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb834-1" data-line-number="1">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb834-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb834-3" data-line-number="3">    <span class="dt">scloze =</span> (cloze_ans <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span>(N <span class="op">+</span><span class="st"> </span><span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb834-4" data-line-number="4">    <span class="dt">c_logscloze =</span> <span class="kw">log</span>(scloze) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(<span class="kw">log</span>(scloze))</a>
-<a class="sourceLine" id="cb834-5" data-line-number="5">  )</a></code></pre></div>
+<div class="sourceCode" id="cb838"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb838-1" data-line-number="1">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb838-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb838-3" data-line-number="3">    <span class="dt">scloze =</span> (cloze_ans <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span>(N <span class="op">+</span><span class="st"> </span><span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb838-4" data-line-number="4">    <span class="dt">c_logscloze =</span> <span class="kw">log</span>(scloze) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(<span class="kw">log</span>(scloze))</a>
+<a class="sourceLine" id="cb838-5" data-line-number="5">  )</a></code></pre></div>
 <p>Next, we center the predictor variable, and we scale it to the same standard deviation as the linear Cloze probabilities. To implement this scaling, we first divide the centered smoothed log cloze probability variable by its standard deviation (i.e., effectively creating z-scaled values). As a next step, we multiply the z-scaled values by the standard deviation of the non-transformed cloze probability variable. This way, both predictors (log cloze and cloze) have the same standard deviation. We therefore expect them to have a similar impact on the N400. As a result of this transformation, we can therefore use the same priors for both variables (given that we currently have no specific information about the effect of log Cloze probability versus linear Cloze probability):</p>
 <!--TO-DO: explain here the scaling-->
 <!-- If you don't scale the predictors, then when you use raw cloze probability, beta is the change in EEG from cloze 0 to cloze 1, right? So that's more than the entire range of cloze which is from 0.1 to 0.9 (or something like this). 
@@ -1368,22 +1369,22 @@ But when you use log_2(cloze), with one unit of change of log_2(cloze) you barel
 
 If one wants to put them in the same scale, to be able to use the same priors, one possibility is to make that for both of them 1 unit corresponds to the entire range (or the same range), so you can make that 0.9-0.1 would be one unit, and also log_2(.9)-log_2(.1). (I think this is what I did). The two betas won't have the same interpretation, but at least they are more comparable, and one can assign the same prior.
 -->
-<div class="sourceCode" id="cb835"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb835-1" data-line-number="1">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb835-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_logscloze =</span> <span class="kw">scale</span>(c_logscloze) <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(c_cloze))</a></code></pre></div>
+<div class="sourceCode" id="cb839"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb839-1" data-line-number="1">df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb839-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_logscloze =</span> <span class="kw">scale</span>(c_logscloze) <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(c_cloze))</a></code></pre></div>
 <p>Then, we can run a linear mixed-effects model with log Cloze probability instead of linear Cloze probability, and we again carry out bridge sampling.</p>
-<div class="sourceCode" id="cb836"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb836-1" data-line-number="1">fit_N400_h_log &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_logscloze <span class="op">+</span></a>
-<a class="sourceLine" id="cb836-2" data-line-number="2"><span class="st">  </span>(c_logscloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_logscloze <span class="op">|</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb836-3" data-line-number="3"><span class="dt">prior =</span> priors1,</a>
-<a class="sourceLine" id="cb836-4" data-line-number="4"><span class="dt">warmup =</span> <span class="dv">2000</span>,</a>
-<a class="sourceLine" id="cb836-5" data-line-number="5"><span class="dt">iter =</span> <span class="dv">20000</span>,</a>
-<a class="sourceLine" id="cb836-6" data-line-number="6"><span class="dt">cores =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb836-7" data-line-number="7"><span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.9</span>),</a>
-<a class="sourceLine" id="cb836-8" data-line-number="8"><span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb836-9" data-line-number="9"><span class="dt">data =</span> df_eeg</a>
-<a class="sourceLine" id="cb836-10" data-line-number="10">)</a></code></pre></div>
-<div class="sourceCode" id="cb837"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb837-1" data-line-number="1">margLogLik_log &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_N400_h_log, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb840"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb840-1" data-line-number="1">fit_N400_h_log &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span>c_logscloze <span class="op">+</span></a>
+<a class="sourceLine" id="cb840-2" data-line-number="2"><span class="st">  </span>(c_logscloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_logscloze <span class="op">|</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb840-3" data-line-number="3"><span class="dt">prior =</span> priors1,</a>
+<a class="sourceLine" id="cb840-4" data-line-number="4"><span class="dt">warmup =</span> <span class="dv">2000</span>,</a>
+<a class="sourceLine" id="cb840-5" data-line-number="5"><span class="dt">iter =</span> <span class="dv">20000</span>,</a>
+<a class="sourceLine" id="cb840-6" data-line-number="6"><span class="dt">cores =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb840-7" data-line-number="7"><span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.9</span>),</a>
+<a class="sourceLine" id="cb840-8" data-line-number="8"><span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb840-9" data-line-number="9"><span class="dt">data =</span> df_eeg</a>
+<a class="sourceLine" id="cb840-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb841"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb841-1" data-line-number="1">margLogLik_log &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_N400_h_log, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Now, we can compare the linear and the log model to each other using Bayes factors.</p>
-<div class="sourceCode" id="cb838"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb838-1" data-line-number="1">(BF_log_lin &lt;-<span class="st"> </span><span class="kw">bayes_factor</span>(margLogLik_log, margLogLik_linear))</a></code></pre></div>
+<div class="sourceCode" id="cb842"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb842-1" data-line-number="1">(BF_log_lin &lt;-<span class="st"> </span><span class="kw">bayes_factor</span>(margLogLik_log, margLogLik_linear))</a></code></pre></div>
 <pre><code>## Estimated Bayes factor in favor of x1 over x2: 6.04762</code></pre>
 <p>The results show a Bayes factor of <span class="math inline">\(6\)</span> of the log model over the linear model. This shows some evidence that log cloze probability is a better predictor of N400 amplitudes than linear cloze probability. Importantly, this analysis demonstrates that model comparisons using Bayes factor are not limited to nested models, but can also be used for non-nested models.</p>
 </div>
@@ -1435,8 +1436,8 @@ If one wants to put them in the same scale, to be able to use the same priors, o
 </div>
 <div class="footnotes">
 <hr />
-<ol start="35">
-<li id="fn35"><p>A formal methodology for eliciting priors (including from oneself) is discussed in <span class="citation">O’Hagan et al. (<a href="#ref-ohagan2006uncertain">2006</a>)</span>. There is also a very useful R package, <code>SHELF</code> <span class="citation">Oakley and O’Hagan (<a href="#ref-OakleyOHagan">2010</a>)</span>, which is very helpful in visualizing priors in preparation for a sensitivity analysis. <span class="citation">Schad, Betancourt, and Vasishth (<a href="#ref-schad2020toward">2020</a>)</span> provide some suggested guidelines for a principled investigation of priors in Bayesian analysis.<a href="sec-N400BF.html#fnref35" class="footnote-back">↩</a></p></li>
+<ol start="38">
+<li id="fn38"><p>A formal methodology for eliciting priors (including from oneself) is discussed in <span class="citation">O’Hagan et al. (<a href="#ref-ohagan2006uncertain">2006</a>)</span>. There is also a very useful R package, <code>SHELF</code> <span class="citation">Oakley and O’Hagan (<a href="#ref-OakleyOHagan">2010</a>)</span>, which is very helpful in visualizing priors in preparation for a sensitivity analysis. <span class="citation">Schad, Betancourt, and Vasishth (<a href="#ref-schad2020toward">2020</a>)</span> provide some suggested guidelines for a principled investigation of priors in Bayesian analysis.<a href="sec-N400BF.html#fnref38" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1477,8 +1478,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/16-BF.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1488,7 +1489,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1192,80 +1193,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.5</span> Computing condition means from estimated contrasts</h2>
 <p>As mentioned earlier, one advantage of Bayesian modeling is that based on the posterior samples, it is possible to very flexibly compute new comparisons and estimates. Above (see section <a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans">8.1.4</a>), we had discussed the case where the Bayesian model estimated the condition means instead of contrasts by removing the intercept from the brms model (the formula in brms was: <code>DV ~ -1 + F</code>). This allowed us to get posterior samples from each condition mean, and then to compute any possible comparison between condition means by subtracting the corresponding samples.</p>
 <p>Importantly, posterior samples for the condition means can also be obtained after fitting a model with contrasts. We illustrate this here for the case of sum contrasts. Let’s use our above example of a design where we assess response times (in milliseconds, <code>DV</code>) for three different word classes adjectives, nouns, and verbs, that is, for a 3-level factor <code>F</code>. In the above example, factor <code>F</code> was coded using a sum contrast, where the first contrast coded the difference of adjectives from the grand mean, and the second contrast coded the difference of nouns from the grand mean. This was the corresponding contrast matrix:</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb420-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts2<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(HcSum)</a>
-<a class="sourceLine" id="cb420-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts2<span class="op">$</span>F)</a></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb423-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts2<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(HcSum)</a>
+<a class="sourceLine" id="cb423-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts2<span class="op">$</span>F)</a></code></pre></div>
 <pre><code>##            b1 b2
 ## adjectives  1  0
 ## nouns       0  1
 ## verbs      -1 -1</code></pre>
 <p>We had estimated a brms model for this data. The posterior estimates show results for the intercept (which is estimated to be 450 ms) and for our two coded comparisons. The effect <code>FcH01</code> codes our first comparison that response times for adjectives differ from the grand mean, and show an estimate that response times for adjectives are about 50 ms shorter than the grand mean. Moreover, the effect <code>FcH02</code> codes our second comparison that response times for nouns differ from the grand mean, and show the estimate that response times for nouns are 50 ms longer than the grand mean.</p>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb422-1" data-line-number="1"><span class="kw">fixef</span>(fit_Sum)</a></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb425-1" data-line-number="1"><span class="kw">fixef</span>(fit_Sum)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error  Q2.5 Q97.5
-## Intercept    450.3      6.96 436.3 464.3
-## FcH01        -48.9     10.05 -67.9 -28.8
-## FcH02         48.7      9.80  28.3  66.9</code></pre>
+## Intercept    450.1      7.11 436.3 464.4
+## FcH01        -49.3      9.66 -68.5 -30.1
+## FcH02         49.1      9.60  29.8  68.2</code></pre>
 <p>However, of course other comparisons might be of interest to us as well. For example, we might be interested in estimating how strongly response times for verbs differ from the grand mean.</p>
 <p>To do so, one possible first step is to obtain the posteriors for the response times in each of the three conditions. How can this be done? The first step is to again extract the posterior samples from the model:</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb424-1" data-line-number="1">df_postSamp_Sum &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_Sum)</a>
-<a class="sourceLine" id="cb424-2" data-line-number="2"><span class="kw">str</span>(df_postSamp_Sum)</a></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb427-1" data-line-number="1">df_postSamp_Sum &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_Sum)</a>
+<a class="sourceLine" id="cb427-2" data-line-number="2"><span class="kw">str</span>(df_postSamp_Sum)</a></code></pre></div>
 <pre><code>## draws_df [4,000 × 8] (S3: draws_df/draws/tbl_df/tbl/data.frame)
-##  $ b_Intercept: num [1:4000] 449 451 447 447 453 ...
-##  $ b_FcH01    : num [1:4000] -55.9 -48.7 -43.8 -36.3 -64.4 ...
-##  $ b_FcH02    : num [1:4000] 60.7 47 40.2 42.1 53.7 ...
-##  $ sigma      : num [1:4000] 16.9 15.6 20 24.4 21.1 ...
-##  $ lp__       : num [1:4000] -71.6 -70.5 -71.1 -71.9 -72.1 ...
+##  $ b_Intercept: num [1:4000] 443 477 437 458 456 ...
+##  $ b_FcH01    : num [1:4000] -52.4 -45 -60 -35.6 -38.8 ...
+##  $ b_FcH02    : num [1:4000] 45.3 52.3 54.3 42.4 43.8 ...
+##  $ sigma      : num [1:4000] 22.9 30.4 31.9 26.2 24.2 ...
+##  $ lp__       : num [1:4000] -71.6 -77.2 -74.2 -72.7 -71.9 ...
 ##  $ .chain     : int [1:4000] 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ .iteration : int [1:4000] 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ .draw      : int [1:4000] 1 2 3 4 5 6 7 8 9 10 ...</code></pre>
 <p>We can see the samples for our first contrast (<code>b_FcH01</code>) and for our second contrast (<code>b_FcH02</code>). How can we now compute the posterior samples for each of the condition means, i.e., for adjectives, nouns, and verbs? For this, we need to take another look at the contrast matrix.</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb426-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts2<span class="op">$</span>F)</a></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts2<span class="op">$</span>F)</a></code></pre></div>
 <pre><code>##            b1 b2
 ## adjectives  1  0
 ## nouns       0  1
 ## verbs      -1 -1</code></pre>
 <p>It tells us how the condition means are computed. For adjectives (see the first row of the contrast matrix), we can see that the response time is computed by taking 1 times the coefficient for <code>b1</code> (i.e., <code>FcH01</code>) and 0 times the coefficient for <code>b2</code> (i.e., <code>FcH02</code>). Thus, response times for adjectives are simply the samples for the <code>b1</code> (i.e., <code>FcH01</code>) contrast. The contrast matrix does not show the intercept term, which is implicitly added. Thus, we also have to add the estimates for the intercept. Thus, the condition mean for adjectives is computed as <code>b_adjectives &lt;- b_Intercept + b_FcH01</code>:</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" data-line-number="1">df_postSamp_Sum<span class="op">$</span>b_adjectives &lt;-</a>
-<a class="sourceLine" id="cb428-2" data-line-number="2"><span class="st">  </span>df_postSamp_Sum<span class="op">$</span>b_Intercept <span class="op">+</span><span class="st"> </span>df_postSamp_Sum<span class="op">$</span>b_FcH01</a></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb431-1" data-line-number="1">df_postSamp_Sum<span class="op">$</span>b_adjectives &lt;-</a>
+<a class="sourceLine" id="cb431-2" data-line-number="2"><span class="st">  </span>df_postSamp_Sum<span class="op">$</span>b_Intercept <span class="op">+</span><span class="st"> </span>df_postSamp_Sum<span class="op">$</span>b_FcH01</a></code></pre></div>
 <p>Similarly, we can obtain the posterior samples for the response times for nouns. The computation can be seen from the second row of the contrast matrix, which shows that the contrast <code>b1</code> (i.e., <code>FcH01</code>) has weight 0 times, whereas the contrast <code>b2</code> (i.e., <code>FcH02</code>) has weight 1. Adding the intercept thus gives:</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" data-line-number="1">df_postSamp_Sum<span class="op">$</span>b_nouns &lt;-</a>
-<a class="sourceLine" id="cb429-2" data-line-number="2"><span class="st">  </span>df_postSamp_Sum<span class="op">$</span>b_Intercept <span class="op">+</span><span class="st"> </span>df_postSamp_Sum<span class="op">$</span>b_FcH02</a></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" data-line-number="1">df_postSamp_Sum<span class="op">$</span>b_nouns &lt;-</a>
+<a class="sourceLine" id="cb432-2" data-line-number="2"><span class="st">  </span>df_postSamp_Sum<span class="op">$</span>b_Intercept <span class="op">+</span><span class="st"> </span>df_postSamp_Sum<span class="op">$</span>b_FcH02</a></code></pre></div>
 <p>Finally, we want to obtain posterior samples for the average response times for verbs. For verbs, the third row of the contrast matrix shows two times a -1. Thus, contrasts <code>b1</code> (i.e., <code>FcH01</code>) and <code>b2</code> (i.e., <code>FcH02</code>) have to be subtracted from the intercept:</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" data-line-number="1">df_postSamp_Sum<span class="op">$</span>b_verbs &lt;-</a>
-<a class="sourceLine" id="cb430-2" data-line-number="2"><span class="st">  </span>df_postSamp_Sum<span class="op">$</span>b_Intercept <span class="op">-</span><span class="st"> </span>df_postSamp_Sum<span class="op">$</span>b_FcH01 <span class="op">-</span></a>
-<a class="sourceLine" id="cb430-3" data-line-number="3"><span class="st">  </span>df_postSamp_Sum<span class="op">$</span>b_FcH02</a></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb433-1" data-line-number="1">df_postSamp_Sum<span class="op">$</span>b_verbs &lt;-</a>
+<a class="sourceLine" id="cb433-2" data-line-number="2"><span class="st">  </span>df_postSamp_Sum<span class="op">$</span>b_Intercept <span class="op">-</span><span class="st"> </span>df_postSamp_Sum<span class="op">$</span>b_FcH01 <span class="op">-</span></a>
+<a class="sourceLine" id="cb433-3" data-line-number="3"><span class="st">  </span>df_postSamp_Sum<span class="op">$</span>b_FcH02</a></code></pre></div>
 <p>This yields posterior samples for the mean response times for verbs.</p>
 <p>We can now look at the posterior means and 95% credible intervals for adjectives, nouns, and verbs by computing the means and quantiles across all computed samples.</p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb431-1" data-line-number="1">postTab &lt;-<span class="st"> </span>df_postSamp_Sum <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb431-2" data-line-number="2"><span class="st">  </span><span class="co"># removes the meta data:</span></a>
-<a class="sourceLine" id="cb431-3" data-line-number="3"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb431-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(b_adjectives, b_nouns, b_verbs) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb431-5" data-line-number="5"><span class="st">  </span><span class="co"># transform from wide to long with tidyr: </span></a>
-<a class="sourceLine" id="cb431-6" data-line-number="6"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">everything</span>(),</a>
-<a class="sourceLine" id="cb431-7" data-line-number="7">               <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</a>
-<a class="sourceLine" id="cb431-8" data-line-number="8">               <span class="dt">values_to =</span> <span class="st">&quot;samp&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb431-9" data-line-number="9"><span class="st">  </span><span class="kw">group_by</span>(condition) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb431-10" data-line-number="10"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb431-11" data-line-number="11">    <span class="dt">post_mean =</span> <span class="kw">round</span>(<span class="kw">mean</span>(samp)),</a>
-<a class="sourceLine" id="cb431-12" data-line-number="12">    <span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">quantile</span>(samp, <span class="dt">p =</span> <span class="fl">0.025</span>)),</a>
-<a class="sourceLine" id="cb431-13" data-line-number="13">    <span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">quantile</span>(samp, <span class="dt">p =</span> <span class="fl">0.975</span>))</a>
-<a class="sourceLine" id="cb431-14" data-line-number="14">  )</a></code></pre></div>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" data-line-number="1">postTab</a></code></pre></div>
-<pre><code>## # A tibble: 3 x 4
+<div class="sourceCode" id="cb434"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" data-line-number="1">postTab &lt;-<span class="st"> </span>df_postSamp_Sum <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb434-2" data-line-number="2"><span class="st">  </span><span class="co"># removes the meta data:</span></a>
+<a class="sourceLine" id="cb434-3" data-line-number="3"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb434-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(b_adjectives, b_nouns, b_verbs) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb434-5" data-line-number="5"><span class="st">  </span><span class="co"># transform from wide to long with tidyr: </span></a>
+<a class="sourceLine" id="cb434-6" data-line-number="6"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">everything</span>(),</a>
+<a class="sourceLine" id="cb434-7" data-line-number="7">               <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</a>
+<a class="sourceLine" id="cb434-8" data-line-number="8">               <span class="dt">values_to =</span> <span class="st">&quot;samp&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb434-9" data-line-number="9"><span class="st">  </span><span class="kw">group_by</span>(condition) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb434-10" data-line-number="10"><span class="st">  </span><span class="kw">summarize</span>(</a>
+<a class="sourceLine" id="cb434-11" data-line-number="11">    <span class="dt">post_mean =</span> <span class="kw">round</span>(<span class="kw">mean</span>(samp)),</a>
+<a class="sourceLine" id="cb434-12" data-line-number="12">    <span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">quantile</span>(samp, <span class="dt">p =</span> <span class="fl">0.025</span>)),</a>
+<a class="sourceLine" id="cb434-13" data-line-number="13">    <span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">quantile</span>(samp, <span class="dt">p =</span> <span class="fl">0.975</span>))</a>
+<a class="sourceLine" id="cb434-14" data-line-number="14">  )</a></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb435-1" data-line-number="1">postTab</a></code></pre></div>
+<pre><code>## # A tibble: 3 × 4
 ##   condition    post_mean `2.5%` `97.5%`
 ##   &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-## 1 b_adjectives       401    378     426
-## 2 b_nouns            499    474     521
-## 3 b_verbs            450    425     474</code></pre>
+## 1 b_adjectives       401    377     425
+## 2 b_nouns            499    475     523
+## 3 b_verbs            450    425     475</code></pre>
 <p>The results show that as expected the posterior mean for adjectives is 400 ms, for nouns it is 500 ms, and for verbs, the posterior mean is 450 ms. Moreover, we have now posterior credible intervals for each of these estimates.</p>
 <p>In fact, <code>brms</code> has a very convenient built-in function that allows us to compute these nested effects automatically (<code>robust = FALSE</code> shows the posterior mean; by default <code>brms</code> shows the posterior median). Notice that you need to add a <code>[]</code> after the function call, otherwise <code>brms</code> will plot the results.</p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" data-line-number="1"><span class="kw">conditional_effects</span>(fit_Sum, <span class="dt">robust =</span> <span class="ot">FALSE</span>)[]</a></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" data-line-number="1"><span class="kw">conditional_effects</span>(fit_Sum, <span class="dt">robust =</span> <span class="ot">FALSE</span>)[]</a></code></pre></div>
 <pre><code>## $F
 ##            F  DV cond__  effect1__ estimate__ se__ lower__ upper__
-## 1 adjectives 450      1 adjectives        401 12.2     378     426
-## 2      nouns 450      1      nouns        499 12.0     474     521
-## 3      verbs 450      1      verbs        450 12.2     425     474</code></pre>
+## 1 adjectives 450      1 adjectives        401 12.0     377     425
+## 2      nouns 450      1      nouns        499 11.9     475     523
+## 3      verbs 450      1      verbs        450 12.2     425     475</code></pre>
 <p>The same function allows us to visualize the effects, as shown in Figure <a href="computing-condition-means-from-estimated-contrasts.html#fig:cFigCond">8.5</a>.</p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb436-1" data-line-number="1"><span class="kw">conditional_effects</span>(fit_Sum, <span class="dt">robust =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" data-line-number="1"><span class="kw">conditional_effects</span>(fit_Sum, <span class="dt">robust =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:cFigCond"></span>
 <img src="bookdown_files/figure-html/cFigCond-1.svg" alt="Estimated condition means, computed from a brms model fitted with a sum contrast." width="384" />
 <p class="caption">
@@ -1273,81 +1274,81 @@ FIGURE 8.5: Estimated condition means, computed from a brms model fitted with a 
 </p>
 </div>
 <p>Importantly, coming back to our hand-crafted computations, the computed posterior samples can be used to compute additional comparisons. For example, we might be interested in how much response times for verbs differ from the grand mean. This can be computed based on the samples for the condition means: we first compute the grand mean from the three condition means, <code>b_GM &lt;- (b_adjectives + b_nouns + b_verbs)/3</code>, and then we compare this to the estimate for verbs.</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" data-line-number="1">df_postSamp_Sum<span class="op">$</span>GM &lt;-</a>
-<a class="sourceLine" id="cb437-2" data-line-number="2"><span class="st">  </span>(df_postSamp_Sum<span class="op">$</span>b_adjectives <span class="op">+</span></a>
-<a class="sourceLine" id="cb437-3" data-line-number="3"><span class="st">    </span>df_postSamp_Sum<span class="op">$</span>b_nouns <span class="op">+</span></a>
-<a class="sourceLine" id="cb437-4" data-line-number="4"><span class="st">    </span>df_postSamp_Sum<span class="op">$</span>b_verbs) <span class="op">/</span><span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb437-5" data-line-number="5">df_postSamp_Sum<span class="op">$</span>b_FcH03 &lt;-</a>
-<a class="sourceLine" id="cb437-6" data-line-number="6"><span class="st">  </span>df_postSamp_Sum<span class="op">$</span>b_verbs <span class="op">-</span><span class="st"> </span>df_postSamp_Sum<span class="op">$</span>GM</a>
-<a class="sourceLine" id="cb437-7" data-line-number="7"><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb437-8" data-line-number="8">  <span class="dt">post_mean =</span> <span class="kw">mean</span>(df_postSamp_Sum<span class="op">$</span>b_FcH03),</a>
-<a class="sourceLine" id="cb437-9" data-line-number="9">  <span class="kw">quantile</span>(df_postSamp_Sum<span class="op">$</span>b_FcH03, <span class="dt">p =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a>
-<a class="sourceLine" id="cb437-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" data-line-number="1">df_postSamp_Sum<span class="op">$</span>GM &lt;-</a>
+<a class="sourceLine" id="cb440-2" data-line-number="2"><span class="st">  </span>(df_postSamp_Sum<span class="op">$</span>b_adjectives <span class="op">+</span></a>
+<a class="sourceLine" id="cb440-3" data-line-number="3"><span class="st">    </span>df_postSamp_Sum<span class="op">$</span>b_nouns <span class="op">+</span></a>
+<a class="sourceLine" id="cb440-4" data-line-number="4"><span class="st">    </span>df_postSamp_Sum<span class="op">$</span>b_verbs) <span class="op">/</span><span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb440-5" data-line-number="5">df_postSamp_Sum<span class="op">$</span>b_FcH03 &lt;-</a>
+<a class="sourceLine" id="cb440-6" data-line-number="6"><span class="st">  </span>df_postSamp_Sum<span class="op">$</span>b_verbs <span class="op">-</span><span class="st"> </span>df_postSamp_Sum<span class="op">$</span>GM</a>
+<a class="sourceLine" id="cb440-7" data-line-number="7"><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb440-8" data-line-number="8">  <span class="dt">post_mean =</span> <span class="kw">mean</span>(df_postSamp_Sum<span class="op">$</span>b_FcH03),</a>
+<a class="sourceLine" id="cb440-9" data-line-number="9">  <span class="kw">quantile</span>(df_postSamp_Sum<span class="op">$</span>b_FcH03, <span class="dt">p =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a>
+<a class="sourceLine" id="cb440-10" data-line-number="10">)</a></code></pre></div>
 <pre><code>## post_mean      2.5%     97.5% 
-##     0.175   -19.944    20.208</code></pre>
+##     0.209   -19.582    19.753</code></pre>
 <p>The results show that reading times for verbs are quite the same as the grand mean, with a posterior mean estimate for the differences of nearly <span class="math inline">\(0\)</span> ms, and with a 95% credible interval ranging between -20 and +20 ms.</p>
 <p>The key message here is that based on the contrast matrix, it is possible to compute posterior samples for the condition means, and then to compute any arbitrary further comparisons or contrasts. We want to stress again that just obtaining the posterior distribution of a comparison does not allow us to argue that we have evidence for the effect; to argue that we have evidence for an effect being present/absent, we need Bayes factors. But the approach we outline above does allow us to obtain posterior means and credible intervals for arbitrary comparisons.</p>
 <p>We briefly show how to compute posterior samples for condition means for one more example contrast, namely for repeated contrasts. Here, the contrast matrix is:</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(HcRep)</a>
-<a class="sourceLine" id="cb439-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F)</a></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(HcRep)</a>
+<a class="sourceLine" id="cb442-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F)</a></code></pre></div>
 <pre><code>##    c2vs1 c3vs2 c4vs3
 ## F1 -0.75  -0.5 -0.25
 ## F2  0.25  -0.5 -0.25
 ## F3  0.25   0.5 -0.25
 ## F4  0.25   0.5  0.75</code></pre>
 <p>The model estimates were:</p>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" data-line-number="1"><span class="kw">fixef</span>(fit_Rep)</a></code></pre></div>
-<pre><code>##           Estimate Est.Error  Q2.5 Q97.5
-## Intercept    20.01      2.48  14.9 24.94
-## Fc2vs1        9.58      7.15  -4.7 23.69
-## Fc3vs2       -9.27      6.98 -22.2  4.85
-## Fc4vs3       29.17      6.86  15.7 42.38</code></pre>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb444-1" data-line-number="1"><span class="kw">fixef</span>(fit_Rep)</a></code></pre></div>
+<pre><code>##           Estimate Est.Error   Q2.5 Q97.5
+## Intercept    19.98      2.57  14.81 25.17
+## Fc2vs1        9.72      6.94  -3.96 23.30
+## Fc3vs2       -9.37      6.87 -22.75  4.33
+## Fc4vs3       29.17      6.70  15.17 42.20</code></pre>
 <p>We first obtain the posterior samples for the contrasts:</p>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" data-line-number="1">df_postSamp_Rep &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_Rep)</a>
-<a class="sourceLine" id="cb443-2" data-line-number="2"><span class="kw">str</span>(df_postSamp_Rep)</a></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" data-line-number="1">df_postSamp_Rep &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_Rep)</a>
+<a class="sourceLine" id="cb446-2" data-line-number="2"><span class="kw">str</span>(df_postSamp_Rep)</a></code></pre></div>
 <pre><code>## draws_df [4,000 × 9] (S3: draws_df/draws/tbl_df/tbl/data.frame)
-##  $ b_Intercept: num [1:4000] 19.3 19 20.5 21.3 19.4 ...
-##  $ b_Fc2vs1   : num [1:4000] 15.21 6.13 16.44 20.77 -5.08 ...
-##  $ b_Fc3vs2   : num [1:4000] -21.11 2.79 -13.1 -16.82 2.02 ...
-##  $ b_Fc4vs3   : num [1:4000] 22.4 36.6 21.6 28.5 29.8 ...
-##  $ sigma      : num [1:4000] 9.96 9.51 12.02 8.73 11.88 ...
-##  $ lp__       : num [1:4000] -98.8 -100.2 -96.1 -96.1 -97.1 ...
+##  $ b_Intercept: num [1:4000] 15.3 18.5 20.8 19 20.5 ...
+##  $ b_Fc2vs1   : num [1:4000] -8.07 2.32 9.16 8.13 3.09 ...
+##  $ b_Fc3vs2   : num [1:4000] -9.88 -11.53 -8.91 -6.74 -6.1 ...
+##  $ b_Fc4vs3   : num [1:4000] 41.7 36.7 28.5 28 28.8 ...
+##  $ sigma      : num [1:4000] 10.21 10.66 9.85 9.3 13 ...
+##  $ lp__       : num [1:4000] -102 -95.6 -93.9 -93.9 -95.9 ...
 ##  $ .chain     : int [1:4000] 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ .iteration : int [1:4000] 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ .draw      : int [1:4000] 1 2 3 4 5 6 7 8 9 10 ...</code></pre>
 <p>Then we compute the posterior samples for condition F1. First, we have to add the intercept. Then, we can see in the contrast matrix that to compute the condition mean for F1, we have to add up all contrasts while using the weights <code>c(-3/4, -1/2, -1/4)</code> for each of the three contrasts (see first row of the contrast matrix). Thus, the posterior samples are computed as follows:</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" data-line-number="1">df_postSamp_Rep<span class="op">$</span>b_F1 &lt;-<span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Intercept <span class="op">+</span></a>
-<a class="sourceLine" id="cb445-2" data-line-number="2"><span class="st">  </span><span class="dv">-3</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc2vs1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb445-3" data-line-number="3"><span class="st">  </span><span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc3vs2 <span class="op">+</span></a>
-<a class="sourceLine" id="cb445-4" data-line-number="4"><span class="st">  </span><span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc4vs3</a></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb448-1" data-line-number="1">df_postSamp_Rep<span class="op">$</span>b_F1 &lt;-<span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Intercept <span class="op">+</span></a>
+<a class="sourceLine" id="cb448-2" data-line-number="2"><span class="st">  </span><span class="dv">-3</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc2vs1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb448-3" data-line-number="3"><span class="st">  </span><span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc3vs2 <span class="op">+</span></a>
+<a class="sourceLine" id="cb448-4" data-line-number="4"><span class="st">  </span><span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc4vs3</a></code></pre></div>
 <p>The other condition means are computed correspondingly:</p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" data-line-number="1">df_postSamp_Rep<span class="op">$</span>b_F2 &lt;-<span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Intercept <span class="op">+</span></a>
-<a class="sourceLine" id="cb446-2" data-line-number="2"><span class="st">  </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc2vs1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb446-3" data-line-number="3"><span class="st">  </span><span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc3vs2 <span class="op">+</span></a>
-<a class="sourceLine" id="cb446-4" data-line-number="4"><span class="st">  </span><span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc4vs3</a>
-<a class="sourceLine" id="cb446-5" data-line-number="5">df_postSamp_Rep<span class="op">$</span>b_F3 &lt;-<span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Intercept <span class="op">+</span></a>
-<a class="sourceLine" id="cb446-6" data-line-number="6"><span class="st">  </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc2vs1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb446-7" data-line-number="7"><span class="st">  </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc3vs2 <span class="op">+</span></a>
-<a class="sourceLine" id="cb446-8" data-line-number="8"><span class="st">  </span><span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc4vs3</a>
-<a class="sourceLine" id="cb446-9" data-line-number="9">df_postSamp_Rep<span class="op">$</span>b_F4 &lt;-<span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Intercept <span class="op">+</span></a>
-<a class="sourceLine" id="cb446-10" data-line-number="10"><span class="st">  </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc2vs1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb446-11" data-line-number="11"><span class="st">  </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc3vs2 <span class="op">+</span></a>
-<a class="sourceLine" id="cb446-12" data-line-number="12"><span class="st">  </span><span class="dv">3</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc4vs3</a></code></pre></div>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" data-line-number="1">df_postSamp_Rep<span class="op">$</span>b_F2 &lt;-<span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Intercept <span class="op">+</span></a>
+<a class="sourceLine" id="cb449-2" data-line-number="2"><span class="st">  </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc2vs1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb449-3" data-line-number="3"><span class="st">  </span><span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc3vs2 <span class="op">+</span></a>
+<a class="sourceLine" id="cb449-4" data-line-number="4"><span class="st">  </span><span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc4vs3</a>
+<a class="sourceLine" id="cb449-5" data-line-number="5">df_postSamp_Rep<span class="op">$</span>b_F3 &lt;-<span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Intercept <span class="op">+</span></a>
+<a class="sourceLine" id="cb449-6" data-line-number="6"><span class="st">  </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc2vs1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb449-7" data-line-number="7"><span class="st">  </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc3vs2 <span class="op">+</span></a>
+<a class="sourceLine" id="cb449-8" data-line-number="8"><span class="st">  </span><span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc4vs3</a>
+<a class="sourceLine" id="cb449-9" data-line-number="9">df_postSamp_Rep<span class="op">$</span>b_F4 &lt;-<span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Intercept <span class="op">+</span></a>
+<a class="sourceLine" id="cb449-10" data-line-number="10"><span class="st">  </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc2vs1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb449-11" data-line-number="11"><span class="st">  </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc3vs2 <span class="op">+</span></a>
+<a class="sourceLine" id="cb449-12" data-line-number="12"><span class="st">  </span><span class="dv">3</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span>df_postSamp_Rep<span class="op">$</span>b_Fc4vs3</a></code></pre></div>
 <p>Now we can look at the posterior means and credible intervals:</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" data-line-number="1">postTab &lt;-<span class="st"> </span>df_postSamp_Rep <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb447-2" data-line-number="2"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb447-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(b_F1, b_F2, b_F3, b_F4) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb447-4" data-line-number="4"><span class="st">   </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">everything</span>(),</a>
-<a class="sourceLine" id="cb447-5" data-line-number="5">               <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</a>
-<a class="sourceLine" id="cb447-6" data-line-number="6">               <span class="dt">values_to =</span> <span class="st">&quot;samp&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb447-7" data-line-number="7"><span class="st">  </span><span class="kw">group_by</span>(condition) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb447-8" data-line-number="8"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb447-9" data-line-number="9">    <span class="dt">post_mean =</span> <span class="kw">round</span>(<span class="kw">mean</span>(samp)),</a>
-<a class="sourceLine" id="cb447-10" data-line-number="10">    <span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">quantile</span>(samp, <span class="dt">p =</span> <span class="fl">0.025</span>)),</a>
-<a class="sourceLine" id="cb447-11" data-line-number="11">    <span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">quantile</span>(samp, <span class="dt">p =</span> <span class="fl">0.975</span>))</a>
-<a class="sourceLine" id="cb447-12" data-line-number="12">  ) </a></code></pre></div>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb448-1" data-line-number="1">postTab</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
+<div class="sourceCode" id="cb450"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" data-line-number="1">postTab &lt;-<span class="st"> </span>df_postSamp_Rep <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb450-2" data-line-number="2"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb450-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(b_F1, b_F2, b_F3, b_F4) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb450-4" data-line-number="4"><span class="st">   </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">everything</span>(),</a>
+<a class="sourceLine" id="cb450-5" data-line-number="5">               <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</a>
+<a class="sourceLine" id="cb450-6" data-line-number="6">               <span class="dt">values_to =</span> <span class="st">&quot;samp&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb450-7" data-line-number="7"><span class="st">  </span><span class="kw">group_by</span>(condition) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb450-8" data-line-number="8"><span class="st">  </span><span class="kw">summarize</span>(</a>
+<a class="sourceLine" id="cb450-9" data-line-number="9">    <span class="dt">post_mean =</span> <span class="kw">round</span>(<span class="kw">mean</span>(samp)),</a>
+<a class="sourceLine" id="cb450-10" data-line-number="10">    <span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">quantile</span>(samp, <span class="dt">p =</span> <span class="fl">0.025</span>)),</a>
+<a class="sourceLine" id="cb450-11" data-line-number="11">    <span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">quantile</span>(samp, <span class="dt">p =</span> <span class="fl">0.975</span>))</a>
+<a class="sourceLine" id="cb450-12" data-line-number="12">  ) </a></code></pre></div>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" data-line-number="1">postTab</a></code></pre></div>
+<pre><code>## # A tibble: 4 × 4
 ##   condition post_mean `2.5%` `97.5%`
 ##   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
 ## 1 b_F1             10      0      20
@@ -1355,13 +1356,13 @@ FIGURE 8.5: Estimated condition means, computed from a brms model fitted with a 
 ## 3 b_F3             10      1      20
 ## # … with 1 more row</code></pre>
 <p>We can verify that <code>brms</code> function return the same values:</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" data-line-number="1"><span class="kw">conditional_effects</span>(fit_Rep, <span class="dt">robust =</span> <span class="ot">FALSE</span>)[]</a></code></pre></div>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" data-line-number="1"><span class="kw">conditional_effects</span>(fit_Rep, <span class="dt">robust =</span> <span class="ot">FALSE</span>)[]</a></code></pre></div>
 <pre><code>## $F
 ##    F DV cond__ effect1__ estimate__ se__ lower__ upper__
-## 1 F1 20      1        F1       10.2 4.95   0.215    20.1
-## 2 F2 20      1        F2       19.7 4.99   9.627    29.7
-## 3 F3 20      1        F3       10.5 4.97   1.011    20.4
-## 4 F4 20      1        F4       39.6 4.84  30.186    49.4</code></pre>
+## 1 F1 20      1        F1       10.1 4.91   0.261    19.7
+## 2 F2 20      1        F2       19.8 5.03   9.665    29.7
+## 3 F3 20      1        F3       10.4 4.85   0.916    20.0
+## 4 F4 20      1        F4       39.6 4.85  29.907    49.3</code></pre>
 <p>The posterior means reflect exactly the means in the data (for comparison see Figure <a href="sec-4levelFactor.html#fig:helmertsimdatFig">8.2</a> and Table <a href="sec-4levelFactor.html#tab:cTab3Means">8.3</a>). However, we now have posterior samples for each of the conditions and can compute posterior credible intervals as well as new comparisons between conditions.</p>
 </div>
             </section>
@@ -1402,8 +1403,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/08-coding.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1413,7 +1414,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

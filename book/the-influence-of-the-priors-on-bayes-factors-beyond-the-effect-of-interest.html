@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1191,8 +1192,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest" class="section level2">
 <h2><span class="header-section-number">16.3</span> The influence of the priors on Bayes factors: beyond the effect of interest</h2>
 <p>We saw above that the width (or standard deviation) of the prior distribution for the effect of interest had a strong impact on the results from Bayes factor analyses (see sensitivity analysis). Thus, one question is whether only the prior for the effect of interest is important, or whether priors for other model parameters can also impact resulting Bayes factors in an analysis. It turns out that priors for other model parameters can also be important and impact Bayes factors, especially when there are non-linear components in the model, such as in generalized linear mixed effects models. We investigate this issue by using a simulated data set on a variable that has a Bernoulli distribution; in each trial, subjects can perform either successfully (pDV = 1) on a task, or not (pDV = 0). The simulated data is from a factorial experimental design, with one between-subject factor F with 2 levels (F1 and F2), and Table <a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html#tab:cTabXMeans">16.2</a> shows success probabilities for each of the experimental conditions.</p>
-<div class="sourceCode" id="cb840"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb840-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_BF&quot;</span>)</a>
-<a class="sourceLine" id="cb840-2" data-line-number="2"><span class="kw">str</span>(df_BF)</a></code></pre></div>
+<div class="sourceCode" id="cb844"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb844-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_BF&quot;</span>)</a>
+<a class="sourceLine" id="cb844-2" data-line-number="2"><span class="kw">str</span>(df_BF)</a></code></pre></div>
 <pre><code>## tibble [100 × 3] (S3: tbl_df/tbl/data.frame)
 ##  $ F  : Factor w/ 2 levels &quot;F1&quot;,&quot;F2&quot;: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ pDV: int [1:100] 1 1 1 1 1 1 1 1 1 1 ...
@@ -1226,64 +1227,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>Our question now is whether there is evidence for a difference in success probabilities between groups F1 and F2.
 As contrasts for the factor F, we use scaled sum coding (-0.5, +0.5).</p>
-<div class="sourceCode" id="cb842"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb842-1" data-line-number="1"><span class="kw">contrasts</span>(df_BF<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">+0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb846"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb846-1" data-line-number="1"><span class="kw">contrasts</span>(df_BF<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">+0.5</span>)</a></code></pre></div>
 <p>Next, we proceed to specify our priors. Let’s assume that for the difference between groups (F1 versus F2), we define a normally distributed prior with a mean of 0 and a standard deviation of 0.5. Thus, we do not specify a direction of the difference a priori, and assume not too large effect sizes. We can now run two logistic brms models, one with the group factor F included, and one without the factor F, and compute Bayes factors using bridge sampling to obtain the evidence that the data provide for the alternative hypothesis that a group difference exists between levels F1 and F2.</p>
 <p>So far, we have only specified the prior for the effect size. The question we are asking now is whether priors on other model parameters can impact the Bayes factor computations for testing the group effect. Specifically, can the prior for the intercept influence the Bayes factor for the group difference? The results show that yes, such an influence can take place in some situations. Let’s have a look at this in more detail. Let’s assume that we compare two different priors for the intercept. We specify each as a normal distribution with a standard deviation of 0.1, thus, specifying relatively high certainty a priori where the intercept of the data will fall. The only difference that we now specify, is that one time, the prior mean (on the latent logistic scale) is set to 0, corresponding to a prior mean probability of 0.5. In the other condition, we specify a prior mean of 2, corresponding to a prior mean probability of 88%. When we look at the data (see Table <a href="the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest.html#tab:cTabXMeans">16.2</a>) we see that the prior mean of 0 (i.e., prior probability for the intercept of 0.5) is not very compatible with the data, whereas the prior mean of 2 (i.e., a prior probability for the intercept of 0.88) is quite closely aligned with the actual data.</p>
 <p>We now compute Bayes factors for the group difference (F1 versus F2) by using these different priors for the intercept. Thus, we first fit a null (H0) and alternative (H1) model under the assumption of a false prior believe (mean = 0), and perform bridge sampling for these models:</p>
-<div class="sourceCode" id="cb843"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb843-1" data-line-number="1"><span class="co"># set prior</span></a>
-<a class="sourceLine" id="cb843-2" data-line-number="2">priors_logit1 &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb843-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb843-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb843-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb843-6" data-line-number="6"><span class="co"># Bayesian GLM: H0</span></a>
-<a class="sourceLine" id="cb843-7" data-line-number="7">fit_pDV_H0 &lt;-<span class="st"> </span><span class="kw">brm</span>(pDV <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb843-8" data-line-number="8">  <span class="dt">data =</span> df_BF,</a>
-<a class="sourceLine" id="cb843-9" data-line-number="9">  <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>),</a>
-<a class="sourceLine" id="cb843-10" data-line-number="10">  <span class="dt">prior =</span> priors_logit1[<span class="op">-</span><span class="dv">2</span>, ],</a>
-<a class="sourceLine" id="cb843-11" data-line-number="11">  <span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb843-12" data-line-number="12">)</a>
-<a class="sourceLine" id="cb843-13" data-line-number="13"><span class="co"># Bayesian GLM: H1</span></a>
-<a class="sourceLine" id="cb843-14" data-line-number="14">fit_pDV_H1 &lt;-<span class="st"> </span><span class="kw">brm</span>(pDV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb843-15" data-line-number="15">  <span class="dt">data =</span> df_BF,</a>
-<a class="sourceLine" id="cb843-16" data-line-number="16">  <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>),</a>
-<a class="sourceLine" id="cb843-17" data-line-number="17">  <span class="dt">prior =</span> priors_logit1,</a>
-<a class="sourceLine" id="cb843-18" data-line-number="18">  <span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb843-19" data-line-number="19">)</a>
-<a class="sourceLine" id="cb843-20" data-line-number="20"><span class="co"># Bridge sampling</span></a>
-<a class="sourceLine" id="cb843-21" data-line-number="21">mLL_binom_H0 &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_pDV_H0, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>## Warning: effective sample size cannot be calculated, has been replaced
-## by number of samples.</code></pre>
-<div class="sourceCode" id="cb845"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb845-1" data-line-number="1">mLL_binom_H1 &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_pDV_H1, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb847"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb847-1" data-line-number="1"><span class="co"># set prior</span></a>
+<a class="sourceLine" id="cb847-2" data-line-number="2">priors_logit1 &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb847-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb847-4" data-line-number="4">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb847-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb847-6" data-line-number="6"><span class="co"># Bayesian GLM: H0</span></a>
+<a class="sourceLine" id="cb847-7" data-line-number="7">fit_pDV_H0 &lt;-<span class="st"> </span><span class="kw">brm</span>(pDV <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb847-8" data-line-number="8">  <span class="dt">data =</span> df_BF,</a>
+<a class="sourceLine" id="cb847-9" data-line-number="9">  <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>),</a>
+<a class="sourceLine" id="cb847-10" data-line-number="10">  <span class="dt">prior =</span> priors_logit1[<span class="op">-</span><span class="dv">2</span>, ],</a>
+<a class="sourceLine" id="cb847-11" data-line-number="11">  <span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb847-12" data-line-number="12">)</a>
+<a class="sourceLine" id="cb847-13" data-line-number="13"><span class="co"># Bayesian GLM: H1</span></a>
+<a class="sourceLine" id="cb847-14" data-line-number="14">fit_pDV_H1 &lt;-<span class="st"> </span><span class="kw">brm</span>(pDV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb847-15" data-line-number="15">  <span class="dt">data =</span> df_BF,</a>
+<a class="sourceLine" id="cb847-16" data-line-number="16">  <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>),</a>
+<a class="sourceLine" id="cb847-17" data-line-number="17">  <span class="dt">prior =</span> priors_logit1,</a>
+<a class="sourceLine" id="cb847-18" data-line-number="18">  <span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb847-19" data-line-number="19">)</a>
+<a class="sourceLine" id="cb847-20" data-line-number="20"><span class="co"># Bridge sampling</span></a>
+<a class="sourceLine" id="cb847-21" data-line-number="21">mLL_binom_H0 &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_pDV_H0, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb847-22" data-line-number="22">mLL_binom_H1 &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_pDV_H1, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Next, we again prepare computation of Bayes factors, by again running the null (H0) and the alternative (H1) model, now assuming a more realistic prior for the intercept (prior mean = 2).</p>
-<div class="sourceCode" id="cb846"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb846-1" data-line-number="1">priors_logit2 &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb846-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">2</span>, <span class="fl">0.1</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb846-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb846-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb846-5" data-line-number="5"><span class="co"># Bayesian GLM: H0</span></a>
-<a class="sourceLine" id="cb846-6" data-line-number="6">fit_pDV_H0_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">brm</span>(pDV <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb846-7" data-line-number="7">  <span class="dt">data =</span> df_BF,</a>
-<a class="sourceLine" id="cb846-8" data-line-number="8">  <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>),</a>
-<a class="sourceLine" id="cb846-9" data-line-number="9">  <span class="dt">prior =</span> priors_logit2[<span class="op">-</span><span class="dv">2</span>, ],</a>
-<a class="sourceLine" id="cb846-10" data-line-number="10">  <span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb846-11" data-line-number="11">)</a>
-<a class="sourceLine" id="cb846-12" data-line-number="12"><span class="co"># Bayesian GLM: H1</span></a>
-<a class="sourceLine" id="cb846-13" data-line-number="13">fit_pDV_H1_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">brm</span>(pDV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb846-14" data-line-number="14">  <span class="dt">data =</span> df_BF,</a>
-<a class="sourceLine" id="cb846-15" data-line-number="15">  <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>),</a>
-<a class="sourceLine" id="cb846-16" data-line-number="16">  <span class="dt">prior =</span> priors_logit2,</a>
-<a class="sourceLine" id="cb846-17" data-line-number="17">  <span class="dt">save_pars =</span> <span class="kw">save_pars</span>(<span class="dt">all =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb846-18" data-line-number="18">)</a>
-<a class="sourceLine" id="cb846-19" data-line-number="19"><span class="co"># Bridge sampling</span></a>
-<a class="sourceLine" id="cb846-20" data-line-number="20">mLL_binom_H0_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_pDV_H0_<span class="dv">2</span>, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>## Warning: effective sample size cannot be calculated, has been replaced
-## by number of samples.</code></pre>
-<div class="sourceCode" id="cb848"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb848-1" data-line-number="1">mLL_binom_H1_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">bridge_sampler</span>(fit_pDV_H1_<span class="dv">2</span>, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>```{r bfh0h012, echo=TRUE, message=FALSE, results=“hide”, eval =<br />
+!file.exists(“dataR/mLL_binom_H0_2.RDS”) | !file.exists(“dataR/mLL_binom_H1_2.RDS”)}</p>
+<p>priors_logit2 &lt;- c(
+prior(normal(2, 0.1), class = Intercept),
+prior(normal(0, 0.5), class = b)
+)
+# Bayesian GLM: H0
+fit_pDV_H0_2 &lt;- brm(pDV ~ 1,
+data = df_BF,
+family = bernoulli(link = “logit”),
+prior = priors_logit2[-2, ],
+save_pars = save_pars(all = TRUE)
+)
+# Bayesian GLM: H1
+fit_pDV_H1_2 &lt;- brm(pDV ~ 1 + F,
+data = df_BF,
+family = bernoulli(link = “logit”),
+prior = priors_logit2,
+save_pars = save_pars(all = TRUE)
+)
+# Bridge sampling
+mLL_binom_H0_2 &lt;- bridge_sampler(fit_pDV_H0_2, silent = TRUE)
+mLL_binom_H1_2 &lt;- bridge_sampler(fit_pDV_H1_2, silent = TRUE)
+```</p>
 <p>Based on these models and bridge samples, we can now compute the Bayes factors in support for H1 (i.e., in support of a group-difference between F1 and F2). We can do so for the unrealistic prior for the intercept (prior mean of 0) and the more realistic prior for the intercept (prior mean of 2).</p>
-<div class="sourceCode" id="cb849"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb849-1" data-line-number="1">(BF_binom_H1_H0 &lt;-<span class="st"> </span><span class="kw">bayes_factor</span>(mLL_binom_H1, mLL_binom_H0))</a></code></pre></div>
-<pre><code>## Estimated Bayes factor in favor of x1 over x2: 7.19989</code></pre>
-<div class="sourceCode" id="cb851"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb851-1" data-line-number="1">(BF_binom_H1_H0_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">bayes_factor</span>(mLL_binom_H1_<span class="dv">2</span>, mLL_binom_H0_<span class="dv">2</span>))</a></code></pre></div>
-<pre><code>## Estimated Bayes factor in favor of x1 over x2: 29.53056</code></pre>
-<p>The results show that with the realistic prior for the intercept (prior mean = 2), the evidence for the H1 is quite strong, with a Bayes factor of <span class="math inline">\(BF_{10} =\)</span> 29.5. With the unrealistic prior for the intercept (i.e., prior mean = 0), by contrast, the evidence for the H1 is much reduced, <span class="math inline">\(BF_{10} =\)</span> 7.2, and now only modest in nature.</p>
+<div class="sourceCode" id="cb848"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb848-1" data-line-number="1">(BF_binom_H1_H0 &lt;-<span class="st"> </span><span class="kw">bayes_factor</span>(mLL_binom_H1, mLL_binom_H0))</a></code></pre></div>
+<pre><code>## Estimated Bayes factor in favor of x1 over x2: 7.19449</code></pre>
+<div class="sourceCode" id="cb850"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb850-1" data-line-number="1">(BF_binom_H1_H0_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">bayes_factor</span>(mLL_binom_H1_<span class="dv">2</span>, mLL_binom_H0_<span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## Estimated Bayes factor in favor of x1 over x2: 29.60257</code></pre>
+<p>The results show that with the realistic prior for the intercept (prior mean = 2), the evidence for the H1 is quite strong, with a Bayes factor of <span class="math inline">\(BF_{10} =\)</span> 29.6. With the unrealistic prior for the intercept (i.e., prior mean = 0), by contrast, the evidence for the H1 is much reduced, <span class="math inline">\(BF_{10} =\)</span> 7.2, and now only modest in nature.</p>
 <p>These results show that when performing Bayes factor analyses, not only can the priors for the effect of interest (here the group difference) impact the results, under certain circumstances priors for other model parameters can too, such as the prior mean for the intercept here. Such an influence will not always be strong, and can sometimes be negligible. There may be many situations, where the exact specification of the intercept does not have much of an effect on the Bayes factor for a group difference. However, such influences can in principle occur, especially in models with non-linear components. Therefore, it is very important to be careful in specifying realistic priors for all model parameters, also including the intercept. A good way to judge whether prior assumptions are realistic and plausible is prior predictive checks, where we simulate data based on the priors and the model and judge whether the simulated data is plausible and realistic. We perform such prior predictive checks in detail in the chapter on Bayesian workflow.</p>
 </div>
             </section>
@@ -1324,8 +1324,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/16-BF.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1335,7 +1335,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

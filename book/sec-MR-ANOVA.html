@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1307,27 +1308,27 @@ B2
 </tbody>
 </table>
 <p>In order to carry out a <span class="math inline">\(2\times 2\)</span> ANOVA-type (main effects and interaction) analysis, one needs sum contrasts in the linear model. (This is true for factors with two levels, but does not generalize to factors with more levels.)</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" data-line-number="1"><span class="co"># define sum contrasts:</span></a>
-<a class="sourceLine" id="cb458-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb458-3" data-line-number="3"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb458-4" data-line-number="4"><span class="co"># frequentist LM</span></a>
-<a class="sourceLine" id="cb458-5" data-line-number="5">fit_AB_mr.sum &lt;-<span class="st"> </span><span class="kw">lm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B, <span class="dt">data =</span> df_contrasts4)</a></code></pre></div>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" data-line-number="1"><span class="co"># Bayesian LM</span></a>
-<a class="sourceLine" id="cb459-2" data-line-number="2">fit_AB.sum &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B,</a>
-<a class="sourceLine" id="cb459-3" data-line-number="3">  <span class="dt">data =</span> df_contrasts4,</a>
-<a class="sourceLine" id="cb459-4" data-line-number="4">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb459-5" data-line-number="5">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb459-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb459-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb459-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb459-9" data-line-number="9">  )</a>
-<a class="sourceLine" id="cb459-10" data-line-number="10">)</a></code></pre></div>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" data-line-number="1"><span class="kw">fixef</span>(fit_AB.sum)</a></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" data-line-number="1"><span class="co"># define sum contrasts:</span></a>
+<a class="sourceLine" id="cb461-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb461-3" data-line-number="3"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb461-4" data-line-number="4"><span class="co"># frequentist LM</span></a>
+<a class="sourceLine" id="cb461-5" data-line-number="5">fit_AB_mr.sum &lt;-<span class="st"> </span><span class="kw">lm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B, <span class="dt">data =</span> df_contrasts4)</a></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" data-line-number="1"><span class="co"># Bayesian LM</span></a>
+<a class="sourceLine" id="cb462-2" data-line-number="2">fit_AB.sum &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B,</a>
+<a class="sourceLine" id="cb462-3" data-line-number="3">  <span class="dt">data =</span> df_contrasts4,</a>
+<a class="sourceLine" id="cb462-4" data-line-number="4">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb462-5" data-line-number="5">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb462-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb462-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb462-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb462-9" data-line-number="9">  )</a>
+<a class="sourceLine" id="cb462-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" data-line-number="1"><span class="kw">fixef</span>(fit_AB.sum)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error   Q2.5 Q97.5
-## Intercept    20.03      2.53  15.05 24.91
-## A1           -4.98      2.54  -9.87  0.01
-## B1           -9.95      2.48 -14.65 -5.04
-## A1:B1         5.07      2.54   0.12 10.07</code></pre>
+## Intercept    20.00      2.36  15.37 24.71
+## A1           -4.98      2.51 -10.08 -0.06
+## B1          -10.00      2.45 -14.82 -5.09
+## A1:B1         5.00      2.52   0.01 10.10</code></pre>
 <table>
 <caption>
 <span id="tab:table18">TABLE 9.2: </span>Regression analysis with sum contrasts.
@@ -1423,50 +1424,56 @@ A1:B1
 </tbody>
 </table>
 <p>Next, we reproduce the <span class="math inline">\(A(2) \times B(2)\)</span> - ANOVA with contrasts specified for the corresponding one-way <span class="math inline">\(F(4)\)</span> ANOVA, that is by treating the <span class="math inline">\(2 \times 2 = 4\)</span> condition means as four levels of a single factor F. In other words, we go back to the data frame simulated for the analysis of repeated contrasts (see chapter <a href="ch-contr.html#ch:contr">8</a>, section <a href="sec-4levelFactor.html#sec:4levelFactor">8.3</a>). We first define weights for condition means according to our hypotheses, invert this matrix, and use it as the contrast matrix for factor F in a LM. We define weights of <span class="math inline">\(1/4\)</span> and <span class="math inline">\(-1/4\)</span>. We do so because (a) we want to compare the mean of two conditions to the mean of two other conditions (e.g., factor A compares <span class="math inline">\(\frac{F1 + F2}{2}\)</span> to <span class="math inline">\(\frac{F3 + F4}{2}\)</span>). Moreover, (b) we want coefficients to code half the difference between condition means, reflecting sum contrasts. Together (a+b), this yields weights of <span class="math inline">\(1/2 \cdot 1/2 = 1/4\)</span>. The resulting contrast matrix contains contrast coefficients of <span class="math inline">\(+1\)</span> or <span class="math inline">\(-1\)</span>, showing that we successfully implemented sum contrasts. The results are identical to the previous models.</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">fractions</span>(HcInt &lt;-<span class="st"> </span><span class="kw">rbind</span>(</a>
-<a class="sourceLine" id="cb462-2" data-line-number="2">  <span class="dt">A =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F2 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F3 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F4 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb462-3" data-line-number="3">  <span class="dt">B =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F2 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F3 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F4 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb462-4" data-line-number="4">  <span class="dt">AxB =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F2 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F3 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F4 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb462-5" data-line-number="5">)))</a></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb465-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">fractions</span>(HcInt &lt;-<span class="st"> </span><span class="kw">rbind</span>(</a>
+<a class="sourceLine" id="cb465-2" data-line-number="2">  <span class="dt">A =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F2 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F3 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F4 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb465-3" data-line-number="3">  <span class="dt">B =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F2 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F3 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F4 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb465-4" data-line-number="4">  <span class="dt">AxB =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F2 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F3 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>, <span class="dt">F4 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb465-5" data-line-number="5">)))</a></code></pre></div>
 <pre><code>##    A    B    AxB 
 ## F1  1/4  1/4  1/4
 ## F2  1/4 -1/4 -1/4
 ## F3 -1/4  1/4 -1/4
 ## F4 -1/4 -1/4  1/4</code></pre>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" data-line-number="1">(XcInt &lt;-<span class="st"> </span><span class="kw">ginv2</span>(HcInt))</a></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb467-1" data-line-number="1">(XcInt &lt;-<span class="st"> </span><span class="kw">ginv2</span>(HcInt))</a></code></pre></div>
 <pre><code>##    A  B  AxB
 ## F1  1  1  1 
 ## F2  1 -1 -1 
 ## F3 -1  1 -1 
 ## F4 -1 -1  1</code></pre>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span>XcInt</a></code></pre></div>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb467-1" data-line-number="1">fit_F4.sum &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb467-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
-<a class="sourceLine" id="cb467-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb467-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb467-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb467-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb467-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb467-8" data-line-number="8">  )</a>
-<a class="sourceLine" id="cb467-9" data-line-number="9">)</a></code></pre></div>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb468-1" data-line-number="1"><span class="kw">fixef</span>(fit_F4.sum)</a></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb469-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span>XcInt</a></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" data-line-number="1">fit_F4.sum &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb470-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
+<a class="sourceLine" id="cb470-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb470-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb470-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb470-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb470-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb470-8" data-line-number="8">  )</a>
+<a class="sourceLine" id="cb470-9" data-line-number="9">)</a></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb471-1" data-line-number="1"><span class="kw">fixef</span>(fit_F4.sum)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error   Q2.5 Q97.5
-## Intercept    20.05      2.45  15.23 24.87
-## FA           -4.98      2.43  -9.61 -0.26
-## FB           -9.92      2.47 -14.72 -4.94
-## FAxB          4.97      2.44   0.18  9.79</code></pre>
+## Intercept    19.96      2.48  14.95 24.90
+## FA           -4.98      2.41  -9.67 -0.14
+## FB           -9.97      2.48 -14.80 -5.06
+## FAxB          4.98      2.44   0.15  9.81</code></pre>
 <p>This shows that it is possible to specify the contrasts not only for each factor (e.g., here in the <span class="math inline">\(2 \times 2\)</span> design) separately. Instead, one can also pool all experimental conditions (or design cells) into one large factor (here factor F with <span class="math inline">\(4\)</span> levels), and specify the contrasts for the main effects and for the interactions in the resulting one large contrast matrix simultaneously.</p>
 <p>In this approach, it can again be very useful to apply the <code>hypr</code> package to construct contrasts for a <span class="math inline">\(2 \times 2\)</span> design. The first hypothesis estimates the main effect A, i.e., it compares the average of <code>F1</code> and <code>F2</code> to the average of <code>F3</code> and <code>F4</code>. The second parameter estimates the main effect B, i.e., it compares the average of <code>F1</code> and <code>F3</code> to the average of <code>F2</code> and <code>F4</code>. We code direct differences between the averages, i.e., we implement scaled sum contrasts instead of sum contrasts. This is shown below: the contrast matrix contains coefficients of <span class="math inline">\(+1/2\)</span> and <span class="math inline">\(-1/2\)</span> instead of <span class="math inline">\(+1\)</span> and <span class="math inline">\(-1\)</span>. The interaction term estimates the difference between differences, i.e., the difference between <code>F1 - F2</code> and <code>F3 - F4</code>.</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" data-line-number="1">hAxB &lt;-<span class="st"> </span><span class="kw">hypr</span>(</a>
-<a class="sourceLine" id="cb470-2" data-line-number="2">  <span class="dt">A =</span> (F1 <span class="op">+</span><span class="st"> </span>F2) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span>(F3 <span class="op">+</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb470-3" data-line-number="3">  <span class="dt">B =</span> (F1 <span class="op">+</span><span class="st"> </span>F3) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span>(F2 <span class="op">+</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb470-4" data-line-number="4">  <span class="dt">AxB =</span> (F1 <span class="op">-</span><span class="st"> </span>F2) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span>(F3 <span class="op">-</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb470-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb470-6" data-line-number="6">hAxB</a></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" data-line-number="1">hAxB &lt;-<span class="st"> </span><span class="kw">hypr</span>(</a>
+<a class="sourceLine" id="cb473-2" data-line-number="2">  <span class="dt">A =</span> (F1 <span class="op">+</span><span class="st"> </span>F2) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span>(F3 <span class="op">+</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb473-3" data-line-number="3">  <span class="dt">B =</span> (F1 <span class="op">+</span><span class="st"> </span>F3) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span>(F2 <span class="op">+</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb473-4" data-line-number="4">  <span class="dt">AxB =</span> (F1 <span class="op">-</span><span class="st"> </span>F2) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span>(F3 <span class="op">-</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb473-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb473-6" data-line-number="6">hAxB</a></code></pre></div>
 <pre><code>## hypr object containing 3 null hypotheses:
-##   H0.A: 0 = 1/2*F1 + 1/2*F2 - 1/2*F3 - 1/2*F4
-##   H0.B: 0 = 1/2*F1 + 1/2*F3 - 1/2*F2 - 1/2*F4
-## H0.AxB: 0 = 1/2*F1 - 1/2*F2 - 1/2*F3 + 1/2*F4
+##   H0.A: 0 = (F1 + F2 - F3 - F4)/2
+##   H0.B: 0 = (F1 + F3 - F2 - F4)/2
+## H0.AxB: 0 = (F1 - F2 - F3 + F4)/2
+## 
+## Call:
+## hypr(A = 1/2 * F1 + 1/2 * F2 - 1/2 * F3 - 1/2 * F4 ~ 0, B = 1/2 * 
+##     F1 + 1/2 * F3 - 1/2 * F2 - 1/2 * F4 ~ 0, AxB = 1/2 * F1 - 
+##     1/2 * F2 - 1/2 * F3 + 1/2 * F4 ~ 0, levels = c(&quot;F1&quot;, &quot;F2&quot;, 
+## &quot;F3&quot;, &quot;F4&quot;))
 ## 
 ## Hypothesis matrix (transposed):
 ##    A    B    AxB 
@@ -1481,37 +1488,37 @@ A1:B1
 ## F2  1/2 -1/2 -1/2
 ## F3 -1/2  1/2 -1/2
 ## F4 -1/2 -1/2  1/2</code></pre>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(hAxB)</a></code></pre></div>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" data-line-number="1">fit_F4hypr &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb473-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
-<a class="sourceLine" id="cb473-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb473-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb473-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb473-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb473-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb473-8" data-line-number="8">  )</a>
-<a class="sourceLine" id="cb473-9" data-line-number="9">)</a></code></pre></div>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" data-line-number="1"><span class="kw">fixef</span>(fit_F4hypr)</a></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb475-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(hAxB)</a></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb476-1" data-line-number="1">fit_F4hypr &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb476-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
+<a class="sourceLine" id="cb476-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb476-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb476-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb476-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb476-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb476-8" data-line-number="8">  )</a>
+<a class="sourceLine" id="cb476-9" data-line-number="9">)</a></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" data-line-number="1"><span class="kw">fixef</span>(fit_F4hypr)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error   Q2.5  Q97.5
-## Intercept    19.99      2.45  15.16  24.70
-## FA           -9.92      4.81 -19.35  -0.24
-## FB          -19.81      4.92 -29.36 -10.04
-## FAxB         10.12      4.82   0.81  19.76</code></pre>
+## Intercept    19.97      2.36  15.25  24.60
+## FA           -9.86      4.86 -19.52  -0.39
+## FB          -19.84      4.86 -29.49 -10.20
+## FAxB          9.95      4.87   0.07  20.01</code></pre>
 <p>The results show that the estimates have half the size as compared to the sum contrasts - this is the result of the scaling that we applied. I.e., the main effects now directly estimate the difference between averages. However, both contrasts provide the exact same hypothesis tests. Thus, the hypr package can be used to code hypotheses in a <span class="math inline">\(2 \times 2\)</span> design.</p>
 <p>An alternative way to code main effects and interactions is to use the <code>ifelse</code> command in R. For example, if we want to use <span class="math inline">\(\pm 1\)</span> sum contrasts in the above example, we can specify the contrasts for the main effects as vectors:</p>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb476-1" data-line-number="1">A &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts3<span class="op">$</span>F <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F2&quot;</span>), <span class="dv">-1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb476-2" data-line-number="2">B &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts3<span class="op">$</span>F <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F3&quot;</span>), <span class="dv">-1</span>, <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb479-1" data-line-number="1">A &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts3<span class="op">$</span>F <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F2&quot;</span>), <span class="dv">-1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb479-2" data-line-number="2">B &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts3<span class="op">$</span>F <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F3&quot;</span>), <span class="dv">-1</span>, <span class="dv">1</span>)</a></code></pre></div>
 <p>Now, defining the interaction is simply a matter of multiplying the two vectors:</p>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" data-line-number="1">AxB &lt;-<span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B</a></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb480-1" data-line-number="1">AxB &lt;-<span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B</a></code></pre></div>
 <p>If one uses <span class="math inline">\(\pm 1/2\)</span> coding when using this approach, if one wants the interaction term to be on the same scale as the main effects, it would need to be multiplied by 2:</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" data-line-number="1">A &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts3<span class="op">$</span>F <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F2&quot;</span>), <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb478-2" data-line-number="2">B &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts3<span class="op">$</span>F <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F3&quot;</span>), <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb478-3" data-line-number="3"><span class="co">## scale has changed:</span></a>
-<a class="sourceLine" id="cb478-4" data-line-number="4">(AxB &lt;-<span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B)</a></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" data-line-number="1">A &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts3<span class="op">$</span>F <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F2&quot;</span>), <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb481-2" data-line-number="2">B &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts3<span class="op">$</span>F <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F3&quot;</span>), <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb481-3" data-line-number="3"><span class="co">## scale has changed:</span></a>
+<a class="sourceLine" id="cb481-4" data-line-number="4">(AxB &lt;-<span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B)</a></code></pre></div>
 <pre><code>##  [1]  0.25  0.25  0.25  0.25  0.25 -0.25 -0.25 -0.25 -0.25 -0.25 -0.25
 ## [12] -0.25 -0.25 -0.25 -0.25  0.25  0.25  0.25  0.25  0.25</code></pre>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb480-1" data-line-number="1"><span class="co">## same scale as main effects:</span></a>
-<a class="sourceLine" id="cb480-2" data-line-number="2">(AxB &lt;-<span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B <span class="op">*</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb483-1" data-line-number="1"><span class="co">## same scale as main effects:</span></a>
+<a class="sourceLine" id="cb483-2" data-line-number="2">(AxB &lt;-<span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B <span class="op">*</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##  [1]  0.5  0.5  0.5  0.5  0.5 -0.5 -0.5 -0.5 -0.5 -0.5 -0.5 -0.5 -0.5
 ## [14] -0.5 -0.5  0.5  0.5  0.5  0.5  0.5</code></pre>
 <p>This kind of vector-based contrast coding is convenient for more complex designs, such as <span class="math inline">\(2\times 2\times 2\)</span> factorial designs.</p>
@@ -1519,70 +1526,75 @@ A1:B1
 <h3><span class="header-section-number">9.1.1</span> Nested effects</h3>
 <p>One can specify hypotheses that do not correspond directly to main effects and interaction of the traditional ANOVA. For example, in a <span class="math inline">\(2 \times 2\)</span> experimental design, where factor <span class="math inline">\(A\)</span> codes word frequency (low/high) and factor <span class="math inline">\(B\)</span> is part of speech (noun/verb), one can test the effect of word frequency within nouns and the effect of word frequency within verbs. Formally, <span class="math inline">\(A_{B1}\)</span> versus <span class="math inline">\(A_{B2}\)</span> are nested within levels of <span class="math inline">\(B\)</span>. Said differently, simple effects of factor <span class="math inline">\(A\)</span> are tested for each of the levels of factor <span class="math inline">\(B\)</span>.
 In this version, we test whether there is a main effect of part of speech (<span class="math inline">\(B\)</span>; as in traditional ANOVA). However, instead of also estimating the second main effect word frequency, <span class="math inline">\(A\)</span>, and the interaction, we estimate (1) whether the two levels of word frequency, <span class="math inline">\(A\)</span>, differ for the first level of <span class="math inline">\(B\)</span> (i.e., nouns) and (2) whether the two levels of word frequency, <span class="math inline">\(A\)</span>, differ for the second level of <span class="math inline">\(B\)</span> (i.e., verbs). In other words, we estimate whether there are differences for <span class="math inline">\(A\)</span> in each of the levels of <span class="math inline">\(B\)</span>. Often researchers have hypotheses about these differences, and not about the interaction.</p>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb482-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">fractions</span>(HcNes &lt;-<span class="st"> </span><span class="kw">rbind</span>(</a>
-<a class="sourceLine" id="cb482-2" data-line-number="2">  <span class="dt">B =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">F2 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">F3 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">F4 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb482-3" data-line-number="3">  <span class="dt">B1xA =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">-1</span>, <span class="dt">F2 =</span> <span class="dv">0</span>, <span class="dt">F3 =</span> <span class="dv">1</span>, <span class="dt">F4 =</span> <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb482-4" data-line-number="4">  <span class="dt">B2xA =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">0</span>, <span class="dt">F2 =</span> <span class="dv">-1</span>, <span class="dt">F3 =</span> <span class="dv">0</span>, <span class="dt">F4 =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb482-5" data-line-number="5">)))</a></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb485-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">fractions</span>(HcNes &lt;-<span class="st"> </span><span class="kw">rbind</span>(</a>
+<a class="sourceLine" id="cb485-2" data-line-number="2">  <span class="dt">B =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">F2 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">F3 =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">F4 =</span> <span class="dv">-1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb485-3" data-line-number="3">  <span class="dt">B1xA =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">-1</span>, <span class="dt">F2 =</span> <span class="dv">0</span>, <span class="dt">F3 =</span> <span class="dv">1</span>, <span class="dt">F4 =</span> <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb485-4" data-line-number="4">  <span class="dt">B2xA =</span> <span class="kw">c</span>(<span class="dt">F1 =</span> <span class="dv">0</span>, <span class="dt">F2 =</span> <span class="dv">-1</span>, <span class="dt">F3 =</span> <span class="dv">0</span>, <span class="dt">F4 =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb485-5" data-line-number="5">)))</a></code></pre></div>
 <pre><code>##    B    B1xA B2xA
 ## F1  1/2   -1    0
 ## F2 -1/2    0   -1
 ## F3  1/2    1    0
 ## F4 -1/2    0    1</code></pre>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" data-line-number="1">(XcNes &lt;-<span class="st"> </span><span class="kw">ginv2</span>(HcNes))</a></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb487-1" data-line-number="1">(XcNes &lt;-<span class="st"> </span><span class="kw">ginv2</span>(HcNes))</a></code></pre></div>
 <pre><code>##    B    B1xA B2xA
 ## F1  1/2 -1/2    0
 ## F2 -1/2    0 -1/2
 ## F3  1/2  1/2    0
 ## F4 -1/2    0  1/2</code></pre>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb486-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span>XcNes</a></code></pre></div>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb487-1" data-line-number="1">fit_Nest &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb487-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
-<a class="sourceLine" id="cb487-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb487-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb487-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb487-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb487-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb487-8" data-line-number="8">  )</a>
-<a class="sourceLine" id="cb487-9" data-line-number="9">)</a></code></pre></div>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb488-1" data-line-number="1"><span class="kw">fixef</span>(fit_Nest)</a></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb489-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span>XcNes</a></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb490-1" data-line-number="1">fit_Nest &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb490-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
+<a class="sourceLine" id="cb490-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb490-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb490-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb490-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb490-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb490-8" data-line-number="8">  )</a>
+<a class="sourceLine" id="cb490-9" data-line-number="9">)</a></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb491-1" data-line-number="1"><span class="kw">fixef</span>(fit_Nest)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error   Q2.5 Q97.5
-## Intercept    19.96      2.49  14.89  24.9
-## FB          -19.91      4.81 -29.17 -10.3
-## FB1xA        -0.19      7.10 -14.54  13.8
-## FB2xA        19.66      7.28   4.56  33.7</code></pre>
+## Intercept    20.00      2.51  15.00  25.0
+## FB          -19.77      4.97 -29.69  -9.7
+## FB1xA         0.11      6.85 -13.34  14.2
+## FB2xA        19.52      6.98   5.42  33.1</code></pre>
 <p>Regression coefficients estimate the GM, the difference for the main effect of word frequency (<span class="math inline">\(A\)</span>) and the two differences (for <span class="math inline">\(B\)</span>; i.e., simple main effects) within levels of word frequency (<span class="math inline">\(A\)</span>).</p>
 <p>These custom nested contrasts’ columns are scaled versions of the corresponding hypothesis matrix. This is the case because the columns are orthogonal. It illustrates the advantage of orthogonal contrasts for the interpretation of regression coefficients: the underlying hypotheses being tested are already clear from the contrast matrix.</p>
 <p>There is also a built-in R formula specification for nested designs. The order of factors in the formula from left to right specifies a top-down order of nesting within levels, i.e., here factor <span class="math inline">\(A\)</span> (word frequency) is nested within levels of the factor <span class="math inline">\(B\)</span> (part of speech). This yields the exact same result as our previous result based on custom nested contrasts:</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb490-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">+0.5</span>)</a>
-<a class="sourceLine" id="cb490-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">+</span><span class="fl">0.5</span>, <span class="fl">-0.5</span>)</a>
-<a class="sourceLine" id="cb490-3" data-line-number="3">fit_Nest2 &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>B <span class="op">/</span><span class="st"> </span>A,</a>
-<a class="sourceLine" id="cb490-4" data-line-number="4">  <span class="dt">data =</span> df_contrasts4,</a>
-<a class="sourceLine" id="cb490-5" data-line-number="5">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb490-6" data-line-number="6">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb490-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb490-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb490-9" data-line-number="9">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb490-10" data-line-number="10">  )</a>
-<a class="sourceLine" id="cb490-11" data-line-number="11">)</a></code></pre></div>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb491-1" data-line-number="1"><span class="kw">fixef</span>(fit_Nest2)</a></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb493-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">+0.5</span>)</a>
+<a class="sourceLine" id="cb493-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">+</span><span class="fl">0.5</span>, <span class="fl">-0.5</span>)</a>
+<a class="sourceLine" id="cb493-3" data-line-number="3">fit_Nest2 &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>B <span class="op">/</span><span class="st"> </span>A,</a>
+<a class="sourceLine" id="cb493-4" data-line-number="4">  <span class="dt">data =</span> df_contrasts4,</a>
+<a class="sourceLine" id="cb493-5" data-line-number="5">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb493-6" data-line-number="6">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb493-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb493-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb493-9" data-line-number="9">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb493-10" data-line-number="10">  )</a>
+<a class="sourceLine" id="cb493-11" data-line-number="11">)</a></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb494-1" data-line-number="1"><span class="kw">fixef</span>(fit_Nest2)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error   Q2.5 Q97.5
-## Intercept    20.01      2.46  15.13  24.8
-## B1          -19.88      4.79 -29.38 -10.5
-## BB1:A1       -0.11      6.91 -13.61  13.8
-## BB2:A1       19.58      6.93   6.08  33.2</code></pre>
+## Intercept    19.96      2.44  15.19  24.7
+## B1          -19.77      4.87 -28.75 -10.3
+## BB1:A1        0.24      6.85 -12.85  14.9
+## BB2:A1       19.58      6.97   5.65  33.0</code></pre>
 <p>In cases such as these, where <span class="math inline">\(A_{B1}\)</span> vs. <span class="math inline">\(A_{B2}\)</span> are nested within levels of <span class="math inline">\(B\)</span>, it is necessary to include the effect of <span class="math inline">\(B\)</span> (part of speech) in the model, even if one is only interested in the effect of <span class="math inline">\(A\)</span> (word frequency) within levels of <span class="math inline">\(B\)</span> (part of speech). Leaving out factor <span class="math inline">\(B\)</span> in this case would increase posterior uncertainty in the case of fully balanced data, and can lead to biases in parameter estimation in the case the data are not fully balanced.</p>
 <p>Again, we show how nested contrasts can be easily implemented using <code>hypr</code>:</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb493-1" data-line-number="1">hNest &lt;-<span class="st"> </span><span class="kw">hypr</span>(</a>
-<a class="sourceLine" id="cb493-2" data-line-number="2">  <span class="dt">B =</span> (F1 <span class="op">+</span><span class="st"> </span>F3) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span>(F2 <span class="op">+</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb493-3" data-line-number="3">  <span class="dt">B1xA =</span> F3 <span class="op">~</span><span class="st"> </span>F1,</a>
-<a class="sourceLine" id="cb493-4" data-line-number="4">  <span class="dt">B2xA =</span> F4 <span class="op">~</span><span class="st"> </span>F2</a>
-<a class="sourceLine" id="cb493-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb493-6" data-line-number="6">hNest</a></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb496-1" data-line-number="1">hNest &lt;-<span class="st"> </span><span class="kw">hypr</span>(</a>
+<a class="sourceLine" id="cb496-2" data-line-number="2">  <span class="dt">B =</span> (F1 <span class="op">+</span><span class="st"> </span>F3) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span>(F2 <span class="op">+</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb496-3" data-line-number="3">  <span class="dt">B1xA =</span> F3 <span class="op">~</span><span class="st"> </span>F1,</a>
+<a class="sourceLine" id="cb496-4" data-line-number="4">  <span class="dt">B2xA =</span> F4 <span class="op">~</span><span class="st"> </span>F2</a>
+<a class="sourceLine" id="cb496-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb496-6" data-line-number="6">hNest</a></code></pre></div>
 <pre><code>## hypr object containing 3 null hypotheses:
-##    H0.B: 0 = 1/2*F1 + 1/2*F3 - 1/2*F2 - 1/2*F4
+##    H0.B: 0 = (F1 + F3 - F2 - F4)/2
 ## H0.B1xA: 0 = F3 - F1
 ## H0.B2xA: 0 = F4 - F2
+## 
+## Call:
+## hypr(B = 1/2 * F1 + 1/2 * F3 - 1/2 * F2 - 1/2 * F4 ~ 0, B1xA = F3 - 
+##     F1 ~ 0, B2xA = F4 - F2 ~ 0, levels = c(&quot;F1&quot;, &quot;F2&quot;, &quot;F3&quot;, 
+## &quot;F4&quot;))
 ## 
 ## Hypothesis matrix (transposed):
 ##    B    B1xA B2xA
@@ -1597,33 +1609,38 @@ In this version, we test whether there is a main effect of part of speech (<span
 ## F2 -1/2    0 -1/2
 ## F3  1/2  1/2    0
 ## F4 -1/2    0  1/2</code></pre>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb495-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(hNest)</a></code></pre></div>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb496-1" data-line-number="1">fit_NestHypr &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb496-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
-<a class="sourceLine" id="cb496-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb496-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb496-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb496-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb496-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb496-8" data-line-number="8">  )</a>
-<a class="sourceLine" id="cb496-9" data-line-number="9">)</a></code></pre></div>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb497-1" data-line-number="1"><span class="kw">fixef</span>(fit_NestHypr)</a></code></pre></div>
-<pre><code>##           Estimate Est.Error  Q2.5 Q97.5
-## Intercept     20.1      2.43  15.2 24.88
-## FB           -19.8      5.01 -29.8 -9.91
-## FB1xA         -0.1      7.22 -14.3 14.64
-## FB2xA         19.6      6.93   5.7 32.86</code></pre>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb498-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(hNest)</a></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb499-1" data-line-number="1">fit_NestHypr &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb499-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
+<a class="sourceLine" id="cb499-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb499-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb499-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb499-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb499-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb499-8" data-line-number="8">  )</a>
+<a class="sourceLine" id="cb499-9" data-line-number="9">)</a></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb500-1" data-line-number="1"><span class="kw">fixef</span>(fit_NestHypr)</a></code></pre></div>
+<pre><code>##           Estimate Est.Error   Q2.5 Q97.5
+## Intercept    19.94      2.52  14.93  24.8
+## FB          -19.77      4.84 -29.20 -10.2
+## FB1xA         0.03      6.90 -13.89  13.7
+## FB2xA        19.66      6.92   6.09  33.5</code></pre>
 <p>Of course, we can also ask the reverse question: Are there differences for part of speech (<span class="math inline">\(B\)</span>) in the levels of word frequency (<span class="math inline">\(A\)</span>; in addition to estimating the main effect of word frequency, <span class="math inline">\(A\)</span>)? That is, do nouns differ from verbs for low-frequency words (<span class="math inline">\(B_{A1}\)</span>) and do nouns differ from verbs for high-frequency words (<span class="math inline">\(B_{A2}\)</span>)?</p>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb499-1" data-line-number="1">hNest2 &lt;-<span class="st"> </span><span class="kw">hypr</span>(</a>
-<a class="sourceLine" id="cb499-2" data-line-number="2">  <span class="dt">A =</span> (F1 <span class="op">+</span><span class="st"> </span>F2) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span>(F3 <span class="op">+</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb499-3" data-line-number="3">  <span class="dt">A1xB =</span> F2 <span class="op">~</span><span class="st"> </span>F1,</a>
-<a class="sourceLine" id="cb499-4" data-line-number="4">  <span class="dt">A2xB =</span> F4 <span class="op">~</span><span class="st"> </span>F3</a>
-<a class="sourceLine" id="cb499-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb499-6" data-line-number="6">hNest2</a></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb502-1" data-line-number="1">hNest2 &lt;-<span class="st"> </span><span class="kw">hypr</span>(</a>
+<a class="sourceLine" id="cb502-2" data-line-number="2">  <span class="dt">A =</span> (F1 <span class="op">+</span><span class="st"> </span>F2) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span>(F3 <span class="op">+</span><span class="st"> </span>F4) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb502-3" data-line-number="3">  <span class="dt">A1xB =</span> F2 <span class="op">~</span><span class="st"> </span>F1,</a>
+<a class="sourceLine" id="cb502-4" data-line-number="4">  <span class="dt">A2xB =</span> F4 <span class="op">~</span><span class="st"> </span>F3</a>
+<a class="sourceLine" id="cb502-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb502-6" data-line-number="6">hNest2</a></code></pre></div>
 <pre><code>## hypr object containing 3 null hypotheses:
-##    H0.A: 0 = 1/2*F1 + 1/2*F2 - 1/2*F3 - 1/2*F4
+##    H0.A: 0 = (F1 + F2 - F3 - F4)/2
 ## H0.A1xB: 0 = F2 - F1
 ## H0.A2xB: 0 = F4 - F3
+## 
+## Call:
+## hypr(A = 1/2 * F1 + 1/2 * F2 - 1/2 * F3 - 1/2 * F4 ~ 0, A1xB = F2 - 
+##     F1 ~ 0, A2xB = F4 - F3 ~ 0, levels = c(&quot;F1&quot;, &quot;F2&quot;, &quot;F3&quot;, 
+## &quot;F4&quot;))
 ## 
 ## Hypothesis matrix (transposed):
 ##    A    A1xB A2xB
@@ -1638,22 +1655,22 @@ In this version, we test whether there is a main effect of part of speech (<span
 ## F2  1/2  1/2    0
 ## F3 -1/2    0 -1/2
 ## F4 -1/2    0  1/2</code></pre>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb501-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(hNest2)</a></code></pre></div>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb502-1" data-line-number="1">fit_Nest2Hypr &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
-<a class="sourceLine" id="cb502-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
-<a class="sourceLine" id="cb502-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
-<a class="sourceLine" id="cb502-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb502-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb502-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb502-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb502-8" data-line-number="8">  )</a>
-<a class="sourceLine" id="cb502-9" data-line-number="9">)</a></code></pre></div>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb503-1" data-line-number="1"><span class="kw">fixef</span>(fit_Nest2Hypr)</a></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb504-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(hNest2)</a></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb505-1" data-line-number="1">fit_Nest2Hypr &lt;-<span class="st"> </span><span class="kw">brm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb505-2" data-line-number="2">  <span class="dt">data =</span> df_contrasts3,</a>
+<a class="sourceLine" id="cb505-3" data-line-number="3">  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</a>
+<a class="sourceLine" id="cb505-4" data-line-number="4">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb505-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">20</span>, <span class="dv">50</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb505-6" data-line-number="6">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb505-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb505-8" data-line-number="8">  )</a>
+<a class="sourceLine" id="cb505-9" data-line-number="9">)</a></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb506-1" data-line-number="1"><span class="kw">fixef</span>(fit_Nest2Hypr)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error   Q2.5 Q97.5
-## Intercept    19.95      2.52  14.86 24.85
-## FA           -9.86      4.90 -19.23  0.17
-## FA1xB         9.71      6.91  -4.18 23.44
-## FA2xB        29.28      6.66  15.87 42.34</code></pre>
+## Intercept    20.01      2.39  15.22 24.74
+## FA           -9.86      4.95 -19.89 -0.02
+## FA1xB         9.68      7.02  -4.49 22.99
+## FA2xB        29.32      6.77  15.82 42.21</code></pre>
 <p>Regression coefficients estimate the GM, the difference for the main effect of word frequency (<span class="math inline">\(A\)</span>) and the two part of speech effects (for <span class="math inline">\(B\)</span>; i.e., simple main effects) within levels of word frequency (<span class="math inline">\(A\)</span>).</p>
 </div>
 <div id="interactions-between-contrasts" class="section level3">
@@ -1663,30 +1680,35 @@ In this version, we test whether there is a main effect of part of speech (<span
 <p>The general rule to remember is that the effect of one contrast measures its effect at the location <span class="math inline">\(0\)</span> of the other contrast(s) in the analysis. What does that mean? Let us consider the example that we use two treatment contrasts in a <span class="math inline">\(2 \times 2\)</span> design. Let’s take a look at the effect of factor A. How can we interpret what this measures or tests? This effect actually tests the effect of factor A at the “location” where factor B is coded as <span class="math inline">\(0\)</span>. Factor B is coded as a treatment contrast, that is, it codes a zero at its baseline condition, which is B1. Thus, the effect of factor A tests the effect of A nested within the baseline condition of B, i.e., a simple effect. We take a look at the data presented in Figure <a href="sec-MR-ANOVA.html#fig:twobytwosimdatFig">9.1</a>, what this nested effect should be. Figure <a href="sec-MR-ANOVA.html#fig:twobytwosimdatFig">9.1</a> shows that the effect of factor A nested in B1 is <span class="math inline">\(0\)</span>. If we now compare this to the results from the linear model, it is indeed clear that the effect of factor A is exactly estimated as <span class="math inline">\(0\)</span>. As expected, when factor B is coded as a treatment contrast, the effect of factor A estimates the effect of A nested within the baseline level of factor B.</p>
 <p>Next, consider the effect of factor B. According to the same logic, this effect estimates the effect of factor B at the “location” where factor A is <span class="math inline">\(0\)</span>. Factor A is also coded as a treatment contrast, that is, it codes its baseline condition A1 as <span class="math inline">\(0\)</span>. The effect of factor B estimates the effect of B nested within the baseline condition of A. Figure <a href="sec-MR-ANOVA.html#fig:twobytwosimdatFig">9.1</a> shows that this effect should be <span class="math inline">\(10\)</span>.</p>
 <p>How do we know what the “location” is, where a contrast applies? For the treatment contrasts discussed here, it is possible to reason this through because all contrasts are coded as <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>. However, how is it possible to derive the “location” in general? What we can do is to look at the hypotheses tested by the treatment contrasts (or the comparisons that are estimated) in the presence of an interaction between them by using the generalized matrix inverse. We go back to the default treatment contrasts. Then we extract the contrast matrix from the design matrix:</p>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb505-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">contr.treatment</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb505-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">contr.treatment</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb505-3" data-line-number="3">XcTr &lt;-<span class="st"> </span>df_contrasts4 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb505-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(A, B) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb505-5" data-line-number="5"><span class="st">  </span><span class="kw">summarise</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb505-6" data-line-number="6"><span class="st">  </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B, .) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb505-7" data-line-number="7"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb505-8" data-line-number="8"><span class="st">  </span><span class="kw">as.matrix</span>()</a>
-<a class="sourceLine" id="cb505-9" data-line-number="9"><span class="kw">rownames</span>(XcTr) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)</a>
-<a class="sourceLine" id="cb505-10" data-line-number="10">XcTr</a></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb508-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">contr.treatment</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb508-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">contr.treatment</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb508-3" data-line-number="3">XcTr &lt;-<span class="st"> </span>df_contrasts4 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb508-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(A, B) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb508-5" data-line-number="5"><span class="st">  </span><span class="kw">summarise</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb508-6" data-line-number="6"><span class="st">  </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B, .) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb508-7" data-line-number="7"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb508-8" data-line-number="8"><span class="st">  </span><span class="kw">as.matrix</span>()</a>
+<a class="sourceLine" id="cb508-9" data-line-number="9"><span class="kw">rownames</span>(XcTr) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)</a>
+<a class="sourceLine" id="cb508-10" data-line-number="10">XcTr</a></code></pre></div>
 <pre><code>##       (Intercept) A2 B2 A2:B2
 ## A1_B1           1  0  0     0
 ## A1_B2           1  0  1     0
 ## A2_B1           1  1  0     0
 ## A2_B2           1  1  1     1</code></pre>
 <p>This shows the treatment contrast for factors <code>A</code> and <code>B</code>, and their interaction. We can now assign this contrast matrix to a <code>hypr</code> object. <code>hypr</code> automatically converts the contrast matrix into a hypothesis matrix, such that we can read from the hypothesis matrix which comparison are being estimated by the different contrasts.</p>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" data-line-number="1">htr &lt;-<span class="st"> </span><span class="kw">hypr</span>() <span class="co"># initialize empty hypr object</span></a>
-<a class="sourceLine" id="cb507-2" data-line-number="2"><span class="kw">cmat</span>(htr) &lt;-<span class="st"> </span>XcTr <span class="co"># assign contrast matrix to hypr object</span></a>
-<a class="sourceLine" id="cb507-3" data-line-number="3">htr <span class="co"># look at the resulting hypothesis matrix</span></a></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb510-1" data-line-number="1">htr &lt;-<span class="st"> </span><span class="kw">hypr</span>() <span class="co"># initialize empty hypr object</span></a>
+<a class="sourceLine" id="cb510-2" data-line-number="2"><span class="kw">cmat</span>(htr) &lt;-<span class="st"> </span>XcTr <span class="co"># assign contrast matrix to hypr object</span></a>
+<a class="sourceLine" id="cb510-3" data-line-number="3">htr <span class="co"># look at the resulting hypothesis matrix</span></a></code></pre></div>
 <pre><code>## hypr object containing 4 null hypotheses:
-## H0.(Intercept): 0 = A1_B1
+## H0.(Intercept): 0 = A1_B1                          (Intercept)
 ##          H0.A2: 0 = -A1_B1 + A2_B1
 ##          H0.B2: 0 = -A1_B1 + A1_B2
 ##       H0.A2:B2: 0 = A1_B1 - A1_B2 - A2_B1 + A2_B2
+## 
+## Call:
+## hypr(`(Intercept)` = A1_B1 ~ 0, A2 = -A1_B1 + A2_B1 ~ 0, B2 = -A1_B1 + 
+##     A1_B2 ~ 0, `A2:B2` = A1_B1 - A1_B2 - A2_B1 + A2_B2 ~ 0, levels = c(&quot;A1_B1&quot;, 
+## &quot;A1_B2&quot;, &quot;A2_B1&quot;, &quot;A2_B2&quot;))
 ## 
 ## Hypothesis matrix (transposed):
 ##       (Intercept) A2 B2 A2:B2
@@ -1702,7 +1724,7 @@ In this version, we test whether there is a main effect of part of speech (<span
 ## A2_B1 1           1  0  0    
 ## A2_B2 1           1  1  1</code></pre>
 <p>The same result is obtained by applying the generalized inverse to the contrast matrix (this is what hypr does as well). An important fact is that when we apply the generalized inverse to the contrast matrix, we obtain the corresponding hypothesis matrix <span class="citation">(for details see Schad et al. <a href="#ref-schad2020capitalize">2020</a>)</span>.</p>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">ginv2</span>(XcTr))</a></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb512-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">ginv2</span>(XcTr))</a></code></pre></div>
 <pre><code>##       (Intercept) A2 B2 A2:B2
 ## A1_B1  1          -1 -1  1   
 ## A1_B2  0           0  1 -1   
@@ -1712,24 +1734,32 @@ In this version, we test whether there is a main effect of part of speech (<span
 <p>How does this work for sum contrasts? They do not have a baseline condition that is coded as <span class="math inline">\(0\)</span>. In sum contrasts, however, the average of the contrast coefficients is <span class="math inline">\(0\)</span>. Therefore, effects estimate the average effect across factor levels, i.e., they estimate main effect. This is what is typically also tested in standard ANOVA. Let’s look at the example shown in Table <a href="sec-MR-ANOVA.html#tab:table18">9.2</a>: given that factor B has a sum contrast, the main effect of factor A is tested as the average across levels of factor B. Figure <a href="sec-MR-ANOVA.html#fig:twobytwosimdatFig">9.1</a> shows that the effect of factor A in level B1 is <span class="math inline">\(10 - 10 = 0\)</span>, and in level B2 it is <span class="math inline">\(20 - 40 = -20\)</span>. The average effect across both levels is <span class="math inline">\((0 - 20)/2 = -10\)</span>. Due to the sum contrast coding, we have to divide this by 2, yielding an expected effect of <span class="math inline">\(-10 / 2 = -5\)</span>. This is exactly what the effect of factor A measures (see Table <a href="sec-MR-ANOVA.html#tab:table18">9.2</a>, <em>Estimate</em> for A1).</p>
 <p>Similarly, factor B tests its effect at the location <span class="math inline">\(0\)</span> of factor A. Again, <span class="math inline">\(0\)</span> is exactly the mean of the contrast coefficients from factor A, which is coded as a sum contrast. Therefore, factor B tests the effect of B averaged across factor levels of A, i.e., the main effect of B. For factor level A1, factor B has an effect of <span class="math inline">\(10 - 20 = -10\)</span>. For factor level A2, factor B has an effect of <span class="math inline">\(10 - 40 = -30\)</span>. The average effect is <span class="math inline">\((-10 - 30)/2 = -20\)</span>, which again needs to be divided by <span class="math inline">\(2\)</span> due to the sum contrast. This yields exactly the estimate of <span class="math inline">\(-10\)</span> that is also reported in Table <a href="sec-MR-ANOVA.html#tab:table18">9.2</a> (<em>Estimate</em> for B1).</p>
 <p>Again, we look at the hypothesis matrix for the main effects and the interaction:</p>
-<div class="sourceCode" id="cb511"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb511-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb511-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb511-3" data-line-number="3">XcSum &lt;-<span class="st"> </span>df_contrasts4 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb511-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(A, B) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb511-5" data-line-number="5"><span class="st">  </span><span class="kw">summarise</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb511-6" data-line-number="6"><span class="st">  </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B, .) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb511-7" data-line-number="7"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb511-8" data-line-number="8"><span class="st">  </span><span class="kw">as.matrix</span>()</a>
-<a class="sourceLine" id="cb511-9" data-line-number="9"><span class="kw">rownames</span>(XcSum) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)</a>
-<a class="sourceLine" id="cb511-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb511-11" data-line-number="11">hsum &lt;-<span class="st"> </span><span class="kw">hypr</span>() <span class="co"># initialize empty hypr object</span></a>
-<a class="sourceLine" id="cb511-12" data-line-number="12"><span class="kw">cmat</span>(hsum) &lt;-<span class="st"> </span>XcSum <span class="co"># assign contrast matrix to hypr object</span></a>
-<a class="sourceLine" id="cb511-13" data-line-number="13">hsum <span class="co"># look at the resulting hypothesis matrix</span></a></code></pre></div>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb514-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb514-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb514-3" data-line-number="3">XcSum &lt;-<span class="st"> </span>df_contrasts4 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb514-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(A, B) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb514-5" data-line-number="5"><span class="st">  </span><span class="kw">summarise</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb514-6" data-line-number="6"><span class="st">  </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B, .) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb514-7" data-line-number="7"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb514-8" data-line-number="8"><span class="st">  </span><span class="kw">as.matrix</span>()</a>
+<a class="sourceLine" id="cb514-9" data-line-number="9"><span class="kw">rownames</span>(XcSum) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)</a>
+<a class="sourceLine" id="cb514-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb514-11" data-line-number="11">hsum &lt;-<span class="st"> </span><span class="kw">hypr</span>() <span class="co"># initialize empty hypr object</span></a>
+<a class="sourceLine" id="cb514-12" data-line-number="12"><span class="kw">cmat</span>(hsum) &lt;-<span class="st"> </span>XcSum <span class="co"># assign contrast matrix to hypr object</span></a>
+<a class="sourceLine" id="cb514-13" data-line-number="13">hsum <span class="co"># look at the resulting hypothesis matrix</span></a></code></pre></div>
 <pre><code>## hypr object containing 4 null hypotheses:
-## H0.(Intercept): 0 = 1/4*A1_B1 + 1/4*A1_B2 + 1/4*A2_B1 + 1/4*A2_B2
-##          H0.A1: 0 = 1/4*A1_B1 + 1/4*A1_B2 - 1/4*A2_B1 - 1/4*A2_B2
-##          H0.B1: 0 = 1/4*A1_B1 - 1/4*A1_B2 + 1/4*A2_B1 - 1/4*A2_B2
-##       H0.A1:B1: 0 = 1/4*A1_B1 - 1/4*A1_B2 - 1/4*A2_B1 + 1/4*A2_B2
+## H0.(Intercept): 0 = (A1_B1 + A1_B2 + A2_B1 + A2_B2)/4  (Intercept)
+##          H0.A1: 0 = (A1_B1 + A1_B2 - A2_B1 - A2_B2)/4
+##          H0.B1: 0 = (A1_B1 - A1_B2 + A2_B1 - A2_B2)/4
+##       H0.A1:B1: 0 = (A1_B1 - A1_B2 - A2_B1 + A2_B2)/4
+## 
+## Call:
+## hypr(`(Intercept)` = 1/4 * A1_B1 + 1/4 * A1_B2 + 1/4 * A2_B1 + 
+##     1/4 * A2_B2 ~ 0, A1 = 1/4 * A1_B1 + 1/4 * A1_B2 - 1/4 * A2_B1 - 
+##     1/4 * A2_B2 ~ 0, B1 = 1/4 * A1_B1 - 1/4 * A1_B2 + 1/4 * A2_B1 - 
+##     1/4 * A2_B2 ~ 0, `A1:B1` = 1/4 * A1_B1 - 1/4 * A1_B2 - 1/4 * 
+##     A2_B1 + 1/4 * A2_B2 ~ 0, levels = c(&quot;A1_B1&quot;, &quot;A1_B2&quot;, &quot;A2_B1&quot;, 
+## &quot;A2_B2&quot;))
 ## 
 ## Hypothesis matrix (transposed):
 ##       (Intercept) A1   B1   A1:B1
@@ -1793,8 +1823,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/09-coding2x2.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1804,7 +1834,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

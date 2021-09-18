@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1211,9 +1212,35 @@ FIGURE 7.1: Prior predictive checks. a) In a first step, define a summary statis
 </div>
 <!--\FloatBarrier-->
 <p>Choosing good summary statistics is more an art than a science. The choice of summary statistics will be crucial, however, as they provide key markers of what we want the model to account for in the data. They should thus be carefully chosen and designed based on the expectations that we have about the true data generating process and about the kinds of structures and effects we expect the data may exhibit. Interestingly, summary statistics can also be used to critique the model: if someone wants to criticize an analysis, then they can formalize that criticism into a summary statistic they expect to show undesired behavior. Such criticism can serve as a very constructive way to write reviews in a peer-review setting. Here, we will show some examples of useful summary statistics below when discussing data analysis for a concrete example dataset.</p>
-<p>Choosing good priors will be particularly relevant in cases where the likelihood is not precise (see Figure <a href="principled-questions-on-a-model.html#fig:FigBayes">7.2</a>, in particular g-i). In linear mixed-effects models, for example, this often occurs in cases where a “maximal model” is fitted for a small dataset that does not constrain estimation of all random effects variance and covariance parameters.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a></p>
+<p>Choosing good priors will be particularly relevant in cases where the likelihood is not precise (see Figure <a href="principled-questions-on-a-model.html#fig:FigBayes">7.2</a>, in particular g-i). In linear mixed-effects models, for example, this often occurs in cases where a “maximal model” is fitted for a small dataset that does not constrain estimation of all random effects variance and covariance parameters.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a></p>
 <p>In such situations, using a prior in a Bayesian analysis (or a more informative prior rather than a relatively uninformative one) should incorporate just enough domain expertise to suppress extreme, although not impossible parameter values. This may allow the model to be fit, as the posterior is now sufficiently constrained. Thus, introducing prior information in Bayesian computation allows us to fit and interpret models that cannot be validly estimated using frequentist tools.</p>
 <p>A welcome side-effect of incorporating more domain expertise (into what still constitutes weakly informative priors) is thus more concentrated prior distributions, which can facilitate Bayesian computation. This allows more complex models to be estimated; that is, using prior knowledge can make it possible to fit models that could otherwise not be estimated using the available tools. In other words, incorporating prior knowledge can allow us to get closer to the aspirational model in the iterative model building procedure. Moreover, more informative priors also lead to faster convergence of MCMC algorithms.</p>
+<pre><code>## Warning: It is deprecated to specify `guide = FALSE` to remove a
+## guide. Please use `guide = &quot;none&quot;` instead.
+
+## Warning: It is deprecated to specify `guide = FALSE` to remove a
+## guide. Please use `guide = &quot;none&quot;` instead.
+
+## Warning: It is deprecated to specify `guide = FALSE` to remove a
+## guide. Please use `guide = &quot;none&quot;` instead.
+
+## Warning: It is deprecated to specify `guide = FALSE` to remove a
+## guide. Please use `guide = &quot;none&quot;` instead.
+
+## Warning: It is deprecated to specify `guide = FALSE` to remove a
+## guide. Please use `guide = &quot;none&quot;` instead.
+
+## Warning: It is deprecated to specify `guide = FALSE` to remove a
+## guide. Please use `guide = &quot;none&quot;` instead.
+
+## Warning: It is deprecated to specify `guide = FALSE` to remove a
+## guide. Please use `guide = &quot;none&quot;` instead.
+
+## Warning: It is deprecated to specify `guide = FALSE` to remove a
+## guide. Please use `guide = &quot;none&quot;` instead.
+
+## Warning: It is deprecated to specify `guide = FALSE` to remove a
+## guide. Please use `guide = &quot;none&quot;` instead.</code></pre>
 <div class="figure"><span id="fig:FigBayes"></span>
 <img src="bookdown_files/figure-html/FigBayes-1.svg" alt="The role of priors for informative and uninformative data. a)-c) When the data provides good information via the likelihood (b), then a flat uninformative prior (a) is sufficient to obtain a concentrated posterior (c). d)-f) When the data does not sufficiently constrain the parameters through the likelihood (e), then using a flat uninformative prior (d) also leaves the posterior (f) widely spread out. g)-i) When the data does not constrain the parameter through the likelihood (h), then including domain expertise through an informative prior (g) can help to constrain the posterior (i) to reasonable values." width="576" />
 <p class="caption">
@@ -1298,8 +1325,8 @@ FIGURE 7.3: Posterior predictive checks. Compare posterior model predictions (hi
 </div>
 <div class="footnotes">
 <hr />
-<ol start="22">
-<li id="fn22"><p>In frequentist methods (such as implemented in the lme4 package in the lmer program), this problem manifests itself as problems with convergence of the optimizer, which indicates that the likelihood is too flat and that the parameter estimates are not constrained by the data.<a href="principled-questions-on-a-model.html#fnref22" class="footnote-back">↩</a></p></li>
+<ol start="24">
+<li id="fn24"><p>In frequentist methods (such as implemented in the lme4 package in the lmer program), this problem manifests itself as problems with convergence of the optimizer, which indicates that the likelihood is too flat and that the parameter estimates are not constrained by the data.<a href="principled-questions-on-a-model.html#fnref24" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1340,8 +1367,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/07-workflow.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1351,7 +1378,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

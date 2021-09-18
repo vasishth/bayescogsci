@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1191,7 +1192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sec:firststan" class="section level2">
 <h2><span class="header-section-number">10.2</span> A first simple example with Stan: Normal likelihood</h2>
 <p>Let’s fit a Stan model to estimate the simple example given at the introduction of this chapter, where we simulate data from a normal distribution with a true mean of 3 and a true standard deviation of 10:</p>
-<div class="sourceCode" id="cb574"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb574-1" data-line-number="1">Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb577-1" data-line-number="1">Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</a></code></pre></div>
 <p>As we said before Stan code is organized in blocks. The first block indicates what constitutes “data” for the model:</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower = 1&gt; N;  // Total number of trials
@@ -1223,15 +1224,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <p>We can exemplify how <code>target</code> works with one hypothetical iteration of the sampler.</p>
-<p>In every iteration where the sampler explores the posterior space, <code>mu</code> and <code>sigma</code> acquire different values (this is where Stan algorithm stops the movement of the particle in the Hamiltonian space). Say that in an iteration, <code>mu = 4.161</code> and <code>sigma = 8.528</code>. Then the following happens in the model block:</p>
+<p>In every iteration where the sampler explores the posterior space, <code>mu</code> and <code>sigma</code> acquire different values (this is where Stan algorithm stops the movement of the particle in the Hamiltonian space). Say that in an iteration, <code>mu = 2.617</code> and <code>sigma = 8.004</code>. Then the following happens in the model block:</p>
 <ol style="list-style-type: decimal">
 <li>At the beginning of the iteration, <code>target</code> is zero.</li>
-<li>The transformations that the sampler <em>automatically</em> does are taken into account. In our case, although <code>sigma</code> is constrained to be positive in our model, inside Stan’s sampler it is transformed to an “unconstrained” space amenable to Hamiltonian Monte Carlo. That is, Stan samples from an auxiliary parameter that ranges from minus infinity to infinity, which is equivalent to <code>log(sigma)</code>. This auxiliary parameter is then exponentiated, when it is incorporated into our model. Because of the mismatch between the constrained parameter space that we defined and the unconstrained space that its converted to by Stan, an adjustment to the unnormalized posterior is required and added <em>automatically</em>. The reasons for this requirement are somewhat complex and will be discussed in section <a href="ch-custom.html#ch:custom">12</a>. In this particular case, this adjustment (which is the log absolute value of the Jacobian determinant), is equivalent to adding <code>log(sigma) = 2.143</code> to <code>target</code>.</li>
-<li>After <code>target + = normal_lpdf(mu | 0, 20);</code> the log of the density of <span class="math inline">\(\mathit{Normal}(0,20)\)</span> is evaluated at a given sample of mu (specifically 4.161) and this is added to <code>target</code>. In R, this would be <code>dnorm(x = 4.161, mean = 0, sd = 20, log = TRUE)</code>, which is equal to <code>-3.936</code>. Thus, <code>target</code> should be <code>-3.936 + 2.143 = -1.793</code>.</li>
-<li>After <code>target += lognormal_lpdf(sigma | 3, 1)</code>, we add the log of the density of <span class="math inline">\(\mathit{LogNormal}(3, 1)\)</span> evaluated at <code>8.528</code> to the previous value of the target. In R, this would be <code>dlnorm(x = 8.528 , mean = 3, sd = 1, log = TRUE)</code>, which is equal to <code>-3.429</code>. Thus, <code>target</code> should be updated to <code>-1.793 + -3.429 = -5.222</code>.</li>
-<li>After each iteration of the for-loop in the model block, we add to the target the log density of <span class="math inline">\(\mathit{Normal}( 4.161, 8.528)\)</span> evaluated at each of the values of Y. In R, this would be to add <code>sum(dnorm(Y, 4.161, 8.528, log = TRUE))</code> (which is equal to <code>-369.96</code>) to the current value of <code>target</code> <code>-5.222 + -369.96 = -375.183</code>.</li>
+<li>The transformations that the sampler <em>automatically</em> does are taken into account. In our case, although <code>sigma</code> is constrained to be positive in our model, inside Stan’s sampler it is transformed to an “unconstrained” space amenable to Hamiltonian Monte Carlo. That is, Stan samples from an auxiliary parameter that ranges from minus infinity to infinity, which is equivalent to <code>log(sigma)</code>. This auxiliary parameter is then exponentiated, when it is incorporated into our model. Because of the mismatch between the constrained parameter space that we defined and the unconstrained space that its converted to by Stan, an adjustment to the unnormalized posterior is required and added <em>automatically</em>. The reasons for this requirement are somewhat complex and will be discussed in section <a href="ch-custom.html#ch:custom">12</a>. In this particular case, this adjustment (which is the log absolute value of the Jacobian determinant), is equivalent to adding <code>log(sigma) = 2.08</code> to <code>target</code>.</li>
+<li>After <code>target + = normal_lpdf(mu | 0, 20);</code> the log of the density of <span class="math inline">\(\mathit{Normal}(0,20)\)</span> is evaluated at a given sample of mu (specifically 2.617) and this is added to <code>target</code>. In R, this would be <code>dnorm(x = 2.617, mean = 0, sd = 20, log = TRUE)</code>, which is equal to <code>-3.923</code>. Thus, <code>target</code> should be <code>-3.923 + 2.08 = -1.843</code>.</li>
+<li>After <code>target += lognormal_lpdf(sigma | 3, 1)</code>, we add the log of the density of <span class="math inline">\(\mathit{LogNormal}(3, 1)\)</span> evaluated at <code>8.004</code> to the previous value of the target. In R, this would be <code>dlnorm(x = 8.004 , mean = 3, sd = 1, log = TRUE)</code>, which is equal to <code>-3.422</code>. Thus, <code>target</code> should be updated to <code>-1.843 + -3.422 = -5.265</code>.</li>
+<li>After each iteration of the for-loop in the model block, we add to the target the log density of <span class="math inline">\(\mathit{Normal}( 2.617, 8.004)\)</span> evaluated at each of the values of Y. In R, this would be to add <code>sum(dnorm(Y, 2.617, 8.004, log = TRUE))</code> (which is equal to <code>-371.322</code>) to the current value of <code>target</code> <code>-5.265 + -371.322 = -376.587</code>.</li>
 </ol>
-<p>This means that for the coordinates &lt;mu = 4.161, sigma = 8.528&gt;, the height of the unnormalized posterior would be the value <code>exp(target) =</code> <span class="math inline">\(\exp( -375.183 ) = 1.149\times 10^{-163}\)</span>. Incidentally, the value of <code>target</code> is returned as <code>lp__</code> (log probability) in an object storing a fit model with Stan.</p>
+<p>This means that for the coordinates &lt;mu = 2.617, sigma = 8.004&gt;, the height of the unnormalized posterior would be the value <code>exp(target) =</code> <span class="math inline">\(\exp( -376.587 ) = 2.82\times 10^{-164}\)</span>. Incidentally, the value of <code>target</code> is returned as <code>lp__</code> (log probability) in an object storing a fit model with Stan.</p>
 <p>It is possible to expose the value of <code>target</code>, by printing <code>target()</code> inside a Stan model. The value of <code>target</code> after each iteration is named <code>lp__</code> in the Stan object. This can be useful to troubleshoot a problematic model.</p>
 
 <div/>
@@ -1265,31 +1266,31 @@ model {
   target += normal_lpdf(y | mu, sigma);
 }</code></pre>
 <p>You can save the above code as <code>normal.stan</code>. Alternatively, you can use the version stored in the package <code>bcogsci</code>. (<code>?stan-normal</code> provides some documentation for the model.) You can access the code of the models of this book by using <code>system.file(&quot;stan_models&quot;, &quot;name_of_the_model.stan&quot;, package = &quot;bcogsci&quot;)</code>.</p>
-<div class="sourceCode" id="cb580"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb580-1" data-line-number="1">normal &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb580-2" data-line-number="2">                      <span class="st">&quot;normal.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb580-3" data-line-number="3">                      <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb583-1" data-line-number="1">normal &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb583-2" data-line-number="2">                      <span class="st">&quot;normal.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb583-3" data-line-number="3">                      <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a></code></pre></div>
 <p>This command just points to a text file that the package <code>bcogsci</code> stored in your system. You can open it to read the code (with any text editor, or <code>readLines()</code> in R). You’ll need to compile this code and run it with <code>stan()</code>.</p>
 <p>Stan requires the data to be in a list object in R. Below we fit the model with the default number of chains and iterations.</p>
-<div class="sourceCode" id="cb581"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb581-1" data-line-number="1">lst_score_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">y =</span> Y, <span class="dt">N =</span> <span class="kw">length</span>(Y))</a>
-<a class="sourceLine" id="cb581-2" data-line-number="2"><span class="co"># Fit the model with the default values of number of</span></a>
-<a class="sourceLine" id="cb581-3" data-line-number="3"><span class="co"># chains and iterations: chains = 4, iter = 2000</span></a>
-<a class="sourceLine" id="cb581-4" data-line-number="4">fit_score &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb581-5" data-line-number="5">  <span class="dt">file =</span> normal,</a>
-<a class="sourceLine" id="cb581-6" data-line-number="6">  <span class="dt">data =</span> lst_score_data</a>
-<a class="sourceLine" id="cb581-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb581-8" data-line-number="8"><span class="co"># alternatively:</span></a>
-<a class="sourceLine" id="cb581-9" data-line-number="9"><span class="co"># stan(file = &quot;normal.stan&quot;, data = lst_score_data)</span></a></code></pre></div>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb584-1" data-line-number="1">lst_score_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">y =</span> Y, <span class="dt">N =</span> <span class="kw">length</span>(Y))</a>
+<a class="sourceLine" id="cb584-2" data-line-number="2"><span class="co"># Fit the model with the default values of number of</span></a>
+<a class="sourceLine" id="cb584-3" data-line-number="3"><span class="co"># chains and iterations: chains = 4, iter = 2000</span></a>
+<a class="sourceLine" id="cb584-4" data-line-number="4">fit_score &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb584-5" data-line-number="5">  <span class="dt">file =</span> normal,</a>
+<a class="sourceLine" id="cb584-6" data-line-number="6">  <span class="dt">data =</span> lst_score_data</a>
+<a class="sourceLine" id="cb584-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb584-8" data-line-number="8"><span class="co"># alternatively:</span></a>
+<a class="sourceLine" id="cb584-9" data-line-number="9"><span class="co"># stan(file = &quot;normal.stan&quot;, data = lst_score_data)</span></a></code></pre></div>
 <p>We can inspect how well the chains mixed in Figure <a href="sec-firststan.html#fig:traceplotmusigma">10.2</a>. The chains for each parameter should look like a “fat hairy caterpillar” <span class="citation">(Lunn et al. <a href="#ref-lunn2012bugs">2012</a>)</span>; see section <a href="sec-sampling.html#sec:convergencenut">3.1.1.1.2</a> for a brief discussion of convergence.</p>
 
-<div class="sourceCode" id="cb582"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb582-1" data-line-number="1"><span class="kw">traceplot</span>(fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb585-1" data-line-number="1"><span class="kw">traceplot</span>(fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:traceplotmusigma"></span>
 <img src="bookdown_files/figure-html/traceplotmusigma-1.svg" alt="Traceplots of mu and sigma from the model fit_score." width="672" />
 <p class="caption">
 FIGURE 10.2: Traceplots of <code>mu</code> and <code>sigma</code> from the model <code>fit_score</code>.
 </p>
 </div>
-<p>We can see a summary of the posterior by either printing out the model fit, or by plotting it. The summary displayed by the function <code>print</code> includes means, standard deviations (<code>sd</code>), quantiles, Monte Carlo standard errors for the mean of the posterior (<code>se_mean</code>), split Rhats, and effective sample sizes (<code>n_eff</code>). The summaries are computed after removing the warmup and merging together all chains. The <code>se_mean</code> is unrelated to the <code>se</code> of an estimate in the parallel frequentist model. Similarly to a large effective sample size, small Monte Carlo standard errors indicate an “efficient” sampling procedure: with a large value of <code>n_eff</code> and a small value for <code>se_mean</code> we can be relatively sure of the reliability of the mean of the posterior. However, what constitutes a large or small <code>se_mean</code> is harder to define <span class="citation">(see Vehtari, Gelman, et al. <a href="#ref-vehtari2019ranknormalization">2019</a> for a more extensive discussion)</span>.<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a></p>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb583-1" data-line-number="1"><span class="kw">print</span>(fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<p>We can see a summary of the posterior by either printing out the model fit, or by plotting it. The summary displayed by the function <code>print</code> includes means, standard deviations (<code>sd</code>), quantiles, Monte Carlo standard errors for the mean of the posterior (<code>se_mean</code>), split Rhats, and effective sample sizes (<code>n_eff</code>). The summaries are computed after removing the warmup and merging together all chains. The <code>se_mean</code> is unrelated to the <code>se</code> of an estimate in the parallel frequentist model. Similarly to a large effective sample size, small Monte Carlo standard errors indicate an “efficient” sampling procedure: with a large value of <code>n_eff</code> and a small value for <code>se_mean</code> we can be relatively sure of the reliability of the mean of the posterior. However, what constitutes a large or small <code>se_mean</code> is harder to define <span class="citation">(see Vehtari, Gelman, et al. <a href="#ref-vehtari2019ranknormalization">2019</a> for a more extensive discussion)</span>.<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a></p>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb586-1" data-line-number="1"><span class="kw">print</span>(fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <pre><code>## Inference for Stan model: normal.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
@@ -1298,14 +1299,14 @@ FIGURE 10.2: Traceplots of <code>mu</code> and <code>sigma</code> from the model
 ## mu    3.02    0.02 0.97 1.13 2.36 3.02  3.65  4.97  3400    1
 ## sigma 9.73    0.01 0.71 8.45 9.23 9.70 10.19 11.22  3213    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Sun Sep  5 11:20:22 2021.
+## Samples were drawn using NUTS(diag_e) at Sat Sep 18 11:21:08 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
 <p>After transforming the <code>stanfit</code> object into a data frame, it’s possible to provide summary plots as the one shown in <a href="sec-firststan.html#fig:mcmchist">10.3</a>. The package <code>bayesplot</code> <span class="citation">(Gabry and Mahr <a href="#ref-R-bayesplot">2019</a>)</span> is a wrapper around <code>ggplot2</code> <span class="citation">(Wickham, Chang, et al. <a href="#ref-R-ggplot2">2019</a>)</span> and has several convenient functions to plot the samples. Bayesplot functions for posterior summaries start with <code>mcmc_</code>:</p>
 
-<div class="sourceCode" id="cb585"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb585-1" data-line-number="1">df_fit_score &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_score)</a>
-<a class="sourceLine" id="cb585-2" data-line-number="2"><span class="kw">mcmc_hist</span>(df_fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb588-1" data-line-number="1">df_fit_score &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_score)</a>
+<a class="sourceLine" id="cb588-2" data-line-number="2"><span class="kw">mcmc_hist</span>(df_fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:mcmchist"></span>
 <img src="bookdown_files/figure-html/mcmchist-1.svg" alt="Histograms of the samples of the posterior distributions of mu and sigma from the model fit_score." width="672" />
 <p class="caption">
@@ -1313,28 +1314,28 @@ FIGURE 10.3: Histograms of the samples of the posterior distributions of <code>m
 </p>
 </div>
 <p>There are also several ways to get the samples for other summaries or customized plots, depending on whether we want a list, a data frame, or an array.</p>
-<div class="sourceCode" id="cb586"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb586-1" data-line-number="1"><span class="co"># extract from rstan is sometimes overwritten by</span></a>
-<a class="sourceLine" id="cb586-2" data-line-number="2"><span class="co"># a tidyverse version, we make sure that it&#39;s right one:</span></a>
-<a class="sourceLine" id="cb586-3" data-line-number="3">rstan<span class="op">::</span><span class="kw">extract</span>(fit_score) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb586-4" data-line-number="4"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb589-1" data-line-number="1"><span class="co"># extract from rstan is sometimes overwritten by</span></a>
+<a class="sourceLine" id="cb589-2" data-line-number="2"><span class="co"># a tidyverse version, we make sure that it&#39;s right one:</span></a>
+<a class="sourceLine" id="cb589-3" data-line-number="3">rstan<span class="op">::</span><span class="kw">extract</span>(fit_score) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb589-4" data-line-number="4"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
 <pre><code>## List of 3
-##  $ mu   : num [1:4000(1d)] 4.16 2.74 3.49 2.29 3.44 ...
+##  $ mu   : num [1:4000(1d)] 2.617 3.146 -0.264 2.094 2.304 ...
 ##   ..- attr(*, &quot;dimnames&quot;)=List of 1
 ##   .. ..$ iterations: NULL
-##  $ sigma: num [1:4000(1d)] 8.53 8.49 11.36 9.88 9.55 ...
+##  $ sigma: num [1:4000(1d)] 8 9.25 9.99 9.03 9.59 ...
 ##   ..- attr(*, &quot;dimnames&quot;)=List of 1
 ##   .. ..$ iterations: NULL
-##  $ lp__ : num [1:4000(1d)] -375 -374 -375 -373 -373 ...
+##  $ lp__ : num [1:4000(1d)] -377 -373 -378 -374 -373 ...
 ##   ..- attr(*, &quot;dimnames&quot;)=List of 1
 ##   .. ..$ iterations: NULL</code></pre>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb588-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_score) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb588-2" data-line-number="2"><span class="st">  </span><span class="kw">str</span>(<span class="dt">list.len =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb591-1" data-line-number="1"><span class="kw">as.data.frame</span>(fit_score) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb591-2" data-line-number="2"><span class="st">  </span><span class="kw">str</span>(<span class="dt">list.len =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    4000 obs. of  3 variables:
 ##  $ mu   : num  1.2 1.27 1.78 1.93 2.04 ...
 ##  $ sigma: num  9.37 9.48 9.76 9.61 9.83 ...
 ##  $ lp__ : num  -375 -374 -374 -373 -373 ...</code></pre>
-<div class="sourceCode" id="cb590"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb590-1" data-line-number="1"><span class="kw">as.array</span>(fit_score) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb590-2" data-line-number="2"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb593-1" data-line-number="1"><span class="kw">as.array</span>(fit_score) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb593-2" data-line-number="2"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
 <pre><code>##  num [1:1000, 1:4, 1:3] 1.2 1.27 1.78 1.93 2.04 ...
 ##  - attr(*, &quot;dimnames&quot;)=List of 3
 ##   ..$ iterations: NULL
@@ -1358,8 +1359,8 @@ FIGURE 10.3: Histograms of the samples of the posterior distributions of <code>m
 </div>
 <div class="footnotes">
 <hr />
-<ol start="30">
-<li id="fn30"><p>We simplify the output of <code>print</code> in the text after this call, by actually calling <code>summary(fit, pars = pars, probs = c(0.025, 0.975))$summary</code>.<a href="sec-firststan.html#fnref30" class="footnote-back">↩</a></p></li>
+<ol start="32">
+<li id="fn32"><p>We simplify the output of <code>print</code> in the text after this call, by actually calling <code>summary(fit, pars = pars, probs = c(0.025, 0.975))$summary</code>.<a href="sec-firststan.html#fnref32" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1400,8 +1401,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/10-introstan.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1411,7 +1412,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

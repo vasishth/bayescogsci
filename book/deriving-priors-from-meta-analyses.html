@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1419,55 +1420,55 @@ C Lin &amp; Bev. 06
 FIGURE 6.8: The posterior distribution of the difference between object and subject relative clause processing in Chinese relative clause data, computed from a random-effects meta-analysis using published Chinese relative clause data from reading studies.
 </p>
 </div>
-<p>What we can derive from this posterior distribution of <span class="math inline">\(\zeta\)</span> is a normal approximation that represents what we know so far about Chinese relatives, based on the existing data. The mean of the posterior is 18, and the width of the 95% credible intervals is 23-1=22. Since the 95% credible interval has a width that is approximately four times the standard deviation (assuming a normal distribution), we can work out the standard deviation by dividing the width by four: 5.5.
-Given these estimates, we could use a Normal distribution with mean 18 and standard deviation 5.5 as an informative prior in a sensitivity analysis.</p>
+<p>What we can derive from this posterior distribution of <span class="math inline">\(\zeta\)</span> is a normal approximation that represents what we know so far about Chinese relatives, based on the existing data. The mean of the posterior is 18, and the width of the 95% credible intervals is 24-1=23. Since the 95% credible interval has a width that is approximately four times the standard deviation (assuming a normal distribution), we can work out the standard deviation by dividing the width by four: 5.75.
+Given these estimates, we could use a Normal distribution with mean 18 and standard deviation 5.75 as an informative prior in a sensitivity analysis.</p>
 <p>As an example, we will analyze a data set from <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu">2013</a>)</span> that was not part of the above meta-analysis, and we will use the meta-analysis posterior as an informative prior. First, we load the data and sum-code the predictor:</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_gibsonwu&quot;</span>)</a>
-<a class="sourceLine" id="cb291-2" data-line-number="2">df_gibsonwu &lt;-<span class="st"> </span>df_gibsonwu <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb291-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cond =</span> <span class="kw">if_else</span>(type <span class="op">==</span><span class="st"> &quot;obj-ext&quot;</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">-1</span><span class="op">/</span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_gibsonwu&quot;</span>)</a>
+<a class="sourceLine" id="cb290-2" data-line-number="2">df_gibsonwu &lt;-<span class="st"> </span>df_gibsonwu <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb290-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cond =</span> <span class="kw">if_else</span>(type <span class="op">==</span><span class="st"> &quot;obj-ext&quot;</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">-1</span><span class="op">/</span><span class="dv">2</span>))</a></code></pre></div>
 <p>Because we will now use a log-normal likelihood for the reading time data, we need to work out what the meta-analysis posterior of <span class="math inline">\(\zeta\)</span> corresponds to on the log scale. The grand mean reading time of the <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu">2013</a>)</span> data on the log scale is 6.1. In order to arrive at approximately the mean difference of 18 ms, the log-scale value of the mean difference would be <span class="math inline">\(0.041\)</span>, with a 95% credible interval <span class="math inline">\([-0.079,0.145]\)</span>, which implies a standard deviation of <span class="math inline">\((0.0145-(-0.79))/4=0.2\)</span>. The calculations are shown below (see Box <a href="sec-trial.html#thm:lognormal">4.3</a> in chapter <a href="ch-reg.html#ch:reg">4</a> for an explanation of a model with a log-normal likelihood).</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" data-line-number="1">int &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">log</span>(df_gibsonwu<span class="op">$</span>rt))</a>
-<a class="sourceLine" id="cb292-2" data-line-number="2">b &lt;-<span class="st"> </span><span class="fl">0.041</span></a>
-<a class="sourceLine" id="cb292-3" data-line-number="3"><span class="kw">exp</span>(int <span class="op">+</span><span class="st"> </span>b<span class="op">/</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(int <span class="op">-</span><span class="st"> </span>b<span class="op">/</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" data-line-number="1">int &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">log</span>(df_gibsonwu<span class="op">$</span>rt))</a>
+<a class="sourceLine" id="cb291-2" data-line-number="2">b &lt;-<span class="st"> </span><span class="fl">0.041</span></a>
+<a class="sourceLine" id="cb291-3" data-line-number="3"><span class="kw">exp</span>(int <span class="op">+</span><span class="st"> </span>b<span class="op">/</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(int <span class="op">-</span><span class="st"> </span>b<span class="op">/</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 17.6</code></pre>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" data-line-number="1">lower &lt;-<span class="st"> </span><span class="fl">-0.079</span></a>
-<a class="sourceLine" id="cb294-2" data-line-number="2"><span class="kw">exp</span>(int <span class="op">+</span><span class="st"> </span>lower<span class="op">/</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(int <span class="op">-</span><span class="st"> </span>lower<span class="op">/</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" data-line-number="1">lower &lt;-<span class="st"> </span><span class="fl">-0.079</span></a>
+<a class="sourceLine" id="cb293-2" data-line-number="2"><span class="kw">exp</span>(int <span class="op">+</span><span class="st"> </span>lower<span class="op">/</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(int <span class="op">-</span><span class="st"> </span>lower<span class="op">/</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] -33.9</code></pre>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" data-line-number="1">upper &lt;-<span class="st"> </span><span class="fl">0.145</span></a>
-<a class="sourceLine" id="cb296-2" data-line-number="2"><span class="kw">exp</span>(int <span class="op">+</span><span class="st"> </span>upper<span class="op">/</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(int <span class="op">-</span><span class="st"> </span>upper<span class="op">/</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" data-line-number="1">upper &lt;-<span class="st"> </span><span class="fl">0.145</span></a>
+<a class="sourceLine" id="cb295-2" data-line-number="2"><span class="kw">exp</span>(int <span class="op">+</span><span class="st"> </span>upper<span class="op">/</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(int <span class="op">-</span><span class="st"> </span>upper<span class="op">/</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 62.2</code></pre>
 <p>As always, we will do a sensitivity analysis, using (relatively) uninformative priors on the slope parameter (Normal(0,1)), and the meta-analysis prior.</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" data-line-number="1"><span class="co">## uninformative priors on the parameters of interest</span></a>
-<a class="sourceLine" id="cb298-2" data-line-number="2"><span class="co">## and on the variance components:</span></a>
-<a class="sourceLine" id="cb298-3" data-line-number="3">fit_gibsonwu_log &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb298-4" data-line-number="4"><span class="st">                         </span>(c_cond <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb298-5" data-line-number="5"><span class="st">                         </span>(c_cond <span class="op">|</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb298-6" data-line-number="6">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
-<a class="sourceLine" id="cb298-7" data-line-number="7">  <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb298-8" data-line-number="8">    <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb298-9" data-line-number="9">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb298-10" data-line-number="10">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb298-11" data-line-number="11">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb298-12" data-line-number="12">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb298-13" data-line-number="13">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb298-14" data-line-number="14">    ),</a>
-<a class="sourceLine" id="cb298-15" data-line-number="15">  <span class="dt">data =</span> df_gibsonwu</a>
-<a class="sourceLine" id="cb298-16" data-line-number="16">)</a>
-<a class="sourceLine" id="cb298-17" data-line-number="17"><span class="co">## meta-analysis priors:</span></a>
-<a class="sourceLine" id="cb298-18" data-line-number="18">fit_gibsonwu_ma &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb298-19" data-line-number="19"><span class="st">                         </span>(c_cond <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb298-20" data-line-number="20"><span class="st">                         </span>(c_cond <span class="op">|</span><span class="st"> </span>item),</a>
-<a class="sourceLine" id="cb298-21" data-line-number="21">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
-<a class="sourceLine" id="cb298-22" data-line-number="22">  <span class="dt">prior =</span></a>
-<a class="sourceLine" id="cb298-23" data-line-number="23">    <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb298-24" data-line-number="24">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb298-25" data-line-number="25">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="fl">0.041</span>, <span class="fl">0.2</span>), <span class="dt">class =</span> b),</a>
-<a class="sourceLine" id="cb298-26" data-line-number="26">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
-<a class="sourceLine" id="cb298-27" data-line-number="27">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
-<a class="sourceLine" id="cb298-28" data-line-number="28">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
-<a class="sourceLine" id="cb298-29" data-line-number="29">    ),</a>
-<a class="sourceLine" id="cb298-30" data-line-number="30">  <span class="dt">data =</span> df_gibsonwu</a>
-<a class="sourceLine" id="cb298-31" data-line-number="31">)</a></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" data-line-number="1"><span class="co">## uninformative priors on the parameters of interest</span></a>
+<a class="sourceLine" id="cb297-2" data-line-number="2"><span class="co">## and on the variance components:</span></a>
+<a class="sourceLine" id="cb297-3" data-line-number="3">fit_gibsonwu_log &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb297-4" data-line-number="4"><span class="st">                         </span>(c_cond <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb297-5" data-line-number="5"><span class="st">                         </span>(c_cond <span class="op">|</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb297-6" data-line-number="6">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
+<a class="sourceLine" id="cb297-7" data-line-number="7">  <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb297-8" data-line-number="8">    <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb297-9" data-line-number="9">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb297-10" data-line-number="10">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb297-11" data-line-number="11">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb297-12" data-line-number="12">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb297-13" data-line-number="13">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb297-14" data-line-number="14">    ),</a>
+<a class="sourceLine" id="cb297-15" data-line-number="15">  <span class="dt">data =</span> df_gibsonwu</a>
+<a class="sourceLine" id="cb297-16" data-line-number="16">)</a>
+<a class="sourceLine" id="cb297-17" data-line-number="17"><span class="co">## meta-analysis priors:</span></a>
+<a class="sourceLine" id="cb297-18" data-line-number="18">fit_gibsonwu_ma &lt;-<span class="st"> </span><span class="kw">brm</span>(rt <span class="op">~</span><span class="st"> </span>c_cond <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb297-19" data-line-number="19"><span class="st">                         </span>(c_cond <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb297-20" data-line-number="20"><span class="st">                         </span>(c_cond <span class="op">|</span><span class="st"> </span>item),</a>
+<a class="sourceLine" id="cb297-21" data-line-number="21">  <span class="dt">family =</span> <span class="kw">lognormal</span>(),</a>
+<a class="sourceLine" id="cb297-22" data-line-number="22">  <span class="dt">prior =</span></a>
+<a class="sourceLine" id="cb297-23" data-line-number="23">    <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb297-24" data-line-number="24">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">6</span>, <span class="fl">1.5</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb297-25" data-line-number="25">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="fl">0.041</span>, <span class="fl">0.2</span>), <span class="dt">class =</span> b),</a>
+<a class="sourceLine" id="cb297-26" data-line-number="26">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sigma),</a>
+<a class="sourceLine" id="cb297-27" data-line-number="27">      <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">class =</span> sd),</a>
+<a class="sourceLine" id="cb297-28" data-line-number="28">      <span class="kw">prior</span>(<span class="kw">lkj</span>(<span class="dv">2</span>), <span class="dt">class =</span> cor)</a>
+<a class="sourceLine" id="cb297-29" data-line-number="29">    ),</a>
+<a class="sourceLine" id="cb297-30" data-line-number="30">  <span class="dt">data =</span> df_gibsonwu</a>
+<a class="sourceLine" id="cb297-31" data-line-number="31">)</a></code></pre></div>
 <p>A summary of the posteriors under the Normal(0,1) and the meta-analysis prior is shown in Table <a href="deriving-priors-from-meta-analyses.html#tab:mapriors">6.3</a>. In this particular case, the posteriors are not strongly influenced by the two different priors.</p>
 <table>
 <caption>
@@ -1501,7 +1502,7 @@ Normal(0,1)
 -0.18
 </td>
 <td style="text-align:right;">
-0.03
+0.04
 </td>
 </tr>
 <tr>
@@ -1515,7 +1516,7 @@ Normal(0.041, 0.2)
 -0.17
 </td>
 <td style="text-align:right;">
-0.04
+0.05
 </td>
 </tr>
 </tbody>
@@ -1580,8 +1581,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/06-priors.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1591,7 +1592,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

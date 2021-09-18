@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1224,14 +1225,7 @@ f_j &amp;= logit^{-1}(f&#39;_j)
 <span id="exr:mpt" class="exercise"><strong>Exercise 19.4  </strong></span>A more hierarchical MPT.
 </div>
 
-<p>Modify the hierarchical MPT presented in section <a href="multinomial-processing-tree-mpt-models.html#sec:MPT-h">19.2.1.5</a> so that all the parameters are affected by individual differences. Simulate data and fit it. How well can you recover the parameters? (Hint: It might be easier if you don’t assume that the adjustment parameters are correlated.)</p>
-<!--
-Ex:
-https://www.r-bloggers.com/mpt-trees-published-in-brm/
-
-https://cran.r-project.org/web/packages/psychotools/index.html
-https://link.springer.com/article/10.3758/s13428-017-0937-z
--->
+<p>Modify the hierarchical MPT presented in section <a href="multinomial-processing-tree-mpt-models.html#sec:MPT-h">19.2.1.5</a> so that all the parameters are affected by individual differences. Simulate data and fit it. How well can you recover the parameters? You should use the non-centered parameterization for the by-subject adjustments. (Hint: Convergence will be reached much faster if you don’t assume that the adjustment parameters are correlated as in <a href="sec-hierstan.html#sec:uncorrstan">11.1.2</a>, but you could also assume a correlation between all (or some of) the adjustments by using the Cholesky factorization discussed in <a href="sec-hierstan.html#sec:corrstan">11.1.3</a>.)</p>
 
 <div class="exercise">
 <span id="exr:mpt-adv" class="exercise"><strong>Exercise 19.5  </strong></span><strong>Advanced</strong>: Multinomial processing trees.
@@ -1252,9 +1246,23 @@ to investigate whether experiment type, age and/or gender affects the different 
 As in <span class="citation">Batchelder and Riefer (<a href="#ref-batchelder1990multinomial">1990</a>)</span>, assume that <span class="math inline">\(a = g\)</span> (for identifiability) and that discriminability is equal for both sources (<span class="math inline">\(d_1 = d_2\)</span>).</p>
 
 <div class="figure"><span id="fig:sm-tikz"></span>
-<img src="bookdown_files/figure-html/sm-tikz-1.svg" alt="Multinomial processing tree for the source monitoring paradigm (Batchelder and Riefer, 1990). \(D_1\) and \(D_2\) stand the detectability of Source A and Source B items respectively, \(d_1\) and \(d_2\) stand for the source discriminabilities for Source A and Source B items, \(b\) stands for the bias for responding “old” to a nondetected item, \(a\) stands for guessing that a detected but nondiscriminated item belongs to Source A, and \(g\) stands for guessing that the item is a Source A item." width="672" />
+<img src="bookdown_files/figure-html/sm-tikz-1.svg" alt="Multinomial processing tree for the source A items from the source monitoring paradigm (Batchelder and Riefer, 1990). \(D_1\) stands for the detectability of source A, \(d_1\) stands for the source discriminabilities for source A items, \(b\) stands for the bias for responding “old” to a nondetected item, \(a\) stands for guessing that a detected but nondiscriminated item belongs to source A, and \(g\) stands for guessing that the item is a source A item." width="672" />
 <p class="caption">
-FIGURE 19.10: Multinomial processing tree for the source monitoring paradigm (Batchelder and Riefer, 1990). <span class="math inline">\(D_1\)</span> and <span class="math inline">\(D_2\)</span> stand the detectability of Source A and Source B items respectively, <span class="math inline">\(d_1\)</span> and <span class="math inline">\(d_2\)</span> stand for the source discriminabilities for Source A and Source B items, <span class="math inline">\(b\)</span> stands for the bias for responding “old” to a nondetected item, <span class="math inline">\(a\)</span> stands for guessing that a detected but nondiscriminated item belongs to Source A, and <span class="math inline">\(g\)</span> stands for guessing that the item is a Source A item.
+FIGURE 19.10: Multinomial processing tree for the source A items from the source monitoring paradigm (Batchelder and Riefer, 1990). <span class="math inline">\(D_1\)</span> stands for the detectability of source A, <span class="math inline">\(d_1\)</span> stands for the source discriminabilities for source A items, <span class="math inline">\(b\)</span> stands for the bias for responding “old” to a nondetected item, <span class="math inline">\(a\)</span> stands for guessing that a detected but nondiscriminated item belongs to source A, and <span class="math inline">\(g\)</span> stands for guessing that the item is a source A item.
+</p>
+</div>
+
+<div class="figure"><span id="fig:sm-tikz2"></span>
+<img src="bookdown_files/figure-html/sm-tikz2-1.svg" alt="Multinomial processing tree for the source B items from source monitoring paradigm (Batchelder and Riefer, 1990). \(D_2\) stand for the detectability of source B items, \(d_2\) stands for the source discriminabilities for source B, \(b\) stands for the bias for responding “old” to a nondetected item, \(a\) stands for guessing that a detected but nondiscriminated item belongs to Source A, and \(g\) stands for guessing that the item is a source A item." width="672" />
+<p class="caption">
+FIGURE 19.11: Multinomial processing tree for the source B items from source monitoring paradigm (Batchelder and Riefer, 1990). <span class="math inline">\(D_2\)</span> stand for the detectability of source B items, <span class="math inline">\(d_2\)</span> stands for the source discriminabilities for source B, <span class="math inline">\(b\)</span> stands for the bias for responding “old” to a nondetected item, <span class="math inline">\(a\)</span> stands for guessing that a detected but nondiscriminated item belongs to Source A, and <span class="math inline">\(g\)</span> stands for guessing that the item is a source A item.
+</p>
+</div>
+
+<div class="figure"><span id="fig:sm-tikz3"></span>
+<img src="bookdown_files/figure-html/sm-tikz3-1.svg" alt="Multinomial processing tree for the new items in the source monitoring paradigm (Batchelder and Riefer, 1990). \(b\) stands for the bias for responding “old” to a nondetected item, \(a\) stands for guessing that a detected but nondiscriminated item belongs to source A, and \(g\) stands for guessing that the item is a source A item." width="672" />
+<p class="caption">
+FIGURE 19.12: Multinomial processing tree for the new items in the source monitoring paradigm (Batchelder and Riefer, 1990). <span class="math inline">\(b\)</span> stands for the bias for responding “old” to a nondetected item, <span class="math inline">\(a\)</span> stands for guessing that a detected but nondiscriminated item belongs to source A, and <span class="math inline">\(g\)</span> stands for guessing that the item is a source A item.
 </p>
 </div>
 <p>Notice the following:</p>
@@ -1264,10 +1272,10 @@ FIGURE 19.10: Multinomial processing tree for the source monitoring paradigm (Ba
 <li>All the predictors are between subject, this means that only a by-intercept adjustment (for every latent process) is possible.</li>
 </ul>
 <p>If you want some basis to start with, you can have a look at the incomplete code in <code>source.stan</code>, by typing the following in R:</p>
-<div class="sourceCode" id="cb1018"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1018-1" data-line-number="1"><span class="kw">cat</span>(<span class="kw">readLines</span>(<span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb1018-2" data-line-number="2">                     <span class="st">&quot;source.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb1018-3" data-line-number="3">                     <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)),</a>
-<a class="sourceLine" id="cb1018-4" data-line-number="4">    <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1017"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb1017-1" data-line-number="1"><span class="kw">cat</span>(<span class="kw">readLines</span>(<span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb1017-2" data-line-number="2">                     <span class="st">&quot;source.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb1017-3" data-line-number="3">                     <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)),</a>
+<a class="sourceLine" id="cb1017-4" data-line-number="4">    <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
 
 </div>
 <!-- </div> -->
@@ -1318,8 +1326,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/19-MPT.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1329,7 +1337,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

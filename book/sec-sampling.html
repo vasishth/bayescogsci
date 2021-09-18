@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1191,7 +1192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sec:sampling" class="section level2">
 <h2><span class="header-section-number">3.1</span> Deriving the posterior through sampling</h2>
 <p>Let’s say that we want to derive the posterior of the model from section <a href="sec-analytical.html#sec:analytical">2.2</a>, that is, the posterior distribution of the cloze probability of <em>“umbrella”</em>, <span class="math inline">\(\theta\)</span>, given the following data: a word (e.g., <em>“umbrella”</em>) was answered 80 out of 100 times, and assuming a binomial distribution as the likelihood function, and <span class="math inline">\(\mathit{Beta}(a=4,b=4)\)</span> as a prior distribution for the cloze probability. If we have samples from the posterior distribution of <span class="math inline">\(\theta\)</span>, instead of an analytically derived posterior distribution, given enough samples we will have a good approximation of the real posterior distribution. Getting samples from the posterior will be the only viable option in the models that we will discuss in this book. By “getting samples”, we are talking about a situation analogous to when we use <code>rbinom</code> or <code>rnorm</code> to obtain samples from a particular distribution. For more details about sampling algorithms, see the further readings suggested in section <a href="sec-ch3furtherreading.html#sec:ch3furtherreading">3.7</a>.</p>
-<p>Thanks to probabilistic programming languages, it will be relatively straightforward to get these samples, and we will discuss how we will do it in more detail in the next section. For now let’s assume that we used some probabilistic programming language to obtain 20000 samples from the posterior distribution of the cloze probability, <span class="math inline">\(\theta\)</span>: 0.722, 0.731, 0.763, 0.772, 0.84, 0.73, 0.736, 0.778, 0.796, 0.732, 0.765, 0.807, 0.83, 0.775, 0.806, 0.813, 0.817, 0.805, 0.774, 0.794, … Figure <a href="sec-sampling.html#fig:betapost">3.1</a> shows that the approximation of the posterior looks quite similar to the analytically derived posterior. The difference between the analytically computed and approximated mean and variance are 0.0001 and -0.00001 respectively.</p>
+<p>Thanks to probabilistic programming languages, it will be relatively straightforward to get these samples, and we will discuss how we will do it in more detail in the next section. For now let’s assume that we used some probabilistic programming language to obtain 20000 samples from the posterior distribution of the cloze probability, <span class="math inline">\(\theta\)</span>: 0.777, 0.788, 0.747, 0.799, 0.753, 0.778, 0.748, 0.808, 0.832, 0.793, 0.798, 0.761, 0.774, 0.791, 0.698, 0.765, 0.748, 0.76, 0.815, 0.772, … Figure <a href="sec-sampling.html#fig:betapost">3.1</a> shows that the approximation of the posterior looks quite similar to the analytically derived posterior. The difference between the analytically computed and approximated mean and variance are 0.00009 and -0.00001 respectively.</p>
 
 <div class="figure"><span id="fig:betapost"></span>
 <img src="bookdown_files/figure-html/betapost-1.svg" alt="Histogram of the samples of \(\theta\) from the posterior distribution generated via sampling. The black line shows the density plot of the analytically derived posterior." width="672" />
@@ -1237,7 +1238,7 @@ rt_n \sim \mathit{Normal}(\mu, \sigma)
 <p>First, load the data frame <code>df_spacebar</code> from <code>bcogsci</code> package</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_spacebar&quot;</span>)</a>
 <a class="sourceLine" id="cb88-2" data-line-number="2">df_spacebar</a></code></pre></div>
-<pre><code>## # A tibble: 361 x 2
+<pre><code>## # A tibble: 361 × 2
 ##      rt trial
 ##   &lt;int&gt; &lt;int&gt;
 ## 1   141     1
@@ -1311,16 +1312,16 @@ FIGURE 3.4: Trace plot of a model that <strong>did not</strong> converge. We can
 <div class="sourceCode" id="cb93"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">as_draws_df</span>(fit_press) </a></code></pre></div>
 <pre><code>## # A draws_df: 1000 iterations, 4 chains, and 3 variables
 ##    b_Intercept sigma  lp__
-## 1          171    24 -1689
-## 2          166    25 -1690
-## 3          167    25 -1688
-## 4          169    26 -1688
-## 5          169    26 -1688
-## 6          168    25 -1688
-## 7          169    25 -1688
-## 8          168    26 -1688
-## 9          170    24 -1689
-## 10         169    24 -1689
+## 1          169    25 -1688
+## 2          168    26 -1688
+## 3          168    24 -1689
+## 4          169    25 -1688
+## 5          168    25 -1688
+## 6          169    25 -1688
+## 7          168    26 -1689
+## 8          168    23 -1689
+## 9          166    25 -1690
+## 10         168    25 -1688
 ## # ... with 3990 more draws
 ## # ... hidden reserved variables {&#39;.chain&#39;, &#39;.iteration&#39;, &#39;.draw&#39;}</code></pre>
 <p>The term <code>b_Intercept</code> in the <code>brms</code> output corresponds to our <span class="math inline">\(\mu\)</span>, and <code>lp</code> is not really part of the posterior, it’s the density of the unnormalized log posterior for each iteration. We will discuss <code>lp</code> later (in Box <a href="sec-firststan.html#thm:target">10.1</a>).</p>
@@ -1340,11 +1341,11 @@ FIGURE 3.4: Trace plot of a model that <strong>did not</strong> converge. We can
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept   168.60      1.30   166.12   171.21 1.00     3806     3189
+## Intercept   168.63      1.27   166.13   171.14 1.00     3489     2795
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma    24.99      0.93    23.22    26.85 1.00     3773     2658
+## sigma    25.00      0.94    23.20    27.02 1.00     3843     2465
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -1453,8 +1454,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/03-compbayes.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1464,7 +1465,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

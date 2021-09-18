@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1207,15 +1208,15 @@ p\_size_n \sim \mathit{Normal}(\alpha + c\_load_n \cdot \beta_1 + c\_trial \cdot
 \end{aligned}
 \end{equation}\]</span></p>
 <p>We prepare the data as in <a href="regression-models-in-stan.html#sec:interstan">10.4.2</a>:</p>
-<div class="sourceCode" id="cb912"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb912-1" data-line-number="1">df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb912-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load),</a>
-<a class="sourceLine" id="cb912-3" data-line-number="3">         <span class="dt">c_trial =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial))</a>
-<a class="sourceLine" id="cb912-4" data-line-number="4">ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb912-5" data-line-number="5">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
-<a class="sourceLine" id="cb912-6" data-line-number="6">  <span class="dt">c_trial=</span> df_pupil<span class="op">$</span>c_trial,</a>
-<a class="sourceLine" id="cb912-7" data-line-number="7">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
-<a class="sourceLine" id="cb912-8" data-line-number="8">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
-<a class="sourceLine" id="cb912-9" data-line-number="9">)</a></code></pre></div>
+<div class="sourceCode" id="cb911"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb911-1" data-line-number="1">df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb911-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load),</a>
+<a class="sourceLine" id="cb911-3" data-line-number="3">         <span class="dt">c_trial =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial))</a>
+<a class="sourceLine" id="cb911-4" data-line-number="4">ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb911-5" data-line-number="5">  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</a>
+<a class="sourceLine" id="cb911-6" data-line-number="6">  <span class="dt">c_trial=</span> df_pupil<span class="op">$</span>c_trial,</a>
+<a class="sourceLine" id="cb911-7" data-line-number="7">  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</a>
+<a class="sourceLine" id="cb911-8" data-line-number="8">  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)</a>
+<a class="sourceLine" id="cb911-9" data-line-number="9">)</a></code></pre></div>
 <p>We add a <code>generated quantities</code> block to the model as we show below. (It is also possible to run this block in a stand-alone file with the <code>rstan</code> function <code>gqs()</code>). If we use the variable name <code>log_lik</code> in the Stan code, the <code>loo</code> package will know where to find the log likelihood of the observations.</p>
 <p>We code the effects as <code>beta1</code>, <code>beta2</code>, <code>beta3</code> to more easily compare the model with the one used in the BF chapter, but in this case we could have used a vector or an array instead. This is the model <code>pupil_null.stan</code> shown below:</p>
 <pre class="stan fold-show"><code>data {
@@ -1284,55 +1285,55 @@ generated quantities{
   }
 }</code></pre>
 <p>The models can be found in the <code>bcogsci</code> package:</p>
-<div class="sourceCode" id="cb915"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb915-1" data-line-number="1">pupil_model_cv &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb915-2" data-line-number="2">                              <span class="st">&quot;pupil_model_cv.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb915-3" data-line-number="3">                              <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb915-4" data-line-number="4">pupil_null &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb915-5" data-line-number="5">                          <span class="st">&quot;pupil_null.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb915-6" data-line-number="6">                          <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a></code></pre></div>
-<p>Fit the models with the default number of iterations:</p>
-<div class="sourceCode" id="cb916"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb916-1" data-line-number="1">fit_pupil_int_pos_ll &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb916-2" data-line-number="2">  <span class="dt">file =</span> pupil_model_cv,</a>
-<a class="sourceLine" id="cb916-3" data-line-number="3">  <span class="dt">iter =</span> <span class="dv">3000</span>,</a>
-<a class="sourceLine" id="cb916-4" data-line-number="4">  <span class="dt">data =</span> ls_pupil</a>
-<a class="sourceLine" id="cb916-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb916-6" data-line-number="6">fit_pupil_int_null_ll &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
-<a class="sourceLine" id="cb916-7" data-line-number="7">  <span class="dt">file =</span> pupil_null,</a>
-<a class="sourceLine" id="cb916-8" data-line-number="8">  <span class="dt">iter =</span> <span class="dv">3000</span>,</a>
-<a class="sourceLine" id="cb916-9" data-line-number="9">  <span class="dt">data =</span> ls_pupil</a>
-<a class="sourceLine" id="cb916-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb914"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb914-1" data-line-number="1">pupil_model_cv &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb914-2" data-line-number="2">                              <span class="st">&quot;pupil_model_cv.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb914-3" data-line-number="3">                              <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb914-4" data-line-number="4">pupil_null &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb914-5" data-line-number="5">                          <span class="st">&quot;pupil_null.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb914-6" data-line-number="6">                          <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a></code></pre></div>
+<p>Fit the models:</p>
+<div class="sourceCode" id="cb915"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb915-1" data-line-number="1">fit_pupil_int_pos_ll &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb915-2" data-line-number="2">  <span class="dt">file =</span> pupil_model_cv,</a>
+<a class="sourceLine" id="cb915-3" data-line-number="3">  <span class="dt">iter =</span> <span class="dv">3000</span>,</a>
+<a class="sourceLine" id="cb915-4" data-line-number="4">  <span class="dt">data =</span> ls_pupil</a>
+<a class="sourceLine" id="cb915-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb915-6" data-line-number="6">fit_pupil_int_null_ll &lt;-<span class="st"> </span><span class="kw">stan</span>(</a>
+<a class="sourceLine" id="cb915-7" data-line-number="7">  <span class="dt">file =</span> pupil_null,</a>
+<a class="sourceLine" id="cb915-8" data-line-number="8">  <span class="dt">iter =</span> <span class="dv">3000</span>,</a>
+<a class="sourceLine" id="cb915-9" data-line-number="9">  <span class="dt">data =</span> ls_pupil</a>
+<a class="sourceLine" id="cb915-10" data-line-number="10">)</a></code></pre></div>
 <p>Show summary of predictive accuracy of the models:</p>
-<div class="sourceCode" id="cb917"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb917-1" data-line-number="1">(loo_pos &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_pupil_int_pos_ll))</a></code></pre></div>
+<div class="sourceCode" id="cb916"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb916-1" data-line-number="1">(loo_pos &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_pupil_int_pos_ll))</a></code></pre></div>
 <pre><code>## 
 ## Computed from 6000 by 41 log-likelihood matrix
 ## 
 ##          Estimate   SE
-## elpd_loo   -258.7  5.6
-## p_loo         3.3  1.0
-## looic       517.3 11.2
+## elpd_loo   -258.6  5.6
+## p_loo         3.2  1.0
+## looic       517.1 11.1
 ## ------
 ## Monte Carlo SE of elpd_loo is 0.0.
 ## 
 ## All Pareto k estimates are good (k &lt; 0.5).
 ## See help(&#39;pareto-k-diagnostic&#39;) for details.</code></pre>
-<div class="sourceCode" id="cb919"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb919-1" data-line-number="1">(loo_null &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_pupil_int_null_ll))</a></code></pre></div>
+<div class="sourceCode" id="cb918"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb918-1" data-line-number="1">(loo_null &lt;-<span class="st"> </span><span class="kw">loo</span>(fit_pupil_int_null_ll))</a></code></pre></div>
 <pre><code>## 
 ## Computed from 6000 by 41 log-likelihood matrix
 ## 
 ##          Estimate   SE
 ## elpd_loo   -258.1  5.6
 ## p_loo         3.1  1.0
-## looic       516.2 11.1
+## looic       516.3 11.1
 ## ------
 ## Monte Carlo SE of elpd_loo is 0.0.
 ## 
 ## All Pareto k estimates are good (k &lt; 0.5).
 ## See help(&#39;pareto-k-diagnostic&#39;) for details.</code></pre>
 <p>Unlike with <code>brms</code>, the functions from <code>loo</code> warn the user when <span class="math inline">\(\hat{k} &gt; 0.5\)</span>. In practice, given that PSIS-LOO-CV has good performance for values of <span class="math inline">\(\hat{k}\)</span> up to 0.7, the message can be ignored.</p>
-<div class="sourceCode" id="cb921"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb921-1" data-line-number="1"><span class="kw">loo_compare</span>(loo_pos, loo_null)</a></code></pre></div>
+<div class="sourceCode" id="cb920"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb920-1" data-line-number="1"><span class="kw">loo_compare</span>(loo_pos, loo_null)</a></code></pre></div>
 <pre><code>##        elpd_diff se_diff
 ## model2  0.0       0.0   
-## model1 -0.5       0.4</code></pre>
+## model1 -0.4       0.4</code></pre>
 <p>As it happened with the cloze probability effect in the previous section, we cannot decide which model has better predictive accuracy according to PSIS-LOO.</p>
 <div id="k-fold-cv-in-stan" class="section level4">
 <h4><span class="header-section-number">17.6.1.1</span> K-fold-CV in Stan</h4>
@@ -1342,13 +1343,13 @@ generated quantities{
 <li>Split the data in 10 folds.</li>
 </ol>
 <p>Since there are no subjects we don’t need to stratify (using <code>kfold_split_stratified</code>), and we use <code>kfold_split_random</code> from the <code>loo</code> package.</p>
-<div class="sourceCode" id="cb923"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb923-1" data-line-number="1">df_pupil<span class="op">$</span>fold &lt;-<span class="st"> </span><span class="kw">kfold_split_random</span>(<span class="dt">K =</span> <span class="dv">10</span>, <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil))</a>
-<a class="sourceLine" id="cb923-2" data-line-number="2"><span class="co"># Show number of obs for each fold:</span></a>
-<a class="sourceLine" id="cb923-3" data-line-number="3">df_pupil <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb923-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(fold) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb923-5" data-line-number="5"><span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb923-6" data-line-number="6"><span class="st">  </span><span class="kw">print</span>(<span class="dt">n=</span><span class="dv">10</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 10 x 2
+<div class="sourceCode" id="cb922"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb922-1" data-line-number="1">df_pupil<span class="op">$</span>fold &lt;-<span class="st"> </span><span class="kw">kfold_split_random</span>(<span class="dt">K =</span> <span class="dv">10</span>, <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil))</a>
+<a class="sourceLine" id="cb922-2" data-line-number="2"><span class="co"># Show number of obs for each fold:</span></a>
+<a class="sourceLine" id="cb922-3" data-line-number="3">df_pupil <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb922-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(fold) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb922-5" data-line-number="5"><span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb922-6" data-line-number="6"><span class="st">  </span><span class="kw">print</span>(<span class="dt">n=</span><span class="dv">10</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 10 × 2
 ## # Groups:   fold [10]
 ##     fold     n
 ##    &lt;int&gt; &lt;int&gt;
@@ -1366,65 +1367,65 @@ generated quantities{
 <li>Fit and extract the log pointwise predictive densities for each fold.</li>
 </ol>
 <p>We compile the alternative and the null models first with <code>stan_model</code>, and we prepare two matrices to store the predictive densities from the held out data. Each matrix has as many rows as post-warmup iterations we’ll produce (<span class="math inline">\(3000 \times 2\)</span>), and as many columns as observations in the data set.</p>
-<div class="sourceCode" id="cb925"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb925-1" data-line-number="1">pupil_stanmodel &lt;-<span class="st"> </span><span class="kw">stan_model</span>(pupil_model_cv)</a>
-<a class="sourceLine" id="cb925-2" data-line-number="2">pupil_null_stanmodel &lt;-<span class="st"> </span><span class="kw">stan_model</span>(pupil_null)</a>
-<a class="sourceLine" id="cb925-3" data-line-number="3">log_pd_kfold &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">6000</span>, <span class="dt">ncol =</span> <span class="kw">nrow</span>(df_pupil))</a>
-<a class="sourceLine" id="cb925-4" data-line-number="4">log_pd_null_kfold &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">6000</span>, <span class="dt">ncol =</span> <span class="kw">nrow</span>(df_pupil))</a></code></pre></div>
+<div class="sourceCode" id="cb924"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb924-1" data-line-number="1">pupil_stanmodel &lt;-<span class="st"> </span><span class="kw">stan_model</span>(pupil_model_cv)</a>
+<a class="sourceLine" id="cb924-2" data-line-number="2">pupil_null_stanmodel &lt;-<span class="st"> </span><span class="kw">stan_model</span>(pupil_null)</a>
+<a class="sourceLine" id="cb924-3" data-line-number="3">log_pd_kfold &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">6000</span>, <span class="dt">ncol =</span> <span class="kw">nrow</span>(df_pupil))</a>
+<a class="sourceLine" id="cb924-4" data-line-number="4">log_pd_null_kfold &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">6000</span>, <span class="dt">ncol =</span> <span class="kw">nrow</span>(df_pupil))</a></code></pre></div>
 <p>We loop over the 10 folds. In each loop we do the following. First, we fit each model (i.e, the alternative and null model) to all the observations except the ones belonging to the held-out fold using <code>sampling()</code> with the already compiled models. Second, we compute the log pointwise predictive densities for the held-out fold with <code>gqs()</code>. This function produces <code>generated quantities</code> based on samples from a posterior (in the <code>draw</code> argument) and ignores all the blocks except the <code>generated quantities</code> one. Last, we store the predictive density for the observations of the held-out fold in a matrix by extracting the log likelihood of the held-out data. The output of this loop is a matrix of the log pointwise predictive densities of all the observations.</p>
-<div class="sourceCode" id="cb926"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb926-1" data-line-number="1"><span class="co"># Loop over the folds</span></a>
-<a class="sourceLine" id="cb926-2" data-line-number="2"><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){</a>
-<a class="sourceLine" id="cb926-3" data-line-number="3">  <span class="co"># Training set for k</span></a>
-<a class="sourceLine" id="cb926-4" data-line-number="4">  df_pupil_train &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb926-5" data-line-number="5"><span class="st">    </span><span class="kw">filter</span>(fold <span class="op">!=</span><span class="st"> </span>k)</a>
-<a class="sourceLine" id="cb926-6" data-line-number="6">  ls_pupil_train &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb926-7" data-line-number="7">    <span class="dt">c_load =</span> df_pupil_train<span class="op">$</span>c_load,</a>
-<a class="sourceLine" id="cb926-8" data-line-number="8">    <span class="dt">c_trial=</span> df_pupil_train<span class="op">$</span>c_trial,</a>
-<a class="sourceLine" id="cb926-9" data-line-number="9">    <span class="dt">p_size =</span> df_pupil_train<span class="op">$</span>p_size,</a>
-<a class="sourceLine" id="cb926-10" data-line-number="10">    <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil_train)</a>
-<a class="sourceLine" id="cb926-11" data-line-number="11">  )</a>
-<a class="sourceLine" id="cb926-12" data-line-number="12">  <span class="co"># Held out set for k</span></a>
-<a class="sourceLine" id="cb926-13" data-line-number="13">   df_pupil_ho &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb926-14" data-line-number="14"><span class="st">    </span><span class="kw">filter</span>(fold <span class="op">==</span><span class="st"> </span>k)</a>
-<a class="sourceLine" id="cb926-15" data-line-number="15">  ls_pupil_ho &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb926-16" data-line-number="16">    <span class="dt">c_load =</span> df_pupil_ho<span class="op">$</span>c_load,</a>
-<a class="sourceLine" id="cb926-17" data-line-number="17">    <span class="dt">c_trial=</span> df_pupil_ho<span class="op">$</span>c_trial,</a>
-<a class="sourceLine" id="cb926-18" data-line-number="18">    <span class="dt">p_size =</span> df_pupil_ho<span class="op">$</span>p_size,</a>
-<a class="sourceLine" id="cb926-19" data-line-number="19">    <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil_ho)</a>
-<a class="sourceLine" id="cb926-20" data-line-number="20">  )</a>
-<a class="sourceLine" id="cb926-21" data-line-number="21">  <span class="co"># Train the models</span></a>
-<a class="sourceLine" id="cb926-22" data-line-number="22">  fit_train &lt;-<span class="st"> </span><span class="kw">sampling</span>(pupil_stanmodel,</a>
-<a class="sourceLine" id="cb926-23" data-line-number="23">                                     <span class="dt">iter =</span> <span class="dv">3000</span>,</a>
-<a class="sourceLine" id="cb926-24" data-line-number="24">                                     <span class="dt">data =</span> ls_pupil_train)</a>
-<a class="sourceLine" id="cb926-25" data-line-number="25">  fit_null_train &lt;-<span class="st"> </span><span class="kw">sampling</span>(pupil_null_stanmodel,</a>
-<a class="sourceLine" id="cb926-26" data-line-number="26">                                     <span class="dt">iter =</span> <span class="dv">3000</span>,</a>
-<a class="sourceLine" id="cb926-27" data-line-number="27">                                     <span class="dt">data =</span> ls_pupil_train)</a>
-<a class="sourceLine" id="cb926-28" data-line-number="28">  <span class="co"># Generated quantities based on the posterior from the training set</span></a>
-<a class="sourceLine" id="cb926-29" data-line-number="29">  <span class="co"># and the data from the held out set </span></a>
-<a class="sourceLine" id="cb926-30" data-line-number="30">  gq_ho &lt;-<span class="st"> </span><span class="kw">gqs</span>(pupil_stanmodel,</a>
-<a class="sourceLine" id="cb926-31" data-line-number="31">                     <span class="dt">draws =</span> <span class="kw">as.matrix</span>(fit_train),</a>
-<a class="sourceLine" id="cb926-32" data-line-number="32">                     <span class="dt">data =</span> ls_pupil_ho)</a>
-<a class="sourceLine" id="cb926-33" data-line-number="33">  gq_null_ho &lt;-<span class="st"> </span><span class="kw">gqs</span>(pupil_null_stanmodel,</a>
-<a class="sourceLine" id="cb926-34" data-line-number="34">                        <span class="dt">draws =</span> <span class="kw">as.matrix</span>(fit_null_train),</a>
-<a class="sourceLine" id="cb926-35" data-line-number="35">                        <span class="dt">data =</span> ls_pupil_ho)</a>
-<a class="sourceLine" id="cb926-36" data-line-number="36">  <span class="co"># Extract log likelihood which represents</span></a>
-<a class="sourceLine" id="cb926-37" data-line-number="37">  <span class="co"># the pointwise predictive density</span></a>
-<a class="sourceLine" id="cb926-38" data-line-number="38">  log_pd_kfold[, df_pupil<span class="op">$</span>fold <span class="op">==</span><span class="st"> </span>k] &lt;-</a>
-<a class="sourceLine" id="cb926-39" data-line-number="39"><span class="st">    </span><span class="kw">extract_log_lik</span>(gq_ho)</a>
-<a class="sourceLine" id="cb926-40" data-line-number="40">  log_pd_null_kfold[, df_pupil<span class="op">$</span>fold <span class="op">==</span><span class="st"> </span>k] &lt;-</a>
-<a class="sourceLine" id="cb926-41" data-line-number="41"><span class="st">    </span><span class="kw">extract_log_lik</span>(gq_null_ho)</a>
-<a class="sourceLine" id="cb926-42" data-line-number="42">}</a></code></pre></div>
+<div class="sourceCode" id="cb925"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb925-1" data-line-number="1"><span class="co"># Loop over the folds</span></a>
+<a class="sourceLine" id="cb925-2" data-line-number="2"><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){</a>
+<a class="sourceLine" id="cb925-3" data-line-number="3">  <span class="co"># Training set for k</span></a>
+<a class="sourceLine" id="cb925-4" data-line-number="4">  df_pupil_train &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb925-5" data-line-number="5"><span class="st">    </span><span class="kw">filter</span>(fold <span class="op">!=</span><span class="st"> </span>k)</a>
+<a class="sourceLine" id="cb925-6" data-line-number="6">  ls_pupil_train &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb925-7" data-line-number="7">    <span class="dt">c_load =</span> df_pupil_train<span class="op">$</span>c_load,</a>
+<a class="sourceLine" id="cb925-8" data-line-number="8">    <span class="dt">c_trial=</span> df_pupil_train<span class="op">$</span>c_trial,</a>
+<a class="sourceLine" id="cb925-9" data-line-number="9">    <span class="dt">p_size =</span> df_pupil_train<span class="op">$</span>p_size,</a>
+<a class="sourceLine" id="cb925-10" data-line-number="10">    <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil_train)</a>
+<a class="sourceLine" id="cb925-11" data-line-number="11">  )</a>
+<a class="sourceLine" id="cb925-12" data-line-number="12">  <span class="co"># Held out set for k</span></a>
+<a class="sourceLine" id="cb925-13" data-line-number="13">   df_pupil_ho &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb925-14" data-line-number="14"><span class="st">    </span><span class="kw">filter</span>(fold <span class="op">==</span><span class="st"> </span>k)</a>
+<a class="sourceLine" id="cb925-15" data-line-number="15">  ls_pupil_ho &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb925-16" data-line-number="16">    <span class="dt">c_load =</span> df_pupil_ho<span class="op">$</span>c_load,</a>
+<a class="sourceLine" id="cb925-17" data-line-number="17">    <span class="dt">c_trial=</span> df_pupil_ho<span class="op">$</span>c_trial,</a>
+<a class="sourceLine" id="cb925-18" data-line-number="18">    <span class="dt">p_size =</span> df_pupil_ho<span class="op">$</span>p_size,</a>
+<a class="sourceLine" id="cb925-19" data-line-number="19">    <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil_ho)</a>
+<a class="sourceLine" id="cb925-20" data-line-number="20">  )</a>
+<a class="sourceLine" id="cb925-21" data-line-number="21">  <span class="co"># Train the models</span></a>
+<a class="sourceLine" id="cb925-22" data-line-number="22">  fit_train &lt;-<span class="st"> </span><span class="kw">sampling</span>(pupil_stanmodel,</a>
+<a class="sourceLine" id="cb925-23" data-line-number="23">                                     <span class="dt">iter =</span> <span class="dv">3000</span>,</a>
+<a class="sourceLine" id="cb925-24" data-line-number="24">                                     <span class="dt">data =</span> ls_pupil_train)</a>
+<a class="sourceLine" id="cb925-25" data-line-number="25">  fit_null_train &lt;-<span class="st"> </span><span class="kw">sampling</span>(pupil_null_stanmodel,</a>
+<a class="sourceLine" id="cb925-26" data-line-number="26">                                     <span class="dt">iter =</span> <span class="dv">3000</span>,</a>
+<a class="sourceLine" id="cb925-27" data-line-number="27">                                     <span class="dt">data =</span> ls_pupil_train)</a>
+<a class="sourceLine" id="cb925-28" data-line-number="28">  <span class="co"># Generated quantities based on the posterior from the training set</span></a>
+<a class="sourceLine" id="cb925-29" data-line-number="29">  <span class="co"># and the data from the held out set </span></a>
+<a class="sourceLine" id="cb925-30" data-line-number="30">  gq_ho &lt;-<span class="st"> </span><span class="kw">gqs</span>(pupil_stanmodel,</a>
+<a class="sourceLine" id="cb925-31" data-line-number="31">                     <span class="dt">draws =</span> <span class="kw">as.matrix</span>(fit_train),</a>
+<a class="sourceLine" id="cb925-32" data-line-number="32">                     <span class="dt">data =</span> ls_pupil_ho)</a>
+<a class="sourceLine" id="cb925-33" data-line-number="33">  gq_null_ho &lt;-<span class="st"> </span><span class="kw">gqs</span>(pupil_null_stanmodel,</a>
+<a class="sourceLine" id="cb925-34" data-line-number="34">                        <span class="dt">draws =</span> <span class="kw">as.matrix</span>(fit_null_train),</a>
+<a class="sourceLine" id="cb925-35" data-line-number="35">                        <span class="dt">data =</span> ls_pupil_ho)</a>
+<a class="sourceLine" id="cb925-36" data-line-number="36">  <span class="co"># Extract log likelihood which represents</span></a>
+<a class="sourceLine" id="cb925-37" data-line-number="37">  <span class="co"># the pointwise predictive density</span></a>
+<a class="sourceLine" id="cb925-38" data-line-number="38">  log_pd_kfold[, df_pupil<span class="op">$</span>fold <span class="op">==</span><span class="st"> </span>k] &lt;-</a>
+<a class="sourceLine" id="cb925-39" data-line-number="39"><span class="st">    </span><span class="kw">extract_log_lik</span>(gq_ho)</a>
+<a class="sourceLine" id="cb925-40" data-line-number="40">  log_pd_null_kfold[, df_pupil<span class="op">$</span>fold <span class="op">==</span><span class="st"> </span>k] &lt;-</a>
+<a class="sourceLine" id="cb925-41" data-line-number="41"><span class="st">    </span><span class="kw">extract_log_lik</span>(gq_null_ho)</a>
+<a class="sourceLine" id="cb925-42" data-line-number="42">}</a></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Compute K-fold elpd</li>
 </ol>
 <p>Now we evaluate the predictive performance of the model on the 10 folds using <code>elpd()</code>.</p>
-<div class="sourceCode" id="cb927"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb927-1" data-line-number="1">(elpd_pupil_kfold &lt;-<span class="st"> </span><span class="kw">elpd</span>(log_pd_kfold))</a></code></pre></div>
+<div class="sourceCode" id="cb926"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb926-1" data-line-number="1">(elpd_pupil_kfold &lt;-<span class="st"> </span><span class="kw">elpd</span>(log_pd_kfold))</a></code></pre></div>
 <pre><code>## 
 ## Computed from 6000 by 41 log-likelihood matrix using the generic elpd function
 ## 
 ##      Estimate   SE
 ## elpd   -259.7  6.0
 ## ic      519.5 12.0</code></pre>
-<div class="sourceCode" id="cb929"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb929-1" data-line-number="1">(elpd_pupil_null_kfold &lt;-<span class="st"> </span><span class="kw">elpd</span>(log_pd_null_kfold))</a></code></pre></div>
+<div class="sourceCode" id="cb928"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb928-1" data-line-number="1">(elpd_pupil_null_kfold &lt;-<span class="st"> </span><span class="kw">elpd</span>(log_pd_null_kfold))</a></code></pre></div>
 <pre><code>## 
 ## Computed from 6000 by 41 log-likelihood matrix using the generic elpd function
 ## 
@@ -1434,7 +1435,7 @@ generated quantities{
 <ol start="4" style="list-style-type: decimal">
 <li>Compare the elpd estimates</li>
 </ol>
-<div class="sourceCode" id="cb931"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb931-1" data-line-number="1"><span class="kw">loo_compare</span>(elpd_pupil_kfold, elpd_pupil_null_kfold)</a></code></pre></div>
+<div class="sourceCode" id="cb930"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb930-1" data-line-number="1"><span class="kw">loo_compare</span>(elpd_pupil_kfold, elpd_pupil_null_kfold)</a></code></pre></div>
 <pre><code>##        elpd_diff se_diff
 ## model2  0.0       0.0   
 ## model1 -0.2       0.5</code></pre>
@@ -1524,8 +1525,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/17-CV.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1535,7 +1536,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

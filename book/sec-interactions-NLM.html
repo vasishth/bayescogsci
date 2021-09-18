@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1193,8 +1194,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Next, we look at generalized linear models, where a linear predictor is passed through a non-linear link function to predict the dependent variable. Examples for generalized linear models include logistic regression models and models assuming a Poisson distribution. Even though a log-normal model is a linear model on a log-transformed dependent variable, the same techniques apply to this type of model since the logarithm is not linear. Here, we treat an example with a logistic model in a <span class="math inline">\(2 \times 2\)</span> factorial between-subject design. The logistic model has the following non-linear link function called the logistic function: <span class="math inline">\(p(y=1 \mid x, b) = \frac{1}{1 + \exp(-\eta)}\)</span>, where <span class="math inline">\(\eta\)</span> is the latent linear predictor. For example, in our <span class="math inline">\(2 \times 2\)</span> factorial design with main effects A and B and their interaction, <span class="math inline">\(\eta\)</span> is computed as a linear combination of the intercept plus the main effects and their interaction: <span class="math inline">\(\eta = 1 + \beta_A x_A + \beta_B x_B + \beta_{A \times B} x_{A \times B}\)</span>.</p>
 <p>Thus, there is a latent level of linear predictions (<span class="math inline">\(\eta\)</span>), which are then passed through a non-linear link function to predict the probability that the observed data is a success (<span class="math inline">\(p(y = 1)\)</span>). We will use this logistic model to analyze an example data set where the dependent variable is dichotomous, coded as either a 1 (indicating success) or a 0 (indicating failure).</p>
 <p>We load a simulated data set where the dependent variable codes whether a subject performed a task successfully (pDV = 1) or not (pDV = 0). Moreover, the data set has two between-subject factors A and B. The means for each of the four conditions are shown in Table <a href="sec-interactions-NLM.html#tab:cTab7Means">9.3</a>.</p>
-<div class="sourceCode" id="cb544"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb544-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_contrasts7&quot;</span>)</a>
-<a class="sourceLine" id="cb544-2" data-line-number="2"><span class="kw">str</span>(df_contrasts7)</a></code></pre></div>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb547-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_contrasts7&quot;</span>)</a>
+<a class="sourceLine" id="cb547-2" data-line-number="2"><span class="kw">str</span>(df_contrasts7)</a></code></pre></div>
 <pre><code>## tibble [200 × 4] (S3: tbl_df/tbl/data.frame)
 ##  $ A  : Factor w/ 2 levels &quot;A1&quot;,&quot;A2&quot;: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ B  : Factor w/ 2 levels &quot;B1&quot;,&quot;B2&quot;: 1 1 1 1 1 1 1 1 1 1 ...
@@ -1280,119 +1281,119 @@ B2
 </tbody>
 </table>
 <p>To analyze this data, we use scaled sum contrasts, as we had done above for the <span class="math inline">\(2 \times 2\)</span> design with response times as the dependent variable; this allows us to interpret the coefficients directly as main effects. Next, we fit a brms model. The model specification is the same as the model with response times - with two differences: First, the <code>family</code> argument is now specified as <code>family = bernoulli(link = &quot;logit&quot;)</code> to indicate the logistic model. Moreover, we do not specify a prior for <code>sigma</code>, since there is no residual standard deviation in a logistic model.</p>
-<div class="sourceCode" id="cb546"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb546-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts7<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">+0.5</span>)</a>
-<a class="sourceLine" id="cb546-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts7<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">+0.5</span>)</a>
-<a class="sourceLine" id="cb546-3" data-line-number="3">fit_pDV_AB.sum &lt;-<span class="st"> </span><span class="kw">brm</span>(pDV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B,</a>
-<a class="sourceLine" id="cb546-4" data-line-number="4">  <span class="dt">data =</span> df_contrasts7,</a>
-<a class="sourceLine" id="cb546-5" data-line-number="5">  <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>),</a>
-<a class="sourceLine" id="cb546-6" data-line-number="6">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb546-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">3</span>), <span class="dt">class =</span> Intercept),</a>
-<a class="sourceLine" id="cb546-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">3</span>), <span class="dt">class =</span> b)</a>
-<a class="sourceLine" id="cb546-9" data-line-number="9">  )</a>
-<a class="sourceLine" id="cb546-10" data-line-number="10">)</a></code></pre></div>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb547-1" data-line-number="1"><span class="kw">fixef</span>(fit_pDV_AB.sum)</a></code></pre></div>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb549-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts7<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">+0.5</span>)</a>
+<a class="sourceLine" id="cb549-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts7<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">+0.5</span>)</a>
+<a class="sourceLine" id="cb549-3" data-line-number="3">fit_pDV_AB.sum &lt;-<span class="st"> </span><span class="kw">brm</span>(pDV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B,</a>
+<a class="sourceLine" id="cb549-4" data-line-number="4">  <span class="dt">data =</span> df_contrasts7,</a>
+<a class="sourceLine" id="cb549-5" data-line-number="5">  <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>),</a>
+<a class="sourceLine" id="cb549-6" data-line-number="6">  <span class="dt">prior =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb549-7" data-line-number="7">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">3</span>), <span class="dt">class =</span> Intercept),</a>
+<a class="sourceLine" id="cb549-8" data-line-number="8">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">3</span>), <span class="dt">class =</span> b)</a>
+<a class="sourceLine" id="cb549-9" data-line-number="9">  )</a>
+<a class="sourceLine" id="cb549-10" data-line-number="10">)</a></code></pre></div>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb550-1" data-line-number="1"><span class="kw">fixef</span>(fit_pDV_AB.sum)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error  Q2.5 Q97.5
-## Intercept    -0.36      0.17 -0.69 -0.02
-## A1            0.70      0.35  0.02  1.38
-## B1            2.11      0.34  1.45  2.80
-## A1:B1         1.35      0.66  0.10  2.64</code></pre>
+## Intercept    -0.35      0.17 -0.69 -0.02
+## A1            0.71      0.34  0.05  1.39
+## B1            2.10      0.34  1.43  2.77
+## A1:B1         1.36      0.66  0.06  2.68</code></pre>
 <p>Multiplying the main effects, which are coded as <span class="math inline">\(\pm 0.5\)</span>, with each other will lead to a weight of <span class="math inline">\(0.25\)</span> in the interaction. Because this changes the scale, it may be better to use <span class="math inline">\(\pm 1\)</span> coding, creating vectors for the main effects:</p>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb549-1" data-line-number="1">ME_A &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts7<span class="op">$</span>A <span class="op">==</span><span class="st"> &quot;A1&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb549-2" data-line-number="2">ME_B &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts7<span class="op">$</span>B <span class="op">==</span><span class="st"> &quot;B1&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb552-1" data-line-number="1">ME_A &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts7<span class="op">$</span>A <span class="op">==</span><span class="st"> &quot;A1&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb552-2" data-line-number="2">ME_B &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df_contrasts7<span class="op">$</span>B <span class="op">==</span><span class="st"> &quot;B1&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>)</a></code></pre></div>
 <p>However, in the present example, we continue with the <span class="math inline">\(\pm 0.5\)</span> coding, because as long as one is aware of the scaling, one can interpret the main effects and interactions appropriately.</p>
 <p>The results from this analysis show that the estimates for the two main effects (“A1” and “B1”) as well as the interaction (“A1:B1”) are positive and the 95% credible intervals do not include zero. If we want to make a discovery claim, we would need to perform Bayes factor analyses to investigate the evidence that there is for each of the effects.</p>
 <p>Next, we discuss how we can obtain model predictions for each of the four experimental conditions for this generalized linear model. To obtain such predictions, we first take a look at the contrast matrix. We simultaneously have contrasts for two main effects and one interaction:</p>
-<div class="sourceCode" id="cb550"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb550-1" data-line-number="1">tab7 &lt;-<span class="st"> </span>df_contrasts7 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb550-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(A, B) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb550-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb550-4" data-line-number="4"><span class="st">  </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B, <span class="dt">data =</span> .) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb550-5" data-line-number="5"><span class="st">  </span><span class="kw">as.data.frame</span>()</a>
-<a class="sourceLine" id="cb550-6" data-line-number="6"><span class="kw">row.names</span>(tab7) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb551-1" data-line-number="1">tab7</a></code></pre></div>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb553-1" data-line-number="1">tab7 &lt;-<span class="st"> </span>df_contrasts7 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb553-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(A, B) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb553-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb553-4" data-line-number="4"><span class="st">  </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span>A <span class="op">*</span><span class="st"> </span>B, <span class="dt">data =</span> .) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb553-5" data-line-number="5"><span class="st">  </span><span class="kw">as.data.frame</span>()</a>
+<a class="sourceLine" id="cb553-6" data-line-number="6"><span class="kw">row.names</span>(tab7) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb554-1" data-line-number="1">tab7</a></code></pre></div>
 <pre><code>##       (Intercept)   A1   B1 A1:B1
 ## A1_B1           1 -0.5 -0.5  0.25
 ## A1_B2           1 -0.5  0.5 -0.25
 ## A2_B1           1  0.5 -0.5 -0.25
 ## A2_B2           1  0.5  0.5  0.25</code></pre>
 <p>We obtain the posterior samples for the estimates from the model:</p>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb553-1" data-line-number="1">df_postSamp_pDV &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_pDV_AB.sum)</a>
-<a class="sourceLine" id="cb553-2" data-line-number="2"><span class="kw">str</span>(df_postSamp_pDV)</a></code></pre></div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb556-1" data-line-number="1">df_postSamp_pDV &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_pDV_AB.sum)</a>
+<a class="sourceLine" id="cb556-2" data-line-number="2"><span class="kw">str</span>(df_postSamp_pDV)</a></code></pre></div>
 <pre><code>## draws_df [4,000 × 8] (S3: draws_df/draws/tbl_df/tbl/data.frame)
-##  $ b_Intercept: num [1:4000] -0.46 -0.344 -0.97 -0.847 -0.287 ...
-##  $ b_A1       : num [1:4000] 0.8067 -0.1752 0.562 0.5522 0.0458 ...
-##  $ b_B1       : num [1:4000] 2.39 1.99 2.43 2.45 2.49 ...
-##  $ b_A1:B1    : num [1:4000] 1.524 1.46 1.092 0.918 1.739 ...
-##  $ lp__       : num [1:4000] -119 -122 -125 -123 -121 ...
+##  $ b_Intercept: num [1:4000] -0.46 -0.36 -0.326 -0.335 -0.386 ...
+##  $ b_A1       : num [1:4000] 0.45841 0.00964 0.45602 0.96106 0.53058 ...
+##  $ b_B1       : num [1:4000] 1.19 1.51 1.8 2.19 1.83 ...
+##  $ b_A1:B1    : num [1:4000] 1.544 1.276 0.896 1.63 1.144 ...
+##  $ lp__       : num [1:4000] -122 -122 -119 -119 -119 ...
 ##  $ .chain     : int [1:4000] 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ .iteration : int [1:4000] 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ .draw      : int [1:4000] 1 2 3 4 5 6 7 8 9 10 ...</code></pre>
 <p>From these, we can compute the posterior samples for the linear predictions for each group. We see in the contrast matrix how we have to combine the posterior samples for the intercept, main effects, and interaction to obtain latent linear predictions for each condition. The first condition (design cell A1, B1) has a weight of <span class="math inline">\(1\)</span> for the intercept, and then weights of <span class="math inline">\(-0.5\)</span> (for the main effect of A), <span class="math inline">\(-0.5\)</span> (for the main effect of B), and <span class="math inline">\(0.25\)</span> (for the interaction). The posterior samples for the other conditions are computed accordingly.</p>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb555-1" data-line-number="1">df_postSamp_pDV<span class="op">$</span>A1_B1 &lt;-</a>
-<a class="sourceLine" id="cb555-2" data-line-number="2"><span class="st">  </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_Intercept <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-3" data-line-number="3"><span class="st">  </span><span class="fl">-0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_A1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-4" data-line-number="4"><span class="st">  </span><span class="fl">-0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_B1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-5" data-line-number="5"><span class="st">  </span><span class="fl">+0.25</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span><span class="st">`</span><span class="dt">b_A1:B1</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb555-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb555-7" data-line-number="7">df_postSamp_pDV<span class="op">$</span>A1_B2 &lt;-</a>
-<a class="sourceLine" id="cb555-8" data-line-number="8"><span class="st">  </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_Intercept <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-9" data-line-number="9"><span class="st">  </span><span class="fl">-0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_A1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-10" data-line-number="10"><span class="st">  </span><span class="fl">+0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_B1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-11" data-line-number="11"><span class="st">  </span><span class="fl">-0.25</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span><span class="st">`</span><span class="dt">b_A1:B1</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb555-12" data-line-number="12">df_postSamp_pDV<span class="op">$</span>A2_B1 &lt;-</a>
-<a class="sourceLine" id="cb555-13" data-line-number="13"><span class="st">  </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_Intercept <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-14" data-line-number="14"><span class="st">  </span><span class="fl">+0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_A1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-15" data-line-number="15"><span class="st">  </span><span class="fl">-0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_B1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-16" data-line-number="16"><span class="st">  </span><span class="fl">-0.25</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span><span class="st">`</span><span class="dt">b_A1:B1</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb555-17" data-line-number="17">df_postSamp_pDV<span class="op">$</span>A2_B2 &lt;-</a>
-<a class="sourceLine" id="cb555-18" data-line-number="18"><span class="st">  </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_Intercept <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-19" data-line-number="19"><span class="st">  </span><span class="fl">+0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_A1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-20" data-line-number="20"><span class="st">  </span><span class="fl">+0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_B1 <span class="op">+</span></a>
-<a class="sourceLine" id="cb555-21" data-line-number="21"><span class="st">  </span><span class="fl">+0.25</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span><span class="st">`</span><span class="dt">b_A1:B1</span><span class="st">`</span></a></code></pre></div>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb558-1" data-line-number="1">df_postSamp_pDV<span class="op">$</span>A1_B1 &lt;-</a>
+<a class="sourceLine" id="cb558-2" data-line-number="2"><span class="st">  </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_Intercept <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-3" data-line-number="3"><span class="st">  </span><span class="fl">-0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_A1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-4" data-line-number="4"><span class="st">  </span><span class="fl">-0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_B1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-5" data-line-number="5"><span class="st">  </span><span class="fl">+0.25</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span><span class="st">`</span><span class="dt">b_A1:B1</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb558-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb558-7" data-line-number="7">df_postSamp_pDV<span class="op">$</span>A1_B2 &lt;-</a>
+<a class="sourceLine" id="cb558-8" data-line-number="8"><span class="st">  </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_Intercept <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-9" data-line-number="9"><span class="st">  </span><span class="fl">-0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_A1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-10" data-line-number="10"><span class="st">  </span><span class="fl">+0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_B1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-11" data-line-number="11"><span class="st">  </span><span class="fl">-0.25</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span><span class="st">`</span><span class="dt">b_A1:B1</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb558-12" data-line-number="12">df_postSamp_pDV<span class="op">$</span>A2_B1 &lt;-</a>
+<a class="sourceLine" id="cb558-13" data-line-number="13"><span class="st">  </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_Intercept <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-14" data-line-number="14"><span class="st">  </span><span class="fl">+0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_A1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-15" data-line-number="15"><span class="st">  </span><span class="fl">-0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_B1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-16" data-line-number="16"><span class="st">  </span><span class="fl">-0.25</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span><span class="st">`</span><span class="dt">b_A1:B1</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb558-17" data-line-number="17">df_postSamp_pDV<span class="op">$</span>A2_B2 &lt;-</a>
+<a class="sourceLine" id="cb558-18" data-line-number="18"><span class="st">  </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_Intercept <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-19" data-line-number="19"><span class="st">  </span><span class="fl">+0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_A1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-20" data-line-number="20"><span class="st">  </span><span class="fl">+0.5</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span>b_B1 <span class="op">+</span></a>
+<a class="sourceLine" id="cb558-21" data-line-number="21"><span class="st">  </span><span class="fl">+0.25</span> <span class="op">*</span><span class="st"> </span>df_postSamp_pDV<span class="op">$</span><span class="st">`</span><span class="dt">b_A1:B1</span><span class="st">`</span></a></code></pre></div>
 <p>Now, we have computed posterior samples for estimates of the latent linear predictor <span class="math inline">\(\eta\)</span> for each experimental condition. We can look at the posterior means:</p>
-<div class="sourceCode" id="cb556"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb556-1" data-line-number="1"><span class="kw">colMeans</span>(<span class="kw">as.data.frame</span>(df_postSamp_pDV)[, <span class="kw">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)])</a></code></pre></div>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb559-1" data-line-number="1"><span class="kw">colMeans</span>(<span class="kw">as.data.frame</span>(df_postSamp_pDV)[, <span class="kw">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)])</a></code></pre></div>
 <pre><code>##    A1_B1    A1_B2    A2_B1    A2_B2 
-## -1.42752  0.00882 -1.39893  1.38475</code></pre>
-<p>This shows that these values are not on the scale of probabilities. Instead, they are on the scale of the latent linear predictor <span class="math inline">\(\eta\)</span>. However, for presentation and interpretation of the results, it might be much more informative to look at the condition means in terms of the probabilities of success in each of the four conditions. Given that we have the linear predictions for each condition, this can be easily computed by sending all posterior samples for the linear predictions through the link function. Applying the logistic function (<code>plogis(.)</code> in R) transforms the linear predictors to the probability scale:<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a></p>
-<div class="sourceCode" id="cb558"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb558-1" data-line-number="1">df_postSamp_pDV<span class="op">$</span>p_A1_B1 &lt;-<span class="st"> </span><span class="kw">plogis</span>(df_postSamp_pDV<span class="op">$</span>A1_B1)</a>
-<a class="sourceLine" id="cb558-2" data-line-number="2">df_postSamp_pDV<span class="op">$</span>p_A1_B2 &lt;-<span class="st"> </span><span class="kw">plogis</span>(df_postSamp_pDV<span class="op">$</span>A1_B2)</a>
-<a class="sourceLine" id="cb558-3" data-line-number="3">df_postSamp_pDV<span class="op">$</span>p_A2_B1 &lt;-<span class="st"> </span><span class="kw">plogis</span>(df_postSamp_pDV<span class="op">$</span>A2_B1)</a>
-<a class="sourceLine" id="cb558-4" data-line-number="4">df_postSamp_pDV<span class="op">$</span>p_A2_B2 &lt;-<span class="st"> </span><span class="kw">plogis</span>(df_postSamp_pDV<span class="op">$</span>A2_B2)</a></code></pre></div>
+## -1.41563  0.00144 -1.38622  1.39571</code></pre>
+<p>This shows that these values are not on the scale of probabilities. Instead, they are on the scale of the latent linear predictor <span class="math inline">\(\eta\)</span>. However, for presentation and interpretation of the results, it might be much more informative to look at the condition means in terms of the probabilities of success in each of the four conditions. Given that we have the linear predictions for each condition, this can be easily computed by sending all posterior samples for the linear predictions through the link function. Applying the logistic function (<code>plogis(.)</code> in R) transforms the linear predictors to the probability scale:<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a></p>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb561-1" data-line-number="1">df_postSamp_pDV<span class="op">$</span>p_A1_B1 &lt;-<span class="st"> </span><span class="kw">plogis</span>(df_postSamp_pDV<span class="op">$</span>A1_B1)</a>
+<a class="sourceLine" id="cb561-2" data-line-number="2">df_postSamp_pDV<span class="op">$</span>p_A1_B2 &lt;-<span class="st"> </span><span class="kw">plogis</span>(df_postSamp_pDV<span class="op">$</span>A1_B2)</a>
+<a class="sourceLine" id="cb561-3" data-line-number="3">df_postSamp_pDV<span class="op">$</span>p_A2_B1 &lt;-<span class="st"> </span><span class="kw">plogis</span>(df_postSamp_pDV<span class="op">$</span>A2_B1)</a>
+<a class="sourceLine" id="cb561-4" data-line-number="4">df_postSamp_pDV<span class="op">$</span>p_A2_B2 &lt;-<span class="st"> </span><span class="kw">plogis</span>(df_postSamp_pDV<span class="op">$</span>A2_B2)</a></code></pre></div>
 <p>Now, we have posterior samples for each condition on the probability scale. We can take a look at the posterior means, and see that these closely correspond to the probabilities in the data that we have seen above in Table <a href="sec-interactions-NLM.html#tab:cTab7Means">9.3</a>.</p>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb559-1" data-line-number="1"><span class="kw">colMeans</span>(<span class="kw">as.data.frame</span>(df_postSamp_pDV)[, <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb559-2" data-line-number="2">  <span class="st">&quot;p_A1_B1&quot;</span>, <span class="st">&quot;p_A1_B2&quot;</span>,</a>
-<a class="sourceLine" id="cb559-3" data-line-number="3">  <span class="st">&quot;p_A2_B1&quot;</span>, <span class="st">&quot;p_A2_B2&quot;</span></a>
-<a class="sourceLine" id="cb559-4" data-line-number="4">)])</a></code></pre></div>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb562-1" data-line-number="1"><span class="kw">colMeans</span>(<span class="kw">as.data.frame</span>(df_postSamp_pDV)[, <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb562-2" data-line-number="2">  <span class="st">&quot;p_A1_B1&quot;</span>, <span class="st">&quot;p_A1_B2&quot;</span>,</a>
+<a class="sourceLine" id="cb562-3" data-line-number="3">  <span class="st">&quot;p_A2_B1&quot;</span>, <span class="st">&quot;p_A2_B2&quot;</span></a>
+<a class="sourceLine" id="cb562-4" data-line-number="4">)])</a></code></pre></div>
 <pre><code>## p_A1_B1 p_A1_B2 p_A2_B1 p_A2_B2 
-##   0.200   0.502   0.204   0.794</code></pre>
+##   0.201   0.500   0.206   0.796</code></pre>
 <p>Of course, the advantage is that we now have posterior samples for these conditions available, and can compute posterior 95% credible intervals (also see Figure <a href="#fig:figpDV"><strong>??</strong></a>). Rather than do it manually, the function <code>conditional_effects</code> can do this for us. By default, all main effects and two-way interactions estimated in the model are shown (this can be changed by including, for example, <code>effects = &quot;A:B&quot;</code>).</p>
-<div class="sourceCode" id="cb561"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb561-1" data-line-number="1"><span class="kw">conditional_effects</span>(fit_pDV_AB.sum, <span class="dt">robust =</span> <span class="ot">FALSE</span>)[]</a></code></pre></div>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb564-1" data-line-number="1"><span class="kw">conditional_effects</span>(fit_pDV_AB.sum, <span class="dt">robust =</span> <span class="ot">FALSE</span>)[]</a></code></pre></div>
 <pre><code>## $A
-##    A   pDV  B cond__ effect1__ estimate__  se__ lower__ upper__
-## 1 A1 0.425 B1      1        A1      0.200 0.056   0.102   0.319
-## 2 A2 0.425 B1      1        A2      0.204 0.056   0.105   0.323
+##    A   pDV  B cond__ effect1__ estimate__   se__ lower__ upper__
+## 1 A1 0.425 B1      1        A1      0.201 0.0553   0.105   0.321
+## 2 A2 0.425 B1      1        A2      0.206 0.0573   0.107   0.329
 ## 
 ## $B
 ##    B   pDV  A cond__ effect1__ estimate__   se__ lower__ upper__
-## 1 B1 0.425 A1      1        B1      0.200 0.0560   0.102   0.319
-## 2 B2 0.425 A1      1        B2      0.502 0.0699   0.368   0.641
+## 1 B1 0.425 A1      1        B1      0.201 0.0553   0.105   0.321
+## 2 B2 0.425 A1      1        B2      0.500 0.0689   0.365   0.635
 ## 
 ## $`A:B`
 ##    A  B   pDV cond__ effect1__ effect2__ estimate__   se__ lower__
-## 1 A1 B1 0.425      1        A1        B1      0.200 0.0560   0.102
-## 2 A1 B2 0.425      1        A1        B2      0.502 0.0699   0.368
-## 3 A2 B1 0.425      1        A2        B1      0.204 0.0560   0.105
-## 4 A2 B2 0.425      1        A2        B2      0.794 0.0564   0.674
+## 1 A1 B1 0.425      1        A1        B1      0.201 0.0553   0.105
+## 2 A1 B2 0.425      1        A1        B2      0.500 0.0689   0.365
+## 3 A2 B1 0.425      1        A2        B1      0.206 0.0573   0.107
+## 4 A2 B2 0.425      1        A2        B2      0.796 0.0564   0.676
 ##   upper__
-## 1   0.319
-## 2   0.641
-## 3   0.323
-## 4   0.894</code></pre>
+## 1   0.321
+## 2   0.635
+## 3   0.329
+## 4   0.892</code></pre>
 <p>We plot the two-way interaction using <code>brms</code> embedding the <code>conditional_effects()</code> call in <code>plot(.)[[1]]</code>. This allows us to select the first (and here the only) <code>ggplot</code> element and to customize it.</p>
 
-<div class="sourceCode" id="cb563"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb563-1" data-line-number="1"><span class="kw">plot</span>(<span class="kw">conditional_effects</span>(fit_pDV_AB.sum, <span class="dt">effects =</span> <span class="st">&quot;A:B&quot;</span>, <span class="dt">robust =</span> <span class="ot">FALSE</span>))[[<span class="dv">1</span>]] <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb563-2" data-line-number="2"><span class="st">  </span><span class="kw">labs</span>(</a>
-<a class="sourceLine" id="cb563-3" data-line-number="3">    <span class="dt">y =</span> <span class="st">&quot;Success probability&quot;</span></a>
-<a class="sourceLine" id="cb563-4" data-line-number="4">  )</a></code></pre></div>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb566-1" data-line-number="1"><span class="kw">plot</span>(<span class="kw">conditional_effects</span>(fit_pDV_AB.sum, <span class="dt">effects =</span> <span class="st">&quot;A:B&quot;</span>, <span class="dt">robust =</span> <span class="ot">FALSE</span>))[[<span class="dv">1</span>]] <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb566-2" data-line-number="2"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb566-3" data-line-number="3">    <span class="dt">y =</span> <span class="st">&quot;Success probability&quot;</span></a>
+<a class="sourceLine" id="cb566-4" data-line-number="4">  )</a></code></pre></div>
 <div class="figure"><span id="fig:figpDV-1"></span>
 <img src="bookdown_files/figure-html/figpDV-1.svg" alt="Means and 95 percent posterior credible intervals for a simulated data set of successful task performance in a \(2 \times 2\) design." width="336" />
 <p class="caption">
@@ -1408,8 +1409,8 @@ FIGURE 9.6: Means and 95 percent posterior credible intervals for a simulated da
 </div>
 <div class="footnotes">
 <hr />
-<ol start="26">
-<li id="fn26"><p>The same (with lower precision) can be achieved using <code>1/1+exp(-.)</code>.<a href="sec-interactions-NLM.html#fnref26" class="footnote-back">↩</a></p></li>
+<ol start="28">
+<li id="fn28"><p>The same (with lower precision) can be achieved using <code>1/1+exp(-.)</code>.<a href="sec-interactions-NLM.html#fnref28" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1450,8 +1451,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/09-coding2x2.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1461,7 +1462,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

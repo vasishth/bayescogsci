@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 21 A simple accumulator model to account for choice response time | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
+  <title>12.2 A handmade distribution | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 21 A simple accumulator model to account for choice response time | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta property="og:title" content="12.2 A handmade distribution | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://vasishth.github.io/Bayes_CogSci/" />
   <meta property="og:image" content="https://vasishth.github.io/Bayes_CogSci//images/temporarycover.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/vasishth/Bayes_CogSci" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 21 A simple accumulator model to account for choice response time | An Introduction to Bayesian Data Analysis for Cognitive Science" />
+  <meta name="twitter:title" content="12.2 A handmade distribution | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   
   <meta name="twitter:description" content="An introduction to Bayesian data analysis for Cognitive Science." />
   <meta name="twitter:image" content="https://vasishth.github.io/Bayes_CogSci//images/temporarycover.jpg" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="exercises-5.html"/>
-<link rel="next" href="ch-distr.html"/>
+<link rel="prev" href="a-change-of-variables-with-reciprocal-normal-distribution.html"/>
+<link rel="next" href="further-reading-8.html"/>
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
@@ -1189,21 +1189,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ch:lognormalrace" class="section level1">
-<h1><span class="header-section-number">Chapter 21</span> A simple accumulator model to account for choice response time</h1>
-
-
+<div id="a-handmade-distribution" class="section level2">
+<h2><span class="header-section-number">12.2</span> A handmade distribution</h2>
+<p>There are cases when one needs a distribution that is not included in Stan. Many times one can find the PDF (or a CDF) derived in a paper, and one needs to implement it manually by writing the log(PDF) in Stan language.
+Even though the exponential distribution is included in Stan, we demonstrate how we would include it step-by-step as if it weren’t available. This example extends what is demonstrated in Stan’s user guide <span class="citation">(Stan Development Team <a href="#ref-Stan2021">2021</a>)</span>.
+The PDF of an exponential distribution is</p>
+<p><span class="math display">\[\begin{equation}
+f(x, \lambda )={
+\begin{cases}
+\lambda e^{-\lambda x} &amp; x\geq 0,\\0&amp;x&lt;0.
+\end{cases}} 
+\end{equation}\]</span></p>
+<p>where parameter <span class="math inline">\(\lambda\)</span> is often called the rate parameter and needs to be positive.</p>
+<p>It’s a good idea to verify that this actually a distribution, we make our own version of <code>dexp</code>, and we’ll check if it integrates to 1.</p>
+<p>To avoid underflow, that is getting a zero instead of of a very small number, we’ll work in log-scale. This will also be useful when we implement this function in Stan, thus the log(PDF) is</p>
+<p><span class="math display">\[\begin{equation}
+\log(f(x, \lambda ))= \log(\lambda) -\lambda  x
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(x &gt;0\)</span>.</p>
+<p>Implement this in R with the same arguments as the <code>d*</code> function family: if <code>log = TRUE</code> the output is a log density, and call it <code>dexp2</code>.</p>
+<div class="sourceCode" id="cb757"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb757-1" data-line-number="1">dexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">lambda =</span> <span class="dv">1</span>, <span class="dt">log =</span> <span class="ot">FALSE</span>){</a>
+<a class="sourceLine" id="cb757-2" data-line-number="2">  log_density &lt;-<span class="st"> </span><span class="kw">log</span>(lambda) <span class="op">-</span><span class="st"> </span>lambda <span class="op">*</span><span class="st"> </span>x</a>
+<a class="sourceLine" id="cb757-3" data-line-number="3">  <span class="cf">if</span>(log <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> ) {</a>
+<a class="sourceLine" id="cb757-4" data-line-number="4">    <span class="kw">exp</span>(log_density)</a>
+<a class="sourceLine" id="cb757-5" data-line-number="5">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb757-6" data-line-number="6">    log_density</a>
+<a class="sourceLine" id="cb757-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb757-8" data-line-number="8">}</a></code></pre></div>
+<p>Verify that integrates to 1 for some parameter values (here <span class="math inline">\(\lambda = 1\)</span> and <span class="math inline">\(\lambda = 20\)</span>):</p>
+<div class="sourceCode" id="cb758"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb758-1" data-line-number="1">dexp2_l1 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dexp2</span>(x, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb758-2" data-line-number="2"><span class="kw">integrate</span>(dexp2_l1, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)</a></code></pre></div>
+<pre><code>## 1 with absolute error &lt; 0.000057</code></pre>
+<div class="sourceCode" id="cb760"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb760-1" data-line-number="1">dexp2_l20 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dexp2</span>(x, <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb760-2" data-line-number="2"><span class="kw">integrate</span>(dexp2_l20, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)</a></code></pre></div>
+<pre><code>## 1 with absolute error &lt; 0.00000001</code></pre>
+<p>To test our function we’ll also need to generate random values from the exponential distribution. If the quantile function of the distribution exists, the inverse transform sampling is a relatively straightforward way to get pseudo random numbers sampled from a target distribution.</p>
+<blockquote>
+<p>TO COMPLETE EXPLANATION HERE</p>
+</blockquote>
+<p>In this case, the quantile function has been derived already for us and it’s:</p>
+<p><span class="math display">\[\begin{equation}
+- \log(1-p)/\lambda
+\end{equation}\]</span></p>
+<p>But it can also be derived by inverting the CDF; given the CDF of the exponential distribution</p>
+<p><span class="math display">\[\begin{equation}
+F(x, \lambda) = 1- e^{-\lambda x}
+\end{equation}\]</span></p>
+<p>we need to find the value of <span class="math inline">\(x\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{aligned}
+p &amp;= 1- e^{-\lambda x}\\
+p-1 &amp;= - e^{-\lambda x}\\
+-p+1 &amp;=  e^{-\lambda x}\\
+\log(1-p) &amp;=  -\lambda x\\
+- \log(1-p)/\lambda &amp;=  x\\
+\end{aligned}
+\end{equation}\]</span></p>
+<p>Write the quantile function (or inverse CDF) and random number generator for the exponential distribution:</p>
+<div class="sourceCode" id="cb762"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb762-1" data-line-number="1">qexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(p, <span class="dt">lambda =</span> <span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb762-2" data-line-number="2"><span class="op">-</span><span class="kw">log</span>(<span class="dv">1</span><span class="op">-</span>p)<span class="op">/</span>lambda</a>
+<a class="sourceLine" id="cb762-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb762-4" data-line-number="4">rexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">lambda =</span> <span class="dv">1</span>){</a>
+<a class="sourceLine" id="cb762-5" data-line-number="5">  u &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <span class="dv">0</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb762-6" data-line-number="6">  <span class="kw">qexp2</span>(u, lambda)</a>
+<a class="sourceLine" id="cb762-7" data-line-number="7">}</a></code></pre></div>
+<p>We are now ready to generate synthetic data and fit the distribution in Stan.</p>
+<div class="sourceCode" id="cb763"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb763-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb763-2" data-line-number="2">rt &lt;-<span class="st"> </span><span class="kw">rexp2</span>(N, <span class="dv">2</span>)</a></code></pre></div>
+<blockquote>
+<p>TO BE CONTINUED</p>
+</blockquote>
 </div>
-
-
-
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Stan2021">
+<p>Stan Development Team. 2021. “Stan Modeling Language Users Guide and Reference Manual, Version 2.27.” <a href="https://mc-stan.org" class="uri">https://mc-stan.org</a>.</p>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="exercises-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ch-distr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="a-change-of-variables-with-reciprocal-normal-distribution.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="further-reading-8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>

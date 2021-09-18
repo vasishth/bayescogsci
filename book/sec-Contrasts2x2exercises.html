@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1196,10 +1197,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <p>Load the following data. These data are from Experiment 1 in a set of reading studies on Persian <span class="citation">(Safavi, Husain, and Vasishth <a href="#ref-SafaviEtAlFrontiers2016">2016</a>)</span>; we encountered these data in the preceding chapter’s exercises.</p>
-<div class="sourceCode" id="cb564"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb564-1" data-line-number="1"><span class="kw">library</span>(bcogsci)</a>
-<a class="sourceLine" id="cb564-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;df_persianE1&quot;</span>)</a>
-<a class="sourceLine" id="cb564-3" data-line-number="3">dat1 &lt;-<span class="st"> </span>df_persianE1</a>
-<a class="sourceLine" id="cb564-4" data-line-number="4"><span class="kw">head</span>(dat1)</a></code></pre></div>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb567-1" data-line-number="1"><span class="kw">library</span>(bcogsci)</a>
+<a class="sourceLine" id="cb567-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;df_persianE1&quot;</span>)</a>
+<a class="sourceLine" id="cb567-3" data-line-number="3">dat1 &lt;-<span class="st"> </span>df_persianE1</a>
+<a class="sourceLine" id="cb567-4" data-line-number="4"><span class="kw">head</span>(dat1)</a></code></pre></div>
 <pre><code>##     subj item   rt distance   predability
 ## 60     4    6  568    short   predictable
 ## 94     4   17  517     long unpredictable
@@ -1221,8 +1222,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <p>Load the following data set. This is <span class="math inline">\(2\times 2\times 2\)</span> design from <span class="citation">Jäger et al. (<a href="#ref-jager2020interference">2020</a>)</span>, with the factors Grammaticality (grammatical vs. ungrammatical), Dependency (Agreement vs. Reflexives), and Interference (Interference vs. no interference). The experiment is a replication attempt of Experiment 1 reported in <span class="citation">Dillon et al. (<a href="#ref-Dillon-EtAl-2013">2013</a>)</span>.</p>
-<div class="sourceCode" id="cb566"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb566-1" data-line-number="1"><span class="kw">library</span>(bcogsci)</a>
-<a class="sourceLine" id="cb566-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;df_dillonrep&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb569-1" data-line-number="1"><span class="kw">library</span>(bcogsci)</a>
+<a class="sourceLine" id="cb569-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;df_dillonrep&quot;</span>)</a></code></pre></div>
 <ul>
 <li>The grammatical conditions are a,b,e,f. The rest of the conditions are ungrammatical.</li>
 <li>The agreement conditions are a,b,c,d. The other conditions are reflexives.</li>
@@ -1298,8 +1299,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/09-coding2x2.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1309,7 +1310,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

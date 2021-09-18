@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1258,7 +1259,7 @@ Next, we turn our attention to the prior specification for the group-level param
 <div class="sourceCode" id="cb258"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_stroop&quot;</span>)</a>
 <a class="sourceLine" id="cb258-2" data-line-number="2">(df_stroop &lt;-<span class="st"> </span>df_stroop <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb258-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cond =</span> <span class="kw">if_else</span>(condition <span class="op">==</span><span class="st"> &quot;Incongruent&quot;</span>, <span class="dv">1</span>, <span class="dv">-1</span>)))</a></code></pre></div>
-<pre><code>## # A tibble: 3,058 x 5
+<pre><code>## # A tibble: 3,058 × 5
 ##    subj trial condition      RT c_cond
 ##   &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;       &lt;int&gt;  &lt;dbl&gt;
 ## 1     1     0 Congruent    1484     -1
@@ -1279,7 +1280,7 @@ Next, we turn our attention to the prior specification for the group-level param
 <a class="sourceLine" id="cb260-11" data-line-number="11">  <span class="dt">iter =</span> <span class="dv">4000</span>,</a>
 <a class="sourceLine" id="cb260-12" data-line-number="12">  <span class="dt">data =</span> df_stroop</a>
 <a class="sourceLine" id="cb260-13" data-line-number="13">)</a></code></pre></div>
-<p>We will focus on <span class="math inline">\(\beta\)</span> (but you can verify that there is nothing surprising in the other parameters in the model <code>fit_stroop</code> ); see Figure @ref(fig:plotfit_stroop).</p>
+<p>We will focus on <span class="math inline">\(\beta\)</span> (but you can verify that there is nothing surprising in the other parameters in the model <code>fit_stroop</code> ); see Figure <a href="#fig:plotfitstroop"><strong>??</strong></a>.</p>
 <div class="sourceCode" id="cb261"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_stroop, <span class="dt">variable =</span> <span class="st">&quot;b_c_cond&quot;</span>)</a></code></pre></div>
 <pre><code>##          Estimate Est.Error   Q2.5  Q97.5
 ## b_c_cond    0.027   0.00552 0.0157 0.0374</code></pre>
@@ -1401,7 +1402,7 @@ normal(0, 1)
 0.025
 </td>
 <td style="text-align:right;">
-0.050
+0.049
 </td>
 </tr>
 <tr>
@@ -1412,7 +1413,7 @@ normal(0, 2)
 0.038
 </td>
 <td style="text-align:right;">
-0.025
+0.026
 </td>
 <td style="text-align:right;">
 0.050
@@ -1420,7 +1421,7 @@ normal(0, 2)
 </tr>
 </tbody>
 </table>
-<p>It might be easier to see how much the posterior difference between conditions changes depending on the prior. In order to answer this question, we need to remember that the median difference between conditions (<span class="math inline">\(MedianRT_{diff}\)</span>) can be calculated as the difference between the exponents of each condition’s medians:</p>
+<p>It might be easier to see how much the posterior difference between conditions changes depending on the prior. In order to answer this question, we need to remember that the median difference between conditions (<span class="math inline">\(\mathit{MedianRT}_{diff}\)</span>) can be calculated as the difference between the exponents of each condition’s medians:</p>
 <p><span class="math display" id="eq:medianrt">\[\begin{equation}
 \begin{aligned}
 \mathit{MedianRT}_{diff} &amp;= \mathit{MedianRT}_{incongruent} - \mathit{MedianRT}_{congruent}\\
@@ -1428,7 +1429,7 @@ normal(0, 2)
 \end{aligned}
 \tag{5.4}
 \end{equation}\]</span></p>
-<p>Equation <a href="sec-stroop.html#eq:medianrt">(5.4)</a> gives us the posterior distributions of the median difference between conditions for the different models. We calculate the median difference rather than the mean difference because the mean depends on the parameter <span class="math inline">\(\sigma\)</span>, but the median doesn’t; see <a href="sec-ppd.html#sec:lognormal">3.5.3</a>.</p>
+<p>Equation <a href="sec-stroop.html#eq:medianrt">(5.4)</a> gives us the posterior distributions of the median difference between conditions for the different models. We calculate the median difference rather than the mean difference because the mean depends on the parameter <span class="math inline">\(\sigma\)</span>, but the median doesn’t: The mean of a log-normal distribution is <span class="math inline">\(\exp(\mu +\sigma ^{2}/2)\)</span>, while the median is simply <span class="math inline">\(\exp(\mu)\)</span>, see also <a href="sec-ppd.html#sec:lognormal">3.5.3</a>.</p>
 <p>Table <a href="sec-stroop.html#tab:meanrtdiffsummary">5.2</a> summarizes the posterior distributions under different priors using the means of the difference in medians, along with 95% credible intervals. It’s important to realize that the use of mean to summarize the posterior distribution is orthogonal to our use of the median to summarize the response times by condition: In the first case, we use the median to summarize a group of <em>observations</em>, and in the second case, we use the mean to summarize a group of <em>samples</em> from the posterior–we could have summarized the samples from the posterior with its median instead of the mean.</p>
 <table>
 <caption>
@@ -1436,6 +1437,9 @@ normal(0, 2)
 </caption>
 <thead>
 <tr>
+<th style="text-align:left;">
+prior
+</th>
 <th style="text-align:right;">
 mean diff (ms)
 </th>
@@ -1445,94 +1449,91 @@ Q2.5
 <th style="text-align:right;">
 Q97.5
 </th>
-<th style="text-align:left;">
-prior
-</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:right;">
-0.682
-</td>
-<td style="text-align:right;">
--1.47
-</td>
-<td style="text-align:right;">
-2.88
-</td>
 <td style="text-align:left;">
 normal(0, 0.001)
 </td>
+<td style="text-align:right;">
+0.645
+</td>
+<td style="text-align:right;">
+-1.51
+</td>
+<td style="text-align:right;">
+2.77
+</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-30.220
-</td>
-<td style="text-align:right;">
-17.86
-</td>
-<td style="text-align:right;">
-42.35
-</td>
 <td style="text-align:left;">
 normal(0, 0.01)
 </td>
+<td style="text-align:right;">
+30.098
+</td>
+<td style="text-align:right;">
+18.01
+</td>
+<td style="text-align:right;">
+41.84
+</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-41.484
-</td>
-<td style="text-align:right;">
-28.20
-</td>
-<td style="text-align:right;">
-54.97
-</td>
 <td style="text-align:left;">
 normal(0, 0.05)
 </td>
+<td style="text-align:right;">
+41.458
+</td>
+<td style="text-align:right;">
+27.68
+</td>
+<td style="text-align:right;">
+55.42
+</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-41.944
-</td>
-<td style="text-align:right;">
-27.96
-</td>
-<td style="text-align:right;">
-56.16
-</td>
 <td style="text-align:left;">
 normal(0, 0.1)
 </td>
+<td style="text-align:right;">
+41.930
+</td>
+<td style="text-align:right;">
+27.90
+</td>
+<td style="text-align:right;">
+55.55
+</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-41.958
-</td>
-<td style="text-align:right;">
-28.18
-</td>
-<td style="text-align:right;">
-55.96
-</td>
 <td style="text-align:left;">
 normal(0, 1)
 </td>
+<td style="text-align:right;">
+41.980
+</td>
+<td style="text-align:right;">
+28.14
+</td>
+<td style="text-align:right;">
+55.82
+</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-42.159
-</td>
-<td style="text-align:right;">
-28.58
-</td>
-<td style="text-align:right;">
-56.00
-</td>
 <td style="text-align:left;">
 normal(0, 2)
+</td>
+<td style="text-align:right;">
+42.042
+</td>
+<td style="text-align:right;">
+27.92
+</td>
+<td style="text-align:right;">
+56.35
 </td>
 </tr>
 </tbody>
@@ -1605,8 +1606,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/05-hierarchical.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1616,7 +1617,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

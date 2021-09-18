@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -868,7 +868,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bayesian Data Analysis for Cognitive Science</a></li>
+<li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -1082,7 +1082,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html"><i class="fa fa-check"></i><b>12.1</b> A change of variables with reciprocal normal distribution</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="a-change-of-variables-with-reciprocal-normal-distribution.html"><a href="a-change-of-variables-with-reciprocal-normal-distribution.html#simulation-based-calibration"><i class="fa fa-check"></i><b>12.1.1</b> Simulation based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.2</b> Further reading</a></li>
+<li class="chapter" data-level="12.2" data-path="a-handmade-distribution.html"><a href="a-handmade-distribution.html"><i class="fa fa-check"></i><b>12.2</b> A handmade distribution</a></li>
+<li class="chapter" data-level="12.3" data-path="further-reading-8.html"><a href="further-reading-8.html"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
 </ul></li>
 <li class="part"><span><b>IV Other useful models</b></span></li>
 <li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
@@ -1220,7 +1221,7 @@ FIGURE 5.4: Typical ERP for the grand average across the N400 spatial window (ce
 <div class="sourceCode" id="cb216"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_eeg&quot;</span>)</a>
 <a class="sourceLine" id="cb216-2" data-line-number="2">(df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb216-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cloze =</span> cloze <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cloze)))</a></code></pre></div>
-<pre><code>## # A tibble: 2,863 x 7
+<pre><code>## # A tibble: 2,863 × 7
 ##    subj cloze  item  n400 cloze_ans     N c_cloze
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
 ## 1     1  0        1  7.08         0    44  -0.476
@@ -1231,7 +1232,7 @@ FIGURE 5.4: Typical ERP for the grand average across the N400 spatial window (ce
 <a class="sourceLine" id="cb218-2" data-line-number="2">df_eeg <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb218-3" data-line-number="3"><span class="st">  </span><span class="kw">distinct</span>(subj) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb218-4" data-line-number="4"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##       n
 ##   &lt;int&gt;
 ## 1    37</code></pre>
@@ -1288,11 +1289,11 @@ FIGURE 5.5: Histogram of the N400 averages for every trial, overlaid is a densit
 <div class="sourceCode" id="cb221"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1">samples &lt;-<span class="st"> </span>extraDistr<span class="op">::</span><span class="kw">rtnorm</span>(<span class="dv">20000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb221-2" data-line-number="2"><span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(samples), <span class="dt">sd =</span> <span class="kw">sd</span>(samples))</a></code></pre></div>
 <pre><code>## mean   sd 
-##   40   30</code></pre>
+## 39.9 30.3</code></pre>
 <p>So we are essentially saying that we assume a priori that we will find the true standard deviation of the signal in the following interval with 95% probability:</p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1"><span class="kw">quantile</span>(samples, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">.975</span>))</a></code></pre></div>
 <pre><code>##   2.5%  97.5% 
-##   1.65 111.82</code></pre>
+##   1.47 112.18</code></pre>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1"><span class="co"># Analytically:</span></a>
 <a class="sourceLine" id="cb225-2" data-line-number="2"><span class="co"># c(qtnorm(.025, 0, 50, a = 0), qtnorm(.975, 0, 50, a = 0))</span></a></code></pre></div>
 <p>To sum up, we are going to use the following priors:</p>
@@ -1319,12 +1320,12 @@ FIGURE 5.5: Histogram of the N400 averages for every trial, overlaid is a densit
 <pre><code>## ...
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     3.67      0.22     3.24     4.11 1.00     4431     3303
-## c_cloze       2.27      0.55     1.19     3.35 1.00     4875     3089
+## Intercept     3.66      0.22     3.22     4.11 1.00     3888     2771
+## c_cloze       2.25      0.53     1.19     3.29 1.00     3898     2901
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma    11.82      0.15    11.52    12.12 1.00     4937     3137
+## sigma    11.82      0.15    11.52    12.13 1.00     3979     3279
 ## 
 ## ...</code></pre>
 
@@ -1367,7 +1368,8 @@ FIGURE 5.6: Posterior distributions of the complete pooling model, <code>fit_N40
  \end{aligned}
  \end{equation}\]</span></p>
 <p>In <code>brms</code>, such a model can be fit by removing the common intercept with the formula <code>n400 ~ 0 + factor(subj) + c_cloze:factor(subj)</code>.</p>
-<p>This formula forces the model to estimate one intercept and one slope for <em>each</em> level of <code>subj</code>. The by-subject intercepts are indicated with <code>factor(subj)</code> and the by-subject slopes with <code>c_cloze:factor(subj)</code>. It’s very important to specify that <code>subject</code> should be treated as a factor and not as a number; we don’t assume that subject number 3 will show 3 times more positive (or negative) average signal than subject number 1! The model fits 37 independent intercepts and 37 independent slopes. By setting a prior to <code>class = b</code> and omitting <code>coef</code>, we are essentially setting identical priors to all the intercepts and slopes of the model. The parameters are independent from each other; it is only our previous knowledge (or prior beliefs) about their possible values (encoded in the priors) that is identical. We can set different priors to each intercept and slope, but that will mean setting 74 priors!</p>
+<p>This formula forces the model to estimate one intercept and one slope for <em>each</em> level of <code>subj</code>.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>
+The by-subject intercepts are indicated with <code>factor(subj)</code> and the by-subject slopes with <code>c_cloze:factor(subj)</code>. It’s very important to specify that <code>subject</code> should be treated as a factor and not as a number; we don’t assume that subject number 3 will show 3 times more positive (or negative) average signal than subject number 1! The model fits 37 independent intercepts and 37 independent slopes. By setting a prior to <code>class = b</code> and omitting <code>coef</code>, we are essentially setting identical priors to all the intercepts and slopes of the model. The parameters are independent from each other; it is only our previous knowledge (or prior beliefs) about their possible values (encoded in the priors) that is identical. We can set different priors to each intercept and slope, but that will mean setting 74 priors!</p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1">fit_N400_np &lt;-<span class="st"> </span><span class="kw">brm</span>(n400 <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(subj) <span class="op">+</span><span class="st"> </span>c_cloze<span class="op">:</span><span class="kw">factor</span>(subj),</a>
 <a class="sourceLine" id="cb230-2" data-line-number="2">  <span class="dt">prior =</span></a>
 <a class="sourceLine" id="cb230-3" data-line-number="3">    <span class="kw">c</span>(</a>
@@ -1377,7 +1379,7 @@ FIGURE 5.6: Posterior distributions of the complete pooling model, <code>fit_N40
 <a class="sourceLine" id="cb230-7" data-line-number="7">  <span class="dt">data =</span> df_eeg</a>
 <a class="sourceLine" id="cb230-8" data-line-number="8">)</a></code></pre></div>
 <p>For this model, printing a summary means printing the 75 parameters (<span class="math inline">\(\alpha_{1,...,37}\)</span>, <span class="math inline">\(\beta_{1,...,37}\)</span>, and <span class="math inline">\(\sigma\)</span>). We could do this as always by printing out the model results: just type <code>fit_N400_np</code>.</p>
-<p>It may be easier to understand the output of the model by plotting <span class="math inline">\(\beta_{1,..,37}\)</span> using <code>bayesplot</code>. (<code>brms</code> also includes a wrapper for this function called <code>stanplot</code>). We can take a look at the internal names that <code>brms</code> gives to the parameters with <code>parnames(fit_N400_np)</code>; they are <code>b_factorsubj</code>, then the subject index and then <code>:c_cloze</code>. The code below changes the subject labels back to their original numerical indices and plots them in Figure <a href="sec-N400hierarchical.html#fig:nopooling">5.7</a>. The subjects are ordered by the magnitude of their mean effects.</p>
+<p>It may be easier to understand the output of the model by plotting <span class="math inline">\(\beta_{1,..,37}\)</span> using <code>bayesplot</code>. (<code>brms</code> also includes a wrapper for this function called <code>stanplot</code>). We can take a look at the internal names that <code>brms</code> gives to the parameters with <code>variables(fit_N400_np)</code>; they are <code>b_factorsubj</code>, then the subject index and then <code>:c_cloze</code>. The code below changes the subject labels back to their original numerical indices and plots them in Figure <a href="sec-N400hierarchical.html#fig:nopooling">5.7</a>. The subjects are ordered by the magnitude of their mean effects.</p>
 <p>The model <span class="math inline">\(M_{np}\)</span> does not estimate a unique population-level effect; instead, there is a different effect estimated for each subject. However, given the posterior means from each subject, it is still possible to calculate the average of these estimates <span class="math inline">\(\hat\beta_{1,...,I}\)</span>, where <span class="math inline">\(I\)</span> is the total number of subjects:</p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1"><span class="co"># parameter name of beta by subject:</span></a>
 <a class="sourceLine" id="cb231-2" data-line-number="2">ind_effects_np &lt;-<span class="st"> </span><span class="kw">paste0</span>(</a>
@@ -1399,10 +1401,10 @@ FIGURE 5.6: Posterior distributions of the complete pooling model, <code>fit_N40
 <a class="sourceLine" id="cb233-4" data-line-number="4">  <span class="dt">lq =</span> <span class="kw">quantile</span>(beta_across_subj, <span class="kw">c</span>(.<span class="dv">025</span>)),</a>
 <a class="sourceLine" id="cb233-5" data-line-number="5">  <span class="dt">hq =</span> <span class="kw">quantile</span>(beta_across_subj, <span class="kw">c</span>(.<span class="dv">975</span>))</a>
 <a class="sourceLine" id="cb233-6" data-line-number="6">))</a></code></pre></div>
-<pre><code>## # A tibble: 1 x 3
+<pre><code>## # A tibble: 1 × 3
 ##    mean    lq    hq
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.18  1.21  3.15</code></pre>
+## 1  2.17  1.20  3.16</code></pre>
 <p>In Figure <a href="sec-N400hierarchical.html#fig:nopooling">5.7</a>, the 95% credible interval of this overall mean effect is plotted as two vertical lines together with the effect of cloze probability for each subject (ordered by effect size). Here, rather than using a plotting function from <code>brms</code>, we can extract the summary of by-subject effects, reorder them by magnitude, and then plot the summary with a custom plot using <code>ggplot2</code>.</p>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1"><span class="co"># make a table of beta&#39;s by subject</span></a>
 <a class="sourceLine" id="cb235-2" data-line-number="2">beta_by_subj &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_N400_np,</a>
@@ -1438,7 +1440,7 @@ FIGURE 5.7: 95% credible intervals of the effect of cloze probability for each s
 <h3><span class="header-section-number">5.1.3</span> Varying intercepts and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</h3>
 <p>One major problem with the no-pooling model is that we completely ignore the fact that the subjects were doing the same experiment. We fit each subject’s data ignoring the information available in the other subjects’ data.
 The no-pooling model is very likely to <em>overfit</em> the individual subjects’ data; we are likely to ignore the generalities of the data and we may end up overinterpreting noisy estimates from each subject’s data. The model can be modified to explicitly assume that the subjects have an overall effect common to all the subjects, with the individual subjects deviating from this common effect.</p>
-<p>In the model that we fit next, we will assume that there is an overall effect that is common to the subjects and, importantly, that all subjects’ parameters originate from one common (normal) distribution. This model specification will result in the estimation of posteriors for each subject being also influenced by what we know about all the subjects together. We begin with a hierarchical model with uncorrelated varying intercepts and slopes.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></p>
+<p>In the model that we fit next, we will assume that there is an overall effect that is common to the subjects and, importantly, that all subjects’ parameters originate from one common (normal) distribution. This model specification will result in the estimation of posteriors for each subject being also influenced by what we know about all the subjects together. We begin with a hierarchical model with uncorrelated varying intercepts and slopes.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
 <div id="model-assumptions-2" class="section level4">
 <h4><span class="header-section-number">5.1.3.1</span> Model assumptions</h4>
 <ol style="list-style-type: decimal">
@@ -1464,9 +1466,9 @@ The no-pooling model is very likely to <em>overfit</em> the individual subjects�
  \sigma  &amp;\sim \mathit{Normal}_+(0,50)
  \end{aligned}
  \end{equation}\]</span></p>
-<p>In this model each subject has their own intercept adjustment, <span class="math inline">\(u_{subj,1}\)</span>, and slope adjustment, <span class="math inline">\(u_{subj,2}\)</span>.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> If <span class="math inline">\(u_{subj,1}\)</span> is positive, the subject will have a more positive EEG signal than the grand mean average. If <span class="math inline">\(u_{subj,2}\)</span> is positive, the subject will have a more positive EEG response to a change of one unit in <code>c_cloze</code> than the overall mean effect (i.e., there will be a more positive effect of cloze probability on the N400). The parameters <span class="math inline">\(u\)</span> are sometimes called random effects and thus a model with fixed effects (<span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>) and random effects is called a mixed model. However, random effects have different meanings in different contexts. To avoid ambiguity, <code>brms</code> calls these random-effects parameters <em>group-level</em> effects. Since we are estimating <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(u\)</span> at the same time and we assume that the average of the <span class="math inline">\(u\)</span>’s is 0 (since it is assumed to be normally distributed with mean 0), what is common between the subjects, the grand mean, is estimated as the intercept <span class="math inline">\(\alpha\)</span>, and the deviations of individual subjects’ means from this grand mean are the adjustments <span class="math inline">\(u_1\)</span>. Similarly, the mean effect of cloze is estimated as <span class="math inline">\(\beta\)</span>, and the deviations of individual subjects’ mean effects of cloze from <span class="math inline">\(\beta\)</span> are the adjustment <span class="math inline">\(u_2\)</span>. The standard deviations of these two adjustment terms, <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span>, respectively, represent between subject variability; see Box <a href="sec-N400hierarchical.html#thm:hierarchical">5.2</a>.</p>
+<p>In this model each subject has their own intercept adjustment, <span class="math inline">\(u_{subj,1}\)</span>, and slope adjustment, <span class="math inline">\(u_{subj,2}\)</span>.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> If <span class="math inline">\(u_{subj,1}\)</span> is positive, the subject will have a more positive EEG signal than the grand mean average. If <span class="math inline">\(u_{subj,2}\)</span> is positive, the subject will have a more positive EEG response to a change of one unit in <code>c_cloze</code> than the overall mean effect (i.e., there will be a more positive effect of cloze probability on the N400). The parameters <span class="math inline">\(u\)</span> are sometimes called random effects and thus a model with fixed effects (<span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>) and random effects is called a mixed model. However, random effects have different meanings in different contexts. To avoid ambiguity, <code>brms</code> calls these random-effects parameters <em>group-level</em> effects. Since we are estimating <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(u\)</span> at the same time and we assume that the average of the <span class="math inline">\(u\)</span>’s is 0 (since it is assumed to be normally distributed with mean 0), what is common between the subjects, the grand mean, is estimated as the intercept <span class="math inline">\(\alpha\)</span>, and the deviations of individual subjects’ means from this grand mean are the adjustments <span class="math inline">\(u_1\)</span>. Similarly, the mean effect of cloze is estimated as <span class="math inline">\(\beta\)</span>, and the deviations of individual subjects’ mean effects of cloze from <span class="math inline">\(\beta\)</span> are the adjustment <span class="math inline">\(u_2\)</span>. The standard deviations of these two adjustment terms, <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span>, respectively, represent between subject variability; see Box <a href="sec-N400hierarchical.html#thm:hierarchical">5.2</a>.</p>
 <p>Thus, the model <span class="math inline">\(M_{v}\)</span> has three <em>standard deviations</em>: <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span>. In statistics, it is conventional to talk about variances (the square of these standard deviations); for this reason, these standard deviations are also (confusingly) called <em>variance components</em>. The variance components <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span> characterize between-subject variability, and the variance component <span class="math inline">\(\sigma\)</span> characterizes within-subject variability.</p>
-<p>The by-subject adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span> are parameters in the model, and therefore have priors defined on them.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> Parameters that appear in the prior specifications for parameters, such as <span class="math inline">\(\tau_u\)</span>, are often called <em>hyperparameters</em>,<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> and the priors on such hyperparameters are called <em>hyperpriors</em>. Thus, the parameter <span class="math inline">\(u_1\)</span> has <span class="math inline">\(Normal(0,\tau_{u_1})\)</span> as a prior; <span class="math inline">\(\tau_{u_1}\)</span> is a hyperparameter, and the hyperprior on <span class="math inline">\(\tau_{u_1}\)</span> is <span class="math inline">\(Normal(0,20)\)</span>.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
+<p>The by-subject adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span> are parameters in the model, and therefore have priors defined on them.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> Parameters that appear in the prior specifications for parameters, such as <span class="math inline">\(\tau_u\)</span>, are often called <em>hyperparameters</em>,<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> and the priors on such hyperparameters are called <em>hyperpriors</em>. Thus, the parameter <span class="math inline">\(u_1\)</span> has <span class="math inline">\(Normal(0,\tau_{u_1})\)</span> as a prior; <span class="math inline">\(\tau_{u_1}\)</span> is a hyperparameter, and the hyperprior on <span class="math inline">\(\tau_{u_1}\)</span> is <span class="math inline">\(Normal(0,20)\)</span>.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
 <p>We know that in general, in EEG experiments, the standard deviations for the by-subject adjustments are smaller than the standard deviation of the observations (which is the within-subjects standard deviation). That is, usually the between-subject variability in the intercepts and slopes is smaller than the within-subjects variability in the data. For this reason, reducing the scale of the truncated normal distribution to <span class="math inline">\(20\)</span> (in comparison to <span class="math inline">\(50\)</span>) seems reasonable for the priors of the <span class="math inline">\(\tau\)</span> parameters. As always, we can do a sensitivity analysis to verify that our priors are reasonably uninformative (if we intended them to be uninformative).</p>
 
 <div class="extra">
@@ -1490,7 +1492,7 @@ The no-pooling model is very likely to <em>overfit</em> the individual subjects�
 <p>Mostly by convention, the adjustments <span class="math inline">\(u\)</span> are assumed to come from a Normal distribution. Another reason is that if we don’t know anything about the distribution besides its mean and variance, the normal distribution is the most conservative assumption <span class="citation">(see chapter 9 of McElreath <a href="#ref-mcelreath2015statistical">2015</a>)</span>.</p>
 </div>
 
-<p>For now, we are assuming that there is no relationship (no correlation) between the by-subject intercept and slope adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span>; this lack of correlation is indicated in <code>brms</code> using the double pipe <code>||</code>.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> In <code>brms</code>, we need to specify hyperpriors for <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span>; these are called <code>sd</code> in <code>brms</code>, to distinguish these standard deviations from the standard deviation of the residuals <span class="math inline">\(\sigma\)</span>. As with the population-level effects, the by-subjects intercept adjustments are implicitly fit for the group-level effects and thus <code>(c_cloze || subj)</code> is equivalent to <code>(1 + c_cloze || subj)</code>. If we don’t want an intercept we need to explicitly indicate it with <code>(0 + c_cloze || subj)</code> or <code>(-1 + c_cloze || subj)</code>. Such a removal of the intercept is not normally done.</p>
+<p>For now, we are assuming that there is no relationship (no correlation) between the by-subject intercept and slope adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span>; this lack of correlation is indicated in <code>brms</code> using the double pipe <code>||</code>.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> In <code>brms</code>, we need to specify hyperpriors for <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span>; these are called <code>sd</code> in <code>brms</code>, to distinguish these standard deviations from the standard deviation of the residuals <span class="math inline">\(\sigma\)</span>. As with the population-level effects, the by-subjects intercept adjustments are implicitly fit for the group-level effects and thus <code>(c_cloze || subj)</code> is equivalent to <code>(1 + c_cloze || subj)</code>. If we don’t want an intercept we need to explicitly indicate it with <code>(0 + c_cloze || subj)</code> or <code>(-1 + c_cloze || subj)</code>. Such a removal of the intercept is not normally done.</p>
 <div class="sourceCode" id="cb237"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1">prior_v &lt;-</a>
 <a class="sourceLine" id="cb237-2" data-line-number="2"><span class="st">  </span><span class="kw">c</span>(</a>
 <a class="sourceLine" id="cb237-3" data-line-number="3">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
@@ -1505,9 +1507,9 @@ The no-pooling model is very likely to <em>overfit</em> the individual subjects�
 <a class="sourceLine" id="cb237-12" data-line-number="12">)</a></code></pre></div>
 <p>When we print a <code>brms</code> fit, we first see the summaries of the posteriors of the standard deviation of the by-group intercept and slopes, <span class="math inline">\(\tau_{u_1}\)</span> and <span class="math inline">\(\tau_{u_2}\)</span> as <code>sd(Intercept)</code> and <code>sd(c_cloze)</code>, and then, as with previous models, the population-level effects, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> as <code>Intercept</code> and <code>c_cloze</code>, and the scale of the likelihood, <span class="math inline">\(\sigma\)</span>, as <code>sigma</code>. The full summary can be printed out by typing:</p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1">fit_N400_v</a></code></pre></div>
-<p>Because the above command will result in some pages of output, it is easier to understand the summary graphically (Figure <a href="sec-N400hierarchical.html#fig:plotfitN400v">5.8</a>).</p>
+<p>Because the above command will result in some pages of output, it is easier to understand the summary graphically (Figure <a href="sec-N400hierarchical.html#fig:plotfitN400v">5.8</a>). Rather than the wrapper <code>plot()</code>, we use the original function of the package<code>bayesplot</code>, <code>mcmc_dens</code>, to only show density plots. We extract the first 6 parameters of the model with <code>variables(fit_N400_v)[1:6]</code>.</p>
 
-<div class="sourceCode" id="cb239"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1"><span class="kw">plot</span>(fit_N400_v, <span class="dt">N =</span> <span class="dv">6</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1"><span class="kw">mcmc_dens</span>(fit_N400_v, <span class="dt">pars =</span> <span class="kw">variables</span>(fit_N400_v)[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>])</a></code></pre></div>
 <div class="figure"><span id="fig:plotfitN400v"></span>
 <img src="bookdown_files/figure-html/plotfitN400v-1.svg" alt="Posterior distributions of the parameters in the model fit_N400_v." width="672" />
 <p class="caption">
@@ -1715,7 +1717,7 @@ FIGURE 5.10: This plot compares the estimates of the effect of cloze probability
 \rho_u \tau_{u_1} \tau_{u_2} &amp; \tau_{u_2}^2
 \end{pmatrix}}
 \end{equation}\]</span></p>
-<p>In order to specify a prior for <span class="math inline">\(\Sigma_u\)</span>, we need priors for the standard deviations, <span class="math inline">\(\tau_{u_1}\)</span>, and <span class="math inline">\(\tau_{u_2}\)</span>, and also for their correlation, <span class="math inline">\(\rho_u\)</span>. We can use the same priors for <span class="math inline">\(\tau\)</span> as before. For the correlation parameter <span class="math inline">\(\rho_u\)</span> (and the correlation matrix more generally), we use the LKJ prior. The basic idea of the LKJ prior on the correlation matrix is that as its parameter, <span class="math inline">\(\eta\)</span> (<em>eta</em>), increases, it will favor correlations closer to zero.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> At <span class="math inline">\(\eta = 1\)</span>, the LKJ correlation distribution is uninformative (similar to <span class="math inline">\(Beta(1,1)\)</span>), at <span class="math inline">\(\eta &lt; 1\)</span>, it favors extreme correlations (similar to <span class="math inline">\(Beta(a&lt;1,b&lt;1)\)</span>). We set <span class="math inline">\(\eta = 2\)</span> so that we don’t favor extreme correlations, and we still represent our lack of knowledge through the wide spread of the prior between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>. Thus, <span class="math inline">\(\eta = 2\)</span> gives us a regularizing, relatively uninformative or mildly informative prior.</p>
+<p>In order to specify a prior for <span class="math inline">\(\Sigma_u\)</span>, we need priors for the standard deviations, <span class="math inline">\(\tau_{u_1}\)</span>, and <span class="math inline">\(\tau_{u_2}\)</span>, and also for their correlation, <span class="math inline">\(\rho_u\)</span>. We can use the same priors for <span class="math inline">\(\tau\)</span> as before. For the correlation parameter <span class="math inline">\(\rho_u\)</span> (and the correlation matrix more generally), we use the LKJ prior. The basic idea of the LKJ prior on the correlation matrix is that as its parameter, <span class="math inline">\(\eta\)</span> (<em>eta</em>), increases, it will favor correlations closer to zero.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> At <span class="math inline">\(\eta = 1\)</span>, the LKJ correlation distribution is uninformative (similar to <span class="math inline">\(Beta(1,1)\)</span>), at <span class="math inline">\(\eta &lt; 1\)</span>, it favors extreme correlations (similar to <span class="math inline">\(Beta(a&lt;1,b&lt;1)\)</span>). We set <span class="math inline">\(\eta = 2\)</span> so that we don’t favor extreme correlations, and we still represent our lack of knowledge through the wide spread of the prior between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>. Thus, <span class="math inline">\(\eta = 2\)</span> gives us a regularizing, relatively uninformative or mildly informative prior.</p>
 <p>Figure <a href="sec-N400hierarchical.html#fig:lkjviz">5.11</a> shows a visualization of different parametrizations of the LKJ prior.</p>
 
 <div class="figure"><span id="fig:lkjviz"></span>
@@ -2116,7 +2118,7 @@ FIGURE 5.15: The plot shows 100 predicted distributions with the label <span cla
 FIGURE 5.16: Distribution of posterior predicted standard deviations in gray and observed standard deviation in black lines by subject.
 </p>
 </div>
-<p>Why is our “maximal” hierarchical model misfitting the by-subject distribution of data? This is because, the maximal models are, in general and implicitly, models with the maximal group-level effect structure for the location parameter (e.g., the mean, <span class="math inline">\(\mu\)</span>, in a normal model). Other parameters (e.g., scale or shape parameters) are estimated as auxiliary parameters, and are assumed to be constant across observations and clusters. This assumption is so common that researchers may not be aware that it is just an assumption. In the Bayesian framework, it is easy to change such default assumptions if necessary. Changing the assumption that all subjects have the same residual standard deviation leads to the distributional regression model. Such models can be fit in <code>brms</code>.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>.</p>
+<p>Why is our “maximal” hierarchical model misfitting the by-subject distribution of data? This is because, the maximal models are, in general and implicitly, models with the maximal group-level effect structure for the location parameter (e.g., the mean, <span class="math inline">\(\mu\)</span>, in a normal model). Other parameters (e.g., scale or shape parameters) are estimated as auxiliary parameters, and are assumed to be constant across observations and clusters. This assumption is so common that researchers may not be aware that it is just an assumption. In the Bayesian framework, it is easy to change such default assumptions if necessary. Changing the assumption that all subjects have the same residual standard deviation leads to the distributional regression model. Such models can be fit in <code>brms</code>.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>.</p>
 <!--
 https://web.archive.org/web/20191206093021/https://paul-buerkner.github.io/brms/articles/brms_distreg.html
 -->
@@ -2135,7 +2137,7 @@ https://web.archive.org/web/20191206093021/https://paul-buerkner.github.io/brms/
   \tau_{\sigma_u} &amp;\sim \mathit{Normal}_+(0, 5)
 \end{aligned}
 \end{equation}\]</span></p>
-<p>This model can be fit in <code>brms</code> using the internal function <code>bf()</code>. This will allow us to set a hierarchical structure (and any regression) to the parameter <span class="math inline">\(\sigma\)</span>. We also need to set new priors; these priors are identified by <code>dpar = sigma</code>.</p>
+<p>This model can be fit in <code>brms</code> using the internal function <code>brmsformula()</code>. This is a powerful function that extends the formulas that we used so far allowing for setting a hierarchical regression to any parameter of a model. This will allow us to set a by-subject hierarchical structure to the parameter <span class="math inline">\(\sigma\)</span>. We also need to set new priors; these priors are identified by <code>dpar = sigma</code>.</p>
 <div class="sourceCode" id="cb252"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" data-line-number="1">prior_s &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
 <a class="sourceLine" id="cb252-2" data-line-number="2">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> Intercept),</a>
 <a class="sourceLine" id="cb252-3" data-line-number="3">  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="dt">class =</span> b),</a>
@@ -2147,7 +2149,7 @@ https://web.archive.org/web/20191206093021/https://paul-buerkner.github.io/brms/
 <a class="sourceLine" id="cb252-9" data-line-number="9">    <span class="dt">dpar =</span> sigma</a>
 <a class="sourceLine" id="cb252-10" data-line-number="10">  )</a>
 <a class="sourceLine" id="cb252-11" data-line-number="11">)</a>
-<a class="sourceLine" id="cb252-12" data-line-number="12">fit_N400_s &lt;-<span class="st"> </span><span class="kw">brm</span>(<span class="kw">bf</span>(</a>
+<a class="sourceLine" id="cb252-12" data-line-number="12">fit_N400_s &lt;-<span class="st"> </span><span class="kw">brm</span>(<span class="kw">brmsformula</span>(</a>
 <a class="sourceLine" id="cb252-13" data-line-number="13">  n400 <span class="op">~</span><span class="st"> </span>c_cloze <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>subj) <span class="op">+</span><span class="st"> </span>(c_cloze <span class="op">|</span><span class="st"> </span>item),</a>
 <a class="sourceLine" id="cb252-14" data-line-number="14">  sigma <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>subj)</a>
 <a class="sourceLine" id="cb252-15" data-line-number="15">),</a>
@@ -2158,11 +2160,11 @@ https://web.archive.org/web/20191206093021/https://paul-buerkner.github.io/brms/
 remains very similar to that of the model <code>fit_N400_sih</code>.</p>
 <p>Compare the two models’ estimates:</p>
 <div class="sourceCode" id="cb253"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_N400_sih, <span class="dt">variable =</span> <span class="st">&quot;b_c_cloze&quot;</span>)</a></code></pre></div>
-<pre><code>##           Estimate Est.Error  Q2.5 Q97.5
-## b_c_cloze     2.31     0.676 0.979  3.62</code></pre>
+<pre><code>##           Estimate Est.Error Q2.5 Q97.5
+## b_c_cloze     2.31     0.702  0.9  3.66</code></pre>
 <div class="sourceCode" id="cb255"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="kw">posterior_summary</span>(fit_N400_s, <span class="dt">variable =</span> <span class="st">&quot;b_c_cloze&quot;</span>)</a></code></pre></div>
 <pre><code>##           Estimate Est.Error  Q2.5 Q97.5
-## b_c_cloze      2.3     0.667 0.967  3.67</code></pre>
+## b_c_cloze     2.31     0.679 0.974   3.6</code></pre>
 <p>Nonetheless, Figure <a href="sec-N400hierarchical.html#fig:postpreddensbysubj2">5.17</a> shows that the fit of the model with respect to the by-subject variability is much better than before. Furthermore, Figure <a href="sec-N400hierarchical.html#fig:postpredsumbysubj2">5.18</a> shows that the observed standard deviations for each subject are well inside the posterior predictive distributions. The code below produces Figure <a href="sec-N400hierarchical.html#fig:postpreddensbysubj2">5.17</a>.</p>
 
 <div class="sourceCode" id="cb257"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="kw">ppc_dens_overlay_grouped</span>(df_eeg<span class="op">$</span>n400,</a>
@@ -2188,7 +2190,7 @@ FIGURE 5.18: The gray lines show the distributions of posterior predicted standa
 </div>
 <p>The model <code>fit_N400_s</code> raises the question: how much structure should we add to our statistical model? Should we also assume that <span class="math inline">\(\sigma\)</span> can vary by items, and also by our experimental manipulation? Should we also have a maximal model for <span class="math inline">\(\sigma\)</span>? Unfortunately, there are no clear answers that apply to every situation. The amount of complexity that we can introduce in a statistical model depends on (i) the answers we are looking for (we should include parameters that represent what we want to estimate), (ii) the size of the data at hand (more complex models require more data), (iii) our computing power (as the complexity increases models take increasingly long to converge and require more computer power to finish the computations in a feasible time frame), and (iv) our domain knowledge.</p>
 <p>Ultimately, all models are approximations (that’s in the best case; often, they are plainly wrong) and we need to think carefully about which aspects of our data we have to account and which aspects we can abstract away from.</p>
-<p>In the context of cognitive modeling, <span class="citation">McClelland (<a href="#ref-mcclellandPlaceModelingCognitive2009">2009</a>)</span> argues that models should not focus on a every single detail of the process they intend to explain. In order to understand a model, it needs to be simple enough. However, <span class="citation">McClelland (<a href="#ref-mcclellandPlaceModelingCognitive2009">2009</a>)</span> warns us that one must bear in mind that oversimplification does have an impact on what we can conclude from our analysis: A simplification can limit the phenomena that a model addresses, or can even lead to incorrect predictions. There is a continuum between purely statistical models (e.g., a linear regression) and computational cognitive models. For example, we can define “hybrid” models such as the linear ballistic accumulator, where a great deal of cognitive detail is sacrificed for tractability. The conclusions of <span class="citation">McClelland (<a href="#ref-mcclellandPlaceModelingCognitive2009">2009</a>)</span> apply to any type of model in cognitive science: “Simplification is essential, but it comes at a cost, and real understanding depends in part on understanding the effects of the simplification”.</p>
+<p>In the context of cognitive modeling, <span class="citation">McClelland (<a href="#ref-mcclellandPlaceModelingCognitive2009">2009</a>)</span> argues that models should not focus on a every single detail of the process they intend to explain. In order to understand a model, it needs to be simple enough. However, <span class="citation">McClelland (<a href="#ref-mcclellandPlaceModelingCognitive2009">2009</a>)</span> warns us that one must bear in mind that oversimplification does have an impact on what we can conclude from our analysis: A simplification can limit the phenomena that a model addresses, or can even lead to incorrect predictions. There is a continuum between purely statistical models (e.g., a linear regression) and computational cognitive models. For example, we can define “hybrid” models such as the linear ballistic accumulator <span class="citation">(Brown and Heathcote <a href="#ref-brownSimplestCompleteModel2008">2008</a>; and see Nicenboim <a href="#ref-Nicenboim2018StanCon">2018</a> for an implementation in Stan)</span>, where a great deal of cognitive detail is sacrificed for tractability. The conclusions of <span class="citation">McClelland (<a href="#ref-mcclellandPlaceModelingCognitive2009">2009</a>)</span> apply to any type of model in cognitive science: “Simplification is essential, but it comes at a cost, and real understanding depends in part on understanding the effects of the simplification”.</p>
 </div>
 </div>
 <h3>References</h3>
@@ -2198,6 +2200,9 @@ FIGURE 5.18: The gray lines show the distributions of posterior predicted standa
 </div>
 <div id="ref-lme4">
 <p>Bates, Douglas M, Martin Mächler, Ben Bolker, and Steve Walker. 2015a. “Fitting Linear Mixed-Effects Models Using lme4.” <em>Journal of Statistical Software</em> 67 (1): 1–48. <a href="https://doi.org/10.18637/jss.v067.i01" class="uri">https://doi.org/10.18637/jss.v067.i01</a>.</p>
+</div>
+<div id="ref-brownSimplestCompleteModel2008">
+<p>Brown, Scott D., and Andrew Heathcote. 2008. “The Simplest Complete Model of Choice Response Time: Linear Ballistic Accumulation.” <em>Cognitive Psychology</em> 57 (3): 153–78. <a href="https://doi.org/10.1016/j.cogpsych.2007.12.002" class="uri">https://doi.org/10.1016/j.cogpsych.2007.12.002</a>.</p>
 </div>
 <div id="ref-delongProbabilisticWordPreactivation2005">
 <p>DeLong, Katherine A, Thomas P Urbach, and Marta Kutas. 2005. “Probabilistic Word Pre-Activation During Language Comprehension Inferred from Electrical Brain Activity.” <em>Nature Neuroscience</em> 8 (8): 1117–21. <a href="https://doi.org/10.1038/nn1504" class="uri">https://doi.org/10.1038/nn1504</a>.</p>
@@ -2226,6 +2231,9 @@ FIGURE 5.18: The gray lines show the distributions of posterior predicted standa
 <div id="ref-mcelreath2015statistical">
 <p>McElreath, Richard. 2015. <em>Statistical Rethinking: A Bayesian Course with R Examples</em>. Chapman; Hall/CRC.</p>
 </div>
+<div id="ref-Nicenboim2018StanCon">
+<p>Nicenboim, Bruno. 2018. “The Implementation of a Model of Choice: The (Truncated) Linear Ballistic Accumulator.” In <em>StanCon</em>. Aalto University, Helsinki, Finland. <a href="https://doi.org/10.5281/zenodo.1465990" class="uri">https://doi.org/10.5281/zenodo.1465990</a>.</p>
+</div>
 <div id="ref-nicenboim_vasishth_rosler_2020">
 <p>Nicenboim, Bruno, Shravan Vasishth, and Frank Rösler. 2020a. “Are Words Pre-Activated Probabilistically During Sentence Comprehension? Evidence from New Data and a Bayesian Random-Effects Meta-Analysis Using Publicly Available Data.” <em>Neuropsychologia</em> 142. <a href="https://doi.org/10.1016/j.neuropsychologia.2020.107427" class="uri">https://doi.org/10.1016/j.neuropsychologia.2020.107427</a>.</p>
 </div>
@@ -2243,14 +2251,15 @@ FIGURE 5.18: The gray lines show the distributions of posterior predicted standa
 <hr />
 <ol start="13">
 <li id="fn13"><p>For simplicity, we assume that they share the same standard deviation.<a href="sec-N400hierarchical.html#fnref13" class="footnote-back">↩</a></p></li>
-<li id="fn14"><p>The analogous frequentist model can be fit using <code>lmer</code> from the package <code>lme4</code>, using <code>(1+c_cloze||subj)</code> or, equivalently, <code>(c_cloze||subj)</code> for the by-subject random effects.<a href="sec-N400hierarchical.html#fnref14" class="footnote-back">↩</a></p></li>
-<li id="fn15"><p>The intercept adjustment is often called <span class="math inline">\(u_0\)</span> in statistics books, where the intercept might be called <span class="math inline">\(\alpha\)</span> or (sometimes also <span class="math inline">\(\beta_0\)</span>), and thus <span class="math inline">\(u_1\)</span> refers to the adjustment to the slope. However, in this book, we start the indexing with 1 to be consistent with the Stan language.<a href="sec-N400hierarchical.html#fnref15" class="footnote-back">↩</a></p></li>
-<li id="fn16"><p>By contrast, in the frequentist <code>lmer</code> model, the adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span> are not parameters; they are called conditional modes; see <span class="citation">Bates, Mächler, et al. (<a href="#ref-lme4">2015</a><a href="#ref-lme4">a</a>)</span>.<a href="sec-N400hierarchical.html#fnref16" class="footnote-back">↩</a></p></li>
-<li id="fn17"><p>Another source of confusion here is that <em>hyperparameters</em> is also used in the machine learning literature with a different meaning.<a href="sec-N400hierarchical.html#fnref17" class="footnote-back">↩</a></p></li>
-<li id="fn18"><p>One could in theory keep going deeper and deeper, defining hyper-hyperpriors etc., but the model would quickly become impossible to fit.<a href="sec-N400hierarchical.html#fnref18" class="footnote-back">↩</a></p></li>
-<li id="fn19"><p>The double pipe is also used in the same way in <code>lmer</code> from the package <code>lme4</code>.<a href="sec-N400hierarchical.html#fnref19" class="footnote-back">↩</a></p></li>
-<li id="fn20"><p>This is because an LKJ correlation distribution with a large <span class="math inline">\(\eta\)</span> corresponds to a correlation matrix with values close to zero in the lower and upper triangles<a href="sec-N400hierarchical.html#fnref20" class="footnote-back">↩</a></p></li>
-<li id="fn21"><p>shorturl.at/brNS8<a href="sec-N400hierarchical.html#fnref21" class="footnote-back">↩</a></p></li>
+<li id="fn14"><p>If we don’t remove the intercept, that is, if we use the formula <code>n400 ~ 1 + factor(subj) + c_cloze:factor(subj)</code>, with <code>factor(subj)</code> we are going estimate the deviation between the first subject and the each of the other subjects.<a href="sec-N400hierarchical.html#fnref14" class="footnote-back">↩</a></p></li>
+<li id="fn15"><p>The analogous frequentist model can be fit using <code>lmer</code> from the package <code>lme4</code>, using <code>(1+c_cloze||subj)</code> or, equivalently, <code>(c_cloze||subj)</code> for the by-subject random effects.<a href="sec-N400hierarchical.html#fnref15" class="footnote-back">↩</a></p></li>
+<li id="fn16"><p>The intercept adjustment is often called <span class="math inline">\(u_0\)</span> in statistics books, where the intercept might be called <span class="math inline">\(\alpha\)</span> or (sometimes also <span class="math inline">\(\beta_0\)</span>), and thus <span class="math inline">\(u_1\)</span> refers to the adjustment to the slope. However, in this book, we start the indexing with 1 to be consistent with the Stan language.<a href="sec-N400hierarchical.html#fnref16" class="footnote-back">↩</a></p></li>
+<li id="fn17"><p>By contrast, in the frequentist <code>lmer</code> model, the adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span> are not parameters; they are called conditional modes; see <span class="citation">Bates, Mächler, et al. (<a href="#ref-lme4">2015</a><a href="#ref-lme4">a</a>)</span>.<a href="sec-N400hierarchical.html#fnref17" class="footnote-back">↩</a></p></li>
+<li id="fn18"><p>Another source of confusion here is that <em>hyperparameters</em> is also used in the machine learning literature with a different meaning.<a href="sec-N400hierarchical.html#fnref18" class="footnote-back">↩</a></p></li>
+<li id="fn19"><p>One could in theory keep going deeper and deeper, defining hyper-hyperpriors etc., but the model would quickly become impossible to fit.<a href="sec-N400hierarchical.html#fnref19" class="footnote-back">↩</a></p></li>
+<li id="fn20"><p>The double pipe is also used in the same way in <code>lmer</code> from the package <code>lme4</code>.<a href="sec-N400hierarchical.html#fnref20" class="footnote-back">↩</a></p></li>
+<li id="fn21"><p>This is because an LKJ correlation distribution with a large <span class="math inline">\(\eta\)</span> corresponds to a correlation matrix with values close to zero in the lower and upper triangles<a href="sec-N400hierarchical.html#fnref21" class="footnote-back">↩</a></p></li>
+<li id="fn22"><p>shorturl.at/brNS8<a href="sec-N400hierarchical.html#fnref22" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -2291,8 +2300,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/05-hierarchical.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -2302,7 +2311,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": null,
 "toc": {
 "collapse": "none"
 }
