@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-18" />
+<meta name="date" content="2021-09-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1208,20 +1208,20 @@ f(x, \lambda )={
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(x &gt;0\)</span>.</p>
 <p>Implement this in R with the same arguments as the <code>d*</code> function family: if <code>log = TRUE</code> the output is a log density, and call it <code>dexp2</code>.</p>
-<div class="sourceCode" id="cb757"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb757-1" data-line-number="1">dexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">lambda =</span> <span class="dv">1</span>, <span class="dt">log =</span> <span class="ot">FALSE</span>){</a>
-<a class="sourceLine" id="cb757-2" data-line-number="2">  log_density &lt;-<span class="st"> </span><span class="kw">log</span>(lambda) <span class="op">-</span><span class="st"> </span>lambda <span class="op">*</span><span class="st"> </span>x</a>
-<a class="sourceLine" id="cb757-3" data-line-number="3">  <span class="cf">if</span>(log <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> ) {</a>
-<a class="sourceLine" id="cb757-4" data-line-number="4">    <span class="kw">exp</span>(log_density)</a>
-<a class="sourceLine" id="cb757-5" data-line-number="5">  } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb757-6" data-line-number="6">    log_density</a>
-<a class="sourceLine" id="cb757-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb757-8" data-line-number="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb756"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb756-1" data-line-number="1">dexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">lambda =</span> <span class="dv">1</span>, <span class="dt">log =</span> <span class="ot">FALSE</span>){</a>
+<a class="sourceLine" id="cb756-2" data-line-number="2">  log_density &lt;-<span class="st"> </span><span class="kw">log</span>(lambda) <span class="op">-</span><span class="st"> </span>lambda <span class="op">*</span><span class="st"> </span>x</a>
+<a class="sourceLine" id="cb756-3" data-line-number="3">  <span class="cf">if</span>(log <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> ) {</a>
+<a class="sourceLine" id="cb756-4" data-line-number="4">    <span class="kw">exp</span>(log_density)</a>
+<a class="sourceLine" id="cb756-5" data-line-number="5">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb756-6" data-line-number="6">    log_density</a>
+<a class="sourceLine" id="cb756-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb756-8" data-line-number="8">}</a></code></pre></div>
 <p>Verify that integrates to 1 for some parameter values (here <span class="math inline">\(\lambda = 1\)</span> and <span class="math inline">\(\lambda = 20\)</span>):</p>
-<div class="sourceCode" id="cb758"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb758-1" data-line-number="1">dexp2_l1 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dexp2</span>(x, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb758-2" data-line-number="2"><span class="kw">integrate</span>(dexp2_l1, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb757"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb757-1" data-line-number="1">dexp2_l1 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dexp2</span>(x, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb757-2" data-line-number="2"><span class="kw">integrate</span>(dexp2_l1, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)</a></code></pre></div>
 <pre><code>## 1 with absolute error &lt; 0.000057</code></pre>
-<div class="sourceCode" id="cb760"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb760-1" data-line-number="1">dexp2_l20 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dexp2</span>(x, <span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb760-2" data-line-number="2"><span class="kw">integrate</span>(dexp2_l20, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb759"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb759-1" data-line-number="1">dexp2_l20 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dexp2</span>(x, <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb759-2" data-line-number="2"><span class="kw">integrate</span>(dexp2_l20, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)</a></code></pre></div>
 <pre><code>## 1 with absolute error &lt; 0.00000001</code></pre>
 <p>To test our function we’ll also need to generate random values from the exponential distribution. If the quantile function of the distribution exists, the inverse transform sampling is a relatively straightforward way to get pseudo random numbers sampled from a target distribution.</p>
 <blockquote>
@@ -1246,18 +1246,81 @@ p-1 &amp;= - e^{-\lambda x}\\
 \end{aligned}
 \end{equation}\]</span></p>
 <p>Write the quantile function (or inverse CDF) and random number generator for the exponential distribution:</p>
-<div class="sourceCode" id="cb762"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb762-1" data-line-number="1">qexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(p, <span class="dt">lambda =</span> <span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb762-2" data-line-number="2"><span class="op">-</span><span class="kw">log</span>(<span class="dv">1</span><span class="op">-</span>p)<span class="op">/</span>lambda</a>
-<a class="sourceLine" id="cb762-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb762-4" data-line-number="4">rexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">lambda =</span> <span class="dv">1</span>){</a>
-<a class="sourceLine" id="cb762-5" data-line-number="5">  u &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <span class="dv">0</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb762-6" data-line-number="6">  <span class="kw">qexp2</span>(u, lambda)</a>
-<a class="sourceLine" id="cb762-7" data-line-number="7">}</a></code></pre></div>
+<div class="sourceCode" id="cb761"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb761-1" data-line-number="1">qexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(p, <span class="dt">lambda =</span> <span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb761-2" data-line-number="2">  <span class="op">-</span><span class="st"> </span><span class="kw">log</span>( <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p) <span class="op">/</span><span class="st"> </span>lambda</a>
+<a class="sourceLine" id="cb761-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb761-4" data-line-number="4">rexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">lambda =</span> <span class="dv">1</span>){</a>
+<a class="sourceLine" id="cb761-5" data-line-number="5">  u &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb761-6" data-line-number="6">  <span class="kw">qexp2</span>(u, lambda)</a>
+<a class="sourceLine" id="cb761-7" data-line-number="7">}</a></code></pre></div>
+<p>The Stan model, <code>exponential.stan</code>, is relatively faithful to the R code, but follows Stan conventions: The function <code>exp_lpdf</code> stores the sum of the log(PDF) evaluated at each value of x, this would be analogous to do <code>sum(dexp2(x,lambda, log = TRUE))</code>; the function <code>exp_rng</code> implements a non-vectorized version of <code>rexp2</code> using the auxiliary function <code>exp_icdf</code> which is similar to <code>qexp2</code>.</p>
+<pre class="stan fold-show"><code>functions {
+  real exp_lpdf(vector x, real lambda){
+    vector[num_elements(x)] lpdf = log(lambda) - lambda * x;
+    return sum(lpdf);
+  }
+  real exp_icdf(real p, real lambda){
+    return - log(1 - p) / lambda;
+  }
+  real exp_rng(real lambda){
+    real u = uniform_rng(0, 1);
+    return exp_icdf(u, lambda);
+  }
+}
+data {
+  int&lt;lower = 1&gt; N;
+  vector[N] RT;
+}
+parameters {
+  real&lt;lower = 0&gt; lambda;
+}
+model {
+  target += normal_lpdf(lambda | 0, .1) -
+    normal_lccdf(0 | 0, .1);
+  target += exp_lpdf(RT | lambda);
+}
+generated quantities {
+  real rt_pred[N];
+  for (n in 1:N)
+    rt_pred[n] = exp_rng(lambda);
+}</code></pre>
 <p>We are now ready to generate synthetic data and fit the distribution in Stan.</p>
+<p>Generate 1000 observations.</p>
 <div class="sourceCode" id="cb763"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb763-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb763-2" data-line-number="2">rt &lt;-<span class="st"> </span><span class="kw">rexp2</span>(N, <span class="dv">2</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb763-2" data-line-number="2">lambda &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">200</span></a>
+<a class="sourceLine" id="cb763-3" data-line-number="3">rt &lt;-<span class="st"> </span><span class="kw">rexp2</span>(N, lambda)</a></code></pre></div>
+<div class="sourceCode" id="cb764"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb764-1" data-line-number="1">exponential &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb764-2" data-line-number="2">                             <span class="st">&quot;exponential.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb764-3" data-line-number="3">                             <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb764-4" data-line-number="4">fit_exp &lt;-<span class="st"> </span><span class="kw">stan</span>(exponential, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt))  </a></code></pre></div>
+<p>Print the summary:</p>
+<div class="sourceCode" id="cb765"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb765-1" data-line-number="1"><span class="kw">print</span>(fit_exp, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;lambda&quot;</span>))</a></code></pre></div>
+<pre><code>##        mean 2.5% 97.5% n_eff Rhat
+## lambda 0.01    0  0.01  1402    1</code></pre>
+<p>We expect that the model will pass posterior predictive checks coded below and shown in Figure <a href="a-handmade-distribution.html#fig:ppcheckexp">12.4</a>.</p>
+
+<div class="sourceCode" id="cb767"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb767-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb767-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(rt, <span class="dt">yrep =</span> <span class="kw">extract</span>(fit_exp)<span class="op">$</span>rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>, ]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb767-3" data-line-number="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</a></code></pre></div>
+<div class="figure"><span id="fig:ppcheckexp"></span>
+<img src="bookdown_files/figure-html/ppcheckexp-1.svg" alt="Posterior predictive check of fit_exp in comparison with the synthetic data." width="672" />
+<p class="caption">
+FIGURE 12.4: Posterior predictive check of <code>fit_exp</code> in comparison with the synthetic data.
+</p>
+</div>
+<p>Check that the true values of the parameter <span class="math inline">\(\lambda\)</span> and is well inside its posterior distribution, and shown in Figure <a href="a-handmade-distribution.html#fig:recoveryexp">12.5</a></p>
+
+<div class="sourceCode" id="cb768"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb768-1" data-line-number="1">post_exp &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_exp) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb768-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="st">&quot;lambda&quot;</span>)</a>
+<a class="sourceLine" id="cb768-3" data-line-number="3"><span class="kw">mcmc_recover_hist</span>(post_exp, <span class="dt">true =</span> lambda)</a></code></pre></div>
+<div class="figure"><span id="fig:recoveryexp"></span>
+<img src="bookdown_files/figure-html/recoveryexp-1.svg" alt="Posterior distributions of the parameters of fit_exp together with their true values." width="672" />
+<p class="caption">
+FIGURE 12.5: Posterior distributions of the parameters of <code>fit_exp</code> together with their true values.
+</p>
+</div>
 <blockquote>
-<p>TO BE CONTINUED</p>
+<p>SBC?</p>
 </blockquote>
 </div>
 <h3>References</h3>

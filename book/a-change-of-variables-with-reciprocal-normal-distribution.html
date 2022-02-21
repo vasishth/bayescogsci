@@ -24,7 +24,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2021-09-18" />
+<meta name="date" content="2021-09-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1201,11 +1201,11 @@ y &amp;\sim \mathit{RecNormal}(\mu, \sigma)
 \end{equation}\]</span></p>
 <p>An interesting aspect of the rec-normal is that it affords an interpretation of the location parameter in terms of rate or speed rather than time. As it happens with the log-normal, both the location, <span class="math inline">\(\mu\)</span> and scale, <span class="math inline">\(\sigma\)</span> are not in the same scale of the dependent variable, they are in the same scale as <span class="math inline">\(1/y\)</span>.</p>
 <p>By setting <span class="math inline">\(\mu = .002\)</span> and <span class="math inline">\(\sigma =.0004\)</span> we generate data that looks right-skewed and not unlike a distribution of response times, the code below shows some summary statistics of the generated data.</p>
-<div class="sourceCode" id="cb736"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb736-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb736-2" data-line-number="2">mu &lt;-<span class="st"> </span><span class="fl">.002</span></a>
-<a class="sourceLine" id="cb736-3" data-line-number="3">sigma &lt;-<span class="st"> </span><span class="fl">.0004</span></a>
-<a class="sourceLine" id="cb736-4" data-line-number="4">rt &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">rnorm</span>(N, mu, sigma) </a>
-<a class="sourceLine" id="cb736-5" data-line-number="5"><span class="kw">c</span>(<span class="kw">mean</span>(rt), <span class="kw">sd</span>(rt), <span class="kw">min</span>(rt), <span class="kw">max</span>(rt))</a></code></pre></div>
+<div class="sourceCode" id="cb735"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb735-1" data-line-number="1">N &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb735-2" data-line-number="2">mu &lt;-<span class="st"> </span><span class="fl">.002</span></a>
+<a class="sourceLine" id="cb735-3" data-line-number="3">sigma &lt;-<span class="st"> </span><span class="fl">.0004</span></a>
+<a class="sourceLine" id="cb735-4" data-line-number="4">rt &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">rnorm</span>(N, mu, sigma) </a>
+<a class="sourceLine" id="cb735-5" data-line-number="5"><span class="kw">c</span>(<span class="kw">mean</span>(rt), <span class="kw">sd</span>(rt), <span class="kw">min</span>(rt), <span class="kw">max</span>(rt))</a></code></pre></div>
 <pre><code>## [1]  524  124  282 2646</code></pre>
 <p>Figure <a href="a-change-of-variables-with-reciprocal-normal-distribution.html#fig:recnormalhist">12.1</a> shows the distribution generated with the code shown above.</p>
 
@@ -1239,11 +1239,11 @@ model {
   target += normal_lpdf(recRT | mu, sigma);
 }</code></pre>
 <p>Fit and display the summary of the previous model:</p>
-<div class="sourceCode" id="cb740"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb740-1" data-line-number="1">normal_recrt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb740-2" data-line-number="2">                            <span class="st">&quot;normal_recrt.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb740-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>) </a>
-<a class="sourceLine" id="cb740-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(normal_recrt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">recRT =</span> <span class="dv">1</span><span class="op">/</span>rt))</a></code></pre></div>
-<div class="sourceCode" id="cb741"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb741-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb739"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb739-1" data-line-number="1">normal_recrt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb739-2" data-line-number="2">                            <span class="st">&quot;normal_recrt.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb739-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>) </a>
+<a class="sourceLine" id="cb739-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(normal_recrt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">recRT =</span> <span class="dv">1</span><span class="op">/</span>rt))</a></code></pre></div>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb740-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>##         mean   2.5%  97.5% n_eff Rhat
 ## mu    0.0020 0.0020 0.0020  4126    1
 ## sigma 0.0004 0.0004 0.0004  2757    1</code></pre>
@@ -1296,12 +1296,12 @@ model {
     - sum(2 * log(RT));
 }</code></pre>
 <p>Fit the model to the data.</p>
-<div class="sourceCode" id="cb745"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb745-1" data-line-number="1">recnormal_rt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb745-2" data-line-number="2">                            <span class="st">&quot;recnormal_rt.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb745-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>) </a>
-<a class="sourceLine" id="cb745-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt)) </a></code></pre></div>
+<div class="sourceCode" id="cb744"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb744-1" data-line-number="1">recnormal_rt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb744-2" data-line-number="2">                            <span class="st">&quot;recnormal_rt.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb744-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>) </a>
+<a class="sourceLine" id="cb744-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt)) </a></code></pre></div>
 <p>Print the posterior.</p>
-<div class="sourceCode" id="cb746"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb746-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb745"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb745-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>##         mean   2.5%  97.5% n_eff Rhat
 ## mu    0.0020 0.0020 0.0020  3830    1
 ## sigma 0.0004 0.0004 0.0004  2537    1</code></pre>
@@ -1367,20 +1367,20 @@ generated quantities {
     rt_pred[n] = recnormal_rng(mu, sigma);
 }</code></pre>
 <p>Fit the model:</p>
-<div class="sourceCode" id="cb750"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb750-1" data-line-number="1">recnormal_rt_f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb750-2" data-line-number="2">                            <span class="st">&quot;recnormal_rt_f.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb750-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb750-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt_f, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt))  </a></code></pre></div>
+<div class="sourceCode" id="cb749"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb749-1" data-line-number="1">recnormal_rt_f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb749-2" data-line-number="2">                            <span class="st">&quot;recnormal_rt_f.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb749-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb749-4" data-line-number="4">fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt_f, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt))  </a></code></pre></div>
 <p>Print the summary:</p>
-<div class="sourceCode" id="cb751"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb751-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb750"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb750-1" data-line-number="1"><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>##         mean   2.5%  97.5% n_eff Rhat
 ## mu    0.0020 0.0020 0.0020  4246    1
 ## sigma 0.0004 0.0004 0.0004  2437    1</code></pre>
 <p>The model converged, but did it work? At the very least we expect that the synthetic data that we used to test the model shows a perfect fit when we posterior predictive checks. This is because we are fitting the data with the same function that we use to generate the data. Figure <a href="a-change-of-variables-with-reciprocal-normal-distribution.html#fig:ppcheckrec">12.2</a> shows that this is the case.</p>
 
-<div class="sourceCode" id="cb753"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb753-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb753-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(rt, <span class="dt">yrep =</span> <span class="kw">extract</span>(fit_rec)<span class="op">$</span>rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>, ]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb753-3" data-line-number="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb752"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><a class="sourceLine" id="cb752-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb752-2" data-line-number="2"><span class="kw">ppc_dens_overlay</span>(rt, <span class="dt">yrep =</span> <span class="kw">extract</span>(fit_rec)<span class="op">$</span>rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>, ]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb752-3" data-line-number="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</a></code></pre></div>
 <div class="figure"><span id="fig:ppcheckrec"></span>
 <img src="bookdown_files/figure-html/ppcheckrec-1.svg" alt="Posterior predictive check of fit_rec in comparison with the synthetic data." width="672" />
 <p class="caption">
@@ -1389,9 +1389,9 @@ FIGURE 12.2: Posterior predictive check of <code>fit_rec</code> in comparison wi
 </div>
 <p>Furthermore, the true values of the parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> should be well inside their posterior distribution. We investigate this by plotting the true values of the parameters together with their posterior distributions using the function <code>mcmc_recover_hist</code> of <code>bayesplot</code> as shown below:</p>
 
-<div class="sourceCode" id="cb754"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb754-1" data-line-number="1">post_rec &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_rec) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb754-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>)</a>
-<a class="sourceLine" id="cb754-3" data-line-number="3"><span class="kw">mcmc_recover_hist</span>(post_rec, <span class="dt">true =</span> <span class="kw">c</span>(mu, sigma))</a></code></pre></div>
+<div class="sourceCode" id="cb753"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb753-1" data-line-number="1">post_rec &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_rec) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb753-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>)</a>
+<a class="sourceLine" id="cb753-3" data-line-number="3"><span class="kw">mcmc_recover_hist</span>(post_rec, <span class="dt">true =</span> <span class="kw">c</span>(mu, sigma))</a></code></pre></div>
 <div class="figure"><span id="fig:recoveryrec"></span>
 <img src="bookdown_files/figure-html/recoveryrec-1.svg" alt="Posterior distributions of the parameters of fit_rec together with their true values." width="672" />
 <p class="caption">
@@ -1466,17 +1466,17 @@ generated quantities {
   for(n in 1:N)
     log_lik[n] = recnormal_lpdf([RT[n]]&#39; | mu, sigma);
 }</code></pre>
-<div class="sourceCode" id="cb756"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb756-1" data-line-number="1">recnormal_sbc &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
-<a class="sourceLine" id="cb756-2" data-line-number="2">                            <span class="st">&quot;recnormal_sbc.stan&quot;</span>,</a>
-<a class="sourceLine" id="cb756-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
-<a class="sourceLine" id="cb756-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb756-5" data-line-number="5">mod_recnormal_sbc &lt;-<span class="st"> </span><span class="kw">stan_model</span>(recnormal_sbc)</a>
-<a class="sourceLine" id="cb756-6" data-line-number="6">output_sbc &lt;-<span class="st"> </span><span class="kw">sbc</span>(mod_recnormal_sbc, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb756-7" data-line-number="7">                                         <span class="dt">mu_s_loc =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb756-8" data-line-number="8">                                         <span class="dt">mu_s_scale =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb756-9" data-line-number="9">                                         <span class="dt">sigma_s_loc =</span> <span class="kw">log</span>(.<span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb756-10" data-line-number="10">                                         <span class="dt">sigma_s_scale =</span> <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb756-11" data-line-number="11">                  <span class="dt">M =</span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb755"><pre class="sourceCode r fold-show"><code class="sourceCode r"><a class="sourceLine" id="cb755-1" data-line-number="1">recnormal_sbc &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</a>
+<a class="sourceLine" id="cb755-2" data-line-number="2">                            <span class="st">&quot;recnormal_sbc.stan&quot;</span>,</a>
+<a class="sourceLine" id="cb755-3" data-line-number="3">                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</a>
+<a class="sourceLine" id="cb755-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb755-5" data-line-number="5">mod_recnormal_sbc &lt;-<span class="st"> </span><span class="kw">stan_model</span>(recnormal_sbc)</a>
+<a class="sourceLine" id="cb755-6" data-line-number="6">output_sbc &lt;-<span class="st"> </span><span class="kw">sbc</span>(mod_recnormal_sbc, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb755-7" data-line-number="7">                                         <span class="dt">mu_s_loc =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb755-8" data-line-number="8">                                         <span class="dt">mu_s_scale =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb755-9" data-line-number="9">                                         <span class="dt">sigma_s_loc =</span> <span class="kw">log</span>(.<span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb755-10" data-line-number="10">                                         <span class="dt">sigma_s_scale =</span> <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb755-11" data-line-number="11">                  <span class="dt">M =</span><span class="dv">5</span>)</a></code></pre></div>
 <blockquote>
 <p>TO FINISH</p>
 </blockquote>
