@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 17 Introduction to computational cognitive modeling | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 17 Introduction to computational cognitive modeling | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2023-02-18" />
+<meta name="date" content="2024-03-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,6 +49,7 @@
 
 
 
+<script src="libs/accessible-code-block/empty-anchor.js"></script>
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
@@ -792,25 +793,26 @@ $(document).ready(function () {
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -819,9 +821,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -854,6 +856,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <link rel="stylesheet" href="css/toc.css" type="text/css" />
@@ -872,7 +878,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-read-this-book-and-what-is-its-target-audience"><i class="fa fa-check"></i>Why read this book, and what is its target audience?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#developing-the-right-mindset-for-this-book"><i class="fa fa-check"></i>Developing the right mindset for this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-read-this-book"><i class="fa fa-check"></i>How to read this book</a></li>
@@ -883,38 +890,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="ch-intro.html"><a href="ch-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="ch-intro.html"><a href="ch-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="ch-intro.html"><a href="ch-intro.html#introprob"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
-<li class="chapter" data-level="1.2" data-path="ch-intro.html"><a href="ch-intro.html#condprob"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
-<li class="chapter" data-level="1.3" data-path="ch-intro.html"><a href="ch-intro.html#the-law-of-total-probability"><i class="fa fa-check"></i><b>1.3</b> The law of total probability</a></li>
-<li class="chapter" data-level="1.4" data-path="ch-intro.html"><a href="ch-intro.html#sec-binomialcloze"><i class="fa fa-check"></i><b>1.4</b> Discrete random variables: An example using the binomial distribution</a><ul>
+<li class="chapter" data-level="1.2" data-path="ch-intro.html"><a href="ch-intro.html#condprob"><i class="fa fa-check"></i><b>1.2</b>  Conditional probability</a></li>
+<li class="chapter" data-level="1.3" data-path="ch-intro.html"><a href="ch-intro.html#the-law-of-total-probability"><i class="fa fa-check"></i><b>1.3</b> The  law of total probability</a></li>
+<li class="chapter" data-level="1.4" data-path="ch-intro.html"><a href="ch-intro.html#sec-binomialcloze"><i class="fa fa-check"></i><b>1.4</b>  Discrete random variables: An example using the  binomial distribution</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="ch-intro.html"><a href="ch-intro.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.4.1</b> The mean and variance of the binomial distribution</a></li>
 <li class="chapter" data-level="1.4.2" data-path="ch-intro.html"><a href="ch-intro.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.4.2</b> What information does a probability distribution provide?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="ch-intro.html"><a href="ch-intro.html#continuous-random-variables-an-example-using-the-normal-distribution"><i class="fa fa-check"></i><b>1.5</b> Continuous random variables: An example using the normal distribution</a><ul>
-<li class="chapter" data-level="1.5.1" data-path="ch-intro.html"><a href="ch-intro.html#an-important-distinction-probability-vs.density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
+<li class="chapter" data-level="1.5" data-path="ch-intro.html"><a href="ch-intro.html#continuous-random-variables-an-example-using-the-normal-distribution"><i class="fa fa-check"></i><b>1.5</b>  Continuous random variables: An example using the  normal distribution</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="ch-intro.html"><a href="ch-intro.html#an-important-distinction-probability-vs.-density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
 <li class="chapter" data-level="1.5.2" data-path="ch-intro.html"><a href="ch-intro.html#truncating-a-normal-distribution"><i class="fa fa-check"></i><b>1.5.2</b> Truncating a normal distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="ch-intro.html"><a href="ch-intro.html#bivariate-and-multivariate-distributions"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="ch-intro.html"><a href="ch-intro.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1: Discrete bivariate distributions</a></li>
-<li class="chapter" data-level="1.6.2" data-path="ch-intro.html"><a href="ch-intro.html#sec-contbivar"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
-<li class="chapter" data-level="1.6.3" data-path="ch-intro.html"><a href="ch-intro.html#sec-generatebivariatedata"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
+<li class="chapter" data-level="1.6" data-path="ch-intro.html"><a href="ch-intro.html#bivariate-and-multivariate-distributions"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="ch-intro.html"><a href="ch-intro.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1:  Discrete bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.2" data-path="ch-intro.html"><a href="ch-intro.html#sec-contbivar"><i class="fa fa-check"></i><b>1.6.2</b> Example 2:  Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.3" data-path="ch-intro.html"><a href="ch-intro.html#sec-generatebivariatedata"><i class="fa fa-check"></i><b>1.6.3</b> Generate  simulated bivariate  (multivariate) data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="ch-intro.html"><a href="ch-intro.html#sec-marginal"><i class="fa fa-check"></i><b>1.7</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
+<li class="chapter" data-level="1.7" data-path="ch-intro.html"><a href="ch-intro.html#sec-marginal"><i class="fa fa-check"></i><b>1.7</b> An important concept: The  marginal likelihood  (integrating out a parameter)</a></li>
 <li class="chapter" data-level="1.8" data-path="ch-intro.html"><a href="ch-intro.html#summary-of-useful-r-functions-relating-to-distributions"><i class="fa fa-check"></i><b>1.8</b> Summary of useful R functions relating to distributions</a></li>
 <li class="chapter" data-level="1.9" data-path="ch-intro.html"><a href="ch-intro.html#summary"><i class="fa fa-check"></i><b>1.9</b> Summary</a></li>
 <li class="chapter" data-level="1.10" data-path="ch-intro.html"><a href="ch-intro.html#further-reading"><i class="fa fa-check"></i><b>1.10</b> Further reading</a></li>
 <li class="chapter" data-level="1.11" data-path="ch-intro.html"><a href="ch-intro.html#sec-Foundationsexercises"><i class="fa fa-check"></i><b>1.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="ch-introBDA.html"><a href="ch-introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
-<li class="chapter" data-level="2.1" data-path="ch-introBDA.html"><a href="ch-introBDA.html#bayes-rule"><i class="fa fa-check"></i><b>2.1</b> Bayes’ rule</a></li>
-<li class="chapter" data-level="2.2" data-path="ch-introBDA.html"><a href="ch-introBDA.html#sec-analytical"><i class="fa fa-check"></i><b>2.2</b> Deriving the posterior using Bayes’ rule: An analytical example</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="ch-introBDA.html"><a href="ch-introBDA.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.2.1</b> Choosing a likelihood</a></li>
-<li class="chapter" data-level="2.2.2" data-path="ch-introBDA.html"><a href="ch-introBDA.html#sec-choosepriortheta"><i class="fa fa-check"></i><b>2.2.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
-<li class="chapter" data-level="2.2.3" data-path="ch-introBDA.html"><a href="ch-introBDA.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.2.3</b> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
+<li class="chapter" data-level="2" data-path="ch-introBDA.html"><a href="ch-introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ch-introBDA.html"><a href="ch-introBDA.html#bayes-rule"><i class="fa fa-check"></i><b>2.1</b>  Bayes’ rule</a></li>
+<li class="chapter" data-level="2.2" data-path="ch-introBDA.html"><a href="ch-introBDA.html#sec-analytical"><i class="fa fa-check"></i><b>2.2</b> Deriving the  posterior using Bayes’ rule: An analytical example</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="ch-introBDA.html"><a href="ch-introBDA.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.2.1</b> Choosing a  likelihood</a></li>
+<li class="chapter" data-level="2.2.2" data-path="ch-introBDA.html"><a href="ch-introBDA.html#sec-choosepriortheta"><i class="fa fa-check"></i><b>2.2.2</b> Choosing a  prior for <span class="math inline">\(\theta\)</span></a></li>
+<li class="chapter" data-level="2.2.3" data-path="ch-introBDA.html"><a href="ch-introBDA.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.2.3</b> Using  Bayes’ rule to compute the  posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
 <li class="chapter" data-level="2.2.4" data-path="ch-introBDA.html"><a href="ch-introBDA.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.2.4</b> Summary of the procedure</a></li>
 <li class="chapter" data-level="2.2.5" data-path="ch-introBDA.html"><a href="ch-introBDA.html#visualizing-the-prior-likelihood-and-posterior"><i class="fa fa-check"></i><b>2.2.5</b> Visualizing the prior, likelihood, and posterior</a></li>
-<li class="chapter" data-level="2.2.6" data-path="ch-introBDA.html"><a href="ch-introBDA.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.2.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
+<li class="chapter" data-level="2.2.6" data-path="ch-introBDA.html"><a href="ch-introBDA.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.2.6</b> The  posterior distribution is a compromise between the prior and the likelihood</a></li>
 <li class="chapter" data-level="2.2.7" data-path="ch-introBDA.html"><a href="ch-introBDA.html#incremental-knowledge-gain-using-prior-knowledge"><i class="fa fa-check"></i><b>2.2.7</b> Incremental knowledge gain using prior knowledge</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="ch-introBDA.html"><a href="ch-introBDA.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
@@ -922,22 +935,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="ch-introBDA.html"><a href="ch-introBDA.html#sec-BDAexercises"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>II Regression models with brms</b></span></li>
-<li class="chapter" data-level="3" data-path="ch-compbda.html"><a href="ch-compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a><ul>
-<li class="chapter" data-level="3.1" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-sampling"><i class="fa fa-check"></i><b>3.1</b> Deriving the posterior through sampling</a></li>
-<li class="chapter" data-level="3.2" data-path="ch-compbda.html"><a href="ch-compbda.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.2</b> Bayesian Regression Models using Stan: brms</a><ul>
+<li class="chapter" data-level="3" data-path="ch-compbda.html"><a href="ch-compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-sampling"><i class="fa fa-check"></i><b>3.1</b> Deriving the  posterior through  sampling</a></li>
+<li class="chapter" data-level="3.2" data-path="ch-compbda.html"><a href="ch-compbda.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.2</b>  Bayesian Regression Models using Stan:  brms</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-simplenormal"><i class="fa fa-check"></i><b>3.2.1</b> A simple linear model: A single subject pressing a button repeatedly (a finger tapping task)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-priorpred"><i class="fa fa-check"></i><b>3.3</b> Prior predictive distribution</a></li>
-<li class="chapter" data-level="3.4" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-sensitivity"><i class="fa fa-check"></i><b>3.4</b> The influence of priors: sensitivity analysis</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="ch-compbda.html"><a href="ch-compbda.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.4.1</b> Flat, uninformative priors</a></li>
-<li class="chapter" data-level="3.4.2" data-path="ch-compbda.html"><a href="ch-compbda.html#regularizing-priors"><i class="fa fa-check"></i><b>3.4.2</b> Regularizing priors</a></li>
-<li class="chapter" data-level="3.4.3" data-path="ch-compbda.html"><a href="ch-compbda.html#principled-priors"><i class="fa fa-check"></i><b>3.4.3</b> Principled priors</a></li>
-<li class="chapter" data-level="3.4.4" data-path="ch-compbda.html"><a href="ch-compbda.html#informative-priors"><i class="fa fa-check"></i><b>3.4.4</b> Informative priors</a></li>
+<li class="chapter" data-level="3.3" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-priorpred"><i class="fa fa-check"></i><b>3.3</b>  Prior predictive distribution</a></li>
+<li class="chapter" data-level="3.4" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-sensitivity"><i class="fa fa-check"></i><b>3.4</b> The influence of priors:  sensitivity analysis</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="ch-compbda.html"><a href="ch-compbda.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.4.1</b>  Flat, uninformative priors</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ch-compbda.html"><a href="ch-compbda.html#regularizing-priors"><i class="fa fa-check"></i><b>3.4.2</b>  Regularizing priors</a></li>
+<li class="chapter" data-level="3.4.3" data-path="ch-compbda.html"><a href="ch-compbda.html#principled-priors"><i class="fa fa-check"></i><b>3.4.3</b>  Principled priors</a></li>
+<li class="chapter" data-level="3.4.4" data-path="ch-compbda.html"><a href="ch-compbda.html#informative-priors"><i class="fa fa-check"></i><b>3.4.4</b>  Informative priors</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-revisit"><i class="fa fa-check"></i><b>3.5</b> Revisiting the button-pressing example with different priors</a></li>
-<li class="chapter" data-level="3.6" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-ppd"><i class="fa fa-check"></i><b>3.6</b> Posterior predictive distribution</a></li>
-<li class="chapter" data-level="3.7" data-path="ch-compbda.html"><a href="ch-compbda.html#the-influence-of-the-likelihood"><i class="fa fa-check"></i><b>3.7</b> The influence of the likelihood</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-lnfirst"><i class="fa fa-check"></i><b>3.7.1</b> The log-normal likelihood</a></li>
+<li class="chapter" data-level="3.6" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-ppd"><i class="fa fa-check"></i><b>3.6</b>  Posterior predictive distribution</a></li>
+<li class="chapter" data-level="3.7" data-path="ch-compbda.html"><a href="ch-compbda.html#the-influence-of-the-likelihood"><i class="fa fa-check"></i><b>3.7</b> The influence of the likelihood</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-lnfirst"><i class="fa fa-check"></i><b>3.7.1</b> The  log-normal likelihood</a></li>
 <li class="chapter" data-level="3.7.2" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-lognormal"><i class="fa fa-check"></i><b>3.7.2</b> Using a log-normal likelihood to fit data from a single subject pressing a button repeatedly</a></li>
 </ul></li>
 <li class="chapter" data-level="3.8" data-path="ch-compbda.html"><a href="ch-compbda.html#list-of-the-most-important-commands"><i class="fa fa-check"></i><b>3.8</b> List of the most important commands</a></li>
@@ -945,257 +962,303 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.10" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-ch3furtherreading"><i class="fa fa-check"></i><b>3.10</b> Further reading</a></li>
 <li class="chapter" data-level="3.11" data-path="ch-compbda.html"><a href="ch-compbda.html#ex:compbda"><i class="fa fa-check"></i><b>3.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
-<li class="chapter" data-level="4.1" data-path="ch-reg.html"><a href="ch-reg.html#sec-pupil"><i class="fa fa-check"></i><b>4.1</b> A first linear regression: Does attentional load affect pupil size?</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="ch-reg.html"><a href="ch-reg.html#likelihood-and-priors"><i class="fa fa-check"></i><b>4.1.1</b> Likelihood and priors</a></li>
-<li class="chapter" data-level="4.1.2" data-path="ch-reg.html"><a href="ch-reg.html#the-brms-model"><i class="fa fa-check"></i><b>4.1.2</b> The <code>brms</code> model</a></li>
+<li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ch-reg.html"><a href="ch-reg.html#sec-pupil"><i class="fa fa-check"></i><b>4.1</b> A first  linear regression: Does attentional load affect pupil size?</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="ch-reg.html"><a href="ch-reg.html#likelihood-and-priors"><i class="fa fa-check"></i><b>4.1.1</b>  Likelihood and  priors</a></li>
+<li class="chapter" data-level="4.1.2" data-path="ch-reg.html"><a href="ch-reg.html#the-brms-model"><i class="fa fa-check"></i><b>4.1.2</b> The  <code>brms</code> model</a></li>
 <li class="chapter" data-level="4.1.3" data-path="ch-reg.html"><a href="ch-reg.html#how-to-communicate-the-results"><i class="fa fa-check"></i><b>4.1.3</b> How to communicate the results?</a></li>
 <li class="chapter" data-level="4.1.4" data-path="ch-reg.html"><a href="ch-reg.html#sec-pupiladq"><i class="fa fa-check"></i><b>4.1.4</b> Descriptive adequacy</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="ch-reg.html"><a href="ch-reg.html#sec-trial"><i class="fa fa-check"></i><b>4.2</b> Log-normal model: Does trial affect finger tapping times?</a><ul>
+<li class="chapter" data-level="4.2" data-path="ch-reg.html"><a href="ch-reg.html#sec-trial"><i class="fa fa-check"></i><b>4.2</b>  Log-normal model: Does trial affect response times?</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="ch-reg.html"><a href="ch-reg.html#likelihood-and-priors-for-the-log-normal-model"><i class="fa fa-check"></i><b>4.2.1</b> Likelihood and priors for the log-normal model</a></li>
-<li class="chapter" data-level="4.2.2" data-path="ch-reg.html"><a href="ch-reg.html#the-brms-model-1"><i class="fa fa-check"></i><b>4.2.2</b> The <code>brms</code> model</a></li>
+<li class="chapter" data-level="4.2.2" data-path="ch-reg.html"><a href="ch-reg.html#the-brms-model-1"><i class="fa fa-check"></i><b>4.2.2</b> The  <code>brms</code> model</a></li>
 <li class="chapter" data-level="4.2.3" data-path="ch-reg.html"><a href="ch-reg.html#how-to-communicate-the-results-1"><i class="fa fa-check"></i><b>4.2.3</b> How to communicate the results?</a></li>
 <li class="chapter" data-level="4.2.4" data-path="ch-reg.html"><a href="ch-reg.html#descriptive-adequacy"><i class="fa fa-check"></i><b>4.2.4</b> Descriptive adequacy</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="ch-reg.html"><a href="ch-reg.html#sec-logistic"><i class="fa fa-check"></i><b>4.3</b> Logistic regression: Does set size affect free recall?</a><ul>
+<li class="chapter" data-level="4.3" data-path="ch-reg.html"><a href="ch-reg.html#sec-logistic"><i class="fa fa-check"></i><b>4.3</b>  Logistic regression: Does  set size affect  free recall?</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="ch-reg.html"><a href="ch-reg.html#the-likelihood-for-the-logistic-regression-model"><i class="fa fa-check"></i><b>4.3.1</b> The likelihood for the logistic regression model</a></li>
 <li class="chapter" data-level="4.3.2" data-path="ch-reg.html"><a href="ch-reg.html#sec-priorslogisticregression"><i class="fa fa-check"></i><b>4.3.2</b> Priors for the logistic regression</a></li>
 <li class="chapter" data-level="4.3.3" data-path="ch-reg.html"><a href="ch-reg.html#the-brms-model-2"><i class="fa fa-check"></i><b>4.3.3</b> The <code>brms</code> model</a></li>
 <li class="chapter" data-level="4.3.4" data-path="ch-reg.html"><a href="ch-reg.html#sec-comlogis"><i class="fa fa-check"></i><b>4.3.4</b> How to communicate the results?</a></li>
-<li class="chapter" data-level="4.3.5" data-path="ch-reg.html"><a href="ch-reg.html#descriptive-adequacy-1"><i class="fa fa-check"></i><b>4.3.5</b> Descriptive adequacy</a></li>
+<li class="chapter" data-level="4.3.5" data-path="ch-reg.html"><a href="ch-reg.html#descriptive-adequacy-1"><i class="fa fa-check"></i><b>4.3.5</b>  Descriptive adequacy</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="ch-reg.html"><a href="ch-reg.html#summary-3"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
 <li class="chapter" data-level="4.5" data-path="ch-reg.html"><a href="ch-reg.html#sec-ch4furtherreading"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
 <li class="chapter" data-level="4.6" data-path="ch-reg.html"><a href="ch-reg.html#sec-LMexercises"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
+<li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#exchangeability-and-hierarchical-models"><i class="fa fa-check"></i><b>5.1</b> Exchangeability and hierarchical models</a></li>
-<li class="chapter" data-level="5.2" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-N400hierarchical"><i class="fa fa-check"></i><b>5.2</b> A hierarchical model with a normal likelihood: The N400 effect</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-Mcp"><i class="fa fa-check"></i><b>5.2.1</b> Complete pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
-<li class="chapter" data-level="5.2.2" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.2.2</b> No pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
-<li class="chapter" data-level="5.2.3" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-uncorrelated"><i class="fa fa-check"></i><b>5.2.3</b> Varying intercepts and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
+<li class="chapter" data-level="5.2" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-N400hierarchical"><i class="fa fa-check"></i><b>5.2</b> A hierarchical model with a normal likelihood: The N400 effect</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-Mcp"><i class="fa fa-check"></i><b>5.2.1</b>  Complete pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.2.2</b>  No pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-uncorrelated"><i class="fa fa-check"></i><b>5.2.3</b>  Varying intercepts and  varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
 <li class="chapter" data-level="5.2.4" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-mcvivs"><i class="fa fa-check"></i><b>5.2.4</b> Correlated varying intercept varying slopes model (<span class="math inline">\(M_{h}\)</span>)</a></li>
 <li class="chapter" data-level="5.2.5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-sih"><i class="fa fa-check"></i><b>5.2.5</b> By-subjects and by-items correlated varying intercept varying slopes model (<span class="math inline">\(M_{sih}\)</span>)</a></li>
 <li class="chapter" data-level="5.2.6" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-distrmodel"><i class="fa fa-check"></i><b>5.2.6</b> Beyond the maximal model–Distributional regression models</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-stroop"><i class="fa fa-check"></i><b>5.3</b> A hierarchical log-normal model: The Stroop effect</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.3.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
+<li class="chapter" data-level="5.3" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-stroop"><i class="fa fa-check"></i><b>5.3</b> A  hierarchical log-normal model: The  Stroop effect</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.3.1</b> A correlated varying intercept varying slopes  log-normal model</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort"><i class="fa fa-check"></i><b>5.4</b> Why fitting a Bayesian hierarchical model is worth the effort</a></li>
 <li class="chapter" data-level="5.5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#summary-4"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
 <li class="chapter" data-level="5.6" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#further-reading-2"><i class="fa fa-check"></i><b>5.6</b> Further reading</a></li>
 <li class="chapter" data-level="5.7" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-HLMexercises"><i class="fa fa-check"></i><b>5.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="ch-priors.html"><a href="ch-priors.html"><i class="fa fa-check"></i><b>6</b> The Art and Science of Prior Elicitation</a><ul>
-<li class="chapter" data-level="6.1" data-path="ch-priors.html"><a href="ch-priors.html#sec-simpleexamplepriors"><i class="fa fa-check"></i><b>6.1</b> Eliciting priors from oneself for a self-paced reading study: A simple example</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="ch-priors.html"><a href="ch-priors.html#an-example-english-relative-clauses"><i class="fa fa-check"></i><b>6.1.1</b> An example: English relative clauses</a></li>
+<li class="chapter" data-level="6" data-path="ch-priors.html"><a href="ch-priors.html"><i class="fa fa-check"></i><b>6</b> The Art and Science of  Prior Elicitation</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ch-priors.html"><a href="ch-priors.html#sec-simpleexamplepriors"><i class="fa fa-check"></i><b>6.1</b> Eliciting priors from oneself for a self-paced reading study: A simple example</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="ch-priors.html"><a href="ch-priors.html#an-example-english-relative-clauses"><i class="fa fa-check"></i><b>6.1.1</b> An example: English  relative clauses</a></li>
 <li class="chapter" data-level="6.1.2" data-path="ch-priors.html"><a href="ch-priors.html#eliciting-a-prior-for-the-intercept"><i class="fa fa-check"></i><b>6.1.2</b> Eliciting a prior for the intercept</a></li>
 <li class="chapter" data-level="6.1.3" data-path="ch-priors.html"><a href="ch-priors.html#eliciting-a-prior-for-the-slope"><i class="fa fa-check"></i><b>6.1.3</b> Eliciting a prior for the slope</a></li>
-<li class="chapter" data-level="6.1.4" data-path="ch-priors.html"><a href="ch-priors.html#sec-varcomppriors"><i class="fa fa-check"></i><b>6.1.4</b> Eliciting priors for the variance components</a></li>
+<li class="chapter" data-level="6.1.4" data-path="ch-priors.html"><a href="ch-priors.html#sec-varcomppriors"><i class="fa fa-check"></i><b>6.1.4</b> Eliciting priors for the  variance components</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="ch-priors.html"><a href="ch-priors.html#eliciting-priors-from-experts"><i class="fa fa-check"></i><b>6.2</b> Eliciting priors from experts</a></li>
-<li class="chapter" data-level="6.3" data-path="ch-priors.html"><a href="ch-priors.html#deriving-priors-from-meta-analyses"><i class="fa fa-check"></i><b>6.3</b> Deriving priors from meta-analyses</a></li>
-<li class="chapter" data-level="6.4" data-path="ch-priors.html"><a href="ch-priors.html#using-previous-experiments-posteriors-as-priors-for-a-new-study"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’ posteriors as priors for a new study</a></li>
+<li class="chapter" data-level="6.2" data-path="ch-priors.html"><a href="ch-priors.html#eliciting-priors-from-experts"><i class="fa fa-check"></i><b>6.2</b>  Eliciting priors from experts</a></li>
+<li class="chapter" data-level="6.3" data-path="ch-priors.html"><a href="ch-priors.html#deriving-priors-from-meta-analyses"><i class="fa fa-check"></i><b>6.3</b> Deriving priors from  meta-analyses</a></li>
+<li class="chapter" data-level="6.4" data-path="ch-priors.html"><a href="ch-priors.html#using-previous-experiments-posteriors-as-priors-for-a-new-study"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’  posteriors as priors for a new study</a></li>
 <li class="chapter" data-level="6.5" data-path="ch-priors.html"><a href="ch-priors.html#summary-5"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
 <li class="chapter" data-level="6.6" data-path="ch-priors.html"><a href="ch-priors.html#further-reading-3"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a><ul>
-<li class="chapter" data-level="7.1" data-path="ch-workflow.html"><a href="ch-workflow.html#model-building"><i class="fa fa-check"></i><b>7.1</b> Model building</a></li>
-<li class="chapter" data-level="7.2" data-path="ch-workflow.html"><a href="ch-workflow.html#principled-questions-on-a-model"><i class="fa fa-check"></i><b>7.2</b> Principled questions on a model</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#prior-predictive-checks-checking-consistency-with-domain-expertise"><i class="fa fa-check"></i><b>7.2.1</b> Prior predictive checks: Checking consistency with domain expertise</a></li>
-<li class="chapter" data-level="7.2.2" data-path="ch-workflow.html"><a href="ch-workflow.html#computational-faithfulness-testing-for-correct-posterior-approximations"><i class="fa fa-check"></i><b>7.2.2</b> Computational faithfulness: Testing for correct posterior approximations</a></li>
-<li class="chapter" data-level="7.2.3" data-path="ch-workflow.html"><a href="ch-workflow.html#model-sensitivity"><i class="fa fa-check"></i><b>7.2.3</b> Model sensitivity</a></li>
-<li class="chapter" data-level="7.2.4" data-path="ch-workflow.html"><a href="ch-workflow.html#posterior-predictive-checks-does-the-model-adequately-capture-the-data"><i class="fa fa-check"></i><b>7.2.4</b> Posterior predictive checks: Does the model adequately capture the data?</a></li>
+<li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ch-workflow.html"><a href="ch-workflow.html#building-a-model"><i class="fa fa-check"></i><b>7.1</b>  Building a model</a></li>
+<li class="chapter" data-level="7.2" data-path="ch-workflow.html"><a href="ch-workflow.html#principled-questions-to-ask-on-a-model"><i class="fa fa-check"></i><b>7.2</b> Principled questions to ask on a model</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#checking-whether-assumptions-are-consist-with-domain-expertise-prior-predictive-checks"><i class="fa fa-check"></i><b>7.2.1</b>  Checking whether assumptions are consist with  domain expertise: Prior predictive checks</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ch-workflow.html"><a href="ch-workflow.html#testing-for-correct-posterior-approximations-checks-of-computational-faithfulness"><i class="fa fa-check"></i><b>7.2.2</b>  Testing for correct posterior approximations: Checks of computational faithfulness</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ch-workflow.html"><a href="ch-workflow.html#sensitivity-of-the-model"><i class="fa fa-check"></i><b>7.2.3</b>  Sensitivity of the model</a></li>
+<li class="chapter" data-level="7.2.4" data-path="ch-workflow.html"><a href="ch-workflow.html#does-the-model-adequately-capture-the-dataposterior-predictive-checks"><i class="fa fa-check"></i><b>7.2.4</b>  Does the model adequately capture the data?–Posterior predictive checks</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="ch-workflow.html"><a href="ch-workflow.html#exemplary-data-analysis"><i class="fa fa-check"></i><b>7.3</b> Exemplary data analysis</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="ch-workflow.html"><a href="ch-workflow.html#prior-predictive-checks"><i class="fa fa-check"></i><b>7.3.1</b> Prior predictive checks</a></li>
-<li class="chapter" data-level="7.3.2" data-path="ch-workflow.html"><a href="ch-workflow.html#adjusting-priors"><i class="fa fa-check"></i><b>7.3.2</b> Adjusting priors</a></li>
-<li class="chapter" data-level="7.3.3" data-path="ch-workflow.html"><a href="ch-workflow.html#computational-faithfulness-and-model-sensitivity"><i class="fa fa-check"></i><b>7.3.3</b> Computational faithfulness and model sensitivity</a></li>
-<li class="chapter" data-level="7.3.4" data-path="ch-workflow.html"><a href="ch-workflow.html#posterior-predictive-checks-model-adequacy"><i class="fa fa-check"></i><b>7.3.4</b> Posterior predictive checks: Model adequacy</a></li>
+<li class="chapter" data-level="7.3" data-path="ch-workflow.html"><a href="ch-workflow.html#further-reading-4"><i class="fa fa-check"></i><b>7.3</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="ch-workflow.html"><a href="ch-workflow.html#summary-6"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
-<li class="chapter" data-level="7.5" data-path="ch-workflow.html"><a href="ch-workflow.html#further-reading-4"><i class="fa fa-check"></i><b>7.5</b> Further reading</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>8</b> Contrast coding</a><ul>
-<li class="chapter" data-level="8.1" data-path="ch-contr.html"><a href="ch-contr.html#basic-concepts-illustrated-using-a-two-level-factor"><i class="fa fa-check"></i><b>8.1</b> Basic concepts illustrated using a two-level factor</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="ch-contr.html"><a href="ch-contr.html#treatmentcontrasts"><i class="fa fa-check"></i><b>8.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="8" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>8</b>  Contrast coding</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="ch-contr.html"><a href="ch-contr.html#basic-concepts-illustrated-using-a-two-level-factor"><i class="fa fa-check"></i><b>8.1</b> Basic concepts illustrated using a two-level factor</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="ch-contr.html"><a href="ch-contr.html#treatmentcontrasts"><i class="fa fa-check"></i><b>8.1.1</b> Default contrast coding:  Treatment contrasts</a></li>
 <li class="chapter" data-level="8.1.2" data-path="ch-contr.html"><a href="ch-contr.html#inverseMatrix"><i class="fa fa-check"></i><b>8.1.2</b> Defining comparisons</a></li>
-<li class="chapter" data-level="8.1.3" data-path="ch-contr.html"><a href="ch-contr.html#effectcoding"><i class="fa fa-check"></i><b>8.1.3</b> Sum contrasts</a></li>
-<li class="chapter" data-level="8.1.4" data-path="ch-contr.html"><a href="ch-contr.html#sec-cellMeans"><i class="fa fa-check"></i><b>8.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+<li class="chapter" data-level="8.1.3" data-path="ch-contr.html"><a href="ch-contr.html#effectcoding"><i class="fa fa-check"></i><b>8.1.3</b>  Sum contrasts</a></li>
+<li class="chapter" data-level="8.1.4" data-path="ch-contr.html"><a href="ch-contr.html#sec-cellMeans"><i class="fa fa-check"></i><b>8.1.4</b>  Cell means parameterization and  posterior comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix-illustrated-with-a-three-level-factor"><i class="fa fa-check"></i><b>8.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="ch-contr.html"><a href="ch-contr.html#sumcontrasts"><i class="fa fa-check"></i><b>8.2.1</b> Sum contrasts</a></li>
-<li class="chapter" data-level="8.2.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>8.2.2</b> The hypothesis matrix</a></li>
-<li class="chapter" data-level="8.2.3" data-path="ch-contr.html"><a href="ch-contr.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>8.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+<li class="chapter" data-level="8.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix-illustrated-with-a-three-level-factor"><i class="fa fa-check"></i><b>8.2</b> The hypothesis matrix illustrated with a three-level factor</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="ch-contr.html"><a href="ch-contr.html#sumcontrasts"><i class="fa fa-check"></i><b>8.2.1</b>  Sum contrasts</a></li>
+<li class="chapter" data-level="8.2.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>8.2.2</b> The  hypothesis matrix</a></li>
+<li class="chapter" data-level="8.2.3" data-path="ch-contr.html"><a href="ch-contr.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>8.2.3</b> Generating contrasts: The  <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="ch-contr.html"><a href="ch-contr.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="8.3.2" data-path="ch-contr.html"><a href="ch-contr.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b> Helmert contrasts</a></li>
-<li class="chapter" data-level="8.3.3" data-path="ch-contr.html"><a href="ch-contr.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="8.3.4" data-path="ch-contr.html"><a href="ch-contr.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b> Polynomial contrasts</a></li>
-<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts: monotonic effects</a></li>
+<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="ch-contr.html"><a href="ch-contr.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b>  Repeated contrasts</a></li>
+<li class="chapter" data-level="8.3.2" data-path="ch-contr.html"><a href="ch-contr.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b>  Helmert contrasts</a></li>
+<li class="chapter" data-level="8.3.3" data-path="ch-contr.html"><a href="ch-contr.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or  model matrix</a></li>
+<li class="chapter" data-level="8.3.4" data-path="ch-contr.html"><a href="ch-contr.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b>  Polynomial contrasts</a></li>
+<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts:  monotonic effects</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="ch-contr.html"><a href="ch-contr.html#nonOrthogonal"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="ch-contr.html"><a href="ch-contr.html#centered-contrasts"><i class="fa fa-check"></i><b>8.4.1</b> Centered contrasts</a></li>
-<li class="chapter" data-level="8.4.2" data-path="ch-contr.html"><a href="ch-contr.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>8.4.2</b> Orthogonal contrasts</a></li>
-<li class="chapter" data-level="8.4.3" data-path="ch-contr.html"><a href="ch-contr.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>8.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+<li class="chapter" data-level="8.4" data-path="ch-contr.html"><a href="ch-contr.html#nonOrthogonal"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="ch-contr.html"><a href="ch-contr.html#centered-contrasts"><i class="fa fa-check"></i><b>8.4.1</b>  Centered contrasts</a></li>
+<li class="chapter" data-level="8.4.2" data-path="ch-contr.html"><a href="ch-contr.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>8.4.2</b>  Orthogonal contrasts</a></li>
+<li class="chapter" data-level="8.4.3" data-path="ch-contr.html"><a href="ch-contr.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>8.4.3</b> The role of the  intercept in  non-centered contrasts</a></li>
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="ch-contr.html"><a href="ch-contr.html#computing-condition-means-from-estimated-contrasts"><i class="fa fa-check"></i><b>8.5</b> Computing condition means from estimated contrasts</a></li>
-<li class="chapter" data-level="8.6" data-path="ch-contr.html"><a href="ch-contr.html#summary-7"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
+<li class="chapter" data-level="8.6" data-path="ch-contr.html"><a href="ch-contr.html#summary-6"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
 <li class="chapter" data-level="8.7" data-path="ch-contr.html"><a href="ch-contr.html#further-reading-5"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
 <li class="chapter" data-level="8.8" data-path="ch-contr.html"><a href="ch-contr.html#sec-Contrastsexercises"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a><ul>
-<li class="chapter" data-level="9.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-MR-ANOVA"><i class="fa fa-check"></i><b>9.1</b> Contrast coding in a factorial <span class="math inline">\(2 \times 2\)</span> design</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#nestedEffects"><i class="fa fa-check"></i><b>9.1.1</b> Nested effects</a></li>
-<li class="chapter" data-level="9.1.2" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>9.1.2</b> Interactions between contrasts</a></li>
+<li class="chapter" data-level="9" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-MR-ANOVA"><i class="fa fa-check"></i><b>9.1</b> Contrast coding in a factorial  <span class="math inline">\(2 \times 2\)</span> design</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#nestedEffects"><i class="fa fa-check"></i><b>9.1.1</b>  Nested effects</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>9.1.2</b>  Interactions between contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-contrast-covariate"><i class="fa fa-check"></i><b>9.2</b> One factor and one covariate</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>9.2.1</b> Estimating a group difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="9.2" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-contrast-covariate"><i class="fa fa-check"></i><b>9.2</b> One factor and one  covariate</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>9.2.1</b> Estimating a  group difference and controlling for a covariate</a></li>
 <li class="chapter" data-level="9.2.2" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>9.2.2</b> Estimating differences in slopes</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-interactions-NLM"><i class="fa fa-check"></i><b>9.3</b> Interactions in generalized linear models (with non-linear link functions) and non-linear models</a></li>
-<li class="chapter" data-level="9.4" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#summary-8"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.4" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#summary-7"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#further-reading-6"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 <li class="chapter" data-level="9.6" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-Contrasts2x2exercises"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>III Advanced models with Stan</b></span></li>
-<li class="chapter" data-level="10" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>10</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="10" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>10</b> Introduction to the probabilistic programming language Stan</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="ch-introstan.html"><a href="ch-introstan.html#stan-syntax"><i class="fa fa-check"></i><b>10.1</b> Stan syntax</a></li>
-<li class="chapter" data-level="10.2" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-firststan"><i class="fa fa-check"></i><b>10.2</b> A first simple example with Stan: Normal likelihood</a></li>
-<li class="chapter" data-level="10.3" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-clozestan"><i class="fa fa-check"></i><b>10.3</b> Another simple example: Cloze probability with Stan with the binomial likelihood</a></li>
-<li class="chapter" data-level="10.4" data-path="ch-introstan.html"><a href="ch-introstan.html#regression-models-in-stan"><i class="fa fa-check"></i><b>10.4</b> Regression models in Stan</a><ul>
-<li class="chapter" data-level="10.4.1" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-pupilstan"><i class="fa fa-check"></i><b>10.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
-<li class="chapter" data-level="10.4.2" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-interstan"><i class="fa fa-check"></i><b>10.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
-<li class="chapter" data-level="10.4.3" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-logisticstan"><i class="fa fa-check"></i><b>10.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
+<li class="chapter" data-level="10.2" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-firststan"><i class="fa fa-check"></i><b>10.2</b> A first simple example with Stan:  Normal likelihood</a></li>
+<li class="chapter" data-level="10.3" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-clozestan"><i class="fa fa-check"></i><b>10.3</b> Another simple example:  Cloze probability with Stan with the  binomial likelihood</a></li>
+<li class="chapter" data-level="10.4" data-path="ch-introstan.html"><a href="ch-introstan.html#regression-models-in-stan"><i class="fa fa-check"></i><b>10.4</b>  Regression models in Stan</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-pupilstan"><i class="fa fa-check"></i><b>10.4.1</b> A first  linear regression in Stan: Does attentional load affect  pupil size?</a></li>
+<li class="chapter" data-level="10.4.2" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-interstan"><i class="fa fa-check"></i><b>10.4.2</b>  Interactions in Stan: Does attentional load interact with trial number affecting  pupil size?</a></li>
+<li class="chapter" data-level="10.4.3" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-logisticstan"><i class="fa fa-check"></i><b>10.4.3</b>  Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="ch-introstan.html"><a href="ch-introstan.html#summary-9"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
+<li class="chapter" data-level="10.5" data-path="ch-introstan.html"><a href="ch-introstan.html#summary-8"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
 <li class="chapter" data-level="10.6" data-path="ch-introstan.html"><a href="ch-introstan.html#further-reading-7"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
 <li class="chapter" data-level="10.7" data-path="ch-introstan.html"><a href="ch-introstan.html#exercises"><i class="fa fa-check"></i><b>10.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>11</b> Complex models and reparameterization</a><ul>
-<li class="chapter" data-level="11.1" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-hierstan"><i class="fa fa-check"></i><b>11.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="11" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>11</b> Hierarchical models and reparameterization </a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-hierstan"><i class="fa fa-check"></i><b>11.1</b> Hierarchical models with Stan</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="ch-complexstan.html"><a href="ch-complexstan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>11.1.1</b> Varying intercept model with Stan</a></li>
-<li class="chapter" data-level="11.1.2" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-uncorrstan"><i class="fa fa-check"></i><b>11.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
-<li class="chapter" data-level="11.1.3" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-corrstan"><i class="fa fa-check"></i><b>11.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="11.1.2" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-uncorrstan"><i class="fa fa-check"></i><b>11.1.2</b> Uncorrelated  varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="11.1.3" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-corrstan"><i class="fa fa-check"></i><b>11.1.3</b>  Correlated varying intercept varying slopes model</a></li>
 <li class="chapter" data-level="11.1.4" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-crosscorrstan"><i class="fa fa-check"></i><b>11.1.4</b> By-subject and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="ch-complexstan.html"><a href="ch-complexstan.html#summary-10"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
+<li class="chapter" data-level="11.2" data-path="ch-complexstan.html"><a href="ch-complexstan.html#summary-9"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
 <li class="chapter" data-level="11.3" data-path="ch-complexstan.html"><a href="ch-complexstan.html#further-reading-8"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
 <li class="chapter" data-level="11.4" data-path="ch-complexstan.html"><a href="ch-complexstan.html#exercises-1"><i class="fa fa-check"></i><b>11.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a><ul>
-<li class="chapter" data-level="12.1" data-path="ch-custom.html"><a href="ch-custom.html#sec-change"><i class="fa fa-check"></i><b>12.1</b> A change of variables with the reciprocal normal distribution</a><ul>
+<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="ch-custom.html"><a href="ch-custom.html#sec-change"><i class="fa fa-check"></i><b>12.1</b> A change of variables with the reciprocal normal distribution</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="ch-custom.html"><a href="ch-custom.html#scaling-a-probability-density-with-the-jacobian-adjustment"><i class="fa fa-check"></i><b>12.1.1</b> Scaling a probability density with the Jacobian adjustment</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="ch-custom.html"><a href="ch-custom.html#sec-validSBC"><i class="fa fa-check"></i><b>12.2</b> Validation of a computed posterior distribution</a><ul>
-<li class="chapter" data-level="12.2.1" data-path="ch-custom.html"><a href="ch-custom.html#the-simulation-based-calibration-procedure"><i class="fa fa-check"></i><b>12.2.1</b> The simulation-based calibration procedure</a></li>
-<li class="chapter" data-level="12.2.2" data-path="ch-custom.html"><a href="ch-custom.html#simulation-based-calibration-revealing-a-problem"><i class="fa fa-check"></i><b>12.2.2</b> Simulation-based calibration revealing a problem</a></li>
-<li class="chapter" data-level="12.2.3" data-path="ch-custom.html"><a href="ch-custom.html#issues-and-limitation-of-simulation-based-calibration"><i class="fa fa-check"></i><b>12.2.3</b> Issues and limitation of simulation-based calibration</a></li>
+<li class="chapter" data-level="12.2" data-path="ch-custom.html"><a href="ch-custom.html#sec-validSBC"><i class="fa fa-check"></i><b>12.2</b>  Validation of a computed posterior distribution</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="ch-custom.html"><a href="ch-custom.html#the-simulation-based-calibration-procedure"><i class="fa fa-check"></i><b>12.2.1</b> The  simulation-based calibration procedure</a></li>
+<li class="chapter" data-level="12.2.2" data-path="ch-custom.html"><a href="ch-custom.html#an-example-where-simulation-based-calibration-reveals-a-problem"><i class="fa fa-check"></i><b>12.2.2</b> An example where simulation-based calibration reveals a problem</a></li>
+<li class="chapter" data-level="12.2.3" data-path="ch-custom.html"><a href="ch-custom.html#issues-with-and-limitations-of-simulation-based-calibration"><i class="fa fa-check"></i><b>12.2.3</b> Issues with and limitations of simulation-based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-re-implementing-the-exponential-distribution-manually"><i class="fa fa-check"></i><b>12.3</b> Another custom distribution: Re-implementing the exponential distribution manually</a></li>
-<li class="chapter" data-level="12.4" data-path="ch-custom.html"><a href="ch-custom.html#summary-11"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
+<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-re-implementing-the-exponential-distribution-manually"><i class="fa fa-check"></i><b>12.3</b> Another  custom distribution: Re-implementing the  exponential distribution manually</a></li>
+<li class="chapter" data-level="12.4" data-path="ch-custom.html"><a href="ch-custom.html#summary-10"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
 <li class="chapter" data-level="12.5" data-path="ch-custom.html"><a href="ch-custom.html#further-reading-9"><i class="fa fa-check"></i><b>12.5</b> Further reading</a></li>
 <li class="chapter" data-level="12.6" data-path="ch-custom.html"><a href="ch-custom.html#sec-customexercises"><i class="fa fa-check"></i><b>12.6</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>IV Evidence synthesis and measurements with error</b></span></li>
-<li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
-<li class="chapter" data-level="13.1" data-path="ch-remame.html"><a href="ch-remame.html#meta-analysis"><i class="fa fa-check"></i><b>13.1</b> Meta-analysis</a><ul>
+<li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b>  Meta-analysis and  measurement error models</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ch-remame.html"><a href="ch-remame.html#meta-analysis"><i class="fa fa-check"></i><b>13.1</b> Meta-analysis</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="ch-remame.html"><a href="ch-remame.html#a-meta-analysis-of-similarity-based-interference-in-sentence-comprehension"><i class="fa fa-check"></i><b>13.1.1</b> A meta-analysis of similarity-based interference in sentence comprehension</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="ch-remame.html"><a href="ch-remame.html#measurement-error-models"><i class="fa fa-check"></i><b>13.2</b> Measurement-error models</a><ul>
+<li class="chapter" data-level="13.2" data-path="ch-remame.html"><a href="ch-remame.html#measurement-error-models"><i class="fa fa-check"></i><b>13.2</b>  Measurement-error models</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="ch-remame.html"><a href="ch-remame.html#accounting-for-measurement-error-in-individual-differences-in-working-memory-capacity-and-reading-fluency"><i class="fa fa-check"></i><b>13.2.1</b> Accounting for measurement error in individual differences in working memory capacity and reading fluency</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="ch-remame.html"><a href="ch-remame.html#summary-12"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
+<li class="chapter" data-level="13.3" data-path="ch-remame.html"><a href="ch-remame.html#summary-11"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
 <li class="chapter" data-level="13.4" data-path="ch-remame.html"><a href="ch-remame.html#further-reading-10"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
 <li class="chapter" data-level="13.5" data-path="ch-remame.html"><a href="ch-remame.html#sec-REMAMEexercises"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>V Model comparison and hypothesis testing</b></span></li>
-<li class="chapter" data-level="14" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>14</b> Introduction to model comparison</a><ul>
-<li class="chapter" data-level="14.1" data-path="ch-comparison.html"><a href="ch-comparison.html#further-reading-11"><i class="fa fa-check"></i><b>14.1</b> Further reading</a></li>
+<li class="part"><span><b>V Model comparison</b></span></li>
+<li class="chapter" data-level="14" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>14</b> Introduction to model comparison</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="ch-comparison.html"><a href="ch-comparison.html#prior-predictive-vs.-posterior-predictive-model-comparison"><i class="fa fa-check"></i><b>14.1</b> Prior predictive vs. posterior predictive model comparison</a></li>
+<li class="chapter" data-level="14.2" data-path="ch-comparison.html"><a href="ch-comparison.html#some-important-points-to-consider-when-comparing-models"><i class="fa fa-check"></i><b>14.2</b> Some important points to consider when comparing models</a></li>
+<li class="chapter" data-level="14.3" data-path="ch-comparison.html"><a href="ch-comparison.html#further-reading-11"><i class="fa fa-check"></i><b>14.3</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>15</b> Bayes factors</a><ul>
-<li class="chapter" data-level="15.1" data-path="ch-bf.html"><a href="ch-bf.html#hypothesis-testing-using-the-bayes-factor"><i class="fa fa-check"></i><b>15.1</b> Hypothesis testing using the Bayes factor</a><ul>
+<li class="chapter" data-level="15" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>15</b> Bayes factors</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="ch-bf.html"><a href="ch-bf.html#hypothesis-testing-using-the-bayes-factor"><i class="fa fa-check"></i><b>15.1</b> Hypothesis testing using the Bayes factor</a>
+<ul>
 <li class="chapter" data-level="15.1.1" data-path="ch-bf.html"><a href="ch-bf.html#marginal-likelihood"><i class="fa fa-check"></i><b>15.1.1</b> Marginal likelihood</a></li>
 <li class="chapter" data-level="15.1.2" data-path="ch-bf.html"><a href="ch-bf.html#bayes-factor"><i class="fa fa-check"></i><b>15.1.2</b> Bayes factor</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="ch-bf.html"><a href="ch-bf.html#sec-N400BF"><i class="fa fa-check"></i><b>15.2</b> Examining the N400 effect with Bayes factor</a><ul>
+<li class="chapter" data-level="15.2" data-path="ch-bf.html"><a href="ch-bf.html#sec-N400BF"><i class="fa fa-check"></i><b>15.2</b> Examining the N400 effect with Bayes factor</a>
+<ul>
 <li class="chapter" data-level="15.2.1" data-path="ch-bf.html"><a href="ch-bf.html#sensitivity-analysis-1"><i class="fa fa-check"></i><b>15.2.1</b> Sensitivity analysis</a></li>
-<li class="chapter" data-level="15.2.2" data-path="ch-bf.html"><a href="ch-bf.html#sec-BFnonnested"><i class="fa fa-check"></i><b>15.2.2</b> Non-nested models</a></li>
+<li class="chapter" data-level="15.2.2" data-path="ch-bf.html"><a href="ch-bf.html#sec-BFnonnested"><i class="fa fa-check"></i><b>15.2.2</b>  Non-nested models</a></li>
 </ul></li>
 <li class="chapter" data-level="15.3" data-path="ch-bf.html"><a href="ch-bf.html#the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest"><i class="fa fa-check"></i><b>15.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a></li>
-<li class="chapter" data-level="15.4" data-path="ch-bf.html"><a href="ch-bf.html#sec-stanBF"><i class="fa fa-check"></i><b>15.4</b> Bayes factor in Stan</a></li>
-<li class="chapter" data-level="15.5" data-path="ch-bf.html"><a href="ch-bf.html#bayes-factors-in-theory-and-in-practice"><i class="fa fa-check"></i><b>15.5</b> Bayes factors in theory and in practice</a><ul>
-<li class="chapter" data-level="15.5.1" data-path="ch-bf.html"><a href="ch-bf.html#bayes-factors-in-theory-stability-and-accuracy"><i class="fa fa-check"></i><b>15.5.1</b> Bayes factors in theory: Stability and accuracy</a></li>
+<li class="chapter" data-level="15.4" data-path="ch-bf.html"><a href="ch-bf.html#sec-stanBF"><i class="fa fa-check"></i><b>15.4</b>  Bayes factor in Stan</a></li>
+<li class="chapter" data-level="15.5" data-path="ch-bf.html"><a href="ch-bf.html#bayes-factors-in-theory-and-in-practice"><i class="fa fa-check"></i><b>15.5</b> Bayes factors in theory and in practice</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="ch-bf.html"><a href="ch-bf.html#bayes-factors-in-theory-stability-and-accuracy"><i class="fa fa-check"></i><b>15.5.1</b> Bayes factors in theory: Stability and  accuracy</a></li>
 <li class="chapter" data-level="15.5.2" data-path="ch-bf.html"><a href="ch-bf.html#sec-BFvar"><i class="fa fa-check"></i><b>15.5.2</b> Bayes factors in practice: Variability with the data</a></li>
 <li class="chapter" data-level="15.5.3" data-path="ch-bf.html"><a href="ch-bf.html#sec-caution"><i class="fa fa-check"></i><b>15.5.3</b> A cautionary note about Bayes factors</a></li>
 </ul></li>
-<li class="chapter" data-level="15.6" data-path="ch-bf.html"><a href="ch-bf.html#summary-13"><i class="fa fa-check"></i><b>15.6</b> Summary</a></li>
-<li class="chapter" data-level="15.7" data-path="ch-bf.html"><a href="ch-bf.html#further-reading-12"><i class="fa fa-check"></i><b>15.7</b> Further reading</a></li>
-<li class="chapter" data-level="15.8" data-path="ch-bf.html"><a href="ch-bf.html#exercises-2"><i class="fa fa-check"></i><b>15.8</b> Exercises</a></li>
+<li class="chapter" data-level="15.6" data-path="ch-bf.html"><a href="ch-bf.html#sample-size-determination-using-bayes-factors"><i class="fa fa-check"></i><b>15.6</b> Sample size determination using Bayes factors</a></li>
+<li class="chapter" data-level="15.7" data-path="ch-bf.html"><a href="ch-bf.html#summary-12"><i class="fa fa-check"></i><b>15.7</b> Summary</a></li>
+<li class="chapter" data-level="15.8" data-path="ch-bf.html"><a href="ch-bf.html#further-reading-12"><i class="fa fa-check"></i><b>15.8</b> Further reading</a></li>
+<li class="chapter" data-level="15.9" data-path="ch-bf.html"><a href="ch-bf.html#exercises-2"><i class="fa fa-check"></i><b>15.9</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>16</b> Cross-validation</a><ul>
+<li class="chapter" data-level="16" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>16</b> Cross-validation</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="ch-cv.html"><a href="ch-cv.html#the-expected-log-predictive-density-of-a-model"><i class="fa fa-check"></i><b>16.1</b> The expected log predictive density of a model</a></li>
 <li class="chapter" data-level="16.2" data-path="ch-cv.html"><a href="ch-cv.html#k-fold-and-leave-one-out-cross-validation"><i class="fa fa-check"></i><b>16.2</b> K-fold and leave-one-out cross-validation</a></li>
-<li class="chapter" data-level="16.3" data-path="ch-cv.html"><a href="ch-cv.html#testing-the-n400-effect-using-cross-validation"><i class="fa fa-check"></i><b>16.3</b> Testing the N400 effect using cross-validation</a><ul>
+<li class="chapter" data-level="16.3" data-path="ch-cv.html"><a href="ch-cv.html#testing-the-n400-effect-using-cross-validation"><i class="fa fa-check"></i><b>16.3</b> Testing the N400 effect using cross-validation</a>
+<ul>
 <li class="chapter" data-level="16.3.1" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-with-psis-loo"><i class="fa fa-check"></i><b>16.3.1</b> Cross-validation with PSIS-LOO</a></li>
 <li class="chapter" data-level="16.3.2" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-with-k-fold"><i class="fa fa-check"></i><b>16.3.2</b> Cross-validation with K-fold</a></li>
 <li class="chapter" data-level="16.3.3" data-path="ch-cv.html"><a href="ch-cv.html#leave-one-group-out-cross-validation"><i class="fa fa-check"></i><b>16.3.3</b> Leave-one-group-out cross-validation</a></li>
 </ul></li>
-<li class="chapter" data-level="16.4" data-path="ch-cv.html"><a href="ch-cv.html#sec-logcv"><i class="fa fa-check"></i><b>16.4</b> Comparing different likelihoods with cross-validation</a></li>
+<li class="chapter" data-level="16.4" data-path="ch-cv.html"><a href="ch-cv.html#sec-logcv"><i class="fa fa-check"></i><b>16.4</b>  Comparing different likelihoods with cross-validation</a></li>
 <li class="chapter" data-level="16.5" data-path="ch-cv.html"><a href="ch-cv.html#issues-with-cross-validation"><i class="fa fa-check"></i><b>16.5</b> Issues with cross-validation</a></li>
-<li class="chapter" data-level="16.6" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>16.6</b> Cross-validation in Stan</a><ul>
-<li class="chapter" data-level="16.6.1" data-path="ch-cv.html"><a href="ch-cv.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>16.6.1</b> PSIS-LOO-CV in Stan</a></li>
+<li class="chapter" data-level="16.6" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>16.6</b> Cross-validation in Stan</a>
+<ul>
+<li class="chapter" data-level="16.6.1" data-path="ch-cv.html"><a href="ch-cv.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>16.6.1</b>  PSIS-LOO-CV in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="16.7" data-path="ch-cv.html"><a href="ch-cv.html#summary-14"><i class="fa fa-check"></i><b>16.7</b> Summary</a></li>
+<li class="chapter" data-level="16.7" data-path="ch-cv.html"><a href="ch-cv.html#summary-13"><i class="fa fa-check"></i><b>16.7</b> Summary</a></li>
 <li class="chapter" data-level="16.8" data-path="ch-cv.html"><a href="ch-cv.html#further-reading-13"><i class="fa fa-check"></i><b>16.8</b> Further reading</a></li>
 <li class="chapter" data-level="16.9" data-path="ch-cv.html"><a href="ch-cv.html#exercises-3"><i class="fa fa-check"></i><b>16.9</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
-<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="17.1" data-path="ch-cogmod.html"><a href="ch-cogmod.html#further-reading-14"><i class="fa fa-check"></i><b>17.1</b> Further reading</a></li>
+<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to computational cognitive modeling</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="ch-cogmod.html"><a href="ch-cogmod.html#what-characterizes-a-computational-cognitive-model"><i class="fa fa-check"></i><b>17.1</b> What characterizes a computational cognitive model?</a></li>
+<li class="chapter" data-level="17.2" data-path="ch-cogmod.html"><a href="ch-cogmod.html#some-advantages-of-taking-the-latent-variable-modeling-approach"><i class="fa fa-check"></i><b>17.2</b> Some advantages of taking the latent-variable modeling approach</a></li>
+<li class="chapter" data-level="17.3" data-path="ch-cogmod.html"><a href="ch-cogmod.html#types-of-computational-cognitive-model"><i class="fa fa-check"></i><b>17.3</b> Types of computational cognitive model</a></li>
+<li class="chapter" data-level="17.4" data-path="ch-cogmod.html"><a href="ch-cogmod.html#summary-14"><i class="fa fa-check"></i><b>17.4</b> Summary</a></li>
+<li class="chapter" data-level="17.5" data-path="ch-cogmod.html"><a href="ch-cogmod.html#further-reading-14"><i class="fa fa-check"></i><b>17.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>18</b> Multinomial processing trees</a><ul>
-<li class="chapter" data-level="18.1" data-path="ch-MPT.html"><a href="ch-MPT.html#modeling-multiple-categorical-responses"><i class="fa fa-check"></i><b>18.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="18" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>18</b> Multinomial processing trees</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="ch-MPT.html"><a href="ch-MPT.html#modeling-multiple-categorical-responses"><i class="fa fa-check"></i><b>18.1</b> Modeling  multiple categorical responses</a>
+<ul>
 <li class="chapter" data-level="18.1.1" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-mult"><i class="fa fa-check"></i><b>18.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
 <li class="chapter" data-level="18.1.2" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-cat"><i class="fa fa-check"></i><b>18.1.2</b> A model for multiple responses using the categorical distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="18.2" data-path="ch-MPT.html"><a href="ch-MPT.html#modeling-picture-naming-abilities-in-aphasia-with-mpt-models"><i class="fa fa-check"></i><b>18.2</b> Modeling picture naming abilities in aphasia with MPT models</a><ul>
+<li class="chapter" data-level="18.2" data-path="ch-MPT.html"><a href="ch-MPT.html#modeling-picture-naming-abilities-in-aphasia-with-mpt-models"><i class="fa fa-check"></i><b>18.2</b> Modeling picture naming abilities in aphasia with MPT models</a>
+<ul>
 <li class="chapter" data-level="18.2.1" data-path="ch-MPT.html"><a href="ch-MPT.html#calculation-of-the-probabilities-in-the-mpt-branches"><i class="fa fa-check"></i><b>18.2.1</b> Calculation of the probabilities in the MPT branches</a></li>
 <li class="chapter" data-level="18.2.2" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-mpt-data"><i class="fa fa-check"></i><b>18.2.2</b> A simple MPT model</a></li>
 <li class="chapter" data-level="18.2.3" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-MPT-reg"><i class="fa fa-check"></i><b>18.2.3</b> An MPT model assuming by-item variability</a></li>
-<li class="chapter" data-level="18.2.4" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-MPT-h"><i class="fa fa-check"></i><b>18.2.4</b> A hierarchical MPT</a></li>
+<li class="chapter" data-level="18.2.4" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-MPT-h"><i class="fa fa-check"></i><b>18.2.4</b> A  hierarchical MPT</a></li>
 </ul></li>
 <li class="chapter" data-level="18.3" data-path="ch-MPT.html"><a href="ch-MPT.html#summary-15"><i class="fa fa-check"></i><b>18.3</b> Summary</a></li>
 <li class="chapter" data-level="18.4" data-path="ch-MPT.html"><a href="ch-MPT.html#further-reading-15"><i class="fa fa-check"></i><b>18.4</b> Further reading</a></li>
 <li class="chapter" data-level="18.5" data-path="ch-MPT.html"><a href="ch-MPT.html#exercises-4"><i class="fa fa-check"></i><b>18.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>19</b> Mixture models</a><ul>
-<li class="chapter" data-level="19.1" data-path="ch-mixture.html"><a href="ch-mixture.html#a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account"><i class="fa fa-check"></i><b>19.1</b> A mixture model of the speed-accuracy trade-off: The fast-guess model account</a><ul>
+<li class="chapter" data-level="19" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>19</b> Mixture models</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="ch-mixture.html"><a href="ch-mixture.html#a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account"><i class="fa fa-check"></i><b>19.1</b> A mixture model of the speed-accuracy trade-off: The fast-guess model account</a>
+<ul>
 <li class="chapter" data-level="19.1.1" data-path="ch-mixture.html"><a href="ch-mixture.html#the-global-motion-detection-task"><i class="fa fa-check"></i><b>19.1.1</b> The global motion detection task</a></li>
 <li class="chapter" data-level="19.1.2" data-path="ch-mixture.html"><a href="ch-mixture.html#sec-simplefastguess"><i class="fa fa-check"></i><b>19.1.2</b> A very simple implementation of the fast-guess model</a></li>
-<li class="chapter" data-level="19.1.3" data-path="ch-mixture.html"><a href="ch-mixture.html#sec-multmix"><i class="fa fa-check"></i><b>19.1.3</b> A multivariate implementation of the fast-guess model</a></li>
+<li class="chapter" data-level="19.1.3" data-path="ch-mixture.html"><a href="ch-mixture.html#sec-multmix"><i class="fa fa-check"></i><b>19.1.3</b> A  multivariate implementation of the fast-guess model</a></li>
 <li class="chapter" data-level="19.1.4" data-path="ch-mixture.html"><a href="ch-mixture.html#an-implementation-of-the-fast-guess-model-that-takes-instructions-into-account"><i class="fa fa-check"></i><b>19.1.4</b> An implementation of the fast-guess model that takes instructions into account</a></li>
-<li class="chapter" data-level="19.1.5" data-path="ch-mixture.html"><a href="ch-mixture.html#sec-fastguessh"><i class="fa fa-check"></i><b>19.1.5</b> A hierarchical implementation of the fast-guess model</a></li>
+<li class="chapter" data-level="19.1.5" data-path="ch-mixture.html"><a href="ch-mixture.html#sec-fastguessh"><i class="fa fa-check"></i><b>19.1.5</b> A  hierarchical implementation of the fast-guess model</a></li>
 </ul></li>
 <li class="chapter" data-level="19.2" data-path="ch-mixture.html"><a href="ch-mixture.html#summary-16"><i class="fa fa-check"></i><b>19.2</b> Summary</a></li>
 <li class="chapter" data-level="19.3" data-path="ch-mixture.html"><a href="ch-mixture.html#further-reading-16"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
 <li class="chapter" data-level="19.4" data-path="ch-mixture.html"><a href="ch-mixture.html#exercises-5"><i class="fa fa-check"></i><b>19.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html"><i class="fa fa-check"></i><b>20</b> A simple accumulator model to account for choice response time</a><ul>
-<li class="chapter" data-level="20.1" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#modeling-a-lexical-decision-task"><i class="fa fa-check"></i><b>20.1</b> Modeling a lexical decision task</a><ul>
+<li class="chapter" data-level="20" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html"><i class="fa fa-check"></i><b>20</b> A simple accumulator model to account for choice response time</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#modeling-a-lexical-decision-task"><i class="fa fa-check"></i><b>20.1</b> Modeling a lexical decision task</a>
+<ul>
 <li class="chapter" data-level="20.1.1" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#sec-acccoding"><i class="fa fa-check"></i><b>20.1.1</b> Modeling the lexical decision task with the log-normal race model</a></li>
 <li class="chapter" data-level="20.1.2" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#sec-genaccum"><i class="fa fa-check"></i><b>20.1.2</b> A generative model for a race between accumulators</a></li>
 <li class="chapter" data-level="20.1.3" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#fitting-the-log-normal-race-model"><i class="fa fa-check"></i><b>20.1.3</b> Fitting the log-normal race model</a></li>
 <li class="chapter" data-level="20.1.4" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#sec-lognormalh"><i class="fa fa-check"></i><b>20.1.4</b> A hierarchical implementation of the log-normal race model</a></li>
-<li class="chapter" data-level="20.1.5" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#sec-contaminant"><i class="fa fa-check"></i><b>20.1.5</b> Dealing with contaminant responses</a></li>
+<li class="chapter" data-level="20.1.5" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#sec-contaminant"><i class="fa fa-check"></i><b>20.1.5</b> Dealing with  contaminant responses</a></li>
 </ul></li>
 <li class="chapter" data-level="20.2" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#posterior-predictive-check-with-the-quantile-probability-plots"><i class="fa fa-check"></i><b>20.2</b> Posterior predictive check with the quantile probability plots</a></li>
 <li class="chapter" data-level="20.3" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#summary-17"><i class="fa fa-check"></i><b>20.3</b> Summary</a></li>
 <li class="chapter" data-level="20.4" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#further-reading-17"><i class="fa fa-check"></i><b>20.4</b> Further reading</a></li>
 <li class="chapter" data-level="20.5" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#exercises-6"><i class="fa fa-check"></i><b>20.5</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="21" data-path="ch-closing.html"><a href="ch-closing.html"><i class="fa fa-check"></i><b>21</b> In closing</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -1217,143 +1280,169 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ch-cogmod" class="section level1 hasAnchor">
+<div id="ch-cogmod" class="section level1 hasAnchor" number="17">
 <h1><span class="header-section-number">Chapter 17</span> Introduction to computational cognitive modeling<a href="ch-cogmod.html#ch-cogmod" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Until this point in the book, we have been discussing models that specify a generative process for the observed data. This generative process could be as simple as <span class="math inline">\(Y \sim Normal(\mu,\sigma)\)</span> or it could be an elaborate hierarchical model that incorporates multiple variance components. Usually, in these kinds of models, what is of interest is a parameter that represents a so-called “effect” of interest. Examples that we encountered in the present book are: the effect of word frequency on reading time; effect of relative clause type on reading time; and the effect of attentional load on pupil size.</p>
-<p>One characteristic common to the models seen so far is that no underlying latent cognitive process is specified that elaborates on the generative process that produces the observed dependent variable. For example, in a logistic regression, the correct or incorrect response (say, to a yes/no comprehension question) could be the result of a cascade of alternative steps taken unconsciously (or consciously) by the subject as they generate a response. To make this concrete, a subject could give a yes/no response to a comprehension question after seeing a target sentence by probabilistically processing the sentence deeply or superficially; once the deep/shallow path is taken, the subject might end up giving either a correct or incorrect answer (the latter by misinterpreting the meaning of the sentence). What is observed in the data is a correct or incorrect response, but the reason that that particular response was given could be underlyingly due to deep or superficial processing.</p>
-<p>In this book, we use the phrase “computational cognitive modeling” to refer to generative models that specify latent (unobserved and, usually, unobservable) processes that result in a behavioral or other kind of response. Cognitive modeling as presented in this section goes beyond estimates of “effects” in the sense discussed above; the principal goal is to explain and understand how a particular cognitive process unfolds.</p>
-<p>Unpacking the latent cognitive process that produces a response has a long history in cognitive science. For example, in sentence processing research, early models like the classic garden-path model <span class="citation">(Frazier <a href="#ref-frazier79">1979</a>)</span> seek to spell out the steps that occur when the human sentence processing system (the parser) attempts to build syntactic structure incrementally when faced with a temporarily ambiguous sentence. To make this concrete, consider the sentence: “While Mary bathed the baby happily played in the living room.” Compared to the unambiguous baseline sentence
-“While Mary bathed, the baby happily played in the living room,” the garden-path model assumes that in the ambiguous sentence the parser initially connects the noun phrase “the baby” as a grammatical object of the verb “bathed.” It is only when the verb “played” is encountered that the parser reassigns “the baby” as a grammatical subject of the verb “played”, leading to the correct parse whereby Mary being the one who is bathing, and not that Mary is bathing the baby. This process of reassigning “the baby”’s grammatical role is computationally costly and is called reanalysis in sentence processing. The slowdown observed (e.g., in reading studies) at the verb “played” is often called the garden-path effect.</p>
-<p>This kind of paper-pencil model implicitly posits an overly simplistic and deterministic parsing process: Although this is never spelled out in the garden-path model, there is no assumption that the parser could only probabilistically misparse the sentence when it encounters “the baby”; misparse are implicitly assumed to happen every single time such a temporarily ambiguous sentence is encountered. Such a model does not explicitly allow alternative parsing constraints to come into play; by contrast, a computational model allows the empirical consequences of multiple parsing constraints to be considered quantitatively <span class="citation">(e.g., Jurafsky <a href="#ref-jurafsky96">1996</a>; Paape and Vasishth <a href="#ref-paapevasishthmpt2022">2022</a>)</span>.</p>
+<p>Until this point in the book, we have been discussing models that specify a  generative process for the observed data. This generative process could be as simple as <span class="math inline">\(Y \sim Normal(\mu,\sigma)\)</span> or it could be an elaborate hierarchical model that incorporates multiple variance components. Usually, in these kinds of models, what is of interest is a parameter that represents a so-called “effect” of interest. Examples that we encountered in the present book are: the effect of word frequency on reading time; effect of relative clause type on reading time; and the effect of attentional load on pupil size.</p>
+<div id="what-characterizes-a-computational-cognitive-model" class="section level2 hasAnchor" number="17.1">
+<h2><span class="header-section-number">17.1</span> What characterizes a computational cognitive model?<a href="ch-cogmod.html#what-characterizes-a-computational-cognitive-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One characteristic common to the models seen so far is that no underlying  latent cognitive process is specified that elaborates on the generative process that produces the observed dependent variable. For example, in a logistic regression, the correct or incorrect response (say, to a yes/no comprehension question) could be the result of a cascade of alternative steps taken unconsciously (or consciously) by the subject as they generate a response. To make this concrete, a subject could give a yes/no response to a comprehension question after seeing a target sentence by probabilistically processing the sentence deeply or superficially; once the deep/shallow path is taken, the subject might end up giving either a correct or incorrect answer (the latter by misinterpreting the meaning of the sentence). What is observed in the data is a correct or incorrect response, but the reason that that particular response was given could be underlyingly due to deep or superficial processing.</p>
+<p>In this book, we use the phrase “computational cognitive modeling” to refer to generative models that are implemented computationally (as a computer program), and that specify latent (unobserved and, usually, unobservable) processes that result in a behavioral or other kind of response. Cognitive modeling as presented in this section goes beyond estimates of “effects” in the sense discussed above; the principal goal is to explain and understand how a particular cognitive process unfolds, often at an individual trial level and incorporating assumptions about individual-level variation in the way the assumed latent processes are deployed.</p>
+<p>Unpacking the latent cognitive process that produces a response has a long history in cognitive science. For example, in sentence processing research, early models like the classic  garden-path model <span class="citation">(Frazier <a href="#ref-frazier79" role="doc-biblioref">1979</a>)</span> seek to spell out the steps that occur when the human sentence processing system (the  parser) attempts to build  syntactic structure incrementally when faced with a temporarily  ambiguous sentence. To make this concrete, consider the sentence: “While Mary bathed the baby happily played in the living room.” Compared to the unambiguous baseline sentence
+“While Mary bathed, the baby happily played in the living room,” the garden-path model assumes that in the ambiguous sentence the parser initially connects the noun phrase “the baby” as a grammatical object of the verb “bathed.” It is only when the verb “played” is encountered that the parser reassigns “the baby” as a grammatical subject of the verb “played”, leading to the correct parse whereby Mary being the one who is bathing, and not that Mary is bathing the baby. This process of reassigning “the baby”’s grammatical role is computationally costly and is called  reanalysis in sentence processing. The slowdown observed (e.g., in reading studies) at the verb “played” is often called the  garden-path effect.</p>
+<p>This kind of paper-pencil model implicitly posits an overly simplistic and deterministic parsing process: Although this is never spelled out in the garden-path model, there is no assumption that the parser could only probabilistically misparse the sentence when it encounters “the baby”; misparses are implicitly assumed to happen every single time such a temporarily ambiguous sentence is encountered. Such a model does not explicitly allow alternative parsing constraints to come into play; by contrast, a computational model allows the empirical consequences of multiple parsing constraints to be considered quantitatively <span class="citation">(e.g., Jurafsky <a href="#ref-jurafsky96" role="doc-biblioref">1996</a>; Paape and Vasishth <a href="#ref-paapevasishthmpt2022" role="doc-biblioref">2022</a>)</span>.</p>
+</div>
+<div id="some-advantages-of-taking-the-latent-variable-modeling-approach" class="section level2 hasAnchor" number="17.2">
+<h2><span class="header-section-number">17.2</span> Some advantages of taking the latent-variable modeling approach<a href="ch-cogmod.html#some-advantages-of-taking-the-latent-variable-modeling-approach" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Although this kind of simple paper-pencil model is an excellent start towards modeling the latent process of sentence comprehension, just stopping with such a description has several disadvantages.
-First, no quantitative predictions can be derived; a corollary is that a slowdown at the verb “played” (due to reanalysis) of 10 ms or 500 ms would both be equally consistent with the predictions of the model—the model cannot say anything about how much time the reanalysis process would take. This is a problem for model evaluation, not least because overly large effect sizes observed in data could just be Type M error and therefore very misleading <span class="citation">(Gelman and Carlin <a href="#ref-gelmancarlin">2014</a>; Vasishth, Mertzen, Jäger, et al. <a href="#ref-VasishthMertzenJaegerGelman2018">2018</a><a href="#ref-VasishthMertzenJaegerGelman2018">a</a>)</span>.
-Second, such paper-pencil models encourage an excessive (in fact, exclusive) focus on the average effect size (here, the garden-path effect); the variability among individuals (which would affect the standard error of the estimated effect from data) plays no role in determining whether the model’s prediction is consistent with the data.
-Another problem with such verbally stated models is that it is often not clear what the exact assumptions are. This makes it difficult to establish whether the model’s predictions are consistent with observed patterns in the data.</p>
-<p>The absence of quantitative predictions, and the inability to quantitatively investigate individual-level variation are two major drawbacks of paper-pencil models. As <span class="citation">Roberts and Pashler (<a href="#ref-rp">2000</a>)</span> have discussed at length, a good fit of a model to data is not merely about the sign of the predicted effect being correct; the model must be able to commit a priori to the uncertainty of the predicted effect, and the estimated effect from the data and its uncertainty need to be compared to the predictions of the model. A good fit requires a tightly constrained quantitative prediction derived from the model that is then validated by the comparing the prediction with the data; this point has also been eloquently made by the psychologist <span class="citation">Meehl (<a href="#ref-meehl97">1997</a>)</span>. Meehl suggests that the model make risky numerical predictions (by which he means tighly constrained quantitative predictions), which should then be compared with the observed effect size and its confidence interval—this is essentially the <span class="citation">Roberts and Pashler (<a href="#ref-rp">2000</a>)</span> criterion for a good fit.</p>
-<p>For example, if a computational implementation of the garden-path model were to exist, one could have derived (through prior specifications on the parameters of the model) prior predictive distributions of the garden-path effect, and compared these predictions to the estimates of the effect from a statistical model fit to the data <span class="citation">(for an example from psycholinguistics, see Vasishth and Engelmann <a href="#ref-VasishthEngelmann2022">2022</a>)</span>. Using parameteric variation, one could even investigate the implications of the model for individual-level diffrences <span class="citation">(e.g., Yadav, Paape, et al. <a href="#ref-yadavindiff2021">2022</a>)</span>; such implications of models are impossible to derive unless the model is implemented computationally. In the absence of an implemented model, one is reduced to classifying subjects into groups (e.g., by working memory capacity measures) and investigating average group-level effects <span class="citation">(e.g., Caplan and Waters <a href="#ref-cw99">1999</a>)</span>. This makes the question a binary one: are there individual differences or are there none? The right question about individual differences is a quantitative one <span class="citation">(Haaf and Rouder <a href="#ref-haaf2019some">2019</a>)</span>.</p>
-<p>There are many different classes of computational cognitive model. For example, <span class="citation">Newell (<a href="#ref-utc">1990</a>)</span> pioneered a cognitive architectures approach, where a model of a particular cognitive process (like sentence processing) occurs within a broader computational framework that defines very general constraints on human information processing. Examples of cognitive architectures are SOAR <span class="citation">(Laird <a href="#ref-laird2019soar">2019</a>)</span>, the CAPS family of models <span class="citation">(Just, Carpenter, and Varma <a href="#ref-justetal99">1999</a>)</span>, and ACT-R <span class="citation">(Anderson et al. <a href="#ref-abbl02">2004</a>)</span> . Other approaches include connectionist models <span class="citation">(e.g., McClelland and Rumelhart <a href="#ref-mcclelland1989explorations">1989</a>)</span>, dynamical systems-based models <span class="citation">(e.g., Port and Van Gelder <a href="#ref-port1995mind">1995</a>; Tabor and Tanenhaus <a href="#ref-tabor1999dynamical">1999</a>; Beer <a href="#ref-beer2000dynamical">2000</a>; Rabe et al. <a href="#ref-Rabe2019">2021</a>)</span>.</p>
-<p>In this book, we focus on Bayesian cognitive models <span class="citation">(Lee and Wagenmakers <a href="#ref-LeeWagenmakers2014">2014</a>)</span>; these are distinct from models that assume that human cognitive processes involve Bayesian inference <span class="citation">(e.g., Feldman <a href="#ref-feldman2017true">2017</a>)</span>. The type of model we discuss here has the characteristic that the underlying generative process spells out the latent, probabilistically occurring sub-processes. The latent processes are spelled out by specifying a Bayesian model that allows different events to happen probabilistically in each trial.
-An example is multinomial processing tree models, which specify a sequence of possible latent sub-processes. Another example is a hierarchical finite mixture process which specifies that, in some proportion of trials, the observed response comes from one distribution, and in another proportion from a different distribution. A third example is the assumption that the observed response (e.g., reading time) is the result of an unobserved (latent) race process in the cognitive system. Probabilistic programming languages like Stan allow us to implement such latent process models, allowing for hierarchical structure (individual-level variability).</p>
-<p>This part of the book introduces these three types of cognitive models using Stan. In many cases, a great deal of cognitive detail is sacrificed for tractability, but this is a characteristic shared by all computational models—by definition, a model is a simplification of the underlying process being modeled <span class="citation">(James L. McClelland <a href="#ref-mcclelland2009place">2009</a><a href="#ref-mcclelland2009place">b</a>)</span>.</p>
-<p>The broader lesson to learn from this section is that it is possible to specify an underlying generative process for the data that reflects theoretical assumptions in a particular research area. The gain is that: (i) the assumptions of the underlying theory, and their consequences, become transparent <span class="citation">(Epstein <a href="#ref-epstein2008model">2008</a>)</span>; (ii) one can derive quantitative predictions that, as <span class="citation">Roberts and Pashler (<a href="#ref-rp">2000</a>)</span> point out, are vital for model evaluation; (iii) it becomes possible (at least in principle) to eliminate competing theoretical proposals through quantitative model comparison using benchmark data <span class="citation">(Nicenboim and Vasishth <a href="#ref-nicenboimModelsRetrievalSentence2018">2018</a>; Lissón et al. <a href="#ref-lisson_2020">2021</a>; Lissón et al. <a href="#ref-LissonEtAlInterference2021">2022</a>; Yadav, Smith, et al. <a href="#ref-YadavetalJML2022">2022</a>)</span>; and (iv) the implications of models for individual-level differences can be investigated <span class="citation">(Yadav, Paape, et al. <a href="#ref-yadavindiff2021">2022</a>)</span>.</p>
-<div id="further-reading-14" class="section level2 hasAnchor">
-<h2><span class="header-section-number">17.1</span> Further reading<a href="ch-cogmod.html#further-reading-14" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>General textbooks on computational modeling for cognitive science are <span class="citation">Busemeyer and Diederich (<a href="#ref-busemeyer2010cognitive">2010</a>)</span>, and <span class="citation">Farrell and Lewandowsky (<a href="#ref-farrell2018computational">2018</a>)</span>. The textbook by <span class="citation">Lee and Wagenmakers (<a href="#ref-LeeWagenmakers2014">2014</a>)</span> focuses on relatively simple computational cognitive models implemented in a Bayesian framework (using the BUGS language).
-A good free textbook on computational modeling for cognitive science is <span class="citation">Blokpoel and Rooij (<a href="#ref-blokpoelvanrooij">2021</a>)</span>.<br />
-The entire special issue <span class="citation">(Lee <a href="#ref-mathpsych2011">2011</a><a href="#ref-mathpsych2011">a</a>)</span> on hierarchical Bayesian modeling in the Journal of Mathematical Psychology is highly recommended <span class="citation">(in particular, see the article by Lee <a href="#ref-Lee2011">2011</a><a href="#ref-Lee2011">b</a>)</span>. <span class="citation">Wilson and Collins (<a href="#ref-WilsonEtAl2019">2019</a>)</span> discuss good practices in the computational modeling of behavioral data using examples from reinforcement learning. <span class="citation">Haines et al. (<a href="#ref-haines2020learning">2020</a>)</span> discuss how generative models produce higher test-retest reliability and more theoretically informative parameter estimates than do traditional methods. For an overview of the different modeling approaches in cognitive science and the relationships between them, see <span class="citation">James L. McClelland (<a href="#ref-mcclelland2009place">2009</a><a href="#ref-mcclelland2009place">b</a>)</span>.
-<span class="citation">Luce (<a href="#ref-luce1986response">1991</a>)</span> is a classic book that focuses on modeling response times.</p>
+First, no  quantitative predictions can be derived; a corollary is that a slowdown at the verb “played” (due to reanalysis) of 10 ms or 500 ms would both be equally consistent with the predictions of the model—the model cannot say anything about how much time the reanalysis process would take. This is a problem for  model evaluation, not least because overly large effect sizes observed in data could just be  Type M errors and therefore very misleading <span class="citation">(Gelman and Carlin <a href="#ref-gelmancarlin" role="doc-biblioref">2014</a>; Vasishth et al. <a href="#ref-VasishthMertzenJaegerGelman2018" role="doc-biblioref">2018</a>)</span>.
+Second, such paper-pencil models encourage an excessive (in fact, exclusive) focus on the  average effect size (here, the garden-path effect); the  variability among individuals (which would affect the standard error of the estimated effect from data) plays no role in determining whether the model’s prediction is consistent with the data.
+A third problem with such verbally stated models is that it is often not clear what the exact assumptions are. This makes it difficult to establish whether the model’s predictions are consistent with observed patterns in the data. As a concrete example of these hidden degrees of freedom, an influential theory in sentence processing is the Dependency Locality Theory or DLT <span class="citation">(Gibson <a href="#ref-gibson00" role="doc-biblioref">2000</a>)</span>. This theory explicitly assumes that interposing new discourse referents intervening between, say, a subject and a verb, will make it more difficult to complete the subject-verb dependency. The status of the intervening discourse referent is crucial for dependency completion cost to increase. A further descriptive elaboration of the model is presented in <span class="citation">Warren and Gibson (<a href="#ref-warren2002influence" role="doc-biblioref">2002</a>)</span>; there, the authors argued that the cost of an intervening discourse referent should be graded according to its discourse accessibility. There was no quantitative implementation of what that implies empirically; for example, do old vs. new discourse referents eliminate dependency completion cost entirely, or is the cost attentuated by some amount (if so, how much?)? Interestingly, in later work, the discourse status of the intervener was ignored; in <span class="citation">Gibson and Wu (<a href="#ref-gibsonwu" role="doc-biblioref">2013</a>)</span>, the intervening discourse referents are all old (previously introduced in an immediately preceding context), but they are assumed to have the same impact on dependency completion as new discourse referents, as described in <span class="citation">Gibson (<a href="#ref-gibson00" role="doc-biblioref">2000</a>)</span>. Had the model been computationally implemented, the empirical impact of relaxing the model assumption would have had a quantitative impact on the predictions. This example also illustrates how easy it is to be misled by paper-pencil statements of theories.</p>
+<p>Thus, the absence of quantitative predictions, the inability to quantitatively investigate individual-level variation, and hidden degrees of freedom in the model, are three major drawbacks of paper-pencil models. As <span class="citation">Roberts and Pashler (<a href="#ref-rp" role="doc-biblioref">2000</a>)</span> have discussed at length, a good fit of a model to data is not merely about the sign of the predicted effect being correct; the model must be able to commit a priori to the uncertainty of the predicted effect, and the estimated effect from the data and its uncertainty need to be compared to the predictions of the model. A good fit ideally requires a tightly constrained quantitative prediction derived from the model that is then validated by the comparing the prediction with unseen data; this point has also been eloquently made by the psychologist <span class="citation">Meehl (<a href="#ref-meehl97" role="doc-biblioref">1997</a>)</span>. Meehl suggests that the model makes risky numerical predictions (by which he means tighly constrained quantitative predictions), which should then be compared with the observed effect size and its confidence interval—this is essentially the <span class="citation">Roberts and Pashler (<a href="#ref-rp" role="doc-biblioref">2000</a>)</span> criterion for a good fit.</p>
+<p>For example, if a  computational implementation of the garden-path model were to exist, one could have derived (through prior specifications on the parameters of the model)  prior predictive distributions of the garden-path effect, and compared these predictions to the estimates of the effect from a  statistical model fit to new, unseen data <span class="citation">(for an example from psycholinguistics, see Vasishth and Engelmann <a href="#ref-VasishthEngelmann2022" role="doc-biblioref">2022</a>)</span>. Using  parameteric variation, one could even investigate the implications of the model for individual-level differences <span class="citation">(e.g., Yadav et al. <a href="#ref-yadavindiff2021" role="doc-biblioref">2022</a>)</span>; such implications of models are impossible to derive unless the model is implemented computationally. In the absence of an implemented model, one is reduced to classifying subjects into groups (e.g., by working memory capacity measures) and investigating average group-level effects <span class="citation">(e.g., Caplan and Waters <a href="#ref-cw99" role="doc-biblioref">1999</a>)</span>. This makes the question a binary one: are there individual differences or are there none? The right question to ask about individual differences is a quantitative one <span class="citation">(Haaf and Rouder <a href="#ref-haaf2019some" role="doc-biblioref">2019</a>)</span>.</p>
+</div>
+<div id="types-of-computational-cognitive-model" class="section level2 hasAnchor" number="17.3">
+<h2><span class="header-section-number">17.3</span> Types of computational cognitive model<a href="ch-cogmod.html#types-of-computational-cognitive-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are many different classes of computational cognitive model. For example, <span class="citation">Newell (<a href="#ref-utc" role="doc-biblioref">1990</a>)</span> pioneered a cognitive architectures approach, where a model of a particular cognitive process (like sentence processing) occurs within a broader computational framework that defines very general constraints on human information processing. Examples of cognitive architectures are SOAR <span class="citation">(Laird <a href="#ref-laird2019soar" role="doc-biblioref">2019</a>)</span>, the CAPS family of models <span class="citation">(Just, Carpenter, and Varma <a href="#ref-justetal99" role="doc-biblioref">1999</a>)</span>, and ACT-R <span class="citation">(Anderson et al. <a href="#ref-abbl02" role="doc-biblioref">2004</a>)</span>. Other approaches include connectionist models <span class="citation">(e.g., McClelland and Rumelhart <a href="#ref-mcclelland1989explorations" role="doc-biblioref">1989</a>)</span>, dynamical systems-based models <span class="citation">(e.g., Port and Van Gelder <a href="#ref-port1995mind" role="doc-biblioref">1995</a>; Tabor and Tanenhaus <a href="#ref-tabor1999dynamical" role="doc-biblioref">1999</a>; Beer <a href="#ref-beer2000dynamical" role="doc-biblioref">2000</a>; Rabe et al. <a href="#ref-Rabe2019" role="doc-biblioref">2021</a>, <a href="#ref-RabePaapeJML2023" role="doc-biblioref">2024</a>; Engbert et al. <a href="#ref-engbertetal06" role="doc-biblioref">2005</a>)</span>.</p>
+<p>In this book, we focus on Bayesian cognitive models <span class="citation">(Lee and Wagenmakers <a href="#ref-LeeWagenmakers2014" role="doc-biblioref">2014</a>)</span>; these are distinct from models that assume that human cognitive processes involve Bayesian inference <span class="citation">(e.g., Feldman <a href="#ref-feldman2017true" role="doc-biblioref">2017</a>)</span>. The type of model we discuss here has the characteristic that the underlying generative process spells out the latent, probabilistically occurring sub-processes. The latent processes are spelled out by specifying a Bayesian model that allows different events to happen probabilistically in each trial.
+An example is  multinomial processing tree models, which specify a sequence of possible latent sub-processes. Another example is a  hierarchical finite mixture process which specifies that, in some proportion of trials, the observed response comes from one distribution, and in another proportion from a different distribution. A third example is the assumption that the observed response (e.g., reading time) is the result of an unobserved (latent)  race process in the cognitive system. Probabilistic programming languages like Stan allow us to implement such latent process models, allowing for hierarchical structure (individual-level variability).</p>
+<p>This part of the book introduces these three types of cognitive models using Stan. In many cases, a great deal of cognitive detail is sacrificed for tractability, but this is a characteristic shared by all computational models—by definition, a model is a simplification of the underlying process being modeled <span class="citation">(McClelland <a href="#ref-mcclellandPlaceModelingCognitive2009" role="doc-biblioref">2009</a>)</span>.</p>
+</div>
+<div id="summary-14" class="section level2 hasAnchor" number="17.4">
+<h2><span class="header-section-number">17.4</span> Summary<a href="ch-cogmod.html#summary-14" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The main take-away from this section is that it is possible to specify an underlying generative process for the data that reflects theoretical assumptions in a particular research area. The gain is that: (i) the assumptions of the underlying theory, and their consequences, become transparent and explicit <span class="citation">(Epstein <a href="#ref-epstein2008model" role="doc-biblioref">2008</a>)</span>; (ii) one can derive quantitative predictions (along with the uncertainty of those predictions) which, as <span class="citation">Roberts and Pashler (<a href="#ref-rp" role="doc-biblioref">2000</a>)</span> point out, are vital for model evaluation; (iii) it becomes possible (at least in principle) to eliminate competing theoretical proposals through quantitative model comparison using benchmark data <span class="citation">(Nicenboim and Vasishth <a href="#ref-nicenboimModelsRetrievalSentence2018" role="doc-biblioref">2018</a>; Lissón et al. <a href="#ref-lisson_2020" role="doc-biblioref">2021</a>; Lissón et al. <a href="#ref-LissonEtAlInterference2021" role="doc-biblioref">2023</a>; Yadav et al. <a href="#ref-YadavetalJML2022" role="doc-biblioref">2023</a>)</span>; and (iv) the implications of models, for average behavior <span class="citation">(e.g., Yadav et al. <a href="#ref-YadavetalJML2022" role="doc-biblioref">2023</a>)</span> as well as for individual-level differences <span class="citation">(e.g., Yadav et al. <a href="#ref-yadavindiff2021" role="doc-biblioref">2022</a>)</span> can be investigated.</p>
+</div>
+<div id="further-reading-14" class="section level2 hasAnchor" number="17.5">
+<h2><span class="header-section-number">17.5</span> Further reading<a href="ch-cogmod.html#further-reading-14" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>General textbooks on computational modeling for cognitive science are <span class="citation">Busemeyer and Diederich (<a href="#ref-busemeyer2010cognitive" role="doc-biblioref">2010</a>)</span>, and <span class="citation">Farrell and Lewandowsky (<a href="#ref-farrell2018computational" role="doc-biblioref">2018</a>)</span>. The textbook by <span class="citation">Lee and Wagenmakers (<a href="#ref-LeeWagenmakers2014" role="doc-biblioref">2014</a>)</span> focuses on relatively simple computational cognitive models implemented in a Bayesian framework (using the BUGS language).
+A good free textbook on computational modeling for cognitive science is <span class="citation">Blokpoel and Rooij (<a href="#ref-blokpoelvanrooij" role="doc-biblioref">2021</a>)</span>. The entire special issue <span class="citation">(Lee <a href="#ref-mathpsych2011" role="doc-biblioref">2011</a><a href="#ref-mathpsych2011" role="doc-biblioref">a</a>)</span> on hierarchical Bayesian modeling in the Journal of Mathematical Psychology is highly recommended <span class="citation">(in particular, see the article by Lee <a href="#ref-Lee2011" role="doc-biblioref">2011</a><a href="#ref-Lee2011" role="doc-biblioref">b</a>)</span>. <span class="citation">Wilson and Collins (<a href="#ref-WilsonEtAl2019" role="doc-biblioref">2019</a>)</span> discuss good practices in the computational modeling of behavioral data using examples from reinforcement learning. <span class="citation">Haines et al. (<a href="#ref-haines2020learning" role="doc-biblioref">2020</a>)</span> discuss how generative models produce higher test-retest reliability and more theoretically informative parameter estimates than do traditional methods. For an overview of the different modeling approaches in cognitive science and the relationships between them, see <span class="citation">McClelland (<a href="#ref-mcclellandPlaceModelingCognitive2009" role="doc-biblioref">2009</a>)</span>.
+<span class="citation">Luce (<a href="#ref-luce1986response" role="doc-biblioref">1991</a>)</span> is a classic book that focuses on modeling response times.</p>
 
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references">
+<div id="refs" class="references hanging-indent">
 <div id="ref-abbl02">
 <p>Anderson, John R., Dan Bothell, Michael D. Byrne, Scott Douglass, Christian Lebiere, and Yulin Qin. 2004. “An Integrated Theory of the Mind.” <em>Psychological Review</em> 111 (4): 1036–60.</p>
 </div>
 <div id="ref-beer2000dynamical">
-<p>Beer, Randall D. 2000. “Dynamical Approaches to Cognitive Science.” <em>Trends in Cognitive Sciences</em> 4 (3). Elsevier: 91–99.</p>
+<p>Beer, Randall D. 2000. “Dynamical Approaches to Cognitive Science.” <em>Trends in Cognitive Sciences</em> 4 (3): 91–99.</p>
 </div>
 <div id="ref-blokpoelvanrooij">
-<p>Blokpoel, Mark, and Iris van Rooij. 2021. <em>Theoretical Modeling for Cognitive Science and Psychology</em>.</p>
+<p>Blokpoel, Mark, and Iris van Rooij. 2021. <em>Theoretical Modeling for Cognitive Science and Psychology</em>. <a href="https://computationalcognitivescience.github.io/lovelace/">https://computationalcognitivescience.github.io/lovelace/</a>.</p>
 </div>
 <div id="ref-busemeyer2010cognitive">
 <p>Busemeyer, Jerome R, and Adele Diederich. 2010. <em>Cognitive Modeling</em>. Sage.</p>
 </div>
 <div id="ref-cw99">
-<p>Caplan, D., and G. S. Waters. 1999. “Verbal Working Memory and Sentence Comprehension.” <em>Behavioral and Brain Science</em> 22: 77–94.</p>
+<p>Caplan, David, and G. S. Waters. 1999. “Verbal Working Memory and Sentence Comprehension.” <em>Behavioral and Brain Science</em> 22: 77–94. <a href="https://doi.org/https://doi.org/10.1017/S0140525X99001788">https://doi.org/https://doi.org/10.1017/S0140525X99001788</a>.</p>
+</div>
+<div id="ref-engbertetal06">
+<p>Engbert, Ralf, Antje Nuthmann, Eike M. Richter, and Reinhold Kliegl. 2005. “SWIFT: A Dynamical Model of Saccade Generation During Reading.” <em>Psychological Review</em> 112: 777–813. <a href="https://doi.org/https://doi.org/10.1037/0033-295X.112.4.777">https://doi.org/https://doi.org/10.1037/0033-295X.112.4.777</a>.</p>
 </div>
 <div id="ref-epstein2008model">
-<p>Epstein, Joshua M. 2008. “Why Model?” <em>Journal of Artificial Societies and Social Simulation</em> 11 (4): 12.</p>
+<p>Epstein, Joshua M. 2008. “Why Model?” <em>Journal of Artificial Societies and Social Simulation</em> 11 (4): 12. <a href="https://www.jasss.org/11/4/12.html">https://www.jasss.org/11/4/12.html</a>.</p>
 </div>
 <div id="ref-farrell2018computational">
 <p>Farrell, Simon, and Stephan Lewandowsky. 2018. <em>Computational Modeling of Cognition and Behavior</em>. Cambridge University Press.</p>
 </div>
 <div id="ref-feldman2017true">
-<p>Feldman, Jacob. 2017. “What Are the ‘True’ Statistics of the Environment?” <em>Cognitive Science</em> 41 (7). Wiley Online Library: 1871–1903.</p>
+<p>Feldman, Jacob. 2017. “What Are the ‘True’ Statistics of the Environment?” <em>Cognitive Science</em> 41 (7): 1871–1903. <a href="https://doi.org/https://doi.org/10.1111/cogs.12444">https://doi.org/https://doi.org/10.1111/cogs.12444</a>.</p>
 </div>
 <div id="ref-frazier79">
 <p>Frazier, Lyn. 1979. “On Comprehending Sentences: Syntactic Parsing Strategies.” PhD thesis, Amherst: University of Massachusetts.</p>
 </div>
 <div id="ref-gelmancarlin">
-<p>Gelman, Andrew, and John B. Carlin. 2014. “Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors.” <em>Perspectives on Psychological Science</em> 9 (6). SAGE Publications: 641–51.</p>
+<p>Gelman, Andrew, and John B. Carlin. 2014. “Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors.” <em>Perspectives on Psychological Science</em> 9 (6): 641–51. <a href="https://doi.org/https://doi.org/10.1177/1745691614551642">https://doi.org/https://doi.org/10.1177/1745691614551642</a>.</p>
+</div>
+<div id="ref-gibson00">
+<p>Gibson, Edward. 2000. “Dependency Locality Theory: A Distance-Based Theory of Linguistic Complexity.” In <em>Image, Language, Brain: Papers from the First Mind Articulation Project Symposium</em>, edited by Alec Marantz, Yasushi Miyashita, and Wayne O’Neil. Cambridge, MA: MIT Press.</p>
+</div>
+<div id="ref-gibsonwu">
+<p>Gibson, Edward, and H.-H. Iris Wu. 2013. “Processing Chinese Relative Clauses in Context.” <em>Language and Cognitive Processes</em> 28 (1-2): 125–55. <a href="https://doi.org/https://doi.org/10.1080/01690965.2010.536656">https://doi.org/https://doi.org/10.1080/01690965.2010.536656</a>.</p>
 </div>
 <div id="ref-haaf2019some">
-<p>Haaf, Julia M., and Jeffrey N. Rouder. 2019. “Some Do and Some Don’t? Accounting for Variability of Individual Difference Structures.” <em>Psychonomic Bulletin &amp; Review</em> 26 (3). Springer: 772–89.</p>
+<p>Haaf, Julia M., and Jeffrey N. Rouder. 2019. “Some Do and Some Don’t? Accounting for Variability of Individual Difference Structures.” <em>Psychonomic Bulletin &amp; Review</em> 26 (3): 772–89.</p>
 </div>
 <div id="ref-haines2020learning">
-<p>Haines, Nathaniel, Peter D Kvam, Louis H Irving, Colin Smith, Theodore P Beauchaine, Mark A Pitt, Woo-Young Ahn, and Brandon Turner. 2020. “Learning from the Reliability Paradox: How Theoretically Informed Generative Models Can Advance the Social, Behavioral, and Brain Sciences.” <em>Unpublished</em>. PsyArXiv.</p>
+<p>Haines, Nathaniel, Peter D. Kvam, Louis H. Irving, Colin Smith, Theodore P. Beauchaine, Mark A. Pitt, Woo-Young Ahn, and Brandon M Turner. 2020. “Learning from the Reliability Paradox: How Theoretically Informed Generative Models Can Advance the Social, Behavioral, and Brain Sciences.” <a href="https://ccs-lab.github.io/pdfs/papers/haines2020_reliability.pdf">https://ccs-lab.github.io/pdfs/papers/haines2020_reliability.pdf</a>.</p>
 </div>
 <div id="ref-jurafsky96">
-<p>Jurafsky, Daniel. 1996. “A Probabilistic Model of Lexical and Syntactic Access and Disambiguation.” <em>Cognition</em> 20: 137–94.</p>
+<p>Jurafsky, Daniel. 1996. “A Probabilistic Model of Lexical and Syntactic Access and Disambiguation.” <em>Cognition</em> 20: 137–94. <a href="https://doi.org/https://doi.org/10.1207/s15516709cog2002_1">https://doi.org/https://doi.org/10.1207/s15516709cog2002_1</a>.</p>
 </div>
 <div id="ref-justetal99">
-<p>Just, M.A., P.A. Carpenter, and S. Varma. 1999. “Computational Modeling of High-Level Cognition and Brain Function.” <em>Human Brain Mapping</em> 8: 128–36.</p>
+<p>Just, Marcel Adam, Patricia A. Carpenter, and S. Varma. 1999. “Computational Modeling of High-Level Cognition and Brain Function.” <em>Human Brain Mapping</em> 8: 128–36. <a href="https://doi.org/https://doi.org/10.1002/(SICI)1097-0193(1999)8:2/3%3C128::AID-HBM10%3E3.0.CO;2-G">https://doi.org/https://doi.org/10.1002/(SICI)1097-0193(1999)8:2/3&lt;128::AID-HBM10&gt;3.0.CO;2-G</a>.</p>
 </div>
 <div id="ref-laird2019soar">
-<p>Laird, John E. 2019. <em>The Soar Cognitive Architecture</em>. MIT press.</p>
+<p>Laird, John E. 2019. <em>The Soar Cognitive Architecture</em>. MIT Press.</p>
 </div>
 <div id="ref-mathpsych2011">
-<p>Lee, Michael D., ed. 2011a. “Special Issue on Hierarchical Bayesian Models.” <em>Journal of Mathematical Psychology</em> 55 (1). <a href="https://www.sciencedirect.com/journal/journal-of-mathematical-psychology/vol/55/issue/1" class="uri">https://www.sciencedirect.com/journal/journal-of-mathematical-psychology/vol/55/issue/1</a>.</p>
+<p>Lee, Michael D., ed. 2011a. “Special Issue on Hierarchical Bayesian Models.” <em>Journal of Mathematical Psychology</em> 55 (1). <a href="https://www.sciencedirect.com/journal/journal-of-mathematical-psychology/vol/55/issue/1">https://www.sciencedirect.com/journal/journal-of-mathematical-psychology/vol/55/issue/1</a>.</p>
 </div>
 <div id="ref-Lee2011">
-<p>Lee, Michael D., ed. 2011a. “Special Issue on Hierarchical Bayesian Models.” <em>Journal of Mathematical Psychology</em> 55 (1). <a href="https://www.sciencedirect.com/journal/journal-of-mathematical-psychology/vol/55/issue/1" class="uri">https://www.sciencedirect.com/journal/journal-of-mathematical-psychology/vol/55/issue/1</a>.</p> 2011b. “How Cognitive Modeling Can Benefit from Hierarchical Bayesian Models.” <em>Journal of Mathematical Psychology</em> 55 (1). Elsevier BV: 1–7. <a href="https://doi.org/10.1016/j.jmp.2010.08.013" class="uri">https://doi.org/10.1016/j.jmp.2010.08.013</a>.</p>
+<p>Lee, Michael D., ed. 2011a. “Special Issue on Hierarchical Bayesian Models.” <em>Journal of Mathematical Psychology</em> 55 (1). <a href="https://www.sciencedirect.com/journal/journal-of-mathematical-psychology/vol/55/issue/1">https://www.sciencedirect.com/journal/journal-of-mathematical-psychology/vol/55/issue/1</a>.</p> 2011b. “How Cognitive Modeling Can Benefit from Hierarchical Bayesian Models.” <em>Journal of Mathematical Psychology</em> 55 (1): 1–7. <a href="https://doi.org/10.1016/j.jmp.2010.08.013">https://doi.org/10.1016/j.jmp.2010.08.013</a>.</p>
 </div>
 <div id="ref-LeeWagenmakers2014">
 <p>Lee, Michael D., and Eric-Jan Wagenmakers. 2014. <em>Bayesian Cognitive Modeling: A Practical Course</em>. Cambridge University Press.</p>
 </div>
 <div id="ref-LissonEtAlInterference2021">
-<p>Lissón, Paula, Dario Paape, Dorothea Pregla, Frank Burchert, Nicole Stadie, and Shravan Vasishth. 2022. “Similarity-Based Interference in Sentence Comprehension in Aphasia: A Computational Evaluation of Two Models of Cue-Based Retrieval.”</p>
+<p>Lissón, Paula, Dario Paape, Dorothea Pregla, Frank Burchert, Nicole Stadie, and Shravan Vasishth. 2023. “Similarity-Based Interference in Sentence Comprehension in Aphasia: A Computational Evaluation of Two Models of Cue-Based Retrieval.” <em>Computational Brain and Behavior</em>. <a href="https://doi.org/10.1007/s42113-023-00168-3">https://doi.org/10.1007/s42113-023-00168-3</a>.</p>
 </div>
 <div id="ref-lisson_2020">
-<p>Lissón, Paula, Dorothea Pregla, Bruno Nicenboim, Dario Paape, Mick van het Nederend, Frank Burchert, Nicole Stadie, David Caplan, and Shravan Vasishth. 2021. “A Computational Evaluation of Two Models of Retrieval Processes in Sentence Processing in Aphasia.” <em>Cognitive Science</em> 45 (4): e12956. <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/cogs.12956" class="uri">https://onlinelibrary.wiley.com/doi/full/10.1111/cogs.12956</a>.</p>
+<p>Lissón, Paula, Dorothea Pregla, Bruno Nicenboim, Dario Paape, Mick van het Nederend, Frank Burchert, Nicole Stadie, David Caplan, and Shravan Vasishth. 2021. “A Computational Evaluation of Two Models of Retrieval Processes in Sentence Processing in Aphasia.” <em>Cognitive Science</em> 45 (4): e12956. <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/cogs.12956">https://onlinelibrary.wiley.com/doi/full/10.1111/cogs.12956</a>.</p>
 </div>
 <div id="ref-luce1986response">
-<p>Luce, R Duncan. 1991. <em>Response Times: Their Role in Inferring Elementary Mental Organization</em>. Oxford University Press.</p>
+<p>Luce, R. Duncan. 1991. <em>Response Times: Their Role in Inferring Elementary Mental Organization</em>. Oxford University Press.</p>
 </div>
-<div id="ref-mcclelland2009place">
-<p>McClelland, James L. 2009b. “The Place of Modeling in Cognitive Science.” <em>Topics in Cognitive Science</em> 1 (1). Wiley Online Library: 11–38.</p>
+<div id="ref-mcclellandPlaceModelingCognitive2009">
+<p>McClelland, James L. 2009. “The Place of Modeling in Cognitive Science.” <em>Topics in Cognitive Science</em> 1 (1): 11–38. <a href="https://doi.org/10.1111/j.1756-8765.2008.01003.x">https://doi.org/10.1111/j.1756-8765.2008.01003.x</a>.</p>
 </div>
 <div id="ref-mcclelland1989explorations">
-<p>McClelland, James L, and David E Rumelhart. 1989. <em>Explorations in Parallel Distributed Processing: A Handbook of Models, Programs, and Exercises</em>. MIT Press.</p>
+<p>McClelland, James L., and David E. Rumelhart. 1989. <em>Explorations in Parallel Distributed Processing: A Handbook of Models, Programs, and Exercises</em>. MIT Press.</p>
 </div>
 <div id="ref-meehl97">
-<p>Meehl, Paul E. 1997. “The Problem Is Epistemology, Not Statistics: Replace Significance Tests by Confidence Intervals and Quantify Accuracy of Risky Numerical Predictions.” In <em>What If There Were No Significance Tests?</em>, edited by L.L. Harlow, S.A. Mulaik, and J. H. Steiger. Mahwah, New Jersey: Erlbaum.</p>
+<p>Meehl, Paul E. 1997. “The Problem Is Epistemology, Not Statistics: Replace Significance Tests by Confidence Intervals and Quantify Accuracy of Risky Numerical Predictions.” In <em>What If There Were No Significance Tests?</em>, edited by L. L. Harlow, S. A. Mulaik, and J. H. Steiger. Mahwah, New Jersey: Erlbaum.</p>
 </div>
 <div id="ref-utc">
-<p>Newell, Allen. 1990. <em>Unified Theories of Cognition</em>. cambridge: Harvard University Press.</p>
+<p>Newell, Allen. 1990. <em>Unified Theories of Cognition</em>. Cambridge: MA: Harvard University Press.</p>
 </div>
 <div id="ref-nicenboimModelsRetrievalSentence2018">
-<p>Nicenboim, Bruno, and Shravan Vasishth. 2018. “Models of Retrieval in Sentence Comprehension: A Computational Evaluation Using Bayesian Hierarchical Modeling.” <em>Journal of Memory and Language</em> 99: 1–34. <a href="https://doi.org/10.1016/j.jml.2017.08.004" class="uri">https://doi.org/10.1016/j.jml.2017.08.004</a>.</p>
+<p>Nicenboim, Bruno, and Shravan Vasishth. 2018. “Models of Retrieval in Sentence Comprehension: A Computational Evaluation Using Bayesian Hierarchical Modeling.” <em>Journal of Memory and Language</em> 99: 1–34. <a href="https://doi.org/10.1016/j.jml.2017.08.004">https://doi.org/10.1016/j.jml.2017.08.004</a>.</p>
 </div>
 <div id="ref-paapevasishthmpt2022">
-<p>Paape, Dario, and Shravan Vasishth. 2022. “Estimating the True Cost of Garden-Pathing: A Computational Model of Latent Cognitive Processes.” <em>Cognitive Science</em> 46 (8): e13186.</p>
+<p>Paape, Dario, and Shravan Vasishth. 2022. “Estimating the True Cost of Garden-Pathing: A Computational Model of Latent Cognitive Processes.” <em>Cognitive Science</em> 46 (8): e13186. <a href="https://doi.org/https://doi.org/10.1111/cogs.13186">https://doi.org/https://doi.org/10.1111/cogs.13186</a>.</p>
 </div>
 <div id="ref-port1995mind">
-<p>Port, Robert F, and Timothy Van Gelder. 1995. <em>Mind as Motion: Explorations in the Dynamics of Cognition</em>. MIT Press.</p>
+<p>Port, Robert F., and Timothy Van Gelder. 1995. <em>Mind as Motion: Explorations in the Dynamics of Cognition</em>. MIT Press.</p>
 </div>
 <div id="ref-Rabe2019">
-<p>Rabe, Maximilian M., Johan Chandra, André Krü&quot;gel, Stefan A. Seelig, Shravan Vasishth, and Ralf Engbert. 2021. “A Bayesian Approach to Dynamical Modeling of Eye-Movement Control in Reading of Normal, Mirrored, and Scrambled Texts.” <em>Psychological Review</em>. <a href="https://doi.org/10.1037/rev0000268" class="uri">https://doi.org/10.1037/rev0000268</a>.</p>
+<p>Rabe, Maximilian M., Johan Chandra, André Krügel, Stefan A. Seelig, Shravan Vasishth, and Ralf Engbert. 2021. “A Bayesian Approach to Dynamical Modeling of Eye-Movement Control in Reading of Normal, Mirrored, and Scrambled Texts.” <em>Psychological Review</em>. <a href="https://doi.org/10.1037/rev0000268">https://doi.org/10.1037/rev0000268</a>.</p>
+</div>
+<div id="ref-RabePaapeJML2023">
+<p>Rabe, Maximilian M., Dario Paape, Daniela Metzen, Shravan Vasishth, and Ralf Engbert. 2024. “SEAM: An Integrated Activation-Coupled Model of Sentence Processing and Eye Movements in Reading.” <em>Journal of Memory and Language</em>. <a href="https://doi.org/https://doi.org/10.1016/j.jml.2023.104496">https://doi.org/https://doi.org/10.1016/j.jml.2023.104496</a>.</p>
 </div>
 <div id="ref-rp">
-<p>Roberts, Seth, and Harold Pashler. 2000. “How Persuasive Is a Good Fit? A Comment on Theory Testing.” <em>Psychological Review</em> 107 (2): 358–67.</p>
+<p>Roberts, Seth, and Harold Pashler. 2000. “How Persuasive Is a Good Fit? A Comment on Theory Testing.” <em>Psychological Review</em> 107 (2): 358–67. <a href="https://doi.org/https://doi.org/10.1037/0033-295X.107.2.358">https://doi.org/https://doi.org/10.1037/0033-295X.107.2.358</a>.</p>
 </div>
 <div id="ref-tabor1999dynamical">
-<p>Tabor, Whitney, and Michael K Tanenhaus. 1999. “Dynamical Models of Sentence Processing.” <em>Cognitive Science</em> 23 (4). Wiley Online Library: 491–515.</p>
+<p>Tabor, Whitney, and Michael K. Tanenhaus. 1999. “Dynamical Models of Sentence Processing.” <em>Cognitive Science</em> 23 (4): 491–515.</p>
 </div>
 <div id="ref-VasishthEngelmann2022">
-<p>Vasishth, Shravan, and Felix Engelmann. 2022. <em>Sentence Comprehension as a Cognitive Process: A Computational Approach</em>. Cambridge, UK: Cambridge University Press. <a href="https://books.google.de/books?id=6KZKzgEACAAJ" class="uri">https://books.google.de/books?id=6KZKzgEACAAJ</a>.</p>
+<p>Vasishth, Shravan, and Felix Engelmann. 2022. <em>Sentence Comprehension as a Cognitive Process: A Computational Approach</em>. Cambridge, UK: Cambridge University Press. <a href="https://books.google.de/books?id=6KZKzgEACAAJ">https://books.google.de/books?id=6KZKzgEACAAJ</a>.</p>
 </div>
 <div id="ref-VasishthMertzenJaegerGelman2018">
-<p>Vasishth, Shravan, Daniela Mertzen, Lena A. Jäger, and Andrew Gelman. 2018a. “The Statistical Significance Filter Leads to Overoptimistic Expectations of Replicability.” <em>Journal of Memory and Language</em> 103: 151–75. <a href="https://doi.org/https://doi.org/10.1016/j.jml.2018.07.004" class="uri">https://doi.org/https://doi.org/10.1016/j.jml.2018.07.004</a>.</p>
+<p>Vasishth, Shravan, Daniela Mertzen, Lena A. Jäger, and Andrew Gelman. 2018. “The Statistical Significance Filter Leads to Overoptimistic Expectations of Replicability.” <em>Journal of Memory and Language</em> 103: 151–75. <a href="https://doi.org/https://doi.org/10.1016/j.jml.2018.07.004">https://doi.org/https://doi.org/10.1016/j.jml.2018.07.004</a>.</p>
+</div>
+<div id="ref-warren2002influence">
+<p>Warren, Tessa, and Edward Gibson. 2002. “The Influence of Referential Processing on Sentence Complexity.” <em>Cognition</em> 85: 79–112.</p>
 </div>
 <div id="ref-WilsonEtAl2019">
-<p>Wilson, Robert C, and Anne GE Collins. 2019. “Ten Simple Rules for the Computational Modeling of Behavioral Data.” Edited by Timothy E Behrens. <em>eLife</em> 8 (November). eLife Sciences Publications, Ltd: e49547. <a href="https://doi.org/10.7554/eLife.49547" class="uri">https://doi.org/10.7554/eLife.49547</a>.</p>
+<p>Wilson, Robert C., and Anne G. E. Collins. 2019. “Ten Simple Rules for the Computational Modeling of Behavioral Data.” Edited by Timothy E Behrens. <em>eLife</em> 8 (November): e49547. <a href="https://doi.org/10.7554/eLife.49547">https://doi.org/10.7554/eLife.49547</a>.</p>
 </div>
 <div id="ref-yadavindiff2021">
-<p>Yadav, Himanshu, Dario Paape, Garrett Smith, Brian W. Dillon, and Shravan Vasishth. 2022. “Individual Differences in Cue Weighting in Sentence Comprehension: An evaluation using Approximate Bayesian Computation.” <em>Open Mind</em>. <a href="https://doi.org/https://doi.org/10.1162/opmi_a_00052" class="uri">https://doi.org/https://doi.org/10.1162/opmi_a_00052</a>.</p>
+<p>Yadav, Himanshu, Dario Paape, Garrett Smith, Brian W. Dillon, and Shravan Vasishth. 2022. “Individual Differences in Cue Weighting in Sentence Comprehension: An evaluation using Approximate Bayesian Computation.” <em>Open Mind</em>. <a href="https://doi.org/https://doi.org/10.1162/opmi_a_00052">https://doi.org/https://doi.org/10.1162/opmi_a_00052</a>.</p>
 </div>
 <div id="ref-YadavetalJML2022">
-<p>Yadav, Himanshu, Garrett Smith, Sebastian Reich, and Shravan Vasishth. 2022. “Number Feature Distortion Modulates Cue-Based Retrieval in Reading.” <em>Journal of Memory and Language</em>.</p>
+<p>Yadav, Himanshu, Garrett Smith, Sebastian Reich, and Shravan Vasishth. 2023. “Number Feature Distortion Modulates Cue-Based Retrieval in Reading.” <em>Journal of Memory and Language</em> 129. <a href="https://doi.org/10.1016/j.jml.2022.104400">https://doi.org/10.1016/j.jml.2022.104400</a>.</p>
 </div>
 </div>
             </section>

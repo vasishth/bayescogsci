@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 Introduction to model comparison | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 14 Introduction to model comparison | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2023-02-18" />
+<meta name="date" content="2024-03-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,6 +49,7 @@
 
 
 
+<script src="libs/accessible-code-block/empty-anchor.js"></script>
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
@@ -792,25 +793,26 @@ $(document).ready(function () {
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -819,9 +821,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -854,6 +856,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <link rel="stylesheet" href="css/toc.css" type="text/css" />
@@ -872,7 +878,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Bayesian Data Analysis for Cognitive Science (DRAFT)</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-read-this-book-and-what-is-its-target-audience"><i class="fa fa-check"></i>Why read this book, and what is its target audience?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#developing-the-right-mindset-for-this-book"><i class="fa fa-check"></i>Developing the right mindset for this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-read-this-book"><i class="fa fa-check"></i>How to read this book</a></li>
@@ -883,38 +890,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="ch-intro.html"><a href="ch-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="ch-intro.html"><a href="ch-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="ch-intro.html"><a href="ch-intro.html#introprob"><i class="fa fa-check"></i><b>1.1</b> Probability</a></li>
-<li class="chapter" data-level="1.2" data-path="ch-intro.html"><a href="ch-intro.html#condprob"><i class="fa fa-check"></i><b>1.2</b> Conditional probability</a></li>
-<li class="chapter" data-level="1.3" data-path="ch-intro.html"><a href="ch-intro.html#the-law-of-total-probability"><i class="fa fa-check"></i><b>1.3</b> The law of total probability</a></li>
-<li class="chapter" data-level="1.4" data-path="ch-intro.html"><a href="ch-intro.html#sec-binomialcloze"><i class="fa fa-check"></i><b>1.4</b> Discrete random variables: An example using the binomial distribution</a><ul>
+<li class="chapter" data-level="1.2" data-path="ch-intro.html"><a href="ch-intro.html#condprob"><i class="fa fa-check"></i><b>1.2</b>  Conditional probability</a></li>
+<li class="chapter" data-level="1.3" data-path="ch-intro.html"><a href="ch-intro.html#the-law-of-total-probability"><i class="fa fa-check"></i><b>1.3</b> The  law of total probability</a></li>
+<li class="chapter" data-level="1.4" data-path="ch-intro.html"><a href="ch-intro.html#sec-binomialcloze"><i class="fa fa-check"></i><b>1.4</b>  Discrete random variables: An example using the  binomial distribution</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="ch-intro.html"><a href="ch-intro.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.4.1</b> The mean and variance of the binomial distribution</a></li>
 <li class="chapter" data-level="1.4.2" data-path="ch-intro.html"><a href="ch-intro.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.4.2</b> What information does a probability distribution provide?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="ch-intro.html"><a href="ch-intro.html#continuous-random-variables-an-example-using-the-normal-distribution"><i class="fa fa-check"></i><b>1.5</b> Continuous random variables: An example using the normal distribution</a><ul>
-<li class="chapter" data-level="1.5.1" data-path="ch-intro.html"><a href="ch-intro.html#an-important-distinction-probability-vs.density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
+<li class="chapter" data-level="1.5" data-path="ch-intro.html"><a href="ch-intro.html#continuous-random-variables-an-example-using-the-normal-distribution"><i class="fa fa-check"></i><b>1.5</b>  Continuous random variables: An example using the  normal distribution</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="ch-intro.html"><a href="ch-intro.html#an-important-distinction-probability-vs.-density-in-a-continuous-random-variable"><i class="fa fa-check"></i><b>1.5.1</b> An important distinction: probability vs. density in a continuous random variable</a></li>
 <li class="chapter" data-level="1.5.2" data-path="ch-intro.html"><a href="ch-intro.html#truncating-a-normal-distribution"><i class="fa fa-check"></i><b>1.5.2</b> Truncating a normal distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="ch-intro.html"><a href="ch-intro.html#bivariate-and-multivariate-distributions"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="ch-intro.html"><a href="ch-intro.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1: Discrete bivariate distributions</a></li>
-<li class="chapter" data-level="1.6.2" data-path="ch-intro.html"><a href="ch-intro.html#sec-contbivar"><i class="fa fa-check"></i><b>1.6.2</b> Example 2: Continuous bivariate distributions</a></li>
-<li class="chapter" data-level="1.6.3" data-path="ch-intro.html"><a href="ch-intro.html#sec-generatebivariatedata"><i class="fa fa-check"></i><b>1.6.3</b> Generate simulated bivariate (multivariate) data</a></li>
+<li class="chapter" data-level="1.6" data-path="ch-intro.html"><a href="ch-intro.html#bivariate-and-multivariate-distributions"><i class="fa fa-check"></i><b>1.6</b> Bivariate and multivariate distributions</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="ch-intro.html"><a href="ch-intro.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Example 1:  Discrete bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.2" data-path="ch-intro.html"><a href="ch-intro.html#sec-contbivar"><i class="fa fa-check"></i><b>1.6.2</b> Example 2:  Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.6.3" data-path="ch-intro.html"><a href="ch-intro.html#sec-generatebivariatedata"><i class="fa fa-check"></i><b>1.6.3</b> Generate  simulated bivariate  (multivariate) data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="ch-intro.html"><a href="ch-intro.html#sec-marginal"><i class="fa fa-check"></i><b>1.7</b> An important concept: The marginal likelihood (integrating out a parameter)</a></li>
+<li class="chapter" data-level="1.7" data-path="ch-intro.html"><a href="ch-intro.html#sec-marginal"><i class="fa fa-check"></i><b>1.7</b> An important concept: The  marginal likelihood  (integrating out a parameter)</a></li>
 <li class="chapter" data-level="1.8" data-path="ch-intro.html"><a href="ch-intro.html#summary-of-useful-r-functions-relating-to-distributions"><i class="fa fa-check"></i><b>1.8</b> Summary of useful R functions relating to distributions</a></li>
 <li class="chapter" data-level="1.9" data-path="ch-intro.html"><a href="ch-intro.html#summary"><i class="fa fa-check"></i><b>1.9</b> Summary</a></li>
 <li class="chapter" data-level="1.10" data-path="ch-intro.html"><a href="ch-intro.html#further-reading"><i class="fa fa-check"></i><b>1.10</b> Further reading</a></li>
 <li class="chapter" data-level="1.11" data-path="ch-intro.html"><a href="ch-intro.html#sec-Foundationsexercises"><i class="fa fa-check"></i><b>1.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="ch-introBDA.html"><a href="ch-introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a><ul>
-<li class="chapter" data-level="2.1" data-path="ch-introBDA.html"><a href="ch-introBDA.html#bayes-rule"><i class="fa fa-check"></i><b>2.1</b> Bayes’ rule</a></li>
-<li class="chapter" data-level="2.2" data-path="ch-introBDA.html"><a href="ch-introBDA.html#sec-analytical"><i class="fa fa-check"></i><b>2.2</b> Deriving the posterior using Bayes’ rule: An analytical example</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="ch-introBDA.html"><a href="ch-introBDA.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.2.1</b> Choosing a likelihood</a></li>
-<li class="chapter" data-level="2.2.2" data-path="ch-introBDA.html"><a href="ch-introBDA.html#sec-choosepriortheta"><i class="fa fa-check"></i><b>2.2.2</b> Choosing a prior for <span class="math inline">\(\theta\)</span></a></li>
-<li class="chapter" data-level="2.2.3" data-path="ch-introBDA.html"><a href="ch-introBDA.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.2.3</b> Using Bayes’ rule to compute the posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
+<li class="chapter" data-level="2" data-path="ch-introBDA.html"><a href="ch-introBDA.html"><i class="fa fa-check"></i><b>2</b> Introduction to Bayesian data analysis</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ch-introBDA.html"><a href="ch-introBDA.html#bayes-rule"><i class="fa fa-check"></i><b>2.1</b>  Bayes’ rule</a></li>
+<li class="chapter" data-level="2.2" data-path="ch-introBDA.html"><a href="ch-introBDA.html#sec-analytical"><i class="fa fa-check"></i><b>2.2</b> Deriving the  posterior using Bayes’ rule: An analytical example</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="ch-introBDA.html"><a href="ch-introBDA.html#choosing-a-likelihood"><i class="fa fa-check"></i><b>2.2.1</b> Choosing a  likelihood</a></li>
+<li class="chapter" data-level="2.2.2" data-path="ch-introBDA.html"><a href="ch-introBDA.html#sec-choosepriortheta"><i class="fa fa-check"></i><b>2.2.2</b> Choosing a  prior for <span class="math inline">\(\theta\)</span></a></li>
+<li class="chapter" data-level="2.2.3" data-path="ch-introBDA.html"><a href="ch-introBDA.html#using-bayes-rule-to-compute-the-posterior-pthetank"><i class="fa fa-check"></i><b>2.2.3</b> Using  Bayes’ rule to compute the  posterior <span class="math inline">\(p(\theta|n,k)\)</span></a></li>
 <li class="chapter" data-level="2.2.4" data-path="ch-introBDA.html"><a href="ch-introBDA.html#summary-of-the-procedure"><i class="fa fa-check"></i><b>2.2.4</b> Summary of the procedure</a></li>
 <li class="chapter" data-level="2.2.5" data-path="ch-introBDA.html"><a href="ch-introBDA.html#visualizing-the-prior-likelihood-and-posterior"><i class="fa fa-check"></i><b>2.2.5</b> Visualizing the prior, likelihood, and posterior</a></li>
-<li class="chapter" data-level="2.2.6" data-path="ch-introBDA.html"><a href="ch-introBDA.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.2.6</b> The posterior distribution is a compromise between the prior and the likelihood</a></li>
+<li class="chapter" data-level="2.2.6" data-path="ch-introBDA.html"><a href="ch-introBDA.html#the-posterior-distribution-is-a-compromise-between-the-prior-and-the-likelihood"><i class="fa fa-check"></i><b>2.2.6</b> The  posterior distribution is a compromise between the prior and the likelihood</a></li>
 <li class="chapter" data-level="2.2.7" data-path="ch-introBDA.html"><a href="ch-introBDA.html#incremental-knowledge-gain-using-prior-knowledge"><i class="fa fa-check"></i><b>2.2.7</b> Incremental knowledge gain using prior knowledge</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="ch-introBDA.html"><a href="ch-introBDA.html#summary-1"><i class="fa fa-check"></i><b>2.3</b> Summary</a></li>
@@ -922,22 +935,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="ch-introBDA.html"><a href="ch-introBDA.html#sec-BDAexercises"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>II Regression models with brms</b></span></li>
-<li class="chapter" data-level="3" data-path="ch-compbda.html"><a href="ch-compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a><ul>
-<li class="chapter" data-level="3.1" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-sampling"><i class="fa fa-check"></i><b>3.1</b> Deriving the posterior through sampling</a></li>
-<li class="chapter" data-level="3.2" data-path="ch-compbda.html"><a href="ch-compbda.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.2</b> Bayesian Regression Models using Stan: brms</a><ul>
+<li class="chapter" data-level="3" data-path="ch-compbda.html"><a href="ch-compbda.html"><i class="fa fa-check"></i><b>3</b> Computational Bayesian data analysis</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-sampling"><i class="fa fa-check"></i><b>3.1</b> Deriving the  posterior through  sampling</a></li>
+<li class="chapter" data-level="3.2" data-path="ch-compbda.html"><a href="ch-compbda.html#bayesian-regression-models-using-stan-brms"><i class="fa fa-check"></i><b>3.2</b>  Bayesian Regression Models using Stan:  brms</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-simplenormal"><i class="fa fa-check"></i><b>3.2.1</b> A simple linear model: A single subject pressing a button repeatedly (a finger tapping task)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-priorpred"><i class="fa fa-check"></i><b>3.3</b> Prior predictive distribution</a></li>
-<li class="chapter" data-level="3.4" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-sensitivity"><i class="fa fa-check"></i><b>3.4</b> The influence of priors: sensitivity analysis</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="ch-compbda.html"><a href="ch-compbda.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.4.1</b> Flat, uninformative priors</a></li>
-<li class="chapter" data-level="3.4.2" data-path="ch-compbda.html"><a href="ch-compbda.html#regularizing-priors"><i class="fa fa-check"></i><b>3.4.2</b> Regularizing priors</a></li>
-<li class="chapter" data-level="3.4.3" data-path="ch-compbda.html"><a href="ch-compbda.html#principled-priors"><i class="fa fa-check"></i><b>3.4.3</b> Principled priors</a></li>
-<li class="chapter" data-level="3.4.4" data-path="ch-compbda.html"><a href="ch-compbda.html#informative-priors"><i class="fa fa-check"></i><b>3.4.4</b> Informative priors</a></li>
+<li class="chapter" data-level="3.3" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-priorpred"><i class="fa fa-check"></i><b>3.3</b>  Prior predictive distribution</a></li>
+<li class="chapter" data-level="3.4" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-sensitivity"><i class="fa fa-check"></i><b>3.4</b> The influence of priors:  sensitivity analysis</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="ch-compbda.html"><a href="ch-compbda.html#flat-uninformative-priors"><i class="fa fa-check"></i><b>3.4.1</b>  Flat, uninformative priors</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ch-compbda.html"><a href="ch-compbda.html#regularizing-priors"><i class="fa fa-check"></i><b>3.4.2</b>  Regularizing priors</a></li>
+<li class="chapter" data-level="3.4.3" data-path="ch-compbda.html"><a href="ch-compbda.html#principled-priors"><i class="fa fa-check"></i><b>3.4.3</b>  Principled priors</a></li>
+<li class="chapter" data-level="3.4.4" data-path="ch-compbda.html"><a href="ch-compbda.html#informative-priors"><i class="fa fa-check"></i><b>3.4.4</b>  Informative priors</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-revisit"><i class="fa fa-check"></i><b>3.5</b> Revisiting the button-pressing example with different priors</a></li>
-<li class="chapter" data-level="3.6" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-ppd"><i class="fa fa-check"></i><b>3.6</b> Posterior predictive distribution</a></li>
-<li class="chapter" data-level="3.7" data-path="ch-compbda.html"><a href="ch-compbda.html#the-influence-of-the-likelihood"><i class="fa fa-check"></i><b>3.7</b> The influence of the likelihood</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-lnfirst"><i class="fa fa-check"></i><b>3.7.1</b> The log-normal likelihood</a></li>
+<li class="chapter" data-level="3.6" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-ppd"><i class="fa fa-check"></i><b>3.6</b>  Posterior predictive distribution</a></li>
+<li class="chapter" data-level="3.7" data-path="ch-compbda.html"><a href="ch-compbda.html#the-influence-of-the-likelihood"><i class="fa fa-check"></i><b>3.7</b> The influence of the likelihood</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-lnfirst"><i class="fa fa-check"></i><b>3.7.1</b> The  log-normal likelihood</a></li>
 <li class="chapter" data-level="3.7.2" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-lognormal"><i class="fa fa-check"></i><b>3.7.2</b> Using a log-normal likelihood to fit data from a single subject pressing a button repeatedly</a></li>
 </ul></li>
 <li class="chapter" data-level="3.8" data-path="ch-compbda.html"><a href="ch-compbda.html#list-of-the-most-important-commands"><i class="fa fa-check"></i><b>3.8</b> List of the most important commands</a></li>
@@ -945,257 +962,303 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.10" data-path="ch-compbda.html"><a href="ch-compbda.html#sec-ch3furtherreading"><i class="fa fa-check"></i><b>3.10</b> Further reading</a></li>
 <li class="chapter" data-level="3.11" data-path="ch-compbda.html"><a href="ch-compbda.html#ex:compbda"><i class="fa fa-check"></i><b>3.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a><ul>
-<li class="chapter" data-level="4.1" data-path="ch-reg.html"><a href="ch-reg.html#sec-pupil"><i class="fa fa-check"></i><b>4.1</b> A first linear regression: Does attentional load affect pupil size?</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="ch-reg.html"><a href="ch-reg.html#likelihood-and-priors"><i class="fa fa-check"></i><b>4.1.1</b> Likelihood and priors</a></li>
-<li class="chapter" data-level="4.1.2" data-path="ch-reg.html"><a href="ch-reg.html#the-brms-model"><i class="fa fa-check"></i><b>4.1.2</b> The <code>brms</code> model</a></li>
+<li class="chapter" data-level="4" data-path="ch-reg.html"><a href="ch-reg.html"><i class="fa fa-check"></i><b>4</b> Bayesian regression models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ch-reg.html"><a href="ch-reg.html#sec-pupil"><i class="fa fa-check"></i><b>4.1</b> A first  linear regression: Does attentional load affect pupil size?</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="ch-reg.html"><a href="ch-reg.html#likelihood-and-priors"><i class="fa fa-check"></i><b>4.1.1</b>  Likelihood and  priors</a></li>
+<li class="chapter" data-level="4.1.2" data-path="ch-reg.html"><a href="ch-reg.html#the-brms-model"><i class="fa fa-check"></i><b>4.1.2</b> The  <code>brms</code> model</a></li>
 <li class="chapter" data-level="4.1.3" data-path="ch-reg.html"><a href="ch-reg.html#how-to-communicate-the-results"><i class="fa fa-check"></i><b>4.1.3</b> How to communicate the results?</a></li>
 <li class="chapter" data-level="4.1.4" data-path="ch-reg.html"><a href="ch-reg.html#sec-pupiladq"><i class="fa fa-check"></i><b>4.1.4</b> Descriptive adequacy</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="ch-reg.html"><a href="ch-reg.html#sec-trial"><i class="fa fa-check"></i><b>4.2</b> Log-normal model: Does trial affect finger tapping times?</a><ul>
+<li class="chapter" data-level="4.2" data-path="ch-reg.html"><a href="ch-reg.html#sec-trial"><i class="fa fa-check"></i><b>4.2</b>  Log-normal model: Does trial affect response times?</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="ch-reg.html"><a href="ch-reg.html#likelihood-and-priors-for-the-log-normal-model"><i class="fa fa-check"></i><b>4.2.1</b> Likelihood and priors for the log-normal model</a></li>
-<li class="chapter" data-level="4.2.2" data-path="ch-reg.html"><a href="ch-reg.html#the-brms-model-1"><i class="fa fa-check"></i><b>4.2.2</b> The <code>brms</code> model</a></li>
+<li class="chapter" data-level="4.2.2" data-path="ch-reg.html"><a href="ch-reg.html#the-brms-model-1"><i class="fa fa-check"></i><b>4.2.2</b> The  <code>brms</code> model</a></li>
 <li class="chapter" data-level="4.2.3" data-path="ch-reg.html"><a href="ch-reg.html#how-to-communicate-the-results-1"><i class="fa fa-check"></i><b>4.2.3</b> How to communicate the results?</a></li>
 <li class="chapter" data-level="4.2.4" data-path="ch-reg.html"><a href="ch-reg.html#descriptive-adequacy"><i class="fa fa-check"></i><b>4.2.4</b> Descriptive adequacy</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="ch-reg.html"><a href="ch-reg.html#sec-logistic"><i class="fa fa-check"></i><b>4.3</b> Logistic regression: Does set size affect free recall?</a><ul>
+<li class="chapter" data-level="4.3" data-path="ch-reg.html"><a href="ch-reg.html#sec-logistic"><i class="fa fa-check"></i><b>4.3</b>  Logistic regression: Does  set size affect  free recall?</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="ch-reg.html"><a href="ch-reg.html#the-likelihood-for-the-logistic-regression-model"><i class="fa fa-check"></i><b>4.3.1</b> The likelihood for the logistic regression model</a></li>
 <li class="chapter" data-level="4.3.2" data-path="ch-reg.html"><a href="ch-reg.html#sec-priorslogisticregression"><i class="fa fa-check"></i><b>4.3.2</b> Priors for the logistic regression</a></li>
 <li class="chapter" data-level="4.3.3" data-path="ch-reg.html"><a href="ch-reg.html#the-brms-model-2"><i class="fa fa-check"></i><b>4.3.3</b> The <code>brms</code> model</a></li>
 <li class="chapter" data-level="4.3.4" data-path="ch-reg.html"><a href="ch-reg.html#sec-comlogis"><i class="fa fa-check"></i><b>4.3.4</b> How to communicate the results?</a></li>
-<li class="chapter" data-level="4.3.5" data-path="ch-reg.html"><a href="ch-reg.html#descriptive-adequacy-1"><i class="fa fa-check"></i><b>4.3.5</b> Descriptive adequacy</a></li>
+<li class="chapter" data-level="4.3.5" data-path="ch-reg.html"><a href="ch-reg.html#descriptive-adequacy-1"><i class="fa fa-check"></i><b>4.3.5</b>  Descriptive adequacy</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="ch-reg.html"><a href="ch-reg.html#summary-3"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
 <li class="chapter" data-level="4.5" data-path="ch-reg.html"><a href="ch-reg.html#sec-ch4furtherreading"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
 <li class="chapter" data-level="4.6" data-path="ch-reg.html"><a href="ch-reg.html#sec-LMexercises"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a><ul>
+<li class="chapter" data-level="5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html"><i class="fa fa-check"></i><b>5</b> Bayesian hierarchical models</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#exchangeability-and-hierarchical-models"><i class="fa fa-check"></i><b>5.1</b> Exchangeability and hierarchical models</a></li>
-<li class="chapter" data-level="5.2" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-N400hierarchical"><i class="fa fa-check"></i><b>5.2</b> A hierarchical model with a normal likelihood: The N400 effect</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-Mcp"><i class="fa fa-check"></i><b>5.2.1</b> Complete pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
-<li class="chapter" data-level="5.2.2" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.2.2</b> No pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
-<li class="chapter" data-level="5.2.3" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-uncorrelated"><i class="fa fa-check"></i><b>5.2.3</b> Varying intercepts and varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
+<li class="chapter" data-level="5.2" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-N400hierarchical"><i class="fa fa-check"></i><b>5.2</b> A hierarchical model with a normal likelihood: The N400 effect</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-Mcp"><i class="fa fa-check"></i><b>5.2.1</b>  Complete pooling model (<span class="math inline">\(M_{cp}\)</span>)</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#no-pooling-model-m_np"><i class="fa fa-check"></i><b>5.2.2</b>  No pooling model (<span class="math inline">\(M_{np}\)</span>)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-uncorrelated"><i class="fa fa-check"></i><b>5.2.3</b>  Varying intercepts and  varying slopes model (<span class="math inline">\(M_{v}\)</span>)</a></li>
 <li class="chapter" data-level="5.2.4" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-mcvivs"><i class="fa fa-check"></i><b>5.2.4</b> Correlated varying intercept varying slopes model (<span class="math inline">\(M_{h}\)</span>)</a></li>
 <li class="chapter" data-level="5.2.5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-sih"><i class="fa fa-check"></i><b>5.2.5</b> By-subjects and by-items correlated varying intercept varying slopes model (<span class="math inline">\(M_{sih}\)</span>)</a></li>
 <li class="chapter" data-level="5.2.6" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-distrmodel"><i class="fa fa-check"></i><b>5.2.6</b> Beyond the maximal model–Distributional regression models</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-stroop"><i class="fa fa-check"></i><b>5.3</b> A hierarchical log-normal model: The Stroop effect</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.3.1</b> A correlated varying intercept varying slopes log-normal model</a></li>
+<li class="chapter" data-level="5.3" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-stroop"><i class="fa fa-check"></i><b>5.3</b> A  hierarchical log-normal model: The  Stroop effect</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#a-correlated-varying-intercept-varying-slopes-log-normal-model"><i class="fa fa-check"></i><b>5.3.1</b> A correlated varying intercept varying slopes  log-normal model</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#why-fitting-a-bayesian-hierarchical-model-is-worth-the-effort"><i class="fa fa-check"></i><b>5.4</b> Why fitting a Bayesian hierarchical model is worth the effort</a></li>
 <li class="chapter" data-level="5.5" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#summary-4"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
 <li class="chapter" data-level="5.6" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#further-reading-2"><i class="fa fa-check"></i><b>5.6</b> Further reading</a></li>
 <li class="chapter" data-level="5.7" data-path="ch-hierarchical.html"><a href="ch-hierarchical.html#sec-HLMexercises"><i class="fa fa-check"></i><b>5.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="ch-priors.html"><a href="ch-priors.html"><i class="fa fa-check"></i><b>6</b> The Art and Science of Prior Elicitation</a><ul>
-<li class="chapter" data-level="6.1" data-path="ch-priors.html"><a href="ch-priors.html#sec-simpleexamplepriors"><i class="fa fa-check"></i><b>6.1</b> Eliciting priors from oneself for a self-paced reading study: A simple example</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="ch-priors.html"><a href="ch-priors.html#an-example-english-relative-clauses"><i class="fa fa-check"></i><b>6.1.1</b> An example: English relative clauses</a></li>
+<li class="chapter" data-level="6" data-path="ch-priors.html"><a href="ch-priors.html"><i class="fa fa-check"></i><b>6</b> The Art and Science of  Prior Elicitation</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ch-priors.html"><a href="ch-priors.html#sec-simpleexamplepriors"><i class="fa fa-check"></i><b>6.1</b> Eliciting priors from oneself for a self-paced reading study: A simple example</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="ch-priors.html"><a href="ch-priors.html#an-example-english-relative-clauses"><i class="fa fa-check"></i><b>6.1.1</b> An example: English  relative clauses</a></li>
 <li class="chapter" data-level="6.1.2" data-path="ch-priors.html"><a href="ch-priors.html#eliciting-a-prior-for-the-intercept"><i class="fa fa-check"></i><b>6.1.2</b> Eliciting a prior for the intercept</a></li>
 <li class="chapter" data-level="6.1.3" data-path="ch-priors.html"><a href="ch-priors.html#eliciting-a-prior-for-the-slope"><i class="fa fa-check"></i><b>6.1.3</b> Eliciting a prior for the slope</a></li>
-<li class="chapter" data-level="6.1.4" data-path="ch-priors.html"><a href="ch-priors.html#sec-varcomppriors"><i class="fa fa-check"></i><b>6.1.4</b> Eliciting priors for the variance components</a></li>
+<li class="chapter" data-level="6.1.4" data-path="ch-priors.html"><a href="ch-priors.html#sec-varcomppriors"><i class="fa fa-check"></i><b>6.1.4</b> Eliciting priors for the  variance components</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="ch-priors.html"><a href="ch-priors.html#eliciting-priors-from-experts"><i class="fa fa-check"></i><b>6.2</b> Eliciting priors from experts</a></li>
-<li class="chapter" data-level="6.3" data-path="ch-priors.html"><a href="ch-priors.html#deriving-priors-from-meta-analyses"><i class="fa fa-check"></i><b>6.3</b> Deriving priors from meta-analyses</a></li>
-<li class="chapter" data-level="6.4" data-path="ch-priors.html"><a href="ch-priors.html#using-previous-experiments-posteriors-as-priors-for-a-new-study"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’ posteriors as priors for a new study</a></li>
+<li class="chapter" data-level="6.2" data-path="ch-priors.html"><a href="ch-priors.html#eliciting-priors-from-experts"><i class="fa fa-check"></i><b>6.2</b>  Eliciting priors from experts</a></li>
+<li class="chapter" data-level="6.3" data-path="ch-priors.html"><a href="ch-priors.html#deriving-priors-from-meta-analyses"><i class="fa fa-check"></i><b>6.3</b> Deriving priors from  meta-analyses</a></li>
+<li class="chapter" data-level="6.4" data-path="ch-priors.html"><a href="ch-priors.html#using-previous-experiments-posteriors-as-priors-for-a-new-study"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’  posteriors as priors for a new study</a></li>
 <li class="chapter" data-level="6.5" data-path="ch-priors.html"><a href="ch-priors.html#summary-5"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
 <li class="chapter" data-level="6.6" data-path="ch-priors.html"><a href="ch-priors.html#further-reading-3"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a><ul>
-<li class="chapter" data-level="7.1" data-path="ch-workflow.html"><a href="ch-workflow.html#model-building"><i class="fa fa-check"></i><b>7.1</b> Model building</a></li>
-<li class="chapter" data-level="7.2" data-path="ch-workflow.html"><a href="ch-workflow.html#principled-questions-on-a-model"><i class="fa fa-check"></i><b>7.2</b> Principled questions on a model</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#prior-predictive-checks-checking-consistency-with-domain-expertise"><i class="fa fa-check"></i><b>7.2.1</b> Prior predictive checks: Checking consistency with domain expertise</a></li>
-<li class="chapter" data-level="7.2.2" data-path="ch-workflow.html"><a href="ch-workflow.html#computational-faithfulness-testing-for-correct-posterior-approximations"><i class="fa fa-check"></i><b>7.2.2</b> Computational faithfulness: Testing for correct posterior approximations</a></li>
-<li class="chapter" data-level="7.2.3" data-path="ch-workflow.html"><a href="ch-workflow.html#model-sensitivity"><i class="fa fa-check"></i><b>7.2.3</b> Model sensitivity</a></li>
-<li class="chapter" data-level="7.2.4" data-path="ch-workflow.html"><a href="ch-workflow.html#posterior-predictive-checks-does-the-model-adequately-capture-the-data"><i class="fa fa-check"></i><b>7.2.4</b> Posterior predictive checks: Does the model adequately capture the data?</a></li>
+<li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ch-workflow.html"><a href="ch-workflow.html#building-a-model"><i class="fa fa-check"></i><b>7.1</b>  Building a model</a></li>
+<li class="chapter" data-level="7.2" data-path="ch-workflow.html"><a href="ch-workflow.html#principled-questions-to-ask-on-a-model"><i class="fa fa-check"></i><b>7.2</b> Principled questions to ask on a model</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#checking-whether-assumptions-are-consist-with-domain-expertise-prior-predictive-checks"><i class="fa fa-check"></i><b>7.2.1</b>  Checking whether assumptions are consist with  domain expertise: Prior predictive checks</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ch-workflow.html"><a href="ch-workflow.html#testing-for-correct-posterior-approximations-checks-of-computational-faithfulness"><i class="fa fa-check"></i><b>7.2.2</b>  Testing for correct posterior approximations: Checks of computational faithfulness</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ch-workflow.html"><a href="ch-workflow.html#sensitivity-of-the-model"><i class="fa fa-check"></i><b>7.2.3</b>  Sensitivity of the model</a></li>
+<li class="chapter" data-level="7.2.4" data-path="ch-workflow.html"><a href="ch-workflow.html#does-the-model-adequately-capture-the-dataposterior-predictive-checks"><i class="fa fa-check"></i><b>7.2.4</b>  Does the model adequately capture the data?–Posterior predictive checks</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="ch-workflow.html"><a href="ch-workflow.html#exemplary-data-analysis"><i class="fa fa-check"></i><b>7.3</b> Exemplary data analysis</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="ch-workflow.html"><a href="ch-workflow.html#prior-predictive-checks"><i class="fa fa-check"></i><b>7.3.1</b> Prior predictive checks</a></li>
-<li class="chapter" data-level="7.3.2" data-path="ch-workflow.html"><a href="ch-workflow.html#adjusting-priors"><i class="fa fa-check"></i><b>7.3.2</b> Adjusting priors</a></li>
-<li class="chapter" data-level="7.3.3" data-path="ch-workflow.html"><a href="ch-workflow.html#computational-faithfulness-and-model-sensitivity"><i class="fa fa-check"></i><b>7.3.3</b> Computational faithfulness and model sensitivity</a></li>
-<li class="chapter" data-level="7.3.4" data-path="ch-workflow.html"><a href="ch-workflow.html#posterior-predictive-checks-model-adequacy"><i class="fa fa-check"></i><b>7.3.4</b> Posterior predictive checks: Model adequacy</a></li>
+<li class="chapter" data-level="7.3" data-path="ch-workflow.html"><a href="ch-workflow.html#further-reading-4"><i class="fa fa-check"></i><b>7.3</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="ch-workflow.html"><a href="ch-workflow.html#summary-6"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
-<li class="chapter" data-level="7.5" data-path="ch-workflow.html"><a href="ch-workflow.html#further-reading-4"><i class="fa fa-check"></i><b>7.5</b> Further reading</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>8</b> Contrast coding</a><ul>
-<li class="chapter" data-level="8.1" data-path="ch-contr.html"><a href="ch-contr.html#basic-concepts-illustrated-using-a-two-level-factor"><i class="fa fa-check"></i><b>8.1</b> Basic concepts illustrated using a two-level factor</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="ch-contr.html"><a href="ch-contr.html#treatmentcontrasts"><i class="fa fa-check"></i><b>8.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="8" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>8</b>  Contrast coding</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="ch-contr.html"><a href="ch-contr.html#basic-concepts-illustrated-using-a-two-level-factor"><i class="fa fa-check"></i><b>8.1</b> Basic concepts illustrated using a two-level factor</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="ch-contr.html"><a href="ch-contr.html#treatmentcontrasts"><i class="fa fa-check"></i><b>8.1.1</b> Default contrast coding:  Treatment contrasts</a></li>
 <li class="chapter" data-level="8.1.2" data-path="ch-contr.html"><a href="ch-contr.html#inverseMatrix"><i class="fa fa-check"></i><b>8.1.2</b> Defining comparisons</a></li>
-<li class="chapter" data-level="8.1.3" data-path="ch-contr.html"><a href="ch-contr.html#effectcoding"><i class="fa fa-check"></i><b>8.1.3</b> Sum contrasts</a></li>
-<li class="chapter" data-level="8.1.4" data-path="ch-contr.html"><a href="ch-contr.html#sec-cellMeans"><i class="fa fa-check"></i><b>8.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+<li class="chapter" data-level="8.1.3" data-path="ch-contr.html"><a href="ch-contr.html#effectcoding"><i class="fa fa-check"></i><b>8.1.3</b>  Sum contrasts</a></li>
+<li class="chapter" data-level="8.1.4" data-path="ch-contr.html"><a href="ch-contr.html#sec-cellMeans"><i class="fa fa-check"></i><b>8.1.4</b>  Cell means parameterization and  posterior comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix-illustrated-with-a-three-level-factor"><i class="fa fa-check"></i><b>8.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="ch-contr.html"><a href="ch-contr.html#sumcontrasts"><i class="fa fa-check"></i><b>8.2.1</b> Sum contrasts</a></li>
-<li class="chapter" data-level="8.2.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>8.2.2</b> The hypothesis matrix</a></li>
-<li class="chapter" data-level="8.2.3" data-path="ch-contr.html"><a href="ch-contr.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>8.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+<li class="chapter" data-level="8.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix-illustrated-with-a-three-level-factor"><i class="fa fa-check"></i><b>8.2</b> The hypothesis matrix illustrated with a three-level factor</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="ch-contr.html"><a href="ch-contr.html#sumcontrasts"><i class="fa fa-check"></i><b>8.2.1</b>  Sum contrasts</a></li>
+<li class="chapter" data-level="8.2.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>8.2.2</b> The  hypothesis matrix</a></li>
+<li class="chapter" data-level="8.2.3" data-path="ch-contr.html"><a href="ch-contr.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>8.2.3</b> Generating contrasts: The  <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="ch-contr.html"><a href="ch-contr.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="8.3.2" data-path="ch-contr.html"><a href="ch-contr.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b> Helmert contrasts</a></li>
-<li class="chapter" data-level="8.3.3" data-path="ch-contr.html"><a href="ch-contr.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="8.3.4" data-path="ch-contr.html"><a href="ch-contr.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b> Polynomial contrasts</a></li>
-<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts: monotonic effects</a></li>
+<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="ch-contr.html"><a href="ch-contr.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b>  Repeated contrasts</a></li>
+<li class="chapter" data-level="8.3.2" data-path="ch-contr.html"><a href="ch-contr.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b>  Helmert contrasts</a></li>
+<li class="chapter" data-level="8.3.3" data-path="ch-contr.html"><a href="ch-contr.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or  model matrix</a></li>
+<li class="chapter" data-level="8.3.4" data-path="ch-contr.html"><a href="ch-contr.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b>  Polynomial contrasts</a></li>
+<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts:  monotonic effects</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="ch-contr.html"><a href="ch-contr.html#nonOrthogonal"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="ch-contr.html"><a href="ch-contr.html#centered-contrasts"><i class="fa fa-check"></i><b>8.4.1</b> Centered contrasts</a></li>
-<li class="chapter" data-level="8.4.2" data-path="ch-contr.html"><a href="ch-contr.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>8.4.2</b> Orthogonal contrasts</a></li>
-<li class="chapter" data-level="8.4.3" data-path="ch-contr.html"><a href="ch-contr.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>8.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+<li class="chapter" data-level="8.4" data-path="ch-contr.html"><a href="ch-contr.html#nonOrthogonal"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="ch-contr.html"><a href="ch-contr.html#centered-contrasts"><i class="fa fa-check"></i><b>8.4.1</b>  Centered contrasts</a></li>
+<li class="chapter" data-level="8.4.2" data-path="ch-contr.html"><a href="ch-contr.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>8.4.2</b>  Orthogonal contrasts</a></li>
+<li class="chapter" data-level="8.4.3" data-path="ch-contr.html"><a href="ch-contr.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>8.4.3</b> The role of the  intercept in  non-centered contrasts</a></li>
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="ch-contr.html"><a href="ch-contr.html#computing-condition-means-from-estimated-contrasts"><i class="fa fa-check"></i><b>8.5</b> Computing condition means from estimated contrasts</a></li>
-<li class="chapter" data-level="8.6" data-path="ch-contr.html"><a href="ch-contr.html#summary-7"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
+<li class="chapter" data-level="8.6" data-path="ch-contr.html"><a href="ch-contr.html#summary-6"><i class="fa fa-check"></i><b>8.6</b> Summary</a></li>
 <li class="chapter" data-level="8.7" data-path="ch-contr.html"><a href="ch-contr.html#further-reading-5"><i class="fa fa-check"></i><b>8.7</b> Further reading</a></li>
 <li class="chapter" data-level="8.8" data-path="ch-contr.html"><a href="ch-contr.html#sec-Contrastsexercises"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a><ul>
-<li class="chapter" data-level="9.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-MR-ANOVA"><i class="fa fa-check"></i><b>9.1</b> Contrast coding in a factorial <span class="math inline">\(2 \times 2\)</span> design</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#nestedEffects"><i class="fa fa-check"></i><b>9.1.1</b> Nested effects</a></li>
-<li class="chapter" data-level="9.1.2" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>9.1.2</b> Interactions between contrasts</a></li>
+<li class="chapter" data-level="9" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>9</b> Contrast coding for designs with two predictor variables</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-MR-ANOVA"><i class="fa fa-check"></i><b>9.1</b> Contrast coding in a factorial  <span class="math inline">\(2 \times 2\)</span> design</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#nestedEffects"><i class="fa fa-check"></i><b>9.1.1</b>  Nested effects</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>9.1.2</b>  Interactions between contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-contrast-covariate"><i class="fa fa-check"></i><b>9.2</b> One factor and one covariate</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>9.2.1</b> Estimating a group difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="9.2" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-contrast-covariate"><i class="fa fa-check"></i><b>9.2</b> One factor and one  covariate</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>9.2.1</b> Estimating a  group difference and controlling for a covariate</a></li>
 <li class="chapter" data-level="9.2.2" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>9.2.2</b> Estimating differences in slopes</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-interactions-NLM"><i class="fa fa-check"></i><b>9.3</b> Interactions in generalized linear models (with non-linear link functions) and non-linear models</a></li>
-<li class="chapter" data-level="9.4" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#summary-8"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.4" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#summary-7"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#further-reading-6"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 <li class="chapter" data-level="9.6" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html#sec-Contrasts2x2exercises"><i class="fa fa-check"></i><b>9.6</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>III Advanced models with Stan</b></span></li>
-<li class="chapter" data-level="10" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>10</b> Introduction to the probabilistic programming language Stan</a><ul>
+<li class="chapter" data-level="10" data-path="ch-introstan.html"><a href="ch-introstan.html"><i class="fa fa-check"></i><b>10</b> Introduction to the probabilistic programming language Stan</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="ch-introstan.html"><a href="ch-introstan.html#stan-syntax"><i class="fa fa-check"></i><b>10.1</b> Stan syntax</a></li>
-<li class="chapter" data-level="10.2" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-firststan"><i class="fa fa-check"></i><b>10.2</b> A first simple example with Stan: Normal likelihood</a></li>
-<li class="chapter" data-level="10.3" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-clozestan"><i class="fa fa-check"></i><b>10.3</b> Another simple example: Cloze probability with Stan with the binomial likelihood</a></li>
-<li class="chapter" data-level="10.4" data-path="ch-introstan.html"><a href="ch-introstan.html#regression-models-in-stan"><i class="fa fa-check"></i><b>10.4</b> Regression models in Stan</a><ul>
-<li class="chapter" data-level="10.4.1" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-pupilstan"><i class="fa fa-check"></i><b>10.4.1</b> A first linear regression in Stan: Does attentional load affect pupil size?</a></li>
-<li class="chapter" data-level="10.4.2" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-interstan"><i class="fa fa-check"></i><b>10.4.2</b> Interactions in Stan: Does attentional load interact with trial number affecting pupil size?</a></li>
-<li class="chapter" data-level="10.4.3" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-logisticstan"><i class="fa fa-check"></i><b>10.4.3</b> Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
+<li class="chapter" data-level="10.2" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-firststan"><i class="fa fa-check"></i><b>10.2</b> A first simple example with Stan:  Normal likelihood</a></li>
+<li class="chapter" data-level="10.3" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-clozestan"><i class="fa fa-check"></i><b>10.3</b> Another simple example:  Cloze probability with Stan with the  binomial likelihood</a></li>
+<li class="chapter" data-level="10.4" data-path="ch-introstan.html"><a href="ch-introstan.html#regression-models-in-stan"><i class="fa fa-check"></i><b>10.4</b>  Regression models in Stan</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-pupilstan"><i class="fa fa-check"></i><b>10.4.1</b> A first  linear regression in Stan: Does attentional load affect  pupil size?</a></li>
+<li class="chapter" data-level="10.4.2" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-interstan"><i class="fa fa-check"></i><b>10.4.2</b>  Interactions in Stan: Does attentional load interact with trial number affecting  pupil size?</a></li>
+<li class="chapter" data-level="10.4.3" data-path="ch-introstan.html"><a href="ch-introstan.html#sec-logisticstan"><i class="fa fa-check"></i><b>10.4.3</b>  Logistic regression in Stan: Does set size and trial affect free recall?</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="ch-introstan.html"><a href="ch-introstan.html#summary-9"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
+<li class="chapter" data-level="10.5" data-path="ch-introstan.html"><a href="ch-introstan.html#summary-8"><i class="fa fa-check"></i><b>10.5</b> Summary</a></li>
 <li class="chapter" data-level="10.6" data-path="ch-introstan.html"><a href="ch-introstan.html#further-reading-7"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
 <li class="chapter" data-level="10.7" data-path="ch-introstan.html"><a href="ch-introstan.html#exercises"><i class="fa fa-check"></i><b>10.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>11</b> Complex models and reparameterization</a><ul>
-<li class="chapter" data-level="11.1" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-hierstan"><i class="fa fa-check"></i><b>11.1</b> Hierarchical models with Stan</a><ul>
+<li class="chapter" data-level="11" data-path="ch-complexstan.html"><a href="ch-complexstan.html"><i class="fa fa-check"></i><b>11</b> Hierarchical models and reparameterization </a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-hierstan"><i class="fa fa-check"></i><b>11.1</b> Hierarchical models with Stan</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="ch-complexstan.html"><a href="ch-complexstan.html#varying-intercept-model-with-stan"><i class="fa fa-check"></i><b>11.1.1</b> Varying intercept model with Stan</a></li>
-<li class="chapter" data-level="11.1.2" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-uncorrstan"><i class="fa fa-check"></i><b>11.1.2</b> Uncorrelated varying intercept and slopes model with Stan</a></li>
-<li class="chapter" data-level="11.1.3" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-corrstan"><i class="fa fa-check"></i><b>11.1.3</b> Correlated varying intercept varying slopes model</a></li>
+<li class="chapter" data-level="11.1.2" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-uncorrstan"><i class="fa fa-check"></i><b>11.1.2</b> Uncorrelated  varying intercept and slopes model with Stan</a></li>
+<li class="chapter" data-level="11.1.3" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-corrstan"><i class="fa fa-check"></i><b>11.1.3</b>  Correlated varying intercept varying slopes model</a></li>
 <li class="chapter" data-level="11.1.4" data-path="ch-complexstan.html"><a href="ch-complexstan.html#sec-crosscorrstan"><i class="fa fa-check"></i><b>11.1.4</b> By-subject and by-items correlated varying intercept varying slopes model</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="ch-complexstan.html"><a href="ch-complexstan.html#summary-10"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
+<li class="chapter" data-level="11.2" data-path="ch-complexstan.html"><a href="ch-complexstan.html#summary-9"><i class="fa fa-check"></i><b>11.2</b> Summary</a></li>
 <li class="chapter" data-level="11.3" data-path="ch-complexstan.html"><a href="ch-complexstan.html#further-reading-8"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
 <li class="chapter" data-level="11.4" data-path="ch-complexstan.html"><a href="ch-complexstan.html#exercises-1"><i class="fa fa-check"></i><b>11.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a><ul>
-<li class="chapter" data-level="12.1" data-path="ch-custom.html"><a href="ch-custom.html#sec-change"><i class="fa fa-check"></i><b>12.1</b> A change of variables with the reciprocal normal distribution</a><ul>
+<li class="chapter" data-level="12" data-path="ch-custom.html"><a href="ch-custom.html"><i class="fa fa-check"></i><b>12</b> Custom distributions in Stan</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="ch-custom.html"><a href="ch-custom.html#sec-change"><i class="fa fa-check"></i><b>12.1</b> A change of variables with the reciprocal normal distribution</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="ch-custom.html"><a href="ch-custom.html#scaling-a-probability-density-with-the-jacobian-adjustment"><i class="fa fa-check"></i><b>12.1.1</b> Scaling a probability density with the Jacobian adjustment</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="ch-custom.html"><a href="ch-custom.html#sec-validSBC"><i class="fa fa-check"></i><b>12.2</b> Validation of a computed posterior distribution</a><ul>
-<li class="chapter" data-level="12.2.1" data-path="ch-custom.html"><a href="ch-custom.html#the-simulation-based-calibration-procedure"><i class="fa fa-check"></i><b>12.2.1</b> The simulation-based calibration procedure</a></li>
-<li class="chapter" data-level="12.2.2" data-path="ch-custom.html"><a href="ch-custom.html#simulation-based-calibration-revealing-a-problem"><i class="fa fa-check"></i><b>12.2.2</b> Simulation-based calibration revealing a problem</a></li>
-<li class="chapter" data-level="12.2.3" data-path="ch-custom.html"><a href="ch-custom.html#issues-and-limitation-of-simulation-based-calibration"><i class="fa fa-check"></i><b>12.2.3</b> Issues and limitation of simulation-based calibration</a></li>
+<li class="chapter" data-level="12.2" data-path="ch-custom.html"><a href="ch-custom.html#sec-validSBC"><i class="fa fa-check"></i><b>12.2</b>  Validation of a computed posterior distribution</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="ch-custom.html"><a href="ch-custom.html#the-simulation-based-calibration-procedure"><i class="fa fa-check"></i><b>12.2.1</b> The  simulation-based calibration procedure</a></li>
+<li class="chapter" data-level="12.2.2" data-path="ch-custom.html"><a href="ch-custom.html#an-example-where-simulation-based-calibration-reveals-a-problem"><i class="fa fa-check"></i><b>12.2.2</b> An example where simulation-based calibration reveals a problem</a></li>
+<li class="chapter" data-level="12.2.3" data-path="ch-custom.html"><a href="ch-custom.html#issues-with-and-limitations-of-simulation-based-calibration"><i class="fa fa-check"></i><b>12.2.3</b> Issues with and limitations of simulation-based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-re-implementing-the-exponential-distribution-manually"><i class="fa fa-check"></i><b>12.3</b> Another custom distribution: Re-implementing the exponential distribution manually</a></li>
-<li class="chapter" data-level="12.4" data-path="ch-custom.html"><a href="ch-custom.html#summary-11"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
+<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-re-implementing-the-exponential-distribution-manually"><i class="fa fa-check"></i><b>12.3</b> Another  custom distribution: Re-implementing the  exponential distribution manually</a></li>
+<li class="chapter" data-level="12.4" data-path="ch-custom.html"><a href="ch-custom.html#summary-10"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
 <li class="chapter" data-level="12.5" data-path="ch-custom.html"><a href="ch-custom.html#further-reading-9"><i class="fa fa-check"></i><b>12.5</b> Further reading</a></li>
 <li class="chapter" data-level="12.6" data-path="ch-custom.html"><a href="ch-custom.html#sec-customexercises"><i class="fa fa-check"></i><b>12.6</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>IV Evidence synthesis and measurements with error</b></span></li>
-<li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b> Meta-analysis and measurement error models</a><ul>
-<li class="chapter" data-level="13.1" data-path="ch-remame.html"><a href="ch-remame.html#meta-analysis"><i class="fa fa-check"></i><b>13.1</b> Meta-analysis</a><ul>
+<li class="chapter" data-level="13" data-path="ch-remame.html"><a href="ch-remame.html"><i class="fa fa-check"></i><b>13</b>  Meta-analysis and  measurement error models</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ch-remame.html"><a href="ch-remame.html#meta-analysis"><i class="fa fa-check"></i><b>13.1</b> Meta-analysis</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="ch-remame.html"><a href="ch-remame.html#a-meta-analysis-of-similarity-based-interference-in-sentence-comprehension"><i class="fa fa-check"></i><b>13.1.1</b> A meta-analysis of similarity-based interference in sentence comprehension</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="ch-remame.html"><a href="ch-remame.html#measurement-error-models"><i class="fa fa-check"></i><b>13.2</b> Measurement-error models</a><ul>
+<li class="chapter" data-level="13.2" data-path="ch-remame.html"><a href="ch-remame.html#measurement-error-models"><i class="fa fa-check"></i><b>13.2</b>  Measurement-error models</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="ch-remame.html"><a href="ch-remame.html#accounting-for-measurement-error-in-individual-differences-in-working-memory-capacity-and-reading-fluency"><i class="fa fa-check"></i><b>13.2.1</b> Accounting for measurement error in individual differences in working memory capacity and reading fluency</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="ch-remame.html"><a href="ch-remame.html#summary-12"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
+<li class="chapter" data-level="13.3" data-path="ch-remame.html"><a href="ch-remame.html#summary-11"><i class="fa fa-check"></i><b>13.3</b> Summary</a></li>
 <li class="chapter" data-level="13.4" data-path="ch-remame.html"><a href="ch-remame.html#further-reading-10"><i class="fa fa-check"></i><b>13.4</b> Further reading</a></li>
 <li class="chapter" data-level="13.5" data-path="ch-remame.html"><a href="ch-remame.html#sec-REMAMEexercises"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>V Model comparison and hypothesis testing</b></span></li>
-<li class="chapter" data-level="14" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>14</b> Introduction to model comparison</a><ul>
-<li class="chapter" data-level="14.1" data-path="ch-comparison.html"><a href="ch-comparison.html#further-reading-11"><i class="fa fa-check"></i><b>14.1</b> Further reading</a></li>
+<li class="part"><span><b>V Model comparison</b></span></li>
+<li class="chapter" data-level="14" data-path="ch-comparison.html"><a href="ch-comparison.html"><i class="fa fa-check"></i><b>14</b> Introduction to model comparison</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="ch-comparison.html"><a href="ch-comparison.html#prior-predictive-vs.-posterior-predictive-model-comparison"><i class="fa fa-check"></i><b>14.1</b> Prior predictive vs. posterior predictive model comparison</a></li>
+<li class="chapter" data-level="14.2" data-path="ch-comparison.html"><a href="ch-comparison.html#some-important-points-to-consider-when-comparing-models"><i class="fa fa-check"></i><b>14.2</b> Some important points to consider when comparing models</a></li>
+<li class="chapter" data-level="14.3" data-path="ch-comparison.html"><a href="ch-comparison.html#further-reading-11"><i class="fa fa-check"></i><b>14.3</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>15</b> Bayes factors</a><ul>
-<li class="chapter" data-level="15.1" data-path="ch-bf.html"><a href="ch-bf.html#hypothesis-testing-using-the-bayes-factor"><i class="fa fa-check"></i><b>15.1</b> Hypothesis testing using the Bayes factor</a><ul>
+<li class="chapter" data-level="15" data-path="ch-bf.html"><a href="ch-bf.html"><i class="fa fa-check"></i><b>15</b> Bayes factors</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="ch-bf.html"><a href="ch-bf.html#hypothesis-testing-using-the-bayes-factor"><i class="fa fa-check"></i><b>15.1</b> Hypothesis testing using the Bayes factor</a>
+<ul>
 <li class="chapter" data-level="15.1.1" data-path="ch-bf.html"><a href="ch-bf.html#marginal-likelihood"><i class="fa fa-check"></i><b>15.1.1</b> Marginal likelihood</a></li>
 <li class="chapter" data-level="15.1.2" data-path="ch-bf.html"><a href="ch-bf.html#bayes-factor"><i class="fa fa-check"></i><b>15.1.2</b> Bayes factor</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="ch-bf.html"><a href="ch-bf.html#sec-N400BF"><i class="fa fa-check"></i><b>15.2</b> Examining the N400 effect with Bayes factor</a><ul>
+<li class="chapter" data-level="15.2" data-path="ch-bf.html"><a href="ch-bf.html#sec-N400BF"><i class="fa fa-check"></i><b>15.2</b> Examining the N400 effect with Bayes factor</a>
+<ul>
 <li class="chapter" data-level="15.2.1" data-path="ch-bf.html"><a href="ch-bf.html#sensitivity-analysis-1"><i class="fa fa-check"></i><b>15.2.1</b> Sensitivity analysis</a></li>
-<li class="chapter" data-level="15.2.2" data-path="ch-bf.html"><a href="ch-bf.html#sec-BFnonnested"><i class="fa fa-check"></i><b>15.2.2</b> Non-nested models</a></li>
+<li class="chapter" data-level="15.2.2" data-path="ch-bf.html"><a href="ch-bf.html#sec-BFnonnested"><i class="fa fa-check"></i><b>15.2.2</b>  Non-nested models</a></li>
 </ul></li>
 <li class="chapter" data-level="15.3" data-path="ch-bf.html"><a href="ch-bf.html#the-influence-of-the-priors-on-bayes-factors-beyond-the-effect-of-interest"><i class="fa fa-check"></i><b>15.3</b> The influence of the priors on Bayes factors: beyond the effect of interest</a></li>
-<li class="chapter" data-level="15.4" data-path="ch-bf.html"><a href="ch-bf.html#sec-stanBF"><i class="fa fa-check"></i><b>15.4</b> Bayes factor in Stan</a></li>
-<li class="chapter" data-level="15.5" data-path="ch-bf.html"><a href="ch-bf.html#bayes-factors-in-theory-and-in-practice"><i class="fa fa-check"></i><b>15.5</b> Bayes factors in theory and in practice</a><ul>
-<li class="chapter" data-level="15.5.1" data-path="ch-bf.html"><a href="ch-bf.html#bayes-factors-in-theory-stability-and-accuracy"><i class="fa fa-check"></i><b>15.5.1</b> Bayes factors in theory: Stability and accuracy</a></li>
+<li class="chapter" data-level="15.4" data-path="ch-bf.html"><a href="ch-bf.html#sec-stanBF"><i class="fa fa-check"></i><b>15.4</b>  Bayes factor in Stan</a></li>
+<li class="chapter" data-level="15.5" data-path="ch-bf.html"><a href="ch-bf.html#bayes-factors-in-theory-and-in-practice"><i class="fa fa-check"></i><b>15.5</b> Bayes factors in theory and in practice</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="ch-bf.html"><a href="ch-bf.html#bayes-factors-in-theory-stability-and-accuracy"><i class="fa fa-check"></i><b>15.5.1</b> Bayes factors in theory: Stability and  accuracy</a></li>
 <li class="chapter" data-level="15.5.2" data-path="ch-bf.html"><a href="ch-bf.html#sec-BFvar"><i class="fa fa-check"></i><b>15.5.2</b> Bayes factors in practice: Variability with the data</a></li>
 <li class="chapter" data-level="15.5.3" data-path="ch-bf.html"><a href="ch-bf.html#sec-caution"><i class="fa fa-check"></i><b>15.5.3</b> A cautionary note about Bayes factors</a></li>
 </ul></li>
-<li class="chapter" data-level="15.6" data-path="ch-bf.html"><a href="ch-bf.html#summary-13"><i class="fa fa-check"></i><b>15.6</b> Summary</a></li>
-<li class="chapter" data-level="15.7" data-path="ch-bf.html"><a href="ch-bf.html#further-reading-12"><i class="fa fa-check"></i><b>15.7</b> Further reading</a></li>
-<li class="chapter" data-level="15.8" data-path="ch-bf.html"><a href="ch-bf.html#exercises-2"><i class="fa fa-check"></i><b>15.8</b> Exercises</a></li>
+<li class="chapter" data-level="15.6" data-path="ch-bf.html"><a href="ch-bf.html#sample-size-determination-using-bayes-factors"><i class="fa fa-check"></i><b>15.6</b> Sample size determination using Bayes factors</a></li>
+<li class="chapter" data-level="15.7" data-path="ch-bf.html"><a href="ch-bf.html#summary-12"><i class="fa fa-check"></i><b>15.7</b> Summary</a></li>
+<li class="chapter" data-level="15.8" data-path="ch-bf.html"><a href="ch-bf.html#further-reading-12"><i class="fa fa-check"></i><b>15.8</b> Further reading</a></li>
+<li class="chapter" data-level="15.9" data-path="ch-bf.html"><a href="ch-bf.html#exercises-2"><i class="fa fa-check"></i><b>15.9</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>16</b> Cross-validation</a><ul>
+<li class="chapter" data-level="16" data-path="ch-cv.html"><a href="ch-cv.html"><i class="fa fa-check"></i><b>16</b> Cross-validation</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="ch-cv.html"><a href="ch-cv.html#the-expected-log-predictive-density-of-a-model"><i class="fa fa-check"></i><b>16.1</b> The expected log predictive density of a model</a></li>
 <li class="chapter" data-level="16.2" data-path="ch-cv.html"><a href="ch-cv.html#k-fold-and-leave-one-out-cross-validation"><i class="fa fa-check"></i><b>16.2</b> K-fold and leave-one-out cross-validation</a></li>
-<li class="chapter" data-level="16.3" data-path="ch-cv.html"><a href="ch-cv.html#testing-the-n400-effect-using-cross-validation"><i class="fa fa-check"></i><b>16.3</b> Testing the N400 effect using cross-validation</a><ul>
+<li class="chapter" data-level="16.3" data-path="ch-cv.html"><a href="ch-cv.html#testing-the-n400-effect-using-cross-validation"><i class="fa fa-check"></i><b>16.3</b> Testing the N400 effect using cross-validation</a>
+<ul>
 <li class="chapter" data-level="16.3.1" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-with-psis-loo"><i class="fa fa-check"></i><b>16.3.1</b> Cross-validation with PSIS-LOO</a></li>
 <li class="chapter" data-level="16.3.2" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-with-k-fold"><i class="fa fa-check"></i><b>16.3.2</b> Cross-validation with K-fold</a></li>
 <li class="chapter" data-level="16.3.3" data-path="ch-cv.html"><a href="ch-cv.html#leave-one-group-out-cross-validation"><i class="fa fa-check"></i><b>16.3.3</b> Leave-one-group-out cross-validation</a></li>
 </ul></li>
-<li class="chapter" data-level="16.4" data-path="ch-cv.html"><a href="ch-cv.html#sec-logcv"><i class="fa fa-check"></i><b>16.4</b> Comparing different likelihoods with cross-validation</a></li>
+<li class="chapter" data-level="16.4" data-path="ch-cv.html"><a href="ch-cv.html#sec-logcv"><i class="fa fa-check"></i><b>16.4</b>  Comparing different likelihoods with cross-validation</a></li>
 <li class="chapter" data-level="16.5" data-path="ch-cv.html"><a href="ch-cv.html#issues-with-cross-validation"><i class="fa fa-check"></i><b>16.5</b> Issues with cross-validation</a></li>
-<li class="chapter" data-level="16.6" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>16.6</b> Cross-validation in Stan</a><ul>
-<li class="chapter" data-level="16.6.1" data-path="ch-cv.html"><a href="ch-cv.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>16.6.1</b> PSIS-LOO-CV in Stan</a></li>
+<li class="chapter" data-level="16.6" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>16.6</b> Cross-validation in Stan</a>
+<ul>
+<li class="chapter" data-level="16.6.1" data-path="ch-cv.html"><a href="ch-cv.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>16.6.1</b>  PSIS-LOO-CV in Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="16.7" data-path="ch-cv.html"><a href="ch-cv.html#summary-14"><i class="fa fa-check"></i><b>16.7</b> Summary</a></li>
+<li class="chapter" data-level="16.7" data-path="ch-cv.html"><a href="ch-cv.html#summary-13"><i class="fa fa-check"></i><b>16.7</b> Summary</a></li>
 <li class="chapter" data-level="16.8" data-path="ch-cv.html"><a href="ch-cv.html#further-reading-13"><i class="fa fa-check"></i><b>16.8</b> Further reading</a></li>
 <li class="chapter" data-level="16.9" data-path="ch-cv.html"><a href="ch-cv.html#exercises-3"><i class="fa fa-check"></i><b>16.9</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
-<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to computational cognitive modeling</a><ul>
-<li class="chapter" data-level="17.1" data-path="ch-cogmod.html"><a href="ch-cogmod.html#further-reading-14"><i class="fa fa-check"></i><b>17.1</b> Further reading</a></li>
+<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to computational cognitive modeling</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="ch-cogmod.html"><a href="ch-cogmod.html#what-characterizes-a-computational-cognitive-model"><i class="fa fa-check"></i><b>17.1</b> What characterizes a computational cognitive model?</a></li>
+<li class="chapter" data-level="17.2" data-path="ch-cogmod.html"><a href="ch-cogmod.html#some-advantages-of-taking-the-latent-variable-modeling-approach"><i class="fa fa-check"></i><b>17.2</b> Some advantages of taking the latent-variable modeling approach</a></li>
+<li class="chapter" data-level="17.3" data-path="ch-cogmod.html"><a href="ch-cogmod.html#types-of-computational-cognitive-model"><i class="fa fa-check"></i><b>17.3</b> Types of computational cognitive model</a></li>
+<li class="chapter" data-level="17.4" data-path="ch-cogmod.html"><a href="ch-cogmod.html#summary-14"><i class="fa fa-check"></i><b>17.4</b> Summary</a></li>
+<li class="chapter" data-level="17.5" data-path="ch-cogmod.html"><a href="ch-cogmod.html#further-reading-14"><i class="fa fa-check"></i><b>17.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>18</b> Multinomial processing trees</a><ul>
-<li class="chapter" data-level="18.1" data-path="ch-MPT.html"><a href="ch-MPT.html#modeling-multiple-categorical-responses"><i class="fa fa-check"></i><b>18.1</b> Modeling multiple categorical responses</a><ul>
+<li class="chapter" data-level="18" data-path="ch-MPT.html"><a href="ch-MPT.html"><i class="fa fa-check"></i><b>18</b> Multinomial processing trees</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="ch-MPT.html"><a href="ch-MPT.html#modeling-multiple-categorical-responses"><i class="fa fa-check"></i><b>18.1</b> Modeling  multiple categorical responses</a>
+<ul>
 <li class="chapter" data-level="18.1.1" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-mult"><i class="fa fa-check"></i><b>18.1.1</b> A model for multiple responses using the multinomial likelihood</a></li>
 <li class="chapter" data-level="18.1.2" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-cat"><i class="fa fa-check"></i><b>18.1.2</b> A model for multiple responses using the categorical distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="18.2" data-path="ch-MPT.html"><a href="ch-MPT.html#modeling-picture-naming-abilities-in-aphasia-with-mpt-models"><i class="fa fa-check"></i><b>18.2</b> Modeling picture naming abilities in aphasia with MPT models</a><ul>
+<li class="chapter" data-level="18.2" data-path="ch-MPT.html"><a href="ch-MPT.html#modeling-picture-naming-abilities-in-aphasia-with-mpt-models"><i class="fa fa-check"></i><b>18.2</b> Modeling picture naming abilities in aphasia with MPT models</a>
+<ul>
 <li class="chapter" data-level="18.2.1" data-path="ch-MPT.html"><a href="ch-MPT.html#calculation-of-the-probabilities-in-the-mpt-branches"><i class="fa fa-check"></i><b>18.2.1</b> Calculation of the probabilities in the MPT branches</a></li>
 <li class="chapter" data-level="18.2.2" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-mpt-data"><i class="fa fa-check"></i><b>18.2.2</b> A simple MPT model</a></li>
 <li class="chapter" data-level="18.2.3" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-MPT-reg"><i class="fa fa-check"></i><b>18.2.3</b> An MPT model assuming by-item variability</a></li>
-<li class="chapter" data-level="18.2.4" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-MPT-h"><i class="fa fa-check"></i><b>18.2.4</b> A hierarchical MPT</a></li>
+<li class="chapter" data-level="18.2.4" data-path="ch-MPT.html"><a href="ch-MPT.html#sec-MPT-h"><i class="fa fa-check"></i><b>18.2.4</b> A  hierarchical MPT</a></li>
 </ul></li>
 <li class="chapter" data-level="18.3" data-path="ch-MPT.html"><a href="ch-MPT.html#summary-15"><i class="fa fa-check"></i><b>18.3</b> Summary</a></li>
 <li class="chapter" data-level="18.4" data-path="ch-MPT.html"><a href="ch-MPT.html#further-reading-15"><i class="fa fa-check"></i><b>18.4</b> Further reading</a></li>
 <li class="chapter" data-level="18.5" data-path="ch-MPT.html"><a href="ch-MPT.html#exercises-4"><i class="fa fa-check"></i><b>18.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>19</b> Mixture models</a><ul>
-<li class="chapter" data-level="19.1" data-path="ch-mixture.html"><a href="ch-mixture.html#a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account"><i class="fa fa-check"></i><b>19.1</b> A mixture model of the speed-accuracy trade-off: The fast-guess model account</a><ul>
+<li class="chapter" data-level="19" data-path="ch-mixture.html"><a href="ch-mixture.html"><i class="fa fa-check"></i><b>19</b> Mixture models</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="ch-mixture.html"><a href="ch-mixture.html#a-mixture-model-of-the-speed-accuracy-trade-off-the-fast-guess-model-account"><i class="fa fa-check"></i><b>19.1</b> A mixture model of the speed-accuracy trade-off: The fast-guess model account</a>
+<ul>
 <li class="chapter" data-level="19.1.1" data-path="ch-mixture.html"><a href="ch-mixture.html#the-global-motion-detection-task"><i class="fa fa-check"></i><b>19.1.1</b> The global motion detection task</a></li>
 <li class="chapter" data-level="19.1.2" data-path="ch-mixture.html"><a href="ch-mixture.html#sec-simplefastguess"><i class="fa fa-check"></i><b>19.1.2</b> A very simple implementation of the fast-guess model</a></li>
-<li class="chapter" data-level="19.1.3" data-path="ch-mixture.html"><a href="ch-mixture.html#sec-multmix"><i class="fa fa-check"></i><b>19.1.3</b> A multivariate implementation of the fast-guess model</a></li>
+<li class="chapter" data-level="19.1.3" data-path="ch-mixture.html"><a href="ch-mixture.html#sec-multmix"><i class="fa fa-check"></i><b>19.1.3</b> A  multivariate implementation of the fast-guess model</a></li>
 <li class="chapter" data-level="19.1.4" data-path="ch-mixture.html"><a href="ch-mixture.html#an-implementation-of-the-fast-guess-model-that-takes-instructions-into-account"><i class="fa fa-check"></i><b>19.1.4</b> An implementation of the fast-guess model that takes instructions into account</a></li>
-<li class="chapter" data-level="19.1.5" data-path="ch-mixture.html"><a href="ch-mixture.html#sec-fastguessh"><i class="fa fa-check"></i><b>19.1.5</b> A hierarchical implementation of the fast-guess model</a></li>
+<li class="chapter" data-level="19.1.5" data-path="ch-mixture.html"><a href="ch-mixture.html#sec-fastguessh"><i class="fa fa-check"></i><b>19.1.5</b> A  hierarchical implementation of the fast-guess model</a></li>
 </ul></li>
 <li class="chapter" data-level="19.2" data-path="ch-mixture.html"><a href="ch-mixture.html#summary-16"><i class="fa fa-check"></i><b>19.2</b> Summary</a></li>
 <li class="chapter" data-level="19.3" data-path="ch-mixture.html"><a href="ch-mixture.html#further-reading-16"><i class="fa fa-check"></i><b>19.3</b> Further reading</a></li>
 <li class="chapter" data-level="19.4" data-path="ch-mixture.html"><a href="ch-mixture.html#exercises-5"><i class="fa fa-check"></i><b>19.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html"><i class="fa fa-check"></i><b>20</b> A simple accumulator model to account for choice response time</a><ul>
-<li class="chapter" data-level="20.1" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#modeling-a-lexical-decision-task"><i class="fa fa-check"></i><b>20.1</b> Modeling a lexical decision task</a><ul>
+<li class="chapter" data-level="20" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html"><i class="fa fa-check"></i><b>20</b> A simple accumulator model to account for choice response time</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#modeling-a-lexical-decision-task"><i class="fa fa-check"></i><b>20.1</b> Modeling a lexical decision task</a>
+<ul>
 <li class="chapter" data-level="20.1.1" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#sec-acccoding"><i class="fa fa-check"></i><b>20.1.1</b> Modeling the lexical decision task with the log-normal race model</a></li>
 <li class="chapter" data-level="20.1.2" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#sec-genaccum"><i class="fa fa-check"></i><b>20.1.2</b> A generative model for a race between accumulators</a></li>
 <li class="chapter" data-level="20.1.3" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#fitting-the-log-normal-race-model"><i class="fa fa-check"></i><b>20.1.3</b> Fitting the log-normal race model</a></li>
 <li class="chapter" data-level="20.1.4" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#sec-lognormalh"><i class="fa fa-check"></i><b>20.1.4</b> A hierarchical implementation of the log-normal race model</a></li>
-<li class="chapter" data-level="20.1.5" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#sec-contaminant"><i class="fa fa-check"></i><b>20.1.5</b> Dealing with contaminant responses</a></li>
+<li class="chapter" data-level="20.1.5" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#sec-contaminant"><i class="fa fa-check"></i><b>20.1.5</b> Dealing with  contaminant responses</a></li>
 </ul></li>
 <li class="chapter" data-level="20.2" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#posterior-predictive-check-with-the-quantile-probability-plots"><i class="fa fa-check"></i><b>20.2</b> Posterior predictive check with the quantile probability plots</a></li>
 <li class="chapter" data-level="20.3" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#summary-17"><i class="fa fa-check"></i><b>20.3</b> Summary</a></li>
 <li class="chapter" data-level="20.4" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#further-reading-17"><i class="fa fa-check"></i><b>20.4</b> Further reading</a></li>
 <li class="chapter" data-level="20.5" data-path="ch-lognormalrace.html"><a href="ch-lognormalrace.html#exercises-6"><i class="fa fa-check"></i><b>20.5</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="21" data-path="ch-closing.html"><a href="ch-closing.html"><i class="fa fa-check"></i><b>21</b> In closing</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -1217,205 +1280,140 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ch-comparison" class="section level1 hasAnchor">
+<div id="ch-comparison" class="section level1 hasAnchor" number="14">
 <h1><span class="header-section-number">Chapter 14</span> Introduction to model comparison<a href="ch-comparison.html#ch-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A key goal of cognitive science is to decide which theory under consideration accounts for the experimental data better. This can be accomplished by implementing the theories (or some aspects of them) as Bayesian models and comparing their predicting power. Thus, model comparison and hypothesis testing are closely related ideas. There are two Bayesian perspectives on model comparison: a <em>prior</em> predictive perspective based on the Bayes factor using marginal likelihoods, and a <em>posterior</em> predictive perspective based on cross-validation. The main characteristic difference between the prior predictive approach (Bayes factor) versus the posterior predictive approach (cross-validation) is the following: The Bayes factor examines how well the model (prior <em>and</em> likelihood) explains the experimental data. By contrast, the posterior predictive approach assesses model predictions for held-out data after seeing most of the data.</p>
-<p>That is, the predictive accuracy of the Bayes factor is only based on its prior predictive distribution. In Bayes factor analyses, the prior model predictions are used to evaluate the support that the data give to the model. By contrast, in cross-validation, the model is fit to a large subset of the data (i.e., the training data). The posterior distributions of the parameters of this fitted model are then used to make predictions for held-out or validation data, and model fit is assessed on this subset of the data. Typically, this process is repeated several times, until the entire data set is assessed as held-out data. This attempts to assess whether the model will generalize to truly new, unobserved data. Of course, the held-out data is usually not “truly new” because it is part of the data that was collected, but at least it is data that the model has not been exposed to. That is, the predictive accuracy of cross-validation methods is based on how well the posterior predictive distribution that is fit to most of the data (i.e., the training data) characterizes out-of-sample data (i.e., the test or held-out data).</p>
-<p>The prior predictive distribution is obviously highly sensitive to the priors: it evaluates the probability of the observed data under prior assumptions. By contrast, the posterior predictive distribution is less dependent on the priors because the priors are combined with the likelihood (and are thus less influential, given sufficient data) before making predictions for held-out validation data.</p>
-<p>Jaynes <span class="citation">(<a href="#ref-jaynes2003probability">2003</a>, chap. 20)</span> compares these two perspectives to “a cruel realist” and “a fair judge”. According to Jaynes, Bayes factor adopts the posture of a cruel realist, who “judge[s] each model taking into account the prior information we actually have pertaining to it; that is, we penalize a model if we do not have the best possible prior information about its parameters, although that is not really a fault of the model itself.” By contrast, cross-validation adopts the posture of a scrupulously fair judge, “who insists that fairness in comparing models requires that each is delivering the best performance of which it is capable, by giving each the best possible prior probability for its parameters (similarly, in Olympic games we might consider it unfair to judge two athletes by their performance when one of them is sick or injured; the fair judge might prefer to compare them when both are doing their absolute best).”</p>
+<p>A key goal of cognitive science is to decide which theory under consideration accounts for the experimental data better. This can be accomplished by implementing the theories (or some aspects of them) as Bayesian models and comparing their predicting power. Thus,  model comparison and  hypothesis testing are closely related ideas. There are two Bayesian perspectives on model comparison: a  <em>prior</em> predictive perspective based on the  Bayes factor using  marginal likelihoods, and a  <em>posterior</em> predictive perspective based on  cross-validation. The main characteristic difference between the prior predictive approach (Bayes factor) versus the posterior predictive approach (cross-validation) is the following: The Bayes factor examines how well the model (prior and likelihood) explains the experimental data. By contrast, the posterior predictive approach assesses model predictions for held-out data after seeing most of the data.</p>
+<div id="prior-predictive-vs.-posterior-predictive-model-comparison" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Prior predictive vs. posterior predictive model comparison<a href="ch-comparison.html#prior-predictive-vs.-posterior-predictive-model-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The  predictive accuracy of the Bayes factor is only based on its  prior predictive distribution. In Bayes factor analyses, the prior model predictions are used to evaluate the support that the data give to the model. By contrast, in cross-validation, the model is fit to a large subset of the data (i.e., the  training data). The posterior distributions of the parameters of this fitted model are then used to make predictions for held-out or  validation data, and  model fit is assessed on this subset of the data. Typically, this process is repeated several times, until the subsets of the entire data set are assessed as held-out data. This approach attempts to assess whether the model will generalize to truly new,  unobserved data. Of course, the  held-out data is usually not “truly new” because it is part of the data that was collected, but at least it is data that the model has not been exposed to. That is, the predictive accuracy of cross-validation methods is based on how well the  posterior predictive distribution that is fit to most of the data (i.e., the training data) characterizes  out-of-sample data (i.e., the test or held-out data). Notice that one could in principle use the posterior predictive approach using truly new data, by just repeating the experiment with new subjects and then treating that new data as held-out data.</p>
+<p>Coming back to Bayes factors, the prior predictive distribution is obviously highly sensitive to the priors: it evaluates the probability of the observed data under prior assumptions. By contrast, the posterior predictive distribution is less dependent on the priors because the priors are combined with the likelihood (and are thus less influential, given sufficient data) before making predictions for held-out validation data.</p>
+<p>Jaynes <span class="citation">(<a href="#ref-jaynes2003probability" role="doc-biblioref">2003</a>, chap. 20)</span> compares these two perspectives to “a cruel realist” and “a fair judge”. According to Jaynes, Bayes factor adopts the posture of a cruel realist, who “judge[s] each model taking into account the prior information we actually have pertaining to it; that is, we penalize a model if we do not have the best possible prior information about its parameters, although that is not really a fault of the model itself.” By contrast, cross-validation adopts the posture of a scrupulously fair judge, “who insists that fairness in comparing models requires that each is delivering the best performance of which it is capable, by giving each the best possible prior probability for its parameters (similarly, in Olympic games we might consider it unfair to judge two athletes by their performance when one of them is sick or injured; the fair judge might prefer to compare them when both are doing their absolute best).”</p>
+</div>
+<div id="some-important-points-to-consider-when-comparing-models" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> Some important points to consider when comparing models<a href="ch-comparison.html#some-important-points-to-consider-when-comparing-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Regardless of whether we use Bayes factor or cross-validation or any other method for model comparison, there are several important points that one should keep in mind:</p>
 <ol style="list-style-type: decimal">
-<li><p>Although the objective of model comparison might ultimately be to find out which of the models under consideration generalizes better, this generalization can only be done well within the range of the observed data <span class="citation">(see Vehtari and Lampinen <a href="#ref-VehtariLampinen2002">2002</a>; Vehtari and Ojanen <a href="#ref-VehtariOjanen2012">2012</a>)</span>. That is, if one hypothesis implemented as the model <span class="math inline">\(\mathcal{M}_1\)</span> shows to be superior to a second hypothesis, implemented as the model <span class="math inline">\(\mathcal{M}_2\)</span>, according to Bayes factor and/or cross-validation and evaluated with a young western university student population, this doesn’t mean that <span class="math inline">\(\mathcal{M}_1\)</span> will be superior to <span class="math inline">\(\mathcal{M}_2\)</span> when it is evaluated with a broader population <span class="citation">(and in fact it seems that many times it won’t, see Henrich, Heine, and Norenzayan <a href="#ref-henrich_heine_norenzayan_2010">2010</a>)</span>. However, if we can’t generalize even within the range of the observed data (e.g., university students in the northern part of the western hemisphere), there is no hope of generalizing outside of that range (e.g., non-University students). <span class="citation">Navarro (<a href="#ref-navarroDevilDeepBlue2018">2019</a>)</span> argues that one of the most important functions of a model is to encourage directed exploration of new territory; our view is that this makes sense only if historical data is also accounted for (this is analogous to regression testing in software development—existing functionality/empirical coverage should not be lost when the model is extended to cover new data). In practice, what that means for us is that evaluating a model’s performance should be carried out using historical benchmark data in addition to any new data one has; just using isolated pockets of new data to evaluate a model is not convincing. For an example from psycholinguistics of model evaluation using historical benchmark data, see <span class="citation">Nicenboim, Vasishth, and Rösler (<a href="#ref-NicenboimPreactivation2019">2020</a><a href="#ref-NicenboimPreactivation2019">b</a>)</span>.</p></li>
-<li><p>Model comparison can provide a quantitative way to evaluate models, but this cannot replace understanding the qualitative patterns in the data <span class="citation">(see, e.g., Navarro <a href="#ref-navarroDevilDeepBlue2018">2019</a>)</span>. A model can provide a good fit by behaving in a way that contradicts our substantive knowledge. For example, <span class="citation">Lissón et al. (<a href="#ref-lisson_2020">2021</a>)</span> examine two computational models of sentence comprehension. One of the models yielded higher predictive accuracy when the parameter that is related to the probability of correctly comprehending a sentence was higher for impaired subjects (individuals with aphasia) than for the control population. This contradicts domain knowledge—impaired subjects are generally observed to show worse performance than unimpaired control subjects—and led to a re-evaluation of the model.</p></li>
-<li><p>Model comparison is based on finding the most “useful model” for characterizing our data, but neither the Bayes factor nor cross-validation (nor any other method that we are aware of) guarantees selecting the model closest to the truth (even with enough data). This is related to our previous point: A model that’s closest to the true generating data process is not guaranteed to produce the best (prior or posterior) predictions, and a model with a clearly wrong generating data process is not guaranteed to produce poor (prior or posterior) predictions. See <span class="citation">Wang and Gelman (<a href="#ref-WangGelman2014difficulty">2014</a>)</span>, for an example with cross-validation; and <span class="citation">Navarro (<a href="#ref-navarroDevilDeepBlue2018">2019</a>)</span> for a toy example with Bayes factor.</p></li>
+<li><p>Although the objective of model comparison might ultimately be to find out which of the models under consideration generalizes better, this generalization can only be done well within the range of the observed data <span class="citation">(see Vehtari and Lampinen <a href="#ref-VehtariLampinen2002" role="doc-biblioref">2002</a>; Vehtari and Ojanen <a href="#ref-VehtariOjanen2012" role="doc-biblioref">2012</a>)</span>. That is, if one hypothesis implemented as the model <span class="math inline">\(\mathcal{M}_1\)</span> shows to be superior to a second hypothesis, implemented as the model <span class="math inline">\(\mathcal{M}_2\)</span>, according to Bayes factor and/or cross-validation and evaluated with a young western university student population, this doesn’t mean that <span class="math inline">\(\mathcal{M}_1\)</span> will be superior to <span class="math inline">\(\mathcal{M}_2\)</span> when it is evaluated with a broader population <span class="citation">(and in fact it seems that many times it won’t, see Henrich, Heine, and Norenzayan <a href="#ref-henrich_heine_norenzayan_2010" role="doc-biblioref">2010</a>)</span>. However, if we can’t generalize even within the range of the observed data (e.g., university students in the northern part of the western hemisphere), there is no hope of generalizing outside of that range (e.g., non-University students). <span class="citation">Navarro (<a href="#ref-navarroDevilDeepBlue2018" role="doc-biblioref">2019</a>)</span> argues that one of the most important functions of a model is to encourage directed exploration of new territory; our view is that this makes sense only if historical data can also be accounted for. In practice, what that means for us is that evaluating a model’s performance should be carried out using  historical benchmark data in addition to any new data one has; just using isolated pockets of new data to evaluate a model is not convincing. For an example from psycholinguistics of model evaluation using historical benchmark data, see <span class="citation">Nicenboim, Vasishth, and Rösler (<a href="#ref-NicenboimPreactivation2019" role="doc-biblioref">2020</a>)</span>.</p></li>
+<li><p>Model comparison can provide a quantitative way to evaluate models, but this cannot replace understanding the qualitative patterns in the data <span class="citation">(see, e.g., Navarro <a href="#ref-navarroDevilDeepBlue2018" role="doc-biblioref">2019</a>)</span>. A model can provide a good fit by behaving in a way that contradicts our substantive knowledge. For example, <span class="citation">Lissón et al. (<a href="#ref-lisson_2020" role="doc-biblioref">2021</a>)</span> examine two computational models of sentence comprehension. One of the models yielded higher predictive accuracy when the parameter that is related to the probability of correctly comprehending a sentence was higher for impaired subjects (individuals with aphasia) than for the control population. This contradicts  domain knowledge—impaired subjects are generally observed to show worse performance than unimpaired control subjects—and led to a re-evaluation of the model.</p></li>
+<li><p>Model comparison is based on finding the most “useful model” for characterizing our data, but neither the Bayes factor nor cross-validation (nor any other method that we are aware of) guarantees selecting the  model closest to the truth (even with enough data). This is related to our previous point: A model that’s closest to the true generating data process is not guaranteed to produce the best (prior or posterior) predictions, and a model with a clearly wrong generating data process is not guaranteed to produce poor (prior or posterior) predictions. See <span class="citation">Wang and Gelman (<a href="#ref-WangGelman2014difficulty" role="doc-biblioref">2014</a>)</span>, for an example with cross-validation; and <span class="citation">Navarro (<a href="#ref-navarroDevilDeepBlue2018" role="doc-biblioref">2019</a>)</span> for a toy example with Bayes factor.</p></li>
 <li><p>One should also check that the precision (the uncertainty) of the data being modeled is high; if an effect is being modeled that has high uncertainty (the posterior distribution of the target parameter is widely spread out), then any measure of model fit can be uninformative because we don’t have accurate estimates of the effect of interest. In the Bayesian context, this implies that the prior predictive and posterior predictive distributions of the effects generated by the model should be theoretically plausible and reasonably constrained, and the target parameter of interest should have as high precision as possible; this implies that we need to have sufficient data if we want to obtain precise estimates of the parameter of interest. Later in this part of the book, we will discuss the adverse impact of imprecision in the data on model comparison (see section <a href="ch-bf.html#sec-BFvar">15.5.2</a>). We will show that, in the face of low precision, we generally won’t learn much from model comparison.</p></li>
-<li><p>When comparing a null model with an alternative model, it is important to be clear about what the null model specification is. For example, in section <a href="ch-hierarchical.html#sec-mcvivs">5.2.4</a>, we encountered the correlated varying intercepts and varying slopes model for the Stroop effect. The <code>brms</code> formula for the full model was:</p></li>
+<li><p>When comparing a  null model with an  alternative model, it is important to be clear about what the null model specification is. For example, in section <a href="ch-hierarchical.html#sec-mcvivs">5.2.4</a>, we encountered the correlated varying intercepts and varying slopes model for the Stroop effect. The <code>brms</code> formula for the full model was:</p></li>
 </ol>
 <p><code>n400 ~ 1 + c_cloze + (1 + c_cloze | subj)</code></p>
+<p>The formal statement of this model is:</p>
+<p><span class="math display">\[\begin{equation}
+  signal_n \sim \mathit{Normal}(\alpha + u_{subj[n],1} + c\_cloze_n \cdot (\beta+ u_{subj[n],2}),\sigma)
+ \end{equation}\]</span></p>
 <p>If we want to test the null hypothesis that centered cloze has no effect on the dependent variable, one null model is:</p>
 <p><code>n400 ~ 1 + (1 + c_cloze | subj) (Model M0a)</code></p>
-<p>In model <code>M0a</code>, by-subject variability is allowed; just the fixed effect of centered cloze is assumed to be zero. This is called a nested model comparison, because the null model is subsumed in the full model.</p>
-<p>An alternative null model could remove only the varying slopes:</p>
+<p>Formally, this would be stated as follows (the <span class="math inline">\(\beta\)</span> term is removed as it is assumed to be <span class="math inline">\(0\)</span>):</p>
+<p><span class="math display">\[\begin{equation}
+  signal_n \sim \mathit{Normal}(\alpha + u_{subj[n],1} + c\_cloze_n \cdot u_{subj[n],2},\sigma)
+ \end{equation}\]</span></p>
+<p>In model <code>M0a</code>, by-subject variability is allowed; just the fixed effect of centered cloze is assumed to be zero. This is called a  nested model comparison, because the null model is subsumed in the full model.</p>
+<p>An alternative null model could remove only the  varying slopes:</p>
 <p><code>n400 ~ 1 + c_cloze + (1 | subj) (Model M0b)</code></p>
+<p>Formally:</p>
+<p><span class="math display">\[\begin{equation}
+  signal_n \sim \mathit{Normal}(\alpha + u_{subj[n],1} + c\_cloze_n \cdot \beta,\sigma)
+ \end{equation}\]</span></p>
 <p>Model <code>M0b</code>, which is also nested inside the full model, is testing a different null hypothesis than <code>M0a</code> above: is the between-subject variability in the centered cloze effect zero?</p>
 <p>Yet another possibility is to remove both the fixed and random effects of centered cloze:</p>
 <p><code>n400 ~ 1 + (1 | subj) (Model M0c)</code></p>
-<p>Model <code>M0c</code> is also nested inside the full model, but it now has two parameters missing instead of one. Usually, it is best to compare models by removing one parameter; otherwise one cannot be sure which parameter was responsible for our rejecting or accepting the null hypothesis.</p>
-
+<p>Formally:</p>
+<p><span class="math display">\[\begin{equation}
+  signal_n \sim \mathit{Normal}(\alpha + u_{subj[n],1},\sigma)
+ \end{equation}\]</span></p>
+<p>Model <code>M0c</code> is also nested inside the full model, but it now has two parameters missing instead of one: <span class="math inline">\(\beta\)</span> and <span class="math inline">\(u_{subj[n],1}\)</span>. Usually, it is best to compare models by removing one parameter; otherwise one cannot be sure which parameter was responsible for our rejecting or accepting the null hypothesis.</p>
 <div class="extra">
 <div class="theorem">
 <p><span id="thm:null" class="theorem"><strong>Box 14.1  </strong></span><strong>Credible intervals should not be used to reject a null hypothesis</strong></p>
 </div>
-<p>Researchers often incorrectly use credible intervals for null hypothesis testing, that is, to test whether a parameter <span class="math inline">\(\beta\)</span> is zero or not. A common approach is to check whether zero is included in the 95% credible interval for the parameter <span class="math inline">\(\beta\)</span>; if it is, then the null hypothesis that the effect is zero is accepted; and if zero is outside the interval, then the null is rejected. For example, in a tutorial paper that two of the authors of this book wrote <span class="citation">(Nicenboim and Vasishth <a href="#ref-NicenboimVasishth2016">2016</a>)</span>, we incorrectly suggest that the credible interval can be used to reject the hypothesis that the <span class="math inline">\(\beta\)</span> is zero. This is not the correct approach.</p>
-<p>The problem with this approach is that it is a heuristic that will work in some cases and might be misleading in others <span class="citation">(for an example, see Vasishth, Yadav, et al. <a href="#ref-SampleSizeCBB2021">2022</a>)</span>. Unfortunately, when they will work or not is in fact not well-defined.</p>
-<p>Why is the credible-interval approach only a heuristic?
-One line of (incorrect) reasoning that justifies looking at the overlap between credible intervals and zero is based on the fact that the most likely values of <span class="math inline">\(\beta\)</span> lie within 95% credible interval.<a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a> This entails that if zero is outside the interval, it must have a low probability density. This is true, but it’s meaningless: Regardless of where zero lies (or any point value), zero will have a probability mass of exactly zero since we are dealing with a continuous distribution.
+<p>Researchers often incorrectly use  credible intervals for null hypothesis testing, that is, to test whether a parameter <span class="math inline">\(\beta\)</span> is zero or not. A common approach is to check whether zero is included in the 95% credible interval for the parameter <span class="math inline">\(\beta\)</span>; if it is, then the null hypothesis that the effect is zero is accepted; and if zero is outside the interval, then the null is rejected. For example, in a tutorial paper that two of the authors of this book wrote <span class="citation">(Nicenboim and Vasishth <a href="#ref-NicenboimVasishth2016" role="doc-biblioref">2016</a>)</span>, we incorrectly suggest that the credible interval can be used to reject the hypothesis that the <span class="math inline">\(\beta\)</span> is zero. This is not the correct approach.<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a></p>
+<p>The problem with this approach is that it is a heuristic that will work in some cases and might be misleading in others <span class="citation">(for an example, see Vasishth, Yadav, et al. <a href="#ref-SampleSizeCBB2021" role="doc-biblioref">2022</a>)</span>. Unfortunately, when they will work or not is in fact not well-defined.</p>
+<p>Why is the credible-interval approach only a  heuristic?
+One line of (incorrect) reasoning that justifies looking at the overlap between credible intervals and zero is based on the fact that the most likely values of <span class="math inline">\(\beta\)</span> lie within 95% credible interval.<a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a> This entails that if zero is outside the interval, it must have a low probability density. This is true, but it’s meaningless: Regardless of where zero lies (or any point value), zero will have a probability mass of exactly zero since we are dealing with a continuous distribution.
 The lack of overlap doesn’t tell us how much posterior probability the null model has.</p>
-<p>A partial solution could be to look at a probability interval close to zero rather than zero (e.g., an interval of, say, <span class="math inline">\(-2\)</span> to <span class="math inline">\(2\)</span> ms in a response time experiment), so that we obtain a non-zero probability mass. While the lack of overlap would be slightly more informative, excluding a small interval can be problematic when the prior probability mass of that interval is very small to begin with (as was the case with the regularizing priors we assigned to our parameters). <span class="citation">Rouder, Haaf, and Vandekerckhove (<a href="#ref-rouder2018bayesian">2018</a>)</span> show that if prior probability mass is added to the point value zero using a <em>spike-and-slab</em> prior (or if probability mass is added to the small interval close to zero if one considers that equivalent to the null model), looking at whether zero is in the 95% credible interval is analogous to the Bayes factor. Unfortunately, the <em>spike-and-slab</em> prior cannot be incorporated in Stan, because it relies on a discrete parameter. However, other programming tools (like <code>PyMC3</code>, JAGS, or Turing) can be used if such a prior needs to be fit; see further readings.</p>
+<p>A partial solution could be to look at a probability interval close to zero rather than zero (e.g., an interval of, say, <span class="math inline">\(-2\)</span> to <span class="math inline">\(2\)</span> ms in a response time experiment), so that we obtain a non-zero probability mass. While the lack of overlap would be slightly more informative, excluding a small interval can be problematic when the prior probability mass of that interval is very small to begin with (as was the case with the regularizing priors we assigned to our parameters). <span class="citation">Rouder, Haaf, and Vandekerckhove (<a href="#ref-rouder2018bayesian" role="doc-biblioref">2018</a>)</span> show that if prior probability mass is added to the point value zero using a  <em>spike-and-slab</em> prior (or if probability mass is added to the small interval close to zero if one considers that equivalent to the null model), looking at whether zero is in the 95% credible interval is analogous to the Bayes factor. Unfortunately, the <em>spike-and-slab</em> prior cannot be incorporated in Stan, because it relies on a discrete parameter. However, other programming tools (like PyMC3, JAGS, or Turing) can be used if such a prior needs to be fit; see the further readings at the end of the chapter.</p>
 <p>Rather than looking at the overlap of the 95% credible interval, we might be tempted to conclude that there is evidence for an effect because the probability that a parameter is positive is high, that is <span class="math inline">\(P(\beta &gt; 0) &gt;&gt; 0.5\)</span>. However, the same logic from the previous paragraph renders this meaningless. Given that the probability mass of a point value, <span class="math inline">\(P(\beta = 0)\)</span>, is zero, what we can conclude from <span class="math inline">\(P(\beta &gt; 0) &gt;&gt; 0.5\)</span> is that <span class="math inline">\(\beta\)</span> is very likely to be positive rather than negative, but we can’t make any assertions about whether <span class="math inline">\(\beta\)</span> is exactly zero.</p>
-<!--
-Another way to explain why intervals should not be used for null hypothesis testing comes from the principle of predictive irrelevance [@wagenmakersPrinciplePredictiveIrrelevance2020]. This principle holds that when two models predict the observed data equally well, these data cannot be used to distinguish between the models. @wagenmakersPrinciplePredictiveIrrelevance2020 show that there are sequences of observations that cannot distinguish the predictions of a model and a simpler, null model, but that looking at credible interval might nevertheless lead us to reject the null hypothesis. 
--->
-<p>As we saw, the main problem with these heuristics is that they ignore that the null model is a separate hypothesis. In many situations, the null hypothesis may not be of interest, and it might be perfectly fine to base our conclusions on credible intervals or <span class="math inline">\(P(\beta &gt; 0)\)</span>. The problem arises when these heuristics are used to provide evidence in favor or against the null hypothesis. If one wants to argue about the evidence in favor of or against a null hypothesis, Bayes factors or cross-validation will be needed. These are discussed in the next two chapters.</p>
-<p>How can credible intervals be used sensibly? The region of practical equivalence (ROPE) approach <span class="citation">(Spiegelhalter, Freedman, and Parmar <a href="#ref-spiegelhalter1994bayesian">1994</a>; Freedman, Lowe, and Macaskill <a href="#ref-Freedman1984">1984</a>; and, more recently, Kruschke and Liddell <a href="#ref-kruschke2018bayesian">2018</a>; Kruschke <a href="#ref-kruschke2014doing">2014</a>)</span> is a reasonable alternative to hypothesis testing and arguing for or against a null. This approach is related to the spike-and-slab discussion above. In the ROPE approach, one can define a range of values for a target parameter that is predicted before the data are seen. Of course, there has to be a principled justification for choosing this range a priori; an example of a principled justification would be the prior predictions of a computational model. Then, the overlap (or lack thereof) between this predicted range and the observed credible interval can be used to infer whether one has estimates consistent (or partly consistent) with the predicted range. Here, we are not ruling out any null hypothesis, and we are not using the credible interval to make a decision like “the null hypothesis is true/false.”</p>
+<p>As we saw, the main problem with these heuristics is that they ignore that the  null model is a separate hypothesis. In many situations, the null hypothesis may not be of interest, and it might be perfectly fine to base our conclusions on credible intervals or <span class="math inline">\(P(\beta &gt; 0)\)</span>. The problem arises when these heuristics are used to provide  evidence in favor or against the null hypothesis. If one wants to argue about the evidence in favor of or against a null hypothesis, Bayes factors or cross-validation will be needed. These are discussed in the next two chapters.</p>
+<p>How can credible intervals be used sensibly? The  region of practical equivalence  (ROPE) approach <span class="citation">(Spiegelhalter, Freedman, and Parmar <a href="#ref-spiegelhalter1994bayesian" role="doc-biblioref">1994</a>; Freedman, Lowe, and Macaskill <a href="#ref-Freedman1984" role="doc-biblioref">1984</a>; and, more recently, Kruschke and Liddell <a href="#ref-kruschke2018bayesian" role="doc-biblioref">2018</a>; Kruschke <a href="#ref-kruschke2014doing" role="doc-biblioref">2014</a>)</span> is a reasonable alternative to hypothesis testing and arguing for or against a null. This approach is related to the spike-and-slab discussion above. In the ROPE approach, one can define a range of values for a target parameter that is predicted before the data are seen. Of course, there has to be a principled justification for choosing this range a priori; an example of a principled justification would be the prior predictions of a computational model. Then, the overlap (or lack thereof) between this predicted range and the observed credible interval can be used to infer whether one has estimates consistent (or partly consistent) with the predicted range. Here, we are not ruling out any null hypothesis, and we are not using the credible interval to make a decision like “the null hypothesis is true/false.”</p>
 </div>
-
-<div id="further-reading-11" class="section level2 hasAnchor">
-<h2><span class="header-section-number">14.1</span> Further reading<a href="ch-comparison.html#further-reading-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span class="citation">Roberts and Pashler (<a href="#ref-rp">2000</a>)</span> and <span class="citation">Pitt and Myung (<a href="#ref-pittWhenGoodFit2002">2002</a>)</span> argue for the need of going beyond “a good fit” (this is a good posterior predictive check in the context of Bayesian data analysis) and argue for the need of model comparison and a focus on measuring the generalizability of a model. <span class="citation">Navarro (<a href="#ref-navarroDevilDeepBlue2018">2019</a>)</span> deals with the problematic aspects of model selection in the context of psychological literature and cognitive modeling. Fabian Dablander’s blog post, <a href="https://fabiandablander.com/r/Law-of-Practice.html" class="uri">https://fabiandablander.com/r/Law-of-Practice.html</a>, shows a very clear comparison between Bayes factor and PSIS-LOO-CV. <span class="citation">Rodriguez, Williams, and Rast (<a href="#ref-rodriguez2021and">2021</a>)</span> provides JAGS code for fitting models with spike-and-slab priors. Fabian Dablander has a comprehensive blog post on how to implement a Gibbs sampler in R when using such a prior: <a href="https://fabiandablander.com/r/Spike-and-Slab.html" class="uri">https://fabiandablander.com/r/Spike-and-Slab.html</a>.</p>
-<!-- 
-Rouder et al, 2018 
- The salient difference is that common Bayes factor approaches provide for privileged consideration of theoretically useful parameter values, such as the value corresponding to the null hypothesis, while estimation approaches do not 
-
-Estimation:
-two approaches: 1. Lindley (1965), in his early
-career, notes that one could examine the 95% highest-density
-credible intervals (HDCIs).
-2. Kruschke (2012) and
-Kruschke and Liddell (2017) take a modified version of
-this approach, in which the credible interval is compared
-to a pre-established region called a region of practical
-equivalence (ROPE). ROPEs are small intervals around zero
-containing only values that are considered to be practically
-the same as zero.
-
-posterior-estimation is not recommended for drawing conclu-
-sions about the presence or absence of effect by a number
-of Bayesian psychologists (Dienes, 2014; Gallistel, 2009;
-Rouder et al., 2009; Wagenmakers, 2007).
-
-Bayes factor approach remains con-
-troversial too, and it has been critiqued as well for being too
-sensitive to the prior density on parameter values (see Liu
-& Aitkin 2008; Gelman & Carlin 2017; Kruschke, 2011)
-
-
-From a pragmatic view, Bayes factor and posterior
-estimation often lead to the same conclusion when observed
-effects are large. This is not too surprising as large effects
-should be detected by all approaches. Conclusions may
-differ, however, when observed effects are small.
-
-
-Bayes factor may
-be represented as part of estimation under a certain model
-specification known currently in the statistics literature as a
-spike-and-slab model (George & McCulloch, 1993)
-
-Before we do so, we should note that from a
-mathematical viewpoint, the Bayes factor approach cannot
-be assailed. The Bayes factors are the natural, direct, and
-unavoidable consequence of Bayes’ rule. They are often
-critiqued because of the above robustness issue, but the
-logical consequences of these critiques are that either that
-one should not place beliefs on models or not use Bayes’
-rule for updating these beliefs. The estimation of posteriors
-is also mathematically unassailable as it too is the natural,
-direct, and unavoidable consequence of Bayes’ rule. The
-critical issue is the step between estimation and using
-estimates to draw conclusions about the presence or absence
-of effects. These rules do not come from Bayes rule, and in
-this sense they may be considered heuristics.
-
-
-The Bayes factor
-approaches we have developed in Guan and Vandeker-
-ckhove (2016), Rouder et al. (2009), Rouder and Morey
-(2012), and Rouder et al. (2012), place point-mass on pre-
-specified, theoretically important values. It is this difference
-in model specification—rather than the difference in infer-
-ential statistic—that leads to some of the most salient prac-
-tical differences between the Bayes factor and estimation
-approaches.
-
-### SHOW HOW CHANGING THE PRIOR DOESN'T MATTER FOR > comparisons
-
-
-In some cases—perhaps ones where measurement is
-a main goal and where the zero value has no special
-meaning—a slab-only approach may be best. Researchers in
-these measurement contexts, however, should avoid drawing
-inferences about whether or not there are effects in the data
-as the model specification does not capture such categorical
-difference and Bayes’ rule does not provide a reallocated
-probability for either proposition.
-
-
-Posterior estimation always remains useful in reporting
-the results of analyses. Posterior means give an overall
-indication of where we think values are best localized,
-and posterior intervals describe the precision of this
-localization. Posterior means and CIs may provide valuable
-graphical displays, especially for researchers who are
-used to confidence intervals. Moreover, these analyses are
-not exclusive; one may graph a posterior and report a
-Bayes factor as evidence, combine it with prior odds and
-a loss function to reach a decision.
--->
+</div>
+<div id="further-reading-11" class="section level2 hasAnchor" number="14.3">
+<h2><span class="header-section-number">14.3</span> Further reading<a href="ch-comparison.html#further-reading-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="citation">Roberts and Pashler (<a href="#ref-rp" role="doc-biblioref">2000</a>)</span> and <span class="citation">Pitt and Myung (<a href="#ref-pittWhenGoodFit2002" role="doc-biblioref">2002</a>)</span> argue for the need of going beyond “a good fit” (this is a good posterior predictive check in the context of Bayesian data analysis) and argue for the need of model comparison and a focus on measuring the generalizability of a model. <span class="citation">Navarro (<a href="#ref-navarroDevilDeepBlue2018" role="doc-biblioref">2019</a>)</span> deals with the problematic aspects of model selection in the context of psychological literature and cognitive modeling. Fabian Dablander’s blog post, <a href="https://fabiandablander.com/r/Law-of-Practice.html" class="uri">https://fabiandablander.com/r/Law-of-Practice.html</a>, shows a very clear comparison between Bayes factor and PSIS-LOO-CV. <span class="citation">Rodriguez, Williams, and Rast (<a href="#ref-rodriguez2021and" role="doc-biblioref">2022</a>)</span> provides JAGS code for fitting models with spike-and-slab priors. Fabian Dablander has a comprehensive blog post on how to implement a Gibbs sampler in R when using such a prior: <a href="https://fabiandablander.com/r/Spike-and-Slab.html" class="uri">https://fabiandablander.com/r/Spike-and-Slab.html</a>. <span class="citation">Yadav et al. (<a href="#ref-YadavetalJML2022" role="doc-biblioref">2023</a>)</span> uses 17 different data-sets for model comparison using cross-validation, holding out each data-set successively; this is an example of evaluating the predictive performance of a model on truly new data.</p>
 
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references">
+<div id="refs" class="references hanging-indent">
 <div id="ref-Freedman1984">
 <p>Freedman, Laurence S., D. Lowe, and P. Macaskill. 1984. “Stopping Rules for Clinical Trials Incorporating Clinical Opinion.” <em>Biometrics</em> 40 (3): 575–86.</p>
 </div>
 <div id="ref-henrich_heine_norenzayan_2010">
-<p>Henrich, Joseph, Steven J. Heine, and Ara Norenzayan. 2010. “The Weirdest People in the World?” <em>Behavioral and Brain Sciences</em> 33 (2-3). Cambridge University Press: 61–83. <a href="https://doi.org/10.1017/S0140525X0999152X" class="uri">https://doi.org/10.1017/S0140525X0999152X</a>.</p>
+<p>Henrich, Joseph, Steven J. Heine, and Ara Norenzayan. 2010. “The Weirdest People in the World?” <em>Behavioral and Brain Sciences</em> 33 (2-3): 61–83. <a href="https://doi.org/10.1017/S0140525X0999152X">https://doi.org/10.1017/S0140525X0999152X</a>.</p>
 </div>
 <div id="ref-jaynes2003probability">
-<p>Jaynes, Edwin T. 2003. <em>Probability Theory: The Logic of Science</em>. Cambridge university press.</p>
+<p>Jaynes, Edwin T. 2003. <em>Probability Theory: The Logic of Science</em>. Cambridge University Press.</p>
 </div>
 <div id="ref-kruschke2014doing">
-<p>Kruschke, John. 2014. <em>Doing Bayesian Data Analysis: A tutorial with R, JAGS, and Stan</em>. Academic Press.</p>
+<p>Kruschke, John K. 2014. <em>Doing Bayesian Data Analysis: A tutorial with R, JAGS, and Stan</em>. Academic Press.</p>
 </div>
 <div id="ref-kruschke2018bayesian">
-<p>Kruschke, John, and Torrin M Liddell. 2018. “The Bayesian New Statistics: Hypothesis Testing, Estimation, Meta-Analysis, and Power Analysis from a Bayesian Perspective.” <em>Psychonomic Bulletin &amp; Review</em> 25 (1). Springer: 178–206.</p>
+<p>Kruschke, John K., and Torrin M. Liddell. 2018. “The Bayesian New Statistics: Hypothesis Testing, Estimation, Meta-Analysis, and Power Analysis from a Bayesian Perspective.” <em>Psychonomic Bulletin &amp; Review</em> 25 (1): 178–206. <a href="https://doi.org/https://doi.org/10.3758/s13423-016-1221-4">https://doi.org/https://doi.org/10.3758/s13423-016-1221-4</a>.</p>
 </div>
 <div id="ref-lisson_2020">
-<p>Lissón, Paula, Dorothea Pregla, Bruno Nicenboim, Dario Paape, Mick van het Nederend, Frank Burchert, Nicole Stadie, David Caplan, and Shravan Vasishth. 2021. “A Computational Evaluation of Two Models of Retrieval Processes in Sentence Processing in Aphasia.” <em>Cognitive Science</em> 45 (4): e12956. <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/cogs.12956" class="uri">https://onlinelibrary.wiley.com/doi/full/10.1111/cogs.12956</a>.</p>
+<p>Lissón, Paula, Dorothea Pregla, Bruno Nicenboim, Dario Paape, Mick van het Nederend, Frank Burchert, Nicole Stadie, David Caplan, and Shravan Vasishth. 2021. “A Computational Evaluation of Two Models of Retrieval Processes in Sentence Processing in Aphasia.” <em>Cognitive Science</em> 45 (4): e12956. <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/cogs.12956">https://onlinelibrary.wiley.com/doi/full/10.1111/cogs.12956</a>.</p>
 </div>
 <div id="ref-navarroDevilDeepBlue2018">
-<p>Navarro, Danielle J. 2019. “Between the Devil and the Deep Blue Sea: Tensions Between Scientific Judgement and Statistical Model Selection.” <em>Computational Brain &amp; Behavior</em> 2 (1): 28–34. <a href="https://doi.org/10.1007/s42113-018-0019-z" class="uri">https://doi.org/10.1007/s42113-018-0019-z</a>.</p>
+<p>Navarro, Danielle J. 2019. “Between the Devil and the Deep Blue Sea: Tensions Between Scientific Judgement and Statistical Model Selection.” <em>Computational Brain &amp; Behavior</em> 2 (1): 28–34. <a href="https://doi.org/10.1007/s42113-018-0019-z">https://doi.org/10.1007/s42113-018-0019-z</a>.</p>
+</div>
+<div id="ref-newall2023evaluation">
+<p>Newall, Philip W. S., Taylor R. Hayes, Henrik Singmann, Leonardo Weiss-Cohen, Elliot A. Ludvig, and Lukasz Walasek. 2023. “Evaluation of the ’Take Time to Think’ Safer Gambling Message: A Randomised, Online Experimental Study.” <em>Behavioural Public Policy</em>, 1–18. <a href="https://doi.org/10.1017/bpp.2023.2">https://doi.org/10.1017/bpp.2023.2</a>.</p>
 </div>
 <div id="ref-NicenboimVasishth2016">
-<p>Nicenboim, Bruno, and Shravan Vasishth. 2016. “Statistical methods for linguistic research: Foundational Ideas - Part II.” <em>Language and Linguistics Compass</em> 10 (11): 591–613. <a href="https://doi.org/10.1111/lnc3.12207" class="uri">https://doi.org/10.1111/lnc3.12207</a>.</p>
+<p>Nicenboim, Bruno, and Shravan Vasishth. 2016. “Statistical methods for linguistic research: Foundational Ideas - Part II.” <em>Language and Linguistics Compass</em> 10 (11): 591–613. <a href="https://doi.org/10.1111/lnc3.12207">https://doi.org/10.1111/lnc3.12207</a>.</p>
 </div>
 <div id="ref-NicenboimPreactivation2019">
-<p>Nicenboim, Bruno, Shravan Vasishth, and Frank Rösler. 2020b. “Are Words Pre-Activated Probabilistically During Sentence Comprehension? Evidence from New Data and a Bayesian Random-Effects Meta-Analysis Using Publicly Available Data.” <em>Neuropsychologia</em> 142. <a href="https://doi.org/10.1016/j.neuropsychologia.2020.107427" class="uri">https://doi.org/10.1016/j.neuropsychologia.2020.107427</a>.</p>
+<p>Nicenboim, Bruno, Shravan Vasishth, and Frank Rösler. 2020. “Are Words Pre-Activated Probabilistically During Sentence Comprehension? Evidence from New Data and a Bayesian Random-Effects Meta-Analysis Using Publicly Available Data.” <em>Neuropsychologia</em> 142. <a href="https://doi.org/10.1016/j.neuropsychologia.2020.107427">https://doi.org/10.1016/j.neuropsychologia.2020.107427</a>.</p>
 </div>
 <div id="ref-pittWhenGoodFit2002">
-<p>Pitt, Mark A., and In Jae Myung. 2002. “When a Good Fit Can Be Bad.” <em>Trends in Cognitive Sciences</em> 6 (10): 421–25. <a href="https://doi.org/10.1016/S1364-6613(02)01964-2" class="uri">https://doi.org/10.1016/S1364-6613(02)01964-2</a>.</p>
+<p>Pitt, Mark A., and In Jae Myung. 2002. “When a Good Fit Can Be Bad.” <em>Trends in Cognitive Sciences</em> 6 (10): 421–25. <a href="https://doi.org/10.1016/S1364-6613(02)01964-2">https://doi.org/10.1016/S1364-6613(02)01964-2</a>.</p>
 </div>
 <div id="ref-rp">
-<p>Roberts, Seth, and Harold Pashler. 2000. “How Persuasive Is a Good Fit? A Comment on Theory Testing.” <em>Psychological Review</em> 107 (2): 358–67.</p>
+<p>Roberts, Seth, and Harold Pashler. 2000. “How Persuasive Is a Good Fit? A Comment on Theory Testing.” <em>Psychological Review</em> 107 (2): 358–67. <a href="https://doi.org/https://doi.org/10.1037/0033-295X.107.2.358">https://doi.org/https://doi.org/10.1037/0033-295X.107.2.358</a>.</p>
 </div>
 <div id="ref-rodriguez2021and">
-<p>Rodriguez, Josue E, Donald R Williams, and Philippe Rast. 2021. “Who Is and Is Not&quot; Average’&quot;? Random Effects Selection with Spike-and-Slab Priors.” PsyArXiv.</p>
+<p>Rodriguez, Josue E., Donald R. Williams, and Philippe Rast. 2022. “Who Is and Is Not ‘Average’? Random Effects Selection with Spike-and-Slab Priors.” <em>Psychological Methods</em>. <a href="https://doi.org/https://doi.org/10.1037/met0000535">https://doi.org/https://doi.org/10.1037/met0000535</a>.</p>
 </div>
 <div id="ref-rouder2018bayesian">
-<p>Rouder, Jeffrey N., Julia M Haaf, and Joachim Vandekerckhove. 2018. “Bayesian Inference for Psychology, Part IV: Parameter Estimation and Bayes Factors.” <em>Psychonomic Bulletin &amp; Review</em> 25 (1): 102–13.</p>
+<p>Rouder, Jeffrey N., Julia M. Haaf, and Joachim Vandekerckhove. 2018. “Bayesian Inference for Psychology, Part IV: Parameter Estimation and Bayes Factors.” <em>Psychonomic Bulletin &amp; Review</em> 25 (1): 102–13. <a href="https://doi.org/https://doi.org/10.3758/s13423-017-1420-7">https://doi.org/https://doi.org/10.3758/s13423-017-1420-7</a>.</p>
 </div>
 <div id="ref-spiegelhalter1994bayesian">
-<p>Spiegelhalter, David J, Laurence S. Freedman, and Mahesh KB Parmar. 1994. “Bayesian Approaches to Randomized Trials.” <em>Journal of the Royal Statistical Society. Series A (Statistics in Society)</em> 157 (3): 357–416.</p>
+<p>Spiegelhalter, David J., Laurence S. Freedman, and Mahesh K. B. Parmar. 1994. “Bayesian Approaches to Randomized Trials.” <em>Journal of the Royal Statistical Society. Series A (Statistics in Society)</em> 157 (3): 357–416.</p>
 </div>
 <div id="ref-SampleSizeCBB2021">
 <p>Vasishth, Shravan, Himanshu Yadav, Daniel J. Schad, and Bruno Nicenboim. 2022. “Sample Size Determination for Bayesian Hierarchical Models Commonly Used in Psycholinguistics.” <em>Computational Brain and Behavior</em>.</p>
 </div>
 <div id="ref-VehtariLampinen2002">
-<p>Vehtari, Aki, and Jouko Lampinen. 2002. “Bayesian Model Assessment and Comparison Using Cross-Validation Predictive Densities.” <em>Neural Computation</em> 14 (10): 2439–68. <a href="https://doi.org/10.1162/08997660260293292" class="uri">https://doi.org/10.1162/08997660260293292</a>.</p>
+<p>Vehtari, Aki, and Jouko Lampinen. 2002. “Bayesian Model Assessment and Comparison Using Cross-Validation Predictive Densities.” <em>Neural Computation</em> 14 (10): 2439–68. <a href="https://doi.org/10.1162/08997660260293292">https://doi.org/10.1162/08997660260293292</a>.</p>
 </div>
 <div id="ref-VehtariOjanen2012">
-<p>Vehtari, Aki, and Janne Ojanen. 2012. “A Survey of Bayesian Predictive Methods for Model Assessment, Selection and Comparison.” <em>Statistical Surveys</em> 6 (0). Institute of Mathematical Statistics: 142–228. <a href="https://doi.org/10.1214/12-ss102" class="uri">https://doi.org/10.1214/12-ss102</a>.</p>
+<p>Vehtari, Aki, and Janne Ojanen. 2012. “A Survey of Bayesian Predictive Methods for Model Assessment, Selection and Comparison.” <em>Statistical Surveys</em> 6 (0): 142–228. <a href="https://doi.org/10.1214/12-ss102">https://doi.org/10.1214/12-ss102</a>.</p>
 </div>
 <div id="ref-WangGelman2014difficulty">
 <p>Wang, Wei, and Andrew Gelman. 2014. “Difficulty of Selecting Among Multilevel Models Using Predictive Accuracy.” <em>Statistics at Its Interface</em> 7: 1–8.</p>
 </div>
+<div id="ref-YadavetalJML2022">
+<p>Yadav, Himanshu, Garrett Smith, Sebastian Reich, and Shravan Vasishth. 2023. “Number Feature Distortion Modulates Cue-Based Retrieval in Reading.” <em>Journal of Memory and Language</em> 129. <a href="https://doi.org/10.1016/j.jml.2022.104400">https://doi.org/10.1016/j.jml.2022.104400</a>.</p>
+</div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="41">
-<li id="fn41"><p>This is also strictly true only in a highest density interval (HDI), this is a credible interval where all the points within the interval have a higher probability density than points outside the interval. However, when posterior distributions are symmetrical, these intervals are virtually identical to the equal-tail intervals we use in this book.<a href="ch-comparison.html#fnref41" class="footnote-back">↩</a></p></li>
+<ol start="48">
+<li id="fn48"><p>In cases where priors are flat, however, credible intervals can show frequentist properties, making it reasonable to check whether zero falls within the credible interval. For example, <span class="citation">Newall et al. (<a href="#ref-newall2023evaluation" role="doc-biblioref">2023</a>)</span> use credible intervals as confidence intervals after calibration. They explicitly verify that 5% of the 95% credible intervals exclude zero when no effect exists; such a verification step would be necessary. However, our aim here is not to derive frequentist statistics from Bayesian analysis, but to use Bayesian methods for obtaining posterior probabilities and Bayes factors, focusing on Bayesian hypothesis testing.<a href="ch-comparison.html#fnref48" class="footnote-back">↩︎</a></p></li>
+<li id="fn49"><p>This is also strictly true only in a highest density interval (HDI), this is a credible interval where all the points within the interval have a higher probability density than points outside the interval. However, when posterior distributions are symmetrical, these intervals are virtually identical to the equal-tail intervals we use in this book.<a href="ch-comparison.html#fnref49" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
