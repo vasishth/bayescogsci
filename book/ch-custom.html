@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 Custom distributions in Stan | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 Custom distributions in Stan | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2024-03-11" />
+<meta name="date" content="2024-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1025,13 +1025,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="ch-priors.html"><a href="ch-priors.html#using-previous-experiments-posteriors-as-priors-for-a-new-study"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’  posteriors as priors for a new study</a></li>
 <li class="chapter" data-level="6.5" data-path="ch-priors.html"><a href="ch-priors.html#summary-5"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
 <li class="chapter" data-level="6.6" data-path="ch-priors.html"><a href="ch-priors.html#further-reading-3"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.7" data-path="ch-priors.html"><a href="ch-priors.html#sec-priorsexercises"><i class="fa fa-check"></i><b>6.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="ch-workflow.html"><a href="ch-workflow.html#building-a-model"><i class="fa fa-check"></i><b>7.1</b>  Building a model</a></li>
 <li class="chapter" data-level="7.2" data-path="ch-workflow.html"><a href="ch-workflow.html#principled-questions-to-ask-on-a-model"><i class="fa fa-check"></i><b>7.2</b> Principled questions to ask on a model</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#checking-whether-assumptions-are-consist-with-domain-expertise-prior-predictive-checks"><i class="fa fa-check"></i><b>7.2.1</b>  Checking whether assumptions are consist with  domain expertise: Prior predictive checks</a></li>
+<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#checking-whether-assumptions-are-consistent-with-domain-expertise-prior-predictive-checks"><i class="fa fa-check"></i><b>7.2.1</b>  Checking whether assumptions are consistent with  domain expertise: Prior predictive checks</a></li>
 <li class="chapter" data-level="7.2.2" data-path="ch-workflow.html"><a href="ch-workflow.html#testing-for-correct-posterior-approximations-checks-of-computational-faithfulness"><i class="fa fa-check"></i><b>7.2.2</b>  Testing for correct posterior approximations: Checks of computational faithfulness</a></li>
 <li class="chapter" data-level="7.2.3" data-path="ch-workflow.html"><a href="ch-workflow.html#sensitivity-of-the-model"><i class="fa fa-check"></i><b>7.2.3</b>  Sensitivity of the model</a></li>
 <li class="chapter" data-level="7.2.4" data-path="ch-workflow.html"><a href="ch-workflow.html#does-the-model-adequately-capture-the-dataposterior-predictive-checks"><i class="fa fa-check"></i><b>7.2.4</b>  Does the model adequately capture the data?–Posterior predictive checks</a></li>
@@ -1053,13 +1054,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>8.2.2</b> The  hypothesis matrix</a></li>
 <li class="chapter" data-level="8.2.3" data-path="ch-contr.html"><a href="ch-contr.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>8.2.3</b> Generating contrasts: The  <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a>
+<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor of four levels</a>
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="ch-contr.html"><a href="ch-contr.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b>  Repeated contrasts</a></li>
 <li class="chapter" data-level="8.3.2" data-path="ch-contr.html"><a href="ch-contr.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b>  Helmert contrasts</a></li>
 <li class="chapter" data-level="8.3.3" data-path="ch-contr.html"><a href="ch-contr.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or  model matrix</a></li>
 <li class="chapter" data-level="8.3.4" data-path="ch-contr.html"><a href="ch-contr.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b>  Polynomial contrasts</a></li>
-<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts:  monotonic effects</a></li>
+<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts:  Monotonic effects</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="ch-contr.html"><a href="ch-contr.html#nonOrthogonal"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a>
 <ul>
@@ -1130,7 +1131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.2" data-path="ch-custom.html"><a href="ch-custom.html#an-example-where-simulation-based-calibration-reveals-a-problem"><i class="fa fa-check"></i><b>12.2.2</b> An example where simulation-based calibration reveals a problem</a></li>
 <li class="chapter" data-level="12.2.3" data-path="ch-custom.html"><a href="ch-custom.html#issues-with-and-limitations-of-simulation-based-calibration"><i class="fa fa-check"></i><b>12.2.3</b> Issues with and limitations of simulation-based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-re-implementing-the-exponential-distribution-manually"><i class="fa fa-check"></i><b>12.3</b> Another  custom distribution: Re-implementing the  exponential distribution manually</a></li>
+<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-the-exponential-distribution-implemented-manually"><i class="fa fa-check"></i><b>12.3</b> Another  custom distribution: The exponential distribution  implemented manually</a></li>
 <li class="chapter" data-level="12.4" data-path="ch-custom.html"><a href="ch-custom.html#summary-10"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
 <li class="chapter" data-level="12.5" data-path="ch-custom.html"><a href="ch-custom.html#further-reading-9"><i class="fa fa-check"></i><b>12.5</b> Further reading</a></li>
 <li class="chapter" data-level="12.6" data-path="ch-custom.html"><a href="ch-custom.html#sec-customexercises"><i class="fa fa-check"></i><b>12.6</b> Exercises</a></li>
@@ -1193,7 +1194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.3.3" data-path="ch-cv.html"><a href="ch-cv.html#leave-one-group-out-cross-validation"><i class="fa fa-check"></i><b>16.3.3</b> Leave-one-group-out cross-validation</a></li>
 </ul></li>
 <li class="chapter" data-level="16.4" data-path="ch-cv.html"><a href="ch-cv.html#sec-logcv"><i class="fa fa-check"></i><b>16.4</b>  Comparing different likelihoods with cross-validation</a></li>
-<li class="chapter" data-level="16.5" data-path="ch-cv.html"><a href="ch-cv.html#issues-with-cross-validation"><i class="fa fa-check"></i><b>16.5</b> Issues with cross-validation</a></li>
+<li class="chapter" data-level="16.5" data-path="ch-cv.html"><a href="ch-cv.html#sec-issuesCV"><i class="fa fa-check"></i><b>16.5</b> Issues with cross-validation</a></li>
 <li class="chapter" data-level="16.6" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>16.6</b> Cross-validation in Stan</a>
 <ul>
 <li class="chapter" data-level="16.6.1" data-path="ch-cv.html"><a href="ch-cv.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>16.6.1</b>  PSIS-LOO-CV in Stan</a></li>
@@ -1202,8 +1203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.8" data-path="ch-cv.html"><a href="ch-cv.html#further-reading-13"><i class="fa fa-check"></i><b>16.8</b> Further reading</a></li>
 <li class="chapter" data-level="16.9" data-path="ch-cv.html"><a href="ch-cv.html#exercises-3"><i class="fa fa-check"></i><b>16.9</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
-<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to computational cognitive modeling</a>
+<li class="part"><span><b>VI Cognitive modeling with Stan</b></span></li>
+<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to cognitive modeling</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="ch-cogmod.html"><a href="ch-cogmod.html#what-characterizes-a-computational-cognitive-model"><i class="fa fa-check"></i><b>17.1</b> What characterizes a computational cognitive model?</a></li>
 <li class="chapter" data-level="17.2" data-path="ch-cogmod.html"><a href="ch-cogmod.html#some-advantages-of-taking-the-latent-variable-modeling-approach"><i class="fa fa-check"></i><b>17.2</b> Some advantages of taking the latent-variable modeling approach</a></li>
@@ -1286,7 +1287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Stan includes a large number of distributions, but what happens if we need a distribution that is not provided? In many cases, we can simply build a custom distribution by combining the ever-growing number of functions available in the Stan language.</p>
 <div id="sec-change" class="section level2 hasAnchor" number="12.1">
 <h2><span class="header-section-number">12.1</span> A change of variables with the reciprocal normal distribution<a href="ch-custom.html#sec-change" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In previous chapters, when faced with response times, we assumed a log-normal distribution. The log-normal distribution moves the inferences relating to the location parameter into a multiplicative frame (see Box <a href="ch-reg.html#thm:lognormal">4.3</a>). Another alternative, however, is to assume a  “reciprocal”-normal distribution of response times. This is referred to hereafter as rec-normal in the text, and as the <span class="math inline">\(\mathit{RecNormal}\)</span> distribution in equations. That is, we may want to assume that the reciprocal of the response times are normally distributed. This assumption may be theoretically motivated <span class="citation">(Harris et al. <a href="#ref-HarrisEtAl2014" role="doc-biblioref">2014</a>; Harris and Waddington <a href="#ref-Harris2012" role="doc-biblioref">2012</a>)</span> or it may arise from the application of the Box-Cox variance stabilizing transform procedure <span class="citation">(Box and Cox <a href="#ref-box1964analysis" role="doc-biblioref">1964</a>)</span>.</p>
+<p>In previous chapters, when faced with response times, we assumed a log-normal distribution. The log-normal distribution moves the inferences relating to the location parameter into a multiplicative frame (see Box <a href="ch-reg.html#thm:lognormal">4.3</a>). Another alternative, however, is to assume a  “reciprocal”-normal distribution of response times. This is referred to hereafter as rec-normal in the text, and as the <span class="math inline">\(\mathit{RecNormal}\)</span> distribution in equations. That is, we may want to assume that the reciprocal of the response times are normally distributed. This assumption may be theoretically motivated <span class="citation">(Harris et al. <a href="#ref-HarrisEtAl2014" role="doc-biblioref">2014</a>; Harris and Waddington <a href="#ref-Harris2012" role="doc-biblioref">2012</a>)</span> or it may arise from the application of the Box-Cox variance stabilizing transform procedure <span class="citation">(Box and Cox <a href="#ref-box1964analysis" role="doc-biblioref">1964</a>)</span>. An example from psycholinguistics of a data analysis with a reciprocal transform of reading time data appears in <span class="citation">Wu, Kaiser, and Vasishth (<a href="#ref-WuKaiserVasishth2017" role="doc-biblioref">2017</a>)</span>.</p>
 <p><span class="math display" id="eq:recip">\[\begin{equation}
 \begin{aligned}
 1/y &amp;\sim \mathit{Normal}(\mu, \sigma) \\
@@ -1296,12 +1297,13 @@ y &amp;\sim \mathit{RecNormal}(\mu, \sigma)
 \end{equation}\]</span></p>
 <p>An interesting aspect of the  rec-normal is that it affords an interpretation of the location parameter in terms of  rate or speed rather than time. Analogously to the case of the log-normal, neither the location <span class="math inline">\(\mu\)</span> nor the scale <span class="math inline">\(\sigma\)</span> are in the same scale as the dependent variable <span class="math inline">\(y\)</span>. These parameters are in the same scale as the transformed dependent variable (here, <span class="math inline">\(1/y\)</span>) that is assumed to be normally distributed.</p>
 <p>By setting <span class="math inline">\(\mu = 0.002\)</span> and <span class="math inline">\(\sigma = 0.0004\)</span>, data can be generated from the rec-normal that looks right-skewed and not unlike a distribution of response times. The code below shows some summary statistics of the generated data.</p>
-<div class="sourceCode" id="cb769"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb769-1"><a href="ch-custom.html#cb769-1" aria-hidden="true"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb769-2"><a href="ch-custom.html#cb769-2" aria-hidden="true"></a>mu &lt;-<span class="st"> </span><span class="fl">0.002</span></span>
-<span id="cb769-3"><a href="ch-custom.html#cb769-3" aria-hidden="true"></a>sigma &lt;-<span class="st"> </span><span class="fl">0.0004</span></span>
-<span id="cb769-4"><a href="ch-custom.html#cb769-4" aria-hidden="true"></a>rt &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">rnorm</span>(N, mu, sigma)</span>
-<span id="cb769-5"><a href="ch-custom.html#cb769-5" aria-hidden="true"></a><span class="kw">c</span>(<span class="kw">mean</span>(rt), <span class="kw">sd</span>(rt), <span class="kw">min</span>(rt), <span class="kw">max</span>(rt))</span></code></pre></div>
-<pre><code>## [1]  540  124  340 1084</code></pre>
+<div class="sourceCode" id="cb762"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb762-1"><a href="ch-custom.html#cb762-1" aria-hidden="true"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb762-2"><a href="ch-custom.html#cb762-2" aria-hidden="true"></a>mu &lt;-<span class="st"> </span><span class="fl">0.002</span></span>
+<span id="cb762-3"><a href="ch-custom.html#cb762-3" aria-hidden="true"></a>sigma &lt;-<span class="st"> </span><span class="fl">0.0004</span></span>
+<span id="cb762-4"><a href="ch-custom.html#cb762-4" aria-hidden="true"></a>rt &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">rnorm</span>(N, mu, sigma)</span>
+<span id="cb762-5"><a href="ch-custom.html#cb762-5" aria-hidden="true"></a><span class="kw">c</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(rt), <span class="dt">sd =</span> <span class="kw">sd</span>(rt), <span class="dt">min =</span> <span class="kw">min</span>(rt), <span class="dt">max =</span> <span class="kw">max</span>(rt))</span></code></pre></div>
+<pre><code>## mean   sd  min  max 
+##  527  122  319 1020</code></pre>
 <p>Figure <a href="ch-custom.html#fig:recnormalhist">12.1</a> shows the distribution generated with the code shown above.</p>
 
 <div class="figure"><span style="display:block;" id="fig:recnormalhist"></span>
@@ -1315,7 +1317,7 @@ FIGURE 12.1: Distribution of synthetic data with a rec-normal distribution with 
 \\ priors go here
 target += normal_lpdf(recRT | mu, sigma); 
 }</code></pre>
-<p>One issue here is that the parameters of the likelihood, <code>mu</code> and <code>sigma</code> are going to be very far away from the  unit scale (<span class="math inline">\(0.002\)</span> and <span class="math inline">\(0.0004\)</span> respectively). Due to the way Stan’s sampler is built, parameters that are too small (much smaller than 1) or too large (much larger than 1) can cause convergence problems. A straightforward solution is to fit the normal distribution to parameters in reciprocal of seconds rather than milliseconds; this would make the parameters have values that are <span class="math inline">\(1000\)</span> times larger (<span class="math inline">\(2\)</span> and <span class="math inline">\(0.4\)</span> respectively). We can do this using the  <code>transformed parameters</code> block. Although we use <code>mu</code> and <code>sigma</code> to fit the data, the priors are defined on the parameters <code>mu_s</code> and <code>sigma_s</code> (<span class="math inline">\(\mu_s\)</span> and <span class="math inline">\(\sigma_s\)</span>).</p>
+<p>One issue here is that the parameters of the likelihood, <code>mu</code> and <code>sigma</code> are going to be very far away from the  unit scale (<span class="math inline">\(0.002\)</span> and <span class="math inline">\(0.0004\)</span> respectively). Due to the way Stan’s sampler is built, parameters that are too small (much smaller than 1) or too large (much larger than 1) can cause convergence problems. A straightforward solution is to fit the normal distribution to parameters in reciprocal of seconds rather than milliseconds; this would make the parameters have values that are <span class="math inline">\(1000\)</span> times larger (<span class="math inline">\(2\)</span> and <span class="math inline">\(0.4\)</span> respectively). We can do this using the  <code>transformed parameters</code> block.<a href="#fn44" class="footnote-ref" id="fnref44"><sup>44</sup></a> Although we use <code>mu</code> and <code>sigma</code> to fit the data, the priors are defined on the parameters <code>mu_s</code> and <code>sigma_s</code> (<span class="math inline">\(\mu_s\)</span> and <span class="math inline">\(\sigma_s\)</span>).</p>
 <p>Unless one can rely on previous estimates, finding good priors for <span class="math inline">\(\mu_s\)</span> and <span class="math inline">\(\sigma_s\)</span> is not trivial. To define appropriate priors, we would need to start with relatively arbitrary priors, inspect the prior predictive distributions, adjust the priors, and repeat the inspection of prior predictive distributions until these distributions start to look realistic. In the interest of conserving space, we skip this iterative process here, and assign the following priors:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
@@ -1343,20 +1345,20 @@ model {
   target += normal_lpdf(recRT | mu, sigma);
 }</code></pre>
 <p>Fit and display the summary of the previous model:</p>
-<div class="sourceCode" id="cb773"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb773-1"><a href="ch-custom.html#cb773-1" aria-hidden="true"></a>normal_recrt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb773-2"><a href="ch-custom.html#cb773-2" aria-hidden="true"></a>                            <span class="st">&quot;normal_recrt.stan&quot;</span>,</span>
-<span id="cb773-3"><a href="ch-custom.html#cb773-3" aria-hidden="true"></a>                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb773-4"><a href="ch-custom.html#cb773-4" aria-hidden="true"></a>fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(normal_recrt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">recRT =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>rt))</span></code></pre></div>
-<div class="sourceCode" id="cb774"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb774-1"><a href="ch-custom.html#cb774-1" aria-hidden="true"></a><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb766-1"><a href="ch-custom.html#cb766-1" aria-hidden="true"></a>normal_recrt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb766-2"><a href="ch-custom.html#cb766-2" aria-hidden="true"></a>                            <span class="st">&quot;normal_recrt.stan&quot;</span>,</span>
+<span id="cb766-3"><a href="ch-custom.html#cb766-3" aria-hidden="true"></a>                            <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb766-4"><a href="ch-custom.html#cb766-4" aria-hidden="true"></a>fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(normal_recrt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">recRT =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>rt))</span></code></pre></div>
+<div class="sourceCode" id="cb767"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb767-1"><a href="ch-custom.html#cb767-1" aria-hidden="true"></a><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##         mean   2.5%  97.5% n_eff Rhat
-## mu    0.0019 0.0019 0.0020  3424    1
-## sigma 0.0004 0.0003 0.0005  3189    1</code></pre>
+## mu    0.0020 0.0019 0.0021  3878    1
+## sigma 0.0004 0.0004 0.0005  3687    1</code></pre>
 <p>Is a rec-normal likelihood more appropriate than a log-normal likelihood? As things stand, we cannot compare the models with these two likelihoods. This is because the dependent variables are different: we cannot compare reciprocal response times with untransformed response times on the millisecond scale.  Model comparison with the Bayes factor or cross-validation can only compare models with the same dependent variables; see chapters <a href="ch-comparison.html#ch-comparison">14</a>-<a href="ch-cv.html#ch-cv">16</a>.</p>
 <p>If we do want to compare the reciprocal-normal likelihood and the log-normal likelihood, we have to set up the models with the two likelihoods in such a way that the dependent measure is on the raw millisecond scale in each model. This means that for the reciprocal normal likelihood, the model will receive as data raw reading times in milliseconds, and these will be treated as a transformed random variable from reciprocal reading times. This approach is discussed next, but requires knowledge of the Jacobian adjustment (see <span class="citation">Ross (<a href="#ref-RossProb" role="doc-biblioref">2002</a>)</span>).</p>
 <div id="scaling-a-probability-density-with-the-jacobian-adjustment" class="section level3 hasAnchor" number="12.1.1">
 <h3><span class="header-section-number">12.1.1</span> Scaling a probability density with the Jacobian adjustment<a href="ch-custom.html#scaling-a-probability-density-with-the-jacobian-adjustment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To work with the original dependent variable (<code>RT</code> rather than <code>1/RT</code>) we need to perform a  <em>change of variables</em>: If the random variable X represents the reciprocal reading times (<span class="math inline">\(1/RT\)</span>), we can transform this random variable to a new one, <span class="math inline">\(Y = 1/X = 1/(1/RT) = RT\)</span>, yielding a transformed random variable <span class="math inline">\(Y\)</span> which represents reading time.</p>
-<p>This change of variables requires an adjustment to the (unnormalized log) posterior probability to account for the distortion caused by the transform.<a href="#fn44" class="footnote-ref" id="fnref44"><sup>44</sup></a> The probability must be scaled by a  <em>Jacobian</em> adjustment, which, in the univariate case as this one, is the absolute value of the derivative of the transform.<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a> The absolute value of any number is represented by enclosing it in two vertical bars: e.g., <span class="math inline">\(|-2| = 2\)</span>.</p>
+<p>This change of variables requires an adjustment to the (unnormalized log) posterior probability to account for the distortion caused by the transform.<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a> The probability must be scaled by a  <em>Jacobian</em> adjustment, which, in the univariate case as this one, is the absolute value of the derivative of the transform.<a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a> The absolute value of any number is represented by enclosing it in two vertical bars: e.g., <span class="math inline">\(|-2| = 2\)</span>.</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
 p(\mathit{RT}_n | \mu, \sigma )&amp; = \mathit{Normal}(1/\mathit{RT}_n | \mu, \sigma) \left| \frac{d}{d\mathit{RT}_n} 1/\mathit{RT}_n \right| = \\
@@ -1364,14 +1366,14 @@ p(\mathit{RT}_n | \mu, \sigma )&amp; = \mathit{Normal}(1/\mathit{RT}_n | \mu, \s
 &amp; \mathit{Normal}(1/\mathit{RT}_n | \mu, \sigma) \cdot  1/\mathit{RT}_n^2 
  \end{aligned}
 \end{equation}\]</span></p>
-<p>If we omit the Jacobian adjustment, we are essentially fitting a different and unnormalized likelihood (this will be shown later in this chapter). The discrepancy between the correct and incorrect posterior would depend on how large the Jacobian adjustment for our model is.</p>
+<p>If we omit the Jacobian adjustment, we are essentially fitting a different and unnormalized probability density function (this will be shown later in this chapter). The discrepancy between the correct and incorrect posterior would depend on how large the Jacobian adjustment for our model is.</p>
 <p>Because Stan works in log space, rather than multiplying the Jacobian adjustment, we add its logarithm to the log-probability density (<span class="math inline">\(\log(1/\mathit{RT}_n^2) = - 2 \cdot \log(\mathit{RT}_n)\)</span>). The contribution to the log likelihood (of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>) with its adjustment based from an individual observation, <span class="math inline">\(\mathit{RT}_{n}\)</span>, would be as follows.</p>
 <p><span class="math display">\[\begin{equation}
 \log(\mathit{Normal}(1/\mathit{RT}_n | \mu, \sigma)) - 2 \cdot \log(\mathit{RT}_n) 
 \end{equation}\]</span></p>
 <p>We obtain the log likelihood based on all the <span class="math inline">\(N\)</span> observations by summing the log likelihood of individual observations.</p>
 <p><span class="math display">\[\begin{equation}
-\log \mathcal{L} = \sum_n^N \log(\mathit{Normal}(1/\mathit{RT}_n | \mu, \sigma))  - \sum_n^N 2 \cdot \log(\mathit{RT}_n) 
+\log \mathcal{L} = \sum_{n=1}^N \log(\mathit{Normal}(1/\mathit{RT}_n | \mu, \sigma))  - \sum_{n=1}^N 2 \cdot \log(\mathit{RT}_n) 
 \end{equation}\]</span></p>
 <p>In Stan, this summing up is done as follows. The function <code>normal_lpdf</code> applied to a vector already returns the sum of the individual log-probability densities. The Jacobian adjustment <code>2*log(RT)</code>, which returns a vector of values, has to be summed up and added in manually (the term therefore becomes <code>-sum(2*log(RT))</code>).</p>
 <pre><code>target += normal_lpdf(1 ./ RT | mu, sigma) 
@@ -1400,20 +1402,20 @@ model {
     - sum(2 * log(RT));
 }</code></pre>
 <p>Next, generate data from a reciprocal truncated normal distribution:</p>
-<div class="sourceCode" id="cb778"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb778-1"><a href="ch-custom.html#cb778-1" aria-hidden="true"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb778-2"><a href="ch-custom.html#cb778-2" aria-hidden="true"></a>mu &lt;-<span class="st"> </span><span class="fl">.002</span></span>
-<span id="cb778-3"><a href="ch-custom.html#cb778-3" aria-hidden="true"></a>sigma &lt;-<span class="st"> </span><span class="fl">.0004</span></span>
-<span id="cb778-4"><a href="ch-custom.html#cb778-4" aria-hidden="true"></a>rt &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">rtnorm</span>(N, mu, sigma, <span class="dt">a =</span> <span class="dv">0</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb771"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb771-1"><a href="ch-custom.html#cb771-1" aria-hidden="true"></a>N &lt;-<span class="st"> </span><span class="dv">500</span></span>
+<span id="cb771-2"><a href="ch-custom.html#cb771-2" aria-hidden="true"></a>mu &lt;-<span class="st"> </span><span class="fl">.002</span></span>
+<span id="cb771-3"><a href="ch-custom.html#cb771-3" aria-hidden="true"></a>sigma &lt;-<span class="st"> </span><span class="fl">.0004</span></span>
+<span id="cb771-4"><a href="ch-custom.html#cb771-4" aria-hidden="true"></a>rt &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">rtnorm</span>(N, mu, sigma, <span class="dt">a =</span> <span class="dv">0</span>) </span></code></pre></div>
 <p>Fit the model to the data:</p>
-<div class="sourceCode" id="cb779"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb779-1"><a href="ch-custom.html#cb779-1" aria-hidden="true"></a>recnormal_rt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb779-2"><a href="ch-custom.html#cb779-2" aria-hidden="true"></a>  <span class="st">&quot;recnormal_rt.stan&quot;</span>,</span>
-<span id="cb779-3"><a href="ch-custom.html#cb779-3" aria-hidden="true"></a>  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb779-4"><a href="ch-custom.html#cb779-4" aria-hidden="true"></a>fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt))</span></code></pre></div>
+<div class="sourceCode" id="cb772"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb772-1"><a href="ch-custom.html#cb772-1" aria-hidden="true"></a>recnormal_rt &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb772-2"><a href="ch-custom.html#cb772-2" aria-hidden="true"></a>  <span class="st">&quot;recnormal_rt.stan&quot;</span>,</span>
+<span id="cb772-3"><a href="ch-custom.html#cb772-3" aria-hidden="true"></a>  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb772-4"><a href="ch-custom.html#cb772-4" aria-hidden="true"></a>fit_rec &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt))</span></code></pre></div>
 <p>Print the posterior summary:</p>
-<div class="sourceCode" id="cb780"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb780-1"><a href="ch-custom.html#cb780-1" aria-hidden="true"></a><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb773"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb773-1"><a href="ch-custom.html#cb773-1" aria-hidden="true"></a><span class="kw">print</span>(fit_rec, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>) </span></code></pre></div>
 <pre><code>##         mean   2.5%  97.5% n_eff Rhat
-## mu    0.0020 0.0020 0.0021  2998    1
-## sigma 0.0004 0.0003 0.0004  3135    1</code></pre>
+## mu    0.0020 0.0020 0.0020  3779    1
+## sigma 0.0004 0.0004 0.0004  3522    1</code></pre>
 <p>We get the same results as before, but now we could potentially compare this model to one that assumes a log-normal likelihood, for example.</p>
 <p>An important question is the following: Does every transformation of a random variable require a Jacobian adjustment? Essentially, if we assign a distribution to a random variable and then transform it, this does not require a Jacobian adjustment.</p>
 <p>Alternatively, if we apply a transformation on a random variable first, and then assign a distribution to the transformed random variable afterwards, we have a  change of variables. This requires a Jacobian adjustment. This is the reason why <code>1 ./ RT</code> requires a Jacobian adjustment, but not <code>mu_s</code>, <code>mu</code>, <code>sigma_s</code>, or <code>sigma_s</code> in the previous model.</p>
@@ -1438,7 +1440,7 @@ model {
 }</code></pre>
 <p>We want to create a log(PDF) function, similar to the native Stan functions that end in <code>_lpdf</code>. Our function will take as arguments a vector <code>RT</code>, and real numbers <code>mu</code> and <code>sigma</code>. In <code>_lpdf</code> functions, (some of) the arguments (e.g., <code>RT</code>, <code>mu</code>, and <code>sigma</code>) can be vectorized, but the output of the function is always a real number: the sum of the log(PDF) evaluated at every value of the random variable at the left of the pipe. As we show below, to do that we just move the right hand side of <code>target</code> in our original model inside our new function. See the section entitled Further Reading at the end of this chapter for more about Stan functions.</p>
 <p>For our custom random number generator function (which should end with <code>_rng</code>), we have the added complication that the function is truncated. We simply generate random values from a normal distribution, do the reciprocal transformation and if the number is above zero, this number is returned; otherwise, a new number is drawn.
-This implementation may be inefficient when rejections occur frequently. Another, more complex implementation using the inverse CDF approach can be found in <span class="citation">Stan Development Team (<a href="#ref-Stan2023" role="doc-biblioref">2023</a>)</span> (section 20.10 of the User’s guide).</p>
+This implementation may be inefficient when rejections occur frequently. Another, more complex implementation using the inverse CDF approach can be found in <span class="citation">Stan Development Team (<a href="#ref-Stan2023" role="doc-biblioref">2024</a>)</span> (section 21.10 of the User’s guide).</p>
 <p>The complete code can be found in <code>recnormal_rt_f.stan</code>, and is also shown below:</p>
 <pre class="stan fold-show"><code>functions {
   real recnormal_lpdf(vector y, real mu, real sigma){
@@ -1479,35 +1481,35 @@ generated quantities {
     rt_pred[n] = recnormal_rng(mu, sigma);
 }</code></pre>
 <p>Fit the model to the simulated data:</p>
-<div class="sourceCode" id="cb784"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb784-1"><a href="ch-custom.html#cb784-1" aria-hidden="true"></a>recnormal_rt_f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb784-2"><a href="ch-custom.html#cb784-2" aria-hidden="true"></a>                              <span class="st">&quot;recnormal_rt_f.stan&quot;</span>,</span>
-<span id="cb784-3"><a href="ch-custom.html#cb784-3" aria-hidden="true"></a>                              <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb784-4"><a href="ch-custom.html#cb784-4" aria-hidden="true"></a>fit_rec_f &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt_f, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt))</span></code></pre></div>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb777-1"><a href="ch-custom.html#cb777-1" aria-hidden="true"></a>recnormal_rt_f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb777-2"><a href="ch-custom.html#cb777-2" aria-hidden="true"></a>                              <span class="st">&quot;recnormal_rt_f.stan&quot;</span>,</span>
+<span id="cb777-3"><a href="ch-custom.html#cb777-3" aria-hidden="true"></a>                              <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb777-4"><a href="ch-custom.html#cb777-4" aria-hidden="true"></a>fit_rec_f &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt_f, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt))</span></code></pre></div>
 <p>Print the summary:</p>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb785-1"><a href="ch-custom.html#cb785-1" aria-hidden="true"></a><span class="kw">print</span>(fit_rec_f, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb778-1"><a href="ch-custom.html#cb778-1" aria-hidden="true"></a><span class="kw">print</span>(fit_rec_f, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>), <span class="dt">digits =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##         mean   2.5%  97.5% n_eff Rhat
-## mu    0.0020 0.0020 0.0021  3335    1
-## sigma 0.0004 0.0003 0.0004  3443    1</code></pre>
+## mu    0.0020 0.0020 0.0020  3299    1
+## sigma 0.0004 0.0004 0.0004  3148    1</code></pre>
 </div>
 </div>
 <div id="sec-validSBC" class="section level2 hasAnchor" number="12.2">
 <h2><span class="header-section-number">12.2</span>  Validation of a computed posterior distribution<a href="ch-custom.html#sec-validSBC" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The model converged, but did it work? At the very least we expect that the simulated data that we used to test the model shows similar distribution to the posterior predictive distributions. This is because we are fitting the data with the same function that we use to generate the data. Figure <a href="ch-custom.html#fig:ppcheckrec">12.2</a> shows that the simulated data and the posterior predictive distributions are similar.</p>
+<p>The model converged, but did it work? At the very least we expect that the simulated data that we used to test the model shows a very similar distribution to the posterior predictive distributions. This is because we are fitting the data with the same function that we use to generate the data. Figure <a href="ch-custom.html#fig:ppcheckrec">12.2</a> shows that the simulated data and the posterior predictive distributions are similar.</p>
 
-<div class="sourceCode" id="cb787"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb787-1"><a href="ch-custom.html#cb787-1" aria-hidden="true"></a></span>
-<span id="cb787-2"><a href="ch-custom.html#cb787-2" aria-hidden="true"></a><span class="kw">ppc_dens_overlay</span>(rt, <span class="dt">yrep =</span> <span class="kw">extract</span>(fit_rec_f)<span class="op">$</span>rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>, ]) <span class="op">+</span></span>
-<span id="cb787-3"><a href="ch-custom.html#cb787-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb780-1"><a href="ch-custom.html#cb780-1" aria-hidden="true"></a></span>
+<span id="cb780-2"><a href="ch-custom.html#cb780-2" aria-hidden="true"></a><span class="kw">ppc_dens_overlay</span>(rt, <span class="dt">yrep =</span> <span class="kw">extract</span>(fit_rec_f)<span class="op">$</span>rt_pred[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>, ]) <span class="op">+</span></span>
+<span id="cb780-3"><a href="ch-custom.html#cb780-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:ppcheckrec"></span>
 <img src="bookdown_files/figure-html/ppcheckrec-1.svg" alt="A posterior predictive check of fit_rec in comparison with the simulated data." width="672" />
 <p class="caption">
 FIGURE 12.2: A posterior predictive check of <code>fit_rec</code> in comparison with the simulated data.
 </p>
 </div>
-<p>Our synthetic data set was generated by first defining a  <em>ground truth</em> vector of parameters <span class="math inline">\([\mu; \sigma]\)</span>. We would expect that the true values of the parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> should be well inside the bulk of the posterior distribution of our model. We investigate this by plotting the true values of the parameters together with their posterior distributions using the function  <code>mcmc_recover_hist</code> of <code>bayesplot</code> as shown below in Figure <a href="ch-custom.html#fig:recoveryrec">12.3</a>.</p>
+<p>Our synthetic data set was generated by first defining a  <em>ground truth</em> vector of parameters <span class="math inline">\(\langle \mu; \sigma \rangle\)</span>. We would expect that the true values of the parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> should be well inside the bulk of the posterior distribution of our model. We investigate this by plotting the true values of the parameters together with their posterior distributions using the function  <code>mcmc_recover_hist()</code> of <code>bayesplot</code> as shown below in Figure <a href="ch-custom.html#fig:recoveryrec">12.3</a>.</p>
 
-<div class="sourceCode" id="cb788"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb788-1"><a href="ch-custom.html#cb788-1" aria-hidden="true"></a>post_rec &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_rec_f) <span class="op">%&gt;%</span></span>
-<span id="cb788-2"><a href="ch-custom.html#cb788-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>)</span>
-<span id="cb788-3"><a href="ch-custom.html#cb788-3" aria-hidden="true"></a><span class="kw">mcmc_recover_hist</span>(post_rec, <span class="dt">true =</span> <span class="kw">c</span>(mu, sigma))</span></code></pre></div>
+<div class="sourceCode" id="cb781"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb781-1"><a href="ch-custom.html#cb781-1" aria-hidden="true"></a>post_rec &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_rec_f) <span class="op">%&gt;%</span></span>
+<span id="cb781-2"><a href="ch-custom.html#cb781-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(mu, sigma)</span>
+<span id="cb781-3"><a href="ch-custom.html#cb781-3" aria-hidden="true"></a><span class="kw">mcmc_recover_hist</span>(post_rec, <span class="dt">true =</span> <span class="kw">c</span>(mu, sigma))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:recoveryrec"></span>
 <img src="bookdown_files/figure-html/recoveryrec-1.svg" alt="Posterior distributions of the parameters of fit_rec together with their true values." width="672" />
 <p class="caption">
@@ -1526,111 +1528,104 @@ FIGURE 12.3: Posterior distributions of the parameters of <code>fit_rec</code> t
 <li>Generate true values (i.e., a  ground truth) for the parameters of the model from the priors:</li>
 </ol>
 <p><span class="math display">\[\begin{equation}
-\boldsymbol{\tilde{\Theta}} \sim p(\boldsymbol{\Theta})
+\tilde{\Theta}_n \sim p(\boldsymbol{\Theta})
 \end{equation}\]</span></p>
-<p>Here, <span class="math inline">\(p(\boldsymbol{\Theta})\)</span> represents a  joint prior distributions of vector of parameters. In our previous example, the vector of parameters is <span class="math inline">\([\mu; \sigma]\)</span>, and the joint prior distribution is two independent distributions, a normal and a truncated normal. Crucially, the prior distributions should be meaningful; that is, one should use priors that are at least regularizing or weakly informative. The  prior space plays a crucial role because it determines the parameter space where we will verify the correctness or faithfulness of the model.</p>
-<p>Assuming 120 samples (from the priors), this step for our model would be as follows:</p>
-<div class="sourceCode" id="cb789"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb789-1"><a href="ch-custom.html#cb789-1" aria-hidden="true"></a>N_sim &lt;-<span class="st"> </span><span class="dv">120</span></span>
-<span id="cb789-2"><a href="ch-custom.html#cb789-2" aria-hidden="true"></a>mu_tilde &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_sim, <span class="dv">2</span>, <span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb789-3"><a href="ch-custom.html#cb789-3" aria-hidden="true"></a>sigma_tilde &lt;-<span class="st"> </span><span class="kw">rtnorm</span>(N_sim, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="dt">a =</span> <span class="dv">0</span>) <span class="op">/</span><span class="st"> </span><span class="dv">1000</span></span></code></pre></div>
+<p>Here, <span class="math inline">\(p(\boldsymbol{\Theta})\)</span> represents a  joint prior distributions of vector of parameters. In our previous example, the vector of parameters is <span class="math inline">\(\langle \mu; \sigma \rangle\)</span>, and the joint prior distribution is two independent distributions, a normal and a truncated normal. Crucially, the prior distributions should be meaningful; that is, one should use priors that are at least regularizing or weakly informative. The  prior space plays a crucial role because it determines the parameter space where we will verify the correctness or faithfulness of the model.</p>
+<p>Assuming 150 samples (from the priors), this step for our model would be as follows:</p>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb782-1"><a href="ch-custom.html#cb782-1" aria-hidden="true"></a>N_sim &lt;-<span class="st"> </span><span class="dv">150</span></span>
+<span id="cb782-2"><a href="ch-custom.html#cb782-2" aria-hidden="true"></a>mu_tilde &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_sim, <span class="dv">2</span>, <span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb782-3"><a href="ch-custom.html#cb782-3" aria-hidden="true"></a>sigma_tilde &lt;-<span class="st"> </span><span class="kw">rtnorm</span>(N_sim, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="dt">a =</span> <span class="dv">0</span>) <span class="op">/</span><span class="st"> </span><span class="dv">1000</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Generate multiple (<code>N_sim</code>) data sets based on the probability density function used as the likelihood:</li>
 </ol>
 <p><span class="math display">\[\begin{equation}
-\tilde{D}_n \sim p(\boldsymbol{D} | \boldsymbol{\tilde{\Theta}})
+\tilde{D}_n \sim p(\boldsymbol{D} | \tilde{\Theta}_n)
 \end{equation}\]</span></p>
 <p>The previous equation indicates that each data set <span class="math inline">\(\tilde{D}_n\)</span> is sampled from each of the generated parameters, <span class="math inline">\(\tilde{\Theta}_n\)</span>. Following our previous example, use the reciprocal truncated normal distribution to generate data sets of response times:</p>
-<div class="sourceCode" id="cb790"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb790-1"><a href="ch-custom.html#cb790-1" aria-hidden="true"></a><span class="co">## Create a place holder for all the simulated datasets</span></span>
-<span id="cb790-2"><a href="ch-custom.html#cb790-2" aria-hidden="true"></a>rt_tilde &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> N_sim)</span>
-<span id="cb790-3"><a href="ch-custom.html#cb790-3" aria-hidden="true"></a><span class="co"># Number of observations</span></span>
-<span id="cb790-4"><a href="ch-custom.html#cb790-4" aria-hidden="true"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb790-5"><a href="ch-custom.html#cb790-5" aria-hidden="true"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N_sim) {</span>
-<span id="cb790-6"><a href="ch-custom.html#cb790-6" aria-hidden="true"></a>  rt_tilde[[n]] &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">rtnorm</span>(N, mu_tilde[n], sigma_tilde[n], <span class="dt">a =</span> <span class="dv">0</span>)</span>
-<span id="cb790-7"><a href="ch-custom.html#cb790-7" aria-hidden="true"></a>}</span></code></pre></div>
-<p>Now, rt_tilde` consists of a list with 120 vectors of 100 observations each. Each list represents a  simulated data, which corresponds to <span class="math inline">\(\tilde{D}_{n}\)</span>.</p>
+<div class="sourceCode" id="cb783"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb783-1"><a href="ch-custom.html#cb783-1" aria-hidden="true"></a><span class="co">## Create a place holder for all the simulated datasets</span></span>
+<span id="cb783-2"><a href="ch-custom.html#cb783-2" aria-hidden="true"></a>rt_tilde &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> N_sim)</span>
+<span id="cb783-3"><a href="ch-custom.html#cb783-3" aria-hidden="true"></a><span class="co"># Number of observations</span></span>
+<span id="cb783-4"><a href="ch-custom.html#cb783-4" aria-hidden="true"></a>N &lt;-<span class="st"> </span><span class="dv">500</span></span>
+<span id="cb783-5"><a href="ch-custom.html#cb783-5" aria-hidden="true"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N_sim) {</span>
+<span id="cb783-6"><a href="ch-custom.html#cb783-6" aria-hidden="true"></a>  rt_tilde[[n]] &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">rtnorm</span>(N, mu_tilde[n], sigma_tilde[n], <span class="dt">a =</span> <span class="dv">0</span>)</span>
+<span id="cb783-7"><a href="ch-custom.html#cb783-7" aria-hidden="true"></a>}</span></code></pre></div>
+<p>Now, <code>rt_tilde</code> consists of a list with 150 vectors of 500 observations each. Each list represents a  simulated data, which corresponds to <span class="math inline">\(\tilde{D}_{n}\)</span>.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Fit the same Bayesian model to each of the generated data sets.</li>
 </ol>
 <p>After fitting the same model to each data set, we should compare the recovered  posterior distribution for each parameter of each simulated data set; that is, <span class="math inline">\(p(\Theta_n | \tilde{D}_{n})\)</span>, with the parameters that were used to generate the data, <span class="math inline">\(\tilde{\Theta}_{n}\)</span>. This comparison is represented by <code>...</code> in the code below (that is, it is not yet implemented in the code shown below). This raises the question of how to compare the posterior distribution with the ground truth values of the parameters.</p>
-<div class="sourceCode" id="cb791"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb791-1"><a href="ch-custom.html#cb791-1" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N_sim) {</span>
-<span id="cb791-2"><a href="ch-custom.html#cb791-2" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt,</span>
-<span id="cb791-3"><a href="ch-custom.html#cb791-3" aria-hidden="true"></a>    <span class="dt">data =</span> <span class="kw">list</span>(</span>
-<span id="cb791-4"><a href="ch-custom.html#cb791-4" aria-hidden="true"></a>      <span class="dt">N =</span> N,</span>
-<span id="cb791-5"><a href="ch-custom.html#cb791-5" aria-hidden="true"></a>      <span class="dt">rt =</span> rt_tilde[[n]]</span>
-<span id="cb791-6"><a href="ch-custom.html#cb791-6" aria-hidden="true"></a>    )</span>
-<span id="cb791-7"><a href="ch-custom.html#cb791-7" aria-hidden="true"></a>  )</span>
-<span id="cb791-8"><a href="ch-custom.html#cb791-8" aria-hidden="true"></a>  ...</span>
-<span id="cb791-9"><a href="ch-custom.html#cb791-9" aria-hidden="true"></a>}</span></code></pre></div>
-<p>The procedure shown before (1-3) defines a natural condition for assessing whether the computed posterior distributions match the exact posterior distributions <span class="citation">(Talts et al. <a href="#ref-talts2018validating" role="doc-biblioref">2018</a>; Cook, Gelman, and Rubin <a href="#ref-Cooketal2006" role="doc-biblioref">2006</a>)</span>. This condition is met if the generator, probabilistic program, and posterior approximation algorithm function match: The generator and the probabilistic program must accurately represent the same data-generating process, while the posterior approximation algorithm should yield samples that closely match the correct posterior for the probabilistic program, based on data simulated from the prior. Any discrepancy suggests a mismatch among the components <span class="citation">(Modrák et al. <a href="#ref-ModrakEtAl2023" role="doc-biblioref">2023</a>)</span>.<a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a></p>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb784-1"><a href="ch-custom.html#cb784-1" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N_sim) {</span>
+<span id="cb784-2"><a href="ch-custom.html#cb784-2" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">stan</span>(recnormal_rt,</span>
+<span id="cb784-3"><a href="ch-custom.html#cb784-3" aria-hidden="true"></a>    <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">rt =</span> rt_tilde[[n]])</span>
+<span id="cb784-4"><a href="ch-custom.html#cb784-4" aria-hidden="true"></a>  )</span>
+<span id="cb784-5"><a href="ch-custom.html#cb784-5" aria-hidden="true"></a>  ...</span>
+<span id="cb784-6"><a href="ch-custom.html#cb784-6" aria-hidden="true"></a>}</span></code></pre></div>
+<p>The procedure shown before (1-3) defines a natural condition for assessing whether the computed posterior distributions match the exact posterior distributions <span class="citation">(Talts et al. <a href="#ref-talts2018validating" role="doc-biblioref">2018</a>; Cook, Gelman, and Rubin <a href="#ref-Cooketal2006" role="doc-biblioref">2006</a>)</span>. This condition is met if the generator, probabilistic program, and posterior approximation algorithm function match: The generator and the probabilistic program must accurately represent the same data-generating process, while the posterior approximation algorithm should yield samples that closely match the correct posterior for the probabilistic program, based on data simulated from the prior. Any discrepancy suggests a mismatch among the components <span class="citation">(Modrák et al. <a href="#ref-ModrakEtAl2023" role="doc-biblioref">2023</a>)</span>.<a href="#fn47" class="footnote-ref" id="fnref47"><sup>47</sup></a></p>
 <p>The next two steps describe a well-defined comparison of the exact posterior and prior distribution <span class="citation">(different calibration checking methods differ in how exactly they test for mismatches between the distributions; Modrák et al. <a href="#ref-ModrakEtAl2023" role="doc-biblioref">2023</a>)</span>.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>Generate an  ensemble of rank statistics of prior samples relative to corresponding posterior samples.</li>
 </ol>
-<p><span class="citation">Talts et al. (<a href="#ref-talts2018validating" role="doc-biblioref">2018</a>)</span> demonstrate that the match between the exact posterior and prior can be evaluated by examining whether, for each element of <span class="math inline">\(\boldsymbol{\Theta}\)</span> (e. g., <span class="math inline">\([\mu; \sigma]\)</span>), the  <em>rank statistics</em> of the prior sample relative to <span class="math inline">\(S\)</span> posterior samples will be  uniformly distributed across <span class="math inline">\([0, S]\)</span>. In other words, for each sample of the prior (e.g., <span class="math inline">\(\tilde{\mu}_{n}\)</span>), we calculate the number of samples of the posterior that is smaller than the corresponding value of the parameter sampled, and we examine its distribution. A mismatch between the exact posterior and our posterior would show up as a  non-uniform distribution.</p>
+<p><span class="citation">Talts et al. (<a href="#ref-talts2018validating" role="doc-biblioref">2018</a>)</span> demonstrate that the match between the exact posterior and prior can be evaluated by examining whether, for each element of <span class="math inline">\(\boldsymbol{\Theta}\)</span> (e. g., <span class="math inline">\(\langle \mu; \sigma \rangle\)</span>), the  <em>rank statistics</em> of the prior sample relative to <span class="math inline">\(S\)</span> posterior samples will be  uniformly distributed across <span class="math inline">\([0, S]\)</span>. In other words, for each sample of the prior (e.g., <span class="math inline">\(\tilde{\mu}_{n}\)</span>), we calculate the number of samples of the posterior that is smaller than the corresponding value of the parameter sampled, and we examine its distribution. A mismatch between the exact posterior and our posterior would show up as a  non-uniform distribution.</p>
 <p>As a next step, we examine this new distribution visually using a histogram with <span class="math inline">\(S + 1\)</span> possible ranks (from <span class="math inline">\(0\)</span> to <span class="math inline">\(S\)</span>). There are two issues that we need to take into account <span class="citation">(Talts et al. <a href="#ref-talts2018validating" role="doc-biblioref">2018</a>)</span>:</p>
 <ol style="list-style-type: decimal">
 <li><p>Regardless of our model, histograms will deviate from uniformity if the posterior samples are dependent. This can be solved by  <em>thinning</em> the samples of the posterior, that is removing a number of intermediate samples <span class="citation">(Talts et al. <a href="#ref-talts2018validating" role="doc-biblioref">2018</a> recommend between 6 and 10)</span>.</p></li>
 <li><p>To reduce the noise in the histogram, we should have  bins of equal size. If <span class="math inline">\(S + 1\)</span> are divisible by a large power of <span class="math inline">\(2\)</span>, e.g, <span class="math inline">\(1024\)</span>, we will be able to re-bin the histogram easily with bins of equal size. We complete the code shown in step 3 by generating an ensemble of ranks statistics as well.</p></li>
 </ol>
 <p>Here we encapsulate steps 1 to 4 into a function.</p>
-<div class="sourceCode" id="cb792"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb792-1"><a href="ch-custom.html#cb792-1" aria-hidden="true"></a>gen_ranks &lt;-<span class="st"> </span><span class="cf">function</span>(...,</span>
-<span id="cb792-2"><a href="ch-custom.html#cb792-2" aria-hidden="true"></a>                      <span class="dt">N_sim =</span> <span class="dv">150</span>,</span>
-<span id="cb792-3"><a href="ch-custom.html#cb792-3" aria-hidden="true"></a>                      <span class="dt">N_s =</span> <span class="dv">1024</span> <span class="op">*</span><span class="st"> </span><span class="dv">6</span>, <span class="co"># Total samples from the posterior</span></span>
-<span id="cb792-4"><a href="ch-custom.html#cb792-4" aria-hidden="true"></a>                      <span class="dt">N =</span> <span class="dv">500</span> <span class="co"># Number of observations</span></span>
-<span id="cb792-5"><a href="ch-custom.html#cb792-5" aria-hidden="true"></a>                      ){</span>
-<span id="cb792-6"><a href="ch-custom.html#cb792-6" aria-hidden="true"></a>  mu_tilde &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_sim, <span class="dv">2</span>, <span class="fl">1.5</span>) <span class="op">/</span><span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb792-7"><a href="ch-custom.html#cb792-7" aria-hidden="true"></a>  sigma_tilde &lt;-<span class="st"> </span><span class="kw">rtnorm</span>(N_sim, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="dt">a =</span> <span class="dv">0</span>) <span class="op">/</span><span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb792-8"><a href="ch-custom.html#cb792-8" aria-hidden="true"></a></span>
-<span id="cb792-9"><a href="ch-custom.html#cb792-9" aria-hidden="true"></a>  <span class="co"># Thin by 6, and remove one extra sample so that S + 1 = 1024</span></span>
-<span id="cb792-10"><a href="ch-custom.html#cb792-10" aria-hidden="true"></a>  thinner &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> N_s, <span class="dt">by =</span> <span class="dv">6</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb792-11"><a href="ch-custom.html#cb792-11" aria-hidden="true"></a>  <span class="co"># Placeholders</span></span>
-<span id="cb792-12"><a href="ch-custom.html#cb792-12" aria-hidden="true"></a>  rank_mu &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, N_sim)</span>
-<span id="cb792-13"><a href="ch-custom.html#cb792-13" aria-hidden="true"></a>  rank_sigma &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, N_sim)</span>
-<span id="cb792-14"><a href="ch-custom.html#cb792-14" aria-hidden="true"></a>  rt_tilde &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> N_sim)</span>
-<span id="cb792-15"><a href="ch-custom.html#cb792-15" aria-hidden="true"></a>  <span class="co"># Loop over the simulations</span></span>
-<span id="cb792-16"><a href="ch-custom.html#cb792-16" aria-hidden="true"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N_sim) {</span>
-<span id="cb792-17"><a href="ch-custom.html#cb792-17" aria-hidden="true"></a>    <span class="kw">message</span>(<span class="st">&quot;Fit number &quot;</span>, n)</span>
-<span id="cb792-18"><a href="ch-custom.html#cb792-18" aria-hidden="true"></a>    <span class="co"># it will repeat the sampling unless the model converged</span></span>
-<span id="cb792-19"><a href="ch-custom.html#cb792-19" aria-hidden="true"></a>    <span class="cf">repeat</span>{</span>
-<span id="cb792-20"><a href="ch-custom.html#cb792-20" aria-hidden="true"></a>      rt_tilde[[n]] &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">rtnorm</span>(N,</span>
-<span id="cb792-21"><a href="ch-custom.html#cb792-21" aria-hidden="true"></a>                                  mu_tilde[n],</span>
-<span id="cb792-22"><a href="ch-custom.html#cb792-22" aria-hidden="true"></a>                                  sigma_tilde[n],</span>
-<span id="cb792-23"><a href="ch-custom.html#cb792-23" aria-hidden="true"></a>                                  <span class="dt">a =</span> <span class="dv">0</span></span>
-<span id="cb792-24"><a href="ch-custom.html#cb792-24" aria-hidden="true"></a>                                  )</span>
-<span id="cb792-25"><a href="ch-custom.html#cb792-25" aria-hidden="true"></a>      <span class="co"># Fit is only stored temporarily</span></span>
-<span id="cb792-26"><a href="ch-custom.html#cb792-26" aria-hidden="true"></a>      fit &lt;-<span class="st"> </span><span class="kw">stan</span>(...,</span>
-<span id="cb792-27"><a href="ch-custom.html#cb792-27" aria-hidden="true"></a>                  <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N,</span>
-<span id="cb792-28"><a href="ch-custom.html#cb792-28" aria-hidden="true"></a>                              <span class="dt">RT =</span> rt_tilde[[n]]),</span>
-<span id="cb792-29"><a href="ch-custom.html#cb792-29" aria-hidden="true"></a>                  <span class="dt">warmup =</span> <span class="dv">2500</span>,</span>
-<span id="cb792-30"><a href="ch-custom.html#cb792-30" aria-hidden="true"></a>                  <span class="dt">iter =</span> <span class="dv">2500</span> <span class="op">+</span><span class="st"> </span>N_s <span class="op">/</span><span class="st"> </span><span class="dv">4</span>,</span>
-<span id="cb792-31"><a href="ch-custom.html#cb792-31" aria-hidden="true"></a>                  <span class="dt">refresh =</span> <span class="dv">-1</span>,</span>
-<span id="cb792-32"><a href="ch-custom.html#cb792-32" aria-hidden="true"></a>                  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</span>
-<span id="cb792-33"><a href="ch-custom.html#cb792-33" aria-hidden="true"></a>                                 <span class="dt">max_treedepth =</span> <span class="dv">14</span>)</span>
-<span id="cb792-34"><a href="ch-custom.html#cb792-34" aria-hidden="true"></a>                  )</span>
-<span id="cb792-35"><a href="ch-custom.html#cb792-35" aria-hidden="true"></a>      <span class="co"># continue if there are no divergent transitions</span></span>
-<span id="cb792-36"><a href="ch-custom.html#cb792-36" aria-hidden="true"></a>      <span class="co"># and all Rhat are smaller than 1.05</span></span>
-<span id="cb792-37"><a href="ch-custom.html#cb792-37" aria-hidden="true"></a>      <span class="cf">if</span> (<span class="op">!</span><span class="kw">get_num_divergent</span>(fit) <span class="op">&amp;</span></span>
-<span id="cb792-38"><a href="ch-custom.html#cb792-38" aria-hidden="true"></a><span class="st">          </span><span class="kw">all</span>(<span class="kw">monitor</span>(fit)[,<span class="st">&quot;Rhat&quot;</span>] <span class="op">&lt;=</span><span class="st"> </span><span class="fl">1.05</span>)) <span class="cf">break</span></span>
-<span id="cb792-39"><a href="ch-custom.html#cb792-39" aria-hidden="true"></a>      <span class="kw">message</span>(<span class="st">&quot;Repeating fit &quot;</span>,n)</span>
-<span id="cb792-40"><a href="ch-custom.html#cb792-40" aria-hidden="true"></a>    }</span>
-<span id="cb792-41"><a href="ch-custom.html#cb792-41" aria-hidden="true"></a>    post &lt;-<span class="st"> </span><span class="kw">extract</span>(fit)</span>
-<span id="cb792-42"><a href="ch-custom.html#cb792-42" aria-hidden="true"></a>    <span class="co"># Number of samples of the posterior that is smaller than</span></span>
-<span id="cb792-43"><a href="ch-custom.html#cb792-43" aria-hidden="true"></a>    <span class="co"># the corresponding value of the parameter sampled</span></span>
-<span id="cb792-44"><a href="ch-custom.html#cb792-44" aria-hidden="true"></a>    rank_mu[n] &lt;-<span class="st"> </span><span class="kw">sum</span>(post<span class="op">$</span>mu[thinner] <span class="op">&lt;</span><span class="st"> </span>mu_tilde[n])</span>
-<span id="cb792-45"><a href="ch-custom.html#cb792-45" aria-hidden="true"></a>    rank_sigma[n] &lt;-<span class="st"> </span><span class="kw">sum</span>(post<span class="op">$</span>sigma[thinner] <span class="op">&lt;</span><span class="st"> </span>sigma_tilde[n])</span>
-<span id="cb792-46"><a href="ch-custom.html#cb792-46" aria-hidden="true"></a>    </span>
-<span id="cb792-47"><a href="ch-custom.html#cb792-47" aria-hidden="true"></a>  }</span>
-<span id="cb792-48"><a href="ch-custom.html#cb792-48" aria-hidden="true"></a>  <span class="co">#data frame with ranks:</span></span>
-<span id="cb792-49"><a href="ch-custom.html#cb792-49" aria-hidden="true"></a>  <span class="kw">tibble</span>(<span class="dt">sim =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_sim, <span class="dv">2</span>),</span>
-<span id="cb792-50"><a href="ch-custom.html#cb792-50" aria-hidden="true"></a>         <span class="dt">variable =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>),</span>
-<span id="cb792-51"><a href="ch-custom.html#cb792-51" aria-hidden="true"></a>                        <span class="dt">each =</span> N_sim),</span>
-<span id="cb792-52"><a href="ch-custom.html#cb792-52" aria-hidden="true"></a>         <span class="dt">rank =</span> <span class="kw">c</span>(rank_mu, rank_sigma)</span>
-<span id="cb792-53"><a href="ch-custom.html#cb792-53" aria-hidden="true"></a>         )</span>
-<span id="cb792-54"><a href="ch-custom.html#cb792-54" aria-hidden="true"></a>}</span>
-<span id="cb792-55"><a href="ch-custom.html#cb792-55" aria-hidden="true"></a></span>
-<span id="cb792-56"><a href="ch-custom.html#cb792-56" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb792-57"><a href="ch-custom.html#cb792-57" aria-hidden="true"></a><span class="co"># generate ranks with the default values:</span></span>
-<span id="cb792-58"><a href="ch-custom.html#cb792-58" aria-hidden="true"></a>df_rank &lt;-<span class="st"> </span><span class="kw">gen_ranks</span>(recnormal_rt) </span></code></pre></div>
+<div class="sourceCode" id="cb785"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb785-1"><a href="ch-custom.html#cb785-1" aria-hidden="true"></a>gen_ranks &lt;-<span class="st"> </span><span class="cf">function</span>(...,</span>
+<span id="cb785-2"><a href="ch-custom.html#cb785-2" aria-hidden="true"></a>                      <span class="dt">N_sim =</span> <span class="dv">150</span>,</span>
+<span id="cb785-3"><a href="ch-custom.html#cb785-3" aria-hidden="true"></a>                      <span class="dt">N_s =</span> <span class="dv">1024</span> <span class="op">*</span><span class="st"> </span><span class="dv">6</span>, <span class="co"># Total samples from the posterior</span></span>
+<span id="cb785-4"><a href="ch-custom.html#cb785-4" aria-hidden="true"></a>                      <span class="dt">N =</span> <span class="dv">500</span> <span class="co"># Number of observations</span></span>
+<span id="cb785-5"><a href="ch-custom.html#cb785-5" aria-hidden="true"></a>                      ){</span>
+<span id="cb785-6"><a href="ch-custom.html#cb785-6" aria-hidden="true"></a>  mu_tilde &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_sim, <span class="dv">2</span>, <span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb785-7"><a href="ch-custom.html#cb785-7" aria-hidden="true"></a>  sigma_tilde &lt;-<span class="st"> </span><span class="kw">rtnorm</span>(N_sim, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="dt">a =</span> <span class="dv">0</span>) <span class="op">/</span><span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb785-8"><a href="ch-custom.html#cb785-8" aria-hidden="true"></a>  <span class="co"># Thin by 6, and remove one extra sample so that S + 1 = 1024</span></span>
+<span id="cb785-9"><a href="ch-custom.html#cb785-9" aria-hidden="true"></a>  thinner &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> N_s, <span class="dt">by =</span> <span class="dv">6</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb785-10"><a href="ch-custom.html#cb785-10" aria-hidden="true"></a>  <span class="co"># Placeholders</span></span>
+<span id="cb785-11"><a href="ch-custom.html#cb785-11" aria-hidden="true"></a>  rank_mu &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, N_sim)</span>
+<span id="cb785-12"><a href="ch-custom.html#cb785-12" aria-hidden="true"></a>  rank_sigma &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, N_sim)</span>
+<span id="cb785-13"><a href="ch-custom.html#cb785-13" aria-hidden="true"></a>  rt_tilde &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> N_sim)</span>
+<span id="cb785-14"><a href="ch-custom.html#cb785-14" aria-hidden="true"></a>  <span class="co"># Loop over the simulations</span></span>
+<span id="cb785-15"><a href="ch-custom.html#cb785-15" aria-hidden="true"></a>  <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N_sim) {</span>
+<span id="cb785-16"><a href="ch-custom.html#cb785-16" aria-hidden="true"></a>    <span class="kw">message</span>(<span class="st">&quot;Fit number &quot;</span>, n)</span>
+<span id="cb785-17"><a href="ch-custom.html#cb785-17" aria-hidden="true"></a>    <span class="co"># it will repeat the sampling unless the model converged</span></span>
+<span id="cb785-18"><a href="ch-custom.html#cb785-18" aria-hidden="true"></a>    <span class="cf">repeat</span>{</span>
+<span id="cb785-19"><a href="ch-custom.html#cb785-19" aria-hidden="true"></a>      rt_tilde[[n]] &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">rtnorm</span>(N,</span>
+<span id="cb785-20"><a href="ch-custom.html#cb785-20" aria-hidden="true"></a>                                  mu_tilde[n],</span>
+<span id="cb785-21"><a href="ch-custom.html#cb785-21" aria-hidden="true"></a>                                  sigma_tilde[n],</span>
+<span id="cb785-22"><a href="ch-custom.html#cb785-22" aria-hidden="true"></a>                                  <span class="dt">a =</span> <span class="dv">0</span></span>
+<span id="cb785-23"><a href="ch-custom.html#cb785-23" aria-hidden="true"></a>                                  )</span>
+<span id="cb785-24"><a href="ch-custom.html#cb785-24" aria-hidden="true"></a>      <span class="co"># Fit is only stored temporarily</span></span>
+<span id="cb785-25"><a href="ch-custom.html#cb785-25" aria-hidden="true"></a>      fit &lt;-<span class="st"> </span><span class="kw">stan</span>(...,</span>
+<span id="cb785-26"><a href="ch-custom.html#cb785-26" aria-hidden="true"></a>                  <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N,</span>
+<span id="cb785-27"><a href="ch-custom.html#cb785-27" aria-hidden="true"></a>                              <span class="dt">RT =</span> rt_tilde[[n]]),</span>
+<span id="cb785-28"><a href="ch-custom.html#cb785-28" aria-hidden="true"></a>                  <span class="dt">warmup =</span> <span class="dv">2500</span>,</span>
+<span id="cb785-29"><a href="ch-custom.html#cb785-29" aria-hidden="true"></a>                  <span class="dt">iter =</span> <span class="dv">2500</span> <span class="op">+</span><span class="st"> </span>N_s <span class="op">/</span><span class="st"> </span><span class="dv">4</span>,</span>
+<span id="cb785-30"><a href="ch-custom.html#cb785-30" aria-hidden="true"></a>                  <span class="dt">refresh =</span> <span class="dv">-1</span>,</span>
+<span id="cb785-31"><a href="ch-custom.html#cb785-31" aria-hidden="true"></a>                  <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</span>
+<span id="cb785-32"><a href="ch-custom.html#cb785-32" aria-hidden="true"></a>                                 <span class="dt">max_treedepth =</span> <span class="dv">14</span>))</span>
+<span id="cb785-33"><a href="ch-custom.html#cb785-33" aria-hidden="true"></a>      <span class="co"># continue if there are no divergent transitions</span></span>
+<span id="cb785-34"><a href="ch-custom.html#cb785-34" aria-hidden="true"></a>      <span class="co"># and all Rhat are smaller than 1.05</span></span>
+<span id="cb785-35"><a href="ch-custom.html#cb785-35" aria-hidden="true"></a>      <span class="cf">if</span> (<span class="op">!</span><span class="kw">get_num_divergent</span>(fit) <span class="op">&amp;</span></span>
+<span id="cb785-36"><a href="ch-custom.html#cb785-36" aria-hidden="true"></a><span class="st">          </span><span class="kw">all</span>(<span class="kw">monitor</span>(fit)[,<span class="st">&quot;Rhat&quot;</span>] <span class="op">&lt;=</span><span class="st"> </span><span class="fl">1.05</span>)) <span class="cf">break</span></span>
+<span id="cb785-37"><a href="ch-custom.html#cb785-37" aria-hidden="true"></a>      <span class="kw">message</span>(<span class="st">&quot;Repeating fit &quot;</span>,n)</span>
+<span id="cb785-38"><a href="ch-custom.html#cb785-38" aria-hidden="true"></a>    }</span>
+<span id="cb785-39"><a href="ch-custom.html#cb785-39" aria-hidden="true"></a>    post &lt;-<span class="st"> </span><span class="kw">extract</span>(fit)</span>
+<span id="cb785-40"><a href="ch-custom.html#cb785-40" aria-hidden="true"></a>    <span class="co"># Number of samples of the posterior that is smaller than</span></span>
+<span id="cb785-41"><a href="ch-custom.html#cb785-41" aria-hidden="true"></a>    <span class="co"># the corresponding value of the parameter sampled</span></span>
+<span id="cb785-42"><a href="ch-custom.html#cb785-42" aria-hidden="true"></a>    rank_mu[n] &lt;-<span class="st"> </span><span class="kw">sum</span>(post<span class="op">$</span>mu[thinner] <span class="op">&lt;</span><span class="st"> </span>mu_tilde[n])</span>
+<span id="cb785-43"><a href="ch-custom.html#cb785-43" aria-hidden="true"></a>    rank_sigma[n] &lt;-<span class="st"> </span><span class="kw">sum</span>(post<span class="op">$</span>sigma[thinner] <span class="op">&lt;</span><span class="st"> </span>sigma_tilde[n])</span>
+<span id="cb785-44"><a href="ch-custom.html#cb785-44" aria-hidden="true"></a>  }</span>
+<span id="cb785-45"><a href="ch-custom.html#cb785-45" aria-hidden="true"></a>  <span class="co">#data frame with ranks:</span></span>
+<span id="cb785-46"><a href="ch-custom.html#cb785-46" aria-hidden="true"></a>  <span class="kw">tibble</span>(<span class="dt">sim =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>N_sim, <span class="dv">2</span>),</span>
+<span id="cb785-47"><a href="ch-custom.html#cb785-47" aria-hidden="true"></a>         <span class="dt">variable =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>),</span>
+<span id="cb785-48"><a href="ch-custom.html#cb785-48" aria-hidden="true"></a>                        <span class="dt">each =</span> N_sim),</span>
+<span id="cb785-49"><a href="ch-custom.html#cb785-49" aria-hidden="true"></a>         <span class="dt">rank =</span> <span class="kw">c</span>(rank_mu, rank_sigma))</span>
+<span id="cb785-50"><a href="ch-custom.html#cb785-50" aria-hidden="true"></a>}</span>
+<span id="cb785-51"><a href="ch-custom.html#cb785-51" aria-hidden="true"></a></span>
+<span id="cb785-52"><a href="ch-custom.html#cb785-52" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb785-53"><a href="ch-custom.html#cb785-53" aria-hidden="true"></a><span class="co"># generate ranks with the default values:</span></span>
+<span id="cb785-54"><a href="ch-custom.html#cb785-54" aria-hidden="true"></a>df_rank &lt;-<span class="st"> </span><span class="kw">gen_ranks</span>(recnormal_rt) </span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Graphically assess the  correctness of the model using  rank histograms</li>
 </ol>
@@ -1638,19 +1633,16 @@ FIGURE 12.3: Posterior distributions of the parameters of <code>fit_rec</code> t
 If the posterior estimates are correct, then each of the <span class="math inline">\(B\)</span> bins has a probability of <span class="math inline">\(1/B\)</span> that a simulation (i.e., an individual rank) falls into it: <span class="math inline">\(\mathit{Binomial}(N_{sim}, 1/B)\)</span>. This allow us to complement the histograms with confidence intervals, indicating where the variation expected from a uniform histogram should be.</p>
 <p>Use the code below to build the plot shown in Figure <a href="ch-custom.html#fig:SBChand">12.4</a>. We can conclude that the implementation of our model (in the parameter space determined by the priors) is correct.</p>
 
-<div class="sourceCode" id="cb793"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb793-1"><a href="ch-custom.html#cb793-1" aria-hidden="true"></a>B &lt;-<span class="st"> </span><span class="dv">16</span></span>
-<span id="cb793-2"><a href="ch-custom.html#cb793-2" aria-hidden="true"></a>bin_size &lt;-<span class="st"> </span><span class="dv">1024</span> <span class="op">/</span><span class="st"> </span><span class="dv">16</span></span>
-<span id="cb793-3"><a href="ch-custom.html#cb793-3" aria-hidden="true"></a>ci_l &lt;-<span class="st"> </span><span class="kw">qbinom</span>(<span class="fl">0.005</span>, <span class="dt">size =</span> N_sim, <span class="dt">prob =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>B)</span>
-<span id="cb793-4"><a href="ch-custom.html#cb793-4" aria-hidden="true"></a>ci_u &lt;-<span class="st"> </span><span class="kw">qbinom</span>(<span class="fl">0.995</span>, <span class="dt">size =</span> N_sim, <span class="dt">prob =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>B)</span>
-<span id="cb793-5"><a href="ch-custom.html#cb793-5" aria-hidden="true"></a><span class="kw">ggplot</span>(df_rank, <span class="kw">aes</span>(<span class="dt">x =</span> rank)) <span class="op">+</span></span>
-<span id="cb793-6"><a href="ch-custom.html#cb793-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_histogram</span>(</span>
-<span id="cb793-7"><a href="ch-custom.html#cb793-7" aria-hidden="true"></a>    <span class="dt">breaks =</span></span>
-<span id="cb793-8"><a href="ch-custom.html#cb793-8" aria-hidden="true"></a>      <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1023</span>, <span class="dt">length.out =</span> B <span class="op">+</span><span class="st"> </span><span class="dv">1</span>),</span>
-<span id="cb793-9"><a href="ch-custom.html#cb793-9" aria-hidden="true"></a>    <span class="dt">closed =</span> <span class="st">&quot;left&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span></span>
-<span id="cb793-10"><a href="ch-custom.html#cb793-10" aria-hidden="true"></a>  ) <span class="op">+</span></span>
-<span id="cb793-11"><a href="ch-custom.html#cb793-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="st">&quot;count&quot;</span>) <span class="op">+</span></span>
-<span id="cb793-12"><a href="ch-custom.html#cb793-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">c</span>(ci_l, ci_u), <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
-<span id="cb793-13"><a href="ch-custom.html#cb793-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb786-1"><a href="ch-custom.html#cb786-1" aria-hidden="true"></a>B &lt;-<span class="st"> </span><span class="dv">16</span></span>
+<span id="cb786-2"><a href="ch-custom.html#cb786-2" aria-hidden="true"></a>bin_size &lt;-<span class="st"> </span><span class="dv">1024</span> <span class="op">/</span><span class="st"> </span><span class="dv">16</span></span>
+<span id="cb786-3"><a href="ch-custom.html#cb786-3" aria-hidden="true"></a>ci_l &lt;-<span class="st"> </span><span class="kw">qbinom</span>(<span class="fl">0.005</span>, <span class="dt">size =</span> N_sim, <span class="dt">prob =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>B)</span>
+<span id="cb786-4"><a href="ch-custom.html#cb786-4" aria-hidden="true"></a>ci_u &lt;-<span class="st"> </span><span class="kw">qbinom</span>(<span class="fl">0.995</span>, <span class="dt">size =</span> N_sim, <span class="dt">prob =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>B)</span>
+<span id="cb786-5"><a href="ch-custom.html#cb786-5" aria-hidden="true"></a><span class="kw">ggplot</span>(df_rank, <span class="kw">aes</span>(<span class="dt">x =</span> rank)) <span class="op">+</span></span>
+<span id="cb786-6"><a href="ch-custom.html#cb786-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1023</span>, <span class="dt">length.out =</span> B <span class="op">+</span><span class="st"> </span><span class="dv">1</span>),</span>
+<span id="cb786-7"><a href="ch-custom.html#cb786-7" aria-hidden="true"></a>                 <span class="dt">closed =</span> <span class="st">&quot;left&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb786-8"><a href="ch-custom.html#cb786-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="st">&quot;count&quot;</span>) <span class="op">+</span></span>
+<span id="cb786-9"><a href="ch-custom.html#cb786-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">c</span>(ci_l, ci_u), <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
+<span id="cb786-10"><a href="ch-custom.html#cb786-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:SBChand"></span>
 <img src="bookdown_files/figure-html/SBChand-1.svg" alt="Rank histograms of \(\mu\) and \(\sigma\) from the reciprocal truncated normal distribution. The dashed lines represent the 99% confidence interval." width="672" />
 <p class="caption">
@@ -1682,13 +1674,14 @@ FIGURE 12.6: Rank histograms of <span class="math inline">\(\mu\)</span> and <sp
 <div id="issues-with-and-limitations-of-simulation-based-calibration" class="section level3 hasAnchor" number="12.2.3">
 <h3><span class="header-section-number">12.2.3</span> Issues with and limitations of simulation-based calibration<a href="ch-custom.html#issues-with-and-limitations-of-simulation-based-calibration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the previous sections, we have used only rank histograms. Even though histograms are a very intuitive means of visualization to assess model correctness, they might not be sensitive enough for small deviations <span class="citation">(Talts et al. <a href="#ref-talts2018validating" role="doc-biblioref">2018</a>)</span>. Other visualizations might be better suited. Another limitation of histograms is that they are sensitive to the number of bins <span class="citation">(Säilynoja, Bürkner, and Vehtari <a href="#ref-sailynoja2022graphical" role="doc-biblioref">2022</a>)</span>. One could bin the histograms multiple times, but this approach is difficult to interpret when there are many parameters, and can be vulnerable to multiple testing biases <span class="citation">(Talts et al. <a href="#ref-talts2018validating" role="doc-biblioref">2018</a>)</span>. One alternative to rank histograms is visualizations based on the  empirical cumulative density function of the ranks. This is briefly presented in Box <a href="ch-custom.html#thm:sbc">12.1</a>.</p>
+<div style="page-break-after: always;"></div>
 <div class="extra">
 <div class="theorem">
 <p><span id="thm:sbc" class="theorem"><strong>Box 12.1  </strong></span><strong>Different rank visualizations and the <code>SBC</code> package.</strong></p>
 </div>
-<p>Implementing the simulation-based calibration algorithm “by hand” introduces a new source of potential errors. Fortunately, the R package  <code>SBC</code> <span class="citation">(Kim et al. <a href="#ref-R-SBC" role="doc-biblioref">2022</a>)</span> provides tools to validate a Stan model (or any sampling algorithm) by allowing us to run simulation-based calibrations easily.
-The package is in active development at the moment<a href="#fn47" class="footnote-ref" id="fnref47"><sup>47</sup></a> and can be installed with the following command.</p>
-<div class="sourceCode" id="cb794"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb794-1"><a href="ch-custom.html#cb794-1" aria-hidden="true"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;hyunjimoon/SBC&quot;</span>)</span></code></pre></div>
+<p>Implementing the simulation-based calibration algorithm “by hand” introduces a new source of potential errors. Fortunately, the R package  <code>SBC</code> <span class="citation">(Kim et al. <a href="#ref-R-SBC" role="doc-biblioref">2024</a>)</span> provides tools to validate a Stan model (or any sampling algorithm) by allowing us to run simulation-based calibrations easily.
+The package is in active development at the moment<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a> and can be installed with the following command.</p>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb787-1"><a href="ch-custom.html#cb787-1" aria-hidden="true"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;hyunjimoon/SBC&quot;</span>)</span></code></pre></div>
 <p>One of the main advantages of this package is that it provides several ways to visualize the results of the simulation-based calibration procedure; see <a href="https://hyunjimoon.github.io/SBC/" class="uri">https://hyunjimoon.github.io/SBC/</a>. Figure <a href="ch-custom.html#fig:sbchist">12.7</a> shows rank histograms produced by <code>SBC</code> of a correct model and several different incorrect models. An alternative to rank histograms is to use an  empirical cumulative distribution function (ECDF)-based method, as proposed by <span class="citation">Säilynoja, Bürkner, and Vehtari (<a href="#ref-sailynoja2022graphical" role="doc-biblioref">2022</a>)</span>. The idea behind this method is that if the ranks produced by the simulation-based calibration algorithm are uniform the ECDF of the ranks should be close to the CDF of a uniform distribution. Figure <a href="ch-custom.html#fig:sbcecdf">12.8</a> shows the difference between the ECDF of the ranks and the CDF of a uniform distribution together with 95% confidence bands (this is the default in the <code>SBC</code> package) for a correct model and different incorrect ones.</p>
 
 <div class="figure"><span style="display:block;" id="fig:sbchist"></span>
@@ -1713,10 +1706,10 @@ FIGURE 12.8: Difference between the perfectly uniform CDF and empirical cumulati
 </ol>
 </div>
 </div>
-<div id="another-custom-distribution-re-implementing-the-exponential-distribution-manually" class="section level2 hasAnchor" number="12.3">
-<h2><span class="header-section-number">12.3</span> Another  custom distribution: Re-implementing the  exponential distribution manually<a href="ch-custom.html#another-custom-distribution-re-implementing-the-exponential-distribution-manually" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="another-custom-distribution-the-exponential-distribution-implemented-manually" class="section level2 hasAnchor" number="12.3">
+<h2><span class="header-section-number">12.3</span> Another  custom distribution: The exponential distribution  implemented manually<a href="ch-custom.html#another-custom-distribution-the-exponential-distribution-implemented-manually" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>There are cases when one needs a random variable with a distribution that is not included in Stan. Many times one can find the PDF (or a CDF) derived in a paper, and one needs to implement it manually by writing the log PDF in the Stan language.
-Even though the exponential distribution is included in Stan, we demonstrate how we would include it step-by-step as if it weren’t available. This example extends what is demonstrated in <span class="citation">Stan Development Team (<a href="#ref-Stan2023" role="doc-biblioref">2023</a>)</span> (section 21.1 of the User’s guide).</p>
+Even though the exponential distribution is included in Stan, we demonstrate how we would include it step-by-step as if it weren’t available. This example extends what is demonstrated in <span class="citation">Stan Development Team (<a href="#ref-Stan2023" role="doc-biblioref">2024</a>)</span> (section 22.1 of the User’s guide).</p>
 <p>The exponential distribution is used to model  waiting times until a certain event occurs. Its PDF is the following:</p>
 <p><span class="math display">\[\begin{equation}
 f(x |  \lambda )={
@@ -1737,21 +1730,21 @@ P(X&gt;s + t | X&gt; t)= P(X&gt;s)
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(x &gt;0\)</span>.</p>
 <p>Implement this function in R with the same arguments as the <code>d*</code> family of functions: if <code>log = TRUE</code> the output is a log density; call this new function <code>dexp2</code>.</p>
-<div class="sourceCode" id="cb795"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb795-1"><a href="ch-custom.html#cb795-1" aria-hidden="true"></a>dexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">lambda =</span> <span class="dv">1</span>, <span class="dt">log =</span> <span class="ot">FALSE</span>) {</span>
-<span id="cb795-2"><a href="ch-custom.html#cb795-2" aria-hidden="true"></a>  log_density &lt;-<span class="st"> </span><span class="kw">log</span>(lambda) <span class="op">-</span><span class="st"> </span>lambda <span class="op">*</span><span class="st"> </span>x</span>
-<span id="cb795-3"><a href="ch-custom.html#cb795-3" aria-hidden="true"></a>  <span class="cf">if</span> (log <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>) {</span>
-<span id="cb795-4"><a href="ch-custom.html#cb795-4" aria-hidden="true"></a>    <span class="kw">exp</span>(log_density)</span>
-<span id="cb795-5"><a href="ch-custom.html#cb795-5" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
-<span id="cb795-6"><a href="ch-custom.html#cb795-6" aria-hidden="true"></a>    log_density</span>
-<span id="cb795-7"><a href="ch-custom.html#cb795-7" aria-hidden="true"></a>  }</span>
-<span id="cb795-8"><a href="ch-custom.html#cb795-8" aria-hidden="true"></a>}</span></code></pre></div>
-<p>Verify that this function integrates to 1 for some point values for the parameter (here, <span class="math inline">\(\lambda = 1\)</span> and <span class="math inline">\(\lambda = 20\)</span>):</p>
-<div class="sourceCode" id="cb796"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb796-1"><a href="ch-custom.html#cb796-1" aria-hidden="true"></a>dexp2_l1 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dexp2</span>(x, <span class="dv">1</span>)</span>
-<span id="cb796-2"><a href="ch-custom.html#cb796-2" aria-hidden="true"></a><span class="kw">integrate</span>(dexp2_l1, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)</span></code></pre></div>
-<pre><code>## 1 with absolute error &lt; 0.000057</code></pre>
-<div class="sourceCode" id="cb798"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb798-1"><a href="ch-custom.html#cb798-1" aria-hidden="true"></a>dexp2_l20 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dexp2</span>(x, <span class="dv">20</span>)</span>
-<span id="cb798-2"><a href="ch-custom.html#cb798-2" aria-hidden="true"></a><span class="kw">integrate</span>(dexp2_l20, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)</span></code></pre></div>
-<pre><code>## 1 with absolute error &lt; 0.00000001</code></pre>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb788-1"><a href="ch-custom.html#cb788-1" aria-hidden="true"></a>dexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">lambda =</span> <span class="dv">1</span>, <span class="dt">log =</span> <span class="ot">FALSE</span>) {</span>
+<span id="cb788-2"><a href="ch-custom.html#cb788-2" aria-hidden="true"></a>  log_density &lt;-<span class="st"> </span><span class="kw">log</span>(lambda) <span class="op">-</span><span class="st"> </span>lambda <span class="op">*</span><span class="st"> </span>x</span>
+<span id="cb788-3"><a href="ch-custom.html#cb788-3" aria-hidden="true"></a>  <span class="cf">if</span> (log <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>) {</span>
+<span id="cb788-4"><a href="ch-custom.html#cb788-4" aria-hidden="true"></a>    <span class="kw">exp</span>(log_density)</span>
+<span id="cb788-5"><a href="ch-custom.html#cb788-5" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
+<span id="cb788-6"><a href="ch-custom.html#cb788-6" aria-hidden="true"></a>    log_density</span>
+<span id="cb788-7"><a href="ch-custom.html#cb788-7" aria-hidden="true"></a>  }</span>
+<span id="cb788-8"><a href="ch-custom.html#cb788-8" aria-hidden="true"></a>}</span></code></pre></div>
+<p>Verify that this function integrates to 1 for some point values of its parameter <span class="math inline">\(\lambda\)</span> (here, <span class="math inline">\(\lambda = 1\)</span> and <span class="math inline">\(\lambda = 20\)</span>):</p>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb789-1"><a href="ch-custom.html#cb789-1" aria-hidden="true"></a>dexp2_l1 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dexp2</span>(x, <span class="dv">1</span>)</span>
+<span id="cb789-2"><a href="ch-custom.html#cb789-2" aria-hidden="true"></a><span class="kw">integrate</span>(dexp2_l1, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)<span class="op">$</span>value</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb791"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb791-1"><a href="ch-custom.html#cb791-1" aria-hidden="true"></a>dexp2_l20 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dexp2</span>(x, <span class="dv">20</span>)</span>
+<span id="cb791-2"><a href="ch-custom.html#cb791-2" aria-hidden="true"></a><span class="kw">integrate</span>(dexp2_l20, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="ot">Inf</span>)<span class="op">$</span>value</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
 <p>To test our function, we’ll also need to generate random values from the exponential distribution. If the  quantile function of the distribution exists, the  inverse transform sampling is a relatively straightforward way to get pseudo random numbers sampled from a target distribution <span class="citation">(for an accessible introduction to inverse sampling, see Lynch <a href="#ref-lynch2007introduction" role="doc-biblioref">2007</a>)</span>. Given a target distribution with a PDF <span class="math inline">\(f\)</span>, and a quantile function <span class="math inline">\(F^{-1}\)</span> (the inverse of the CDF), the inverse transform sampling method consists of the following:</p>
 <ol style="list-style-type: decimal">
 <li>Sample one number <span class="math inline">\(u\)</span> from <span class="math inline">\(\mathit{Uniform}(0,1)\)</span>.</li>
@@ -1767,16 +1760,16 @@ F(q) = \int_0^q \lambda \exp(-\lambda x)\, dx
 \end{equation}\]</span></p>
 <p>We can solve this  integral by using the  <span class="math inline">\(u\)</span>-substitution method <span class="citation">(Salas, Etgen, and Hille <a href="#ref-salas2003calculus" role="doc-biblioref">2003</a>)</span>. First, define</p>
 <p><span class="math display">\[\begin{equation}
-u = -\lambda x
+u = g(x) = -\lambda x
 \end{equation}\]</span></p>
 <p>Then, the derivative <span class="math inline">\(du/dx\)</span> is:</p>
 <p><span class="math display">\[\begin{equation}
 \frac{du}{dx} = -\lambda
 \end{equation}\]</span></p>
 <p>This implies that <span class="math inline">\(du = - \lambda dx\)</span>, or that <span class="math inline">\(- du = \lambda dx\)</span>.</p>
-<p>In the CDF, replace the term <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(dx\)</span> with <span class="math inline">\(-du\)</span>:</p>
+<p>In the CDF, replace the term <span class="math inline">\(\lambda dx\)</span> with <span class="math inline">\(-du\)</span>:</p>
 <p><span class="math display">\[\begin{equation}
-F(q) = \int_0^q \lambda \exp(-\lambda x)\, dx = \int_0^q (- \exp(-\lambda x)\, du)
+F(q) = \int_0^q \lambda \exp(-\lambda x)\, dx = \int_0^{-\lambda q} (- \exp(-\lambda x)\, du)
 \end{equation}\]</span></p>
 <p>Rewriting <span class="math inline">\(-\lambda x\)</span> as <span class="math inline">\(u\)</span>, the CDF simplifies to:</p>
 <p><span class="math display">\[\begin{equation}
@@ -1802,13 +1795,13 @@ p-1 &amp;= - e^{-\lambda q}\\
 \end{aligned}
 \end{equation}\]</span></p>
 <p>Write the quantile function (the inverse of the CDF) and the random number generator for the exponential distribution in R. To differentiate it from the built-in function in R, we will call it <code>qexp2</code>:</p>
-<div class="sourceCode" id="cb800"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb800-1"><a href="ch-custom.html#cb800-1" aria-hidden="true"></a>qexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(p, <span class="dt">lambda =</span> <span class="dv">1</span>) {</span>
-<span id="cb800-2"><a href="ch-custom.html#cb800-2" aria-hidden="true"></a>  <span class="op">-</span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p) <span class="op">/</span><span class="st"> </span>lambda</span>
-<span id="cb800-3"><a href="ch-custom.html#cb800-3" aria-hidden="true"></a>}</span>
-<span id="cb800-4"><a href="ch-custom.html#cb800-4" aria-hidden="true"></a>rexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">lambda =</span> <span class="dv">1</span>) {</span>
-<span id="cb800-5"><a href="ch-custom.html#cb800-5" aria-hidden="true"></a>  u &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb800-6"><a href="ch-custom.html#cb800-6" aria-hidden="true"></a>  <span class="kw">qexp2</span>(u, lambda)</span>
-<span id="cb800-7"><a href="ch-custom.html#cb800-7" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb793"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb793-1"><a href="ch-custom.html#cb793-1" aria-hidden="true"></a>qexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(p, <span class="dt">lambda =</span> <span class="dv">1</span>) {</span>
+<span id="cb793-2"><a href="ch-custom.html#cb793-2" aria-hidden="true"></a>  <span class="op">-</span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p) <span class="op">/</span><span class="st"> </span>lambda</span>
+<span id="cb793-3"><a href="ch-custom.html#cb793-3" aria-hidden="true"></a>}</span>
+<span id="cb793-4"><a href="ch-custom.html#cb793-4" aria-hidden="true"></a>rexp2 &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">lambda =</span> <span class="dv">1</span>) {</span>
+<span id="cb793-5"><a href="ch-custom.html#cb793-5" aria-hidden="true"></a>  u &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb793-6"><a href="ch-custom.html#cb793-6" aria-hidden="true"></a>  <span class="kw">qexp2</span>(u, lambda)</span>
+<span id="cb793-7"><a href="ch-custom.html#cb793-7" aria-hidden="true"></a>}</span></code></pre></div>
 <p>The functions that we would use in a Stan model are relatively faithful to the R code, but follow Stan conventions: The expression <code>log1m(p)</code> is more arithmetically stable than <code>log(1 - .)</code> for values of <code>p</code> close to one, the function <code>exp_lpdf</code> stores the sum of the log(PDF) evaluated at each value of x, this would be analogous to doing <code>sum(dexp2(x, lambda, log = TRUE))</code>; the function <code>exp_rng</code> implements a non-vectorized version of <code>rexp2</code> and uses the auxiliary function <code>exp_icdf</code> (icdf stands for inverse CDF), which is similar to <code>qexp2</code>.</p>
 <pre class="stan fold-show"><code>functions {
   real exp_lpdf(vector x, real lambda){
@@ -1824,9 +1817,9 @@ p-1 &amp;= - e^{-\lambda q}\\
   }
 }</code></pre>
 <p>We are now ready to generate synthetic data and fit the distribution in Stan. Generate 1000 observations.</p>
-<div class="sourceCode" id="cb802"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb802-1"><a href="ch-custom.html#cb802-1" aria-hidden="true"></a>N &lt;-<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb802-2"><a href="ch-custom.html#cb802-2" aria-hidden="true"></a>lambda &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">200</span></span>
-<span id="cb802-3"><a href="ch-custom.html#cb802-3" aria-hidden="true"></a>rt &lt;-<span class="st"> </span><span class="kw">rexp2</span>(N, lambda)</span></code></pre></div>
+<div class="sourceCode" id="cb795"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb795-1"><a href="ch-custom.html#cb795-1" aria-hidden="true"></a>N &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb795-2"><a href="ch-custom.html#cb795-2" aria-hidden="true"></a>lambda &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">200</span></span>
+<span id="cb795-3"><a href="ch-custom.html#cb795-3" aria-hidden="true"></a>rt &lt;-<span class="st"> </span><span class="kw">rexp2</span>(N, lambda)</span></code></pre></div>
 <p>Use <code>exponential.stan</code>, which includes the function block shown earlier, and the following obligatory blocks:</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower = 1&gt; N;
@@ -1846,44 +1839,42 @@ generated quantities {
     rt_pred[n] = exp_rng(lambda);
 }</code></pre>
 <p>Fit the data with Stan.</p>
-<div class="sourceCode" id="cb804"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb804-1"><a href="ch-custom.html#cb804-1" aria-hidden="true"></a>exponential &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb804-2"><a href="ch-custom.html#cb804-2" aria-hidden="true"></a>                           <span class="st">&quot;exponential.stan&quot;</span>,</span>
-<span id="cb804-3"><a href="ch-custom.html#cb804-3" aria-hidden="true"></a>                           <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb804-4"><a href="ch-custom.html#cb804-4" aria-hidden="true"></a>fit_exp &lt;-<span class="st"> </span><span class="kw">stan</span>(exponential, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt))</span></code></pre></div>
+<div class="sourceCode" id="cb797"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb797-1"><a href="ch-custom.html#cb797-1" aria-hidden="true"></a>exponential &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb797-2"><a href="ch-custom.html#cb797-2" aria-hidden="true"></a>                           <span class="st">&quot;exponential.stan&quot;</span>,</span>
+<span id="cb797-3"><a href="ch-custom.html#cb797-3" aria-hidden="true"></a>                           <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb797-4"><a href="ch-custom.html#cb797-4" aria-hidden="true"></a>fit_exp &lt;-<span class="st"> </span><span class="kw">stan</span>(exponential, <span class="dt">data =</span> <span class="kw">list</span>(<span class="dt">N =</span> N, <span class="dt">RT =</span> rt))</span></code></pre></div>
 <p>Print the summary:</p>
-<div class="sourceCode" id="cb805"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb805-1"><a href="ch-custom.html#cb805-1" aria-hidden="true"></a><span class="kw">print</span>(fit_exp, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;lambda&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb798"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb798-1"><a href="ch-custom.html#cb798-1" aria-hidden="true"></a><span class="kw">print</span>(fit_exp, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;lambda&quot;</span>))</span></code></pre></div>
 <pre><code>##        mean 2.5% 97.5% n_eff Rhat
-## lambda 0.01    0  0.01  1700    1</code></pre>
+## lambda 0.01    0  0.01  1471    1</code></pre>
 <p>Carry out a quick check first, verifying that the true value of the parameter <span class="math inline">\(\lambda\)</span> is reasonably inside the bulk of the posterior distribution. This is shown in Figure <a href="ch-custom.html#fig:recoveryexp">12.9</a>(a).
 Figure <a href="ch-custom.html#fig:recoveryexp">12.9</a>(b) shows the results of the simulation-based calibration procedure, and shows that our implementation was correct.</p>
 
-<div class="sourceCode" id="cb807"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb807-1"><a href="ch-custom.html#cb807-1" aria-hidden="true"></a></span>
-<span id="cb807-2"><a href="ch-custom.html#cb807-2" aria-hidden="true"></a><span class="co"># Plot a</span></span>
-<span id="cb807-3"><a href="ch-custom.html#cb807-3" aria-hidden="true"></a>post_exp &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_exp) <span class="op">%&gt;%</span></span>
-<span id="cb807-4"><a href="ch-custom.html#cb807-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">&quot;lambda&quot;</span>)</span>
-<span id="cb807-5"><a href="ch-custom.html#cb807-5" aria-hidden="true"></a><span class="kw">mcmc_recover_hist</span>(post_exp, <span class="dt">true =</span> lambda) <span class="op">+</span></span>
-<span id="cb807-6"><a href="ch-custom.html#cb807-6" aria-hidden="true"></a><span class="st">  </span><span class="co"># make it similar to plot b:</span></span>
-<span id="cb807-7"><a href="ch-custom.html#cb807-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;a&quot;</span>) <span class="op">+</span></span>
-<span id="cb807-8"><a href="ch-custom.html#cb807-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;lamda&quot;</span>) <span class="op">+</span></span>
-<span id="cb807-9"><a href="ch-custom.html#cb807-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb807-10"><a href="ch-custom.html#cb807-10" aria-hidden="true"></a>        <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
-<span id="cb807-11"><a href="ch-custom.html#cb807-11" aria-hidden="true"></a>        <span class="dt">strip.text.x =</span> <span class="kw">element_blank</span>())</span>
-<span id="cb807-12"><a href="ch-custom.html#cb807-12" aria-hidden="true"></a><span class="co"># Plot b</span></span>
-<span id="cb807-13"><a href="ch-custom.html#cb807-13" aria-hidden="true"></a>B &lt;-<span class="st"> </span><span class="dv">16</span></span>
-<span id="cb807-14"><a href="ch-custom.html#cb807-14" aria-hidden="true"></a>bin_size &lt;-<span class="st"> </span><span class="dv">1024</span> <span class="op">/</span><span class="st"> </span><span class="dv">16</span></span>
-<span id="cb807-15"><a href="ch-custom.html#cb807-15" aria-hidden="true"></a>N_sim =<span class="st"> </span><span class="dv">200</span></span>
-<span id="cb807-16"><a href="ch-custom.html#cb807-16" aria-hidden="true"></a>ci_l &lt;-<span class="st"> </span><span class="kw">qbinom</span>(<span class="fl">0.005</span>, <span class="dt">size =</span> N_sim, <span class="dt">prob =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>B)</span>
-<span id="cb807-17"><a href="ch-custom.html#cb807-17" aria-hidden="true"></a>ci_u &lt;-<span class="st"> </span><span class="kw">qbinom</span>(<span class="fl">0.995</span>, <span class="dt">size =</span> N_sim, <span class="dt">prob =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>B)</span>
-<span id="cb807-18"><a href="ch-custom.html#cb807-18" aria-hidden="true"></a><span class="kw">ggplot</span>(df_rank_lambda, <span class="kw">aes</span>(<span class="dt">x =</span> rank)) <span class="op">+</span></span>
-<span id="cb807-19"><a href="ch-custom.html#cb807-19" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_histogram</span>(</span>
-<span id="cb807-20"><a href="ch-custom.html#cb807-20" aria-hidden="true"></a>    <span class="dt">breaks =</span></span>
-<span id="cb807-21"><a href="ch-custom.html#cb807-21" aria-hidden="true"></a>      <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1023</span>, <span class="dt">length.out =</span> B <span class="op">+</span><span class="st"> </span><span class="dv">1</span>),</span>
-<span id="cb807-22"><a href="ch-custom.html#cb807-22" aria-hidden="true"></a>    <span class="dt">closed =</span> <span class="st">&quot;left&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span></span>
-<span id="cb807-23"><a href="ch-custom.html#cb807-23" aria-hidden="true"></a>  ) <span class="op">+</span></span>
-<span id="cb807-24"><a href="ch-custom.html#cb807-24" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="st">&quot;count&quot;</span>) <span class="op">+</span></span>
-<span id="cb807-25"><a href="ch-custom.html#cb807-25" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">c</span>(ci_l, ci_u), <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
-<span id="cb807-26"><a href="ch-custom.html#cb807-26" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;b&quot;</span>) <span class="op">+</span></span>
-<span id="cb807-27"><a href="ch-custom.html#cb807-27" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb800-1"><a href="ch-custom.html#cb800-1" aria-hidden="true"></a></span>
+<span id="cb800-2"><a href="ch-custom.html#cb800-2" aria-hidden="true"></a><span class="co"># Plot a</span></span>
+<span id="cb800-3"><a href="ch-custom.html#cb800-3" aria-hidden="true"></a>post_exp &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_exp) <span class="op">%&gt;%</span></span>
+<span id="cb800-4"><a href="ch-custom.html#cb800-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">&quot;lambda&quot;</span>)</span>
+<span id="cb800-5"><a href="ch-custom.html#cb800-5" aria-hidden="true"></a><span class="kw">mcmc_recover_hist</span>(post_exp, <span class="dt">true =</span> lambda) <span class="op">+</span></span>
+<span id="cb800-6"><a href="ch-custom.html#cb800-6" aria-hidden="true"></a><span class="st">  </span><span class="co"># make it similar to plot b:</span></span>
+<span id="cb800-7"><a href="ch-custom.html#cb800-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;a&quot;</span>) <span class="op">+</span></span>
+<span id="cb800-8"><a href="ch-custom.html#cb800-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;lamda&quot;</span>) <span class="op">+</span></span>
+<span id="cb800-9"><a href="ch-custom.html#cb800-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb800-10"><a href="ch-custom.html#cb800-10" aria-hidden="true"></a>        <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
+<span id="cb800-11"><a href="ch-custom.html#cb800-11" aria-hidden="true"></a>        <span class="dt">strip.text.x =</span> <span class="kw">element_blank</span>())</span>
+<span id="cb800-12"><a href="ch-custom.html#cb800-12" aria-hidden="true"></a><span class="co"># Plot b</span></span>
+<span id="cb800-13"><a href="ch-custom.html#cb800-13" aria-hidden="true"></a>B &lt;-<span class="st"> </span><span class="dv">16</span></span>
+<span id="cb800-14"><a href="ch-custom.html#cb800-14" aria-hidden="true"></a>bin_size &lt;-<span class="st"> </span><span class="dv">1024</span> <span class="op">/</span><span class="st"> </span><span class="dv">16</span></span>
+<span id="cb800-15"><a href="ch-custom.html#cb800-15" aria-hidden="true"></a>N_sim =<span class="st"> </span><span class="dv">200</span></span>
+<span id="cb800-16"><a href="ch-custom.html#cb800-16" aria-hidden="true"></a>ci_l &lt;-<span class="st"> </span><span class="kw">qbinom</span>(<span class="fl">0.005</span>, <span class="dt">size =</span> N_sim, <span class="dt">prob =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>B)</span>
+<span id="cb800-17"><a href="ch-custom.html#cb800-17" aria-hidden="true"></a>ci_u &lt;-<span class="st"> </span><span class="kw">qbinom</span>(<span class="fl">0.995</span>, <span class="dt">size =</span> N_sim, <span class="dt">prob =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>B)</span>
+<span id="cb800-18"><a href="ch-custom.html#cb800-18" aria-hidden="true"></a><span class="kw">ggplot</span>(df_rank_lambda, <span class="kw">aes</span>(<span class="dt">x =</span> rank)) <span class="op">+</span></span>
+<span id="cb800-19"><a href="ch-custom.html#cb800-19" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">breaks =</span></span>
+<span id="cb800-20"><a href="ch-custom.html#cb800-20" aria-hidden="true"></a>                   <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1023</span>, <span class="dt">length.out =</span> B <span class="op">+</span><span class="st"> </span><span class="dv">1</span>),</span>
+<span id="cb800-21"><a href="ch-custom.html#cb800-21" aria-hidden="true"></a>                 <span class="dt">closed =</span> <span class="st">&quot;left&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb800-22"><a href="ch-custom.html#cb800-22" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="st">&quot;count&quot;</span>) <span class="op">+</span></span>
+<span id="cb800-23"><a href="ch-custom.html#cb800-23" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">c</span>(ci_l, ci_u), <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
+<span id="cb800-24"><a href="ch-custom.html#cb800-24" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;b&quot;</span>) <span class="op">+</span></span>
+<span id="cb800-25"><a href="ch-custom.html#cb800-25" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:recoveryexp"></span>
 <img src="bookdown_files/figure-html/recoveryexp-1.svg" alt="a) Posterior distribution of the parameter \(\lambda\) of fit_exp together with its true values as a black line. b) Rank histograms of \(\lambda\) and from our hand-made implementation of the exponential distribution. The dashed lines represent the 99% confidence interval." width="45%" /><img src="bookdown_files/figure-html/recoveryexp-2.svg" alt="a) Posterior distribution of the parameter \(\lambda\) of fit_exp together with its true values as a black line. b) Rank histograms of \(\lambda\) and from our hand-made implementation of the exponential distribution. The dashed lines represent the 99% confidence interval." width="45%" />
 <p class="caption">
@@ -1901,16 +1892,17 @@ FIGURE 12.9: a) Posterior distribution of the parameter <span class="math inline
 <ul>
 <li><a href="https://rstudio-pubs-static.s3.amazonaws.com/486816_440106f76c944734a7d4c84761e37388.html" class="uri">https://rstudio-pubs-static.s3.amazonaws.com/486816_440106f76c944734a7d4c84761e37388.html</a></li>
 <li><a href="https://betanalpha.github.io/assets/case_studies/probability_theory.html#42_probability_density_functions" class="uri">https://betanalpha.github.io/assets/case_studies/probability_theory.html#42_probability_density_functions</a></li>
-<li><a href="https://jsocolar.github.io/jacobians/#fn1" class="uri">https://jsocolar.github.io/jacobians/#fn1</a></li>
+<li><a href="https://jsocolar.github.io/jacobians/" class="uri">https://jsocolar.github.io/jacobians/</a></li>
 <li><a href="https://mc-stan.org/documentation/case-studies/mle-params.html" class="uri">https://mc-stan.org/documentation/case-studies/mle-params.html</a></li>
 </ul>
-<p>A complete tutorial of  simulation-based calibration using the  <code>SBC</code> package was given in the online event  Stanconnect 2021, and it is available in <a href="https://www.martinmodrak.cz/post/2021-sbc_tutorial/" class="uri">https://www.martinmodrak.cz/post/2021-sbc_tutorial/</a>. The ideas that predate this technique can be found in <span class="citation">Cook, Gelman, and Rubin (<a href="#ref-Cooketal2006" role="doc-biblioref">2006</a>)</span> and were extended in <span class="citation">Talts et al. (<a href="#ref-talts2018validating" role="doc-biblioref">2018</a>)</span>. The use of ECDF-based visualizations is discussed in <span class="citation">Säilynoja, Bürkner, and Vehtari (<a href="#ref-sailynoja2022graphical" role="doc-biblioref">2022</a>)</span>. The role of simulation-based calibration in the Bayesian workflow is discussed in <span class="citation">Schad, Betancourt, and Vasishth (<a href="#ref-schad2020toward" role="doc-biblioref">2020</a>)</span>. Examples of the use of simulation-based calibration to validate novel models used in cognitive science are <span class="citation">Hartmann, Johannsen, and Klauer (<a href="#ref-hartmann2020rtmpt" role="doc-biblioref">2020</a>)</span> and <span class="citation">Bürkner and Charpentier (<a href="#ref-burkner2020modelling" role="doc-biblioref">2020</a>)</span>. The extension of this procedure to validate Bayes factors is discussed in <span class="citation">Schad, Nicenboim, Bürkner, Betancourt, et al. (<a href="#ref-SchadEtAlBF" role="doc-biblioref">2022</a><a href="#ref-SchadEtAlBF" role="doc-biblioref">b</a>)</span>.</p>
-<p>Custom functions in general and custom probability functions are treated in <span class="citation">Stan Development Team (<a href="#ref-Stan2023" role="doc-biblioref">2023</a>)</span> (chapter 21 of the User’s guide).</p>
+<p>Jacobian adjustments are also relevant for adjusting priors for order constraints, which is especially important for Bayes factors <span class="citation">(Heck and Wagenmakers <a href="#ref-Heck2016" role="doc-biblioref">2016</a>)</span>.</p>
+<p>A complete tutorial of  simulation-based calibration using the  <code>SBC</code> package was given in the online event  Stanconnect 2021, and it is available in <a href="https://www.martinmodrak.cz/post/2021-sbc_tutorial/" class="uri">https://www.martinmodrak.cz/post/2021-sbc_tutorial/</a>. The ideas that predate this technique can be found in <span class="citation">Cook, Gelman, and Rubin (<a href="#ref-Cooketal2006" role="doc-biblioref">2006</a>)</span> and were extended in <span class="citation">Talts et al. (<a href="#ref-talts2018validating" role="doc-biblioref">2018</a>)</span>. The use of ECDF-based visualizations is discussed in <span class="citation">Säilynoja, Bürkner, and Vehtari (<a href="#ref-sailynoja2022graphical" role="doc-biblioref">2022</a>)</span>. The role of simulation-based calibration in the Bayesian workflow is discussed in <span class="citation">Schad, Betancourt, and Vasishth (<a href="#ref-schad2020toward" role="doc-biblioref">2020</a>)</span>. Examples of the use of simulation-based calibration to validate novel models used in cognitive science are <span class="citation">Hartmann, Johannsen, and Klauer (<a href="#ref-hartmann2020rtmpt" role="doc-biblioref">2020</a>)</span> and <span class="citation">Bürkner and Charpentier (<a href="#ref-burkner2020modelling" role="doc-biblioref">2020</a>)</span>. The extension of this procedure to validate Bayes factors is discussed in <span class="citation">Schad et al. (<a href="#ref-SchadEtAlBF" role="doc-biblioref">2021</a>)</span>.</p>
+<p>Custom functions in general and custom probability functions are treated in <span class="citation">Stan Development Team (<a href="#ref-Stan2023" role="doc-biblioref">2024</a>)</span> (chapter 21 of the User’s guide).</p>
 </div>
 <div id="sec-customexercises" class="section level2 hasAnchor" number="12.6">
 <h2><span class="header-section-number">12.6</span> Exercises<a href="ch-custom.html#sec-customexercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="exercise">
-<p><span id="exr:shiftedlogn" class="exercise"><strong>Exercise 12.1  </strong></span>Fitting a  shifted lognormal distribution.</p>
+<p><span id="exr:shiftedlogn" class="exercise"><strong>Exercise 12.1  </strong></span>Fitting a  shifted log-normal distribution.</p>
 </div>
 <p>A random variable <span class="math inline">\(Y\)</span> has a shifted log-normal distribution with shift <span class="math inline">\(\psi\)</span>, location <span class="math inline">\(\mu\)</span>, and scale <span class="math inline">\(\sigma\)</span>, if <span class="math inline">\(Z = Y-\psi\)</span> and <span class="math inline">\(Z \sim \mathit{LogNormal}(\mu,\sigma)\)</span>.</p>
 <ol style="list-style-type: decimal">
@@ -1929,16 +1921,16 @@ f(x;\mu ,\lambda )={\sqrt {\frac {\lambda }{2\pi x^{3}}}}\exp {\biggl (}-{\frac 
 <ol style="list-style-type: decimal">
 <li>Implement this distribution in Stan as <code>wald_lpdf</code>. In order to do this, you will need to derive the logarithm of the PDF presented above. You can adapt the code of the following R function.</li>
 </ol>
-<div class="sourceCode" id="cb808"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb808-1"><a href="ch-custom.html#cb808-1" aria-hidden="true"></a>dwald &lt;-<span class="st"> </span><span class="cf">function</span>(x, lambda, mu, <span class="dt">log =</span> <span class="ot">FALSE</span>) {</span>
-<span id="cb808-2"><a href="ch-custom.html#cb808-2" aria-hidden="true"></a>  log_density &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(lambda <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">pi</span>())) <span class="op">-</span></span>
-<span id="cb808-3"><a href="ch-custom.html#cb808-3" aria-hidden="true"></a><span class="st">    </span><span class="fl">1.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(x) <span class="op">-</span></span>
-<span id="cb808-4"><a href="ch-custom.html#cb808-4" aria-hidden="true"></a><span class="st">    </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>lambda <span class="op">*</span><span class="st"> </span>((x <span class="op">-</span><span class="st"> </span>mu) <span class="op">/</span><span class="st"> </span>(mu <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(x)))<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb808-5"><a href="ch-custom.html#cb808-5" aria-hidden="true"></a>  <span class="cf">if</span> (log <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>) {</span>
-<span id="cb808-6"><a href="ch-custom.html#cb808-6" aria-hidden="true"></a>    <span class="kw">exp</span>(log_density)</span>
-<span id="cb808-7"><a href="ch-custom.html#cb808-7" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
-<span id="cb808-8"><a href="ch-custom.html#cb808-8" aria-hidden="true"></a>    log_density</span>
-<span id="cb808-9"><a href="ch-custom.html#cb808-9" aria-hidden="true"></a>  }</span>
-<span id="cb808-10"><a href="ch-custom.html#cb808-10" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb801"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb801-1"><a href="ch-custom.html#cb801-1" aria-hidden="true"></a>dwald &lt;-<span class="st"> </span><span class="cf">function</span>(x, lambda, mu, <span class="dt">log =</span> <span class="ot">FALSE</span>) {</span>
+<span id="cb801-2"><a href="ch-custom.html#cb801-2" aria-hidden="true"></a>  log_density &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(lambda <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">pi</span>())) <span class="op">-</span></span>
+<span id="cb801-3"><a href="ch-custom.html#cb801-3" aria-hidden="true"></a><span class="st">    </span><span class="fl">1.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(x) <span class="op">-</span></span>
+<span id="cb801-4"><a href="ch-custom.html#cb801-4" aria-hidden="true"></a><span class="st">    </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>lambda <span class="op">*</span><span class="st"> </span>((x <span class="op">-</span><span class="st"> </span>mu) <span class="op">/</span><span class="st"> </span>(mu <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(x)))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb801-5"><a href="ch-custom.html#cb801-5" aria-hidden="true"></a>  <span class="cf">if</span> (log <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>) {</span>
+<span id="cb801-6"><a href="ch-custom.html#cb801-6" aria-hidden="true"></a>    <span class="kw">exp</span>(log_density)</span>
+<span id="cb801-7"><a href="ch-custom.html#cb801-7" aria-hidden="true"></a>  } <span class="cf">else</span> {</span>
+<span id="cb801-8"><a href="ch-custom.html#cb801-8" aria-hidden="true"></a>    log_density</span>
+<span id="cb801-9"><a href="ch-custom.html#cb801-9" aria-hidden="true"></a>  }</span>
+<span id="cb801-10"><a href="ch-custom.html#cb801-10" aria-hidden="true"></a>}</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Verify the correctness of the model by recovering the true values of (your choice) of the parameters of the model and by using simulation-based calibration. As with the previous exercise, you will need to decide on sensible priors by deriving prior predictive distributions that are adequate for response times.</li>
 </ol>
@@ -1983,14 +1975,17 @@ f(x;\mu ,\lambda )={\sqrt {\frac {\lambda }{2\pi x^{3}}}}\exp {\biggl (}-{\frac 
 <div id="ref-heathcote2004fitting">
 <p>Heathcote, Andrew. 2004. “Fitting Wald and ex-Wald Distributions to Response Time Data: An Example Using Functions for the S-Plus Package.” <em>Behavior Research Methods, Instruments, &amp; Computers</em> 36 (4): 678–94. <a href="https://doi.org/https://doi.org/10.3758/BF03206550">https://doi.org/https://doi.org/10.3758/BF03206550</a>.</p>
 </div>
+<div id="ref-Heck2016">
+<p>Heck, Daniel W, and Eric-Jan Wagenmakers. 2016. “Adjusted Priors for Bayes Factors Involving Reparameterized Order Constraints.” <em>Journal of Mathematical Psychology</em> 73: 110–16. <a href="https://doi.org/https://doi.org/10.1016/j.jmp.2016.05.004">https://doi.org/https://doi.org/10.1016/j.jmp.2016.05.004</a>.</p>
+</div>
 <div id="ref-R-SBC">
-<p>Kim, Shinyoung, Hyunji Moon, Martin Modrák, and Teemu Säilynoja. 2022. <em>SBC: Simulation Based Calibration for Rstan/Cmdstanr Models</em>. <a href="https://github.com/hyunjimoon/SBC">https://github.com/hyunjimoon/SBC</a>.</p>
+<p>Kim, Shinyoung, Hyunji Moon, Martin Modrák, and Teemu Säilynoja. 2024. <em>SBC: Simulation Based Calibration for Rstan/Cmdstanr Models</em>. <a href="https://hyunjimoon.github.io/SBC/">https://hyunjimoon.github.io/SBC/</a>.</p>
 </div>
 <div id="ref-lynch2007introduction">
 <p>Lynch, Scott Michael. 2007. <em>Introduction to Applied Bayesian Statistics and Estimation for Social Scientists</em>. New York, NY: Springer.</p>
 </div>
 <div id="ref-ModrakEtAl2023">
-<p>Modrák, Martin, Angie H. Moon, Shinyoung Kim, Paul Bürkner, Niko Huurre, Kateřina Faltejsková, Andrew Gelman, and Aki Vehtari. 2023. “Simulation-Based Calibration Checking for Bayesian Computation: The Choice of Test Quantities Shapes Sensitivity.” <em>Bayesian Analysis</em>, 1–28. <a href="https://doi.org/10.1214/23-BA1404">https://doi.org/10.1214/23-BA1404</a>.</p>
+<p>Modrák, Martin, Angie H. Moon, Shinyoung Kim, Paul-Christian Bürkner, Niko Huurre, Kateřina Faltejsková, Andrew Gelman, and Aki Vehtari. 2023. “Simulation-Based Calibration Checking for Bayesian Computation: The Choice of Test Quantities Shapes Sensitivity.” <em>Bayesian Analysis</em>, 1–28. <a href="https://doi.org/10.1214/23-BA1404">https://doi.org/10.1214/23-BA1404</a>.</p>
 </div>
 <div id="ref-RossProb">
 <p>Ross, Sheldon. 2002. <em>A First Course in Probability</em>. Pearson Education.</p>
@@ -2005,13 +2000,16 @@ f(x;\mu ,\lambda )={\sqrt {\frac {\lambda }{2\pi x^{3}}}}\exp {\biggl (}-{\frac 
 <p>Schad, Daniel J., Michael J. Betancourt, and Shravan Vasishth. 2019. “Toward a Principled Bayesian Workflow in Cognitive Science.” <em>arXiv Preprint</em>. <a href="https://doi.org/10.48550/ARXIV.1904.12765">https://doi.org/10.48550/ARXIV.1904.12765</a>.</p> 2020. “Toward a Principled Bayesian Workflow in Cognitive Science.” <em>Psychological Methods</em> 26 (1): 103–26. <a href="https://doi.org/https://doi.org/10.1037/met0000275">https://doi.org/https://doi.org/10.1037/met0000275</a>.</p>
 </div>
 <div id="ref-SchadEtAlBF">
-<p>Schad, Daniel J., Bruno Nicenboim, Paul-Christian Bürkner, Michael Betancourt, and Shravan Vasishth. 2022b. “Workflow Techniques for the Robust Use of Bayes Factors.” <em>Psychological Methods</em>. <a href="https://doi.org/10.1037/met0000472">https://doi.org/10.1037/met0000472</a>.</p>
+<p>Schad, Daniel J., Bruno Nicenboim, Paul-Christian Bürkner, Michael J. Betancourt, and Shravan Vasishth. 2021. “Workflow Techniques for the Robust Use of Bayes Factors.” <em>arXiv Preprint arXiv:2103.08744</em>.</p>
 </div>
 <div id="ref-Stan2023">
-<p>Stan Development Team. 2023. “Stan Modeling Language Users Guide and Reference Manual, Version 2.32.” <a href="https://mc-stan.org/docs/2_32/reference-manual/index.html;%20https://mc-stan.org/docs/2_32/stan-users-guide/index.html">https://mc-stan.org/docs/2_32/reference-manual/index.html; https://mc-stan.org/docs/2_32/stan-users-guide/index.html</a>.</p>
+<p>Stan Development Team. 2024. “Stan Modeling Language Users Guide and Reference Manual, Version 2.32.” <a href="https://mc-stan.org/docs/2_35/">https://mc-stan.org/docs/2_35/</a>.</p>
 </div>
 <div id="ref-talts2018validating">
 <p>Talts, Sean, Michael J. Betancourt, Daniel P. Simpson, Aki Vehtari, and Andrew Gelman. 2018. “Validating Bayesian Inference Algorithms with Simulation-Based Calibration.” <em>arXiv Preprint arXiv:1804.06788</em>.</p>
+</div>
+<div id="ref-WuKaiserVasishth2017">
+<p>Wu, Fuyun, Elsi Kaiser, and Shravan Vasishth. 2017. “Effects of Early Cues on the Processing of Chinese Relative Clauses: Evidence for Experience-Based Theories.” <em>Cognitive Science</em> 42: 1101–33.</p>
 </div>
 <div id="ref-yao2018yes">
 <p>Yao, Yuling, Aki Vehtari, Daniel P. 2018. “Yes, but Did It Work?: Evaluating Variational Inference.” In <em>International Conference on Machine Learning</em>, 5581–90. PMLR.</p>
@@ -2020,10 +2018,11 @@ f(x;\mu ,\lambda )={\sqrt {\frac {\lambda }{2\pi x^{3}}}}\exp {\biggl (}-{\frac 
 <div class="footnotes">
 <hr />
 <ol start="44">
-<li id="fn44"><p>Not every transformation is valid, univariate changes of variables must be monotonic and differentiable, multivariate changes of variables must be surjective and differentiable.<a href="ch-custom.html#fnref44" class="footnote-back">↩︎</a></p></li>
-<li id="fn45"><p>In the multivariate case, it is equal to the absolute determinant of the Jacobian, the matrix of all its first-order partial derivatives, of the transform; see section 6.7 of <span class="citation">Ross (<a href="#ref-RossProb" role="doc-biblioref">2002</a>)</span>, and p. 707 of <span class="citation">Adams and Essex (<a href="#ref-adams2018calculus" role="doc-biblioref">2018</a>)</span>.<a href="ch-custom.html#fnref45" class="footnote-back">↩︎</a></p></li>
-<li id="fn46"><p>We are working under the assumption that Stan, which yields the posterior approximation, works correctly. In principle, if we assume that our model is correct, we can also use simulation-based calibration to examine whether our approximation to the posterior distribution is correct (that is, whether Stan’s sampler, or any posterior approximation method works correctly); for example, see <span class="citation">Yao et al. (<a href="#ref-yao2018yes" role="doc-biblioref">2018</a>)</span>.<a href="ch-custom.html#fnref46" class="footnote-back">↩︎</a></p></li>
-<li id="fn47"><p>Even though the package is already fully functional, function names and arguments might change by the time this book is published.<a href="ch-custom.html#fnref47" class="footnote-back">↩︎</a></p></li>
+<li id="fn44"><p>In this specific case, we could also transform the dependent variable first, but as will become clear later, we want to avoid changing our dependent variable.<a href="ch-custom.html#fnref44" class="footnote-back">↩︎</a></p></li>
+<li id="fn45"><p>Not every transformation is valid, univariate changes of variables must be monotonic and differentiable, multivariate changes of variables must be surjective and differentiable.<a href="ch-custom.html#fnref45" class="footnote-back">↩︎</a></p></li>
+<li id="fn46"><p>In the multivariate case, it is equal to the absolute determinant of the Jacobian, the matrix of all its first-order partial derivatives, of the transform; see section 6.7 of <span class="citation">Ross (<a href="#ref-RossProb" role="doc-biblioref">2002</a>)</span>, and p. 707 of <span class="citation">Adams and Essex (<a href="#ref-adams2018calculus" role="doc-biblioref">2018</a>)</span>.<a href="ch-custom.html#fnref46" class="footnote-back">↩︎</a></p></li>
+<li id="fn47"><p>We are working under the assumption that Stan, which yields the posterior approximation, works correctly. In principle, if we assume that our model is correct, we can also use simulation-based calibration to examine whether our approximation to the posterior distribution is correct (that is, whether Stan’s sampler, or any posterior approximation method works correctly); for an example, see <span class="citation">Yao et al. (<a href="#ref-yao2018yes" role="doc-biblioref">2018</a>)</span>.<a href="ch-custom.html#fnref47" class="footnote-back">↩︎</a></p></li>
+<li id="fn48"><p>Even though the package is already fully functional, function names and arguments might change by the time this book is published.<a href="ch-custom.html#fnref48" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

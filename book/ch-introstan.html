@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Introduction to the probabilistic programming language Stan | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Introduction to the probabilistic programming language Stan | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2024-03-11" />
+<meta name="date" content="2024-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1025,13 +1025,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="ch-priors.html"><a href="ch-priors.html#using-previous-experiments-posteriors-as-priors-for-a-new-study"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’  posteriors as priors for a new study</a></li>
 <li class="chapter" data-level="6.5" data-path="ch-priors.html"><a href="ch-priors.html#summary-5"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
 <li class="chapter" data-level="6.6" data-path="ch-priors.html"><a href="ch-priors.html#further-reading-3"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.7" data-path="ch-priors.html"><a href="ch-priors.html#sec-priorsexercises"><i class="fa fa-check"></i><b>6.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="ch-workflow.html"><a href="ch-workflow.html#building-a-model"><i class="fa fa-check"></i><b>7.1</b>  Building a model</a></li>
 <li class="chapter" data-level="7.2" data-path="ch-workflow.html"><a href="ch-workflow.html#principled-questions-to-ask-on-a-model"><i class="fa fa-check"></i><b>7.2</b> Principled questions to ask on a model</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#checking-whether-assumptions-are-consist-with-domain-expertise-prior-predictive-checks"><i class="fa fa-check"></i><b>7.2.1</b>  Checking whether assumptions are consist with  domain expertise: Prior predictive checks</a></li>
+<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#checking-whether-assumptions-are-consistent-with-domain-expertise-prior-predictive-checks"><i class="fa fa-check"></i><b>7.2.1</b>  Checking whether assumptions are consistent with  domain expertise: Prior predictive checks</a></li>
 <li class="chapter" data-level="7.2.2" data-path="ch-workflow.html"><a href="ch-workflow.html#testing-for-correct-posterior-approximations-checks-of-computational-faithfulness"><i class="fa fa-check"></i><b>7.2.2</b>  Testing for correct posterior approximations: Checks of computational faithfulness</a></li>
 <li class="chapter" data-level="7.2.3" data-path="ch-workflow.html"><a href="ch-workflow.html#sensitivity-of-the-model"><i class="fa fa-check"></i><b>7.2.3</b>  Sensitivity of the model</a></li>
 <li class="chapter" data-level="7.2.4" data-path="ch-workflow.html"><a href="ch-workflow.html#does-the-model-adequately-capture-the-dataposterior-predictive-checks"><i class="fa fa-check"></i><b>7.2.4</b>  Does the model adequately capture the data?–Posterior predictive checks</a></li>
@@ -1053,13 +1054,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>8.2.2</b> The  hypothesis matrix</a></li>
 <li class="chapter" data-level="8.2.3" data-path="ch-contr.html"><a href="ch-contr.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>8.2.3</b> Generating contrasts: The  <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a>
+<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor of four levels</a>
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="ch-contr.html"><a href="ch-contr.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b>  Repeated contrasts</a></li>
 <li class="chapter" data-level="8.3.2" data-path="ch-contr.html"><a href="ch-contr.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b>  Helmert contrasts</a></li>
 <li class="chapter" data-level="8.3.3" data-path="ch-contr.html"><a href="ch-contr.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or  model matrix</a></li>
 <li class="chapter" data-level="8.3.4" data-path="ch-contr.html"><a href="ch-contr.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b>  Polynomial contrasts</a></li>
-<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts:  monotonic effects</a></li>
+<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts:  Monotonic effects</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="ch-contr.html"><a href="ch-contr.html#nonOrthogonal"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a>
 <ul>
@@ -1130,7 +1131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.2" data-path="ch-custom.html"><a href="ch-custom.html#an-example-where-simulation-based-calibration-reveals-a-problem"><i class="fa fa-check"></i><b>12.2.2</b> An example where simulation-based calibration reveals a problem</a></li>
 <li class="chapter" data-level="12.2.3" data-path="ch-custom.html"><a href="ch-custom.html#issues-with-and-limitations-of-simulation-based-calibration"><i class="fa fa-check"></i><b>12.2.3</b> Issues with and limitations of simulation-based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-re-implementing-the-exponential-distribution-manually"><i class="fa fa-check"></i><b>12.3</b> Another  custom distribution: Re-implementing the  exponential distribution manually</a></li>
+<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-the-exponential-distribution-implemented-manually"><i class="fa fa-check"></i><b>12.3</b> Another  custom distribution: The exponential distribution  implemented manually</a></li>
 <li class="chapter" data-level="12.4" data-path="ch-custom.html"><a href="ch-custom.html#summary-10"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
 <li class="chapter" data-level="12.5" data-path="ch-custom.html"><a href="ch-custom.html#further-reading-9"><i class="fa fa-check"></i><b>12.5</b> Further reading</a></li>
 <li class="chapter" data-level="12.6" data-path="ch-custom.html"><a href="ch-custom.html#sec-customexercises"><i class="fa fa-check"></i><b>12.6</b> Exercises</a></li>
@@ -1193,7 +1194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.3.3" data-path="ch-cv.html"><a href="ch-cv.html#leave-one-group-out-cross-validation"><i class="fa fa-check"></i><b>16.3.3</b> Leave-one-group-out cross-validation</a></li>
 </ul></li>
 <li class="chapter" data-level="16.4" data-path="ch-cv.html"><a href="ch-cv.html#sec-logcv"><i class="fa fa-check"></i><b>16.4</b>  Comparing different likelihoods with cross-validation</a></li>
-<li class="chapter" data-level="16.5" data-path="ch-cv.html"><a href="ch-cv.html#issues-with-cross-validation"><i class="fa fa-check"></i><b>16.5</b> Issues with cross-validation</a></li>
+<li class="chapter" data-level="16.5" data-path="ch-cv.html"><a href="ch-cv.html#sec-issuesCV"><i class="fa fa-check"></i><b>16.5</b> Issues with cross-validation</a></li>
 <li class="chapter" data-level="16.6" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>16.6</b> Cross-validation in Stan</a>
 <ul>
 <li class="chapter" data-level="16.6.1" data-path="ch-cv.html"><a href="ch-cv.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>16.6.1</b>  PSIS-LOO-CV in Stan</a></li>
@@ -1202,8 +1203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.8" data-path="ch-cv.html"><a href="ch-cv.html#further-reading-13"><i class="fa fa-check"></i><b>16.8</b> Further reading</a></li>
 <li class="chapter" data-level="16.9" data-path="ch-cv.html"><a href="ch-cv.html#exercises-3"><i class="fa fa-check"></i><b>16.9</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
-<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to computational cognitive modeling</a>
+<li class="part"><span><b>VI Cognitive modeling with Stan</b></span></li>
+<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to cognitive modeling</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="ch-cogmod.html"><a href="ch-cogmod.html#what-characterizes-a-computational-cognitive-model"><i class="fa fa-check"></i><b>17.1</b> What characterizes a computational cognitive model?</a></li>
 <li class="chapter" data-level="17.2" data-path="ch-cogmod.html"><a href="ch-cogmod.html#some-advantages-of-taking-the-latent-variable-modeling-approach"><i class="fa fa-check"></i><b>17.2</b> Some advantages of taking the latent-variable modeling approach</a></li>
@@ -1282,15 +1283,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ch-introstan" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Introduction to the probabilistic programming language Stan<a href="ch-introstan.html#ch-introstan" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Stan is a  probabilistic programming language for statistical inference written in C++ that can be accessed through several interfaces (e.g., R, Python, Matlab, etc.). Stan uses an advanced dynamic  Hamiltonian Monte Carlo algorithm <span class="citation">(Betancourt <a href="#ref-betancourt2016identifying" role="doc-biblioref">2016</a>)</span> based on a variant of the  No-U-Turn sampler <span class="citation">(known as  NUTS: Hoffman and Gelman <a href="#ref-hoffmanNoUTurnSamplerAdaptively2014" role="doc-biblioref">2014</a>)</span>, which is, in general, more efficient than the traditional  Gibbs sampler used in other probabilistic languages such as  (Win)BUGS <span class="citation">(Lunn et al. <a href="#ref-lunn2000winbugs" role="doc-biblioref">2000</a>)</span> and  JAGS <span class="citation">(Plummer <a href="#ref-plummer2016jags" role="doc-biblioref">2016</a>)</span>. In this part of the book, we will focus on the package  <code>rstan</code> <span class="citation">(Guo, Gabry, and Goodrich <a href="#ref-R-rstan" role="doc-biblioref">2019</a>)</span> that integrates Stan <span class="citation">(Carpenter et al. <a href="#ref-carpenter2017stan" role="doc-biblioref">2017</a>)</span> with R <span class="citation">(R Core Team <a href="#ref-R-base" role="doc-biblioref">2019</a>)</span>.</p>
-<p>In order to understand how to fit a model in Stan and the difficulties we might face, a minimal understanding of the Stan  sampling algorithm is needed.
-Stan takes advantage of the fact that the  shape of the posterior distribution is completely determined by the  priors and the  likelihood we have defined; by that we mean that we know the analytical form of the  unnormalized posterior, which is the upper part of the Bayes rule (abbreviated below as <span class="math inline">\(q\)</span>). This is because the denominator, or  marginal likelihood, “only” constitutes a  normalizing constant:</p>
+<p>Stan is a  probabilistic programming language for statistical inference written in C++ that can be accessed through several interfaces (e.g., R, Python, Matlab, etc.). Stan uses an advanced dynamic  Hamiltonian Monte Carlo algorithm <span class="citation">(Betancourt <a href="#ref-betancourt2016identifying" role="doc-biblioref">2016</a>)</span> based on a variant of the  No-U-Turn sampler <span class="citation">(known as  NUTS: Hoffman and Gelman <a href="#ref-hoffmanNoUTurnSamplerAdaptively2014" role="doc-biblioref">2014</a>)</span>, which is, in general, more efficient than the traditional  Gibbs sampler used in other probabilistic languages such as  (Win)BUGS <span class="citation">(Lunn et al. <a href="#ref-lunn2000winbugs" role="doc-biblioref">2000</a>)</span> and  JAGS <span class="citation">(Plummer <a href="#ref-plummer2016jags" role="doc-biblioref">2016</a>)</span>. In this part of the book, we will focus on the package  <code>rstan</code> <span class="citation">(Guo et al. <a href="#ref-R-rstan" role="doc-biblioref">2024</a>)</span> that integrates Stan <span class="citation">(Carpenter et al. <a href="#ref-carpenter2017stan" role="doc-biblioref">2017</a>)</span> with R <span class="citation">(R Core Team <a href="#ref-R-base" role="doc-biblioref">2023</a>)</span>.</p>
+<p>In order to understand how to fit a model in Stan and the difficulties we might face, a minimal understanding of the Stan  sampling algorithm is needed. Our descriptions of the technical details of HMC are gross oversimplifications that suffice for the purposes of this book. Stan takes advantage of the fact that the  shape of the posterior distribution is completely determined by the  priors and the  likelihood we have defined; by that we mean that we know the analytical form of the  unnormalized posterior, which is the upper part of the Bayes rule (abbreviated below as <span class="math inline">\(q\)</span>). This is because the denominator, or  marginal likelihood, “only” constitutes a  normalizing constant:</p>
 <p><span class="math display" id="eq:bayesagain">\[\begin{equation}
 p(\Theta|y) = \cfrac{ p(y|\Theta) \cdot p(\Theta) }{p(y)}
 \tag{10.1}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:bayesagain2">\[\begin{equation}
-q(\Theta|y) = p(y|\Theta) \cdot p(\Theta) 
+q(\Theta|y) = p(y|\Theta) \cdot p(\Theta)
 \tag{10.2}
 \end{equation}\]</span></p>
 <p>Thus the unnormalized posterior is proportional (<span class="math inline">\(\propto\)</span>) to the posterior distribution:</p>
@@ -1298,14 +1298,14 @@ q(\Theta|y) = p(y|\Theta) \cdot p(\Theta)
 q(\Theta|y) \propto p(\Theta|y)
 \tag{10.3}
 \end{equation}\]</span></p>
-<p>The Stan sampler uses  Hamiltonian dynamics and treats the vector of parameters, <span class="math inline">\(\Theta\)</span> (that could range from a vector containing a couple of parameters, e.g., <span class="math inline">\([\mu,\sigma]\)</span>, to a vector of hundreds of parameters in hierarchical models), as the position of a  frictionless particle that glides on the  <em>negative logarithm of the unnormalized posterior</em>.
+<p>The Stan sampler uses  Hamiltonian dynamics and treats the vector of parameters, <span class="math inline">\(\Theta\)</span> (that could range from a vector containing a couple of parameters, e.g., <span class="math inline">\(\langle \mu,\sigma \rangle\)</span>, to a vector of hundreds of parameters in hierarchical models), as the position of a  frictionless particle that glides on the  <em>negative logarithm of the unnormalized posterior</em>.
 That means that high probability places are valleys and low probability places are peaks in this space.<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a> However, Stan doesn’t just let the particle glide until the bottom of this space. If we let that happen, we would find the mode of the posterior distribution, rather than samples. Stan uses a complex algorithm to determine the  weight of the particle and the  momentum that we apply to it, as well as when to stop the particle trajectory to take a sample. Because we need to know the velocity of this particle, Stan needs to be able to calculate the  derivative of the log unnormalized posterior with respect to the parameters (recall that velocity is the first derivative of position). This means that if the parameter space is differentiable and relatively smooth (i.e., does not have any big break or sharp angle), and if the parameters of the Stan algorithm are well adjusted–as should happen in the warm-up period–these samples are going to represent samples of the true  posterior distribution. Bear in mind that the  geometry of the posterior has a big influence on whether the algorithm will converge (fast) or not: If the space is very flat, because there isn’t much data and the priors are not informative, then the particle may need to glide for a long time before it gets to a high probability area, that is a valley; if there are several valleys  (multimodality) the particle may never leave the vicinity of one of them; and if the space is  funnel shaped, the particle may never explore the funnel. One of the reasons for the difficulties in exploring complicated spaces is that the continuous path of the “particle” is discretized and divided into steps, and the  <em>step size</em> is optimized for the entire posterior space. In spaces that are too complex, such as a funnel, a step size might be too small to explore the wide part of the funnel, but too large to explore the narrow part; we will deal with this problem in section <a href="ch-complexstan.html#sec-uncorrstan">11.1.2</a>.</p>
 <p>Although our following example assumes a vector of two parameters and thus a simple geometry, real world examples can easily have hundreds of parameters defining an unnormalized posterior space with hundreds of dimensions.</p>
 <p>One question that might arise here is the following: Given that we already know the shape of the posterior, why do we need samples? After all, the posterior is just the unnormalized posterior multiplied by some number, the normalizing constant.</p>
 <p>To make this discussion concrete, let’s say that we have a subject that participates in a memory test, and in each trial we get a noisy score from their true  working memory score. We assume that at each trial, the score is elicited with normally distributed noise. If we want to estimate the score and how much the noise makes it vary from trial to trial, we are assuming a normal likelihood and we want to estimate its mean and standard deviation.</p>
 <p>We will use simulated data produced by a normal distribution with a true mean of 3 and a true standard deviation of 10:</p>
-<div class="sourceCode" id="cb604"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb604-1"><a href="ch-introstan.html#cb604-1" aria-hidden="true"></a>Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</span>
-<span id="cb604-2"><a href="ch-introstan.html#cb604-2" aria-hidden="true"></a><span class="kw">head</span>(Y)</span></code></pre></div>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb600-1"><a href="ch-introstan.html#cb600-1" aria-hidden="true"></a>Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb600-2"><a href="ch-introstan.html#cb600-2" aria-hidden="true"></a><span class="kw">head</span>(Y)</span></code></pre></div>
 <pre><code>## [1]  7.522  9.632 -8.364 -0.705 17.770 -9.239</code></pre>
 <p>As always, given our prior knowledge, we decide on priors. In this case, we use a log-normal prior for the standard deviation, <span class="math inline">\(\sigma\)</span>, since it can only be positive, but except for that, the prior distributions are quite arbitrary in this example.</p>
 <p><span class="math display" id="eq:priorsdem">\[\begin{equation}
@@ -1322,13 +1322,13 @@ q(\mu, \sigma |y) = \prod_n^{100} \mathit{Normal}(y_n|\mu, \sigma) \cdot \mathit
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(y = {7.522, 9.632, \ldots}\)</span></p>
 <p>We can also define the unnormalized posterior, <span class="math inline">\(q(\cdot)\)</span>, as a function in R:</p>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb606-1"><a href="ch-introstan.html#cb606-1" aria-hidden="true"></a>q &lt;-<span class="st"> </span><span class="cf">function</span>(mu, sigma, y) {</span>
-<span id="cb606-2"><a href="ch-introstan.html#cb606-2" aria-hidden="true"></a>  <span class="kw">dnorm</span>(<span class="dt">x =</span> mu, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">20</span>) <span class="op">*</span></span>
-<span id="cb606-3"><a href="ch-introstan.html#cb606-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">dlnorm</span>(<span class="dt">x =</span> sigma, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">1</span>) <span class="op">*</span></span>
-<span id="cb606-4"><a href="ch-introstan.html#cb606-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">prod</span>(<span class="kw">dnorm</span>(<span class="dt">x =</span> y, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))</span>
-<span id="cb606-5"><a href="ch-introstan.html#cb606-5" aria-hidden="true"></a>}</span></code></pre></div>
-<p>For example, if we want to know the unnormalized posterior density for the vector of parameters <span class="math inline">\([\mu,\sigma] = [0, 5]\)</span>, we do the following:</p>
-<div class="sourceCode" id="cb607"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb607-1"><a href="ch-introstan.html#cb607-1" aria-hidden="true"></a><span class="kw">q</span>(<span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">5</span>, <span class="dt">y =</span> Y)</span></code></pre></div>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb602-1"><a href="ch-introstan.html#cb602-1" aria-hidden="true"></a>q &lt;-<span class="st"> </span><span class="cf">function</span>(mu, sigma, y) {</span>
+<span id="cb602-2"><a href="ch-introstan.html#cb602-2" aria-hidden="true"></a>  <span class="kw">dnorm</span>(<span class="dt">x =</span> mu, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">20</span>) <span class="op">*</span></span>
+<span id="cb602-3"><a href="ch-introstan.html#cb602-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">dlnorm</span>(<span class="dt">x =</span> sigma, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">1</span>) <span class="op">*</span></span>
+<span id="cb602-4"><a href="ch-introstan.html#cb602-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">prod</span>(<span class="kw">dnorm</span>(<span class="dt">x =</span> y, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))</span>
+<span id="cb602-5"><a href="ch-introstan.html#cb602-5" aria-hidden="true"></a>}</span></code></pre></div>
+<p>For example, if we want to know the unnormalized posterior density for the vector of parameters <span class="math inline">\(\langle \mu,\sigma \rangle = \langle 0, 5 \rangle\)</span>, we do the following:</p>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb603-1"><a href="ch-introstan.html#cb603-1" aria-hidden="true"></a><span class="kw">q</span>(<span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">5</span>, <span class="dt">y =</span> Y)</span></code></pre></div>
 <pre><code>## [1] 6.02e-197</code></pre>
 <p>The shape of the unnormalized posterior density is completely defined and it will look like Figure <a href="ch-introstan.html#fig:up">10.1</a>.</p>
 
@@ -1339,18 +1339,19 @@ FIGURE 10.1: The unnormalized posterior defined by equation <a href="ch-introsta
 </p>
 </div>
 <p>Why is the shape of the unnormalized posterior density not enough? The main reason is that unless we already know which probability distribution we are dealing with (e.g., normal, Bernoulli, etc.) or we can easily  integrate it (which can only be done in simpler cases) we cannot do much with the analytical form of the unnormalized posterior: We cannot calculate credible intervals, or know how likely it is that the true score is above or below zero, and even the mean of the posterior is impossible to calculate.
-This is because the unnormalized posterior distribution represents the shape of the posterior distribution. With just the shape of an unknown distribution, we can only answer the following question: What is the most (or least) likely value of the vector of parameters? We can answer this question by searching for the highest (or lowest) place in that shape. This leads us to the the  maximum a posteriori  (MAP) estimate (i.e., the highest point in Figure <a href="ch-introstan.html#fig:up">10.1</a>, or the lowest point of the negative log unnormalized log posterior), which is in a sense the “Bayesian counterpart” of the penalized maximum likelihood estimate (MLE). However, it is not trully Bayesian since it doesn’t take into account the uncertainty of the posterior. Even calculating the mode is not always trivial. In simple cases as this one, one can calculate it analytically; but in more complex cases relatively complicated algorithms are needed. (If we can recognize the shape as a distribution, we are in a different situation. In that case, we might know already the formulas for the expectation, variance, etc. This is what we did in chapter <a href="ch-introBDA.html#ch-introBDA">2</a>, but this is an unusual situation in realistic analyses.)
-As we mentioned before, if we want to get  posterior density values, we need the denominator of the Bayes rule (or  marginal likelihood), <span class="math inline">\(p(y)\)</span>, which requires integrating the unnormalized posterior. Even this is not too useful if we want to communicate findings, almost every summary statistic requires us to solve more integrals, and except for a handful of cases, these integrals might not have an analytical solution.</p>
-<p>If we want to be able to calculate  summary statistics of the posterior distribution (mean, quantiles, etc.), we are going to need  samples from this distribution. This is because with enough samples of a probability distribution, we can achieve very good approximations of summary statistics. Stan will take care of returning samples from the posterior distribution, if the log unnormalized posterior distribution is differentiable and can be expressed as follows:<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></p>
+This is because the unnormalized posterior distribution represents the shape of the posterior distribution. With just the shape of an unknown distribution, we can only answer the following question: What is the most (or least) likely value of the vector of parameters? We can answer this question by searching for the highest (or lowest) place in that shape. This leads us to the  maximum a posteriori  (MAP) estimate (i.e., the highest point in Figure <a href="ch-introstan.html#fig:up">10.1</a>, or the lowest point of the negative log unnormalized log posterior), which is in a sense the “Bayesian counterpart” of the penalized maximum likelihood estimate (MLE). However, it is not truly Bayesian since it doesn’t take into account the uncertainty of the posterior. Even calculating the mode is not always trivial. In simple cases as this one, one can calculate it analytically; but in more complex cases relatively complicated algorithms are needed. (If we can recognize the shape as a distribution, we are in a different situation. In that case, we might know already the formulas for the expectation, variance, etc. This is what we did in chapter <a href="ch-introBDA.html#ch-introBDA">2</a>, but this is an unusual situation in realistic analyses.)
+As we mentioned before, if we want to get  posterior density values, we need the denominator of the Bayes rule (or  marginal likelihood), <span class="math inline">\(p(y)\)</span>, which requires integrating the unnormalized posterior. Even this is not too useful if we want to communicate findings: almost every summary statistic requires us to solve more integrals, and except for a handful of cases, these integrals might not have an analytical solution.</p>
+<p>If we want to be able to calculate  summary statistics of the posterior distribution (mean, quantiles, etc.), we are going to need  samples from this distribution. This is because with enough samples of a probability distribution, we can achieve very good approximations of summary statistics.</p>
+<p>Stan will take care of returning samples from the posterior distribution, if the log unnormalized posterior distribution is differentiable and can be expressed as follows:<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></p>
 <p><span class="math display" id="eq:logup">\[\begin{equation}
-\log(q(\Theta|y)) = \sum_n \log(p(y_n|\Theta)) + \sum_q \log(p(\Theta_q))
+\log(q(\Theta|y)) = \sum_n \log(p(y_n|\Theta)) + \sum_{par} \log(p(\Theta_{par}))
 \tag{10.6}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(n\)</span> indicates each data point and <span class="math inline">\(q\)</span> each parameter. In our case, this corresponds to the following:</p>
+<p>where <span class="math inline">\(n\)</span> indicates each data point and <span class="math inline">\(par\)</span> each parameter. In our case, this corresponds to the following:</p>
 <p><span class="math display" id="eq:up-applied">\[\begin{equation}
 \begin{aligned}
 \log(q(\mu, \sigma |y)) =&amp; \sum_n^{100} \log(Normal(y_n|\mu, \sigma)) + \log(Normal(\mu | 0, 20)) \\
-&amp;+ \log(LogNormal(\sigma | 3, 1)) 
+&amp;+ \log(LogNormal(\sigma | 3, 1))
 \end{aligned}
 \tag{10.7}
 \end{equation}\]</span></p>
@@ -1358,7 +1359,7 @@ As we mentioned before, if we want to get  posterior density values, we need the
 <div id="stan-syntax" class="section level2 hasAnchor" number="10.1">
 <h2><span class="header-section-number">10.1</span> Stan syntax<a href="ch-introstan.html#stan-syntax" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A Stan program is usually saved as a <code>.stan</code> file and accessed through R (or other interfaces) and it is organized into a sequence of optional and obligatory  blocks, which must be written in order. The Stan language is different from R and it is loosely based on C++; one important aspect to pay attention to is that every statement ends in a semi-colon, <code>;</code>. Blocks (<code>{}</code>) do not end in semi-colons. Some functions in Stan are written in the same way as in R (e.g., <code>mean</code>, <code>sum</code>, <code>max</code>, <code>min</code>). But some are different; when in doubt, <a href="https://mc-stan.org/users/documentation/">Stan documentation</a> can be extremely helpful. In addition, the package  <code>rstan</code> provides the function  <code>lookup()</code> to look up for translations of functions. For example, in <a href="ch-reg.html#sec-logistic">4.3</a>, we saw that the R function <code>plogis()</code> is needed to convert from log-odds to probability space. If we need it in a Stan program, we can look for it in the following way:</p>
-<div class="sourceCode" id="cb609"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb609-1"><a href="ch-introstan.html#cb609-1" aria-hidden="true"></a><span class="kw">lookup</span>(plogis)</span></code></pre></div>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb605-1"><a href="ch-introstan.html#cb605-1" aria-hidden="true"></a><span class="kw">lookup</span>(plogis)</span></code></pre></div>
 <pre><code>##          StanFunction                                Arguments
 ## 262         inv_logit                                (T);(int)
 ## 307     log_inv_logit                                (T);(int)
@@ -1376,12 +1377,12 @@ As we mentioned before, if we want to get  posterior density values, we need the
 ## 326     T;real
 ## 327     T;real</code></pre>
 <p>There are three columns in the output of this call. The first one indicates Stan function names, the second one their arguments with their type, and the third one the type they return. Unlike R, Stan is strict with the type of the variables.<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a> In order to decide on which function to use, it is necessary to look at the Stan documentation and find the function that matches our specific needs (for <code>plogis</code>, the corresponding function would be <code>inv_logit()</code>).</p>
-<p>Another important difference with R is that every variable needs to be declared at the beginning of a block with its type (real, integer, vector, matrix, etc.).<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a> The next two sections exemplify these details through basic Stan programs.</p>
+<p>Another important difference with R is that every variable needs to be declared with its type (real, integer, vector, matrix, etc.). The next two sections exemplify these details through basic Stan programs.</p>
 </div>
 <div id="sec-firststan" class="section level2 hasAnchor" number="10.2">
 <h2><span class="header-section-number">10.2</span> A first simple example with Stan:  Normal likelihood<a href="ch-introstan.html#sec-firststan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s fit a Stan model to estimate the simple example given at the introduction of this chapter, where we simulate data in R from a normal distribution with a true mean of <code>3</code> and a true standard deviation of <code>10</code>:</p>
-<div class="sourceCode" id="cb611"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb611-1"><a href="ch-introstan.html#cb611-1" aria-hidden="true"></a>Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb607"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb607-1"><a href="ch-introstan.html#cb607-1" aria-hidden="true"></a>Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>As mentioned earlier,  Stan code is organized in  blocks. The first block indicates what constitutes data for the model:</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower = 1&gt; N;  // Total number of trials
@@ -1410,24 +1411,24 @@ As we mentioned before, if we want to get  posterior density values, we need the
 <p><span id="thm:target" class="theorem"><strong>Box 10.1  </strong></span><strong>What does <code>target</code> do?</strong></p>
 </div>
 <p>We can exemplify how  <code>target</code> works with one hypothetical iteration of the sampler.</p>
-<p>In every  iteration where the sampler explores the posterior space, <code>mu</code> and <code>sigma</code> acquire different values (this is where the Stan algorithm stops the movement of the particle in the Hamiltonian space). Say that in an iteration, <code>mu = 4.799</code> and <code>sigma = 9.679</code>. Then the following happens in the  model block:</p>
+<p>In every  iteration where the sampler explores the posterior space, <code>mu</code> and <code>sigma</code> acquire different values (this is where the Stan algorithm stops the movement of the particle in the Hamiltonian space). Say that in an iteration, <code>mu = 3.868</code> and <code>sigma = 8.919</code>. Then the following happens in the  model block:</p>
 <ol style="list-style-type: decimal">
 <li>At the beginning of the iteration, <code>target</code> is zero.</li>
-<li>The transformations that the sampler <em>automatically</em> does are taken into account. In our case, although <code>sigma</code> is constrained to be positive in our model, inside Stan’s sampler it is transformed to an  unconstrained space amenable to  Hamiltonian Monte Carlo. That is, Stan samples from an auxiliary parameter that ranges from minus infinity to infinity, which is equivalent to <code>log(sigma)</code>. This auxiliary parameter is then exponentiated, when it is incorporated into our model. Because of the mismatch between the constrained parameter space that we defined and the unconstrained space that it is converted to by Stan, an adjustment to the unnormalized posterior is required and added <em>automatically</em>. The reasons for this requirement are somewhat complex and will be discussed in section <a href="ch-custom.html#ch-custom">12</a>. In this particular case, this  adjustment (which is the log absolute value of the  Jacobian determinant), is equivalent to adding <code>log(sigma) = 2.27</code> to <code>target</code>.</li>
-<li>After <code>target += normal_lpdf(mu | 0, 20);</code> the log of the density of <span class="math inline">\(\mathit{Normal}(0,20)\)</span> is evaluated at a given sample of mu (specifically 4.799) and this is added to <code>target</code>. In R, this would be <code>dnorm(x = 4.799, mean = 0, sd = 20, log = TRUE)</code>, which is equal to <code>-3.943</code>. Thus, <code>target</code> should be <code>-3.943 + 2.27 = -1.674</code>.</li>
-<li>After <code>target += lognormal_lpdf(sigma | 3, 1)</code>, we add the log of the density of <span class="math inline">\(\mathit{LogNormal}(3, 1)\)</span> evaluated at <code>9.679</code> to the previous value of the target. In R, this would be <code>dlnorm(x = 9.679 , mean = 3, sd = 1, log = TRUE)</code>, which is equal to <code>-3.455</code>. Thus, <code>target</code> should be updated to <code>-1.674 + -3.455 = -5.129</code>.</li>
-<li>After each iteration of the for-loop in the model block, we add to the target the log density of <span class="math inline">\(\mathit{Normal}( 4.799, 9.679)\)</span> evaluated at each of the values of Y. In R, this would be to add <code>sum(dnorm(Y, 4.799, 9.679, log = TRUE))</code> (which is equal to <code>-363.343</code>) to the current value of <code>target</code> <code>-5.129 + -363.343 = -368.472</code>.</li>
+<li>The transformations that the sampler <em>automatically</em> does are taken into account. In our case, although <code>sigma</code> is constrained to be positive in our model, inside Stan’s sampler it is transformed to an  unconstrained space amenable to  Hamiltonian Monte Carlo. That is, Stan samples from an auxiliary parameter that ranges from minus infinity to infinity, which is equivalent to <code>log(sigma)</code>. This auxiliary parameter is then exponentiated, when it is incorporated into our model. Because of the mismatch between the constrained parameter space that we defined and the unconstrained space that it is converted to by Stan, an adjustment to the unnormalized posterior is required and added <em>automatically</em>. The reasons for this requirement are somewhat complex and will be discussed in section <a href="ch-custom.html#ch-custom">12</a>. In this particular case, this  adjustment (which is the log absolute value of the  Jacobian determinant), is equivalent to adding <code>log(sigma) = 2.188</code> to <code>target</code>.</li>
+<li>After <code>target += normal_lpdf(mu | 0, 20);</code> the log of the density of <span class="math inline">\(\mathit{Normal}(0,20)\)</span> is evaluated at a given sample of mu (specifically 3.868) and this is added to <code>target</code>. In R, this would be <code>dnorm(x = 3.868, mean = 0, sd = 20, log = TRUE)</code>, which is equal to <code>-3.933</code>. Thus, <code>target</code> should be <code>-3.933 + 2.188 = -1.745</code>.</li>
+<li>After <code>target += lognormal_lpdf(sigma | 3, 1)</code>, we add the log of the density of <span class="math inline">\(\mathit{LogNormal}(3, 1)\)</span> evaluated at <code>8.919</code> to the previous value of the target. In R, this would be <code>dlnorm(x = 8.919 , mean = 3, sd = 1, log = TRUE)</code>, which is equal to <code>-3.437</code>. Thus, <code>target</code> should be updated to <code>-1.745 + -3.437 = -5.182</code>.</li>
+<li>After each iteration of the for-loop in the model block, we add to the target the log density of <span class="math inline">\(\mathit{Normal}( 3.868, 8.919)\)</span> evaluated at each of the values of Y. In R, this would be to add <code>sum(dnorm(Y, 3.868, 8.919, log = TRUE))</code> (which is equal to <code>-362.562</code>) to the current value of <code>target</code> <code>-5.182 + -362.562 = -367.744</code>.</li>
 </ol>
-<p>This means that for the coordinates [mu = 4.799, sigma = 9.679], the height of the  unnormalized posterior would be the value <code>exp(target) =</code> <span class="math inline">\(\exp( -368.472 ) = 9.433\times 10^{-161}\)</span>. Incidentally, the value of <code>target</code> is returned as <code>lp__</code> (log probability) in an object storing a fit model with Stan.</p>
+<p>This means that for the coordinates [mu = 3.868, sigma = 8.919], the height of the  unnormalized posterior would be the value <code>exp(target) =</code> <span class="math inline">\(\exp( -367.744 ) = 1.954\times 10^{-160}\)</span>. Incidentally, the value of <code>target</code> is returned as <code>lp__</code> (log probability) in an object storing a fit model with Stan.</p>
 <p>It is possible to expose the value of <code>target</code>, by printing  <code>target()</code> inside a Stan model. The value of <code>target</code> after each iteration is named  <code>lp__</code> in the Stan object. This can be useful for troubleshooting a problematic model.</p>
 </div>
 <div class="extra">
 <div class="theorem">
-<p><span id="thm:tilde" class="theorem"><strong>Box 10.2  </strong></span><strong>Explicitly  incrementing the log probability function  (<code>target</code>) vs. using the sampling (<code>~</code>) notation.</strong></p>
+<p><span id="thm:tilde" class="theorem"><strong>Box 10.2  </strong></span><strong>Explicitly incrementing the log probability function  (<code>target</code>) vs. using the sampling or distribution <code>~</code> notation.</strong></p>
 </div>
-<p>In this book we specify priors and likelihoods by explicitly incrementing the log-probability function using the following syntax:</p>
+<p>In this book, we specify priors and likelihoods by explicitly incrementing the log-probability function using the following syntax:</p>
 <pre><code>target +=  pdf_name_lpdf(parameter | ...)</code></pre>
-<p>However, Stan also allows for specifying priors and likelihood with the so-called  sampling notation with the following code.</p>
+<p>However, Stan also allows for specifying priors and likelihood with the so-called  sampling or distribution statement notation with the following code.</p>
 <pre><code>parameter ~ pdf_name(..)</code></pre>
 <p>Confusingly enough a sampling statement does not perform any actual sampling, and it is meant to be a notational convenience.</p>
 <p>The following two lines of code lead to the same behavior in Stan with respect to parameter estimation. There is, nonetheless, an important difference between them.</p>
@@ -1438,7 +1439,7 @@ target += normal_lpdf(x | mu, sigma);</code></pre>
 -log(\sigma) - \frac{log(2 \pi)}{2} - \frac{(x-\mu)^2}{2 \sigma^2}
 \end{equation}\]</span></p>
 <p>If one uses the sampling notation, Stan will ignore the terms that don’t contain parameters, such as <span class="math inline">\(- \frac{log(2 \pi)}{2}\)</span>. Depending on whether the variable <span class="math inline">\(x\)</span>, the location <span class="math inline">\(\mu\)</span>, and the scale <span class="math inline">\(\sigma\)</span> are data or parameters, Stan will ignore different terms. For example, consider the case of a linear regression. The data <span class="math inline">\(y\)</span> (taking the role of <span class="math inline">\(x\)</span> in the previous equation) is assumed to be normally distributed with a location (<span class="math inline">\(\mu\)</span>) and scale (<span class="math inline">\(\sigma\)</span>) to be estimated. In this case, only <span class="math inline">\(-\frac{log(2 \pi)}{2}\)</span> can be dropped, because both <span class="math inline">\(-log(\sigma)\)</span> and <span class="math inline">\(- \frac{(y-\mu)^2}{2 \sigma^2}\)</span> contain parameters. Another example where different terms would be dropped is the case of assigning a normal prior distribution to a parameter <span class="math inline">\(\theta\)</span>. Here, the location and scale (<span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>) are data and <span class="math inline">\(\theta\)</span> takes the role of <span class="math inline">\(x\)</span> in the previous equation and acts as a parameter. This means that <span class="math inline">\(-log(\sigma)\)</span> is a constant term that can be ignored, but not <span class="math inline">\(- \frac{(\theta-\mu)^2}{2 \sigma^2}\)</span> because it contains the parameter <span class="math inline">\(\theta\)</span>. Dropping  constant terms does not affect parameter estimation because it only affects the unnormalized likelihood in the same way in all the parameter space. To make this more concrete, the whole plot in Figure <a href="ch-introstan.html#fig:up">10.1</a> will move up or down by some constant amount, and this won’t affect the Hamiltonian dynamics that determine how we sample from the posterior.</p>
-<p>The advantage of the sampling notation is that it can be faster (when many terms are ignored), but the disadvantage is that (i) it is not compatible with the calculation of  Bayes factor with  bridge sampling (see section <a href="ch-bf.html#sec-stanBF">15.4</a> in chapter <a href="ch-bf.html#ch-bf">15</a>), or the calculation of the log-likelihood for  cross validation (see chapter <a href="ch-cv.html#ch-cv">16</a>), (ii) it misleads us into thinking that Stan is actually sampling the left term in the sampling statement, e.g., drawing <span class="math inline">\(y\)</span> from a normal distribution in the previous example, when in fact at each step the log-probability (<code>target</code>) is incremented based on the parameter values determined by Hamiltonian dynamics (as explained before), and (iii) it makes it less straightforward to transition to more complex models where the sampling notation cannot be used (as in, for example, mixture models in chapter <a href="ch-mixture.html#ch-mixture">19</a>).</p>
+<p>The advantage of the sampling notation is that it can be faster (when many terms are ignored), but the disadvantage is that (i) it is not compatible with the calculation of  Bayes factor with  bridge sampling (see section <a href="ch-bf.html#sec-stanBF">15.4</a> in chapter <a href="ch-bf.html#ch-bf">15</a>), or the calculation of the log-likelihood for  cross-validation (see chapter <a href="ch-cv.html#ch-cv">16</a>), (ii) it misleads us into thinking that Stan is actually sampling the left term in the sampling statement, e.g., drawing <span class="math inline">\(y\)</span> from a normal distribution in the previous example, when in fact at each step the log-probability (<code>target</code>) is incremented based on the parameter values determined by Hamiltonian dynamics (as explained before), and (iii) it makes it less straightforward to transition to more complex models where the sampling notation cannot be used (as in, for example, mixture models in chapter <a href="ch-mixture.html#ch-mixture">19</a>).</p>
 <p>If one is not going to use Bayes factor with bridge sampling or cross-validation, the same speed advantage of the sampling notation can also be achieved by incrementing the log-probability with  log-unnormalized probability density or mass functions (functions ending with  <code>_lupdf</code> or  <code>_lupmf</code>). The previous example would be translated into the following:</p>
 <pre><code>target += normal_lupdf(y | mu, sigma);</code></pre>
 </div>
@@ -1470,75 +1471,66 @@ model {
   target += normal_lpdf(y | mu, sigma);
 }</code></pre>
 <p>You can save the above code as <code>normal.stan</code>. Alternatively, you can use the version stored in the package <code>bcogsci</code>. (Typing <code>?stan-normal</code> in the R console provides some documentation for the model.) You can access the code of the models of this book by using  <code>system.file("stan_models", "name_of_the_model.stan", package = "bcogsci")</code>.</p>
-<div class="sourceCode" id="cb621"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb621-1"><a href="ch-introstan.html#cb621-1" aria-hidden="true"></a>normal &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb621-2"><a href="ch-introstan.html#cb621-2" aria-hidden="true"></a>                      <span class="st">&quot;normal.stan&quot;</span>,</span>
-<span id="cb621-3"><a href="ch-introstan.html#cb621-3" aria-hidden="true"></a>                      <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb617"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb617-1"><a href="ch-introstan.html#cb617-1" aria-hidden="true"></a>normal &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb617-2"><a href="ch-introstan.html#cb617-2" aria-hidden="true"></a>                      <span class="st">&quot;normal.stan&quot;</span>,</span>
+<span id="cb617-3"><a href="ch-introstan.html#cb617-3" aria-hidden="true"></a>                      <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span></code></pre></div>
 <p>This command just points to a text file that the package <code>bcogsci</code> stores on your computer. You can open it to read the code (with any text editor, or <code>readLines()</code> in R). You’ll need to compile this code and run it with <code>stan()</code>.</p>
 <p>Stan requires the data to be in a list object in R. Below, we fit the model with the default number of  chains and  iterations.</p>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb622-1"><a href="ch-introstan.html#cb622-1" aria-hidden="true"></a>Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</span>
-<span id="cb622-2"><a href="ch-introstan.html#cb622-2" aria-hidden="true"></a>lst_score_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">y =</span> Y, <span class="dt">N =</span> <span class="kw">length</span>(Y))</span>
-<span id="cb622-3"><a href="ch-introstan.html#cb622-3" aria-hidden="true"></a><span class="co"># Fit the model with the default values of number of</span></span>
-<span id="cb622-4"><a href="ch-introstan.html#cb622-4" aria-hidden="true"></a><span class="co"># chains and iterations: chains = 4, iter = 2000</span></span>
-<span id="cb622-5"><a href="ch-introstan.html#cb622-5" aria-hidden="true"></a>fit_score &lt;-<span class="st"> </span><span class="kw">stan</span>(normal, <span class="dt">data =</span> lst_score_data)</span>
-<span id="cb622-6"><a href="ch-introstan.html#cb622-6" aria-hidden="true"></a><span class="co"># alternatively:</span></span>
-<span id="cb622-7"><a href="ch-introstan.html#cb622-7" aria-hidden="true"></a><span class="co"># stan(&quot;normal.stan&quot;, data = lst_score_data)</span></span></code></pre></div>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb618-1"><a href="ch-introstan.html#cb618-1" aria-hidden="true"></a>Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb618-2"><a href="ch-introstan.html#cb618-2" aria-hidden="true"></a>lst_score_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">y =</span> Y, <span class="dt">N =</span> <span class="kw">length</span>(Y))</span>
+<span id="cb618-3"><a href="ch-introstan.html#cb618-3" aria-hidden="true"></a><span class="co"># Fit the model with the default values of number of</span></span>
+<span id="cb618-4"><a href="ch-introstan.html#cb618-4" aria-hidden="true"></a><span class="co"># chains and iterations: chains = 4, iter = 2000</span></span>
+<span id="cb618-5"><a href="ch-introstan.html#cb618-5" aria-hidden="true"></a>fit_score &lt;-<span class="st"> </span><span class="kw">stan</span>(normal, <span class="dt">data =</span> lst_score_data)</span>
+<span id="cb618-6"><a href="ch-introstan.html#cb618-6" aria-hidden="true"></a><span class="co"># alternatively:</span></span>
+<span id="cb618-7"><a href="ch-introstan.html#cb618-7" aria-hidden="true"></a><span class="co"># stan(&quot;normal.stan&quot;, data = lst_score_data)</span></span></code></pre></div>
 <p>Inspect how well the  chains mixed in Figure <a href="ch-introstan.html#fig:traceplotmusigma">10.2</a>. The chains for each parameter should look like a  “fat hairy caterpillar” <span class="citation">(Lunn et al. <a href="#ref-lunn2012bugs" role="doc-biblioref">2012</a>)</span>; see section <a href="ch-compbda.html#sec-convergencenut">3.2.1.2</a> for a brief discussion about  convergence.</p>
 
-<div class="sourceCode" id="cb623"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb623-1"><a href="ch-introstan.html#cb623-1" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb619-1"><a href="ch-introstan.html#cb619-1" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:traceplotmusigma"></span>
 <img src="bookdown_files/figure-html/traceplotmusigma-1.svg" alt="Traceplots of mu and sigma from the model fit_score." width="672" />
 <p class="caption">
 FIGURE 10.2: Traceplots of <code>mu</code> and <code>sigma</code> from the model <code>fit_score</code>.
 </p>
 </div>
-<p>We can see a summary of the posterior by either printing out the model fit, or by plotting it. The summary displayed by the function  <code>print</code> includes means, standard deviations (<code>sd</code>), quantiles,  Monte Carlo standard errors for the mean of the posterior (<code>se_mean</code>), split Rhats, and effective sample sizes (<code>n_eff</code>). The summaries are computed after removing the warmup and merging together all chains. The  <code>se_mean</code> is unrelated to the <code>se</code> of an estimate in the parallel frequentist model. Similarly to a large effective sample size, small Monte Carlo standard errors indicate a successful sampling procedure: with a large value of  <code>n_eff</code> and a small value for <code>se_mean</code> we can be relatively sure of the reliability of the mean of the posterior. However, what constitutes a large or small <code>se_mean</code> is harder to define <span class="citation">(see Vehtari, Gelman, Simpson, Carpenter, and Bürkner <a href="#ref-vehtari2019ranknormalization" role="doc-biblioref">2019</a> for a more extensive discussion)</span>.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a></p>
-<div class="sourceCode" id="cb624"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb624-1"><a href="ch-introstan.html#cb624-1" aria-hidden="true"></a><span class="kw">print</span>(fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
-<pre><code>## Inference for Stan model: anon_model.
-## 4 chains, each with iter=2000; warmup=1000; thin=1; 
-## post-warmup draws per chain=1000, total post-warmup draws=4000.
-## 
-##       mean se_mean   sd 2.5%  25%  50%  75% 97.5% n_eff Rhat
-## mu    3.91    0.02 0.91 2.14 3.30 3.92 4.51  5.68  3518    1
-## sigma 9.24    0.01 0.67 8.03 8.77 9.20 9.66 10.62  3681    1
-## 
-## Samples were drawn using NUTS(diag_e) at Fri Mar  8 14:42:14 2024.
-## For each parameter, n_eff is a crude measure of effective sample size,
-## and Rhat is the potential scale reduction factor on split chains (at 
-## convergence, Rhat=1).</code></pre>
-<p>After transforming the <code>stanfit</code> object into a data frame, it’s possible to provide summary plots as the one shown in <a href="ch-introstan.html#fig:mcmchist">10.3</a>. The package  <code>bayesplot</code> <span class="citation">(Gabry and Mahr <a href="#ref-R-bayesplot" role="doc-biblioref">2019</a>)</span> is a wrapper around <code>ggplot2</code> <span class="citation">(Wickham, Chang, et al. <a href="#ref-R-ggplot2" role="doc-biblioref">2019</a>)</span> and has several convenient functions to plot the samples. Bayesplot functions for posterior summaries start with <code>mcmc_</code>:</p>
+<p>We can see a summary of the posterior by either printing out the model fit, or by plotting it. The summary displayed by the function  <code>print</code> includes means, standard deviations (<code>sd</code>), quantiles,  Monte Carlo standard errors for the mean of the posterior (<code>se_mean</code>), split Rhats, and effective sample sizes (<code>n_eff</code>). The summaries are computed after removing the warmup and merging together all chains. The  <code>se_mean</code> is unrelated to the <code>se</code> of an estimate in the parallel frequentist model. Similarly to a large effective sample size, small Monte Carlo standard errors indicate a successful sampling procedure: with a large value of  <code>n_eff</code> and a small value for <code>se_mean</code> we can be relatively sure of the reliability of the mean of the posterior. However, what constitutes a large or small <code>se_mean</code> is harder to define <span class="citation">(see Vehtari et al. <a href="#ref-vehtari2019ranknormalization" role="doc-biblioref">2021</a> for a more extensive discussion)</span>.<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a></p>
+<div class="sourceCode" id="cb620"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb620-1"><a href="ch-introstan.html#cb620-1" aria-hidden="true"></a><span class="kw">print</span>(fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<pre><code>##       mean 2.5% 97.5% n_eff Rhat
+## mu    3.91 2.06   5.7  3707    1
+## sigma 9.23 8.07  10.7  4026    1</code></pre>
+<p>After transforming the <code>stanfit</code> object into a data frame, it’s possible to provide summary plots as the one shown in <a href="ch-introstan.html#fig:mcmchist">10.3</a>. The package  <code>bayesplot</code> <span class="citation">(Gabry and Mahr <a href="#ref-R-bayesplot" role="doc-biblioref">2024</a>)</span> is a wrapper around <code>ggplot2</code> <span class="citation">(Wickham, Chang, et al. <a href="#ref-R-ggplot2" role="doc-biblioref">2024</a>)</span> and has several convenient functions to plot the samples. Bayesplot functions for posterior summaries start with <code>mcmc_</code>:</p>
 
-<div class="sourceCode" id="cb626"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb626-1"><a href="ch-introstan.html#cb626-1" aria-hidden="true"></a>df_fit_score &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_score)</span>
-<span id="cb626-2"><a href="ch-introstan.html#cb626-2" aria-hidden="true"></a><span class="kw">mcmc_hist</span>(df_fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb622-1"><a href="ch-introstan.html#cb622-1" aria-hidden="true"></a>df_fit_score &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_score)</span>
+<span id="cb622-2"><a href="ch-introstan.html#cb622-2" aria-hidden="true"></a><span class="kw">mcmc_hist</span>(df_fit_score, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:mcmchist"></span>
 <img src="bookdown_files/figure-html/mcmchist-1.svg" alt="Histograms of the samples of the posterior distributions of mu and sigma from the model fit_score." width="672" />
 <p class="caption">
 FIGURE 10.3: Histograms of the samples of the posterior distributions of <code>mu</code> and <code>sigma</code> from the model <code>fit_score</code>.
 </p>
 </div>
-<p>There are also several ways to get the samples for other summaries or customized plots, depending on whether we want a list, a data frame, or an array.</p>
-<div class="sourceCode" id="cb627"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb627-1"><a href="ch-introstan.html#cb627-1" aria-hidden="true"></a><span class="co"># extract from rstan is sometimes overwritten by</span></span>
-<span id="cb627-2"><a href="ch-introstan.html#cb627-2" aria-hidden="true"></a><span class="co"># a tidyverse version, we make sure that it&#39;s right one:</span></span>
-<span id="cb627-3"><a href="ch-introstan.html#cb627-3" aria-hidden="true"></a>rstan<span class="op">::</span><span class="kw">extract</span>(fit_score) <span class="op">%&gt;%</span></span>
-<span id="cb627-4"><a href="ch-introstan.html#cb627-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">str</span>()</span></code></pre></div>
+<p>There are also several ways to get the samples for other summaries or customized plots, depending on whether we want a list, a data frame, or an array.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a></p>
+<div class="sourceCode" id="cb623"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb623-1"><a href="ch-introstan.html#cb623-1" aria-hidden="true"></a><span class="co"># extract from rstan is sometimes overwritten by</span></span>
+<span id="cb623-2"><a href="ch-introstan.html#cb623-2" aria-hidden="true"></a><span class="co"># a tidyverse version, we make sure that it&#39;s right one:</span></span>
+<span id="cb623-3"><a href="ch-introstan.html#cb623-3" aria-hidden="true"></a>rstan<span class="op">::</span><span class="kw">extract</span>(fit_score) <span class="op">%&gt;%</span></span>
+<span id="cb623-4"><a href="ch-introstan.html#cb623-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">str</span>()</span></code></pre></div>
 <pre><code>## List of 3
-##  $ mu   : num [1:4000(1d)] 4.8 2.95 3.42 3.57 2.93 ...
+##  $ mu   : num [1:4000(1d)] 3.87 1.84 2.55 2.89 3.39 ...
 ##   ..- attr(*, &quot;dimnames&quot;)=List of 1
 ##   .. ..$ iterations: NULL
-##  $ sigma: num [1:4000(1d)] 9.68 8.89 8.65 7.69 10.39 ...
+##  $ sigma: num [1:4000(1d)] 8.92 9.15 8.38 9.15 9.15 ...
 ##   ..- attr(*, &quot;dimnames&quot;)=List of 1
 ##   .. ..$ iterations: NULL
-##  $ lp__ : num [1:4000(1d)] -368 -368 -368 -371 -370 ...
+##  $ lp__ : num [1:4000(1d)] -368 -370 -370 -368 -368 ...
 ##   ..- attr(*, &quot;dimnames&quot;)=List of 1
 ##   .. ..$ iterations: NULL</code></pre>
-<div class="sourceCode" id="cb629"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb629-1"><a href="ch-introstan.html#cb629-1" aria-hidden="true"></a><span class="kw">as.data.frame</span>(fit_score) <span class="op">%&gt;%</span></span>
-<span id="cb629-2"><a href="ch-introstan.html#cb629-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">str</span>(<span class="dt">list.len =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb625-1"><a href="ch-introstan.html#cb625-1" aria-hidden="true"></a><span class="kw">as.data.frame</span>(fit_score) <span class="op">%&gt;%</span></span>
+<span id="cb625-2"><a href="ch-introstan.html#cb625-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">str</span>(<span class="dt">list.len =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    4000 obs. of  3 variables:
-##  $ mu   : num  4.44 4.98 2.99 6 3.78 ...
-##  $ sigma: num  9.56 9.32 9.49 9.42 8.66 ...
-##  $ lp__ : num  -368 -368 -368 -370 -368 ...</code></pre>
-<div class="sourceCode" id="cb631"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb631-1"><a href="ch-introstan.html#cb631-1" aria-hidden="true"></a><span class="kw">as.array</span>(fit_score) <span class="op">%&gt;%</span></span>
-<span id="cb631-2"><a href="ch-introstan.html#cb631-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">str</span>()</span></code></pre></div>
-<pre><code>##  num [1:1000, 1:4, 1:3] 4.44 4.98 2.99 6 3.78 ...
+##  $ mu   : num  4.92 2.6 4.91 3.07 4.02 ...
+##  $ sigma: num  10.04 8.51 9.97 9.39 9.04 ...
+##  $ lp__ : num  -369 -369 -369 -368 -368 ...</code></pre>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb627-1"><a href="ch-introstan.html#cb627-1" aria-hidden="true"></a><span class="kw">as.array</span>(fit_score) <span class="op">%&gt;%</span></span>
+<span id="cb627-2"><a href="ch-introstan.html#cb627-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">str</span>()</span></code></pre></div>
+<pre><code>##  num [1:1000, 1:4, 1:3] 4.92 2.6 4.91 3.07 4.02 ...
 ##  - attr(*, &quot;dimnames&quot;)=List of 3
 ##   ..$ iterations: NULL
 ##   ..$ chains    : chr [1:4] &quot;chain:1&quot; &quot;chain:2&quot; &quot;chain:3&quot; &quot;chain:4&quot;
@@ -1551,24 +1543,23 @@ FIGURE 10.3: Histograms of the samples of the posterior distributions of <code>m
 The downside (at the moment of writing this) is that being lightweight some functionality of <code>rstan</code> is lost, such as looking up functions with  <code>lookup()</code>, exposing functions with  <code>expose_stan_function()</code>, as well as using the fitted model with the  <code>bridgesampling</code> package to generate Bayes factors. Furthermore, the package <code>cmdstanr</code> is currently under development and the  application programming interface  (API) might still change. However, the user interested in an easy (and painless) installation and the latest features of Stan might find it useful.</p>
 <p>Once <code>cmdstanr</code> is installed, we can use it as follows:</p>
 <p>First create a new <code>CmdStanModel</code> object from a file containing a Stan program using  <code>cmdstan_model()</code></p>
-<div class="sourceCode" id="cb633"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb633-1"><a href="ch-introstan.html#cb633-1" aria-hidden="true"></a>normal &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, </span>
-<span id="cb633-2"><a href="ch-introstan.html#cb633-2" aria-hidden="true"></a>                      <span class="st">&quot;normal.stan&quot;</span>,</span>
-<span id="cb633-3"><a href="ch-introstan.html#cb633-3" aria-hidden="true"></a>                      <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb633-4"><a href="ch-introstan.html#cb633-4" aria-hidden="true"></a>normal_mod &lt;-<span class="st"> </span><span class="kw">cmdstan_model</span>(normal) </span></code></pre></div>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb629-1"><a href="ch-introstan.html#cb629-1" aria-hidden="true"></a>normal &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb629-2"><a href="ch-introstan.html#cb629-2" aria-hidden="true"></a>                      <span class="st">&quot;normal.stan&quot;</span>,</span>
+<span id="cb629-3"><a href="ch-introstan.html#cb629-3" aria-hidden="true"></a>                      <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb629-4"><a href="ch-introstan.html#cb629-4" aria-hidden="true"></a>normal_mod &lt;-<span class="st"> </span><span class="kw">cmdstan_model</span>(normal)</span></code></pre></div>
 <p>The object <code>normal_mod</code> is an  R6 reference object (<a href="https://r6.r-lib.org/" class="uri">https://r6.r-lib.org/</a>). This class of object behaves similarly to objects in object oriented programming languages, such as python. Methods are accessed using <code>$</code> (rather than <code>.</code> as in python).</p>
 <p>To sample, use the <code>$sample()</code> method. The data argument accepts a list (as we used in <code>stan()</code> from <code>rstan</code>). However, many of the arguments of <code>$sample</code> have different names than the ones used in <code>stan()</code> from the <code>rstan</code> package:</p>
-<div class="sourceCode" id="cb634"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb634-1"><a href="ch-introstan.html#cb634-1" aria-hidden="true"></a>lst_score_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">y =</span> Y, <span class="dt">N =</span> <span class="kw">length</span>(Y))</span>
-<span id="cb634-2"><a href="ch-introstan.html#cb634-2" aria-hidden="true"></a>fit_normal_cmd &lt;-<span class="st"> </span>normal_mod<span class="op">$</span><span class="kw">sample</span>(</span>
-<span id="cb634-3"><a href="ch-introstan.html#cb634-3" aria-hidden="true"></a>                               <span class="dt">data =</span> lst_score_data,</span>
-<span id="cb634-4"><a href="ch-introstan.html#cb634-4" aria-hidden="true"></a>                               <span class="dt">seed =</span> <span class="dv">123</span>,</span>
-<span id="cb634-5"><a href="ch-introstan.html#cb634-5" aria-hidden="true"></a>                               <span class="dt">chains =</span> <span class="dv">4</span>,</span>
-<span id="cb634-6"><a href="ch-introstan.html#cb634-6" aria-hidden="true"></a>                               <span class="dt">parallel_chains =</span> <span class="dv">4</span>,</span>
-<span id="cb634-7"><a href="ch-introstan.html#cb634-7" aria-hidden="true"></a>                               <span class="dt">iter_warmup =</span> <span class="dv">1000</span>,</span>
-<span id="cb634-8"><a href="ch-introstan.html#cb634-8" aria-hidden="true"></a>                               <span class="dt">iter_sampling =</span> <span class="dv">1000</span>)</span></code></pre></div>
-<p>To show the posterior summary, access the method  <code>$summary()</code>of the object <code>fit_normal_cmd</code>.</p>
-<div class="sourceCode" id="cb635"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb635-1"><a href="ch-introstan.html#cb635-1" aria-hidden="true"></a>fit_normal_cmd<span class="op">$</span><span class="kw">summary</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb630"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb630-1"><a href="ch-introstan.html#cb630-1" aria-hidden="true"></a>lst_score_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">y =</span> Y, <span class="dt">N =</span> <span class="kw">length</span>(Y))</span>
+<span id="cb630-2"><a href="ch-introstan.html#cb630-2" aria-hidden="true"></a>fit_normal_cmd &lt;-<span class="st"> </span>normal_mod<span class="op">$</span><span class="kw">sample</span>(<span class="dt">data =</span> lst_score_data,</span>
+<span id="cb630-3"><a href="ch-introstan.html#cb630-3" aria-hidden="true"></a>                                    <span class="dt">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb630-4"><a href="ch-introstan.html#cb630-4" aria-hidden="true"></a>                                    <span class="dt">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb630-5"><a href="ch-introstan.html#cb630-5" aria-hidden="true"></a>                                    <span class="dt">parallel_chains =</span> <span class="dv">4</span>,</span>
+<span id="cb630-6"><a href="ch-introstan.html#cb630-6" aria-hidden="true"></a>                                    <span class="dt">iter_warmup =</span> <span class="dv">1000</span>,</span>
+<span id="cb630-7"><a href="ch-introstan.html#cb630-7" aria-hidden="true"></a>                                    <span class="dt">iter_sampling =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<p>To show the posterior summary, access the method  <code>$summary()</code> of the object <code>fit_normal_cmd</code>.</p>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb631-1"><a href="ch-introstan.html#cb631-1" aria-hidden="true"></a>fit_normal_cmd<span class="op">$</span><span class="kw">summary</span>()</span></code></pre></div>
 <p>Access the samples of <code>fit_normal_cmd</code> using  <code>$draws()</code>.</p>
-<div class="sourceCode" id="cb636"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb636-1"><a href="ch-introstan.html#cb636-1" aria-hidden="true"></a>fit_normal_cmd<span class="op">$</span><span class="kw">draws</span>(<span class="dt">variables =</span> <span class="st">&quot;mu&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb632"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb632-1"><a href="ch-introstan.html#cb632-1" aria-hidden="true"></a>fit_normal_cmd<span class="op">$</span><span class="kw">draws</span>(<span class="dt">variables =</span> <span class="st">&quot;mu&quot;</span>)</span></code></pre></div>
 <p>The vignette of <a href="https://mc-stan.org/cmdstanr/" class="uri">https://mc-stan.org/cmdstanr/</a> shows more use cases, and how the samples can be transformed into other formats (data frame, matrix, etc.) together with the package <code>posterior</code> (<a href="https://mc-stan.org/cmdstanr/" class="uri">https://mc-stan.org/cmdstanr/</a>).</p>
 </div>
 </div>
@@ -1593,19 +1584,19 @@ model {
 }
 </code></pre>
 <p>There is only one parameter in this model, cloze probability represented with the parameter <code>theta</code>, which is a real number constrained between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. Another difference between this and the previous example is that the likelihood function ends with  <code>_lpmf</code> rather than with  <code>_lpdf</code>. This is because Stan differentiates between distributions of continuous variables, i.e,  probability density functions  (PDFs), and distributions of discrete variables, i.e.,  probability mass functions  (PMFs).</p>
-<div class="sourceCode" id="cb638"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb638-1"><a href="ch-introstan.html#cb638-1" aria-hidden="true"></a>lst_cloze_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">k =</span> <span class="dv">80</span>, <span class="dt">N =</span> <span class="dv">100</span>)</span>
-<span id="cb638-2"><a href="ch-introstan.html#cb638-2" aria-hidden="true"></a>binomial_cloze &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb638-3"><a href="ch-introstan.html#cb638-3" aria-hidden="true"></a>                              <span class="st">&quot;binomial_cloze.stan&quot;</span>,</span>
-<span id="cb638-4"><a href="ch-introstan.html#cb638-4" aria-hidden="true"></a>                              <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb638-5"><a href="ch-introstan.html#cb638-5" aria-hidden="true"></a>fit_cloze &lt;-<span class="st"> </span><span class="kw">stan</span>(binomial_cloze, <span class="dt">data =</span> lst_cloze_data)</span></code></pre></div>
+<div class="sourceCode" id="cb634"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb634-1"><a href="ch-introstan.html#cb634-1" aria-hidden="true"></a>lst_cloze_data &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">k =</span> <span class="dv">80</span>, <span class="dt">N =</span> <span class="dv">100</span>)</span>
+<span id="cb634-2"><a href="ch-introstan.html#cb634-2" aria-hidden="true"></a>binomial_cloze &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb634-3"><a href="ch-introstan.html#cb634-3" aria-hidden="true"></a>                              <span class="st">&quot;binomial_cloze.stan&quot;</span>,</span>
+<span id="cb634-4"><a href="ch-introstan.html#cb634-4" aria-hidden="true"></a>                              <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb634-5"><a href="ch-introstan.html#cb634-5" aria-hidden="true"></a>fit_cloze &lt;-<span class="st"> </span><span class="kw">stan</span>(binomial_cloze, <span class="dt">data =</span> lst_cloze_data)</span></code></pre></div>
 <p>Print the summary of the posterior distribution of <span class="math inline">\(\theta\)</span> below, and show its posterior distribution graphically (see Figure <a href="ch-introstan.html#fig:posttheta">10.4</a>):</p>
 
-<div class="sourceCode" id="cb639"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb639-1"><a href="ch-introstan.html#cb639-1" aria-hidden="true"></a><span class="kw">print</span>(fit_cloze, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb635-1"><a href="ch-introstan.html#cb635-1" aria-hidden="true"></a><span class="kw">print</span>(fit_cloze, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;theta&quot;</span>))</span></code></pre></div>
 <pre><code>##       mean 2.5% 97.5% n_eff Rhat
-## theta 0.78  0.7  0.85  1188    1</code></pre>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb641-1"><a href="ch-introstan.html#cb641-1" aria-hidden="true"></a>df_fit_cloze &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_cloze)</span>
-<span id="cb641-2"><a href="ch-introstan.html#cb641-2" aria-hidden="true"></a><span class="kw">mcmc_dens</span>(df_fit_cloze, <span class="dt">pars =</span> <span class="st">&quot;theta&quot;</span>) <span class="op">+</span></span>
-<span id="cb641-3"><a href="ch-introstan.html#cb641-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">mean</span>(df_fit_cloze<span class="op">$</span>theta))</span></code></pre></div>
+## theta 0.78  0.7  0.85  1429    1</code></pre>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb637-1"><a href="ch-introstan.html#cb637-1" aria-hidden="true"></a>df_fit_cloze &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_cloze)</span>
+<span id="cb637-2"><a href="ch-introstan.html#cb637-2" aria-hidden="true"></a><span class="kw">mcmc_dens</span>(df_fit_cloze, <span class="dt">pars =</span> <span class="st">&quot;theta&quot;</span>) <span class="op">+</span></span>
+<span id="cb637-3"><a href="ch-introstan.html#cb637-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">mean</span>(df_fit_cloze<span class="op">$</span>theta))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:posttheta"></span>
 <img src="bookdown_files/figure-html/posttheta-1.svg" alt="The posterior distribution of the cloze probability of umbrella (the parameter \(\theta\))." width="672" />
 <p class="caption">
@@ -1668,19 +1659,18 @@ log(f_{[a,b]}(x)) = log(f(x)) - log(F(b) - F(a))
 \end{equation}\]</span></p>
 <p>In Stan <span class="math inline">\(\log(f(x))\)</span> corresponds to  <code>normal_lpdf(x |...)</code>, and <code>log(F(x))</code> to  <code>normal_lcdf(x|...)</code>. Because in our example <span class="math inline">\(b=\infty\)</span>, <span class="math inline">\(F(b) = 1\)</span>, we are dealing with the complement of the log CDF evaluated at <span class="math inline">\(a =0\)</span>, <span class="math inline">\(\log(1 - F(0))\)</span>, that is why we use <code>normal_lccdf(0 | ...)</code> (notice the double <code>c</code>; this symbol represents the complement of the CDF).</p>
 <p>To be able to fit the model, Stan requires the data to be input as a list: First, load the data and center the dependent variable in a data frame, then create a list, and finally fit the model.</p>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb645-1"><a href="ch-introstan.html#cb645-1" aria-hidden="true"></a>df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></span>
-<span id="cb645-2"><a href="ch-introstan.html#cb645-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load))</span></code></pre></div>
-<div class="sourceCode" id="cb646"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb646-1"><a href="ch-introstan.html#cb646-1" aria-hidden="true"></a>ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
-<span id="cb646-2"><a href="ch-introstan.html#cb646-2" aria-hidden="true"></a>  <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</span>
-<span id="cb646-3"><a href="ch-introstan.html#cb646-3" aria-hidden="true"></a>  <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</span>
-<span id="cb646-4"><a href="ch-introstan.html#cb646-4" aria-hidden="true"></a>  <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil)) </span>
-<span id="cb646-5"><a href="ch-introstan.html#cb646-5" aria-hidden="true"></a>pupil &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb646-6"><a href="ch-introstan.html#cb646-6" aria-hidden="true"></a>                           <span class="st">&quot;pupil.stan&quot;</span>,</span>
-<span id="cb646-7"><a href="ch-introstan.html#cb646-7" aria-hidden="true"></a>                           <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb646-8"><a href="ch-introstan.html#cb646-8" aria-hidden="true"></a>fit_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil, <span class="dt">data =</span> ls_pupil)</span></code></pre></div>
-<p>Check the  trace plots (Figure <a href="ch-introstan.html#fig:traceplotreg">10.5</a>).</p>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb641-1"><a href="ch-introstan.html#cb641-1" aria-hidden="true"></a>df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></span>
+<span id="cb641-2"><a href="ch-introstan.html#cb641-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load))</span></code></pre></div>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb642-1"><a href="ch-introstan.html#cb642-1" aria-hidden="true"></a>ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</span>
+<span id="cb642-2"><a href="ch-introstan.html#cb642-2" aria-hidden="true"></a>                 <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</span>
+<span id="cb642-3"><a href="ch-introstan.html#cb642-3" aria-hidden="true"></a>                 <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil))</span>
+<span id="cb642-4"><a href="ch-introstan.html#cb642-4" aria-hidden="true"></a>pupil &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb642-5"><a href="ch-introstan.html#cb642-5" aria-hidden="true"></a>                     <span class="st">&quot;pupil.stan&quot;</span>,</span>
+<span id="cb642-6"><a href="ch-introstan.html#cb642-6" aria-hidden="true"></a>                     <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb642-7"><a href="ch-introstan.html#cb642-7" aria-hidden="true"></a>fit_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil, <span class="dt">data =</span> ls_pupil)</span></code></pre></div>
+<p>Check the  traceplots (Figure <a href="ch-introstan.html#fig:traceplotreg">10.5</a>).</p>
 
-<div class="sourceCode" id="cb647"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb647-1"><a href="ch-introstan.html#cb647-1" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb643-1"><a href="ch-introstan.html#cb643-1" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:traceplotreg"></span>
 <img src="bookdown_files/figure-html/traceplotreg-1.svg" alt="Traceplots of alpha, beta, and sigma from the model fit_pupil." width="672" />
 <p class="caption">
@@ -1688,15 +1678,15 @@ FIGURE 10.5: Traceplots of <code>alpha</code>, <code>beta</code>, and <code>sigm
 </p>
 </div>
 <p>Examine some summaries of the marginal posterior distributions of the parameters of interest:</p>
-<div class="sourceCode" id="cb648"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb648-1"><a href="ch-introstan.html#cb648-1" aria-hidden="true"></a><span class="kw">print</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
-<pre><code>##        mean  2.5% 97.5% n_eff Rhat
-## alpha 701.9 661.2 741.7  3550    1
-## beta   33.7  10.8  57.1  3008    1
-## sigma 128.4 103.2 162.0  3142    1</code></pre>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb644-1"><a href="ch-introstan.html#cb644-1" aria-hidden="true"></a><span class="kw">print</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<pre><code>##       mean   2.5% 97.5% n_eff Rhat
+## alpha  702 659.63 740.7  3291    1
+## beta    34   9.82  57.4  3918    1
+## sigma  128 103.71 162.3  3399    1</code></pre>
 <p>Plot the posterior distributions (Figure <a href="ch-introstan.html#fig:postreg">10.6</a>).</p>
 
-<div class="sourceCode" id="cb650"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb650-1"><a href="ch-introstan.html#cb650-1" aria-hidden="true"></a>df_fit_pupil &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_pupil)</span>
-<span id="cb650-2"><a href="ch-introstan.html#cb650-2" aria-hidden="true"></a><span class="kw">mcmc_hist</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb646-1"><a href="ch-introstan.html#cb646-1" aria-hidden="true"></a>df_fit_pupil &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_pupil)</span>
+<span id="cb646-2"><a href="ch-introstan.html#cb646-2" aria-hidden="true"></a><span class="kw">mcmc_hist</span>(fit_pupil, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:postreg"></span>
 <img src="bookdown_files/figure-html/postreg-1.svg" alt="Histograms of the posterior samples of alpha, beta, and sigma from the model fit_pupil." width="672" />
 <p class="caption">
@@ -1704,9 +1694,9 @@ FIGURE 10.6: Histograms of the posterior samples of <code>alpha</code>, <code>be
 </p>
 </div>
 <p>To determine the probability that the posterior for beta is larger than zero given the model and data, examine the proportion of samples above zero:</p>
-<div class="sourceCode" id="cb651"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb651-1"><a href="ch-introstan.html#cb651-1" aria-hidden="true"></a><span class="co"># We are using df_fit_pupil and not the &quot;raw&quot; Stanfit object.</span></span>
-<span id="cb651-2"><a href="ch-introstan.html#cb651-2" aria-hidden="true"></a><span class="kw">mean</span>(df_fit_pupil<span class="op">$</span>beta <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
-<pre><code>## [1] 0.996</code></pre>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb647-1"><a href="ch-introstan.html#cb647-1" aria-hidden="true"></a><span class="co"># We are using df_fit_pupil and not the &quot;raw&quot; Stanfit object.</span></span>
+<span id="cb647-2"><a href="ch-introstan.html#cb647-2" aria-hidden="true"></a><span class="kw">mean</span>(df_fit_pupil<span class="op">$</span>beta <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 0.997</code></pre>
 <p>To generate prior or  posterior predictive distributions, we can create our own functions in R with the <code>purrr</code> function <code>map_dfr</code> (or a for-loop) as we did in section <a href="ch-reg.html#sec-trial">4.2</a> with the function <code>lognormal_model_pred()</code>. Alternatively, we can use the  <code>generated quantities</code> block in our model:</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower = 1&gt; N;
@@ -1734,24 +1724,24 @@ generated quantities {
 }</code></pre>
 <p>For most of the probability functions, there is a matching  pseudorandom number generator  (PRNG) with the suffix  <code>_rng</code>. Here we are using the vectorized function  <code>normal_rng</code>. Once <code>p_size_pred</code> is declared as an array of size <code>N</code>, the following statement generates <span class="math inline">\(N\)</span> predictions (for each iteration of the sampler):</p>
 <pre><code>p_size_pred = normal_rng(alpha + c_load * beta, sigma);</code></pre>
-<p>At the moment not all the PRNG are vectorized, but the ones that are only allow for  arrays and, confusingly enough, not vectors. We define an array by indicating <code>array</code>, between brackets, the length of each dimension, then the type, and finaly the name of the variable. For example to define an array of real numbers with three dimension of length 6, 7, and 10 we write <code>array[6, 7, 10] real var</code>.<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a> Vectors and matrices are also valid types for an array. See Box <a href="ch-introstan.html#thm:stancontainers">10.4</a> for more about the difference between arrays and vectors, and other algebra types. We also included a data variable called <code>onlyprior</code>, this is an integer that can only be set to <span class="math inline">\(1\)</span> (TRUE) or <span class="math inline">\(0\)</span> (FALSE). When <code>onlyprior = 1</code>, the likelihood is omitted from the model, <code>p_size</code> is ignored, and <code>p_size_pred</code> is the  prior predictive distribution. When <code>onlyprior = 0</code>, the likelihood is incorporated in the model (as it is in the original code <code>pupil.stan</code>) using <code>p_size</code>, and <code>p_size_pred</code> is the posterior predictive distribution.</p>
+<p>At the moment not all the PRNG are vectorized, but the ones that are only allow for  arrays and, confusingly enough, not vectors. We define an array by indicating <code>array</code>, between brackets, the length of each dimension, then the type, and finaly the name of the variable. For example to define an array of real numbers with three dimension of length 6, 7, and 10 we write <code>array[6, 7, 10] real var</code>.<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a> Vectors and matrices are also valid types for an array. See Box <a href="ch-introstan.html#thm:stancontainers">10.4</a> for more about the difference between arrays and vectors, and other algebra types. We also included a data variable called <code>onlyprior</code>, this is an integer that can only be set to <span class="math inline">\(1\)</span> (TRUE) or <span class="math inline">\(0\)</span> (FALSE). When <code>onlyprior == 1</code>, the likelihood is omitted from the model, <code>p_size</code> is ignored, and <code>p_size_pred</code> is the  prior predictive distribution. When <code>onlyprior == 0</code>, the likelihood is incorporated in the model (as it is in the original code <code>pupil.stan</code>) using <code>p_size</code>, and <code>p_size_pred</code> is the posterior predictive distribution.</p>
 <p>If we want posterior predictive distributions, we fit the model to the data and set <code>onlyprior = 0</code>, if we want prior predictive distributions, we sample from the priors and set <code>onlyprior = 1</code>. Then we use <code>bayesplot</code> functions to visualize predictive checks.</p>
 <p>For posterior predictive checks, we would do the following:</p>
-<div class="sourceCode" id="cb655"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb655-1"><a href="ch-introstan.html#cb655-1" aria-hidden="true"></a>ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">onlyprior =</span> <span class="dv">0</span>,</span>
-<span id="cb655-2"><a href="ch-introstan.html#cb655-2" aria-hidden="true"></a>                 <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</span>
-<span id="cb655-3"><a href="ch-introstan.html#cb655-3" aria-hidden="true"></a>                 <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</span>
-<span id="cb655-4"><a href="ch-introstan.html#cb655-4" aria-hidden="true"></a>                 <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil))</span>
-<span id="cb655-5"><a href="ch-introstan.html#cb655-5" aria-hidden="true"></a>pupil_gen &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb655-6"><a href="ch-introstan.html#cb655-6" aria-hidden="true"></a>                         <span class="st">&quot;pupil_gen.stan&quot;</span>,</span>
-<span id="cb655-7"><a href="ch-introstan.html#cb655-7" aria-hidden="true"></a>                         <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb655-8"><a href="ch-introstan.html#cb655-8" aria-hidden="true"></a>fit_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> pupil_gen, <span class="dt">data =</span> ls_pupil)</span></code></pre></div>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb651-1"><a href="ch-introstan.html#cb651-1" aria-hidden="true"></a>ls_pupil &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">onlyprior =</span> <span class="dv">0</span>,</span>
+<span id="cb651-2"><a href="ch-introstan.html#cb651-2" aria-hidden="true"></a>                 <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</span>
+<span id="cb651-3"><a href="ch-introstan.html#cb651-3" aria-hidden="true"></a>                 <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</span>
+<span id="cb651-4"><a href="ch-introstan.html#cb651-4" aria-hidden="true"></a>                 <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil))</span>
+<span id="cb651-5"><a href="ch-introstan.html#cb651-5" aria-hidden="true"></a>pupil_gen &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb651-6"><a href="ch-introstan.html#cb651-6" aria-hidden="true"></a>                         <span class="st">&quot;pupil_gen.stan&quot;</span>,</span>
+<span id="cb651-7"><a href="ch-introstan.html#cb651-7" aria-hidden="true"></a>                         <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb651-8"><a href="ch-introstan.html#cb651-8" aria-hidden="true"></a>fit_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(<span class="dt">file =</span> pupil_gen, <span class="dt">data =</span> ls_pupil)</span></code></pre></div>
 <p>Store the predicted pupil sizes in <code>yrep_pupil</code>. This variable contains an <span class="math inline">\(N_{samples} \times N_{observations}\)</span> matrix, that is, each row of the matrix is a draw from the posterior predictive distribution, i.e., a vector with one element for each of the data points in y.</p>
-<div class="sourceCode" id="cb656"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb656-1"><a href="ch-introstan.html#cb656-1" aria-hidden="true"></a>yrep_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(fit_pupil)<span class="op">$</span>p_size_pred</span>
-<span id="cb656-2"><a href="ch-introstan.html#cb656-2" aria-hidden="true"></a><span class="kw">dim</span>(yrep_pupil)</span></code></pre></div>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb652-1"><a href="ch-introstan.html#cb652-1" aria-hidden="true"></a>yrep_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(fit_pupil)<span class="op">$</span>p_size_pred</span>
+<span id="cb652-2"><a href="ch-introstan.html#cb652-2" aria-hidden="true"></a><span class="kw">dim</span>(yrep_pupil)</span></code></pre></div>
 <pre><code>## [1] 4000   41</code></pre>
 <p> Predictive checks functions in  <code>bayesplot</code> (starting with  <code>ppc_</code>) require a vector with the observations in the first argument and a matrix with the predictive distribution as its second argument. As an example, in Figure <a href="ch-introstan.html#fig:densoverlay">10.7</a> we use an overlay of densities and we draw only <span class="math inline">\(50\)</span> elements (that is <span class="math inline">\(50\)</span> predicted data sets).</p>
 
-<div class="sourceCode" id="cb658"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb658-1"><a href="ch-introstan.html#cb658-1" aria-hidden="true"></a><span class="kw">ppc_dens_overlay</span>(df_pupil<span class="op">$</span>p_size, <span class="dt">yrep =</span> yrep_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ])</span></code></pre></div>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb654-1"><a href="ch-introstan.html#cb654-1" aria-hidden="true"></a><span class="kw">ppc_dens_overlay</span>(df_pupil<span class="op">$</span>p_size, <span class="dt">yrep =</span> yrep_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ])</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:densoverlay"></span>
 <img src="bookdown_files/figure-html/densoverlay-1.svg" alt="A posterior predictive check showing 50 predicted density plots from the model fit_pupil against the observed data." width="672" />
 <p class="caption">
@@ -1759,26 +1749,19 @@ FIGURE 10.7: A posterior predictive check showing 50 predicted density plots fro
 </p>
 </div>
 <p>For prior predictive distributions, we simply set <code>onlyprior = 1</code>. The observations (<code>p_size</code>) are ignored by the model, but are required by the data block in Stan. If we haven’t collected data yet, we could include a vector of zeros.</p>
-<div class="sourceCode" id="cb659"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb659-1"><a href="ch-introstan.html#cb659-1" aria-hidden="true"></a>ls_pupil_prior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">onlyprior =</span> <span class="dv">1</span>,</span>
-<span id="cb659-2"><a href="ch-introstan.html#cb659-2" aria-hidden="true"></a>                       <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</span>
-<span id="cb659-3"><a href="ch-introstan.html#cb659-3" aria-hidden="true"></a>                       <span class="co"># or: p_size = rep(0, nrow(df_pupil)),</span></span>
-<span id="cb659-4"><a href="ch-introstan.html#cb659-4" aria-hidden="true"></a>                       <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</span>
-<span id="cb659-5"><a href="ch-introstan.html#cb659-5" aria-hidden="true"></a>                       <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil))</span>
-<span id="cb659-6"><a href="ch-introstan.html#cb659-6" aria-hidden="true"></a>prior_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_gen, <span class="dt">data =</span> ls_pupil_prior,</span>
-<span id="cb659-7"><a href="ch-introstan.html#cb659-7" aria-hidden="true"></a>                    <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.9</span>))</span></code></pre></div>
-<pre><code> ## Warning: There were 1 divergent transitions after
- ## warmup. See
- ## https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
- ## to find out why this is a problem and how to eliminate
- ## them. </code></pre>
-<pre><code> ## Warning: Examine the pairs() plot to diagnose sampling
- ## problems </code></pre>
-<p>To avoid divergent transitions, increase the <code>adapt_delta</code> parameter’s default value from <span class="math inline">\(0.8\)</span> to <span class="math inline">\(0.9\)</span>. It is important to highlight that we cannot safely ignore the warnings of the above model, even if we are not fitting data. This is so because in practice one is still sampling a density using Hamiltonian Monte Carlo, and thus the prior sampling process can break in the same ways as the posterior sampling process. Prior predictive distributions as the one shown in Figure <a href="ch-introstan.html#fig:priordensoverlay">10.8</a> can be plot with  <code>ppd_dens_overlay()</code> (and in general with functions starting with  <code>ppd_</code> which don’t require an argument with data).</p>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb655-1"><a href="ch-introstan.html#cb655-1" aria-hidden="true"></a>ls_pupil_prior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">onlyprior =</span> <span class="dv">1</span>,</span>
+<span id="cb655-2"><a href="ch-introstan.html#cb655-2" aria-hidden="true"></a>                       <span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</span>
+<span id="cb655-3"><a href="ch-introstan.html#cb655-3" aria-hidden="true"></a>                       <span class="co"># or: p_size = rep(0, nrow(df_pupil)),</span></span>
+<span id="cb655-4"><a href="ch-introstan.html#cb655-4" aria-hidden="true"></a>                       <span class="dt">c_load =</span> df_pupil<span class="op">$</span>c_load,</span>
+<span id="cb655-5"><a href="ch-introstan.html#cb655-5" aria-hidden="true"></a>                       <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil))</span>
+<span id="cb655-6"><a href="ch-introstan.html#cb655-6" aria-hidden="true"></a>prior_pupil &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_gen, <span class="dt">data =</span> ls_pupil_prior,</span>
+<span id="cb655-7"><a href="ch-introstan.html#cb655-7" aria-hidden="true"></a>                    <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">0.99</span>))</span></code></pre></div>
+<p>To avoid divergent transitions, increase the <code>adapt_delta</code> parameter’s default value from <span class="math inline">\(0.8\)</span> to <span class="math inline">\(0.99\)</span>. It is important to highlight that we cannot safely ignore the warnings of the above model, even if we are not fitting data. This is so because in practice one is still sampling a density using Hamiltonian Monte Carlo, and thus the prior sampling process can break in the same ways as the posterior sampling process. Prior predictive distributions as the one shown in Figure <a href="ch-introstan.html#fig:priordensoverlay">10.8</a> can be plot with  <code>ppd_dens_overlay()</code> (and in general with functions starting with  <code>ppd_</code> which don’t require an argument with data).</p>
 
-<div class="sourceCode" id="cb662"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb662-1"><a href="ch-introstan.html#cb662-1" aria-hidden="true"></a>yrep_prior_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(prior_pupil)<span class="op">$</span>p_size_pred</span>
-<span id="cb662-2"><a href="ch-introstan.html#cb662-2" aria-hidden="true"></a><span class="kw">ppd_dens_overlay</span>(yrep_prior_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ])</span></code></pre></div>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb656-1"><a href="ch-introstan.html#cb656-1" aria-hidden="true"></a>yrep_prior_pupil &lt;-<span class="st"> </span><span class="kw">extract</span>(prior_pupil)<span class="op">$</span>p_size_pred</span>
+<span id="cb656-2"><a href="ch-introstan.html#cb656-2" aria-hidden="true"></a><span class="kw">ppd_dens_overlay</span>(yrep_prior_pupil[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ])</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:priordensoverlay"></span>
-<img src="bookdown_files/figure-html/priordensoverlay-1.svg" alt="Prior predictive distribution showing \(50\) predicted density plots from the model fit_pupil." width="672" />
+<img src="bookdown_files/figure-html/priordensoverlay-1.svg" alt="Prior predictive distribution showing \(50\) predicted density plots from the model fit_pupil." width="672"  />
 <p class="caption">
 FIGURE 10.8: Prior predictive distribution showing <span class="math inline">\(50\)</span> predicted density plots from the model <code>fit_pupil</code>.
 </p>
@@ -1796,19 +1779,19 @@ row_vector[N] a;</code></pre>
 matrix[N1, N2] m;
 array[N1] vector[N2] b;
 array[N1] row_vector[N2] b;</code></pre>
-<p>These distinctions affect either what we can do with these variables, or the speed of our model, and sometimes are interchangeable. Matrix algebra is only defined for (row) vectors and matrices, that is we cannot multiply arrays. The following line requires all the one-dimensional containers (<code>p_size</code> and <code>c_load</code>) to be defined as vectors (or row_vectors):</p>
-<pre><code>vector[N] mu = alpha + c_load * beta;</code></pre>
+<p>These distinctions affect either what we can do with these variables, or the speed of our model, and sometimes are interchangeable. Matrix algebra is only defined for (row) vectors and matrices, that is we cannot multiply arrays. The following line requires all the one-dimensional containers (<code>p_size</code> and <code>c_load</code>) to be defined as vectors of the same size (or all as row vectors):</p>
+<pre><code>p_size = alpha + c_load * beta;</code></pre>
 <p>Many “vectorized” operations are also valid for arrays, that is, <code>normal_lpdf</code>, accepts (row) vectors (as we did in our code) or arrays as in the next example. There is of course no point in converting a vector to an array as follows, but this shows that Stan allows both type of one-dimensional  containers.</p>
 <pre><code>array[N] real mu = to_array_1d(alpha + c_load * beta);
 target += normal_lpdf(p_size | mu, sigma);</code></pre>
 <p>By contrast, the outcome of “vectorized”  pseudorandom number generator (<code>_rng</code>) functions can only be stored in an array. The following example shows the only way to vectorize this type of function:</p>
-<pre><code>array[N] real p_size_pred = normal_rng(alpha + c_load * beta, 
+<pre><code>array[N] real p_size_pred = normal_rng(alpha + c_load * beta,
                                        sigma);</code></pre>
 <p>Alternatively, one can always use a  for-loop, and it won’t matter if <code>p_size_pred</code> is an array or a vector:</p>
 <pre><code>vector[N] p_size_pred;
 for(n in 1:N)
     p_size_pred[n] = normal_rng(alpha + c_load[n] * beta, sigma);</code></pre>
-<p>See also Stan’s user’s guide section on matrices, vector, and arrays <span class="citation">(Stan Development Team <a href="#ref-Stan2023" role="doc-biblioref">2023</a>, chap. 18 of the User’s guide)</span>.</p>
+<p>See also Stan’s user’s guide section on matrices, vector, and arrays <span class="citation">(Stan Development Team <a href="#ref-Stan2023" role="doc-biblioref">2024</a>, Chapter 18 of the User’s guide)</span>.</p>
 </div>
 </div>
 <div id="sec-interstan" class="section level3 hasAnchor" number="10.4.2">
@@ -1886,33 +1869,33 @@ model {
 <p>For some likelihood functions, Stan provides a more  efficient implementation of the linear regression than the one manually written in the previous code. It’s critical to understand that, in general, a more efficient implementation should not only be faster, but should also achieve the same number of effective samples (or more) than a less efficient implementation (and should also show convergence). In this case, we can achieve that using <code>_glm</code> functions. We can replace the last line with the following statement (the order of the arguments is important):<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a></p>
 <pre><code>target += normal_id_glm_lpdf(p_size | X, alpha, beta, sigma);</code></pre>
 <p>The most optimized model, <code>pupil_int.stan</code>, includes this last statement. We prepare the data as follows: First create a centered version of trial, <code>c_trial</code> and load <code>c_load</code>, then use the function <code>model.matrix</code> to create the <code>X</code> matrix that contains in each column our predictors and omits the intercept with <code>0 +</code>.</p>
-<div class="sourceCode" id="cb672"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb672-1"><a href="ch-introstan.html#cb672-1" aria-hidden="true"></a>df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></span>
-<span id="cb672-2"><a href="ch-introstan.html#cb672-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial),</span>
-<span id="cb672-3"><a href="ch-introstan.html#cb672-3" aria-hidden="true"></a>         <span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load))</span>
-<span id="cb672-4"><a href="ch-introstan.html#cb672-4" aria-hidden="true"></a>X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_load <span class="op">*</span><span class="st"> </span>c_trial, df_pupil)</span>
-<span id="cb672-5"><a href="ch-introstan.html#cb672-5" aria-hidden="true"></a>ls_pupil_X &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</span>
-<span id="cb672-6"><a href="ch-introstan.html#cb672-6" aria-hidden="true"></a>                   <span class="dt">X =</span> X,</span>
-<span id="cb672-7"><a href="ch-introstan.html#cb672-7" aria-hidden="true"></a>                   <span class="dt">K =</span> <span class="kw">ncol</span>(X),</span>
-<span id="cb672-8"><a href="ch-introstan.html#cb672-8" aria-hidden="true"></a>                   <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil))</span></code></pre></div>
-<div class="sourceCode" id="cb673"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb673-1"><a href="ch-introstan.html#cb673-1" aria-hidden="true"></a>pupil_int &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb673-2"><a href="ch-introstan.html#cb673-2" aria-hidden="true"></a>                         <span class="st">&quot;pupil_int.stan&quot;</span>,</span>
-<span id="cb673-3"><a href="ch-introstan.html#cb673-3" aria-hidden="true"></a>                         <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb673-4"><a href="ch-introstan.html#cb673-4" aria-hidden="true"></a>fit_pupil_int &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_int, <span class="dt">data =</span> ls_pupil_X)</span></code></pre></div>
-<div class="sourceCode" id="cb674"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb674-1"><a href="ch-introstan.html#cb674-1" aria-hidden="true"></a><span class="kw">print</span>(fit_pupil_int, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb666"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb666-1"><a href="ch-introstan.html#cb666-1" aria-hidden="true"></a>df_pupil &lt;-<span class="st"> </span>df_pupil <span class="op">%&gt;%</span></span>
+<span id="cb666-2"><a href="ch-introstan.html#cb666-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial),</span>
+<span id="cb666-3"><a href="ch-introstan.html#cb666-3" aria-hidden="true"></a>         <span class="dt">c_load =</span> load <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(load))</span>
+<span id="cb666-4"><a href="ch-introstan.html#cb666-4" aria-hidden="true"></a>X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_load <span class="op">*</span><span class="st"> </span>c_trial, df_pupil)</span>
+<span id="cb666-5"><a href="ch-introstan.html#cb666-5" aria-hidden="true"></a>ls_pupil_X &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">p_size =</span> df_pupil<span class="op">$</span>p_size,</span>
+<span id="cb666-6"><a href="ch-introstan.html#cb666-6" aria-hidden="true"></a>                   <span class="dt">X =</span> X,</span>
+<span id="cb666-7"><a href="ch-introstan.html#cb666-7" aria-hidden="true"></a>                   <span class="dt">K =</span> <span class="kw">ncol</span>(X),</span>
+<span id="cb666-8"><a href="ch-introstan.html#cb666-8" aria-hidden="true"></a>                   <span class="dt">N =</span> <span class="kw">nrow</span>(df_pupil))</span></code></pre></div>
+<div class="sourceCode" id="cb667"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb667-1"><a href="ch-introstan.html#cb667-1" aria-hidden="true"></a>pupil_int &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb667-2"><a href="ch-introstan.html#cb667-2" aria-hidden="true"></a>                         <span class="st">&quot;pupil_int.stan&quot;</span>,</span>
+<span id="cb667-3"><a href="ch-introstan.html#cb667-3" aria-hidden="true"></a>                         <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb667-4"><a href="ch-introstan.html#cb667-4" aria-hidden="true"></a>fit_pupil_int &lt;-<span class="st"> </span><span class="kw">stan</span>(pupil_int, <span class="dt">data =</span> ls_pupil_X)</span></code></pre></div>
+<div class="sourceCode" id="cb668"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb668-1"><a href="ch-introstan.html#cb668-1" aria-hidden="true"></a><span class="kw">print</span>(fit_pupil_int, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <pre><code>##           mean   2.5%  97.5% n_eff Rhat
-## alpha   699.34 666.78 732.81  5563    1
-## beta[1]  31.17  11.63  51.29  4660    1
-## beta[2]  -5.81  -8.58  -3.11  5112    1
-## beta[3]  -1.83  -3.52  -0.13  4958    1
-## sigma   104.76  83.27 133.22  3772    1</code></pre>
+## alpha   699.49 668.86 730.05  4539    1
+## beta[1]  31.51  12.06  50.90  4284    1
+## beta[2]  -5.81  -8.60  -3.01  4754    1
+## beta[3]  -1.83  -3.47  -0.06  4455    1
+## sigma   104.56  82.33 133.49  3035    1</code></pre>
 <p>In <a href="ch-introstan.html#fig:pupilintbeta">10.9</a>, we plot here the 95% CrI of the parameters of interest. We use  <code>regex_pars</code>, rather than <code>pars</code>, because we want to capture <code>beta[1]</code>, <code>beta[2]</code>, and <code>beta[3]</code>; <code>regex_pars</code> use  regular expressions to select the parameters (for information about regular expressions in R see <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html</a>)</p>
 
-<div class="sourceCode" id="cb676"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb676-1"><a href="ch-introstan.html#cb676-1" aria-hidden="true"></a>df_fit_pupil_int &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_pupil_int)</span>
-<span id="cb676-2"><a href="ch-introstan.html#cb676-2" aria-hidden="true"></a><span class="kw">mcmc_intervals</span>(fit_pupil_int,</span>
-<span id="cb676-3"><a href="ch-introstan.html#cb676-3" aria-hidden="true"></a>               <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</span>
-<span id="cb676-4"><a href="ch-introstan.html#cb676-4" aria-hidden="true"></a>               <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</span>
-<span id="cb676-5"><a href="ch-introstan.html#cb676-5" aria-hidden="true"></a>               <span class="dt">prob =</span> <span class="fl">.8</span>,</span>
-<span id="cb676-6"><a href="ch-introstan.html#cb676-6" aria-hidden="true"></a>               <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb670-1"><a href="ch-introstan.html#cb670-1" aria-hidden="true"></a>df_fit_pupil_int &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_pupil_int)</span>
+<span id="cb670-2"><a href="ch-introstan.html#cb670-2" aria-hidden="true"></a><span class="kw">mcmc_intervals</span>(fit_pupil_int,</span>
+<span id="cb670-3"><a href="ch-introstan.html#cb670-3" aria-hidden="true"></a>               <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</span>
+<span id="cb670-4"><a href="ch-introstan.html#cb670-4" aria-hidden="true"></a>               <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</span>
+<span id="cb670-5"><a href="ch-introstan.html#cb670-5" aria-hidden="true"></a>               <span class="dt">prob =</span> <span class="fl">.8</span>,</span>
+<span id="cb670-6"><a href="ch-introstan.html#cb670-6" aria-hidden="true"></a>               <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:pupilintbeta"></span>
 <img src="bookdown_files/figure-html/pupilintbeta-1.svg" alt="95% CrI of the effect of load, beta[1], the effect of trial, beta[2], and their interaction, beta[3]." width="672" />
 <p class="caption">
@@ -1928,10 +1911,10 @@ FIGURE 10.9: 95% CrI of the effect of load, <code>beta[1]</code>, the effect of 
 \begin{aligned}
 correct_n &amp;\sim \mathit{Bernoulli}( \mathit{logistic}(\alpha + X \cdot \beta))\\
 \alpha &amp;\sim \mathit{Normal}(0, 1.5) \\
-\beta &amp;\sim \mathit{Normal}(0, 0.1) 
+\beta &amp;\sim \mathit{Normal}(0, 0.1)
 \end{aligned}
 \end{equation}\]</span></p>
-<p>Where <span class="math inline">\(\beta\)</span> is a vector of size <span class="math inline">\(K = 2\)</span>, <span class="math inline">\([\beta_0, \beta_1]\)</span>. Below in <code>recall.stan</code> we present the most efficient way to code this in Stan.</p>
+<p>Where <span class="math inline">\(\beta\)</span> is a vector of size <span class="math inline">\(K = 2\)</span>, <span class="math inline">\(\langle \beta_0, \beta_1 \rangle\)</span>. Below in <code>recall.stan</code> we present the most efficient way to code this in Stan.</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower = 1&gt; N;
   int&lt;lower=0&gt; K;   // number of predictors
@@ -1959,34 +1942,34 @@ model {
 <pre><code>for (n in 1:N)
   target += bernoulli_lpmf(correct[n] | inv_logit(alpha + X[n] * beta));</code></pre>
 <p>To fit the model as <code>recall.stan</code>, prepare the data by centering the trial number first:</p>
-<div class="sourceCode" id="cb682"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb682-1"><a href="ch-introstan.html#cb682-1" aria-hidden="true"></a>df_recall &lt;-<span class="st"> </span>df_recall <span class="op">%&gt;%</span></span>
-<span id="cb682-2"><a href="ch-introstan.html#cb682-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_set_size =</span> set_size <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(set_size),</span>
-<span id="cb682-3"><a href="ch-introstan.html#cb682-3" aria-hidden="true"></a>         <span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial))</span></code></pre></div>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb676-1"><a href="ch-introstan.html#cb676-1" aria-hidden="true"></a>df_recall &lt;-<span class="st"> </span>df_recall <span class="op">%&gt;%</span></span>
+<span id="cb676-2"><a href="ch-introstan.html#cb676-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_set_size =</span> set_size <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(set_size),</span>
+<span id="cb676-3"><a href="ch-introstan.html#cb676-3" aria-hidden="true"></a>         <span class="dt">c_trial =</span> trial <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(trial))</span></code></pre></div>
 <p>Next, we create the model matrix, <span class="math inline">\(X\)</span>, and prepare the data as a list. As in section <a href="ch-introstan.html#sec-interstan">10.4.2</a>, we exclude the intercept from the matrix <code>X</code> using <code>0 +...</code>. This is because the Stan code that we are using already takes into account that the first column in the model matrix is going to be a vector of ones.</p>
-<div class="sourceCode" id="cb683"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb683-1"><a href="ch-introstan.html#cb683-1" aria-hidden="true"></a>X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_set_size <span class="op">*</span><span class="st"> </span>c_trial, df_recall)</span>
-<span id="cb683-2"><a href="ch-introstan.html#cb683-2" aria-hidden="true"></a>ls_recall &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">correct =</span> df_recall<span class="op">$</span>correct,</span>
-<span id="cb683-3"><a href="ch-introstan.html#cb683-3" aria-hidden="true"></a>                  <span class="dt">X =</span> X,</span>
-<span id="cb683-4"><a href="ch-introstan.html#cb683-4" aria-hidden="true"></a>                  <span class="dt">K =</span> <span class="kw">ncol</span>(X),</span>
-<span id="cb683-5"><a href="ch-introstan.html#cb683-5" aria-hidden="true"></a>                  <span class="dt">N =</span> <span class="kw">nrow</span>(df_recall))</span></code></pre></div>
-<div class="sourceCode" id="cb684"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb684-1"><a href="ch-introstan.html#cb684-1" aria-hidden="true"></a>recall &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb684-2"><a href="ch-introstan.html#cb684-2" aria-hidden="true"></a>                      <span class="st">&quot;recall.stan&quot;</span>,</span>
-<span id="cb684-3"><a href="ch-introstan.html#cb684-3" aria-hidden="true"></a>                      <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb684-4"><a href="ch-introstan.html#cb684-4" aria-hidden="true"></a>fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(recall, <span class="dt">data =</span> ls_recall)</span></code></pre></div>
+<div class="sourceCode" id="cb677"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb677-1"><a href="ch-introstan.html#cb677-1" aria-hidden="true"></a>X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>c_set_size <span class="op">*</span><span class="st"> </span>c_trial, df_recall)</span>
+<span id="cb677-2"><a href="ch-introstan.html#cb677-2" aria-hidden="true"></a>ls_recall &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">correct =</span> df_recall<span class="op">$</span>correct,</span>
+<span id="cb677-3"><a href="ch-introstan.html#cb677-3" aria-hidden="true"></a>                  <span class="dt">X =</span> X,</span>
+<span id="cb677-4"><a href="ch-introstan.html#cb677-4" aria-hidden="true"></a>                  <span class="dt">K =</span> <span class="kw">ncol</span>(X),</span>
+<span id="cb677-5"><a href="ch-introstan.html#cb677-5" aria-hidden="true"></a>                  <span class="dt">N =</span> <span class="kw">nrow</span>(df_recall))</span></code></pre></div>
+<div class="sourceCode" id="cb678"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb678-1"><a href="ch-introstan.html#cb678-1" aria-hidden="true"></a>recall &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb678-2"><a href="ch-introstan.html#cb678-2" aria-hidden="true"></a>                      <span class="st">&quot;recall.stan&quot;</span>,</span>
+<span id="cb678-3"><a href="ch-introstan.html#cb678-3" aria-hidden="true"></a>                      <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb678-4"><a href="ch-introstan.html#cb678-4" aria-hidden="true"></a>fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(recall, <span class="dt">data =</span> ls_recall)</span></code></pre></div>
 <p>After fitting the model we can print and plot summaries of the posterior distribution.</p>
-<div class="sourceCode" id="cb685"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb685-1"><a href="ch-introstan.html#cb685-1" aria-hidden="true"></a><span class="kw">print</span>(fit_recall, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb679"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb679-1"><a href="ch-introstan.html#cb679-1" aria-hidden="true"></a><span class="kw">print</span>(fit_recall, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>))</span></code></pre></div>
 <pre><code>##          mean  2.5% 97.5% n_eff Rhat
-## alpha    2.00  1.41  2.64  3261    1
-## beta[1] -0.19 -0.35 -0.02  3500    1
-## beta[2] -0.02 -0.09  0.05  3444    1
-## beta[3]  0.00 -0.03  0.04  3480    1</code></pre>
+## alpha    1.98  1.37  2.62  3184    1
+## beta[1] -0.19 -0.35 -0.02  4161    1
+## beta[2] -0.02 -0.09  0.05  3773    1
+## beta[3]  0.00 -0.03  0.04  3843    1</code></pre>
 <p>In Figure <a href="ch-introstan.html#fig:cri">10.10</a>, we plot the 95% CrI of the parameters of interest.</p>
 
-<div class="sourceCode" id="cb687"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb687-1"><a href="ch-introstan.html#cb687-1" aria-hidden="true"></a>df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall)</span>
-<span id="cb687-2"><a href="ch-introstan.html#cb687-2" aria-hidden="true"></a><span class="kw">mcmc_intervals</span>(df_fit_recall,</span>
-<span id="cb687-3"><a href="ch-introstan.html#cb687-3" aria-hidden="true"></a>               <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</span>
-<span id="cb687-4"><a href="ch-introstan.html#cb687-4" aria-hidden="true"></a>               <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</span>
-<span id="cb687-5"><a href="ch-introstan.html#cb687-5" aria-hidden="true"></a>               <span class="dt">prob =</span> <span class="fl">.8</span>,</span>
-<span id="cb687-6"><a href="ch-introstan.html#cb687-6" aria-hidden="true"></a>               <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb681-1"><a href="ch-introstan.html#cb681-1" aria-hidden="true"></a>df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall)</span>
+<span id="cb681-2"><a href="ch-introstan.html#cb681-2" aria-hidden="true"></a><span class="kw">mcmc_intervals</span>(df_fit_recall,</span>
+<span id="cb681-3"><a href="ch-introstan.html#cb681-3" aria-hidden="true"></a>               <span class="dt">regex_pars =</span> <span class="st">&quot;beta&quot;</span>,</span>
+<span id="cb681-4"><a href="ch-introstan.html#cb681-4" aria-hidden="true"></a>               <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</span>
+<span id="cb681-5"><a href="ch-introstan.html#cb681-5" aria-hidden="true"></a>               <span class="dt">prob =</span> <span class="fl">.8</span>,</span>
+<span id="cb681-6"><a href="ch-introstan.html#cb681-6" aria-hidden="true"></a>               <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:cri"></span>
 <img src="bookdown_files/figure-html/cri-1.svg" alt="95% credible intervals of the beta parameters of fit_recall model." width="672" />
 <p class="caption">
@@ -1999,21 +1982,21 @@ FIGURE 10.10: 95% credible intervals of the <code>beta</code> parameters of <cod
   vector[K] change_acc = inv_logit(alpha) - inv_logit(alpha - beta);
 }</code></pre>
 <p>Recall that due to the non-linearity of the scale, the effects depend on the average accuracy, and the set size and trial that we start from (in this case we are examining the change of one unit from the average set size and the average trial).</p>
-<div class="sourceCode" id="cb689"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb689-1"><a href="ch-introstan.html#cb689-1" aria-hidden="true"></a>recall_prop &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb689-2"><a href="ch-introstan.html#cb689-2" aria-hidden="true"></a>                           <span class="st">&quot;recall_prop.stan&quot;</span>,</span>
-<span id="cb689-3"><a href="ch-introstan.html#cb689-3" aria-hidden="true"></a>                           <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb689-4"><a href="ch-introstan.html#cb689-4" aria-hidden="true"></a>fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(recall_prop, <span class="dt">data =</span> ls_recall)</span></code></pre></div>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb683-1"><a href="ch-introstan.html#cb683-1" aria-hidden="true"></a>recall_prop &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb683-2"><a href="ch-introstan.html#cb683-2" aria-hidden="true"></a>                           <span class="st">&quot;recall_prop.stan&quot;</span>,</span>
+<span id="cb683-3"><a href="ch-introstan.html#cb683-3" aria-hidden="true"></a>                           <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb683-4"><a href="ch-introstan.html#cb683-4" aria-hidden="true"></a>fit_recall &lt;-<span class="st"> </span><span class="kw">stan</span>(recall_prop, <span class="dt">data =</span> ls_recall)</span></code></pre></div>
 <p>The plot in Figure <a href="ch-introstan.html#fig:vaccdet">10.11</a> now shows how the average accuracy deteriorates when the subject is exposed to a set size larger than the average by one, a trial further than the middle one, and the interaction of both.</p>
-<div class="sourceCode" id="cb690"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb690-1"><a href="ch-introstan.html#cb690-1" aria-hidden="true"></a>df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall) <span class="op">%&gt;%</span></span>
-<span id="cb690-2"><a href="ch-introstan.html#cb690-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">set_size =</span> <span class="st">`</span><span class="dt">change_acc[1]</span><span class="st">`</span>,</span>
-<span id="cb690-3"><a href="ch-introstan.html#cb690-3" aria-hidden="true"></a>         <span class="dt">trial =</span> <span class="st">`</span><span class="dt">change_acc[2]</span><span class="st">`</span>,</span>
-<span id="cb690-4"><a href="ch-introstan.html#cb690-4" aria-hidden="true"></a>         <span class="dt">interaction =</span> <span class="st">`</span><span class="dt">change_acc[3]</span><span class="st">`</span>)</span>
-<span id="cb690-5"><a href="ch-introstan.html#cb690-5" aria-hidden="true"></a><span class="kw">mcmc_intervals</span>(df_fit_recall,</span>
-<span id="cb690-6"><a href="ch-introstan.html#cb690-6" aria-hidden="true"></a>               <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;set_size&quot;</span>, <span class="st">&quot;trial&quot;</span>, <span class="st">&quot;interaction&quot;</span>),</span>
-<span id="cb690-7"><a href="ch-introstan.html#cb690-7" aria-hidden="true"></a>               <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</span>
-<span id="cb690-8"><a href="ch-introstan.html#cb690-8" aria-hidden="true"></a>               <span class="dt">prob =</span> <span class="fl">.8</span>,</span>
-<span id="cb690-9"><a href="ch-introstan.html#cb690-9" aria-hidden="true"></a>               <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span>) <span class="op">+</span></span>
-<span id="cb690-10"><a href="ch-introstan.html#cb690-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Change in accuracy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb684-1"><a href="ch-introstan.html#cb684-1" aria-hidden="true"></a>df_fit_recall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(fit_recall) <span class="op">%&gt;%</span></span>
+<span id="cb684-2"><a href="ch-introstan.html#cb684-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">set_size =</span> <span class="st">`</span><span class="dt">change_acc[1]</span><span class="st">`</span>,</span>
+<span id="cb684-3"><a href="ch-introstan.html#cb684-3" aria-hidden="true"></a>         <span class="dt">trial =</span> <span class="st">`</span><span class="dt">change_acc[2]</span><span class="st">`</span>,</span>
+<span id="cb684-4"><a href="ch-introstan.html#cb684-4" aria-hidden="true"></a>         <span class="dt">interaction =</span> <span class="st">`</span><span class="dt">change_acc[3]</span><span class="st">`</span>)</span>
+<span id="cb684-5"><a href="ch-introstan.html#cb684-5" aria-hidden="true"></a><span class="kw">mcmc_intervals</span>(df_fit_recall,</span>
+<span id="cb684-6"><a href="ch-introstan.html#cb684-6" aria-hidden="true"></a>               <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;set_size&quot;</span>, <span class="st">&quot;trial&quot;</span>, <span class="st">&quot;interaction&quot;</span>),</span>
+<span id="cb684-7"><a href="ch-introstan.html#cb684-7" aria-hidden="true"></a>               <span class="dt">prob_outer =</span> <span class="fl">.95</span>,</span>
+<span id="cb684-8"><a href="ch-introstan.html#cb684-8" aria-hidden="true"></a>               <span class="dt">prob =</span> <span class="fl">.8</span>,</span>
+<span id="cb684-9"><a href="ch-introstan.html#cb684-9" aria-hidden="true"></a>               <span class="dt">point_est =</span> <span class="st">&quot;mean&quot;</span>) <span class="op">+</span></span>
+<span id="cb684-10"><a href="ch-introstan.html#cb684-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Change in accuracy&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:vaccdet"></span>
 <img src="bookdown_files/figure-html/vaccdet-1.svg" alt="Effect of set size, trial, and their interaction on the average accuracy of recall." width="672" />
 <p class="caption">
@@ -2029,7 +2012,7 @@ FIGURE 10.11: Effect of set size, trial, and their interaction on the average ac
 </div>
 <div id="further-reading-7" class="section level2 hasAnchor" number="10.6">
 <h2><span class="header-section-number">10.6</span> Further reading<a href="ch-introstan.html#further-reading-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For further reading on the Hamiltonian Monte Carlo algorithm, see the rather technical review of <span class="citation">Betancourt (<a href="#ref-betancourt2017conceptual" role="doc-biblioref">2017</a>)</span>, or the more conceptual introduction provided by <span class="citation">Monnahan, Thorson, and Branch (<a href="#ref-monnahanFasterEstimationBayesian2017" role="doc-biblioref">2017</a>)</span> or chapter 17 of <span class="citation">Lambert (<a href="#ref-lambert2018student" role="doc-biblioref">2018</a>)</span>. A useful article with example R code is <span class="citation">Neal (<a href="#ref-nealMCMCUsingHamiltonian2011" role="doc-biblioref">2011</a>)</span>. A detailed walk-through on its implementation is also provided in Chapter 41 of <span class="citation">MacKay (<a href="#ref-mackay" role="doc-biblioref">2003</a>)</span>. The Stan documentation <span class="citation">(Stan Development Team <a href="#ref-Stan2023" role="doc-biblioref">2023</a>)</span>, consisting of a User’s Guide and the Language Reference Manual are important starting points for going deeper into Stan programming: <a href="https://mc-stan.org/users/documentation/" class="uri">https://mc-stan.org/users/documentation/</a>.</p>
+<p>For further reading on the Hamiltonian Monte Carlo algorithm, see the rather technical review of <span class="citation">Betancourt (<a href="#ref-betancourt2017conceptual" role="doc-biblioref">2017</a>)</span>, or the more conceptual introduction provided by <span class="citation">Monnahan, Thorson, and Branch (<a href="#ref-monnahanFasterEstimationBayesian2017" role="doc-biblioref">2017</a>)</span> or chapter 17 of <span class="citation">Lambert (<a href="#ref-lambert2018student" role="doc-biblioref">2018</a>)</span>. A useful article with example R code is <span class="citation">Neal (<a href="#ref-nealMCMCUsingHamiltonian2011" role="doc-biblioref">2011</a>)</span>. A detailed walk-through on its implementation is also provided in Chapter 41 of <span class="citation">MacKay (<a href="#ref-mackay" role="doc-biblioref">2003</a>)</span>. The Stan documentation <span class="citation">(Stan Development Team <a href="#ref-Stan2023" role="doc-biblioref">2024</a>)</span>, consisting of a User’s Guide and the Language Reference Manual are important starting points for going deeper into Stan programming: <a href="https://mc-stan.org/users/documentation/" class="uri">https://mc-stan.org/users/documentation/</a>.</p>
 </div>
 <div id="exercises" class="section level2 hasAnchor" number="10.7">
 <h2><span class="header-section-number">10.7</span> Exercises<a href="ch-introstan.html#exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -2056,11 +2039,9 @@ t_n \sim \mathit{Normal}(\mu, \sigma)
 <p><span id="exr:badstan" class="exercise"><strong>Exercise 10.2  </strong></span>Incorrect Stan model.</p>
 </div>
 <p>We want to fit both response times and accuracy with the same model. We simulate the data as follows:</p>
-<div class="sourceCode" id="cb691"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb691-1"><a href="ch-introstan.html#cb691-1" aria-hidden="true"></a>N &lt;-<span class="st"> </span><span class="dv">500</span></span>
-<span id="cb691-2"><a href="ch-introstan.html#cb691-2" aria-hidden="true"></a>df_sim &lt;-<span class="st"> </span><span class="kw">tibble</span>(</span>
-<span id="cb691-3"><a href="ch-introstan.html#cb691-3" aria-hidden="true"></a>  <span class="dt">rt =</span> <span class="kw">rlnorm</span>(N, <span class="dt">mean =</span> <span class="dv">6</span>, <span class="dt">sd =</span> <span class="fl">.5</span>),</span>
-<span id="cb691-4"><a href="ch-introstan.html#cb691-4" aria-hidden="true"></a>  <span class="dt">correct =</span> <span class="kw">rbern</span>(N, <span class="dt">prob =</span> <span class="fl">.85</span>)</span>
-<span id="cb691-5"><a href="ch-introstan.html#cb691-5" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb685"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb685-1"><a href="ch-introstan.html#cb685-1" aria-hidden="true"></a>N &lt;-<span class="st"> </span><span class="dv">500</span></span>
+<span id="cb685-2"><a href="ch-introstan.html#cb685-2" aria-hidden="true"></a>df_sim &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">rt =</span> <span class="kw">rlnorm</span>(N, <span class="dt">mean =</span> <span class="dv">6</span>, <span class="dt">sd =</span> <span class="fl">.5</span>),</span>
+<span id="cb685-3"><a href="ch-introstan.html#cb685-3" aria-hidden="true"></a>                 <span class="dt">correct =</span> <span class="kw">rbern</span>(N, <span class="dt">prob =</span> <span class="fl">.85</span>))</span></code></pre></div>
 <p>We build the following model:</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower = 1&gt; N;
@@ -2079,12 +2060,12 @@ model {
     target += bernoulli_lpdf(correct[n] | theta);
 }</code></pre>
 <p>Why does this model not work?</p>
-<div class="sourceCode" id="cb693"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb693-1"><a href="ch-introstan.html#cb693-1" aria-hidden="true"></a>ls_sim &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rt =</span> df_sim<span class="op">$</span>rt,</span>
-<span id="cb693-2"><a href="ch-introstan.html#cb693-2" aria-hidden="true"></a>               <span class="dt">correct =</span> df_sim<span class="op">$</span>correct)</span>
-<span id="cb693-3"><a href="ch-introstan.html#cb693-3" aria-hidden="true"></a>incorrect &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>, </span>
-<span id="cb693-4"><a href="ch-introstan.html#cb693-4" aria-hidden="true"></a>                         <span class="st">&quot;incorrect.stan&quot;</span>, </span>
-<span id="cb693-5"><a href="ch-introstan.html#cb693-5" aria-hidden="true"></a>                         <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb693-6"><a href="ch-introstan.html#cb693-6" aria-hidden="true"></a>fit_sim &lt;-<span class="st"> </span><span class="kw">stan</span>(incorrect, <span class="dt">data =</span> ls_sim)</span></code></pre></div>
+<div class="sourceCode" id="cb687"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb687-1"><a href="ch-introstan.html#cb687-1" aria-hidden="true"></a>ls_sim &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rt =</span> df_sim<span class="op">$</span>rt,</span>
+<span id="cb687-2"><a href="ch-introstan.html#cb687-2" aria-hidden="true"></a>               <span class="dt">correct =</span> df_sim<span class="op">$</span>correct)</span>
+<span id="cb687-3"><a href="ch-introstan.html#cb687-3" aria-hidden="true"></a>incorrect &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb687-4"><a href="ch-introstan.html#cb687-4" aria-hidden="true"></a>                         <span class="st">&quot;incorrect.stan&quot;</span>,</span>
+<span id="cb687-5"><a href="ch-introstan.html#cb687-5" aria-hidden="true"></a>                         <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb687-6"><a href="ch-introstan.html#cb687-6" aria-hidden="true"></a>fit_sim &lt;-<span class="st"> </span><span class="kw">stan</span>(incorrect, <span class="dt">data =</span> ls_sim)</span></code></pre></div>
 <pre><code>## Error in stanc(file = file, model_code = model_code, model_name = model_name, : 0
 ## Syntax error in &#39;string&#39;, line 13, column 2 to column 5, parsing error:
 ##    -------------------------------------------------
@@ -2096,14 +2077,15 @@ model {
 ##     15:      target += bernoulli_lpdf(correct[n] | theta);
 ##    -------------------------------------------------
 ## 
-## Ill-formed expression. Expression followed by &quot;;&quot; expected after &quot;target +=&quot;.</code></pre>
+## Unexpected input after the conclusion of a valid expression.
+## You may be missing a &quot;,&quot; between expressions, an operator, or a terminating &quot;}&quot;, &quot;)&quot;, &quot;]&quot;, or &quot;;&quot;.</code></pre>
 <p>Try to make it run. (Hint: There are several problems.)</p>
 <div class="exercise">
 <p><span id="exr:skewstan" class="exercise"><strong>Exercise 10.3  </strong></span>Using Stan documentation.</p>
 </div>
 <p>Edit the simple example with Stan from section <a href="ch-introstan.html#sec-firststan">10.2</a>, and replace the normal distribution with a skew normal distribution. (Don’t forget to add a prior to the new parameter, and check the Stan documentation or a statistics textbook for more information about the distribution).</p>
 <p>Fit the following data:</p>
-<div class="sourceCode" id="cb695"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb695-1"><a href="ch-introstan.html#cb695-1" aria-hidden="true"></a>Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb689"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb689-1"><a href="ch-introstan.html#cb689-1" aria-hidden="true"></a>Y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>Does the estimate of the new parameter make sense?</p>
 <div class="exercise">
 <p><span id="exr:linkfunction" class="exercise"><strong>Exercise 10.4  </strong></span>The probit link function as an alternative to the logit function.</p>
@@ -2126,8 +2108,8 @@ model {
 <p><span id="exr:fallacy" class="exercise"><strong>Exercise 10.6  </strong></span>The conjunction fallacy.</p>
 </div>
 <p><span class="citation">Paolacci, Chandler, and Ipeirotis (<a href="#ref-Paolaccietal" role="doc-biblioref">2010</a>)</span> examined whether the results of some classic experiments differ between a university pool population and subjects recruited from Mechanical Turk. We’ll examine whether the results of the conjunction fallacy experiment <span class="citation">(or Linda problem: Tversky and Kahneman <a href="#ref-TverskyKahneman1983" role="doc-biblioref">1983</a>)</span> are replicated for both groups.</p>
-<div class="sourceCode" id="cb697"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb697-1"><a href="ch-introstan.html#cb697-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_fallacy&quot;</span>)</span>
-<span id="cb697-2"><a href="ch-introstan.html#cb697-2" aria-hidden="true"></a>df_fallacy</span></code></pre></div>
+<div class="sourceCode" id="cb691"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb691-1"><a href="ch-introstan.html#cb691-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_fallacy&quot;</span>)</span>
+<span id="cb691-2"><a href="ch-introstan.html#cb691-2" aria-hidden="true"></a>df_fallacy</span></code></pre></div>
 <pre><code>## # A tibble: 268 × 2
 ##   source answer
 ##   &lt;chr&gt;   &lt;int&gt;
@@ -2154,19 +2136,19 @@ Fit a logistic regression in Stan and report:</p>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references hanging-indent">
 <div id="ref-betancourt2016identifying">
-<p>Betancourt, Michael J. 2016. “Identifying the Optimal Integration Time in Hamiltonian Monte Carlo.” <a href="http://arxiv.org/abs/1601.00225">http://arxiv.org/abs/1601.00225</a>.</p>
+<p>Betancourt, Michael J. 2016. “Identifying the Optimal Integration Time in Hamiltonian Monte Carlo.” <em>arXiv Preprint arXiv:1601.00225</em>. <a href="http://arxiv.org/abs/1601.00225">http://arxiv.org/abs/1601.00225</a>.</p>
 </div>
 <div id="ref-betancourt2017conceptual">
-<p>Betancourt, Michael J. 2017. “A Conceptual Introduction to Hamiltonian Monte Carlo.” <a href="http://arxiv.org/abs/1701.02434">http://arxiv.org/abs/1701.02434</a>.</p>
+<p>Betancourt, Michael J. 2017. “A Conceptual Introduction to Hamiltonian Monte Carlo.” <em>arXiv Preprin: arXiv:1701.02434</em>. <a href="http://arxiv.org/abs/1701.02434">http://arxiv.org/abs/1701.02434</a>.</p>
 </div>
 <div id="ref-carpenter2017stan">
 <p>Carpenter, Bob, Andrew Gelman, Matthew D. Hoffman, Daniel Lee, Ben Goodrich, Michael J. Betancourt, Marcus Brubaker, Jiqiang Guo, Peter Li, and Allen Riddell. 2017. “Stan: A Probabilistic Programming Language.” <em>Journal of Statistical Software</em> 76 (1).</p>
 </div>
 <div id="ref-R-bayesplot">
-<p>Gabry, Jonah, and Tristan Mahr. 2019. <em>bayesplot: Plotting for Bayesian Models</em>. <a href="https://CRAN.R-project.org/package=bayesplot">https://CRAN.R-project.org/package=bayesplot</a>.</p>
+<p>Gabry, Jonah, and Tristan Mahr. 2024. <em>bayesplot: Plotting for Bayesian Models</em>. <a href="https://mc-stan.org/bayesplot/">https://mc-stan.org/bayesplot/</a>.</p>
 </div>
 <div id="ref-R-rstan">
-<p>Guo, Jiqiang, Jonah Gabry, and Ben Goodrich. 2019. <em>rstan: R Interface to Stan</em>. <a href="https://CRAN.R-project.org/package=rstan">https://CRAN.R-project.org/package=rstan</a>.</p>
+<p>Guo, Jiqiang, Jonah Gabry, Ben Goodrich, Andrew Johnson, Sebastian Weber, and Hamada S. Badr. 2024. <em>rstan: R Interface to Stan</em>. <a href="https://mc-stan.org/rstan/">https://mc-stan.org/rstan/</a>.</p>
 </div>
 <div id="ref-hoffmanNoUTurnSamplerAdaptively2014">
 <p>Hoffman, Matthew D., and Andrew Gelman. 2014. “The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo.” <em>Journal of Machine Learning Research</em> 15 (1): 1593–1623. <a href="http://dl.acm.org/citation.cfm?id=2627435.2638586">http://dl.acm.org/citation.cfm?id=2627435.2638586</a>.</p>
@@ -2199,32 +2181,32 @@ Fit a logistic regression in Stan and report:</p>
 <p>Plummer, Martin. 2016. “JAGS Version 4.2.0 User Manual.”</p>
 </div>
 <div id="ref-R-base">
-<p>R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</p>
+<p>R Core Team. 2023. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</p>
 </div>
 <div id="ref-Stan2023">
-<p>Stan Development Team. 2023. “Stan Modeling Language Users Guide and Reference Manual, Version 2.32.” <a href="https://mc-stan.org/docs/2_32/reference-manual/index.html;%20https://mc-stan.org/docs/2_32/stan-users-guide/index.html">https://mc-stan.org/docs/2_32/reference-manual/index.html; https://mc-stan.org/docs/2_32/stan-users-guide/index.html</a>.</p>
+<p>Stan Development Team. 2024. “Stan Modeling Language Users Guide and Reference Manual, Version 2.32.” <a href="https://mc-stan.org/docs/2_35/">https://mc-stan.org/docs/2_35/</a>.</p>
 </div>
 <div id="ref-TverskyKahneman1983">
-<p>Tversky, Amos, and Daniel Kahneman. 1983. “Extensional Versus Intuitive Reasoning: The Conjunction Fallacy in Probability Judgment.” <em>Psychological Review</em> 90 (4): 293.</p>
+<p>Tversky, Amos, and Daniel Kahneman. 1983. “Extensional Versus Intuitive Reasoning: The Conjunction Fallacy in Probability Judgment.” <em>Psychological Review</em> 90 (4): 293. <a href="https://doi.org/https://doi.org/10.1037/0033-295X.90.4.293">https://doi.org/https://doi.org/10.1037/0033-295X.90.4.293</a>.</p>
 </div>
 <div id="ref-vehtari2019ranknormalization">
-<p>Vehtari, Aki, Andrew Gelman, Daniel P. Simpson, Bob Carpenter, and Paul-Christian Bürkner. 2019. “Rank-Normalization, Folding, and Localization: An Improved <span class="math inline">\(\widehat{R}\)</span> for Assessing Convergence of MCMC.” <a href="http://arxiv.org/abs/1903.08008">http://arxiv.org/abs/1903.08008</a>.</p>
+<p>Vehtari, Aki, Andrew Gelman, Daniel P. Simpson, Bob Carpenter, and Paul-Christian Bürkner. 2021. “Rank-Normalization, Folding, and Localization: An Improved <span class="math inline">\(\widehat{R}\)</span> for Assessing Convergence of MCMC.” <em>Bayesian Analysis</em> 16 (2): 667–718. <a href="https://doi.org/10.1214/20-BA1221">https://doi.org/10.1214/20-BA1221</a>.</p>
 </div>
 <div id="ref-wahnPupilSizesScale2016">
 <p>Wahn, Basil, Daniel P. Ferris, W. David Hairston, and Peter König. 2016. “Pupil Sizes Scale with Attentional Load and Task Experience in a Multiple Object Tracking Task.” <em>PLOS ONE</em> 11 (12): e0168087. <a href="https://doi.org/10.1371/journal.pone.0168087">https://doi.org/10.1371/journal.pone.0168087</a>.</p>
 </div>
 <div id="ref-R-ggplot2">
-<p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus O. Wilke, Kara Woo, and Hiroaki Yutani. 2019. <em>ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.</p>
+<p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus O. Wilke, Kara Woo, Hiroaki Yutani, and Teun van den Brand. 2024. <em>ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="34">
-<li id="fn34"><p>In the specific case of a model with two parameters, e.g., <span class="math inline">\([\mu,\sigma]\)</span>, the physical analogy works quite well: The <span class="math inline">\([x,y]\)</span> coordinates of the particle would be determined by <span class="math inline">\([\mu,\sigma]\)</span>, and its <span class="math inline">\(z\)</span> coordinate would be established by the height of the unnormalized posterior.<a href="ch-introstan.html#fnref34" class="footnote-back">↩︎</a></p></li>
-<li id="fn35"><p>Incidentally, this <span class="math inline">\(\log(q(\dot))\)</span> is the variable <code>target</code> in a Stan model and <code>lp__</code> in its output; see Box <a href="ch-introstan.html#thm:target">10.1</a>.<a href="ch-introstan.html#fnref35" class="footnote-back">↩︎</a></p></li>
-<li id="fn36"><p>In these output, there are some types that are new to the R user (but they are also used in C++): <code>reals</code> indicates that any of <code>real</code>, <code>real[]</code>, <code>vector</code>, or <code>row_vector</code>. A return type <code>R</code> with an input type <code>T</code> indicates that the type of the output of the function is the same as type of the argument.<a href="ch-introstan.html#fnref36" class="footnote-back">↩︎</a></p></li>
-<li id="fn37"><p>However, this constraint is changing in newer versions.<a href="ch-introstan.html#fnref37" class="footnote-back">↩︎</a></p></li>
-<li id="fn38"><p>We simplify the output of <code>print</code> in the text after this call, by actually calling <code>summary(fit, pars = pars, probs = c(0.025, 0.975))$summary</code>.<a href="ch-introstan.html#fnref38" class="footnote-back">↩︎</a></p></li>
+<li id="fn34"><p>In the specific case of a model with two parameters, e.g., <span class="math inline">\(\langle \mu,\sigma \rangle\)</span>, the physical analogy works quite well: The <span class="math inline">\(\langle x,y \rangle\)</span> coordinates of the particle would be determined by <span class="math inline">\(\langle \mu,\sigma \rangle\)</span>, and its <span class="math inline">\(z\)</span> coordinate would be established by the height of the negative logarithm of the unnormalized posterior.<a href="ch-introstan.html#fnref34" class="footnote-back">↩︎</a></p></li>
+<li id="fn35"><p>Incidentally, this <span class="math inline">\(\log(q(\dot))\)</span> is the variable <code>target</code> in a Stan model and <code>lp__</code> in its output; see the aside below.<a href="ch-introstan.html#fnref35" class="footnote-back">↩︎</a></p></li>
+<li id="fn36"><p>In this kind of output, there are some types that are new to the R user (but they are also used in C++): <code>reals</code> indicates that any of <code>real</code>, <code>real[]</code>, <code>vector</code>, or <code>row_vector</code>. A return type <code>R</code> with an input type <code>T</code> indicates that the type of the output of the function is the same as type of the argument.<a href="ch-introstan.html#fnref36" class="footnote-back">↩︎</a></p></li>
+<li id="fn37"><p>We simplify the output of <code>print</code> in the text after this call, by actually calling <code>summary(fit, pars = pars, probs = c(0.025, 0.975))$summary</code>.<a href="ch-introstan.html#fnref37" class="footnote-back">↩︎</a></p></li>
+<li id="fn38"><p>In addition, the new package <code>posterior</code> provides useful tools for working with output from Bayesian models. It allows for converting the output between many different formats and offers consistent methods for operations commonly performed on samples, as well as summary functions.<a href="ch-introstan.html#fnref38" class="footnote-back">↩︎</a></p></li>
 <li id="fn39"><p>The notation for arrays has changed in recent versions, the previous notation would have been <code>real[6, 7, 10] var</code>.<a href="ch-introstan.html#fnref39" class="footnote-back">↩︎</a></p></li>
 <li id="fn40"><p>An extra boost in efficiency can be obtained in regular regressions where <code>X</code> and <code>Y</code> are data (rather than parameters as in cases of missing data or measurement error), since this function can be executed on a GPU.<a href="ch-introstan.html#fnref40" class="footnote-back">↩︎</a></p></li>
 </ol>

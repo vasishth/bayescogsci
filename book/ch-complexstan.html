@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 11 Hierarchical models and reparameterization  | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 11 Hierarchical models and reparameterization  | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2024-03-11" />
+<meta name="date" content="2024-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1025,13 +1025,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="ch-priors.html"><a href="ch-priors.html#using-previous-experiments-posteriors-as-priors-for-a-new-study"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’  posteriors as priors for a new study</a></li>
 <li class="chapter" data-level="6.5" data-path="ch-priors.html"><a href="ch-priors.html#summary-5"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
 <li class="chapter" data-level="6.6" data-path="ch-priors.html"><a href="ch-priors.html#further-reading-3"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.7" data-path="ch-priors.html"><a href="ch-priors.html#sec-priorsexercises"><i class="fa fa-check"></i><b>6.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="ch-workflow.html"><a href="ch-workflow.html#building-a-model"><i class="fa fa-check"></i><b>7.1</b>  Building a model</a></li>
 <li class="chapter" data-level="7.2" data-path="ch-workflow.html"><a href="ch-workflow.html#principled-questions-to-ask-on-a-model"><i class="fa fa-check"></i><b>7.2</b> Principled questions to ask on a model</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#checking-whether-assumptions-are-consist-with-domain-expertise-prior-predictive-checks"><i class="fa fa-check"></i><b>7.2.1</b>  Checking whether assumptions are consist with  domain expertise: Prior predictive checks</a></li>
+<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#checking-whether-assumptions-are-consistent-with-domain-expertise-prior-predictive-checks"><i class="fa fa-check"></i><b>7.2.1</b>  Checking whether assumptions are consistent with  domain expertise: Prior predictive checks</a></li>
 <li class="chapter" data-level="7.2.2" data-path="ch-workflow.html"><a href="ch-workflow.html#testing-for-correct-posterior-approximations-checks-of-computational-faithfulness"><i class="fa fa-check"></i><b>7.2.2</b>  Testing for correct posterior approximations: Checks of computational faithfulness</a></li>
 <li class="chapter" data-level="7.2.3" data-path="ch-workflow.html"><a href="ch-workflow.html#sensitivity-of-the-model"><i class="fa fa-check"></i><b>7.2.3</b>  Sensitivity of the model</a></li>
 <li class="chapter" data-level="7.2.4" data-path="ch-workflow.html"><a href="ch-workflow.html#does-the-model-adequately-capture-the-dataposterior-predictive-checks"><i class="fa fa-check"></i><b>7.2.4</b>  Does the model adequately capture the data?–Posterior predictive checks</a></li>
@@ -1053,13 +1054,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>8.2.2</b> The  hypothesis matrix</a></li>
 <li class="chapter" data-level="8.2.3" data-path="ch-contr.html"><a href="ch-contr.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>8.2.3</b> Generating contrasts: The  <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a>
+<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor of four levels</a>
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="ch-contr.html"><a href="ch-contr.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b>  Repeated contrasts</a></li>
 <li class="chapter" data-level="8.3.2" data-path="ch-contr.html"><a href="ch-contr.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b>  Helmert contrasts</a></li>
 <li class="chapter" data-level="8.3.3" data-path="ch-contr.html"><a href="ch-contr.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or  model matrix</a></li>
 <li class="chapter" data-level="8.3.4" data-path="ch-contr.html"><a href="ch-contr.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b>  Polynomial contrasts</a></li>
-<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts:  monotonic effects</a></li>
+<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts:  Monotonic effects</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="ch-contr.html"><a href="ch-contr.html#nonOrthogonal"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a>
 <ul>
@@ -1130,7 +1131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.2" data-path="ch-custom.html"><a href="ch-custom.html#an-example-where-simulation-based-calibration-reveals-a-problem"><i class="fa fa-check"></i><b>12.2.2</b> An example where simulation-based calibration reveals a problem</a></li>
 <li class="chapter" data-level="12.2.3" data-path="ch-custom.html"><a href="ch-custom.html#issues-with-and-limitations-of-simulation-based-calibration"><i class="fa fa-check"></i><b>12.2.3</b> Issues with and limitations of simulation-based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-re-implementing-the-exponential-distribution-manually"><i class="fa fa-check"></i><b>12.3</b> Another  custom distribution: Re-implementing the  exponential distribution manually</a></li>
+<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-the-exponential-distribution-implemented-manually"><i class="fa fa-check"></i><b>12.3</b> Another  custom distribution: The exponential distribution  implemented manually</a></li>
 <li class="chapter" data-level="12.4" data-path="ch-custom.html"><a href="ch-custom.html#summary-10"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
 <li class="chapter" data-level="12.5" data-path="ch-custom.html"><a href="ch-custom.html#further-reading-9"><i class="fa fa-check"></i><b>12.5</b> Further reading</a></li>
 <li class="chapter" data-level="12.6" data-path="ch-custom.html"><a href="ch-custom.html#sec-customexercises"><i class="fa fa-check"></i><b>12.6</b> Exercises</a></li>
@@ -1193,7 +1194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.3.3" data-path="ch-cv.html"><a href="ch-cv.html#leave-one-group-out-cross-validation"><i class="fa fa-check"></i><b>16.3.3</b> Leave-one-group-out cross-validation</a></li>
 </ul></li>
 <li class="chapter" data-level="16.4" data-path="ch-cv.html"><a href="ch-cv.html#sec-logcv"><i class="fa fa-check"></i><b>16.4</b>  Comparing different likelihoods with cross-validation</a></li>
-<li class="chapter" data-level="16.5" data-path="ch-cv.html"><a href="ch-cv.html#issues-with-cross-validation"><i class="fa fa-check"></i><b>16.5</b> Issues with cross-validation</a></li>
+<li class="chapter" data-level="16.5" data-path="ch-cv.html"><a href="ch-cv.html#sec-issuesCV"><i class="fa fa-check"></i><b>16.5</b> Issues with cross-validation</a></li>
 <li class="chapter" data-level="16.6" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>16.6</b> Cross-validation in Stan</a>
 <ul>
 <li class="chapter" data-level="16.6.1" data-path="ch-cv.html"><a href="ch-cv.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>16.6.1</b>  PSIS-LOO-CV in Stan</a></li>
@@ -1202,8 +1203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.8" data-path="ch-cv.html"><a href="ch-cv.html#further-reading-13"><i class="fa fa-check"></i><b>16.8</b> Further reading</a></li>
 <li class="chapter" data-level="16.9" data-path="ch-cv.html"><a href="ch-cv.html#exercises-3"><i class="fa fa-check"></i><b>16.9</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
-<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to computational cognitive modeling</a>
+<li class="part"><span><b>VI Cognitive modeling with Stan</b></span></li>
+<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to cognitive modeling</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="ch-cogmod.html"><a href="ch-cogmod.html#what-characterizes-a-computational-cognitive-model"><i class="fa fa-check"></i><b>17.1</b> What characterizes a computational cognitive model?</a></li>
 <li class="chapter" data-level="17.2" data-path="ch-cogmod.html"><a href="ch-cogmod.html#some-advantages-of-taking-the-latent-variable-modeling-approach"><i class="fa fa-check"></i><b>17.2</b> Some advantages of taking the latent-variable modeling approach</a></li>
@@ -1282,7 +1283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ch-complexstan" class="section level1 hasAnchor" number="11">
 <h1><span class="header-section-number">Chapter 11</span> Hierarchical models and reparameterization <a href="ch-complexstan.html#ch-complexstan" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Now that we know how to fit simple regression models using Stan syntax, we can now turn to more complex cases, such as the  hierarchical models that we fit in <code>brms</code> in chapter <a href="ch-hierarchical.html#ch-hierarchical">5</a>. Fitting such models in Stan allows us a great deal of flexibility. However, a price to be paid when using Stan is that we need to think about how exactly we code the model. In some cases, two pieces of computer code that are mathematically similar might behave very differently due to the computer’s limitations; in this chapter, we will learn some of the more common techniques needed to optimize the model’s behavior. In particular, we will learn how to deal with convergence problems using what is called the  non-centered reparameterization.</p>
+<p>Now that we know how to fit simple regression models using Stan syntax, we can turn to more complex cases, such as the  hierarchical models that we fit in <code>brms</code> in chapter <a href="ch-hierarchical.html#ch-hierarchical">5</a>. Fitting such models in Stan allows us a great deal of flexibility. However, a price to be paid when using Stan is that we need to think about how exactly we code the model. In some cases, two pieces of computer code that are mathematically similar might behave very differently due to the computer’s limitations; in this chapter, we will learn some of the more common techniques needed to optimize the model’s behavior. In particular, we will learn how to deal with convergence problems using what is called the  non-centered reparameterization.</p>
 <div id="sec-hierstan" class="section level2 hasAnchor" number="11.1">
 <h2><span class="header-section-number">11.1</span> Hierarchical models with Stan<a href="ch-complexstan.html#sec-hierstan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the following sections, we will revisit and expand on some of the examples from chapter <a href="ch-hierarchical.html#ch-hierarchical">5</a>.</p>
@@ -1301,8 +1302,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  \sigma  &amp;\sim \mathit{Normal}_+(0,50)
  \end{aligned}
  \end{equation}\]</span></p>
-<p>Here <span class="math inline">\(n\)</span> represents each observation, the <span class="math inline">\(n\)</span>th row in the data frame and <span class="math inline">\(subj[n]\)</span> is the subject that corresponds to observation <span class="math inline">\(n\)</span>. We present the mathematical notation of the likelihood with  “multiple indexing” <span class="citation">(see Stan Development Team <a href="#ref-Stan2023" role="doc-biblioref">2023</a>, chap. 19 of the User’s guide)</span>: the index of <span class="math inline">\(u\)</span> is provided by the vector <span class="math inline">\(subj\)</span>.</p>
-<p>Before we discuss the Stan implementation, let’s see what the vector <span class="math inline">\(\mu\)</span>, the  location of the normal likelihood, looks like. There are 2863 observations; that means that <span class="math inline">\(\boldsymbol{\mu}=\{\mu_1,\mu_2, \ldots, \mu_{2863}\}\)</span>. We have 37 subjects which means that <span class="math inline">\(\boldsymbol{u}=\{u_1,u_2, \ldots, u_{37}\}\)</span>. The following equation shows that the use of multiple indexing allows us to have a vector of adjustments with only 37 different elements, with a total length of 2863. In the equation below, the multiplication operator <span class="math inline">\(\circ\)</span> is the  Hadamard or elementwise product <span class="citation">(Fieller <a href="#ref-fieller" role="doc-biblioref">2016</a>)</span>: when we write <span class="math inline">\(X\circ B\)</span>, both <span class="math inline">\(X\)</span> and <span class="math inline">\(B\)</span> have the same dimensions <span class="math inline">\(m\times n\)</span>, and each cell in location <span class="math inline">\([i,j]\)</span> (where <span class="math inline">\(i=1,\dots,m\)</span>, and <span class="math inline">\(j=1,\dots,n\)</span>) in <span class="math inline">\(X\)</span> and <span class="math inline">\(B\)</span> are multiplied to give a matrix that also has dimensions <span class="math inline">\(m\times n\)</span>.<a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a></p>
+<p>Here <span class="math inline">\(n\)</span> represents each observation, the <span class="math inline">\(n\)</span>th row in the data frame and <span class="math inline">\(subj[n]\)</span> is the subject that corresponds to observation <span class="math inline">\(n\)</span>. We present the mathematical notation of the likelihood with  “multiple indexing” <span class="citation">(see Stan Development Team <a href="#ref-Stan2023" role="doc-biblioref">2024</a>, Chapter 19 of the User’s guide)</span>: the index of <span class="math inline">\(u\)</span> is provided by the vector <span class="math inline">\(subj\)</span>.</p>
+<p>Before we discuss the Stan implementation, let’s see what the vector <span class="math inline">\(\mu\)</span>, the  location of the normal likelihood, looks like. There are 2863 observations; that means that <span class="math inline">\(\boldsymbol{\mu}=\langle \mu_1,\mu_2, \ldots, \mu_{2863}\rangle\)</span>. We have 37 subjects which means that <span class="math inline">\(\boldsymbol{u}=\langle u_1,u_2, \ldots, u_{37} \rangle\)</span>. The following equation shows that the use of multiple indexing allows us to have a vector of adjustments with only 37 different elements, with a total length of 2863. In the equation below, the multiplication operator <span class="math inline">\(\circ\)</span> is the  Hadamard or elementwise product <span class="citation">(Fieller <a href="#ref-fieller" role="doc-biblioref">2016</a>)</span>: when we write <span class="math inline">\(X\circ B\)</span>, both <span class="math inline">\(X\)</span> and <span class="math inline">\(B\)</span> have the same dimensions <span class="math inline">\(m\times n\)</span>, and each cell in location <span class="math inline">\([i,j]\)</span> (where <span class="math inline">\(i=1,\dots,m\)</span>, and <span class="math inline">\(j=1,\dots,n\)</span>) in <span class="math inline">\(X\)</span> and <span class="math inline">\(B\)</span> are multiplied to give a matrix that also has dimensions <span class="math inline">\(m\times n\)</span>.<a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a></p>
 <p><span class="math display" id="eq:broadcasted">\[\begin{equation}
  \begin{aligned}
     \boldsymbol{\mu} &amp;=
@@ -1452,14 +1453,14 @@ u_{37 }
 \end{aligned}
 \tag{11.1}
 \end{equation}\]</span></p>
-<p>In this model, each subject has their own intercept adjustment <span class="math inline">\(u_i\)</span>, with <span class="math inline">\(i\)</span> indexing the subjects. If <span class="math inline">\(u_i\)</span> is positive, the subject has a more positive EEG signal than the average over all the subjects; if <span class="math inline">\(u_i\)</span> is negative, then the subject has a more negative EEG signal than the average; and if <span class="math inline">\(u_i\)</span> is <span class="math inline">\(0\)</span>, then the subject has the same EEG signal as the average. As we discussed in section <a href="ch-hierarchical.html#sec-uncorrelated">5.2.3</a>, since we are estimating <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(u\)</span> at the same time and we assume that the average of the <span class="math inline">\(u\)</span>’s is <span class="math inline">\(0\)</span> (since it is assumed to be normally distributed with a mean of zero and there is an intercept to absorbe any non-zero mean), whatever the subjects have in common “goes” to <span class="math inline">\(\alpha\)</span>, and <span class="math inline">\(u\)</span> only “absorbs” the differences between subjects through the variance component <span class="math inline">\(\tau_u\)</span>.</p>
+<p>In this model, each subject has their own intercept adjustment <span class="math inline">\(u_i\)</span>, with <span class="math inline">\(i\)</span> indexing the subjects. If <span class="math inline">\(u_i\)</span> is positive, the subject has a more positive EEG signal than the average over all the subjects; if <span class="math inline">\(u_i\)</span> is negative, then the subject has a more negative EEG signal than the average; and if <span class="math inline">\(u_i\)</span> is <span class="math inline">\(0\)</span>, then the subject has the same EEG signal as the average. As we discussed in section <a href="ch-hierarchical.html#sec-uncorrelated">5.2.3</a>, since we are estimating <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(u\)</span> at the same time and we assume that the average of the <span class="math inline">\(u\)</span>’s is <span class="math inline">\(0\)</span> (since it is assumed to be normally distributed with a mean of zero and there is an intercept to absorb any non-zero mean), whatever the subjects have in common “goes” to <span class="math inline">\(\alpha\)</span>, and <span class="math inline">\(u\)</span> only “absorbs” the differences between subjects through the variance component <span class="math inline">\(\tau_u\)</span>.</p>
 <p>This model is implemented in the file <code>hierarchical1.stan</code>, available in the <code>bcogsci</code> package:</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower=1&gt; N;
   vector[N] signal;
   int&lt;lower = 1&gt; N_subj;
   vector[N] c_cloze;
-  // The following line creates an array of integers;
+  // The following line defines an array of integers;
   array[N] int&lt;lower = 1, upper = N_subj&gt; subj;
 }
 parameters {
@@ -1485,28 +1486,26 @@ model {
 <p><code>array [N] int&lt;lower = 1, upper = N_subj&gt; subj;</code></p>
 <p>to define a one-dimensional  <em>array</em> of <code>N</code> elements that contains integers (bounded between 1 and <code>N_subj</code>). As explained in Box <a href="ch-introstan.html#thm:stancontainers">10.4</a>, the difference between vectors and one-dimensional arrays is that vectors can only contain real numbers and can be used with matrix algebra functions, and arrays can contain any type but can’t be used with matrix algebra functions. We use <code>normal_lpdf</code> rather than <code>normal_glm_lpdf</code> since at the moment there is no efficient likelihood implementation of hierarchical generalized linear models.</p>
 <p>The following code centers the predictor cloze and stores the data required by the Stan model in a list. Because we are using <code>subj</code> as a vector of indices, we need to be careful to have integers starting from <code>1</code> and ending in <code>N_subj</code> without skipping any number (but the order of the subject ids won’t matter).<a href="#fn42" class="footnote-ref" id="fnref42"><sup>42</sup></a></p>
-<div class="sourceCode" id="cb700"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb700-1"><a href="ch-complexstan.html#cb700-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_eeg&quot;</span>)</span>
-<span id="cb700-2"><a href="ch-complexstan.html#cb700-2" aria-hidden="true"></a>df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></span>
-<span id="cb700-3"><a href="ch-complexstan.html#cb700-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cloze =</span> cloze <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cloze))</span>
-<span id="cb700-4"><a href="ch-complexstan.html#cb700-4" aria-hidden="true"></a>ls_eeg &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
-<span id="cb700-5"><a href="ch-complexstan.html#cb700-5" aria-hidden="true"></a>  <span class="dt">N =</span> <span class="kw">nrow</span>(df_eeg),</span>
-<span id="cb700-6"><a href="ch-complexstan.html#cb700-6" aria-hidden="true"></a>  <span class="dt">signal =</span> df_eeg<span class="op">$</span>n400,</span>
-<span id="cb700-7"><a href="ch-complexstan.html#cb700-7" aria-hidden="true"></a>  <span class="dt">c_cloze =</span> df_eeg<span class="op">$</span>c_cloze,</span>
-<span id="cb700-8"><a href="ch-complexstan.html#cb700-8" aria-hidden="true"></a>  <span class="dt">subj =</span> df_eeg<span class="op">$</span>subj,</span>
-<span id="cb700-9"><a href="ch-complexstan.html#cb700-9" aria-hidden="true"></a>  <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>subj)</span>
-<span id="cb700-10"><a href="ch-complexstan.html#cb700-10" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb694-1"><a href="ch-complexstan.html#cb694-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_eeg&quot;</span>)</span>
+<span id="cb694-2"><a href="ch-complexstan.html#cb694-2" aria-hidden="true"></a>df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></span>
+<span id="cb694-3"><a href="ch-complexstan.html#cb694-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_cloze =</span> cloze <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cloze))</span>
+<span id="cb694-4"><a href="ch-complexstan.html#cb694-4" aria-hidden="true"></a>ls_eeg &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_eeg),</span>
+<span id="cb694-5"><a href="ch-complexstan.html#cb694-5" aria-hidden="true"></a>               <span class="dt">signal =</span> df_eeg<span class="op">$</span>n400,</span>
+<span id="cb694-6"><a href="ch-complexstan.html#cb694-6" aria-hidden="true"></a>               <span class="dt">c_cloze =</span> df_eeg<span class="op">$</span>c_cloze,</span>
+<span id="cb694-7"><a href="ch-complexstan.html#cb694-7" aria-hidden="true"></a>               <span class="dt">subj =</span> df_eeg<span class="op">$</span>subj,</span>
+<span id="cb694-8"><a href="ch-complexstan.html#cb694-8" aria-hidden="true"></a>               <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>subj))</span></code></pre></div>
 <p>Fit the model:</p>
-<div class="sourceCode" id="cb701"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb701-1"><a href="ch-complexstan.html#cb701-1" aria-hidden="true"></a>hierarchical1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb701-2"><a href="ch-complexstan.html#cb701-2" aria-hidden="true"></a>                             <span class="st">&quot;hierarchical1.stan&quot;</span>,</span>
-<span id="cb701-3"><a href="ch-complexstan.html#cb701-3" aria-hidden="true"></a>                             <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb701-4"><a href="ch-complexstan.html#cb701-4" aria-hidden="true"></a>fit_eeg1 &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical1, <span class="dt">data =</span> ls_eeg)</span></code></pre></div>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb695-1"><a href="ch-complexstan.html#cb695-1" aria-hidden="true"></a>hierarchical1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb695-2"><a href="ch-complexstan.html#cb695-2" aria-hidden="true"></a>                             <span class="st">&quot;hierarchical1.stan&quot;</span>,</span>
+<span id="cb695-3"><a href="ch-complexstan.html#cb695-3" aria-hidden="true"></a>                             <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb695-4"><a href="ch-complexstan.html#cb695-4" aria-hidden="true"></a>fit_eeg1 &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical1, <span class="dt">data =</span> ls_eeg)</span></code></pre></div>
 <p>Summary of the model:</p>
-<div class="sourceCode" id="cb702"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb702-1"><a href="ch-complexstan.html#cb702-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg1, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb696-1"><a href="ch-complexstan.html#cb696-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg1, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>))</span></code></pre></div>
 <pre><code>##        mean  2.5% 97.5% n_eff Rhat
-## alpha  3.63  2.77  4.48  1392    1
-## beta   2.30  1.28  3.34  5447    1
-## sigma 11.63 11.33 11.95  5869    1
-## tau_u  2.18  1.54  2.99  2004    1</code></pre>
+## alpha  3.64  2.75  4.47  1730    1
+## beta   2.32  1.25  3.34  5402    1
+## sigma 11.64 11.33 11.95  5332    1
+## tau_u  2.17  1.54  2.99  2801    1</code></pre>
 </div>
 <div id="sec-uncorrstan" class="section level3 hasAnchor" number="11.1.2">
 <h3><span class="header-section-number">11.1.2</span> Uncorrelated  varying intercept and slopes model with Stan<a href="ch-complexstan.html#sec-uncorrstan" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1557,19 +1556,14 @@ model {
                         c_cloze .* (beta + u[subj, 2]), sigma);
 }
 </code></pre>
-<p>In the previous model, we assign the same prior distribution to both <code>tau_u[1]</code> and <code>tau_u[2]</code>, and thus in principle we could have written the two statements in one (we multiply by 2 because there are two PDFs that need to be corrected for the truncation):</p>
+<p>In the previous model, we assign the same prior distribution to both <code>tau_u[1]</code> and <code>tau_u[2]</code>, and thus in principle we could have written the two statements in one (we multiply by 2 because there are two log-PDFs that need to be corrected for the truncation):</p>
 <pre><code>  target += normal_lpdf(tau_u | 0, 20)  - 
     2 * normal_lccdf(0 | 0, 20);</code></pre>
 <p>Fit the model as follows:</p>
-<div class="sourceCode" id="cb706"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb706-1"><a href="ch-complexstan.html#cb706-1" aria-hidden="true"></a>hierarchical2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb706-2"><a href="ch-complexstan.html#cb706-2" aria-hidden="true"></a>                             <span class="st">&quot;hierarchical2.stan&quot;</span>,</span>
-<span id="cb706-3"><a href="ch-complexstan.html#cb706-3" aria-hidden="true"></a>                             <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb706-4"><a href="ch-complexstan.html#cb706-4" aria-hidden="true"></a>fit_eeg2 &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical2, <span class="dt">data =</span> ls_eeg)</span></code></pre></div>
-<pre><code> ## Warning: There were 4 chains where the estimated
- ## Bayesian Fraction of Missing Information was low. See
- ## https://mc-stan.org/misc/warnings.html#bfmi-low </code></pre>
-<pre><code> ## Warning: Examine the pairs() plot to diagnose sampling
- ## problems </code></pre>
+<div class="sourceCode" id="cb700"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb700-1"><a href="ch-complexstan.html#cb700-1" aria-hidden="true"></a>hierarchical2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb700-2"><a href="ch-complexstan.html#cb700-2" aria-hidden="true"></a>                             <span class="st">&quot;hierarchical2.stan&quot;</span>,</span>
+<span id="cb700-3"><a href="ch-complexstan.html#cb700-3" aria-hidden="true"></a>                             <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb700-4"><a href="ch-complexstan.html#cb700-4" aria-hidden="true"></a>fit_eeg2 &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical2, <span class="dt">data =</span> ls_eeg)</span></code></pre></div>
 <pre><code> ## Warning: Bulk Effective Samples Size (ESS) is too low,
  ## indicating posterior means and medians may be unreliable.
  ## Running the chains for more iterations may help. See
@@ -1581,27 +1575,27 @@ model {
  ## https://mc-stan.org/misc/warnings.html#tail-ess </code></pre>
 <p>We see that there are warnings. As we increase the complexity and the number of parameters, the sampler has a harder time exploring the parameter space.</p>
 <p>Show the summary of the model below:</p>
-<div class="sourceCode" id="cb711"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb711-1"><a href="ch-complexstan.html#cb711-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb703"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb703-1"><a href="ch-complexstan.html#cb703-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
-## alpha     3.66  2.85  4.50  1175 1.00
-## beta      2.34  1.07  3.58  4402 1.00
-## tau_u[1]  2.17  1.55  2.99  2328 1.00
-## tau_u[2]  1.71  0.31  3.51    87 1.03
-## sigma    11.62 11.32 11.93  5155 1.00</code></pre>
+## alpha     3.65  2.81  4.42  1793 1.00
+## beta      2.34  1.14  3.59  3755 1.00
+## tau_u[1]  2.18  1.53  2.98  2351 1.00
+## tau_u[2]  1.89  0.52  3.55   250 1.02
+## sigma    11.61 11.31 11.93  6461 1.00</code></pre>
 <p>We see that <code>tau_u[2]</code> has a low number of effective samples (<code>n_eff</code>).</p>
 <p>The traceplots are displayed in Figure <a href="ch-complexstan.html#fig:traceploteeg2">11.1</a>:</p>
 
-<div class="sourceCode" id="cb713"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb713-1"><a href="ch-complexstan.html#cb713-1" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb705"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb705-1"><a href="ch-complexstan.html#cb705-1" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:traceploteeg2"></span>
 <img src="bookdown_files/figure-html/traceploteeg2-1.svg" alt="Traceplots of alpha, beta, tau_u, and sigma from the model fit_eeg2." width="672" />
 <p class="caption">
 FIGURE 11.1: Traceplots of <code>alpha</code>, <code>beta</code>, <code>tau_u</code>, and <code>sigma</code> from the model <code>fit_eeg2</code>.
 </p>
 </div>
-<p>Figure <a href="ch-complexstan.html#fig:traceploteeg2">11.1</a> shows that the chains of the parameter <code>tau_u[2]</code> are not mixing properly. This parameter is specially problematic because there are not enough data from each subject to estimate this parameter accurately, its estimated mean is quite small (in comparison with <code>sigma</code>), it’s bounded by zero, and there is a dependency between this parameter and <code>u[, 2]</code>. This makes the  exploration by the sampler quite hard.</p>
+<p>Figure <a href="ch-complexstan.html#fig:traceploteeg2">11.1</a> shows that the chains of the parameter <code>tau_u[2]</code> are not mixing properly. This parameter is especially problematic because there are not enough data from each subject to estimate this parameter accurately, its estimated mean is quite small (in comparison with <code>sigma</code>), it’s bounded by zero, and there is a dependency between this parameter and <code>u[, 2]</code>. This makes the  exploration by the sampler quite hard.</p>
 <p>Pairs plots can be useful to uncover pathologies in the sampling, since we can visualize dependencies between samples, which are in general problematic.<a href="#fn43" class="footnote-ref" id="fnref43"><sup>43</sup></a> The following code creates a  pair plot where we see the samples of <code>tau_u[2]</code> against some of the adjustments to the slope <code>u</code>; see Figure <a href="ch-complexstan.html#fig:pairsfunnel">11.2</a>.</p>
 
-<div class="sourceCode" id="cb714"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb714-1"><a href="ch-complexstan.html#cb714-1" aria-hidden="true"></a><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>, <span class="st">&quot;u[2,2]&quot;</span>, <span class="st">&quot;u[3,2]&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb706"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb706-1"><a href="ch-complexstan.html#cb706-1" aria-hidden="true"></a><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>, <span class="st">&quot;u[2,2]&quot;</span>, <span class="st">&quot;u[3,2]&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:pairsfunnel"></span>
 <img src="bookdown_files/figure-html/pairsfunnel-1.svg" alt="Pair plots showing a relatively strong dependency (funnel-shaped clouds of samples) between the samples of \(\tau_2\) and some of the by-subject adjustments to the slope." width="672" />
 <p class="caption">
@@ -1610,28 +1604,26 @@ FIGURE 11.2: Pair plots showing a relatively strong dependency  (funnel-shaped c
 </div>
 <p>Compare with <code>tau_u[1]</code> plotted against the by-subject adjustments to the intercept. In Figure <a href="ch-complexstan.html#fig:pairsblobs">11.3</a>, instead of funnels we see blobs, indicating no strong dependency between the parameters.</p>
 
-<div class="sourceCode" id="cb715"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb715-1"><a href="ch-complexstan.html#cb715-1" aria-hidden="true"></a><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[1]&quot;</span>, <span class="st">&quot;u[1,1]&quot;</span>, <span class="st">&quot;u[2,1]&quot;</span>, <span class="st">&quot;u[3,1]&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb707"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb707-1"><a href="ch-complexstan.html#cb707-1" aria-hidden="true"></a><span class="kw">pairs</span>(fit_eeg2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[1]&quot;</span>, <span class="st">&quot;u[1,1]&quot;</span>, <span class="st">&quot;u[2,1]&quot;</span>, <span class="st">&quot;u[3,1]&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:pairsblobs"></span>
 <img src="bookdown_files/figure-html/pairsblobs-1.svg" alt="Pair plots showing no strong dependency (blob-shaped clouds of samples) between the samples of \(\tau_1\) and some of the by-subject adjustments to the intercept." width="672" />
 <p class="caption">
 FIGURE 11.3: Pair plots showing no strong dependency (blob-shaped clouds of samples) between the samples of <span class="math inline">\(\tau_1\)</span> and some of the by-subject adjustments to the intercept.
 </p>
 </div>
-<p>In contrast to Figure <a href="ch-complexstan.html#fig:pairsblobs">11.3</a>, which shows  blob-shaped clouds of samples, Figure <a href="ch-complexstan.html#fig:pairsfunnel">11.2</a> shows a relatively strong dependency between the samples of some of the parameters of the model, in particular <span class="math inline">\(\tau_2\)</span> and the samples of <span class="math inline">\(u_{i,2}\)</span>. This strong dependency is hindering the exploration of the sampler leading to the warnings we saw in Stan.
-However, the problem that the sampler faces is, in fact, more serious than what our initial plots show. Stan samples in an  <em>unconstrained</em> space where all the parameters can range from minus infinity to plus infinity, and then transforms back the parameters to the constrained space that we specified where, for example, a standard deviation parameter is restricted to be positive. This means that Stan is actually sampling from a transformed parameter equivalent to <code>log(tau_u[2])</code> rather than from <code>tau_u[2]</code>. We can use  <code>mcmc_pairs</code> to see the actual funnel; see Figure <a href="ch-complexstan.html#fig:scatterpairs">11.4</a>.</p>
+<p>In contrast to Figure <a href="ch-complexstan.html#fig:pairsblobs">11.3</a>, Figure <a href="ch-complexstan.html#fig:pairsfunnel">11.2</a> shows a relatively strong dependency between the samples of some of the parameters of the model, in particular <span class="math inline">\(\tau_2\)</span> and the samples of <span class="math inline">\(u_{i,2}\)</span>: If we see small values in the samples for <span class="math inline">\(\tau_2\)</span>, then the values for the samples of <span class="math inline">\(u_i\)</span> are very close to zero (and they are larger if values of samples of <span class="math inline">\(\tau_2\)</span> are larger). This strong dependency is hindering the exploration of the sampler leading to the warnings we saw in Stan. However, the problem that the sampler faces is, in fact, more serious than what our initial plots show. Stan samples in an  <em>unconstrained</em> space where all the parameters can range from minus infinity to plus infinity, and then transforms back the parameters to the constrained space that we specified where, for example, a standard deviation parameter is restricted to be positive. This means that Stan is actually sampling from a transformed parameter equivalent to <code>log(tau_u[2])</code> rather than from <code>tau_u[2]</code>. We can use  <code>mcmc_pairs</code> to see the actual funnel; see Figure <a href="ch-complexstan.html#fig:scatterpairs">11.4</a>.</p>
 
-<div class="sourceCode" id="cb716"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb716-1"><a href="ch-complexstan.html#cb716-1" aria-hidden="true"></a><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg2),</span>
-<span id="cb716-2"><a href="ch-complexstan.html#cb716-2" aria-hidden="true"></a>           <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</span>
-<span id="cb716-3"><a href="ch-complexstan.html#cb716-3" aria-hidden="true"></a>           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>)</span>
-<span id="cb716-4"><a href="ch-complexstan.html#cb716-4" aria-hidden="true"></a>) </span></code></pre></div>
+<div class="sourceCode" id="cb708"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb708-1"><a href="ch-complexstan.html#cb708-1" aria-hidden="true"></a><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg2),</span>
+<span id="cb708-2"><a href="ch-complexstan.html#cb708-2" aria-hidden="true"></a>           <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</span>
+<span id="cb708-3"><a href="ch-complexstan.html#cb708-3" aria-hidden="true"></a>           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>)) </span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:scatterpairs"></span>
 <img src="bookdown_files/figure-html/scatterpairs-1.svg" alt="Pair plots showing a strong dependency (funnel-shaped clouds of samples) between the samples of \(\tau_2\) and one of the by-subject adjustments to the intercept (\(u_{1,2}\))." width="672" />
 <p class="caption">
 FIGURE 11.4: Pair plots showing a strong dependency (funnel-shaped clouds of samples) between the samples of <span class="math inline">\(\tau_2\)</span> and one of the by-subject adjustments to the intercept (<span class="math inline">\(u_{1,2}\)</span>).
 </p>
 </div>
-<p>At the neck of the funnel, <code>tau_u[2]</code> is close to zero (and <code>log(tau_u[2])</code> is a negative number) and thus the adjustment <code>u</code> is constrained to be near <span class="math inline">\(0\)</span>. This is a problem because a  step size that’s optimized to work well in the broad part of the funnel will fail to work appropriately in the  neck of the funnel and vice versa; see also  Neal’s funnel <span class="citation">(Neal <a href="#ref-neal2003" role="doc-biblioref">2003</a>)</span> and the  optimization chapter of <span class="citation">Stan Development Team (<a href="#ref-Stan2023" role="doc-biblioref">2023</a>)</span> (section 25.7 of the User’s guide).
-There are two options: We might just remove the by-subject varying slope since it’s not giving us much information anyway, or we can alleviate this problem by  reparameterizing the model. In general, this sort of thing is the trickiest and probably most annoying part of modeling. A model can be theoretically and mathematically sound, but still  fail to converge. The best advice to solve this type of problem is to start small with simulated data where we know the true values of the parameters, and increase the complexity of the models gradually. Although in this example the problem was clearly in the parameterization of <code>tau_u[2]</code>, in many cases the biggest hurdle is to identify where the problem lies. Fortunately, the issue with <code>tau_u[2]</code> is a common problem which is easy to solve by using a  non-centered parameterization <span class="citation">(Betancourt and Girolami <a href="#ref-betancourt2013hamiltonian" role="doc-biblioref">2015</a>; Papaspiliopoulos, Roberts, and Sköld <a href="#ref-papaspiliopoulos2007" role="doc-biblioref">2007</a>)</span>. The following Box explains the specific reparameterization we use for the improved version of our Stan code.</p>
+<p>At the neck of the funnel, <code>tau_u[2]</code> is close to zero (and <code>log(tau_u[2])</code> is a negative number) and thus the adjustment <code>u</code> is constrained to be near <span class="math inline">\(0\)</span>. This is a problem because a  step size that’s optimized to work well in the broad part of the funnel will fail to work appropriately in the  neck of the funnel and vice versa; see also  Neal’s funnel <span class="citation">(Neal <a href="#ref-neal2003" role="doc-biblioref">2003</a>)</span> and the  optimization chapter of <span class="citation">Stan Development Team (<a href="#ref-Stan2023" role="doc-biblioref">2024</a>)</span> (section 26.7 of the User’s guide).
+There are two options: We might just remove the by-subject varying slope since it’s not giving us much information anyway, or we can alleviate this problem by  reparameterizing the model. In general, this sort of thing is the trickiest and probably most annoying part of modeling. A model can be theoretically and mathematically sound, but still  fail to converge. The best advice to solve this type of problem is to start small with simulated data where we know the true values of the parameters, and increase the complexity of the models gradually. Although in this example the problem was clearly in the parameterization of <code>tau_u[2]</code>, in many cases the biggest hurdle is to identify where the problem lies. Fortunately, the issue with <code>tau_u[2]</code> is a common problem which is easy to solve by using a  non-centered parameterization <span class="citation">(Betancourt and Girolami <a href="#ref-betancourt2013hamiltonian" role="doc-biblioref">2015</a>; Papaspiliopoulos, Roberts, and Sköld <a href="#ref-papaspiliopoulos2007" role="doc-biblioref">2007</a>)</span>. The Box <a href="ch-complexstan.html#thm:noncenterparam">11.1</a> explains the specific reparameterization we use for the improved version of our Stan code.</p>
 <div class="extra">
 <div class="theorem">
 <p><span id="thm:noncenterparam" class="theorem"><strong>Box 11.1  </strong></span><strong>A simple non-centered parameterization</strong></p>
@@ -1645,7 +1637,7 @@ There are two options: We might just remove the by-subject varying slope since i
 <p><span class="math display">\[\begin{equation}
 \mathbf{z}_{v} =\frac{\mathbf{v} - mean(\mathbf{v})}{SD(\mathbf{v})}
 \end{equation}\]</span></p>
-<p>Transforming the parameter <span class="math inline">\(u_2\)</span> into <span class="math inline">\(z\)</span>-scores amounts to centering it, so we can call this  centered parameterization.</p>
+<p>Transforming the parameter <span class="math inline">\(u_2\)</span> into <span class="math inline">\(z\)</span>-scores amounts to centering it, so we can call this a  centered parameterization.</p>
 <p><span class="math display">\[\begin{equation}
 \mathbf{z}_{u_2} =\frac{\mathbf{u}_{2} - 0}{\tau_{u_2}}
 \end{equation}\]</span></p>
@@ -1657,9 +1649,9 @@ There are two options: We might just remove the by-subject varying slope since i
 <p><span class="math display">\[\begin{equation}
 \mathbf{u}_{2} = \mathbf{z}_{u_2} \cdot \tau_{u_2}
 \end{equation}\]</span></p>
-<p>A question that might be raised here is whether using a non-centered parameterization is always a good idea. <span class="citation">Betancourt and Girolami (<a href="#ref-betancourt2013hamiltonian" role="doc-biblioref">2015</a>)</span> point out that the extremeness of the dependency depends on the amount of data, and the efficacy of the parameterization depends on the relative strength of the data. When there is enough data, this parameterization is unnecessary and it may be more efficient to use the centered parameterization. However, cases where there is enough data to render this parameterization useless might also be cases where the partial pooling of the hierarchical models may not needed in the first place. Although data from conventional lab experiments in psychology, psycholinguistics, and related areas seem to benefit from the non-centered parameterization, the jury is still out for larger data sets with thousands of subjects from crowdsourcing websites.</p>
+<p>A question that might be raised here is whether using a non-centered parameterization is always a good idea. <span class="citation">Betancourt and Girolami (<a href="#ref-betancourt2013hamiltonian" role="doc-biblioref">2015</a>)</span> point out that the extremeness of the dependency depends on the amount of data, and the efficacy of the parameterization depends on the strength of the data (on how informative the data is). When there is enough data, this parameterization is unnecessary and it may be more efficient to use the centered parameterization. However, cases where there is enough data to render this parameterization useless might also be cases where the partial pooling of the hierarchical models may not be needed in the first place. Although data from conventional lab experiments in psychology, psycholinguistics, and related areas seem to benefit from the non-centered parameterization, the jury is still out for larger data sets with thousands of subjects from crowdsourcing websites.</p>
 </div>
-<p>From a mathematical point of view, the following model is equivalent to the one described in Equations <a href="ch-complexstan.html#eq:uncorrstanlik">(11.2)</a> and <a href="ch-complexstan.html#eq:uncorrstanpriors">(11.3)</a>. However, as discussed previously, the computational implementation of the “new” model is more efficient. The following model includes the reparameterization of both adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span>, although the reparameterization of <span class="math inline">\(u_1\)</span> is not strictly necessary (we didn’t see any problems in the trace plots), it won’t hurt either and the Stan code will be simpler.</p>
+<p>From a mathematical point of view, the following model is equivalent to the one described in Equations <a href="ch-complexstan.html#eq:uncorrstanlik">(11.2)</a> and <a href="ch-complexstan.html#eq:uncorrstanpriors">(11.3)</a>. However, as discussed previously, the computational implementation of the “new” model is more efficient. The following model includes the reparameterization of both adjustments <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span>, although the reparameterization of <span class="math inline">\(u_1\)</span> is not strictly necessary (we didn’t see any problems in the traceplots), it won’t hurt either and the Stan code will be simpler.</p>
 <p><span class="math display" id="eq:uncorrstanlik2">\[\begin{equation}
   signal_n \sim \mathit{Normal}(\alpha + u_{subj[n],1} + c\_cloze_n \cdot (\beta+ u_{subj[n],2}),\sigma)
 \tag{11.4}
@@ -1678,7 +1670,7 @@ There are two options: We might just remove the by-subject varying slope since i
  \end{aligned}
 \tag{11.5}
 \end{equation}\]</span></p>
-<p>The following Stan code (<code>hierarchical3.stan</code>) uses the previous parameterization, and introduces some new Stan functions:  <code>to_vector()</code> converts a matrix into a long column vector (in column-major order, that is, concatenating the columns from left to right); and  <code>std_normal_lpdf()</code> implements the log PDF of a  standard normal distribution, a normal distribution with location 0 and scale 1. This function is just a more efficient version of <code>normal_lpdf(... | 0, 1)</code>. We also introduce a new optional  block called  <code>transformed parameters</code>. With each iteration of the sampler, the values of the parameters (i.e., <code>alpha</code>, <code>beta</code>, <code>sigma</code>, and <code>z</code>) are available at the <code>transformed parameters</code> block, and we can derive new auxiliary variables based on them. In this case, we use <code>z_u</code> and <code>tau_u</code> to obtain <code>u</code>, that then becomes available in the <code>model</code> block.</p>
+<p>The following Stan code (<code>hierarchical3.stan</code>) uses the previous parameterization, and introduces some new Stan functions:  <code>to_vector()</code> converts a matrix into a long column vector (in column-major order, that is, concatenating the columns from left to right); and  <code>std_normal_lpdf()</code> implements the log PDF of a  standard normal distribution, a normal distribution with location 0 and scale 1. This function is just a more efficient version of <code>normal_lpdf(... | 0, 1)</code>. We also introduce a new optional  block called  <code>transformed parameters</code>. With each iteration of the sampler, the values of the parameters (i.e., <code>alpha</code>, <code>beta</code>, <code>sigma</code>, and <code>z</code>) are available at the <code>transformed parameters</code> block, and we can derive new auxiliary variables based on them. In this case, we use <code>z_u</code> and <code>tau_u</code> to obtain <code>u</code>, that then becomes available in the <code>model</code> block. Notice that both the model block and R (when we output the stan object) can access both parameters and transformed parameters.</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower=1&gt; N;
   vector[N] signal;
@@ -1713,20 +1705,20 @@ model {
 }
 </code></pre>
 <p>By reparameterizing the model we can also optimize it more, we can convert the matrix <code>z_u</code> into a long column vector allowing us to use a single call of <code>std_normal_lpdf</code>. Fit the model named <code>hierarchical3.stan</code>.</p>
-<div class="sourceCode" id="cb718"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb718-1"><a href="ch-complexstan.html#cb718-1" aria-hidden="true"></a>hierarchical3 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb718-2"><a href="ch-complexstan.html#cb718-2" aria-hidden="true"></a>                             <span class="st">&quot;hierarchical3.stan&quot;</span>,</span>
-<span id="cb718-3"><a href="ch-complexstan.html#cb718-3" aria-hidden="true"></a>                             <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb718-4"><a href="ch-complexstan.html#cb718-4" aria-hidden="true"></a>fit_eeg3 &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical3, <span class="dt">data =</span> ls_eeg) </span></code></pre></div>
+<div class="sourceCode" id="cb710"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb710-1"><a href="ch-complexstan.html#cb710-1" aria-hidden="true"></a>hierarchical3 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb710-2"><a href="ch-complexstan.html#cb710-2" aria-hidden="true"></a>                             <span class="st">&quot;hierarchical3.stan&quot;</span>,</span>
+<span id="cb710-3"><a href="ch-complexstan.html#cb710-3" aria-hidden="true"></a>                             <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb710-4"><a href="ch-complexstan.html#cb710-4" aria-hidden="true"></a>fit_eeg3 &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical3, <span class="dt">data =</span> ls_eeg) </span></code></pre></div>
 <p>Verify that the model worked as expected by printing its summary and traceplots; see Figure <a href="ch-complexstan.html#fig:traceploteeg3">11.5</a>.</p>
 
-<div class="sourceCode" id="cb719"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb719-1"><a href="ch-complexstan.html#cb719-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg3, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb711"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb711-1"><a href="ch-complexstan.html#cb711-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg3, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
 ## alpha     3.63  2.79  4.48  1558    1
 ## beta      2.32  1.10  3.56  3250    1
 ## tau_u[1]  2.16  1.52  2.96  1303    1
 ## tau_u[2]  1.70  0.12  3.48  1110    1
 ## sigma    11.62 11.32 11.92  6091    1</code></pre>
-<div class="sourceCode" id="cb721"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb721-1"><a href="ch-complexstan.html#cb721-1" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_eeg3, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb713"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb713-1"><a href="ch-complexstan.html#cb713-1" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_eeg3, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:traceploteeg3"></span>
 <img src="bookdown_files/figure-html/traceploteeg3-1.svg" alt="Traceplots of alpha, beta, tau_u, and sigma from the model fit_eeg3." width="672" />
 <p class="caption">
@@ -1736,10 +1728,10 @@ FIGURE 11.5: Traceplots of <code>alpha</code>, <code>beta</code>, <code>tau_u</c
 <p>Although the samples of <code>tau_u[2]</code> are still conditioned by the adjustments for the slope, <code>u[,2]</code>, these latter parameters are not the ones explored by the model, the auxiliary parameters, <code>z_u</code>, are the relevant ones for the sampler. The plots in Figures <a href="ch-complexstan.html#fig:pairstauu">11.6</a> and <a href="ch-complexstan.html#fig:pairstauz">11.7</a> show that although samples from <code>log(tau_u[2])</code> and <code>u[1,2]</code> depend on each other, samples from
 <code>log(tau_u[2])</code> and <code>z_u[1,2]</code> do not.</p>
 
-<div class="sourceCode" id="cb722"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb722-1"><a href="ch-complexstan.html#cb722-1" aria-hidden="true"></a></span>
-<span id="cb722-2"><a href="ch-complexstan.html#cb722-2" aria-hidden="true"></a><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3),</span>
-<span id="cb722-3"><a href="ch-complexstan.html#cb722-3" aria-hidden="true"></a>           <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</span>
-<span id="cb722-4"><a href="ch-complexstan.html#cb722-4" aria-hidden="true"></a>           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb714-1"><a href="ch-complexstan.html#cb714-1" aria-hidden="true"></a></span>
+<span id="cb714-2"><a href="ch-complexstan.html#cb714-2" aria-hidden="true"></a><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3),</span>
+<span id="cb714-3"><a href="ch-complexstan.html#cb714-3" aria-hidden="true"></a>           <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;u[1,2]&quot;</span>),</span>
+<span id="cb714-4"><a href="ch-complexstan.html#cb714-4" aria-hidden="true"></a>           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:pairstauu"></span>
 <img src="bookdown_files/figure-html/pairstauu-1.svg" alt="Pair plots showing a clear dependency (funnel-shaped clouds of samples) between the samples of \(\tau_2\) and some of the by-subject adjustments to the slope." width="672" />
 <p class="caption">
@@ -1747,10 +1739,10 @@ FIGURE 11.6: Pair plots showing a clear dependency (funnel-shaped clouds of samp
 </p>
 </div>
 
-<div class="sourceCode" id="cb723"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb723-1"><a href="ch-complexstan.html#cb723-1" aria-hidden="true"></a></span>
-<span id="cb723-2"><a href="ch-complexstan.html#cb723-2" aria-hidden="true"></a><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3),</span>
-<span id="cb723-3"><a href="ch-complexstan.html#cb723-3" aria-hidden="true"></a>           <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;z_u[1,2]&quot;</span>),</span>
-<span id="cb723-4"><a href="ch-complexstan.html#cb723-4" aria-hidden="true"></a>           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb715"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb715-1"><a href="ch-complexstan.html#cb715-1" aria-hidden="true"></a></span>
+<span id="cb715-2"><a href="ch-complexstan.html#cb715-2" aria-hidden="true"></a><span class="kw">mcmc_pairs</span>(<span class="kw">as.array</span>(fit_eeg3),</span>
+<span id="cb715-3"><a href="ch-complexstan.html#cb715-3" aria-hidden="true"></a>           <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;tau_u[2]&quot;</span>, <span class="st">&quot;z_u[1,2]&quot;</span>),</span>
+<span id="cb715-4"><a href="ch-complexstan.html#cb715-4" aria-hidden="true"></a>           <span class="dt">transform =</span> <span class="kw">list</span>(<span class="st">`</span><span class="dt">tau_u[2]</span><span class="st">`</span> =<span class="st"> &quot;log&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:pairstauz"></span>
 <img src="bookdown_files/figure-html/pairstauz-1.svg" alt="Pair plots showing no clear dependency between the samples of \(\tau_2\) and some of the by-subject auxiliary parameters (z_u) used to build the adjustments to the slope." width="672" />
 <p class="caption">
@@ -1786,7 +1778,7 @@ FIGURE 11.7: Pair plots showing no clear dependency between the samples of <span
  \end{aligned}
  \end{equation}\]</span></li>
 </ul>
-<p>where <span class="math inline">\(i = \{1, .., N_{subj} \}\)</span></p>
+<p>where <span class="math inline">\(i\)</span> ranges from <span class="math inline">\(1\)</span> to <span class="math inline">\(N_{subj}\)</span></p>
 <p><span class="math display">\[\begin{equation}
 \boldsymbol{\Sigma_u} = 
 {\begin{pmatrix} 
@@ -1798,15 +1790,19 @@ FIGURE 11.7: Pair plots showing no clear dependency between the samples of <span
 \begin{aligned}
 \tau_{u_1} &amp;\sim \mathit{Normal}_+(0,20)\\
 \tau_{u_2} &amp;\sim \mathit{Normal}_+(0,20)\\
-\rho_u &amp;\sim \mathit{LKJcorr}(2) 
+\mathbf{R_u} &amp; =
+\begin{bmatrix}
+1 &amp; \rho_u \\
+\rho_u &amp; 1
+\end{bmatrix} \sim \mathit{LKJcorr}(2)
 \end{aligned}
 \end{equation}\]</span></p>
 <p>As a first attempt, we write this model following the mathematical notation as closely as possible. We’ll see that this will be problematic in terms of efficient sampling and convergence. In this Stan model (<code>hierarchical_corr.stan</code>), we use some new functions and types:</p>
 <ul>
-<li> <code>corr_matrix[n] M;</code> defines a (square) matrix of <span class="math inline">\(n\)</span> rows and <span class="math inline">\(n\)</span> columns called <span class="math inline">\(M\)</span>, symmetrical around a diagonal of ones.</li>
+<li> <code>corr_matrix[n] R;</code> defines a (square) matrix of <span class="math inline">\(n\)</span> rows and <span class="math inline">\(n\)</span> columns called <span class="math inline">\(R\)</span>, symmetrical around a diagonal of ones.</li>
 <li> <code>rep_row_vector(X, n)</code> creates a row vector with <span class="math inline">\(n\)</span> columns filled with <span class="math inline">\(X\)</span>.</li>
-<li> <code>quad_form_diag(M, V)</code> creates a  <em>quadratic form</em> using the column vector <span class="math inline">\(V\)</span> as a diagonal matrix (a matrix with all zeros except for its diagonal), this function corresponds in Stan to: <code>diag_matrix(V) * M * diag_matrix(V)</code> and in R to <code>diag(V) %*% M %*% diag(V)</code>. This
-computes a  variance-covariance matrix from the vector of  standard deviations, <span class="math inline">\(V\)</span>, and the  correlation matrix, <span class="math inline">\(M\)</span> (recall the generation of multivariate data in section <a href="ch-intro.html#sec-generatebivariatedata">1.6.3</a>).</li>
+<li> <code>quad_form_diag(R, v)</code> creates a  <em>quadratic form</em> using the column vector <span class="math inline">\(v\)</span> as a diagonal matrix (a matrix with all zeros except for its diagonal), this function corresponds in Stan to: <code>diag_matrix(v) * R * diag_matrix(v)</code> and in R to <code>diag(v) %*% R %*% diag(v)</code>. This
+computes a  variance-covariance matrix from the vector of  standard deviations, <span class="math inline">\(v\)</span>, and the  correlation matrix, <span class="math inline">\(R\)</span> (recall the generation of multivariate data in section <a href="ch-intro.html#sec-generatebivariatedata">1.6.3</a>).</li>
 </ul>
 <pre class="stan fold-show"><code>data {
   int&lt;lower=1&gt; N;
@@ -1821,31 +1817,34 @@ parameters {
   real alpha;
   real beta;
   matrix[N_subj, 2] u;
-  corr_matrix[2] rho_u;
+  corr_matrix[2] R_u;
 }
 model {
   target += normal_lpdf(alpha| 0,10);
   target += normal_lpdf(beta | 0,10);
   target += normal_lpdf(sigma | 0, 50)  -
     normal_lccdf(0 | 0, 50);
-  target += normal_lpdf(tau_u[1] | 0, 20)  -
-    normal_lccdf(0 | 0, 20);
- target += normal_lpdf(tau_u[2] | 0, 20)  -
-    normal_lccdf(0 | 0, 20);
-  target += lkj_corr_lpdf(rho_u | 2);
+  target += normal_lpdf(tau_u | 0, 20)  -
+    2 * normal_lccdf(0 | 0, 20);
+  target += lkj_corr_lpdf(R_u | 2);
   for(i in 1:N_subj)
     target +=  multi_normal_lpdf(u[i,] |
                                  rep_row_vector(0, 2),
-                                 quad_form_diag(rho_u, tau_u));
+                                 quad_form_diag(R_u, tau_u));
   target += normal_lpdf(signal | alpha + u[subj, 1] +
                         c_cloze .* (beta + u[subj, 2]), sigma);
 }</code></pre>
 <p>Problematic aspects of the first model presented in section <a href="ch-complexstan.html#sec-uncorrstan">11.1.2</a> (before the reparameterization), that is, dependencies between parameters, are also present here. Fit the model as follows:</p>
-<div class="sourceCode" id="cb725"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb725-1"><a href="ch-complexstan.html#cb725-1" aria-hidden="true"></a>hierarchical_corr &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb725-2"><a href="ch-complexstan.html#cb725-2" aria-hidden="true"></a>                                 <span class="st">&quot;hierarchical_corr.stan&quot;</span>,</span>
-<span id="cb725-3"><a href="ch-complexstan.html#cb725-3" aria-hidden="true"></a>                                 <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb725-4"><a href="ch-complexstan.html#cb725-4" aria-hidden="true"></a>fit_eeg_corr &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical_corr, <span class="dt">data =</span> ls_eeg)</span></code></pre></div>
-<pre><code> ## Warning: There were 2 chains where the estimated
+<div class="sourceCode" id="cb717"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb717-1"><a href="ch-complexstan.html#cb717-1" aria-hidden="true"></a>hierarchical_corr &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb717-2"><a href="ch-complexstan.html#cb717-2" aria-hidden="true"></a>                                 <span class="st">&quot;hierarchical_corr.stan&quot;</span>,</span>
+<span id="cb717-3"><a href="ch-complexstan.html#cb717-3" aria-hidden="true"></a>                                 <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>) </span>
+<span id="cb717-4"><a href="ch-complexstan.html#cb717-4" aria-hidden="true"></a>fit_eeg_corr &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical_corr, <span class="dt">data =</span> ls_eeg)</span></code></pre></div>
+<pre><code> ## Warning: There were 1 divergent transitions after
+ ## warmup. See
+ ## https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+ ## to find out why this is a problem and how to eliminate
+ ## them. </code></pre>
+<pre><code> ## Warning: There were 3 chains where the estimated
  ## Bayesian Fraction of Missing Information was low. See
  ## https://mc-stan.org/misc/warnings.html#bfmi-low </code></pre>
 <pre><code> ## Warning: Examine the pairs() plot to diagnose sampling
@@ -1863,16 +1862,16 @@ model {
  ## help. See
  ## https://mc-stan.org/misc/warnings.html#tail-ess </code></pre>
 <p>As we expected, there are warnings and bad  mixing of the chains for <code>tau_u[2]</code>; see also the traceplots in Figure <a href="ch-complexstan.html#fig:traceploteegcorr">11.8</a>.</p>
-<div class="sourceCode" id="cb731"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb731-1"><a href="ch-complexstan.html#cb731-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg_corr, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb724-1"><a href="ch-complexstan.html#cb724-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg_corr, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
-## alpha     3.66  2.82  4.47  1439 1.00
-## beta      2.31  1.11  3.54  3744 1.00
-## tau_u[1]  2.18  1.52  3.00  2527 1.00
-## tau_u[2]  1.61  0.16  3.41    60 1.09
-## sigma    11.62 11.33 11.92  5485 1.00</code></pre>
+## alpha     3.63  2.83  4.46  1362  1.0
+## beta      2.33  1.11  3.57  4343  1.0
+## tau_u[1]  2.19  1.53  2.99  2168  1.0
+## tau_u[2]  1.56  0.17  3.43    39  1.1
+## sigma    11.62 11.31 11.93  5458  1.0</code></pre>
 
-<div class="sourceCode" id="cb733"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb733-1"><a href="ch-complexstan.html#cb733-1" aria-hidden="true"></a></span>
-<span id="cb733-2"><a href="ch-complexstan.html#cb733-2" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_eeg_corr, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb726-1"><a href="ch-complexstan.html#cb726-1" aria-hidden="true"></a></span>
+<span id="cb726-2"><a href="ch-complexstan.html#cb726-2" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_eeg_corr, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:traceploteegcorr"></span>
 <img src="bookdown_files/figure-html/traceploteegcorr-1.svg" alt="Traceplots of alpha, beta, tau_u, and sigma from the model fit_eeg_corr." width="672" />
 <p class="caption">
@@ -1880,13 +1879,13 @@ FIGURE 11.8: Traceplots of <code>alpha</code>, <code>beta</code>, <code>tau_u</c
 </p>
 </div>
 <p>The problem (which can also be discovered in a pairs plot) is the same one that we saw before: There is a strong dependency between <code>tau_u[2]</code> (in fact, <code>log(tau_u[2])</code>, which is the parameter dimension that the sampler considers) and <code>u</code>, creating a funnel.</p>
-<p>The solution to this problem is the reparameterization of this model. The non-centered parameterization for this type of model uses a  Cholesky factorization <span class="citation">(Fieller <a href="#ref-fieller" role="doc-biblioref">2016</a>)</span>. The mathematics and the intuition behind this parameterization are explained in Box <a href="ch-complexstan.html#thm:cholesky">11.2</a>.</p>
+<p>The solution to this problem is the reparameterization of this model. The reparameterization for this type of model requires us to use  Cholesky factorization <span class="citation">(Fieller <a href="#ref-fieller" role="doc-biblioref">2016</a>)</span>. The mathematics and the intuition behind this parameterization are explained in Box <a href="ch-complexstan.html#thm:cholesky">11.2</a>.</p>
 <div class="extra">
 <div class="theorem">
 <p><span id="thm:cholesky" class="theorem"><strong>Box 11.2  </strong></span><strong>Cholesky factorization</strong></p>
 </div>
 <p>First, some definitions that we will need below. A matrix is square if the number of rows and columns is identical. A  square matrix <span class="math inline">\(A\)</span> is symmetric if <span class="math inline">\(A^T = A\)</span>, i.e., if transposing the matrix gives the matrix back. Suppose that <span class="math inline">\(A\)</span> is a known matrix with real numbers. If <span class="math inline">\(\boldsymbol{x}\)</span> is a vector of variables with length <span class="math inline">\(p\)</span> (a <span class="math inline">\(p\times 1\)</span> matrix), then <span class="math inline">\(x^T A x\)</span> is called a  quadratic form in <span class="math inline">\(x\)</span> (<span class="math inline">\(x^T A x\)</span> will be a scalar, <span class="math inline">\(1\times 1\)</span>). If <span class="math inline">\(x^TAx&gt;0\)</span> for all <span class="math inline">\(x\)</span>, then <span class="math inline">\(A\)</span> is a  positive definite matrix. If <span class="math inline">\(x^TAx\geq 0\)</span> for all <span class="math inline">\(x\neq0\)</span>, then <span class="math inline">\(A\)</span> is positive semi-definite.</p>
-<p>We encountered correlation matrices first in section <a href="ch-intro.html#sec-generatebivariatedata">1.6.3</a>. A correlation matrix is always symmetric, has ones along the diagonal, and real values ranging between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span> on the off-diagonals. Given a  correlation matrix <span class="math inline">\(\boldsymbol{\rho_u}\)</span>, we can decompose it into a  lower triangular matrix <span class="math inline">\(\mathbf{L_u}\)</span> such that <span class="math inline">\(\mathbf{L_u}\mathbf{L_u}^T=\boldsymbol{\rho_u}\)</span>. The matrix <span class="math inline">\(\mathbf{L_u}\)</span> is called the  Cholesky factor of <span class="math inline">\(\boldsymbol{\rho_u}\)</span>. Intuitively, you can think of <span class="math inline">\(L_u\)</span> as the matrix equivalent of the square root of <span class="math inline">\(\boldsymbol{\rho_u}\)</span>. More details on the Cholesky factorization can be found in <span class="citation">Gentle (<a href="#ref-Gentle" role="doc-biblioref">2007</a>)</span>.</p>
+<p>We encountered correlation matrices first in section <a href="ch-intro.html#sec-generatebivariatedata">1.6.3</a>. A correlation matrix is always symmetric, has ones along the diagonal, and real values ranging between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span> on the off-diagonals. Given a  correlation matrix <span class="math inline">\(\mathbf{R_u}\)</span>, we can decompose it into a  lower triangular matrix <span class="math inline">\(\mathbf{L_u}\)</span> such that <span class="math inline">\(\mathbf{L_u}\mathbf{L_u}^T=\mathbf{R_u}\)</span>. The matrix <span class="math inline">\(\mathbf{L_u}\)</span> is called the  Cholesky factor of <span class="math inline">\(\mathbf{R_u}\)</span>. Intuitively, you can think of <span class="math inline">\(\mathbf{L_u}\)</span> as the matrix equivalent of the square root of <span class="math inline">\(\mathbf{R_u}\)</span>. More details on the Cholesky factorization can be found in <span class="citation">Gentle (<a href="#ref-Gentle" role="doc-biblioref">2007</a>)</span>.</p>
 <p><span class="math display">\[\begin{equation}
 \mathbf{L_u}  =
 {\begin{pmatrix} 
@@ -1916,9 +1915,9 @@ adjustments <span class="math inline">\(u_1\)</span> and <span class="math inlin
   \end{pmatrix}}
   \]</span></p>
 <p><span class="math display">\[
-  \mathbf{L_u}\cdot \mathbf{z_u}  =
+  =
   {\begin{pmatrix}
-  L_{11} \cdot z_{u_{1,1}} + 0 \cdot z_{u_{2,1}} &amp;   ... &amp; L_{11} \cdot z_{u_{1,N_{subj}}} \\
+  L_{11} \cdot z_{u_{1,1}} + 0 \cdot z_{u_{2,1}} &amp;   ... &amp; L_{11} \cdot z_{u_{1,N_{subj}}} + 0 \cdot z_{u_{2,1}}  \\
   L_{21} \cdot z_{u_{1,1}} + L_{22} \cdot z_{u_{2,1}} &amp; ... &amp; L_{11} \cdot z_{u_{1,N_{subj}}} + L_{22} \cdot z_{u_{2,N_{subj}}}
   \end{pmatrix}}
   \]</span></p>
@@ -1952,83 +1951,80 @@ the intercept.</p>
   \tau_{u_2} \cdot (L_{21} \cdot z_{u_{1,1}} + L_{22} \cdot z_{u_{2,1}}) &amp; \tau_{u_2} \cdot (L_{21} \cdot  z_{u_{1,2}} + L_{22} \cdot z_{u_{2,2}}) &amp; ... 
   \end{pmatrix}}
   \]</span></p>
-<p><strong>It might be helpful to see how one would implement this in R:</strong></p>
+<p>It might be helpful to see how one would implement this in R:</p>
 <p>Let’s assume a correlation of <span class="math inline">\(0.8\)</span>.</p>
-<div class="sourceCode" id="cb734"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb734-1"><a href="ch-complexstan.html#cb734-1" aria-hidden="true"></a>rho &lt;-<span class="st"> </span><span class="fl">0.8</span></span>
-<span id="cb734-2"><a href="ch-complexstan.html#cb734-2" aria-hidden="true"></a><span class="co"># Correlation matrix</span></span>
-<span id="cb734-3"><a href="ch-complexstan.html#cb734-3" aria-hidden="true"></a>(rho_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, rho, rho, <span class="dv">1</span>), <span class="dt">ncol =</span> <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb727"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb727-1"><a href="ch-complexstan.html#cb727-1" aria-hidden="true"></a>rho_u &lt;-<span class="st"> </span><span class="fl">0.8</span></span>
+<span id="cb727-2"><a href="ch-complexstan.html#cb727-2" aria-hidden="true"></a><span class="co"># Correlation matrix</span></span>
+<span id="cb727-3"><a href="ch-complexstan.html#cb727-3" aria-hidden="true"></a>(R_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, rho_u, rho_u, <span class="dv">1</span>), <span class="dt">ncol =</span> <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.8
 ## [2,]  0.8  1.0</code></pre>
-<div class="sourceCode" id="cb736"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb736-1"><a href="ch-complexstan.html#cb736-1" aria-hidden="true"></a><span class="co"># Cholesky factor:</span></span>
-<span id="cb736-2"><a href="ch-complexstan.html#cb736-2" aria-hidden="true"></a><span class="co"># (Transpose it so that it looks the same as in Stan)</span></span>
-<span id="cb736-3"><a href="ch-complexstan.html#cb736-3" aria-hidden="true"></a>(L_u &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">chol</span>(rho_u)))</span></code></pre></div>
+<div class="sourceCode" id="cb729"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb729-1"><a href="ch-complexstan.html#cb729-1" aria-hidden="true"></a><span class="co"># Cholesky factor:</span></span>
+<span id="cb729-2"><a href="ch-complexstan.html#cb729-2" aria-hidden="true"></a><span class="co"># (Transpose it so that it looks the same as in Stan)</span></span>
+<span id="cb729-3"><a href="ch-complexstan.html#cb729-3" aria-hidden="true"></a>(L_u &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">chol</span>(R_u)))</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.0
 ## [2,]  0.8  0.6</code></pre>
-<div class="sourceCode" id="cb738"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb738-1"><a href="ch-complexstan.html#cb738-1" aria-hidden="true"></a><span class="co"># Verify that we recover rho_u,</span></span>
-<span id="cb738-2"><a href="ch-complexstan.html#cb738-2" aria-hidden="true"></a><span class="co"># Recall that %*% indicates matrix multiplication</span></span>
-<span id="cb738-3"><a href="ch-complexstan.html#cb738-3" aria-hidden="true"></a>L_u <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L_u)</span></code></pre></div>
+<div class="sourceCode" id="cb731"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb731-1"><a href="ch-complexstan.html#cb731-1" aria-hidden="true"></a><span class="co"># Verify that we recover R_u,</span></span>
+<span id="cb731-2"><a href="ch-complexstan.html#cb731-2" aria-hidden="true"></a><span class="co"># Recall that %*% indicates matrix multiplication</span></span>
+<span id="cb731-3"><a href="ch-complexstan.html#cb731-3" aria-hidden="true"></a>L_u <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L_u)</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.8
 ## [2,]  0.8  1.0</code></pre>
 <ol style="list-style-type: decimal">
 <li>Generate uncorrelated z from a standard normal distribution assuming only 10 subjects.</li>
 </ol>
-<div class="sourceCode" id="cb740"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb740-1"><a href="ch-complexstan.html#cb740-1" aria-hidden="true"></a>N_subj &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb740-2"><a href="ch-complexstan.html#cb740-2" aria-hidden="true"></a>(z_u1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
-<pre><code>##  [1]  0.9334  0.0898 -0.6009  1.1351  0.1274  0.6062  0.2909
-##  [8]  0.1641  0.3281 -1.3900</code></pre>
-<div class="sourceCode" id="cb742"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb742-1"><a href="ch-complexstan.html#cb742-1" aria-hidden="true"></a>(z_u2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
-<pre><code>##  [1]  0.48763 -1.05414 -0.03397 -0.00224 -0.31006 -1.44461
-##  [7]  1.76313 -0.15818 -1.77761 -0.99052</code></pre>
+<div class="sourceCode" id="cb733"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb733-1"><a href="ch-complexstan.html#cb733-1" aria-hidden="true"></a>N_subj &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb733-2"><a href="ch-complexstan.html#cb733-2" aria-hidden="true"></a>(z_u1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
+<pre><code>##  [1]  1.0966  1.4457 -1.9251  0.4128  1.5934 -0.4140 -0.2122
+##  [8] -0.0365  0.3650  0.6652</code></pre>
+<div class="sourceCode" id="cb735"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb735-1"><a href="ch-complexstan.html#cb735-1" aria-hidden="true"></a>(z_u2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N_subj, <span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
+<pre><code>##  [1]  1.31782 -0.09549  0.19628  2.48800  0.43110  0.18875
+##  [7] -1.34224  0.00286 -0.22133 -0.01105</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Create matrix of correlated parameters.</li>
 </ol>
 <p>First, create a matrix with the uncorrelated parameters:</p>
-<div class="sourceCode" id="cb744"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb744-1"><a href="ch-complexstan.html#cb744-1" aria-hidden="true"></a><span class="co"># matrix z_u</span></span>
-<span id="cb744-2"><a href="ch-complexstan.html#cb744-2" aria-hidden="true"></a>(z_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(z_u1, z_u2), <span class="dt">ncol =</span> N_subj, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
-<pre><code>##       [,1]    [,2]   [,3]     [,4]   [,5]   [,6]  [,7]
-## [1,] 0.933  0.0898 -0.601  1.13512  0.127  0.606 0.291
-## [2,] 0.488 -1.0541 -0.034 -0.00224 -0.310 -1.445 1.763
-##        [,8]   [,9]  [,10]
-## [1,]  0.164  0.328 -1.390
-## [2,] -0.158 -1.778 -0.991</code></pre>
+<div class="sourceCode" id="cb737"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb737-1"><a href="ch-complexstan.html#cb737-1" aria-hidden="true"></a><span class="co"># matrix z_u</span></span>
+<span id="cb737-2"><a href="ch-complexstan.html#cb737-2" aria-hidden="true"></a>(z_u &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(z_u1, z_u2), <span class="dt">ncol =</span> N_subj, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<pre><code>##      [,1]    [,2]   [,3]  [,4]  [,5]   [,6]   [,7]     [,8]
+## [1,] 1.10  1.4457 -1.925 0.413 1.593 -0.414 -0.212 -0.03654
+## [2,] 1.32 -0.0955  0.196 2.488 0.431  0.189 -1.342  0.00286
+##        [,9]  [,10]
+## [1,]  0.365  0.665
+## [2,] -0.221 -0.011</code></pre>
 <p>Then, generate correlated parameters by pre-multiplying the <span class="math inline">\(\mathbf{z}_u\)</span> matrix with <span class="math inline">\(\mathbf{L}_u\)</span>.</p>
-<div class="sourceCode" id="cb746"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb746-1"><a href="ch-complexstan.html#cb746-1" aria-hidden="true"></a>L_u <span class="op">%*%</span><span class="st"> </span>z_u</span></code></pre></div>
-<pre><code>##       [,1]    [,2]   [,3]  [,4]    [,5]   [,6]  [,7]   [,8]   [,9]
-## [1,] 0.933  0.0898 -0.601 1.135  0.1274  0.606 0.291 0.1641  0.328
-## [2,] 1.039 -0.5606 -0.501 0.907 -0.0841 -0.382 1.291 0.0363 -0.804
-##      [,10]
-## [1,] -1.39
-## [2,] -1.71</code></pre>
+<div class="sourceCode" id="cb739"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb739-1"><a href="ch-complexstan.html#cb739-1" aria-hidden="true"></a>L_u <span class="op">%*%</span><span class="st"> </span>z_u</span></code></pre></div>
+<pre><code>##      [,1] [,2]  [,3]  [,4] [,5]   [,6]   [,7]    [,8]  [,9] [,10]
+## [1,] 1.10 1.45 -1.93 0.413 1.59 -0.414 -0.212 -0.0365 0.365 0.665
+## [2,] 1.67 1.10 -1.42 1.823 1.53 -0.218 -0.975 -0.0275 0.159 0.526</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Use the following diagonal matrix to scale the z_u.</li>
 </ol>
-<div class="sourceCode" id="cb748"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb748-1"><a href="ch-complexstan.html#cb748-1" aria-hidden="true"></a>tau_u1 &lt;-<span class="st"> </span><span class="fl">0.2</span></span>
-<span id="cb748-2"><a href="ch-complexstan.html#cb748-2" aria-hidden="true"></a>tau_u2 &lt;-<span class="st"> </span><span class="fl">0.01</span></span>
-<span id="cb748-3"><a href="ch-complexstan.html#cb748-3" aria-hidden="true"></a>(diag_matrix_tau &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="kw">c</span>(tau_u1,  tau_u2)))</span></code></pre></div>
+<div class="sourceCode" id="cb741"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb741-1"><a href="ch-complexstan.html#cb741-1" aria-hidden="true"></a>tau_u1 &lt;-<span class="st"> </span><span class="fl">0.2</span></span>
+<span id="cb741-2"><a href="ch-complexstan.html#cb741-2" aria-hidden="true"></a>tau_u2 &lt;-<span class="st"> </span><span class="fl">0.01</span></span>
+<span id="cb741-3"><a href="ch-complexstan.html#cb741-3" aria-hidden="true"></a>(diag_matrix_tau &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="kw">c</span>(tau_u1,  tau_u2)))</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  0.2 0.00
 ## [2,]  0.0 0.01</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Finally, generate the adjustments for each subject u:</li>
 </ol>
-<div class="sourceCode" id="cb750"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb750-1"><a href="ch-complexstan.html#cb750-1" aria-hidden="true"></a>(u &lt;-<span class="st"> </span>diag_matrix_tau <span class="op">%*%</span><span class="st"> </span>L_u <span class="op">%*%</span><span class="st"> </span>z_u)</span></code></pre></div>
-<pre><code>##        [,1]     [,2]     [,3]    [,4]      [,5]     [,6]
-## [1,] 0.1867  0.01796 -0.12018 0.22702  0.025481  0.12124
-## [2,] 0.0104 -0.00561 -0.00501 0.00907 -0.000841 -0.00382
-##        [,7]     [,8]     [,9]   [,10]
-## [1,] 0.0582 0.032812  0.06561 -0.2780
-## [2,] 0.0129 0.000363 -0.00804 -0.0171</code></pre>
-<div class="sourceCode" id="cb752"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb752-1"><a href="ch-complexstan.html#cb752-1" aria-hidden="true"></a><span class="co"># The rows are correlated ~.8</span></span>
-<span id="cb752-2"><a href="ch-complexstan.html#cb752-2" aria-hidden="true"></a><span class="kw">cor</span>(u[<span class="dv">1</span>, ], u[<span class="dv">2</span>, ])</span></code></pre></div>
-<pre><code>## [1] 0.758</code></pre>
-<div class="sourceCode" id="cb754"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb754-1"><a href="ch-complexstan.html#cb754-1" aria-hidden="true"></a><span class="co"># The variance components can be recovered as well:</span></span>
-<span id="cb754-2"><a href="ch-complexstan.html#cb754-2" aria-hidden="true"></a><span class="kw">sd</span>(u[<span class="dv">1</span>, ])</span></code></pre></div>
-<pre><code>## [1] 0.146</code></pre>
-<div class="sourceCode" id="cb756"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb756-1"><a href="ch-complexstan.html#cb756-1" aria-hidden="true"></a><span class="kw">sd</span>(u[<span class="dv">2</span>, ])</span></code></pre></div>
-<pre><code>## [1] 0.0093</code></pre>
+<div class="sourceCode" id="cb743"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb743-1"><a href="ch-complexstan.html#cb743-1" aria-hidden="true"></a>(u &lt;-<span class="st"> </span>diag_matrix_tau <span class="op">%*%</span><span class="st"> </span>L_u <span class="op">%*%</span><span class="st"> </span>z_u)</span></code></pre></div>
+<pre><code>##        [,1]  [,2]    [,3]   [,4]   [,5]     [,6]     [,7]
+## [1,] 0.2193 0.289 -0.3850 0.0826 0.3187 -0.08280 -0.04243
+## [2,] 0.0167 0.011 -0.0142 0.0182 0.0153 -0.00218 -0.00975
+##           [,8]    [,9]   [,10]
+## [1,] -0.007307 0.07300 0.13303
+## [2,] -0.000275 0.00159 0.00526</code></pre>
+<div class="sourceCode" id="cb745"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb745-1"><a href="ch-complexstan.html#cb745-1" aria-hidden="true"></a><span class="co"># The rows are correlated, approximately 0.8</span></span>
+<span id="cb745-2"><a href="ch-complexstan.html#cb745-2" aria-hidden="true"></a><span class="kw">cor</span>(u[<span class="dv">1</span>, ], u[<span class="dv">2</span>, ])</span></code></pre></div>
+<pre><code>## [1] 0.848</code></pre>
+<div class="sourceCode" id="cb747"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb747-1"><a href="ch-complexstan.html#cb747-1" aria-hidden="true"></a><span class="co"># The variance components can be recovered as well:</span></span>
+<span id="cb747-2"><a href="ch-complexstan.html#cb747-2" aria-hidden="true"></a><span class="kw">sd</span>(u[<span class="dv">1</span>, ])</span></code></pre></div>
+<pre><code>## [1] 0.207</code></pre>
+<div class="sourceCode" id="cb749"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb749-1"><a href="ch-complexstan.html#cb749-1" aria-hidden="true"></a><span class="kw">sd</span>(u[<span class="dv">2</span>, ])</span></code></pre></div>
+<pre><code>## [1] 0.0112</code></pre>
 </div>
 <p>The reparameterization of the model, which allows for a correlation between adjustments for the intercepts and slopes, in <code>hierarchical_corr2.stan</code> is shown below.
 The code implements the following new types and functions:</p>
@@ -2038,8 +2034,7 @@ matrix which has to be the  Cholesky factor of a correlation.</li>
 <li> <code>diag_pre_multiply(tau_u,L_u)</code> which makes a diagonal matrix out of
 the vector <code>tau_u</code> and multiplies it by <code>L_u</code>.</li>
 <li> <code>to_vector(z_u)</code> makes a long vector out the matrix <code>z_u</code>.</li>
-<li> <code>L_u ~ lkj_corr_cholesky(2)</code> is the Cholesky factor associated with the  LKJ
-correlation distribution. It implies that <code>L_u * L_u' ~ lkj_corr(2.0)</code>. The symbol <code>'</code> indicates transposition (in R, this corresponds to the function <code>t()</code>).</li>
+<li> <code>lkj_corr_cholesky_lpdf(L_u | 2)</code> is the Cholesky factor associated with the  LKJ correlation distribution. It implies that <code>lkj_corr_lpdf(L_u * L_u'| 2)</code>. The symbol <code>'</code> indicates transposition (in R, this is the function <code>t()</code>).</li>
 </ul>
 <pre class="stan fold-show"><code>data {
   int&lt;lower=1&gt; N;
@@ -2065,30 +2060,29 @@ model {
   target += normal_lpdf(beta | 0,10);
   target += normal_lpdf(sigma | 0, 50)  -
     normal_lccdf(0 | 0, 50);
-  target += normal_lpdf(tau_u[1] | 0, 20)  -
-    normal_lccdf(0 | 0, 20);
- target += normal_lpdf(tau_u[2] | 0, 20)  -
-    normal_lccdf(0 | 0, 20);
+  target += normal_lpdf(tau_u | 0, 20)  -
+    2 * normal_lccdf(0 | 0, 20);
   target += lkj_corr_cholesky_lpdf(L_u | 2);
   target += std_normal_lpdf(to_vector(z_u));
   target += normal_lpdf(signal | alpha + u[subj, 1] +
                         c_cloze .* (beta + u[subj, 2]), sigma);
 }
 generated quantities {
-  real rho_u = (L_u * L_u&#39;)[1, 2];
+  matrix[2, 2] R_u = (L_u * L_u&#39;);
+  real rho_u = R_u[1, 2];
   vector[N_subj] effect_by_subj = beta + u[ , 2];
 }</code></pre>
 <p>In this Stan model, we also defined an <code>effect_by_subject</code> in the generated quantities. This would allow us to plot or to summarize by-subject effects of cloze probability.</p>
 <p>One can recover the  correlation parameter by adding in the <code>generated quantities</code> section code to extract one element of the <span class="math inline">\(2 \times 2\)</span> correlation matrix. The correlation matrix is recovered with <code>L_u * L_u'</code>, and then <code>[1, 2]</code> extracts the element in the first row and second column (recall that the diagonal is filled with ones).</p>
 <p>Fit the new model:</p>
-<div class="sourceCode" id="cb759"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb759-1"><a href="ch-complexstan.html#cb759-1" aria-hidden="true"></a>hierarchical_corr2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb759-2"><a href="ch-complexstan.html#cb759-2" aria-hidden="true"></a>                                  <span class="st">&quot;hierarchical_corr2.stan&quot;</span>,</span>
-<span id="cb759-3"><a href="ch-complexstan.html#cb759-3" aria-hidden="true"></a>                                  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb759-4"><a href="ch-complexstan.html#cb759-4" aria-hidden="true"></a>fit_eeg_corr2 &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical_corr2, <span class="dt">data =</span> ls_eeg)</span></code></pre></div>
+<div class="sourceCode" id="cb752"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb752-1"><a href="ch-complexstan.html#cb752-1" aria-hidden="true"></a>hierarchical_corr2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb752-2"><a href="ch-complexstan.html#cb752-2" aria-hidden="true"></a>                                  <span class="st">&quot;hierarchical_corr2.stan&quot;</span>,</span>
+<span id="cb752-3"><a href="ch-complexstan.html#cb752-3" aria-hidden="true"></a>                                  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb752-4"><a href="ch-complexstan.html#cb752-4" aria-hidden="true"></a>fit_eeg_corr2 &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical_corr2, <span class="dt">data =</span> ls_eeg)</span></code></pre></div>
 <p>The Cholesky matrix has some elements which are always zero or one, and thus the variance within and between chains (and therefore Rhat) are not defined. However, the rest of the parameters of the model have an appropriate number of effective sample size (more than 10% of the total number of post-warmup samples), Rhats are close to one, and the chains are mixing well; see also the traceplots in Figure <a href="ch-complexstan.html#fig:traceploteegcorr2">11.9</a>.</p>
-<div class="sourceCode" id="cb760"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb760-1"><a href="ch-complexstan.html#cb760-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg_corr2,</span>
-<span id="cb760-2"><a href="ch-complexstan.html#cb760-2" aria-hidden="true"></a>      <span class="dt">pars =</span></span>
-<span id="cb760-3"><a href="ch-complexstan.html#cb760-3" aria-hidden="true"></a>        <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;L_u&quot;</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb753"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb753-1"><a href="ch-complexstan.html#cb753-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg_corr2,</span>
+<span id="cb753-2"><a href="ch-complexstan.html#cb753-2" aria-hidden="true"></a>      <span class="dt">pars =</span></span>
+<span id="cb753-3"><a href="ch-complexstan.html#cb753-3" aria-hidden="true"></a>        <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;L_u&quot;</span>)) </span></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
 ## alpha     3.66  2.81  4.50  1345 1.01
 ## beta      2.33  1.14  3.56  3488 1.00
@@ -2101,10 +2095,10 @@ generated quantities {
 ## L_u[2,1]  0.16 -0.58  0.77  2681 1.00
 ## L_u[2,2]  0.92  0.62  1.00  1937 1.00</code></pre>
 
-<div class="sourceCode" id="cb762"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb762-1"><a href="ch-complexstan.html#cb762-1" aria-hidden="true"></a></span>
-<span id="cb762-2"><a href="ch-complexstan.html#cb762-2" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_eeg_corr2,</span>
-<span id="cb762-3"><a href="ch-complexstan.html#cb762-3" aria-hidden="true"></a>          <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;L_u[2,1]&quot;</span>, <span class="st">&quot;L_u[2,2]&quot;</span>, <span class="st">&quot;sigma&quot;</span>)) </span>
-<span id="cb762-4"><a href="ch-complexstan.html#cb762-4" aria-hidden="true"></a><span class="st">`</span><span class="dt">## Warning: Line is too long.</span><span class="st">`</span></span></code></pre></div>
+<div class="sourceCode" id="cb755"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb755-1"><a href="ch-complexstan.html#cb755-1" aria-hidden="true"></a></span>
+<span id="cb755-2"><a href="ch-complexstan.html#cb755-2" aria-hidden="true"></a><span class="kw">traceplot</span>(fit_eeg_corr2,</span>
+<span id="cb755-3"><a href="ch-complexstan.html#cb755-3" aria-hidden="true"></a>          <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;L_u[2,1]&quot;</span>, <span class="st">&quot;L_u[2,2]&quot;</span>, <span class="st">&quot;sigma&quot;</span>)) </span>
+<span id="cb755-4"><a href="ch-complexstan.html#cb755-4" aria-hidden="true"></a><span class="st">`</span><span class="dt">## Warning: Line is too long.</span><span class="st">`</span></span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:traceploteegcorr2"></span>
 <img src="bookdown_files/figure-html/traceploteegcorr2-1.svg" alt="Traceplots of alpha, beta, tau_u, L_u, and sigma from the model fit_eeg_corr." width="672" />
 <p class="caption">
@@ -2114,8 +2108,8 @@ FIGURE 11.9: Traceplots of <code>alpha</code>, <code>beta</code>, <code>tau_u</c
 <p>Is there a correlation between the by-subject intercept and slope?</p>
 <p>Let’s visualize some of the posteriors with the following code (see Figure <a href="ch-complexstan.html#fig:posteegcorr2">11.10</a>):</p>
 
-<div class="sourceCode" id="cb763"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb763-1"><a href="ch-complexstan.html#cb763-1" aria-hidden="true"></a><span class="kw">mcmc_hist</span>(<span class="kw">as.data.frame</span>(fit_eeg_corr2),</span>
-<span id="cb763-2"><a href="ch-complexstan.html#cb763-2" aria-hidden="true"></a>          <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;rho_u&quot;</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb756"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb756-1"><a href="ch-complexstan.html#cb756-1" aria-hidden="true"></a><span class="kw">mcmc_hist</span>(<span class="kw">as.data.frame</span>(fit_eeg_corr2),</span>
+<span id="cb756-2"><a href="ch-complexstan.html#cb756-2" aria-hidden="true"></a>          <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;rho_u&quot;</span>)) </span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:posteegcorr2"></span>
 <img src="bookdown_files/figure-html/posteegcorr2-1.svg" alt="Histograms of the samples of the posteriors of beta and rho_u from the model fit_eeg_corr2." width="672" />
 <p class="caption">
@@ -2182,14 +2176,22 @@ FIGURE 11.10: Histograms of the samples of the posteriors of <code>beta</code> a
 \begin{aligned}
 \tau_{u_1} &amp;\sim \mathit{Normal}_+(0,20)\\
 \tau_{u_2} &amp;\sim \mathit{Normal}_+(0,20)\\
-\rho_u &amp;\sim \mathit{LKJcorr}(2) 
+\mathbf{R_u} &amp; =
+\begin{bmatrix}
+1 &amp; \rho_u \\
+\rho_u &amp; 1
+\end{bmatrix} \sim \mathit{LKJcorr}(2) 
 \end{aligned}
 \end{equation}\]</span></p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
 \tau_{w_1} &amp;\sim \mathit{Normal}_+(0,20)\\
 \tau_{w_2} &amp;\sim \mathit{Normal}_+(0,20)\\
-\rho_w &amp;\sim \mathit{LKJcorr}(2) 
+\mathbf{R_w} &amp; =
+\begin{bmatrix}
+1 &amp; \rho_w \\
+\rho_w &amp; 1
+\end{bmatrix} \sim \mathit{LKJcorr}(2) 
 \end{aligned}
 \end{equation}\]</span></p>
 <p>The translation to Stan (<code>hierarchical_corr_by.stan</code>) looks as follows:</p>
@@ -2241,25 +2243,24 @@ generated quantities {
   real rho_w = (L_w * L_w&#39;)[1, 2];
 }</code></pre>
 <p>Add item as a number to the data and store it in a list:</p>
-<div class="sourceCode" id="cb765"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb765-1"><a href="ch-complexstan.html#cb765-1" aria-hidden="true"></a>df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></span>
-<span id="cb765-2"><a href="ch-complexstan.html#cb765-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">item =</span> <span class="kw">as.numeric</span>(<span class="kw">as.factor</span>(item)))</span>
-<span id="cb765-3"><a href="ch-complexstan.html#cb765-3" aria-hidden="true"></a>ls_eeg &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
-<span id="cb765-4"><a href="ch-complexstan.html#cb765-4" aria-hidden="true"></a>  <span class="dt">N =</span> <span class="kw">nrow</span>(df_eeg),</span>
-<span id="cb765-5"><a href="ch-complexstan.html#cb765-5" aria-hidden="true"></a>  <span class="dt">signal =</span> df_eeg<span class="op">$</span>n400,</span>
-<span id="cb765-6"><a href="ch-complexstan.html#cb765-6" aria-hidden="true"></a>  <span class="dt">c_cloze =</span> df_eeg<span class="op">$</span>c_cloze,</span>
-<span id="cb765-7"><a href="ch-complexstan.html#cb765-7" aria-hidden="true"></a>  <span class="dt">subj =</span> df_eeg<span class="op">$</span>subj,</span>
-<span id="cb765-8"><a href="ch-complexstan.html#cb765-8" aria-hidden="true"></a>  <span class="dt">item =</span> df_eeg<span class="op">$</span>item,</span>
-<span id="cb765-9"><a href="ch-complexstan.html#cb765-9" aria-hidden="true"></a>  <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>subj),</span>
-<span id="cb765-10"><a href="ch-complexstan.html#cb765-10" aria-hidden="true"></a>  <span class="dt">N_item =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>item))</span></code></pre></div>
+<div class="sourceCode" id="cb758"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb758-1"><a href="ch-complexstan.html#cb758-1" aria-hidden="true"></a>df_eeg &lt;-<span class="st"> </span>df_eeg <span class="op">%&gt;%</span></span>
+<span id="cb758-2"><a href="ch-complexstan.html#cb758-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">item =</span> <span class="kw">as.numeric</span>(<span class="kw">as.factor</span>(item)))</span>
+<span id="cb758-3"><a href="ch-complexstan.html#cb758-3" aria-hidden="true"></a>ls_eeg &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_eeg),</span>
+<span id="cb758-4"><a href="ch-complexstan.html#cb758-4" aria-hidden="true"></a>               <span class="dt">signal =</span> df_eeg<span class="op">$</span>n400,</span>
+<span id="cb758-5"><a href="ch-complexstan.html#cb758-5" aria-hidden="true"></a>               <span class="dt">c_cloze =</span> df_eeg<span class="op">$</span>c_cloze,</span>
+<span id="cb758-6"><a href="ch-complexstan.html#cb758-6" aria-hidden="true"></a>               <span class="dt">subj =</span> df_eeg<span class="op">$</span>subj,</span>
+<span id="cb758-7"><a href="ch-complexstan.html#cb758-7" aria-hidden="true"></a>               <span class="dt">item =</span> df_eeg<span class="op">$</span>item,</span>
+<span id="cb758-8"><a href="ch-complexstan.html#cb758-8" aria-hidden="true"></a>               <span class="dt">N_subj =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>subj),</span>
+<span id="cb758-9"><a href="ch-complexstan.html#cb758-9" aria-hidden="true"></a>               <span class="dt">N_item =</span> <span class="kw">max</span>(df_eeg<span class="op">$</span>item))</span></code></pre></div>
 <p>Fit the model:</p>
-<div class="sourceCode" id="cb766"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb766-1"><a href="ch-complexstan.html#cb766-1" aria-hidden="true"></a>hierarchical_corr_by &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb766-2"><a href="ch-complexstan.html#cb766-2" aria-hidden="true"></a>                                    <span class="st">&quot;hierarchical_corr_by.stan&quot;</span>,</span>
-<span id="cb766-3"><a href="ch-complexstan.html#cb766-3" aria-hidden="true"></a>                                    <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb766-4"><a href="ch-complexstan.html#cb766-4" aria-hidden="true"></a>fit_eeg_corr_by &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical_corr_by, <span class="dt">data =</span> ls_eeg)</span></code></pre></div>
+<div class="sourceCode" id="cb759"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb759-1"><a href="ch-complexstan.html#cb759-1" aria-hidden="true"></a>hierarchical_corr_by &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb759-2"><a href="ch-complexstan.html#cb759-2" aria-hidden="true"></a>                                    <span class="st">&quot;hierarchical_corr_by.stan&quot;</span>,</span>
+<span id="cb759-3"><a href="ch-complexstan.html#cb759-3" aria-hidden="true"></a>                                    <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb759-4"><a href="ch-complexstan.html#cb759-4" aria-hidden="true"></a>fit_eeg_corr_by &lt;-<span class="st"> </span><span class="kw">stan</span>(hierarchical_corr_by, <span class="dt">data =</span> ls_eeg)</span></code></pre></div>
 <p>Print the summary:</p>
-<div class="sourceCode" id="cb767"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb767-1"><a href="ch-complexstan.html#cb767-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg_corr_by,</span>
-<span id="cb767-2"><a href="ch-complexstan.html#cb767-2" aria-hidden="true"></a>      <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;tau_w&quot;</span>, </span>
-<span id="cb767-3"><a href="ch-complexstan.html#cb767-3" aria-hidden="true"></a>               <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;rho_w&quot;</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb760"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb760-1"><a href="ch-complexstan.html#cb760-1" aria-hidden="true"></a><span class="kw">print</span>(fit_eeg_corr_by,</span>
+<span id="cb760-2"><a href="ch-complexstan.html#cb760-2" aria-hidden="true"></a>      <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;tau_u&quot;</span>, <span class="st">&quot;tau_w&quot;</span>, </span>
+<span id="cb760-3"><a href="ch-complexstan.html#cb760-3" aria-hidden="true"></a>               <span class="st">&quot;rho_u&quot;</span>, <span class="st">&quot;rho_w&quot;</span>)) </span></code></pre></div>
 <pre><code>##           mean  2.5% 97.5% n_eff Rhat
 ## alpha     3.66  2.74  4.54  1704 1.00
 ## beta      2.33  0.98  3.71  3588 1.00
@@ -2270,7 +2271,7 @@ generated quantities {
 ## tau_w[2]  2.32  0.30  4.29  1062 1.00
 ## rho_u     0.13 -0.61  0.77  3794 1.00
 ## rho_w    -0.42 -0.89  0.31  1798 1.00</code></pre>
-<p>The summary above shows that the data are far too sparse to get tight estimates of the correlation parameters <code>rho_u[1,2]</code> and <code>rho_w[1,2]</code>. Both posteriors are widely spread out.</p>
+<p>The summary above shows that the data are far too sparse to get tight estimates of the correlation parameters <code>rho_u</code> and <code>rho_w</code>. Both posteriors are widely spread out.</p>
 <p>This completes our review of hierarchical models and their implementation in Stan. The importance of coding a hierarchical model directly in Stan rather than using <code>brms</code> is that this increases the flexibility of the type of models that we can fit. In fact, we will see in chapters <a href="ch-cogmod.html#ch-cogmod">17</a>-<a href="ch-lognormalrace.html#ch-lognormalrace">20</a> that the same “machinery” can be used to have hierarchical parameters in cognitive models.</p>
 </div>
 </div>
@@ -2288,6 +2289,7 @@ generated quantities {
 <div id="further-reading-8" class="section level2 hasAnchor" number="11.3">
 <h2><span class="header-section-number">11.3</span> Further reading<a href="ch-complexstan.html#further-reading-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><span class="citation">Gelman and Hill (<a href="#ref-GelmanHill2007" role="doc-biblioref">2007</a>)</span> provides a comprehensive introduction to Bayesian hierarchical models, although that edition does not use Stan but rather WinBUGS. <span class="citation">Sorensen, Hohenstein, and Vasishth (<a href="#ref-SorensenVasishthTutorial" role="doc-biblioref">2016</a>)</span> is a short tutorial on hierarchical modeling using Stan, especially tailored for psychologists and linguists.</p>
+<p>An additional example of reparameterization (kindly suggested by Martin Modrák) involves reparameterizing a varying intercept/effects model in terms of total variance and its distribution across individual components. This approach has both theoretical advantages, such as making it easier to elicit priors on total variance and its split, and practical benefits, such as allowing us to work with data sets where only a small number of subjects have repeated measurements, which might otherwise pose computational challenges. This concept is explored in more depth in <span class="citation">Hem, Fuglstad, and Riebler (<a href="#ref-hem2022" role="doc-biblioref">2022</a>)</span>. Additionally, a quick gist provided by Martin Modrák demonstrates how this reparameterization resolves divergences and increases the effective sample size in a model adapted from this chapter. You can find it at <a href="https://gist.github.com/martinmodrak/61a68f22ed954ae68abc76faeef860b6" class="uri">https://gist.github.com/martinmodrak/61a68f22ed954ae68abc76faeef860b6</a>.</p>
 </div>
 <div id="exercises-1" class="section level2 hasAnchor" number="11.4">
 <h2><span class="header-section-number">11.4</span> Exercises<a href="ch-complexstan.html#exercises-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -2310,7 +2312,10 @@ generated quantities {
 \begin{aligned}
 \tau_{u_1} &amp;\sim \mathit{Normal}_+(0,1)\\
 \tau_{u_2} &amp;\sim \mathit{Normal}_+(0,1)\\
-\rho_u &amp;\sim \mathit{LKJcorr}(2) 
+\begin{bmatrix}
+1 &amp; \rho_u \\
+\rho_u &amp; 1
+\end{bmatrix} &amp;\sim \mathit{LKJcorr}(2) 
 \end{aligned}
 \end{equation}\]</span></p>
 <div class="exercise">
@@ -2357,6 +2362,9 @@ generated quantities {
 <div id="ref-Gentle">
 <p>Gentle, James E. 2007. “Matrix Algebra: Theory, Computations, and Applications in Statistics.” <em>Springer Texts in Statistics</em> 10.</p>
 </div>
+<div id="ref-hem2022">
+<p>Hem, Ingeborg Gullikstad, Geir-Arne Fuglstad, and Andrea Riebler. 2022. “makemyprior: Intuitive Construction of Joint Priors for Variance Parameters in R.” <a href="https://arxiv.org/abs/2105.09712">https://arxiv.org/abs/2105.09712</a>.</p>
+</div>
 <div id="ref-neal2003">
 <p>Neal, Radford M. 2003. “Slice Sampling.” <em>Annals of Statistics</em> 31 (3): 705–67. <a href="https://doi.org/10.1214/aos/1056562461">https://doi.org/10.1214/aos/1056562461</a>.</p>
 </div>
@@ -2367,14 +2375,14 @@ generated quantities {
 <p>Sorensen, Tanner, Sven Hohenstein, and Shravan Vasishth. 2016. “Bayesian Linear Mixed Models Using Stan: A Tutorial for Psychologists, Linguists, and Cognitive Scientists.” <em>Quantitative Methods for Psychology</em> 12 (3): 175–200.</p>
 </div>
 <div id="ref-Stan2023">
-<p>Stan Development Team. 2023. “Stan Modeling Language Users Guide and Reference Manual, Version 2.32.” <a href="https://mc-stan.org/docs/2_32/reference-manual/index.html;%20https://mc-stan.org/docs/2_32/stan-users-guide/index.html">https://mc-stan.org/docs/2_32/reference-manual/index.html; https://mc-stan.org/docs/2_32/stan-users-guide/index.html</a>.</p>
+<p>Stan Development Team. 2024. “Stan Modeling Language Users Guide and Reference Manual, Version 2.32.” <a href="https://mc-stan.org/docs/2_35/">https://mc-stan.org/docs/2_35/</a>.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="41">
 <li id="fn41"><p>Whereas in <a href="ch-complexstan.html#eq:broadcasted">(11.1)</a>, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are “broadcasted” into a 2863-vector for ease of exposition, Stan uses vector-scalar arithmetic.<a href="ch-complexstan.html#fnref41" class="footnote-back">↩︎</a></p></li>
-<li id="fn42"><p>If this is not the case, we can do <code>as.numeric(as.factor(df_eeg$subj))</code> to transform a vector where some numbers are skipped into a vector with consecutive numbers. For example, both <code>as.numeric(as.factor(c(1, 3, 4, 7, 9)))</code> and <code>as.numeric(as.factor(paste0("subj", c(1, 3, 4, 7, 9))))</code> will give as output <code>1 2 3 4 5</code>.<a href="ch-complexstan.html#fnref42" class="footnote-back">↩︎</a></p></li>
+<li id="fn42"><p>It often happens that the subject ids are not in sequence in a given data frame. This can happen when, for example, one has lost some subjects due to incomplete data or for some other reason. In such situations, we can re-number the subjects sequentially as follows: type <code>as.numeric(as.factor(df_eeg$subj))</code> to transform a vector where some numbers are skipped into a vector with consecutive numbers. For example, both <code>as.numeric(as.factor(c(1, 3, 4, 7, 9)))</code> and <code>as.numeric(as.factor(paste0("subj", c(1, 3, 4, 7, 9))))</code> will give as output <code>1 2 3 4 5</code>.<a href="ch-complexstan.html#fnref42" class="footnote-back">↩︎</a></p></li>
 <li id="fn43"><p>See <a href="https://mc-stan.org/misc/warnings.html" class="uri">https://mc-stan.org/misc/warnings.html</a>.<a href="ch-complexstan.html#fnref43" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

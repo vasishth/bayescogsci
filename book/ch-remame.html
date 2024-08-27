@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 13 Meta-analysis and measurement error models | An Introduction to Bayesian Data Analysis for Cognitive Science</title>
   <meta name="description" content="An introduction to Bayesian data analysis for Cognitive Science." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 13 Meta-analysis and measurement error models | An Introduction to Bayesian Data Analysis for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Bruno Nicenboim, Daniel Schad, and Shravan Vasishth" />
 
 
-<meta name="date" content="2024-03-11" />
+<meta name="date" content="2024-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1025,13 +1025,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="ch-priors.html"><a href="ch-priors.html#using-previous-experiments-posteriors-as-priors-for-a-new-study"><i class="fa fa-check"></i><b>6.4</b> Using previous experiments’  posteriors as priors for a new study</a></li>
 <li class="chapter" data-level="6.5" data-path="ch-priors.html"><a href="ch-priors.html#summary-5"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
 <li class="chapter" data-level="6.6" data-path="ch-priors.html"><a href="ch-priors.html#further-reading-3"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.7" data-path="ch-priors.html"><a href="ch-priors.html#sec-priorsexercises"><i class="fa fa-check"></i><b>6.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="ch-workflow.html"><a href="ch-workflow.html"><i class="fa fa-check"></i><b>7</b> Workflow</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="ch-workflow.html"><a href="ch-workflow.html#building-a-model"><i class="fa fa-check"></i><b>7.1</b>  Building a model</a></li>
 <li class="chapter" data-level="7.2" data-path="ch-workflow.html"><a href="ch-workflow.html#principled-questions-to-ask-on-a-model"><i class="fa fa-check"></i><b>7.2</b> Principled questions to ask on a model</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#checking-whether-assumptions-are-consist-with-domain-expertise-prior-predictive-checks"><i class="fa fa-check"></i><b>7.2.1</b>  Checking whether assumptions are consist with  domain expertise: Prior predictive checks</a></li>
+<li class="chapter" data-level="7.2.1" data-path="ch-workflow.html"><a href="ch-workflow.html#checking-whether-assumptions-are-consistent-with-domain-expertise-prior-predictive-checks"><i class="fa fa-check"></i><b>7.2.1</b>  Checking whether assumptions are consistent with  domain expertise: Prior predictive checks</a></li>
 <li class="chapter" data-level="7.2.2" data-path="ch-workflow.html"><a href="ch-workflow.html#testing-for-correct-posterior-approximations-checks-of-computational-faithfulness"><i class="fa fa-check"></i><b>7.2.2</b>  Testing for correct posterior approximations: Checks of computational faithfulness</a></li>
 <li class="chapter" data-level="7.2.3" data-path="ch-workflow.html"><a href="ch-workflow.html#sensitivity-of-the-model"><i class="fa fa-check"></i><b>7.2.3</b>  Sensitivity of the model</a></li>
 <li class="chapter" data-level="7.2.4" data-path="ch-workflow.html"><a href="ch-workflow.html#does-the-model-adequately-capture-the-dataposterior-predictive-checks"><i class="fa fa-check"></i><b>7.2.4</b>  Does the model adequately capture the data?–Posterior predictive checks</a></li>
@@ -1053,13 +1054,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.2" data-path="ch-contr.html"><a href="ch-contr.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>8.2.2</b> The  hypothesis matrix</a></li>
 <li class="chapter" data-level="8.2.3" data-path="ch-contr.html"><a href="ch-contr.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>8.2.3</b> Generating contrasts: The  <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor with four levels</a>
+<li class="chapter" data-level="8.3" data-path="ch-contr.html"><a href="ch-contr.html#sec-4levelFactor"><i class="fa fa-check"></i><b>8.3</b> Other types of contrasts: illustration with a factor of four levels</a>
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="ch-contr.html"><a href="ch-contr.html#repeatedcontrasts"><i class="fa fa-check"></i><b>8.3.1</b>  Repeated contrasts</a></li>
 <li class="chapter" data-level="8.3.2" data-path="ch-contr.html"><a href="ch-contr.html#helmertcontrasts"><i class="fa fa-check"></i><b>8.3.2</b>  Helmert contrasts</a></li>
 <li class="chapter" data-level="8.3.3" data-path="ch-contr.html"><a href="ch-contr.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>8.3.3</b> Contrasts in linear regression analysis: The design or  model matrix</a></li>
 <li class="chapter" data-level="8.3.4" data-path="ch-contr.html"><a href="ch-contr.html#polynomialContrasts"><i class="fa fa-check"></i><b>8.3.4</b>  Polynomial contrasts</a></li>
-<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts:  monotonic effects</a></li>
+<li class="chapter" data-level="8.3.5" data-path="ch-contr.html"><a href="ch-contr.html#an-alternative-to-contrasts-monotonic-effects"><i class="fa fa-check"></i><b>8.3.5</b> An alternative to contrasts:  Monotonic effects</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="ch-contr.html"><a href="ch-contr.html#nonOrthogonal"><i class="fa fa-check"></i><b>8.4</b> What makes a good set of contrasts?</a>
 <ul>
@@ -1130,7 +1131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.2" data-path="ch-custom.html"><a href="ch-custom.html#an-example-where-simulation-based-calibration-reveals-a-problem"><i class="fa fa-check"></i><b>12.2.2</b> An example where simulation-based calibration reveals a problem</a></li>
 <li class="chapter" data-level="12.2.3" data-path="ch-custom.html"><a href="ch-custom.html#issues-with-and-limitations-of-simulation-based-calibration"><i class="fa fa-check"></i><b>12.2.3</b> Issues with and limitations of simulation-based calibration</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-re-implementing-the-exponential-distribution-manually"><i class="fa fa-check"></i><b>12.3</b> Another  custom distribution: Re-implementing the  exponential distribution manually</a></li>
+<li class="chapter" data-level="12.3" data-path="ch-custom.html"><a href="ch-custom.html#another-custom-distribution-the-exponential-distribution-implemented-manually"><i class="fa fa-check"></i><b>12.3</b> Another  custom distribution: The exponential distribution  implemented manually</a></li>
 <li class="chapter" data-level="12.4" data-path="ch-custom.html"><a href="ch-custom.html#summary-10"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
 <li class="chapter" data-level="12.5" data-path="ch-custom.html"><a href="ch-custom.html#further-reading-9"><i class="fa fa-check"></i><b>12.5</b> Further reading</a></li>
 <li class="chapter" data-level="12.6" data-path="ch-custom.html"><a href="ch-custom.html#sec-customexercises"><i class="fa fa-check"></i><b>12.6</b> Exercises</a></li>
@@ -1193,7 +1194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.3.3" data-path="ch-cv.html"><a href="ch-cv.html#leave-one-group-out-cross-validation"><i class="fa fa-check"></i><b>16.3.3</b> Leave-one-group-out cross-validation</a></li>
 </ul></li>
 <li class="chapter" data-level="16.4" data-path="ch-cv.html"><a href="ch-cv.html#sec-logcv"><i class="fa fa-check"></i><b>16.4</b>  Comparing different likelihoods with cross-validation</a></li>
-<li class="chapter" data-level="16.5" data-path="ch-cv.html"><a href="ch-cv.html#issues-with-cross-validation"><i class="fa fa-check"></i><b>16.5</b> Issues with cross-validation</a></li>
+<li class="chapter" data-level="16.5" data-path="ch-cv.html"><a href="ch-cv.html#sec-issuesCV"><i class="fa fa-check"></i><b>16.5</b> Issues with cross-validation</a></li>
 <li class="chapter" data-level="16.6" data-path="ch-cv.html"><a href="ch-cv.html#cross-validation-in-stan"><i class="fa fa-check"></i><b>16.6</b> Cross-validation in Stan</a>
 <ul>
 <li class="chapter" data-level="16.6.1" data-path="ch-cv.html"><a href="ch-cv.html#psis-loo-cv-in-stan"><i class="fa fa-check"></i><b>16.6.1</b>  PSIS-LOO-CV in Stan</a></li>
@@ -1202,8 +1203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.8" data-path="ch-cv.html"><a href="ch-cv.html#further-reading-13"><i class="fa fa-check"></i><b>16.8</b> Further reading</a></li>
 <li class="chapter" data-level="16.9" data-path="ch-cv.html"><a href="ch-cv.html#exercises-3"><i class="fa fa-check"></i><b>16.9</b> Exercises</a></li>
 </ul></li>
-<li class="part"><span><b>VI Computational cognitive modeling with Stan</b></span></li>
-<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to computational cognitive modeling</a>
+<li class="part"><span><b>VI Cognitive modeling with Stan</b></span></li>
+<li class="chapter" data-level="17" data-path="ch-cogmod.html"><a href="ch-cogmod.html"><i class="fa fa-check"></i><b>17</b> Introduction to cognitive modeling</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="ch-cogmod.html"><a href="ch-cogmod.html#what-characterizes-a-computational-cognitive-model"><i class="fa fa-check"></i><b>17.1</b> What characterizes a computational cognitive model?</a></li>
 <li class="chapter" data-level="17.2" data-path="ch-cogmod.html"><a href="ch-cogmod.html#some-advantages-of-taking-the-latent-variable-modeling-approach"><i class="fa fa-check"></i><b>17.2</b> Some advantages of taking the latent-variable modeling approach</a></li>
@@ -1283,21 +1284,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ch-remame" class="section level1 hasAnchor" number="13">
 <h1><span class="header-section-number">Chapter 13</span>  Meta-analysis and  measurement error models<a href="ch-remame.html#ch-remame" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>In this chapter, we introduce two relatively underutilized models that are potentially very important for cognitive science: meta-analysis and measurement-error models.</p>
-<p>Meta-analysis can be very informative when carrying out systematic reviews, and measurement-error models are able to take into account uncertainty in one’s dependent or independent variable (or both). What’s common to these two classes of model is that they both assume that the <span class="math inline">\(n\)</span>-th measured data point <span class="math inline">\(y_n\)</span> has an unknown true value of a parameter, say <span class="math inline">\(\zeta_n\)</span> (pronounced <em>zeta en</em>), that is measured with some uncertainty that can be represented by the standard error <span class="math inline">\(SE_n\)</span> of the measurement <span class="math inline">\(y_n\)</span>:</p>
+<p>Meta-analysis can be very informative when carrying out systematic reviews, and measurement-error models are able to take into account uncertainty in one’s dependent or independent variable (or both). What’s common to these two classes of model is that they both assume that the <span class="math inline">\(n\)</span>-th measured data point <span class="math inline">\(y_n\)</span> has a location parameter, say <span class="math inline">\(\zeta_n\)</span> (pronounced <em>zeta en</em>), that is measured with some uncertainty that can be represented by the standard error <span class="math inline">\(SE_n\)</span> of the measurement <span class="math inline">\(y_n\)</span>:</p>
 <p><span class="math inline">\(y_n \sim \mathit{Normal}(\zeta_n,SE_n)\)</span></p>
 <p>In both classes of model, the goal is to obtain a posterior distribution of a latent parameter <span class="math inline">\(\zeta\)</span> which is assumed to generate the <span class="math inline">\(\zeta_n\)</span>, with some standard deviation <span class="math inline">\(\tau\)</span>. The parameter <span class="math inline">\(\tau\)</span> quantifies the noise in the measurement process or the between-study variability in a meta-analysis.</p>
 <p><span class="math inline">\(\zeta_n \sim \mathit{Normal}(\zeta,\tau)\)</span></p>
 <p>The main parameter of interest is usually <span class="math inline">\(\zeta\)</span>, but the posterior distributions of <span class="math inline">\(\tau\)</span> and <span class="math inline">\(\zeta_n\)</span> can also be informative. The above model specification should remind you of the hierarchical models we saw in earlier chapters.</p>
 <div id="meta-analysis" class="section level2 hasAnchor" number="13.1">
 <h2><span class="header-section-number">13.1</span> Meta-analysis<a href="ch-remame.html#meta-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Once a number of studies have accumulated on a particular topic, it can be very informative to synthesize the data. Here is a commonly used approach- a random-effects meta-analysis.</p>
+<p>Once a number of studies have accumulated on a particular topic, it can be very informative to synthesize the data. Here is a commonly used approach–a random-effects meta-analysis.</p>
 <div id="a-meta-analysis-of-similarity-based-interference-in-sentence-comprehension" class="section level3 hasAnchor" number="13.1.1">
 <h3><span class="header-section-number">13.1.1</span> A meta-analysis of similarity-based interference in sentence comprehension<a href="ch-remame.html#a-meta-analysis-of-similarity-based-interference-in-sentence-comprehension" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The model is set up as follows. For each study <span class="math inline">\(n\)</span>, let effect<span class="math inline">\(_n\)</span> be the effect of interest, and let <span class="math inline">\(SE_n\)</span> be the  standard error of the effect. A concrete example of a recent meta-analysis is the effect of  similarity-based interference in sentence comprehension <span class="citation">(Jäger, Engelmann, and Vasishth <a href="#ref-JaegerEngelmannVasishth2017" role="doc-biblioref">2017</a>)</span>; when two nouns are more similar to each other, there is greater processing difficulty (i.e., longer  reading times in milliseconds) when an attempt is made to retrieve one of the nouns to complete a linguistic dependency (such as a subject-verb dependency). The estimate of the effect and its standard error is the information we have from each study <span class="math inline">\(n\)</span>.</p>
 <p>First, load the data, and add an id variable that identifies each experiment.</p>
-<div class="sourceCode" id="cb809"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb809-1"><a href="ch-remame.html#cb809-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_sbi&quot;</span>)</span>
-<span id="cb809-2"><a href="ch-remame.html#cb809-2" aria-hidden="true"></a>(df_sbi &lt;-<span class="st"> </span>df_sbi <span class="op">%&gt;%</span></span>
-<span id="cb809-3"><a href="ch-remame.html#cb809-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">study_id =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb802-1"><a href="ch-remame.html#cb802-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_sbi&quot;</span>)</span>
+<span id="cb802-2"><a href="ch-remame.html#cb802-2" aria-hidden="true"></a>(df_sbi &lt;-<span class="st"> </span>df_sbi <span class="op">%&gt;%</span></span>
+<span id="cb802-3"><a href="ch-remame.html#cb802-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">study_id =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()))</span></code></pre></div>
 <pre><code>## # A tibble: 12 × 4
 ##   publication      effect    SE study_id
 ##   &lt;chr&gt;             &lt;int&gt; &lt;int&gt;    &lt;int&gt;
@@ -1331,7 +1332,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \text{effect}_n \sim &amp; \mathit{Normal}(\zeta_n, SE_n) \quad n=1,\dots, N_{studies}\\
 \zeta_n \sim &amp; \mathit{Normal}(\zeta, \tau) \\
 \zeta \sim &amp; \mathit{Normal}(0,100)\\
- \tau \sim &amp; \mathit{Normal}_+(0,100) 
+ \tau \sim &amp; \mathit{Normal}_+(0,100)
 \end{aligned}
 \tag{13.1}
 \end{equation}\]</span></p>
@@ -1340,18 +1341,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="brms-version-of-the-meta-analysis-model" class="section level4 hasAnchor" number="13.1.1.1">
 <h4><span class="header-section-number">13.1.1.1</span> <code>brms</code> version of the meta-analysis model<a href="ch-remame.html#brms-version-of-the-meta-analysis-model" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>First, define the priors:</p>
-<div class="sourceCode" id="cb811"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb811-1"><a href="ch-remame.html#cb811-1" aria-hidden="true"></a>priors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),</span>
-<span id="cb811-2"><a href="ch-remame.html#cb811-2" aria-hidden="true"></a>            <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> sd))</span></code></pre></div>
+<div class="sourceCode" id="cb804"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb804-1"><a href="ch-remame.html#cb804-1" aria-hidden="true"></a>priors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),</span>
+<span id="cb804-2"><a href="ch-remame.html#cb804-2" aria-hidden="true"></a>            <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> sd))</span></code></pre></div>
 <p>Fit the model as follows. Because of our relatively uninformative priors and the few data points, the models of this chapter require us to tune the <code>control</code> parameter, increasing  <code>adapt_delta</code> and  <code>max_treedepth</code>.</p>
-<div class="sourceCode" id="cb812"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb812-1"><a href="ch-remame.html#cb812-1" aria-hidden="true"></a>fit_sbi &lt;-<span class="st"> </span><span class="kw">brm</span>(effect <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(<span class="st">`</span><span class="dt">SE</span><span class="st">`</span>, <span class="dt">sigma =</span> <span class="ot">FALSE</span>) <span class="op">~</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb812-2"><a href="ch-remame.html#cb812-2" aria-hidden="true"></a>               <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>study_id),</span>
-<span id="cb812-3"><a href="ch-remame.html#cb812-3" aria-hidden="true"></a>               <span class="dt">data =</span> df_sbi,</span>
-<span id="cb812-4"><a href="ch-remame.html#cb812-4" aria-hidden="true"></a>               <span class="dt">prior =</span> priors,</span>
-<span id="cb812-5"><a href="ch-remame.html#cb812-5" aria-hidden="true"></a>               <span class="dt">control =</span> <span class="kw">list</span>(</span>
-<span id="cb812-6"><a href="ch-remame.html#cb812-6" aria-hidden="true"></a>                 <span class="dt">adapt_delta =</span> <span class="fl">.99</span>,</span>
-<span id="cb812-7"><a href="ch-remame.html#cb812-7" aria-hidden="true"></a>                 <span class="dt">max_treedepth =</span> <span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb805"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb805-1"><a href="ch-remame.html#cb805-1" aria-hidden="true"></a>fit_sbi &lt;-<span class="st"> </span><span class="kw">brm</span>(effect <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(<span class="st">`</span><span class="dt">SE</span><span class="st">`</span>, <span class="dt">sigma =</span> <span class="ot">FALSE</span>) <span class="op">~</span></span>
+<span id="cb805-2"><a href="ch-remame.html#cb805-2" aria-hidden="true"></a><span class="st">                 </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>study_id),</span>
+<span id="cb805-3"><a href="ch-remame.html#cb805-3" aria-hidden="true"></a>               <span class="dt">data =</span> df_sbi,</span>
+<span id="cb805-4"><a href="ch-remame.html#cb805-4" aria-hidden="true"></a>               <span class="dt">prior =</span> priors,</span>
+<span id="cb805-5"><a href="ch-remame.html#cb805-5" aria-hidden="true"></a>               <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.99</span>, <span class="dt">max_treedepth =</span> <span class="dv">10</span>))</span></code></pre></div>
 <p>The posterior of <span class="math inline">\(\zeta\)</span> and <span class="math inline">\(\tau\)</span> are summarized below as <code>Intercept</code> and <code>sd(Intercept)</code>.</p>
-<div class="sourceCode" id="cb813"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb813-1"><a href="ch-remame.html#cb813-1" aria-hidden="true"></a>fit_sbi</span></code></pre></div>
+<div class="sourceCode" id="cb806"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb806-1"><a href="ch-remame.html#cb806-1" aria-hidden="true"></a>fit_sbi</span></code></pre></div>
 <pre><code>## ...
 ## Group-Level Effects: 
 ## ~study_id (Number of levels: 12) 
@@ -1376,12 +1375,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="theorem">
 <p><span id="thm:sigmatrue" class="theorem"><strong>Box 13.1  </strong></span><strong>What happens if we set <code>sigma = TRUE</code>?</strong></p>
 </div>
-<p>If we set <code>sigma = TRUE</code>, we won’t be able to get estimates for <span class="math inline">\(\zeta_{n}\)</span>, since they are handled implicitly. The model presented formally in equation <a href="ch-remame.html#eq:ma0">(13.1)</a> is equivalent to the following one in <a href="ch-remame.html#eq:ma2">(13.2)</a>. A critical difference is that <span class="math inline">\(\zeta_n\)</span> does not appear any more.</p>
+<p>If we set <code>sigma = TRUE</code>, we won’t be able to get estimates for <span class="math inline">\(\zeta_{n}\)</span>, since they are handled implicitly. The model presented formally in Equation <a href="ch-remame.html#eq:ma0">(13.1)</a> is equivalent to the following one in Equation <a href="ch-remame.html#eq:ma2">(13.2)</a>. A critical difference is that <span class="math inline">\(\zeta_n\)</span> does not appear any more.</p>
 <p><span class="math display" id="eq:ma2">\[\begin{equation}
 \begin{aligned}
 \text{effect}_n \sim &amp;\mathit{Normal}(\zeta, \sqrt{\tau^2 + SE_n^2} )\\
 \zeta \sim &amp;\mathit{Normal}(0,100)\\
- \tau \sim &amp;\mathit{Normal}_+(0,100) 
+ \tau \sim &amp;\mathit{Normal}_+(0,100)
 \end{aligned}
 \tag{13.2}
 \end{equation}\]</span></p>
@@ -1412,75 +1411,73 @@ U_{n} &amp;\sim \mathit{Normal}(0 , SE_n)\\
 \end{aligned}
 \tag{13.6}
 \end{equation}\]</span></p>
-<p>Analogous to equations <a href="ch-remame.html#eq:Zsum0">(13.4)</a> and <a href="ch-remame.html#eq:Zsum">(13.5)</a>, effect<span class="math inline">\(_n\)</span> can be expressed as a sum of two independent random variables:</p>
+<p>Analogous to Equations <a href="ch-remame.html#eq:Zsum0">(13.4)</a> and <a href="ch-remame.html#eq:Zsum">(13.5)</a>, effect<span class="math inline">\(_n\)</span> can be expressed as a sum of two independent random variables:</p>
 <p><span class="math display">\[\begin{equation}
-\text{effect}_n =  U_n + \zeta_n 
+\text{effect}_n =  U_n + \zeta_n
 \end{equation}\]</span></p>
 <p>The distribution of effect<span class="math inline">\(_n\)</span> will be</p>
 <p><span class="math display" id="eq:ma2-again">\[\begin{equation}
 \text{effect}_n \sim\mathit{Normal}\left(\zeta, \sqrt{SE^2 + \tau^2}\right) \tag{13.7}
 \end{equation}\]</span></p>
 <p>We can fit this in <code>brms</code> as follows. In this model specification, one should not include the + <code>(1 | study_id)</code>, and the prior for <span class="math inline">\(\tau\)</span> should now be specified for  <code>sigma</code>.</p>
-<div class="sourceCode" id="cb815"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb815-1"><a href="ch-remame.html#cb815-1" aria-hidden="true"></a>priors2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),</span>
-<span id="cb815-2"><a href="ch-remame.html#cb815-2" aria-hidden="true"></a>             <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> sigma))</span>
-<span id="cb815-3"><a href="ch-remame.html#cb815-3" aria-hidden="true"></a>fit_sbi_sigma &lt;-<span class="st"> </span><span class="kw">brm</span>(effect <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(<span class="st">`</span><span class="dt">SE</span><span class="st">`</span>, <span class="dt">sigma =</span> <span class="ot">TRUE</span>) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</span>
-<span id="cb815-4"><a href="ch-remame.html#cb815-4" aria-hidden="true"></a>                     <span class="dt">data =</span> df_sbi,</span>
-<span id="cb815-5"><a href="ch-remame.html#cb815-5" aria-hidden="true"></a>                     <span class="dt">prior =</span> priors2,</span>
-<span id="cb815-6"><a href="ch-remame.html#cb815-6" aria-hidden="true"></a>                     <span class="dt">control =</span> <span class="kw">list</span>(</span>
-<span id="cb815-7"><a href="ch-remame.html#cb815-7" aria-hidden="true"></a>                       <span class="dt">adapt_delta =</span> <span class="fl">.99</span>,</span>
-<span id="cb815-8"><a href="ch-remame.html#cb815-8" aria-hidden="true"></a>                       <span class="dt">max_treedepth =</span> <span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb808"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb808-1"><a href="ch-remame.html#cb808-1" aria-hidden="true"></a>priors2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> Intercept),</span>
+<span id="cb808-2"><a href="ch-remame.html#cb808-2" aria-hidden="true"></a>             <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">class =</span> sigma))</span>
+<span id="cb808-3"><a href="ch-remame.html#cb808-3" aria-hidden="true"></a>fit_sbi_sigma &lt;-<span class="st"> </span><span class="kw">brm</span>(effect <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(<span class="st">`</span><span class="dt">SE</span><span class="st">`</span>, <span class="dt">sigma =</span> <span class="ot">TRUE</span>) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</span>
+<span id="cb808-4"><a href="ch-remame.html#cb808-4" aria-hidden="true"></a>                     <span class="dt">data =</span> df_sbi,</span>
+<span id="cb808-5"><a href="ch-remame.html#cb808-5" aria-hidden="true"></a>                     <span class="dt">prior =</span> priors2,</span>
+<span id="cb808-6"><a href="ch-remame.html#cb808-6" aria-hidden="true"></a>                     <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.99</span>,</span>
+<span id="cb808-7"><a href="ch-remame.html#cb808-7" aria-hidden="true"></a>                                    <span class="dt">max_treedepth =</span> <span class="dv">10</span>))</span></code></pre></div>
 <p>There are slight differences with <code>fit_sbi</code> due to the different parameterization and the sampling process, but the results are very similar:</p>
-<div class="sourceCode" id="cb816"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb816-1"><a href="ch-remame.html#cb816-1" aria-hidden="true"></a><span class="kw">posterior_summary</span>(fit_sbi_sigma,</span>
-<span id="cb816-2"><a href="ch-remame.html#cb816-2" aria-hidden="true"></a>  <span class="dt">variable =</span> <span class="kw">c</span>(<span class="st">&quot;b_Intercept&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb809"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb809-1"><a href="ch-remame.html#cb809-1" aria-hidden="true"></a><span class="kw">posterior_summary</span>(fit_sbi_sigma,</span>
+<span id="cb809-2"><a href="ch-remame.html#cb809-2" aria-hidden="true"></a>                  <span class="dt">variable =</span> <span class="kw">c</span>(<span class="st">&quot;b_Intercept&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <pre><code>##             Estimate Est.Error  Q2.5 Q97.5
-## b_Intercept     13.3      6.24 3.093  27.2
-## sigma           11.7      7.92 0.679  30.3</code></pre>
+## b_Intercept     13.0      6.09 2.242  27.3
+## sigma           11.4      7.64 0.827  29.5</code></pre>
 <p>If we are not interested in the underlying effects in each study, this parameterization of the meta-analysis can be faster and more robust (i.e., it has less potential convergence issues). A major drawback is that we can no longer display a forest plot as we do in Figure <a href="ch-remame.html#fig:forest">13.1</a>.</p>
 </div>
 <p>Another interesting by-product of a random-effects meta-analysis is the possibility of displaying a  forest plot (Figure <a href="ch-remame.html#fig:forest">13.1</a>). A forest plot shows the meta-analytic estimate (the parameter <code>b_Intercept</code> in <code>brms</code>) alongside the original estimates effect<span class="math inline">\(_n\)</span> (and their SE<span class="math inline">\(_n\)</span>) and the posterior distributions of the <span class="math inline">\(\zeta_n\)</span> for each study (we reconstruct these estimates by adding <code>b_Intercept</code> to the parameters starting with <code>r_</code> in <code>brms</code>). The original estimates are the ones fed to the model as data and the posterior distributions of the <span class="math inline">\(\zeta_n\)</span> are calculated, as in previous hierarchical models, after the information from all studies is pooled together. The <span class="math inline">\(\zeta_n\)</span> estimates are shrunken estimates of each study’s (unknown) true effect, shrunken towards the grand mean <span class="math inline">\(\zeta\)</span>, and weighted by the standard error observed in each study <span class="math inline">\(n\)</span>. The <span class="math inline">\(\zeta_n\)</span> for a particular study is shrunk more towards the grand mean <span class="math inline">\(\zeta\)</span> when the study’s standard error is large (i.e., when the estimate is very imprecise). The code below shows how to build a forest plot step by step.</p>
 <p>First, change the format of the data so that it looks like the output of <code>brms</code>:</p>
-<div class="sourceCode" id="cb818"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb818-1"><a href="ch-remame.html#cb818-1" aria-hidden="true"></a>df_sbi &lt;-<span class="st"> </span>df_sbi <span class="op">%&gt;%</span></span>
-<span id="cb818-2"><a href="ch-remame.html#cb818-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Q2.5 =</span> effect <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE,</span>
-<span id="cb818-3"><a href="ch-remame.html#cb818-3" aria-hidden="true"></a>         <span class="dt">Q97.5 =</span> effect <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE,</span>
-<span id="cb818-4"><a href="ch-remame.html#cb818-4" aria-hidden="true"></a>         <span class="dt">Estimate =</span> effect,</span>
-<span id="cb818-5"><a href="ch-remame.html#cb818-5" aria-hidden="true"></a>         <span class="dt">type =</span> <span class="st">&quot;original&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb811"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb811-1"><a href="ch-remame.html#cb811-1" aria-hidden="true"></a>df_sbi &lt;-<span class="st"> </span>df_sbi <span class="op">%&gt;%</span></span>
+<span id="cb811-2"><a href="ch-remame.html#cb811-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Q2.5 =</span> effect <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE,</span>
+<span id="cb811-3"><a href="ch-remame.html#cb811-3" aria-hidden="true"></a>         <span class="dt">Q97.5 =</span> effect <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>SE,</span>
+<span id="cb811-4"><a href="ch-remame.html#cb811-4" aria-hidden="true"></a>         <span class="dt">Estimate =</span> effect,</span>
+<span id="cb811-5"><a href="ch-remame.html#cb811-5" aria-hidden="true"></a>         <span class="dt">type =</span> <span class="st">&quot;original&quot;</span>)</span></code></pre></div>
 <p>Extract the meta-analytical estimate:</p>
-<div class="sourceCode" id="cb819"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb819-1"><a href="ch-remame.html#cb819-1" aria-hidden="true"></a>df_Intercept &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_sbi,</span>
-<span id="cb819-2"><a href="ch-remame.html#cb819-2" aria-hidden="true"></a>  <span class="dt">variable =</span> <span class="kw">c</span>(<span class="st">&quot;b_Intercept&quot;</span>)</span>
-<span id="cb819-3"><a href="ch-remame.html#cb819-3" aria-hidden="true"></a>) <span class="op">%&gt;%</span></span>
-<span id="cb819-4"><a href="ch-remame.html#cb819-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></span>
-<span id="cb819-5"><a href="ch-remame.html#cb819-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">publication =</span> <span class="st">&quot;M.A. estimate&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb812"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb812-1"><a href="ch-remame.html#cb812-1" aria-hidden="true"></a>df_Intercept &lt;-<span class="st"> </span><span class="kw">posterior_summary</span>(fit_sbi,</span>
+<span id="cb812-2"><a href="ch-remame.html#cb812-2" aria-hidden="true"></a>                                  <span class="dt">variable =</span> <span class="kw">c</span>(<span class="st">&quot;b_Intercept&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb812-3"><a href="ch-remame.html#cb812-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb812-4"><a href="ch-remame.html#cb812-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">publication =</span> <span class="st">&quot;M.A. estimate&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <p>For the pooled estimated effect (or fitted value) of the individual studies, we need the sum of the meta-analytical estimate (intercept) and each of the by-study adjustment. Obtain this with the <code>fitted()</code> function:</p>
-<div class="sourceCode" id="cb820"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb820-1"><a href="ch-remame.html#cb820-1" aria-hidden="true"></a>df_model &lt;-<span class="st"> </span><span class="kw">fitted</span>(fit_sbi) <span class="op">%&gt;%</span></span>
-<span id="cb820-2"><a href="ch-remame.html#cb820-2" aria-hidden="true"></a><span class="st">  </span><span class="co"># Convert matrix to data frame:</span></span>
-<span id="cb820-3"><a href="ch-remame.html#cb820-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></span>
-<span id="cb820-4"><a href="ch-remame.html#cb820-4" aria-hidden="true"></a><span class="st">  </span><span class="co"># Add a column to identify the estimates,</span></span>
-<span id="cb820-5"><a href="ch-remame.html#cb820-5" aria-hidden="true"></a><span class="st">  </span><span class="co"># and another column to identify the publication:</span></span>
-<span id="cb820-6"><a href="ch-remame.html#cb820-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">type =</span> <span class="st">&quot;adjusted&quot;</span>,</span>
-<span id="cb820-7"><a href="ch-remame.html#cb820-7" aria-hidden="true"></a>         <span class="dt">publication =</span> df_sbi<span class="op">$</span>publication)</span></code></pre></div>
+<div class="sourceCode" id="cb813"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb813-1"><a href="ch-remame.html#cb813-1" aria-hidden="true"></a>df_model &lt;-<span class="st"> </span><span class="kw">fitted</span>(fit_sbi) <span class="op">%&gt;%</span></span>
+<span id="cb813-2"><a href="ch-remame.html#cb813-2" aria-hidden="true"></a><span class="st">  </span><span class="co"># Convert matrix to data frame:</span></span>
+<span id="cb813-3"><a href="ch-remame.html#cb813-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb813-4"><a href="ch-remame.html#cb813-4" aria-hidden="true"></a><span class="st">  </span><span class="co"># Add a column to identify the estimates,</span></span>
+<span id="cb813-5"><a href="ch-remame.html#cb813-5" aria-hidden="true"></a><span class="st">  </span><span class="co"># and another column to identify the publication:</span></span>
+<span id="cb813-6"><a href="ch-remame.html#cb813-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">type =</span> <span class="st">&quot;adjusted&quot;</span>,</span>
+<span id="cb813-7"><a href="ch-remame.html#cb813-7" aria-hidden="true"></a>         <span class="dt">publication =</span> df_sbi<span class="op">$</span>publication)</span></code></pre></div>
 <p>Bind the observed effects, the meta-analytical estimate, and the fitted values of the studies together, and plot the data:</p>
 
-<div class="sourceCode" id="cb821"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb821-1"><a href="ch-remame.html#cb821-1" aria-hidden="true"></a><span class="co"># the adjusted estimates and the meta-analysis estimate:</span></span>
-<span id="cb821-2"><a href="ch-remame.html#cb821-2" aria-hidden="true"></a><span class="kw">bind_rows</span>(df_sbi, df_model, df_Intercept) <span class="op">%&gt;%</span></span>
-<span id="cb821-3"><a href="ch-remame.html#cb821-3" aria-hidden="true"></a><span class="st">  </span><span class="co"># Plot:</span></span>
-<span id="cb821-4"><a href="ch-remame.html#cb821-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Estimate,</span>
-<span id="cb821-5"><a href="ch-remame.html#cb821-5" aria-hidden="true"></a>             <span class="dt">y =</span> publication,</span>
-<span id="cb821-6"><a href="ch-remame.html#cb821-6" aria-hidden="true"></a>             <span class="dt">xmin =</span> Q2<span class="fl">.5</span>,</span>
-<span id="cb821-7"><a href="ch-remame.html#cb821-7" aria-hidden="true"></a>             <span class="dt">xmax =</span> Q97<span class="fl">.5</span>,</span>
-<span id="cb821-8"><a href="ch-remame.html#cb821-8" aria-hidden="true"></a>             <span class="dt">color =</span> type)) <span class="op">+</span></span>
-<span id="cb821-9"><a href="ch-remame.html#cb821-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(.<span class="dv">5</span>)) <span class="op">+</span></span>
-<span id="cb821-10"><a href="ch-remame.html#cb821-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_errorbarh</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(.<span class="dv">5</span>)) <span class="op">+</span></span>
-<span id="cb821-11"><a href="ch-remame.html#cb821-11" aria-hidden="true"></a><span class="st">  </span><span class="co"># Add the meta-analytic estimate and Credible Interval:</span></span>
-<span id="cb821-12"><a href="ch-remame.html#cb821-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Q2<span class="fl">.5</span>,</span>
-<span id="cb821-13"><a href="ch-remame.html#cb821-13" aria-hidden="true"></a>             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</span>
-<span id="cb821-14"><a href="ch-remame.html#cb821-14" aria-hidden="true"></a>             <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></span>
-<span id="cb821-15"><a href="ch-remame.html#cb821-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Q97<span class="fl">.5</span>,</span>
-<span id="cb821-16"><a href="ch-remame.html#cb821-16" aria-hidden="true"></a>             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</span>
-<span id="cb821-17"><a href="ch-remame.html#cb821-17" aria-hidden="true"></a>             <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></span>
-<span id="cb821-18"><a href="ch-remame.html#cb821-18" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Estimate,</span>
-<span id="cb821-19"><a href="ch-remame.html#cb821-19" aria-hidden="true"></a>             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</span>
-<span id="cb821-20"><a href="ch-remame.html#cb821-20" aria-hidden="true"></a>             <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></span>
-<span id="cb821-21"><a href="ch-remame.html#cb821-21" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;adjusted&quot;</span>, <span class="st">&quot;original&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb814"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb814-1"><a href="ch-remame.html#cb814-1" aria-hidden="true"></a><span class="co"># the adjusted estimates and the meta-analysis estimate:</span></span>
+<span id="cb814-2"><a href="ch-remame.html#cb814-2" aria-hidden="true"></a><span class="kw">bind_rows</span>(df_sbi, df_model, df_Intercept) <span class="op">%&gt;%</span></span>
+<span id="cb814-3"><a href="ch-remame.html#cb814-3" aria-hidden="true"></a><span class="st">  </span><span class="co"># Plot:</span></span>
+<span id="cb814-4"><a href="ch-remame.html#cb814-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Estimate,</span>
+<span id="cb814-5"><a href="ch-remame.html#cb814-5" aria-hidden="true"></a>             <span class="dt">y =</span> publication,</span>
+<span id="cb814-6"><a href="ch-remame.html#cb814-6" aria-hidden="true"></a>             <span class="dt">xmin =</span> Q2<span class="fl">.5</span>,</span>
+<span id="cb814-7"><a href="ch-remame.html#cb814-7" aria-hidden="true"></a>             <span class="dt">xmax =</span> Q97<span class="fl">.5</span>,</span>
+<span id="cb814-8"><a href="ch-remame.html#cb814-8" aria-hidden="true"></a>             <span class="dt">color =</span> type)) <span class="op">+</span></span>
+<span id="cb814-9"><a href="ch-remame.html#cb814-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(.<span class="dv">5</span>)) <span class="op">+</span></span>
+<span id="cb814-10"><a href="ch-remame.html#cb814-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_errorbarh</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(.<span class="dv">5</span>)) <span class="op">+</span></span>
+<span id="cb814-11"><a href="ch-remame.html#cb814-11" aria-hidden="true"></a><span class="st">  </span><span class="co"># Add the meta-analytic estimate and Credible Interval:</span></span>
+<span id="cb814-12"><a href="ch-remame.html#cb814-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Q2<span class="fl">.5</span>,</span>
+<span id="cb814-13"><a href="ch-remame.html#cb814-13" aria-hidden="true"></a>             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</span>
+<span id="cb814-14"><a href="ch-remame.html#cb814-14" aria-hidden="true"></a>             <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></span>
+<span id="cb814-15"><a href="ch-remame.html#cb814-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Q97<span class="fl">.5</span>,</span>
+<span id="cb814-16"><a href="ch-remame.html#cb814-16" aria-hidden="true"></a>             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</span>
+<span id="cb814-17"><a href="ch-remame.html#cb814-17" aria-hidden="true"></a>             <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></span>
+<span id="cb814-18"><a href="ch-remame.html#cb814-18" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> df_Intercept<span class="op">$</span>Estimate,</span>
+<span id="cb814-19"><a href="ch-remame.html#cb814-19" aria-hidden="true"></a>             <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>,</span>
+<span id="cb814-20"><a href="ch-remame.html#cb814-20" aria-hidden="true"></a>             <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></span>
+<span id="cb814-21"><a href="ch-remame.html#cb814-21" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;adjusted&quot;</span>, <span class="st">&quot;original&quot;</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:forest"></span>
 <img src="bookdown_files/figure-html/forest-1.svg" alt="Forest plot showing the original and the adjusted estimates computed from each study from the random-effects meta-analysis. The error bars on the original estimates show 95% confidence intervals, and those on the adjusted estimates show 95% credible intervals." width="672" />
 <p class="caption">
@@ -1511,20 +1508,17 @@ model {
     - normal_lccdf(0 | 0, 100);
 }</code></pre>
 <p>Fit the model as follows:</p>
-<div class="sourceCode" id="cb823"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb823-1"><a href="ch-remame.html#cb823-1" aria-hidden="true"></a>ma0 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb823-2"><a href="ch-remame.html#cb823-2" aria-hidden="true"></a>  <span class="st">&quot;meta-analysis0.stan&quot;</span>,</span>
-<span id="cb823-3"><a href="ch-remame.html#cb823-3" aria-hidden="true"></a>  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></span>
-<span id="cb823-4"><a href="ch-remame.html#cb823-4" aria-hidden="true"></a>)</span>
-<span id="cb823-5"><a href="ch-remame.html#cb823-5" aria-hidden="true"></a>ls_sbi &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_sbi),</span>
-<span id="cb823-6"><a href="ch-remame.html#cb823-6" aria-hidden="true"></a>               <span class="dt">effect =</span> df_sbi<span class="op">$</span>effect,</span>
-<span id="cb823-7"><a href="ch-remame.html#cb823-7" aria-hidden="true"></a>               <span class="dt">SE =</span> df_sbi<span class="op">$</span>SE,</span>
-<span id="cb823-8"><a href="ch-remame.html#cb823-8" aria-hidden="true"></a>               <span class="dt">study_id =</span> df_sbi<span class="op">$</span>study_id)</span>
-<span id="cb823-9"><a href="ch-remame.html#cb823-9" aria-hidden="true"></a>fit_sbi0 &lt;-<span class="st"> </span><span class="kw">stan</span>(ma0,</span>
-<span id="cb823-10"><a href="ch-remame.html#cb823-10" aria-hidden="true"></a>                 <span class="dt">data =</span> ls_sbi,</span>
-<span id="cb823-11"><a href="ch-remame.html#cb823-11" aria-hidden="true"></a>                 <span class="dt">control =</span> <span class="kw">list</span>(</span>
-<span id="cb823-12"><a href="ch-remame.html#cb823-12" aria-hidden="true"></a>                   <span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</span>
-<span id="cb823-13"><a href="ch-remame.html#cb823-13" aria-hidden="true"></a>                   <span class="dt">max_treedepth =</span> <span class="dv">12</span>))</span></code></pre></div>
-<pre><code> ## Warning: There were 2 divergent transitions after
+<div class="sourceCode" id="cb816"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb816-1"><a href="ch-remame.html#cb816-1" aria-hidden="true"></a>ma0 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb816-2"><a href="ch-remame.html#cb816-2" aria-hidden="true"></a>                   <span class="st">&quot;meta-analysis0.stan&quot;</span>,</span>
+<span id="cb816-3"><a href="ch-remame.html#cb816-3" aria-hidden="true"></a>                   <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb816-4"><a href="ch-remame.html#cb816-4" aria-hidden="true"></a>ls_sbi &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_sbi),</span>
+<span id="cb816-5"><a href="ch-remame.html#cb816-5" aria-hidden="true"></a>               <span class="dt">effect =</span> df_sbi<span class="op">$</span>effect,</span>
+<span id="cb816-6"><a href="ch-remame.html#cb816-6" aria-hidden="true"></a>               <span class="dt">SE =</span> df_sbi<span class="op">$</span>SE,</span>
+<span id="cb816-7"><a href="ch-remame.html#cb816-7" aria-hidden="true"></a>               <span class="dt">study_id =</span> df_sbi<span class="op">$</span>study_id)</span>
+<span id="cb816-8"><a href="ch-remame.html#cb816-8" aria-hidden="true"></a>fit_sbi0 &lt;-<span class="st"> </span><span class="kw">stan</span>(ma0,</span>
+<span id="cb816-9"><a href="ch-remame.html#cb816-9" aria-hidden="true"></a>                 <span class="dt">data =</span> ls_sbi,</span>
+<span id="cb816-10"><a href="ch-remame.html#cb816-10" aria-hidden="true"></a>                 <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.999</span>, <span class="dt">max_treedepth =</span> <span class="dv">12</span>))</span></code></pre></div>
+<pre><code> ## Warning: There were 3 divergent transitions after
  ## warmup. See
  ## https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
  ## to find out why this is a problem and how to eliminate
@@ -1544,21 +1538,21 @@ model {
  ## help. See
  ## https://mc-stan.org/misc/warnings.html#tail-ess </code></pre>
 <p>We see that there are warnings. As discussed in section <a href="ch-complexstan.html#sec-uncorrstan">11.1.2</a>, we can use pairs plots to uncover pathologies in the sampling. Here we see the samples of <code>zeta</code> and <code>tau</code> are highly correlated:</p>
-<div class="sourceCode" id="cb829"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb829-1"><a href="ch-remame.html#cb829-1" aria-hidden="true"></a><span class="kw">pairs</span>(fit_sbi0, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-445-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb822"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb822-1"><a href="ch-remame.html#cb822-1" aria-hidden="true"></a><span class="kw">pairs</span>(fit_sbi0, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-447-1.svg" width="672" /></p>
 <p>We face a similar problem as we faced in section <a href="ch-complexstan.html#sec-uncorrstan">11.1.2</a>, namely, the sampler cannot properly explore the neck of the funnel-shaped space, because of the strong correlation between the parameters. The solution is, as in section <a href="ch-complexstan.html#sec-uncorrstan">11.1.2</a>, a non-centered parameterization. Re-write <a href="ch-remame.html#eq:ma0">(13.1)</a> as follows:</p>
 <p><span class="math display" id="eq:ma1">\[\begin{equation}
 \begin{aligned}
 z_n &amp; \sim \mathit{Normal}(0, 1)\\
 \zeta_n &amp;= z_n \cdot \tau + \zeta \\
-\text{effect}_n &amp; \sim  \mathit{Normal}(\zeta_n, SE_n)\\ 
+\text{effect}_n &amp; \sim  \mathit{Normal}(\zeta_n, SE_n)\\
 \zeta &amp;\sim \mathit{Normal}(0,100)\\
-\tau &amp;\sim  \mathit{Normal}_+(0,100) 
+\tau &amp;\sim  \mathit{Normal}_+(0,100)
 \end{aligned}
 \tag{13.8}
 \end{equation}\]</span></p>
 <p>This works because if <span class="math inline">\(X \sim\mathit{Normal}(a, b)\)</span> and <span class="math inline">\(Y \sim \mathit{Normal}(0, 1)\)</span>, then <span class="math inline">\(X = a + Y \cdot b\)</span>. You can re-visit chapter <a href="ch-complexstan.html#sec-uncorrstan">11.1.2</a> for more details.</p>
-<p>Translate equation <a href="ch-remame.html#eq:ma1">(13.8)</a> into Stan code as follows in <code>meta-analysis1.stan</code>:</p>
+<p>Translate Equation <a href="ch-remame.html#eq:ma1">(13.8)</a> into Stan code as follows in <code>meta-analysis1.stan</code>:</p>
 <pre class="stan fold-show"><code>data {
   int&lt;lower=1&gt; N;
   vector[N] effect;
@@ -1581,20 +1575,20 @@ model {
     - normal_lccdf(0 | 0, 100);
 }</code></pre>
 <p>The model converges with values virtually identical to the ones of the <code>brms</code> model.</p>
-<div class="sourceCode" id="cb831"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb831-1"><a href="ch-remame.html#cb831-1" aria-hidden="true"></a>ma1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb831-2"><a href="ch-remame.html#cb831-2" aria-hidden="true"></a>  <span class="st">&quot;meta-analysis1.stan&quot;</span>,</span>
-<span id="cb831-3"><a href="ch-remame.html#cb831-3" aria-hidden="true"></a>  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
-<span id="cb831-4"><a href="ch-remame.html#cb831-4" aria-hidden="true"></a>fit_sbi1 &lt;-<span class="st"> </span><span class="kw">stan</span>(ma1,</span>
-<span id="cb831-5"><a href="ch-remame.html#cb831-5" aria-hidden="true"></a>                 <span class="dt">data =</span> ls_sbi,</span>
-<span id="cb831-6"><a href="ch-remame.html#cb831-6" aria-hidden="true"></a>                 <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</span>
-<span id="cb831-7"><a href="ch-remame.html#cb831-7" aria-hidden="true"></a>                                <span class="dt">max_treedepth =</span> <span class="dv">12</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb832"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb832-1"><a href="ch-remame.html#cb832-1" aria-hidden="true"></a><span class="kw">print</span>(fit_sbi1, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb824"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb824-1"><a href="ch-remame.html#cb824-1" aria-hidden="true"></a>ma1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb824-2"><a href="ch-remame.html#cb824-2" aria-hidden="true"></a>                   <span class="st">&quot;meta-analysis1.stan&quot;</span>,</span>
+<span id="cb824-3"><a href="ch-remame.html#cb824-3" aria-hidden="true"></a>                   <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb824-4"><a href="ch-remame.html#cb824-4" aria-hidden="true"></a>fit_sbi1 &lt;-<span class="st"> </span><span class="kw">stan</span>(ma1,</span>
+<span id="cb824-5"><a href="ch-remame.html#cb824-5" aria-hidden="true"></a>                 <span class="dt">data =</span> ls_sbi,</span>
+<span id="cb824-6"><a href="ch-remame.html#cb824-6" aria-hidden="true"></a>                 <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.999</span>,</span>
+<span id="cb824-7"><a href="ch-remame.html#cb824-7" aria-hidden="true"></a>                                <span class="dt">max_treedepth =</span> <span class="dv">12</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb825"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb825-1"><a href="ch-remame.html#cb825-1" aria-hidden="true"></a><span class="kw">print</span>(fit_sbi1, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</span></code></pre></div>
 <pre><code>##      mean 2.5% 97.5% n_eff Rhat
 ## zeta 13.3 2.54  28.4  1125    1
 ## tau  11.4 0.52  29.4   614    1</code></pre>
 <p>We can also reparameterize the model slightly differently, if we set <span class="math inline">\(U_{n} \sim\mathit{Normal}(0 , SE_n)\)</span> then,</p>
 <p><span class="math display">\[\begin{equation}
-\text{effect}_n =  U_n + \zeta_n 
+\text{effect}_n =  U_n + \zeta_n
 \end{equation}\]</span></p>
 <p>Then, given that <span class="math inline">\(\zeta_n \sim \mathit{Normal}(\zeta, \tau)\)</span>,</p>
 <p><span class="math display" id="eq:ma2-again2">\[\begin{equation}
@@ -1621,17 +1615,16 @@ model {
     - normal_lccdf(0 | 0, 100);
 }</code></pre>
 <p>Fit the model:</p>
-<div class="sourceCode" id="cb835"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb835-1"><a href="ch-remame.html#cb835-1" aria-hidden="true"></a>ma2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb835-2"><a href="ch-remame.html#cb835-2" aria-hidden="true"></a>  <span class="st">&quot;meta-analysis2.stan&quot;</span>,</span>
-<span id="cb835-3"><a href="ch-remame.html#cb835-3" aria-hidden="true"></a>  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span></span>
-<span id="cb835-4"><a href="ch-remame.html#cb835-4" aria-hidden="true"></a>)</span>
-<span id="cb835-5"><a href="ch-remame.html#cb835-5" aria-hidden="true"></a>fit_sbi2 &lt;-<span class="st"> </span><span class="kw">stan</span>(ma2,</span>
-<span id="cb835-6"><a href="ch-remame.html#cb835-6" aria-hidden="true"></a>                 <span class="dt">data =</span> ls_sbi,</span>
-<span id="cb835-7"><a href="ch-remame.html#cb835-7" aria-hidden="true"></a>                 <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb836"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb836-1"><a href="ch-remame.html#cb836-1" aria-hidden="true"></a><span class="kw">print</span>(fit_sbi2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb828"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb828-1"><a href="ch-remame.html#cb828-1" aria-hidden="true"></a>ma2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb828-2"><a href="ch-remame.html#cb828-2" aria-hidden="true"></a>                   <span class="st">&quot;meta-analysis2.stan&quot;</span>,</span>
+<span id="cb828-3"><a href="ch-remame.html#cb828-3" aria-hidden="true"></a>                   <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb828-4"><a href="ch-remame.html#cb828-4" aria-hidden="true"></a>fit_sbi2 &lt;-<span class="st"> </span><span class="kw">stan</span>(ma2,</span>
+<span id="cb828-5"><a href="ch-remame.html#cb828-5" aria-hidden="true"></a>                 <span class="dt">data =</span> ls_sbi,</span>
+<span id="cb828-6"><a href="ch-remame.html#cb828-6" aria-hidden="true"></a>                 <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">adapt_delta =</span> <span class="fl">.9</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb829"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb829-1"><a href="ch-remame.html#cb829-1" aria-hidden="true"></a><span class="kw">print</span>(fit_sbi2, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;zeta&quot;</span>, <span class="st">&quot;tau&quot;</span>))</span></code></pre></div>
 <pre><code>##      mean 2.5% 97.5% n_eff Rhat
-## zeta 13.2 2.90  28.7   767 1.00
-## tau  11.3 0.63  28.9   914 1.01</code></pre>
+## zeta 13.7 3.23  29.6   822    1
+## tau  11.7 0.70  29.3  1000    1</code></pre>
 <p>This summary could be reported in an article by displaying the posterior means and 95% credible intervals of the parameters.</p>
 </div>
 </div>
@@ -1644,8 +1637,8 @@ model {
 <p>As a motivating example, consider the following data from <span class="citation">Nicenboim, Vasishth, et al. (<a href="#ref-NicenboimEtAlCogSci2018" role="doc-biblioref">2018</a>)</span>.
 For each subject, we have the partial-credit unit (PCU) scores of an operation span task as a measure of their  working memory capacity <span class="citation">(Conway et al. <a href="#ref-conway2005working" role="doc-biblioref">2005</a>)</span> along with their  standard error. In addition, the reading fluency of each subject is calculated from a separate set of data based on the mean reading speeds (character/second) in a  rapid automatized naming task <span class="citation">(RAN, Denckla and Rudel <a href="#ref-DenklaRudel1976" role="doc-biblioref">1976</a>)</span>; the standard error of the reading speed is also available.</p>
 <p>Of interest here is the extent of the association between working memory capacity (measured as PCU) and  reading fluency (measured as reading speed in 50 characters per second). We avoid making any causal claims: It could be that our measure of working memory capacity really affects reading fluency or it could be the other way around. A third possibility is that there is a third variable (or several) that affects both reading fluency and working memory capacity. A treatment of causality in Bayesian models can be found in chapters 5 and 6 of <span class="citation">McElreath (<a href="#ref-mcelreath2015statistical" role="doc-biblioref">2020</a>)</span>.</p>
-<div class="sourceCode" id="cb838"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb838-1"><a href="ch-remame.html#cb838-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_indiv&quot;</span>)</span>
-<span id="cb838-2"><a href="ch-remame.html#cb838-2" aria-hidden="true"></a>df_indiv</span></code></pre></div>
+<div class="sourceCode" id="cb831"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb831-1"><a href="ch-remame.html#cb831-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_indiv&quot;</span>)</span>
+<span id="cb831-2"><a href="ch-remame.html#cb831-2" aria-hidden="true"></a>df_indiv</span></code></pre></div>
 <pre><code>## # A tibble: 100 × 5
 ##    subj mean_rspeed se_rspeed mean_pcu se_pcu
 ##   &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
@@ -1653,13 +1646,13 @@ For each subject, we have the partial-credit unit (PCU) scores of an operation s
 ## 2     2      0.0479   0.00121    0.292 0.0315
 ## 3     3      0.0601   0.00117    0.408 0.0900
 ## # ℹ 97 more rows</code></pre>
-<p>At first glance, we see a relationship between mean PCU scores and mean reading speed; see Figure <a href="ch-remame.html#fig:relmeanVOTvdur">13.2</a>. However, this relationship seems to be driven by two  extremes data points on the top left corner of the plot.</p>
-<div class="sourceCode" id="cb840"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb840-1"><a href="ch-remame.html#cb840-1" aria-hidden="true"></a></span>
-<span id="cb840-2"><a href="ch-remame.html#cb840-2" aria-hidden="true"></a>df_indiv &lt;-<span class="st"> </span>df_indiv <span class="op">%&gt;%</span></span>
-<span id="cb840-3"><a href="ch-remame.html#cb840-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_mean_pcu =</span> mean_pcu <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_pcu))</span>
-<span id="cb840-4"><a href="ch-remame.html#cb840-4" aria-hidden="true"></a><span class="kw">ggplot</span>(df_indiv, <span class="kw">aes</span>(<span class="dt">x =</span> c_mean_pcu, <span class="dt">y =</span> mean_rspeed)) <span class="op">+</span></span>
-<span id="cb840-5"><a href="ch-remame.html#cb840-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb840-6"><a href="ch-remame.html#cb840-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<p>At first glance, we see a relationship between mean PCU scores and mean reading speed; see Figure <a href="ch-remame.html#fig:relmeanVOTvdur">13.2</a>. However, this relationship seems to be driven by two extreme data points on the top left corner of the plot.</p>
+<div class="sourceCode" id="cb833"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb833-1"><a href="ch-remame.html#cb833-1" aria-hidden="true"></a></span>
+<span id="cb833-2"><a href="ch-remame.html#cb833-2" aria-hidden="true"></a>df_indiv &lt;-<span class="st"> </span>df_indiv <span class="op">%&gt;%</span></span>
+<span id="cb833-3"><a href="ch-remame.html#cb833-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_mean_pcu =</span> mean_pcu <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_pcu))</span>
+<span id="cb833-4"><a href="ch-remame.html#cb833-4" aria-hidden="true"></a><span class="kw">ggplot</span>(df_indiv, <span class="kw">aes</span>(<span class="dt">x =</span> c_mean_pcu, <span class="dt">y =</span> mean_rspeed)) <span class="op">+</span></span>
+<span id="cb833-5"><a href="ch-remame.html#cb833-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb833-6"><a href="ch-remame.html#cb833-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:relmeanVOTvdur"></span>
 <img src="bookdown_files/figure-html/relmeanVOTvdur-1.svg" alt="The relationship between (centered) mean PCU scores and mean reading speed." width="672" />
 <p class="caption">
@@ -1667,42 +1660,39 @@ FIGURE 13.2: The relationship between (centered) mean PCU scores and mean readin
 </p>
 </div>
 <p>A simple linear model shows a somewhat weak association between mean reading speed and centered mean PCU. The priors are relatively arbitrary but they are in the right order of magnitude given that reading speeds are quite short and well below 1.</p>
-<div class="sourceCode" id="cb841"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb841-1"><a href="ch-remame.html#cb841-1" aria-hidden="true"></a>df_indiv &lt;-<span class="st"> </span>df_indiv <span class="op">%&gt;%</span></span>
-<span id="cb841-2"><a href="ch-remame.html#cb841-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_mean_pcu =</span> mean_pcu <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_pcu))</span>
-<span id="cb841-3"><a href="ch-remame.html#cb841-3" aria-hidden="true"></a>priors &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
-<span id="cb841-4"><a href="ch-remame.html#cb841-4" aria-hidden="true"></a>  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> Intercept),</span>
-<span id="cb841-5"><a href="ch-remame.html#cb841-5" aria-hidden="true"></a>  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> b),</span>
-<span id="cb841-6"><a href="ch-remame.html#cb841-6" aria-hidden="true"></a>  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> sigma)</span>
-<span id="cb841-7"><a href="ch-remame.html#cb841-7" aria-hidden="true"></a>)</span>
-<span id="cb841-8"><a href="ch-remame.html#cb841-8" aria-hidden="true"></a>fit_indiv &lt;-<span class="st"> </span><span class="kw">brm</span>(mean_rspeed <span class="op">~</span><span class="st"> </span>c_mean_pcu,</span>
-<span id="cb841-9"><a href="ch-remame.html#cb841-9" aria-hidden="true"></a>  <span class="dt">data =</span> df_indiv,</span>
-<span id="cb841-10"><a href="ch-remame.html#cb841-10" aria-hidden="true"></a>  <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
-<span id="cb841-11"><a href="ch-remame.html#cb841-11" aria-hidden="true"></a>  <span class="dt">prior =</span> priors</span>
-<span id="cb841-12"><a href="ch-remame.html#cb841-12" aria-hidden="true"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb842"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb842-1"><a href="ch-remame.html#cb842-1" aria-hidden="true"></a>fit_indiv</span></code></pre></div>
+<div class="sourceCode" id="cb834"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb834-1"><a href="ch-remame.html#cb834-1" aria-hidden="true"></a>df_indiv &lt;-<span class="st"> </span>df_indiv <span class="op">%&gt;%</span></span>
+<span id="cb834-2"><a href="ch-remame.html#cb834-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">c_mean_pcu =</span> mean_pcu <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mean_pcu))</span>
+<span id="cb834-3"><a href="ch-remame.html#cb834-3" aria-hidden="true"></a>priors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> Intercept),</span>
+<span id="cb834-4"><a href="ch-remame.html#cb834-4" aria-hidden="true"></a>  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> b),</span>
+<span id="cb834-5"><a href="ch-remame.html#cb834-5" aria-hidden="true"></a>  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> sigma))</span>
+<span id="cb834-6"><a href="ch-remame.html#cb834-6" aria-hidden="true"></a>fit_indiv &lt;-<span class="st"> </span><span class="kw">brm</span>(mean_rspeed <span class="op">~</span><span class="st"> </span>c_mean_pcu,</span>
+<span id="cb834-7"><a href="ch-remame.html#cb834-7" aria-hidden="true"></a>                 <span class="dt">data =</span> df_indiv,</span>
+<span id="cb834-8"><a href="ch-remame.html#cb834-8" aria-hidden="true"></a>                 <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb834-9"><a href="ch-remame.html#cb834-9" aria-hidden="true"></a>                 <span class="dt">prior =</span> priors)</span></code></pre></div>
+<div class="sourceCode" id="cb835"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb835-1"><a href="ch-remame.html#cb835-1" aria-hidden="true"></a>fit_indiv</span></code></pre></div>
 <pre><code>## ...
 ## Population-Level Effects: 
 ##            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-## Intercept      0.06      0.00     0.05     0.06 1.00     4968
-## c_mean_pcu    -0.01      0.01    -0.03     0.00 1.00     2191
+## Intercept      0.06      0.00     0.05     0.06 1.00     5332
+## c_mean_pcu    -0.01      0.01    -0.03     0.00 1.00     2603
 ##            Tail_ESS
-## Intercept      2851
-## c_mean_pcu     2197
+## Intercept      3012
+## c_mean_pcu     2358
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.01      0.00     0.01     0.01 1.00     1989     2206
+## sigma     0.01      0.00     0.01     0.01 1.00     1842     2093
 ## 
 ## ...</code></pre>
-<div class="sourceCode" id="cb844"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb844-1"><a href="ch-remame.html#cb844-1" aria-hidden="true"></a><span class="co"># Proportion of samples below zero</span></span>
-<span id="cb844-2"><a href="ch-remame.html#cb844-2" aria-hidden="true"></a>(Pb &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">as_draws_df</span>(fit_indiv)<span class="op">$</span>b_c_mean_pcu <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>))</span></code></pre></div>
-<pre><code>## [1] 0.946</code></pre>
-<p>Figure <a href="ch-remame.html#fig:lmplotstanplot2">13.3</a> shows the posterior distribution of the slope in this model. Most of the probability mass is negative (94.625%), suggesting that a better PCU score is associated with slower reading speed rather than faster; that is, that a larger working memory capacity is associated with less reading fluency. This is not a very intuitive result and it could be the case that is driven by the two extreme data points. Rather than removing these data points, we’ll examine what happens when the uncertainty of the measurements is taken into account.</p>
-<div class="sourceCode" id="cb846"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb846-1"><a href="ch-remame.html#cb846-1" aria-hidden="true"></a></span>
-<span id="cb846-2"><a href="ch-remame.html#cb846-2" aria-hidden="true"></a><span class="kw">mcmc_plot</span>(fit_indiv,</span>
-<span id="cb846-3"><a href="ch-remame.html#cb846-3" aria-hidden="true"></a>          <span class="dt">variable =</span> <span class="st">&quot;^b_c&quot;</span>,</span>
-<span id="cb846-4"><a href="ch-remame.html#cb846-4" aria-hidden="true"></a>          <span class="dt">regex =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb846-5"><a href="ch-remame.html#cb846-5" aria-hidden="true"></a>          <span class="dt">type =</span> <span class="st">&quot;hist&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb837"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb837-1"><a href="ch-remame.html#cb837-1" aria-hidden="true"></a><span class="co"># Proportion of samples below zero</span></span>
+<span id="cb837-2"><a href="ch-remame.html#cb837-2" aria-hidden="true"></a>(Pb &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">as_draws_df</span>(fit_indiv)<span class="op">$</span>b_c_mean_pcu <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## [1] 0.948</code></pre>
+<p>Figure <a href="ch-remame.html#fig:lmplotstanplot2">13.3</a>(a) shows the posterior distribution of the slope in this model. Most of the probability mass is negative (94.8%), suggesting that a better PCU score is associated with slower reading speed rather than faster; that is, that a larger working memory capacity is associated with less reading fluency. This is not a very intuitive result and it could be the case that is driven by the two extreme data points. Rather than removing these data points, we’ll examine what happens when the uncertainty of the measurements is taken into account.</p>
+<div class="sourceCode" id="cb839"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb839-1"><a href="ch-remame.html#cb839-1" aria-hidden="true"></a></span>
+<span id="cb839-2"><a href="ch-remame.html#cb839-2" aria-hidden="true"></a><span class="kw">mcmc_plot</span>(fit_indiv,</span>
+<span id="cb839-3"><a href="ch-remame.html#cb839-3" aria-hidden="true"></a>          <span class="dt">variable =</span> <span class="st">&quot;^b_c&quot;</span>,</span>
+<span id="cb839-4"><a href="ch-remame.html#cb839-4" aria-hidden="true"></a>          <span class="dt">regex =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb839-5"><a href="ch-remame.html#cb839-5" aria-hidden="true"></a>          <span class="dt">type =</span> <span class="st">&quot;hist&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:lmplotstanplot2"></span>
 <img src="bookdown_files/figure-html/lmplotstanplot2-1.svg" alt="The posterior distribution of the slope in the linear model, modeling the effect of centered mean PCU on mean reading speed (the unit is 50 characters per second)." width="672" />
 <p class="caption">
@@ -1714,8 +1704,8 @@ FIGURE 13.3: The posterior distribution of the slope in the linear model, modeli
 The observed values <span class="math inline">\(y_n\)</span> and the predictor <span class="math inline">\(x_n\)</span> are assumed to be generated with some error:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
-y_n &amp;\sim\mathit{Normal}(y_{n,TRUE},SE_y) \\
-x_n &amp;\sim\mathit{Normal}(x_{n,TRUE},SE_x) 
+y_n &amp;\sim\mathit{Normal}(y_{n,TRUE},SE_{y_n}) \\
+x_n &amp;\sim\mathit{Normal}(x_{n,TRUE},SE_{x_n})
 \end{aligned}
 \end{equation}\]</span></p>
 <p>The regression is fit to the (unknown) <em>true</em> values of the dependent and independent variables:</p>
@@ -1723,7 +1713,7 @@ x_n &amp;\sim\mathit{Normal}(x_{n,TRUE},SE_x)
 y_{n,TRUE} \sim\mathit{Normal}(\alpha + \beta x_{n,TRUE},\sigma)
 \tag{13.10}
 \end{equation}\]</span></p>
-<p>In addition, there is also an unknown standard deviation (standard error) of the latent unknown means that generate the underlying PCU means. I.e., we assume that each of the observed centered PCU scores are normally distributed with an underlying mean, <span class="math inline">\(\chi\)</span>, and a standard deviation <span class="math inline">\(\tau\)</span>. This is very similar to the meta-analysis situation we saw earlier: <span class="math inline">\(\zeta_n \sim\mathit{Normal}(\zeta,\tau)\)</span>, where <span class="math inline">\(\zeta_n\)</span> was the true latent mean of each study, and <span class="math inline">\(\zeta\)</span> was the (unknown) true value of the parameter, and <span class="math inline">\(\tau\)</span> was the between-study variability.</p>
+<p>In addition, there is also an unknown standard deviation (standard error) of the latent unknown means that generate the underlying PCU means. I.e., we assume that each of the observed centered PCU scores are normally distributed with an underlying mean, <span class="math inline">\(\chi\)</span>, and a standard deviation <span class="math inline">\(\tau\)</span>. This is very similar to the meta-analysis situation we saw earlier: <span class="math inline">\(\zeta_n \sim\mathit{Normal}(\zeta,\tau)\)</span>, where <span class="math inline">\(\zeta_n\)</span> was the location parameter of each study, and <span class="math inline">\(\zeta\)</span> was the (unknown) location parameter representing the effect of interest, and <span class="math inline">\(\tau\)</span> was the between-study variability.</p>
 <p><span class="math display">\[\begin{equation}
 x_{n,TRUE} \sim\mathit{Normal}(\chi,\tau)
 \end{equation}\]</span></p>
@@ -1742,39 +1732,37 @@ x_{n,TRUE} \sim\mathit{Normal}(\chi,\tau)
 <div id="the-brms-version-of-the-measurement-error-model" class="section level4 hasAnchor" number="13.2.1.1">
 <h4><span class="header-section-number">13.2.1.1</span> The <code>brms</code> version of the measurement error model<a href="ch-remame.html#the-brms-version-of-the-measurement-error-model" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In <code>brms</code>, the model specification would be as follows:</p>
-<div class="sourceCode" id="cb847"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb847-1"><a href="ch-remame.html#cb847-1" aria-hidden="true"></a>priors_me &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
-<span id="cb847-2"><a href="ch-remame.html#cb847-2" aria-hidden="true"></a>  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> Intercept),</span>
-<span id="cb847-3"><a href="ch-remame.html#cb847-3" aria-hidden="true"></a>  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> b),</span>
-<span id="cb847-4"><a href="ch-remame.html#cb847-4" aria-hidden="true"></a>  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> meanme),</span>
-<span id="cb847-5"><a href="ch-remame.html#cb847-5" aria-hidden="true"></a>  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> sdme),</span>
-<span id="cb847-6"><a href="ch-remame.html#cb847-6" aria-hidden="true"></a>  <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> sigma)</span>
-<span id="cb847-7"><a href="ch-remame.html#cb847-7" aria-hidden="true"></a>)</span></code></pre></div>
-<p>Here the parameter with class  <code>meanme</code> and  <code>sdme</code> refer to the unknown mean and standard deviation (standard error) of the  latent unknown means that generate the underlying PCU means, <span class="math inline">\(\chi\)</span> and <span class="math inline">\(\tau\)</span> in <a href="ch-remame.html#eq:me">(13.11)</a>. Once we decide on the priors, we use  <code>resp_se(.)</code> with <code>sigma = TRUE</code> (i.e, we don’t estimate <span class="math inline">\(y_{n,TRUE}\)</span> explicitly) and we use <code>me(c_meanpcu, se_pcu)</code> to indicate that the dependent variable <code>c_mean_pcu</code> is measured with error and <code>se_pcu</code> is its SE.</p>
-<div class="sourceCode" id="cb848"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb848-1"><a href="ch-remame.html#cb848-1" aria-hidden="true"></a>fit_indiv_me &lt;-<span class="st"> </span><span class="kw">brm</span>(mean_rspeed <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(se_rspeed, <span class="dt">sigma =</span> <span class="ot">TRUE</span>) <span class="op">~</span></span>
-<span id="cb848-2"><a href="ch-remame.html#cb848-2" aria-hidden="true"></a><span class="st">                      </span><span class="kw">me</span>(c_mean_pcu, se_pcu),</span>
-<span id="cb848-3"><a href="ch-remame.html#cb848-3" aria-hidden="true"></a>                    <span class="dt">data =</span> df_indiv,</span>
-<span id="cb848-4"><a href="ch-remame.html#cb848-4" aria-hidden="true"></a>                    <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
-<span id="cb848-5"><a href="ch-remame.html#cb848-5" aria-hidden="true"></a>                    <span class="dt">prior =</span> priors_me) </span></code></pre></div>
-<div class="sourceCode" id="cb849"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb849-1"><a href="ch-remame.html#cb849-1" aria-hidden="true"></a>fit_indiv_me</span></code></pre></div>
+<div class="sourceCode" id="cb840"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb840-1"><a href="ch-remame.html#cb840-1" aria-hidden="true"></a>priors_me &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> Intercept),</span>
+<span id="cb840-2"><a href="ch-remame.html#cb840-2" aria-hidden="true"></a>               <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> b),</span>
+<span id="cb840-3"><a href="ch-remame.html#cb840-3" aria-hidden="true"></a>               <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> meanme),</span>
+<span id="cb840-4"><a href="ch-remame.html#cb840-4" aria-hidden="true"></a>               <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> sdme),</span>
+<span id="cb840-5"><a href="ch-remame.html#cb840-5" aria-hidden="true"></a>               <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">class =</span> sigma))</span></code></pre></div>
+<p>Here, the parameter with class  <code>meanme</code> and  <code>sdme</code> refer to the unknown mean and standard deviation (standard error) of the  latent unknown means that generate the underlying PCU means, <span class="math inline">\(\chi\)</span> and <span class="math inline">\(\tau\)</span> in Equation <a href="ch-remame.html#eq:me">(13.11)</a>. Once we decide on the priors, we use  <code>resp_se(.)</code> with <code>sigma = TRUE</code> (i.e, we don’t estimate <span class="math inline">\(y_{n,TRUE}\)</span> explicitly) and we use <code>me(c_meanpcu, se_pcu)</code> to indicate that the dependent variable <code>c_mean_pcu</code> is measured with error and <code>se_pcu</code> is its SE.</p>
+<div class="sourceCode" id="cb841"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb841-1"><a href="ch-remame.html#cb841-1" aria-hidden="true"></a>fit_indiv_me &lt;-<span class="st"> </span><span class="kw">brm</span>(mean_rspeed <span class="op">|</span><span class="st"> </span><span class="kw">resp_se</span>(se_rspeed, <span class="dt">sigma =</span> <span class="ot">TRUE</span>) <span class="op">~</span></span>
+<span id="cb841-2"><a href="ch-remame.html#cb841-2" aria-hidden="true"></a><span class="st">                      </span><span class="kw">me</span>(c_mean_pcu, se_pcu),</span>
+<span id="cb841-3"><a href="ch-remame.html#cb841-3" aria-hidden="true"></a>                    <span class="dt">data =</span> df_indiv,</span>
+<span id="cb841-4"><a href="ch-remame.html#cb841-4" aria-hidden="true"></a>                    <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb841-5"><a href="ch-remame.html#cb841-5" aria-hidden="true"></a>                    <span class="dt">prior =</span> priors_me)</span></code></pre></div>
+<div class="sourceCode" id="cb842"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb842-1"><a href="ch-remame.html#cb842-1" aria-hidden="true"></a>fit_indiv_me</span></code></pre></div>
 <pre><code>## ...
 ## Population-Level Effects: 
 ##                    Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-## Intercept              0.05      0.00     0.05     0.06 1.00     4173
-## mec_mean_pcuse_pcu    -0.00      0.01    -0.01     0.01 1.00     5363
+## Intercept              0.05      0.00     0.05     0.06 1.00     4204
+## mec_mean_pcuse_pcu    -0.00      0.01    -0.01     0.01 1.00     5838
 ##                    Tail_ESS
-## Intercept              2815
-## mec_mean_pcuse_pcu     3255
+## Intercept              3027
+## mec_mean_pcuse_pcu     2922
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.01      0.00     0.01     0.01 1.00     6975     2874
+## sigma     0.01      0.00     0.01     0.01 1.00     7062     2836
 ## 
 ## ...</code></pre>
-<div class="sourceCode" id="cb851"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb851-1"><a href="ch-remame.html#cb851-1" aria-hidden="true"></a><span class="co"># Proportion of samples below zero</span></span>
-<span id="cb851-2"><a href="ch-remame.html#cb851-2" aria-hidden="true"></a><span class="co"># Parameter names can be found out with `variables(fit_indiv_me)`</span></span>
-<span id="cb851-3"><a href="ch-remame.html#cb851-3" aria-hidden="true"></a>(Pb_me &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">as_draws_df</span>(fit_indiv_me)<span class="op">$</span>bsp_mec_mean_pcuse_pcu <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>))</span></code></pre></div>
-<pre><code>## [1] 0.607</code></pre>
-<p>The posterior for the slope is plotted in Figure <a href="ch-remame.html#fig:meplotstanplot">13.4</a>; this figure shows that the association between PCU scores and reading speed is much weaker once measurement error is taken into account: The posterior is much more uncertain (much more widely distributed) than in the simple linear model we fit above (compare Figures <a href="ch-remame.html#fig:meplotstanplot">13.4</a> with <a href="ch-remame.html#fig:lmplotstanplot2">13.3</a>), and the direction of the association is now unclear, with 61% of the probability mass below zero, rather than 95%.</p>
+<div class="sourceCode" id="cb844"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb844-1"><a href="ch-remame.html#cb844-1" aria-hidden="true"></a><span class="co"># Proportion of samples below zero</span></span>
+<span id="cb844-2"><a href="ch-remame.html#cb844-2" aria-hidden="true"></a><span class="co"># Parameter names can be found out with `variables(fit_indiv_me)`</span></span>
+<span id="cb844-3"><a href="ch-remame.html#cb844-3" aria-hidden="true"></a>(Pb_me &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">as_draws_df</span>(fit_indiv_me)<span class="op">$</span>bsp_mec_mean_pcuse_pcu <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## [1] 0.633</code></pre>
+<p>The posterior for the slope is plotted in Figure <a href="ch-remame.html#fig:meplotstanplot">13.4</a>; this figure shows that the association between PCU scores and reading speed is much weaker once measurement error is taken into account: The posterior is much more uncertain (much more widely distributed) than in the simple linear model we fit above (compare Figure <a href="ch-remame.html#fig:meplotstanplot">13.4</a> with Figure <a href="ch-remame.html#fig:lmplotstanplot2">13.3</a>), and the direction of the association is now unclear, with 63% of the probability mass below zero, rather than 95%.</p>
 <div class="figure"><span style="display:block;" id="fig:meplotstanplot"></span>
 <img src="bookdown_files/figure-html/meplotstanplot-1.svg" alt="The posterior distribution of the slope in the measurement error model, modeling the effect of centered mean PCU on mean reading speed." width="672" />
 <p class="caption">
@@ -1782,47 +1770,47 @@ FIGURE 13.4: The posterior distribution of the slope in the measurement error mo
 </p>
 </div>
 <p>Figure <a href="ch-remame.html#fig:seerrors">13.5</a> visualizes the main reason why we have no clear association in the measurement error analysis: the two points at the top left part of the plot that were driving the effect have very large SE for the measurement of reading speed. The code to produce it appears below and overlays several (250) regression lines that correspond to different samples of the posterior distribution with the measurements of reading speed and PCU.</p>
-<div class="sourceCode" id="cb853"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb853-1"><a href="ch-remame.html#cb853-1" aria-hidden="true"></a>df_reg &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_indiv_me) <span class="op">%&gt;%</span></span>
-<span id="cb853-2"><a href="ch-remame.html#cb853-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="dt">alpha =</span> b_Intercept, <span class="dt">beta =</span> bsp_mec_mean_pcuse_pcu) <span class="op">%&gt;%</span></span>
-<span id="cb853-3"><a href="ch-remame.html#cb853-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">250</span>)</span>
-<span id="cb853-4"><a href="ch-remame.html#cb853-4" aria-hidden="true"></a><span class="kw">ggplot</span>(df_indiv, <span class="kw">aes</span>(<span class="dt">x =</span> c_mean_pcu, <span class="dt">y =</span> mean_rspeed)) <span class="op">+</span></span>
-<span id="cb853-5"><a href="ch-remame.html#cb853-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb853-6"><a href="ch-remame.html#cb853-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_errorbarh</span>(<span class="kw">aes</span>(<span class="dt">xmin =</span> c_mean_pcu <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>se_pcu,</span>
-<span id="cb853-7"><a href="ch-remame.html#cb853-7" aria-hidden="true"></a>                     <span class="dt">xmax =</span> c_mean_pcu <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>se_pcu),</span>
-<span id="cb853-8"><a href="ch-remame.html#cb853-8" aria-hidden="true"></a>                 <span class="dt">alpha =</span> <span class="fl">.5</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">+</span></span>
-<span id="cb853-9"><a href="ch-remame.html#cb853-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> mean_rspeed <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>se_rspeed,</span>
-<span id="cb853-10"><a href="ch-remame.html#cb853-10" aria-hidden="true"></a>                    <span class="dt">ymax =</span> mean_rspeed <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>se_rspeed),</span>
-<span id="cb853-11"><a href="ch-remame.html#cb853-11" aria-hidden="true"></a>                <span class="dt">alpha =</span> <span class="fl">.5</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">+</span></span>
-<span id="cb853-12"><a href="ch-remame.html#cb853-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept =</span> alpha, <span class="dt">slope =</span> beta),</span>
-<span id="cb853-13"><a href="ch-remame.html#cb853-13" aria-hidden="true"></a>              <span class="dt">data =</span> df_reg,</span>
-<span id="cb853-14"><a href="ch-remame.html#cb853-14" aria-hidden="true"></a>              <span class="dt">alpha =</span> <span class="fl">.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb846"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb846-1"><a href="ch-remame.html#cb846-1" aria-hidden="true"></a>df_reg &lt;-<span class="st"> </span><span class="kw">as_draws_df</span>(fit_indiv_me) <span class="op">%&gt;%</span></span>
+<span id="cb846-2"><a href="ch-remame.html#cb846-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="dt">alpha =</span> b_Intercept, <span class="dt">beta =</span> bsp_mec_mean_pcuse_pcu) <span class="op">%&gt;%</span></span>
+<span id="cb846-3"><a href="ch-remame.html#cb846-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">250</span>)</span>
+<span id="cb846-4"><a href="ch-remame.html#cb846-4" aria-hidden="true"></a><span class="kw">ggplot</span>(df_indiv, <span class="kw">aes</span>(<span class="dt">x =</span> c_mean_pcu, <span class="dt">y =</span> mean_rspeed)) <span class="op">+</span></span>
+<span id="cb846-5"><a href="ch-remame.html#cb846-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb846-6"><a href="ch-remame.html#cb846-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_errorbarh</span>(<span class="kw">aes</span>(<span class="dt">xmin =</span> c_mean_pcu <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>se_pcu,</span>
+<span id="cb846-7"><a href="ch-remame.html#cb846-7" aria-hidden="true"></a>                     <span class="dt">xmax =</span> c_mean_pcu <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>se_pcu),</span>
+<span id="cb846-8"><a href="ch-remame.html#cb846-8" aria-hidden="true"></a>                 <span class="dt">alpha =</span> <span class="fl">.5</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">+</span></span>
+<span id="cb846-9"><a href="ch-remame.html#cb846-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> mean_rspeed <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>se_rspeed,</span>
+<span id="cb846-10"><a href="ch-remame.html#cb846-10" aria-hidden="true"></a>                    <span class="dt">ymax =</span> mean_rspeed <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>se_rspeed),</span>
+<span id="cb846-11"><a href="ch-remame.html#cb846-11" aria-hidden="true"></a>                <span class="dt">alpha =</span> <span class="fl">.5</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">+</span></span>
+<span id="cb846-12"><a href="ch-remame.html#cb846-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept =</span> alpha, <span class="dt">slope =</span> beta),</span>
+<span id="cb846-13"><a href="ch-remame.html#cb846-13" aria-hidden="true"></a>              <span class="dt">data =</span> df_reg,</span>
+<span id="cb846-14"><a href="ch-remame.html#cb846-14" aria-hidden="true"></a>              <span class="dt">alpha =</span> <span class="fl">.05</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:seerrors"></span>
 <img src="bookdown_files/figure-html/seerrors-1.svg" alt="The relationship between centered mean PCU scores and  mean reading speed accounting for measurement error. The error bars represent two standard errors. The regression lines are produced with 250 samples of the intercept and slope from the posterior distribution." width="672" />
 <p class="caption">
 FIGURE 13.5: The relationship between centered mean PCU scores and mean reading speed accounting for measurement error. The error bars represent two standard errors. The regression lines are produced with 250 samples of the intercept and slope from the posterior distribution.
 </p>
 </div>
-<p>Of course, the conclusion here cannot be that there is no association between PCU scores and reading speed. In order to claim an absence of an effect, we would need to use Bayes factor (see chapter <a href="ch-bf.html#ch-bf">15</a>) or cross validation (see chapter <a href="ch-cv.html#ch-cv">16</a>).</p>
+<p>Of course, the conclusion here cannot be that there is no association between PCU scores and reading speed. In order to claim an absence of an effect, we would need to use Bayes factor (see chapter <a href="ch-bf.html#ch-bf">15</a>) or cross-validation (see chapter <a href="ch-cv.html#ch-cv">16</a>).</p>
 </div>
 <div id="sec-stanme" class="section level4 hasAnchor" number="13.2.1.2">
 <h4><span class="header-section-number">13.2.1.2</span> The Stan version of the measurement error model<a href="ch-remame.html#sec-stanme" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>As it happened when we modeled the meta-analysis, the main difficulty for modeling measurement error models directly in Stan is that we need to reparameterize the models to avoid correlations between samples of different parameters.
-The two changes that we need to do to the parameterization of our model presented in equation <a href="ch-remame.html#eq:me">(13.11)</a> are the following.</p>
+The two changes that we need to do to the parameterization of our model presented in Equation <a href="ch-remame.html#eq:me">(13.11)</a> are the following.</p>
 <ol style="list-style-type: decimal">
-<li>Sample from an auxiliary parameter <span class="math inline">\(z_n\)</span> rather than directly from <span class="math inline">\(x_{n,TRUE}\)</span>, as we did in <a href="ch-remame.html#eq:ma1">(13.8)</a>:</li>
+<li>Sample from an auxiliary parameter <span class="math inline">\(z_n\)</span> rather than directly from <span class="math inline">\(x_{n,TRUE}\)</span>, as we did in Equation <a href="ch-remame.html#eq:ma1">(13.8)</a>:</li>
 </ol>
 <p><span class="math display">\[\begin{equation}
 \begin{aligned}
 z_n &amp; \sim\mathit{Normal}(0, 1)\\
 x_{n,TRUE} &amp;= z_n \cdot \tau + \chi \\
-x_n &amp; \sim \mathit{Normal}(x_{n,TRUE}, SE_x)
+x_n &amp; \sim \mathit{Normal}(x_{n,TRUE}, SE_{x_n})
 \end{aligned}
 \end{equation}\]</span></p>
 <ol start="2" style="list-style-type: decimal">
-<li>Don’t model <span class="math inline">\(y_{n,TRUE}\)</span> explicitly as in <a href="ch-remame.html#eq:masquare">(13.10)</a>; rather take into account the SE and the variation on <span class="math inline">\(y_{n,TRUE}\)</span> in the following way:</li>
+<li>Don’t model <span class="math inline">\(y_{n,TRUE}\)</span> explicitly as in Equation <a href="ch-remame.html#eq:masquare">(13.10)</a>; rather take into account the SE and the variation on <span class="math inline">\(y_{n,TRUE}\)</span> in the following way:</li>
 </ol>
 <p><span class="math display">\[\begin{equation}
-y_{n} \sim\mathit{Normal}\left(\alpha + \beta x_{n,TRUE},\sqrt{SE_y^2 + \sigma^2}\right)
+y_{n} \sim\mathit{Normal}\left(\alpha + \beta x_{n,TRUE},\sqrt{SE_{y_n}^2 + \sigma^2}\right)
 \end{equation}\]</span></p>
 <p>We are now ready to write this in Stan; the code is in the model called <code>me.stan</code>:</p>
 <pre class="stan fold-show"><code>data {
@@ -1857,16 +1845,16 @@ model {
     - normal_lccdf(0 | 0, 0.5);
 }</code></pre>
 <p>Fit the model:</p>
-<div class="sourceCode" id="cb855"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb855-1"><a href="ch-remame.html#cb855-1" aria-hidden="true"></a>me &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
-<span id="cb855-2"><a href="ch-remame.html#cb855-2" aria-hidden="true"></a>  <span class="st">&quot;me.stan&quot;</span>,</span>
-<span id="cb855-3"><a href="ch-remame.html#cb855-3" aria-hidden="true"></a>  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)  </span>
-<span id="cb855-4"><a href="ch-remame.html#cb855-4" aria-hidden="true"></a>ls_me &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_indiv),</span>
-<span id="cb855-5"><a href="ch-remame.html#cb855-5" aria-hidden="true"></a>              <span class="dt">y =</span> df_indiv<span class="op">$</span>mean_rspeed,</span>
-<span id="cb855-6"><a href="ch-remame.html#cb855-6" aria-hidden="true"></a>              <span class="dt">SE_y =</span> df_indiv<span class="op">$</span>se_rspeed,</span>
-<span id="cb855-7"><a href="ch-remame.html#cb855-7" aria-hidden="true"></a>              <span class="dt">x =</span> df_indiv<span class="op">$</span>c_mean_pcu,</span>
-<span id="cb855-8"><a href="ch-remame.html#cb855-8" aria-hidden="true"></a>              <span class="dt">SE_x =</span> df_indiv<span class="op">$</span>se_pcu)</span>
-<span id="cb855-9"><a href="ch-remame.html#cb855-9" aria-hidden="true"></a>fit_indiv_me_stan &lt;-<span class="st"> </span><span class="kw">stan</span>(me, <span class="dt">data =</span> ls_me)</span></code></pre></div>
-<div class="sourceCode" id="cb856"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb856-1"><a href="ch-remame.html#cb856-1" aria-hidden="true"></a><span class="kw">print</span>(fit_indiv_me_stan, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb848"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb848-1"><a href="ch-remame.html#cb848-1" aria-hidden="true"></a>me &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;stan_models&quot;</span>,</span>
+<span id="cb848-2"><a href="ch-remame.html#cb848-2" aria-hidden="true"></a>                  <span class="st">&quot;me.stan&quot;</span>,</span>
+<span id="cb848-3"><a href="ch-remame.html#cb848-3" aria-hidden="true"></a>                  <span class="dt">package =</span> <span class="st">&quot;bcogsci&quot;</span>)</span>
+<span id="cb848-4"><a href="ch-remame.html#cb848-4" aria-hidden="true"></a>ls_me &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">N =</span> <span class="kw">nrow</span>(df_indiv),</span>
+<span id="cb848-5"><a href="ch-remame.html#cb848-5" aria-hidden="true"></a>              <span class="dt">y =</span> df_indiv<span class="op">$</span>mean_rspeed,</span>
+<span id="cb848-6"><a href="ch-remame.html#cb848-6" aria-hidden="true"></a>              <span class="dt">SE_y =</span> df_indiv<span class="op">$</span>se_rspeed,</span>
+<span id="cb848-7"><a href="ch-remame.html#cb848-7" aria-hidden="true"></a>              <span class="dt">x =</span> df_indiv<span class="op">$</span>c_mean_pcu,</span>
+<span id="cb848-8"><a href="ch-remame.html#cb848-8" aria-hidden="true"></a>              <span class="dt">SE_x =</span> df_indiv<span class="op">$</span>se_pcu)</span>
+<span id="cb848-9"><a href="ch-remame.html#cb848-9" aria-hidden="true"></a>fit_indiv_me_stan &lt;-<span class="st"> </span><span class="kw">stan</span>(me, <span class="dt">data =</span> ls_me)</span></code></pre></div>
+<div class="sourceCode" id="cb849"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb849-1"><a href="ch-remame.html#cb849-1" aria-hidden="true"></a><span class="kw">print</span>(fit_indiv_me_stan, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <pre><code>##       mean  2.5% 97.5% n_eff Rhat
 ## alpha 0.05  0.05  0.06  3775    1
 ## beta  0.00 -0.01  0.01  5457    1
@@ -1887,11 +1875,20 @@ model {
 <div id="sec-REMAMEexercises" class="section level2 hasAnchor" number="13.5">
 <h2><span class="header-section-number">13.5</span> Exercises<a href="ch-remame.html#sec-REMAMEexercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="exercise">
-<p><span id="exr:REMAMEBuerki" class="exercise"><strong>Exercise 13.1  </strong></span>A meta-analysis of picture-word interference data</p>
+<p><span id="exr:REMAMEExtracting" class="exercise"><strong>Exercise 13.1  </strong></span>Extracting estimates from published papers</p>
+</div>
+<p>Researchers often do not release the data that lie behind the published paper. This creates the problem that one has to figure out the estimated effect size and standard error from published statistics. This exercise gives some practice on how to do this by considering some typical cases that are encountered in repeated measures designs.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Suppose that in a repeated measures reading study, the observed t-value from a paired t-test is 2.3 with degrees of freedom 23. Suppose also that the estimated standard deviation is 150 ms. What is the estimated standard error and the estimated effect size?</p></li>
+<li><p>Suppose that in a repeated measures reading study, the observed <span class="math inline">\(t\)</span>-value from a paired <span class="math inline">\(t\)</span>-test is is 2.3 with degrees of freedom 23. Suppose also that the estimated standard deviation is 150 ms. What is the estimated standard error and the estimated effect size?</p></li>
+<li><p>A repeated measures reading study reports an F-score from an analysis of variance as <span class="math inline">\(F(1,34)=6.1\)</span>, with an effect size of 25 ms. What is the estimated standard error?</p></li>
+</ol>
+<div class="exercise">
+<p><span id="exr:REMAMEBuerki" class="exercise"><strong>Exercise 13.2  </strong></span>A meta-analysis of picture-word interference data</p>
 </div>
 <p>Load the following data set:</p>
-<div class="sourceCode" id="cb858"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb858-1"><a href="ch-remame.html#cb858-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_buerki&quot;</span>)</span>
-<span id="cb858-2"><a href="ch-remame.html#cb858-2" aria-hidden="true"></a><span class="kw">head</span>(df_buerki)</span></code></pre></div>
+<div class="sourceCode" id="cb851"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb851-1"><a href="ch-remame.html#cb851-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_buerki&quot;</span>)</span>
+<span id="cb851-2"><a href="ch-remame.html#cb851-2" aria-hidden="true"></a><span class="kw">head</span>(df_buerki)</span></code></pre></div>
 <pre><code>##                  study   d    se study_id
 ## 1 Collina 2013 Exp.1 a  24 13.09        1
 ## 2 Collina 2013 Exp.1 b -25 17.00        2
@@ -1899,7 +1896,7 @@ model {
 ## 4     Mahon 2007 Exp.1  17 12.24        4
 ## 5     Mahon 2007 Exp.2  57 13.96        5
 ## 6    Mahon 2007 Exp. 4  17  8.01        6</code></pre>
-<div class="sourceCode" id="cb860"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb860-1"><a href="ch-remame.html#cb860-1" aria-hidden="true"></a>df_buerki &lt;-<span class="st"> </span><span class="kw">subset</span>(df_buerki, se <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.60</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb853"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb853-1"><a href="ch-remame.html#cb853-1" aria-hidden="true"></a>df_buerki &lt;-<span class="st"> </span><span class="kw">subset</span>(df_buerki, se <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.60</span>)</span></code></pre></div>
 <p>The data are from <span class="citation">Bürki et al. (<a href="#ref-BuerkiEtAl2020" role="doc-biblioref">2020</a>)</span>. We have a summary of the effect estimates (d) and standard errors (se) of the estimates from 162 published experiments on a phenomenon called <em>semantic picture-word interference</em>. We removed an implausibly low SE in the code above, but the results don’t change regardless of whether we keep them or not, because we have data from a lot of studies.</p>
 <p>In this experimental paradigm, subjects are asked to name a picture while ignoring a distractor word (which is either related or unrelated to the picture). The word can be printed on the picture itself, or presented auditorily. The dependent measure is the response latency, or time interval between the presentation of the picture and the onset of the vocal response. Theory says that distractors that come from the same semantic category as the picture to be named lead to a slower response then when the distractor comes from a different semantic category.</p>
 <p>Carry out a random effects meta-analysis using <code>brms</code> and display the posterior distribution of the effect, along with the posterior of the between study standard deviation.</p>
@@ -1909,11 +1906,11 @@ model {
 <li><span class="math inline">\(\mathit{Normal}(0,400)\)</span></li>
 </ul>
 <div class="exercise">
-<p><span id="exr:REMAMELiEnglish" class="exercise"><strong>Exercise 13.2  </strong></span>Measurement error model for English VOT data</p>
+<p><span id="exr:REMAMELiEnglish" class="exercise"><strong>Exercise 13.3  </strong></span>Measurement error model for English VOT data</p>
 </div>
 <p>Load the following data:</p>
-<div class="sourceCode" id="cb861"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb861-1"><a href="ch-remame.html#cb861-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_VOTenglish&quot;</span>)</span>
-<span id="cb861-2"><a href="ch-remame.html#cb861-2" aria-hidden="true"></a><span class="kw">head</span>(df_VOTenglish)</span></code></pre></div>
+<div class="sourceCode" id="cb854"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb854-1"><a href="ch-remame.html#cb854-1" aria-hidden="true"></a><span class="kw">data</span>(<span class="st">&quot;df_VOTenglish&quot;</span>)</span>
+<span id="cb854-2"><a href="ch-remame.html#cb854-2" aria-hidden="true"></a><span class="kw">head</span>(df_VOTenglish)</span></code></pre></div>
 <pre><code>##   subject meanVOT seVOT meanvdur sevdur
 ## 1     F01   108.1  4.56      171   11.7
 ## 2     F02    92.5  4.62      189   12.7
@@ -1974,10 +1971,10 @@ model {
 <p>Sutton, Alexander J., Nicky J. Welton, Nicola Cooper, Keith R. Abrams, and A. E. Ades. 2012. <em>Evidence Synthesis for Decision Making in Healthcare</em>. Vol. 132. John Wiley &amp; Sons.</p>
 </div>
 <div id="ref-turner2008bias">
-<p>Turner, R. M., David J. Spiegelhalter, G. Smith, and Simon G. Thompson. 2008. “Bias Modelling in Evidence Synthesis.” <em>Journal of the Royal Statistical Society: Series A (Statistics in Society)</em> 172 (1): 21–47.</p>
+<p>Turner, R. M., David J. Spiegelhalter, G. Smith, and Simon G. Thompson. 2008. “Bias Modelling in Evidence Synthesis.” <em>Journal of the Royal Statistical Society: Series A (Statistics in Society)</em> 172 (1): 21–47. <a href="https://doi.org/https://doi.org/10.1111/j.1467-985X.2008.00547.x">https://doi.org/https://doi.org/10.1111/j.1467-985X.2008.00547.x</a>.</p>
 </div>
 <div id="ref-VasishthetalPLoSOne2013">
-<p>Vasishth, Shravan, Zhong Chen, Qiang Li, and Gueilan Guo. 2013. “Processing Chinese Relative Clauses: Evidence for the Subject-Relative Advantage.” <em>PLoS ONE</em> 8 (10): 1–14.</p>
+<p>Vasishth, Shravan, Zhong Chen, Qiang Li, and Gueilan Guo. 2013. “Processing Chinese Relative Clauses: Evidence for the Subject-Relative Advantage.” <em>PLoS ONE</em> 8 (10): 1–14. <a href="https://doi.org/https://doi.org/10.1371/journal.pone.0077006">https://doi.org/https://doi.org/10.1371/journal.pone.0077006</a>.</p>
 </div>
 </div>
             </section>
